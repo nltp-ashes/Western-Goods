@@ -1,0 +1,240 @@
+--[[
+-- Info
+-- 
+-- Original Author(s) : Tronex
+-- Edited : NLTP_ASHES
+-- Date : 16/12/2022
+-- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+--
+-- Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon.
+--
+-- Naming for some files/folders is based on the following contract :
+-- - textures must be located in 	: "gamedata\textures\ui\magazines\<name_of_the_section>\"
+-- - textures must be named like	: "ui_items_<name_of_the_section>_page_<page_number>.dds"
+--]]
+
+--[[----------------------------------------------------------------------------------------------------
+	Constants and imported functions
+------------------------------------------------------------------------------------------------------]]
+
+local CONST_PATH_TO_TEXTURES = "ui\\magazines\\"
+
+local dbg_printf = western_goods_utils.dbg_printf
+local round_number = western_goods_utils.round_number
+local table_contains = western_goods_utils.table_contains
+local table_random_id = western_goods_utils.table_random_id
+local has_translation = western_goods_utils.has_translation
+local get_translation = game.translate_string
+
+--[[----------------------------------------------------------------------------------------------------
+	UI Item Property
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to return the text written when right clicking on the magazine.
+function menu_view(obj) 
+	local p = obj:parent()
+	if not (p and p:id() == AC_ID) then return end
+	
+	return game.translate_string("st_wg_magazine_view")
+end
+
+-- Function used to display the magazine on-screen
+function func_mag(obj) 
+	local sec = obj:section()
+		
+	local hud = get_hud()
+	
+	if (hud) then
+		hide_hud_inventory()
+	end
+	
+	display(sec)
+end
+
+-- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
+get_psy_health_regenerationBase = arszi_psy.get_psy_health_regeneration
+function arszi_psy.get_psy_health_regeneration()
+	local base_psy_heal = get_psy_health_regenerationBase()
+	local bonus_psy_heal_magazine = get_telepatic_regen_magazine()
+	
+	return base_psy_heal + bonus_psy_heal_magazine
+end
+
+-- Function used to get the bonus for reading a magazine. Returns a user defined value when the Magazine UI is shown, and 0 when it isn't.
+function get_telepatic_regen_magazine()
+	if GUI and GUI:IsShown() then
+		return western_goods_mcm.get_config("magazine_psy_regen")
+	else
+		return 0.0
+	end
+end
+
+-- Function used to start displaying the magazine UI onto the screen.
+GUI = nil -- instance, don't touch
+function display(sec) 
+	if (not sec) then
+		printf("!ERROR western_goods_magazine_ui | no section passed!")
+		return
+	end
+	
+	if (not GUI) then
+		GUI = UIMagazine(sec)
+	end
+	
+	if (GUI) and (not GUI:IsShown()) then
+		GUI:Reset(sec)
+		GUI:ShowDialog(true)
+		Register_UI("UIMagazine","western_goods_magazine_ui")
+	end
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	UI 
+------------------------------------------------------------------------------------------------------]]
+
+class "UIMagazine" (CUIScriptWnd)
+
+function UIMagazine:__init(sec) super()
+	self.section = sec
+	self.page_current = 1
+    self.page_count = self:GetNumberOfPages()
+
+	self:InitControls()
+	self:InitCallBacks()
+end
+
+function UIMagazine:__finalize()
+end
+
+function UIMagazine:InitControls()
+	self:SetWndRect(Frect():set(0,0,1920,1080))
+	self:SetAutoDelete(true)
+
+	self.xml = CScriptXmlInit()
+	local xml = self.xml
+	xml:ParseFile("ui_items_wg_magazine.xml")
+
+	self.dialog = xml:InitStatic("magazine", self)
+	self.dialog:SetStretchTexture(true)
+
+	-- Page Setup
+	self.page = xml:InitStatic("magazine:page",self.dialog)
+	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+	self.page:SetStretchTexture(true)
+
+	-- Button Ok
+	self.btn_ok_pic = xml:InitStatic("magazine:btn_ok_pic", self.dialog)
+	self.btn_ok_pic:InitTexture("ui_button_ordinary_h")
+	self.btn_ok_pic:SetStretchTexture(true)
+	
+	self.btn_ok = xml:Init3tButton("magazine:btn_ok", self.dialog)
+	self:Register(self.btn_ok,"btn_ok")
+	
+	-- Button Next
+	self.btn_next_pic = xml:InitStatic("magazine:btn_next_pic", self.dialog)
+	self.btn_next_pic:InitTexture("ui_button_ordinary_h")
+	self.btn_next_pic:SetStretchTexture(true)
+
+	self.btn_next = xml:Init3tButton("magazine:btn_next", self.dialog)
+	self:Register(self.btn_next,"btn_next")
+	
+	-- Button Previous
+	self.btn_previous_pic = xml:InitStatic("magazine:btn_previous_pic", self.dialog)
+	self.btn_previous_pic:InitTexture("ui_button_ordinary_h")
+	self.btn_previous_pic:SetStretchTexture(true)
+
+	self.btn_previous = xml:Init3tButton("magazine:btn_previous", self.dialog)
+	self:Register(self.btn_previous,"btn_previous")
+end
+
+function UIMagazine:OnNext()
+	if (self.page_current >= self.page_count) then return end
+	
+	utils_obj.play_sound("interface\\inv_page")
+	self.page_current = self.page_current+1
+	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+		
+	self:RefreshNavigationButtons()
+end
+
+function UIMagazine:OnPrevious()
+	if (self.page_current <= 1) then return end
+	
+	utils_obj.play_sound("interface\\inv_page")
+	self.page_current = self.page_current-1
+	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+		
+	self:RefreshNavigationButtons()
+end
+
+function UIMagazine:RefreshNavigationButtons()
+	self.btn_previous_pic:Show(true)
+	self.btn_previous:Show(true)
+	self.btn_next_pic:Show(true)
+	self.btn_next:Show(true)
+	
+	printf("[WG] Current page %s", self.page_current)
+	printf("[WG] Max page %s", self.page_count)
+	
+	if (self.page_current <= 1) then
+		self.btn_previous_pic:Show(false)
+		self.btn_previous:Show(false)
+	end
+	
+	if (self.page_current >= self.page_count) then
+		self.btn_next_pic:Show(false)
+		self.btn_next:Show(false)
+	end
+end
+
+function UIMagazine:GetNumberOfPages()
+	local fileList = getFS():file_list_open("$game_textures$", CONST_PATH_TO_TEXTURES .. self.section .. "\\", bit_or(FS.FS_ListFiles, FS.FS_RootOnly))
+	return fileList and fileList:Size() or 0
+end
+
+function UIMagazine:GetPageTexturePath(page_number)
+	return CONST_PATH_TO_TEXTURES .. self.section .. "\\" .. "ui_items_" .. self.section .. "_page_" .. page_number
+end
+
+function UIMagazine:InitCallBacks()
+	self:AddCallback("btn_ok", ui_events.BUTTON_CLICKED, self.Close, self)
+	self:AddCallback("btn_next", ui_events.BUTTON_CLICKED, self.OnNext, self)
+	self:AddCallback("btn_previous", ui_events.BUTTON_CLICKED, self.OnPrevious, self)
+end
+
+
+
+function UIMagazine:Reset(sec)
+	self.section = sec
+	self.page_current = 1
+	self.page_count = self:GetNumberOfPages()
+	
+	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+	
+	self:RefreshNavigationButtons()
+end
+
+function UIMagazine:Close()
+	utils_obj.play_sound("interface\\inv_close")
+	self:HideDialog()
+	
+	Unregister_UI("UIMagazine")
+end
+
+function UIMagazine:OnKeyboard(dik, keyboard_action)
+	local res = CUIScriptWnd.OnKeyboard(self,dik,keyboard_action)
+	if (res == false) then
+		local bind = dik_to_bind(dik)
+		if keyboard_action == ui_events.WINDOW_KEY_PRESSED then
+			if dik == DIK_keys.DIK_ESCAPE then
+				self:Close()
+			elseif dik == DIK_keys.DIK_RIGHT then
+				self:OnNext()
+			elseif dik == DIK_keys.DIK_LEFT then
+				self:OnPrevious()
+			end
+		end
+	end
+	return res
+end

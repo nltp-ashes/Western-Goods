@@ -1,0 +1,931 @@
+;;--============================================================================--;;
+;;--================| Bottles |=================================================--;;
+;;--============================================================================--;;
+
+[item_wg_cola_bottle_hud]:item_ea_beer_2_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_cola_bottle_hud.ogf
+
+[wg_cola_bottle]:booster
+$spawn                                   = "food and drugs\wg_cola_bottle"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_cola_bottle.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_cola_bottle
+inv_name_short                           = st_wg_cola_bottle_s
+description                              = st_wg_cola_bottle_descr
+inv_weight                               = 0.7
+cost                                     = 4700
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 2
+inv_grid_x                               = 0
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_cola_bottle_drop
+use_sound                                = western_goods_drinks\wg_cola_bottle_drink
+snd_on_take								 = bottle
+
+boost_time                               = 45
+boost_max_weight					     = 1.0
+boost_radiation_restore					 = 0.0005
+boost_power_restore			             = 0.0015
+eat_satiety 				             = 0.127
+eat_sleepiness				             = -0.082
+eat_thirstiness				             = -4.26
+
+use_condition                            = true
+max_uses                                 = 3
+remove_after_use                         = true
+empty_weight                             = 0.4
+
+allow_repair                             = false
+repair_part_bonus	 		             = 0.05
+
+tier  									 = 3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_gorbatschow_bottle_hud]:item_ea_beer_1_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_gorbatschow_bottle_hud.ogf
+
+[wg_gorbatschow_bottle]:booster
+$spawn                                   = "food and drugs\wg_gorbatschow_bottle"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_gorbatschow_bottle.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_gorbatschow_bottle
+inv_name_short                           = st_wg_gorbatschow_bottle_s
+description                              = st_wg_gorbatschow_bottle_descr
+inv_weight                               = 1.69
+cost                                     = 2100
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 2
+inv_grid_x                               = 0
+inv_grid_y                               = 2
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_gorbatschow_bottle_drop
+use_sound                                = western_goods_drinks\wg_gorbatschow_bottle_drink
+snd_on_take								 = bottle
+
+boost_time					             = 45
+boost_radiation_restore					 = 0.0009
+eat_alcohol					             = 0.2
+eat_satiety					             = 0.022
+eat_sleepiness				             = 0.039
+eat_thirstiness				             = 0.25
+eat_health					             = -0.015
+
+use_condition                            = true
+max_uses                                 = 3
+remove_after_use                         = true
+empty_weight                             = 0.8
+
+tier  									 = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_wine_chateau_latour_hud]:item_ea_vodka_wine_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_wine_chateau_latour_hud.ogf
+
+[wg_wine_chateau_latour]:booster
+$spawn                                   = "food and drugs\wg_wine_chateau_latour"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_wine_chateau_latour.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_wine_chateau_latour
+inv_name_short                           = st_wg_wine_chateau_latour_s
+description                              = st_wg_wine_chateau_latour_descr
+inv_weight                               = 1.69
+cost                                     = 7500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 2
+inv_grid_x                               = 2
+inv_grid_y                               = 2
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_wine_chateau_latour_drop
+use_sound                                = western_goods_drinks\wg_wine_chateau_latour_drink
+snd_on_take								 = bottle
+
+boost_time					             = 60
+boost_radiation_restore		             = 0.0009
+eat_alcohol					             = 0.12
+eat_satiety					             = 0.022
+eat_sleepiness				             = 3
+eat_thirstiness				             = 0.25
+
+use_condition                            = true
+max_uses                                 = 3
+remove_after_use                         = true
+empty_weight                             = 0.8
+
+tier  									 = 3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_yoohoo_bottle_hud]:item_ea_beer_1_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_yoohoo_bottle_hud.ogf
+
+[wg_yoohoo_bottle]:booster
+$spawn                                   = "food and drugs\wg_yoohoo_bottle"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_yoohoo_bottle.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_yoohoo_bottle
+inv_name_short                           = st_wg_yoohoo_bottle_s
+description                              = st_wg_yoohoo_bottle_descr
+inv_weight                               = 0.7
+cost                                     = 3100
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 3
+inv_grid_y                               = 2
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_yoohoo_bottle_drop
+use_sound                                = western_goods_drinks\wg_yoohoo_bottle_drink
+snd_on_take								 = bottle
+
+eat_satiety 				             = 0.220
+eat_sleepiness				             = 0.042
+eat_thirstiness				             = -2.26
+
+tier  									 = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_mountain_dew_bottle_hud]:item_ea_mineral_water_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_mountain_dew_bottle_hud.ogf
+
+[wg_mountain_dew_bottle]:booster
+$spawn                                   = "food and drugs\wg_mountain_dew_bottle"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_mountain_dew_bottle.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_mountain_dew_bottle
+inv_name_short                           = st_wg_mountain_dew_bottle_s
+description                              = st_wg_mountain_dew_bottle_descr
+inv_weight                               = 0.5
+cost                                     = 3200
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 2
+inv_grid_x                               = 1
+inv_grid_y                               = 2
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_mountain_dew_bottle_drop
+use_sound                                = western_goods_drinks\wg_mountain_dew_bottle_drink
+
+boost_time                               = 45
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.127
+eat_sleepiness				             = -0.082
+eat_thirstiness				             = -4.26
+
+use_condition                            = true
+max_uses                                 = 3
+remove_after_use                         = true
+empty_weight                             = 0.1
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_nestea_icetea_bottle_hud]:item_ea_mineral_water_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_nestea_icetea_bottle_hud.ogf
+
+[wg_nestea_icetea_bottle]:booster
+$spawn                                   = "food and drugs\wg_nestea_icetea_bottle"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_nestea_icetea_bottle.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_nestea_icetea_bottle
+inv_name_short                           = st_wg_nestea_icetea_bottle_s
+description                              = st_wg_nestea_icetea_bottle_descr
+inv_weight                               = 0.5
+cost                                     = 3200
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 2
+inv_grid_x                               = 4
+inv_grid_y                               = 2
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_nestea_icetea_bottle_drop
+use_sound                                = western_goods_drinks\wg_nestea_icetea_bottle_drink
+
+boost_time                               = 45
+boost_radiation_restore					 = 0.0004
+boost_max_weight					     = 0.22
+boost_power_restore			             = 0.0004
+eat_satiety 				             = 0.099
+eat_sleepiness				             = -0.082
+eat_thirstiness				             = -4.26
+
+use_condition                            = true
+max_uses                                 = 3
+remove_after_use                         = true
+empty_weight                             = 0.1
+
+tier  									 = 2
+;;--============================================================================--;;
+;;--================| Cans |====================================================--;;
+;;--============================================================================--;;
+
+[item_wg_cola_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_cola_can_hud.ogf
+
+[wg_cola_can]:booster
+$spawn                                   = "food and drugs\wg_cola_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_cola_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_cola_can
+inv_name_short                           = st_wg_cola_can_s
+description                              = st_wg_cola_can_descr
+inv_weight                               = 0.35
+cost                                     = 2500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 1
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_cola_can_drop
+use_sound                                = western_goods_drinks\wg_cola_can_drink
+
+boost_time                               = 30
+boost_max_weight					     = 1.0
+boost_radiation_restore					 = 0.0005
+boost_power_restore			             = 0.0015
+eat_satiety 				             = 0.090
+eat_sleepiness				             = -0.042
+eat_thirstiness				             = -2.26
+
+allow_repair                             = false
+repair_part_bonus	 		             = 0.03
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_sprite_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_sprite_can_hud.ogf
+
+[wg_sprite_can]:booster
+$spawn                                   = "food and drugs\wg_sprite_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_sprite_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_sprite_can
+inv_name_short                           = st_wg_sprite_can_s
+description                              = st_wg_sprite_can_descr
+inv_weight                               = 0.35
+cost                                     = 2300
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 1
+inv_grid_y                               = 1
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_sprite_can_drop
+use_sound                                = western_goods_drinks\wg_sprite_can_drink
+
+boost_time                               = 25
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.080
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_redbull_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_redbull_can_hud.ogf
+
+[wg_redbull_can]:booster
+$spawn                                   = "food and drugs\wg_redbull_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_redbull_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_redbull_can
+inv_name_short                           = st_wg_redbull_can_s
+description                              = st_wg_redbull_can_descr
+inv_weight                               = 0.3
+cost                                     = 3000
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 2
+inv_grid_y                               = 1
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_redbull_can_drop
+use_sound                                = western_goods_drinks\wg_redbull_can_drink
+
+boost_time					             = 300
+boost_max_weight					     = 1.65
+boost_radiation_restore					 = 0.0004
+boost_power_restore			             = 0.003
+eat_alcohol 				             = -0.280
+eat_satiety 				             = 0.113
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.22
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_fanta_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_fanta_can_hud.ogf
+
+[wg_fanta_can]:booster
+$spawn                                   = "food and drugs\wg_fanta_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_fanta_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_fanta_can
+inv_name_short                           = st_wg_fanta_can_s
+description                              = st_wg_fanta_can_descr
+inv_weight                               = 0.35
+cost                                     = 2100
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 2
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_fanta_can_drop
+use_sound                                = western_goods_drinks\wg_fanta_can_drink
+
+boost_time                               = 25
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.075
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_pepsi_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_pepsi_can_hud.ogf
+
+[wg_pepsi_can]:booster
+$spawn                                   = "food and drugs\wg_pepsi_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_pepsi_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_pepsi_can
+inv_name_short                           = st_wg_pepsi_can_s
+description                              = st_wg_pepsi_can_descr
+inv_weight                               = 0.35
+cost                                     = 2200
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 3
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_pepsi_can_drop
+use_sound                                = western_goods_drinks\wg_pepsi_can_drink
+
+boost_time                               = 25
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.075
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_mountain_dew_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_mountain_dew_can_hud.ogf
+
+[wg_mountain_dew_can]:booster
+$spawn                                   = "food and drugs\wg_mountain_dew_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_mountain_dew_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_mountain_dew_can
+inv_name_short                           = st_wg_mountain_dew_can_s
+description                              = st_wg_mountain_dew_can_descr
+inv_weight                               = 0.35
+cost                                     = 2300
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 3
+inv_grid_y                               = 1
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_mountain_dew_can_drop
+use_sound                                = western_goods_drinks\wg_mountain_dew_can_drink
+
+boost_time                               = 30
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.075
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_perrier_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_perrier_can_hud.ogf
+
+[wg_perrier_can]:booster
+$spawn                                   = "food and drugs\wg_perrier_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_perrier_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_perrier_can
+inv_name_short                           = st_wg_perrier_can_s
+description                              = st_wg_perrier_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 4
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_perrier_can_drop
+use_sound                                = western_goods_drinks\wg_perrier_can_drink
+
+boost_time                               = 60
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.00
+eat_sleepiness				             = -0.06
+eat_thirstiness				             = -3.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_rockstar_energy_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_rockstar_energy_can_hud.ogf
+
+[wg_rockstar_energy_can]:booster
+$spawn                                   = "food and drugs\wg_rockstar_energy_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_rockstar_energy_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_rockstar_energy_can
+inv_name_short                           = st_wg_rockstar_energy_can_s
+description                              = st_wg_rockstar_energy_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 4
+inv_grid_y                               = 1
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_rockstar_energy_can_drop
+use_sound                                = western_goods_drinks\wg_rockstar_energy_can_drink
+
+boost_time					             = 250
+boost_max_weight					     = 1.4
+boost_radiation_restore					 = 0.0004
+boost_power_restore			             = 0.003
+eat_alcohol 				             = -0.280
+eat_satiety 				             = 0.149
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.22
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_monster_energy_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_monster_energy_can_hud.ogf
+
+[wg_monster_energy_can]:booster
+$spawn                                   = "food and drugs\wg_monster_energy_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_monster_energy_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_monster_energy_can
+inv_name_short                           = st_wg_monster_energy_can_s
+description                              = st_wg_monster_energy_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 5
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_monster_energy_can_drop
+use_sound                                = western_goods_drinks\wg_monster_energy_can_drink
+
+boost_time					             = 260
+boost_max_weight					     = 1.5
+boost_radiation_restore					 = 0.0004
+boost_power_restore			             = 0.003
+eat_alcohol 				             = -0.280
+eat_satiety 				             = 0.220
+eat_sleepiness				             = -0.04
+eat_thirstiness				             = -2.22
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_beer_86_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_beer_86_can_hud.ogf
+
+[wg_beer_86_can]:booster
+$spawn                                   = "food and drugs\wg_beer_86_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_beer_86_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_beer_86_can
+inv_name_short                           = st_wg_beer_86_can_s
+description                              = st_wg_beer_86_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 5
+inv_grid_y                               = 1
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_beer_86_can_drop
+use_sound                                = western_goods_drinks\wg_beer_86_can_drink
+
+boost_time					             = 45
+boost_radiation_restore					 = 0.0007
+eat_alcohol					             = 0.04
+eat_satiety					             = 0.022
+eat_sleepiness				             = 0.029
+eat_thirstiness				             = -1.75
+eat_health					             = -0.015
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_sevenup_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_sevenup_can_hud.ogf
+
+[wg_sevenup_can]:booster
+$spawn                                   = "food and drugs\wg_sevenup_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_sevenup_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_sevenup_can
+inv_name_short                           = st_wg_sevenup_can_s
+description                              = st_wg_sevenup_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 6
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_sevenup_can_drop
+use_sound                                = western_goods_drinks\wg_sevenup_can_drink
+
+boost_time                               = 35
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.01
+eat_sleepiness				             = -0.06
+eat_thirstiness				             = -3.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_dr_bob_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_dr_bob_can_hud.ogf
+
+[wg_dr_bob_can]:booster
+$spawn                                   = "food and drugs\wg_dr_bob_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_dr_bob_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_dr_bob_can
+inv_name_short                           = st_wg_dr_bob_can_s
+description                              = st_wg_dr_bob_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 7
+inv_grid_y                               = 0
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_dr_bob_can_drop
+use_sound                                = western_goods_drinks\wg_dr_bob_can_drink
+
+boost_time                               = 35
+boost_radiation_restore					 = 0.0004
+eat_satiety 				             = 0.01
+eat_sleepiness				             = -0.06
+eat_thirstiness				             = -3.20
+
+tier  									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[item_wg_lipton_icetea_can_hud]:item_ea_energy_drink_nonstop_hud
+item_visual 							 = dynamics\western_goods_drinks\wg_lipton_icetea_can_hud.ogf
+
+[wg_lipton_icetea_can]:booster
+$spawn                                   = "food and drugs\wg_lipton_icetea_can"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_drinks\wg_lipton_icetea_can.ogf
+kind			                         = i_drink
+
+inv_name                                 = st_wg_lipton_icetea_can
+inv_name_short                           = st_wg_lipton_icetea_can_s
+description                              = st_wg_lipton_icetea_can_descr
+inv_weight                               = 0.35
+cost                                     = 1500
+
+script_binding                           = bind_item.bind
+
+icons_texture				             = ui\icons\ui_icon_western_goods_drinks
+inv_grid_width                           = 1
+inv_grid_height                          = 1
+inv_grid_x                               = 6
+inv_grid_y                               = 1
+
+attach_angle_offset                      = 0.000000, 0.000000, 0.000000
+attach_position_offset                   = 0.087266, -0.078540, 0.052360
+attach_bone_name                         = bip01_r_hand
+auto_attach                              = false
+
+bone_name                                = bip01_r_hand
+position_offset                          = 0.0,0.0,0.0
+angle_offset                             = 1.570790,1.570790,3.92699
+
+break_particles                          = destroy_fx\destroy_bottle
+break_sound                              = western_goods_drinks\wg_lipton_icetea_can_drop
+use_sound                                = western_goods_drinks\wg_lipton_icetea_can_drink
+
+boost_time                               = 35
+boost_max_weight					     = 0.22
+boost_radiation_restore					 = 0.0004
+boost_power_restore			             = 0.0004
+eat_satiety 				             = 0.01
+eat_sleepiness				             = -0.06
+eat_thirstiness				             = -3.20
+
+tier  									 = 2

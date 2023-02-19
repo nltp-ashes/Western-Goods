@@ -1,0 +1,112 @@
+--[[
+-- Info
+-- 
+-- Original Author(s) : NLTP_ASHES
+-- Edited : N/A
+-- Date : 03/01/2023
+-- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+-- 
+-- Script used to define various common functions defined in the scripts of the Western Goods addon.
+--]]
+
+-- Function used to print information into the console/log file only when Western Goods' debug mode is enabled
+function dbg_printf(...)
+    if not western_goods_mcm.get_config("debug_mode") then return end
+    printf(...)
+end
+
+-- Function used to know if a certain value is contained in a table. This function is generic enough so that it'd work on any table.
+function table_contains(tab, val)
+	if not tab then return end
+	for key,value in pairs(tab) do
+		if val == value then
+			return true
+		end
+	end
+	return false
+end
+
+-- Function used to get a random id (as an int) from a given table. Returns a random number between 1 and the size of the table.
+function table_random_id(tab)
+	if not tab then return end
+	return math.random(1,#tab)
+end
+
+-- Function used to clear the code a bit.
+function round_number(num)
+	return tostring(math.floor(num+0.5))
+end
+
+-- Function used to know if there exists a translation for a given game string.
+function has_translation(str)
+	return game.translate_string(str) ~= str
+end
+
+-- Function used to get the distance between two points in 2D space.
+function get_distance(position_1, position_2)
+	if not (position_1 and position_2) then return nil end
+	
+    local x = math.abs(position_1.x - position_2.x)
+    local z = math.abs(position_1.z - position_2.z)
+    local distance = math.sqrt((x * x) + (z * z))
+	
+    return distance
+end
+
+-- Function used to get game object by its ID if it exists on the current level.
+function find_object_by_id(id)
+	return db.storage[id] and db.storage[id].object or level.object_by_id(id)
+end
+
+-- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
+function as_number(var)
+	if type(var) == "string" then
+		return tonumber(var)
+	end
+
+	if type(var) == "number" then
+		return var
+	end
+
+	printe("!ERROR : cannot cast variable to number")
+
+	return nil
+end
+
+-- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
+function as_string(var)
+	if type(var) == "number" then
+		return tostring(var)
+	end
+
+	if type(var) == "boolean" then
+		return tostring(var)
+	end
+
+	if type(var) == "string" then
+		return var
+	end
+
+	printe("!ERROR : cannot cast variable to string")
+
+	return nil
+end
+
+-- Function used to get a given variable as a boolean. Returns nil if the variable cannot be casted.
+function as_boolean(var)
+	if type(var) == "string" then
+		if var == "true" then
+			return true
+		elseif var == "false" then
+			return false
+		end
+	end
+
+	if type(var) == "boolean" then
+		return var
+	end
+
+	printe("!ERROR : cannot cast variable to boolean")
+
+	return nil
+end

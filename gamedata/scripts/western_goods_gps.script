@@ -1,0 +1,365 @@
+--[[
+-- Info
+-- 
+-- Original Author(s) : NLTP_ASHES
+-- Edited : N/A
+-- Date : 09/12/2022
+-- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+-- 
+-- Script used to manage the GPS device from the Western Goods addon.
+--]]
+
+--[[----------------------------------------------------------------------------------------------------
+	Constants and imported functions
+------------------------------------------------------------------------------------------------------]]
+
+local dbg_printf = western_goods_utils.dbg_printf
+local round_number = western_goods_utils.round_number
+local table_contains = western_goods_utils.table_contains
+local table_random_id = western_goods_utils.table_random_id
+local has_translation = western_goods_utils.has_translation
+local get_translation = game.translate_string
+
+--[[----------------------------------------------------------------------------------------------------
+	pda.script's primary_objects_tbl table. 
+	Cannot be accessed from outside the script so this is the next best thing.
+------------------------------------------------------------------------------------------------------]]
+
+local pda_primary_objects_tbl = {
+      {target="mar_2c_01_anomaly_spot",					        hint="st_mar_2c_01_anomaly_spot_name"},
+      {target="mar_2c_02_anomaly_spot",					        hint="st_mar_2c_02_anomaly_spot_name"},
+	  {target="ds_2c_01_anomaly_spot",					        hint="st_ds_2c_01_anomaly_spot_name"},
+      {target="ds_2c_02_anomaly_spot",					        hint="st_ds_2c_02_anomaly_spot_name"},
+      {target="ds_2c_03_anomaly_spot",					        hint="st_ds_2c_03_anomaly_spot_name"},
+      {target="ds_2c_04_anomaly_spot",					        hint="st_ds_2c_04_anomaly_spot_name"},
+	  {target="trc_2c_01_rift_anom_spot",					    hint="st_trc_2c_01_rift_anom_spot_name"},
+      {target="trc_2c_02_chem_anom_spot",					    hint="st_trc_2c_02_chem_anom_spot_name"},
+      {target="trc_2c_03_desolation_anom_spot",			        hint="st_trc_2c_03_desolation_anom_spot_name"},
+	  {target="esc_2c_01_high_hopes_anomaly_spot",		        hint="st_esc_2c_01_high_hopes_anomaly_spot_name"},
+	  {target="gar_2c_01_nwi_anomaly_spot",				        hint="st_gar_2c_01_nwi_anomaly_spot_name"},
+      {target="gar_2c_02_toaster_anomaly_spot",			        hint="st_gar_2c_02_toaster_anomaly_spot_name"},
+	  {target="agr_2c_01_hg_anomaly_spot",				        hint="st_agr_2c_01_hg_anomaly_spot_name"},
+	-- Undergound anomalies are commented out until we can have underground minimaps.
+	--{target="labx18_2c_01_deep_burn_anomaly_spot",	        hint="st_labx18_2c_01_deep_burn_anomaly_spot_name"},
+	--{target="labx18_2c_02_ff_anomaly_spot",			        hint="st_labx18_2c_02_ff_anomaly_spot_name"},
+	--{target="labx18_2c_03_elders_anomaly_spot",		        hint="st_labx18_2c_03_elders_anomaly_spot_name"},
+	--{target="labx18_2c_04_bioh_anomaly_spot",			        hint="st_labx18_2c_04_bioh_anomaly_spot_name"},
+	  {target="bar_2c_01_grant_anomaly_spot",				    hint="st_bar_2c_01_grant_anomaly_spot_name"},
+	  {target="ros_2c_01_tunnel_anomaly_spot",			        hint="st_ros_2c_01_tunnel_anomaly_spot_name"},
+      {target="ros_2c_02_crispy_train_anomaly_spot",		    hint="st_ros_2c_02_crispy_train_anomaly_spot_name"},
+      {target="ros_2c_03_yc_anomaly_spot",				        hint="st_ros_2c_03_yc_anomaly_spot_name"},
+	  {target="mil_2c_01_hw_anomaly_spot",				        hint="st_mil_2c_01_hw_anomaly_spot_name"},
+	  {target="yan_2c_01_cd_anomaly_spot",				        hint="st_yan_2c_01_cd_anomaly_spot_name"},
+	--{target="x16_lab_2c_01_fb_anomy_spot",			        hint="st_x16_lab_2c_01_fb_anomy_spot_name"},
+	  {target="cit_2c_01_ch_anomaly_spot",				        hint="st_cit_2c_01_ch_anomaly_spot_name"},
+      {target="cit_2c_02_pg_anomaly_spot",				        hint="st_cit_2c_02_pg_anomaly_spot_name"},
+	  {target="lim_2c_01_ls_anomaly_spot",				        hint="st_lim_2c_01_ls_anomaly_spot_name"},
+      {target="lim_2c_02_ib_anomaly_spot",				        hint="st_lim_2c_02_ib_anomaly_spot_name"},
+	  {target="rad_2c_01_bl_anomaly_spot",				        hint="st_rad_2c_01_bl_anomaly_spot_name"},
+      {target="rad_2c_02_pp_anomaly_spot",				        hint="st_rad_2c_02_pp_anomaly_spot_name"},
+	--{target="bun_2c_01_f_anomaly_spot",				        hint="st_bun_2c_01_f_anomaly_spot_name"},
+	--{target="bun_2c_02_gp_anomaly_spot",				        hint="st_bun_2c_02_gp_anomaly_spot_name"},
+	  {target="pri_2c_01_pp_anomaly_spot",				        hint="st_pri_2c_01_pp_anomaly_spot_name"},
+      {target="pri_2c_02_gt_anomaly_spot",				        hint="st_pri_2c_02_gt_anomaly_spot_name"},
+      {target="pri_2c_03_wr_anomaly_spot",				        hint="st_pri_2c_03_wr_anomaly_spot_name"},
+      {target="pri_2c_04_o_anomaly_spot",					    hint="st_pri_2c_04_o_anomaly_spot_name"},
+	  {target="aes_2c_01_ce_anomaly_spot",				        hint="st_aes_2c_01_ce_anomaly_spot_name"},
+      {target="aes_2c_02_p_anomaly_spot",					    hint="st_aes_2c_02_p_anomaly_spot_name"},
+	  {target="aes2_2c_01_bo_anomaly_spot",				        hint="st_aes2_2c_01_bo_anomaly_spot_name"},
+      {target="aes2_2c_02_at_anomaly_spot",				        hint="st_aes2_2c_02_at_anomaly_spot_name"},
+	--{target="sar_2c_01_r_anomaly_spot",				        hint="st_sar_2c_01_r_anomaly_spot_name"},
+	  {target="gen_2c_01_ss_anomaly_spot",				        hint="st_gen_2c_01_ss_anomaly_spot_name"},
+	  {target="mar_smart_terrain_11_3_anomaly_spot",		    hint="st_mar_smart_terrain_11_3_anomaly_spot_name"},
+      {target="mar_smart_terrain_10_10_anomaly_spot",		    hint="st_mar_smart_terrain_10_10_anomaly_spot_name"},
+      {target="mar_smart_terrain_base_anomaly_spot",		    hint="st_mar_smart_terrain_base_anomaly_spot_name"},
+      {target="mar_smart_terrain_8_8_anomaly_spot",		        hint="st_mar_smart_terrain_8_8_anomaly_spot_name"},
+      {target="mar_smart_terrain_12_2_anomaly_spot",		    hint="st_mar_smart_terrain_12_2_anomaly_spot_name"},
+      {target="mar_smart_terrain_3_7_anomaly_spot",		        hint="st_mar_smart_terrain_3_7_anomaly_spot_name"},
+      {target="mar_smart_terrain_3_3_anomaly_spot",		        hint="st_mar_smart_terrain_3_3_anomaly_spot_name"},
+	  {target="esc_smart_terrain_1_11_anomaly_spot",		    hint="st_esc_smart_terrain_1_11_anomaly_spot_name"},
+      {target="esc_smart_terrain_8_9_anomaly_spot",		        hint="st_esc_smart_terrain_8_9_anomaly_spot_name"},
+      {target="esc_smart_terrain_5_4_anomaly_spot",		        hint="st_esc_smart_terrain_5_4_anomaly_spot_name"},
+	  {target="gar_smart_terrain_3_7_anomaly_spot",		        hint="st_gar_smart_terrain_3_7_anomaly_spot_name"},
+      {target="gar_smart_terrain_3_7_anomaly_spot_2",		    hint="st_gar_smart_terrain_3_7_anomaly_spot_2_name"},
+      {target="gar_smart_terrain_2_4_anomaly_spot",		        hint="st_gar_smart_terrain_2_4_anomaly_spot_name"},
+      {target="gar_smart_terrain_6_7_anomaly_spot",		        hint="st_gar_smart_terrain_6_7_anomaly_spot_name"},
+      {target="gar_smart_terrain_5_6_anomaly_spot",		        hint="st_gar_smart_terrain_5_6_anomaly_spot_name"},
+      {target="gar_smart_terrain_1_7_anomaly_spot",		        hint="st_gar_smart_terrain_1_7_anomaly_spot_name"},
+	  {target="agr_smart_terrain_1_3_anomaly_spot",		        hint="st_agr_smart_terrain_1_3_anomaly_spot_name"},
+      {target="agr_smart_terrain_4_4_near_3_anomaly_spot",      hint="st_agr_smart_terrain_4_4_near_3_anomaly_spot_name"},
+      {target="agr_smart_terrain_5_7_anomaly_spot", 		    hint="st_agr_smart_terrain_5_7_anomaly_spot_name"},
+      {target="agr_smart_terrain_5_2_anomaly_spot", 		    hint="st_agr_smart_terrain_5_2_anomaly_spot_name"},
+      {target="agr_smart_terrain_1_2_anomaly_spot", 		    hint="st_agr_smart_terrain_1_2_anomaly_spot_name"},
+	  {target="val_smart_terrain_9_10_anomaly_spot",		    hint="st_val_smart_terrain_9_10_anomaly_spot_name"},
+      {target="val_smart_terrain_6_4_anomaly_spot",		        hint="st_val_smart_terrain_6_4_anomaly_spot_name"},
+      {target="val_smart_terrain_8_6_anomaly_spot",		        hint="st_val_smart_terrain_8_6_anomaly_spot_name"},
+      {target="val_smart_terrain_9_4_anomaly_spot",		        hint="st_val_smart_terrain_9_4_anomaly_spot_name"},
+      {target="val_smart_terrain_8_9_anomaly_spot",		        hint="st_val_smart_terrain_8_9_anomaly_spot_name"},
+	  {target="mil_smart_terrain_4_7_anomaly_spot",		        hint="st_mil_smart_terrain_4_7_anomaly_spot_name"},
+      {target="mil_smart_terrain_2_1_anomaly_spot",		        hint="st_mil_smart_terrain_2_1_anomaly_spot_name"},
+      {target="mil_smart_terrain_2_6_anomaly_spot",		        hint="st_mil_smart_terrain_2_6_anomaly_spot_name"},
+      {target="mil_smart_terrain_7_4_anomaly_spot",		        hint="st_mil_smart_terrain_7_4_anomaly_spot_name"},
+      {target="mil_smart_terrain_8_3_anomaly_spot",		        hint="st_mil_smart_terrain_8_3_anomaly_spot_name"},
+	  {target="yan_smart_terrain_2_5_anomaly_spot",		        hint="st_yan_smart_terrain_2_5_anomaly_spot_name"},
+      {target="yan_smart_terrain_zombi_spawn_anomaly_spot",		hint="st_yan_smart_terrain_zombi_spawn_anomaly_spot_name"},
+      {target="yan_smart_terrain_5_3_anomaly_spot",		        hint="st_yan_smart_terrain_5_3_anomaly_spot_name"},
+      {target="yan_smart_terrain_4_2_anomaly_spot",		        hint="st_yan_smart_terrain_4_2_anomaly_spot_name"},
+	  {target="red_smart_terrain_6_3_anomaly_spot",		        hint="st_red_smart_terrain_6_3_anomaly_spot_name"},
+      {target="red_smart_terrain_4_5_anomaly_spot",		        hint="st_red_smart_terrain_4_5_anomaly_spot_name"},
+      {target="red_smart_terrain_monsters_anomaly_spot",	    hint="st_red_smart_terrain_monsters_anomaly_spot_name"},
+      {target="red_smart_terrain_3_2_anomaly_spot",		        hint="st_red_smart_terrain_3_2_anomaly_spot_name"},
+      {target="red_smart_terrain_6_6_anomaly_spot",		        hint="st_red_smart_terrain_6_6_anomaly_spot_name"},
+      {target="red_smart_terrain_3_1_anomaly_spot",		        hint="st_red_smart_terrain_3_1_anomaly_spot_name"},
+	  {target="gen_smart_terrain_urod_anomaly_spot",		    hint="st_gen_smart_terrain_urod_anomaly_spot_name"},
+	  {target="trc_sim_13_anomal_zone_spot",				    hint="st_trc_sim_13_anomal_zone_spot_name"},
+	
+	-- POLE
+      {target="pol_smart_terrain_1_2_anomaly_spot",		        hint="st_pol_smart_terrain_1_2_anomaly_spot_name"},
+
+	-- MLR
+      {target="dasc_treesucker_state_spot",	                    hint="st_dasc_treesucker_state_name"},
+      {target="tc_smart_terrain_bandit_base_spot",	            hint="st_tc_bandit_base_name"},
+      {target="rad_smart_terrain_kpp_spot",	                    hint="st_tc_kpp_name"},
+      {target="rad_smart_terrain_vert_spot",	                hint="st_tc_vert_name"},
+      {target="radar_smart_terrain_first_zastava_spot",	        hint="st_radar_first_zastava_name"},
+      {target="rad_smart_terrain_bunker_spot",	                hint="st_rad_bunker_name"},
+      {target="red_smart_terrain_dark_yar_spot",	            hint="st_red_dark_yar_name"},
+      {target="red_smart_terrain_central_mine_spot",	        hint="st_red_central_mine_name"},
+      {target="red_smart_terrain_crap_spot",	                hint="st_red_crap_name"},
+      {target="agr_smart_terrai_SRI_spot",	                    hint="st_agr_SRI_name"},
+      {target="mar_smart_terrain_post_spot",	                hint="st_lim_post_vishka_name"},
+      {target="mar_smart_terrain_old_church_spot",	            hint="st_lim_old_church_name"},
+      {target="mar_smart_terrain_village_csky_spot",	        hint="st_lim_village_csky_name"},
+      {target="mar_smart_terrain_water_pump_station_spot",	    hint="st_lim_water_pump_station_name"},
+      {target="mar_smart_terrain_mechanic_yard_spot",	        hint="st_lim_mechanic_yard_name"},
+      {target="red_smart_terrain_bridge_spot",	                hint="st_lim_bridge_name"},
+      {target="red_smart_terrain_house_lesnik_spot",	        hint="st_lim_house_lesnik_name"},
+      {target="lim_smart_first_zastava_spot",	                hint="st_lim_zastava_name"},
+      {target="lim_smart_bubbles_spot",                  	    hint="st_lim_bubbles_name"},
+      {target="lim_smart_nonbuild_spot",		                hint="st_lim_nonbuild_name"},
+      {target="lim_smart_dyga_spot",		                    hint="st_lim_dyga_name"},
+      {target="ds_smart_administration_spot",	                hint="st_ds_administration_name"},
+      {target="ds_smart_market_spot",                  	        hint="st_ds_market_name"},
+      {target="ds_smart_house_of_culture_spot",		            hint="st_ds_HoC_name"},
+      {target="esc_smart_terrain_novice_village_spot",	        hint="st_novice_village_name"},
+      {target="esc_smart_terrain_south_blokpost_spot",	        hint="st_south_blokpost_name"},
+      {target="esc_smart_terrain_ATP_spot",		                hint="st_ATP_name"},
+      {target="esc_smart_terrain_elevator_spot",		        hint="st_elevator_name"},
+      {target="esc_smart_terrain_tunnel_electr_spot",		    hint="st_tunnel_electr_name"},
+      {target="esc_smart_terrain_neut_base_spot",		        hint="st_neut_base_name"},
+      {target="esc_smart_terrain_north_blockpost_spot",	        hint="st_north_blockpost_name"},
+      {target="dar_smart_terrain_farm_spot",		            hint="st_dar_farm_name"},
+      {target="dar_smart_terrain_complex_proizv_spot",	        hint="st_dar_complex_name"},
+      {target="mil_smart_terrain_bs_village_spot",	            hint="st_bs_village_name"},
+      {target="mil_smart_terrain_base_freedom_spot",		    hint="st_base_freedom_name"},
+      {target="mil_smart_terrain_border_spot",	                hint="st_border_name"},
+      {target="pri_smart_terrain_mon_base_spot",	            hint="st_mon_base_name"},
+      {target="pri_smart_terrain_hotel_poless_spot",		    hint="st_hotel_poless_name"},
+      {target="pri_smart_terrain_big_bus_station_spot",	        hint="st_big_bus_station_name"},
+      {target="gar_smart_terrain_6_3_baraholka_spot",		    hint="st_gar_baraholka_name"},
+      {target="gar_smart_terrain_dolg_outpost_spot",		    hint="st_gar_outpost_name"},
+      {target="gar_smart_terrain_3_5_angar_spot",		        hint="st_gar_angar_name"},
+      {target="bar_smart_terrain_bar100rent_spot",		        hint="st_bar100rent_name"},
+      {target="yan_smart_terrain_6_4_bunker_spot",		        hint="st_yanbunker_name"},
+      {target="yan_smart_terrain_proizvcomplex_spot",		    hint="st_yancomplex_name"},
+
+      {target="zat_b55_spot",		                            hint="st_zat_b55_name_land"},
+      {target="zat_b100_spot",	                                hint="st_zat_b100_name_land"},
+      {target="zat_b104_spot",	                                hint="st_zat_b104_name_land"},
+      {target="zat_b38_spot", 	                                hint="st_zat_b38_name_land"},
+      {target="zat_b40_spot",	                                hint="st_zat_b40_name_land"},
+      {target="zat_b56_spot",		                            hint="st_zat_b56_name_land"},
+      {target="zat_b5_spot",  	                                hint="st_zat_b5_name_land"},
+      {target="zat_a2_spot",  	                                hint="st_zat_a2_name_land"},
+      {target="zat_b20_spot",  	                                hint="st_zat_b20_name_land"},
+      {target="zat_b20_spot",		                            hint="st_zat_fire_name_land"},
+      {target="zat_b53_spot",		                            hint="st_zat_b53_name_land"},
+      {target="zat_b101_spot",	                                hint="st_zat_b101_name_land"},
+      {target="zat_b101_spot",	                                hint="st_zat_waste_name_land"},
+      {target="zat_b106_spot",	                                hint="st_zat_b106_name_land"},
+      {target="zat_b7_spot",  	                                hint="st_zat_b7_name_land"},
+      {target="zat_b14_spot",  	                                hint="st_zat_b14_name_land"},
+      {target="zat_b14_spot",		                            hint="st_zat_tide_name_land"},
+      {target="zat_b52_spot",  	                                hint="st_zat_b52_name_land"},
+      {target="zat_b39_spot",		                            hint="st_zat_b39_name_land"},
+      {target="zat_b33_spot",  	                                hint="st_zat_b33_name_land"},
+      {target="zat_b18_spot",  	                                hint="st_zat_b18_name_land"},
+      {target="zat_b54_spot",		                            hint="st_zat_b54_name_land"},
+      {target="zat_b12_spot",  	                                hint="st_zat_b12_name_land"},
+      {target="zat_b28_spot",  	                                hint="st_zat_b28_name_land"},
+      {target="zat_b103_spot",	                                hint="st_zat_b103_name_land"},
+      {target="jup_b1_spot",		                            hint="st_jup_b1_name_land"},
+      {target="jup_b46_spot",  	                                hint="st_jup_b46_name_land"},
+      {target="jup_b202_spot",	                                hint="st_jup_b202_name_land"},
+      {target="jup_b211_spot",	                                hint="st_jup_b211_name_land"},
+      {target="jup_b200_spot",	                                hint="st_jup_b200_name_land"},
+      {target="jup_b19_spot",  	                                hint="st_jup_b19_name_land"},
+      {target="jup_a6_spot",  	                                hint="st_jup_a6_name_land"},
+      {target="jup_b25_spot",  	                                hint="st_jup_b25_name_land"},
+      {target="jup_b25_spot",		                            hint="st_jup_earth_name_land"},
+      {target="jup_b6_spot",  	                                hint="st_jup_b6_name_land"},
+      {target="jup_b205_spot",	                                hint="st_jup_b205_name_land"},
+      {target="jup_b206_spot",	                                hint="st_jup_b206_name_land"},
+      {target="jup_b206_spot",	                                hint="st_jup_grove_name_land"},
+      {target="jup_b32_spot",  	                                hint="st_jup_b32_name_land"},
+      {target="jup_a10_spot",  	                                hint="st_jup_a10_name_land"},
+      {target="jup_b209_spot",	                                hint="st_jup_b209_name_land"},
+      {target="jup_b208_spot",	                                hint="st_jup_b208_name_land"},
+      {target="jup_a12_spot", 	                                hint="st_jup_a12_name_land"},
+      {target="jup_b212_spot",	                                hint="st_jup_b212_name_land"},
+      {target="jup_b9_spot",  	                                hint="st_jup_b9_name_land"},
+      {target="jup_b201_spot",	                                hint="st_jup_b201_name_land"},
+      {target="jup_a9_spot",  	                                hint="st_jup_a9_name_land"},
+
+      {target="pri_a28_spot",			                        hint="st_pri_a28_name_land"},
+      {target="pri_b36_spot",			                        hint="st_pri_b36_name_land"},
+      {target="pri_b303_spot",		                            hint="st_pri_b303_name_land"},
+      {target="pri_b301_spot",		                            hint="st_pri_b301_name_land"},
+      {target="pri_a17_spot",			                        hint="st_pri_a17_name_land"},
+      {target="pri_b306_spot",		                            hint="st_pri_b306_name_land"},
+      {target="pri_b306_spot",		                            hint="st_pri_plug_name_land"},
+      {target="pri_a16_spot",			                        hint="st_pri_a16_name_land"},
+      {target="pri_a25_spot",			                        hint="st_pri_a25_name_land"},
+      {target="pri_b35_spot",			                        hint="st_pri_b35_name_land"},
+      {target="pri_a21_spot",			                        hint="st_pri_a21_name_land"},
+      {target="pri_b304_spot",		                            hint="st_pri_b304_name_land"},
+      {target="pri_b304_spot",		                            hint="st_pri_bath_name_land"},
+      {target="pri_a18_spot",			                        hint="st_pri_a18_name_land"},
+      {target="pri_anomal_vulkan_spot",	                        hint="st_pri_b307_name_land"},
+      {target="pri_anomal_loza_spot",		                    hint="st_pri_b302_name_land"}
+}
+
+--[[----------------------------------------------------------------------------------------------------
+	Functions
+------------------------------------------------------------------------------------------------------]]
+
+-- Monkey patch of the actor_on_item_use function to run the western_goods_use_gps() function when the GPS is used
+ActorOnItemUse = itms_manager.actor_on_item_use
+function itms_manager.actor_on_item_use(obj)
+    ActorOnItemUse(obj)
+	
+	local sec = obj:section()
+	
+	-- GPS
+	if (sec == "wg_gps") then
+		western_goods_use_gps(obj)
+		return
+	end
+end
+
+-- Function used to run the gps device
+function western_goods_use_gps(obj)
+
+	dbg_printf("[WG] Used the GPS device")
+	
+	utils_xml.hide_menu()
+	
+	-- Get the name and distance to the closest smart terrain, as well as the level's name
+	local game_world_info = find_info_from_game_world()
+	local closest_smart_name = game_world_info[1]
+	local closest_smart_distance = game_world_info[2]
+	local closest_smart_level = game_world_info[3]
+
+	-- If the smart terrain doesn't have a translation, we retry using the PDA instead
+	if closest_smart_name and not has_translation(closest_smart_name) then
+		
+		dbg_printf("[WG] Smart terrain found but no translation. Fallback to PDA info")
+		
+		local pda_info = find_info_from_pda()
+		closest_smart_name = pda_info[1]
+		closest_smart_distance = pda_info[2]
+		closest_smart_level = pda_info[3]
+	end
+	
+	local message = build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level)
+	
+	actor_menu.set_msg(1, message, 7)
+end
+
+function find_info_from_game_world()
+
+	local smart = alife_object(smart_terrain.nearest_to_actor_smart.id)
+	
+	local closest_smart_name = smart:name()
+	local closest_smart_distance = smart.dist_to_actor
+	local closest_smart_level = alife():level_name(smart.level_id)
+		
+	dbg_printf("[WG] Closest smart name from game world : %s", closest_smart_name)
+	dbg_printf("[WG] Closest smart dist from game world : %s", closest_smart_distance)
+	dbg_printf("[WG] Closest smart level from game world : %s", closest_smart_level)
+	
+	return {closest_smart_name, closest_smart_distance, closest_smart_level}
+end
+
+function find_info_from_pda()
+
+	local closest_smart_name
+	local closest_smart_distance
+	local closest_smart_level
+	
+	local actor = db.actor
+	for k,v in pairs(pda_primary_objects_tbl) do
+		local obj_id = get_story_object_id(v.target)
+		if obj_id and db.storage[obj_id] and db.storage[obj_id].object then
+			local this_smart_name = v.target
+			local this_smart_distance = db.storage[obj_id].object:position():distance_to(actor:position())
+			local this_smart_level = level.name()	
+			
+			local current_closest_smart_name = closest_smart_name or this_smart_name
+			local current_closest_smart_distance = closest_smart_distance or this_smart_distance
+			local current_closest_smart_level = closest_smart_level or this_smart_level
+			
+			if (this_smart_distance <= current_closest_smart_distance) then
+				closest_smart_name = this_smart_name
+				closest_smart_distance = this_smart_distance
+				closest_smart_level = this_smart_level
+			end
+		end
+	end
+	
+	dbg_printf("[WG] Closest smart name from PDA : %s", closest_smart_name)
+	dbg_printf("[WG] Closest smart dist from PDA : %s", closest_smart_distance)
+	dbg_printf("[WG] Closest smart level from PDA : %s", closest_smart_level)
+	
+	return {closest_smart_name, closest_smart_distance/2, closest_smart_level}
+end
+
+function build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level)
+	-- Build the message to print on-screen
+	local message
+	
+	-- If we're missing (like properly missing) one of the info, we say we don't know where we are
+	if not (closest_smart_name and closest_smart_distance and closest_smart_level) then
+		message = get_translation("st_wg_gps_use_2")
+	
+	-- If we have all the info, but the distance is infinite (happens when there are no smarts on your current level), we just print the level name
+	elseif string.find(closest_smart_distance,"inf") then
+		message = get_translation("st_wg_gps_use_3")
+	
+	else
+		-- If the smart terrain's name can be translated, we use the translation. Otherwise, we don't show that information
+		if has_translation(closest_smart_name) then
+			message = get_translation(closest_smart_name) .. " - " .. round_number(closest_smart_distance) .. "m "
+		else
+			-- If we can't find a translation with the smart name, maybe the PDA hint has a translation
+			for k,v in pairs(pda_primary_objects_tbl) do
+				if v.target == closest_smart_name and has_translation(v.hint) then
+					message = get_translation(v.hint) .. " - " .. round_number(closest_smart_distance) .. "m "
+				end
+			end
+		end
+		
+		-- If the level name can be translation, we use the translation. Otherwise, we don't show that information
+		if has_translation(closest_smart_level) then
+			message = (message or "") .. "(" .. get_translation(closest_smart_level) .. ")"
+		end
+
+		-- If at this point we still don't have a string (because things don't have translations), we say we don't know where we are
+		if not(message) then
+			message = get_translation("st_wg_gps_use_4")
+		end
+	end
+	
+	return get_translation("st_wg_gps_use_1") .. " " .. message
+end
+

@@ -1,0 +1,25 @@
+<w>
+	<magazine x="0" y="0" width="1024" height="768" stretch="1">
+	
+		<page x="0" y="0" width="1024" height="768"/>
+		
+		<btn_previous x="381" y="692" width="54" height="32">
+			<text r="150" g="150" b="150" font="letterica16" align="c">ui_mm_previous</text>
+			<texture>ui_button_empty</texture>
+		</btn_previous>
+		<btn_previous_pic x="381" y="692" width="54" height="32"/>
+			
+		<btn_ok x="485" y="692" width="54" height="32">
+			<text r="150" g="150" b="150" font="letterica16" align="c">ui_mm_ok</text>
+			<texture>ui_button_empty</texture>
+		</btn_ok>
+		<btn_ok_pic x="485" y="692" width="54" height="32"/>
+		
+		<btn_next x="589" y="692" width="54" height="32">
+			<text r="150" g="150" b="150" font="letterica16" align="c">ui_mm_next</text>
+			<texture>ui_button_empty</texture>
+		</btn_next>
+		<btn_next_pic x="589" y="692" width="54" height="32"/>
+			
+	</magazine>
+</w>

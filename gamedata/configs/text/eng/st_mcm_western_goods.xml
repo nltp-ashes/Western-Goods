@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
+<string_table>
+
+<!--=====================================================================================================================================================================
+	MCM Strings
+======================================================================================================================================================================-->
+
+	<!--=================================================================================================================================================================
+		Main Strings
+	==================================================================================================================================================================-->
+	
+	<!-- Page Title -->
+	<string id="ui_mcm_western_goods_title">
+		<text>Western Goods</text>
+	</string>
+
+	<!-- Menu Title -->
+	<string id="ui_mcm_menu_western_goods">
+		<text>Western Goods</text>
+	</string>
+
+	<!--=================================================================================================================================================================
+		GENERAL SETTINGS
+	==================================================================================================================================================================-->
+	
+	<!-- Section Title -->
+	<string id="ui_mcm_western_goods_general_settings_title">
+		<text>GENERAL SETTINGS</text>
+	</string>
+
+	<!-- Guided Tasks -->
+	<string id="ui_mcm_western_goods_guided_tasks">
+		<text>Guided tasks</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_guided_tasks_desc">
+		<text>Part of some tasks are intentionally un-guided, to encourage exploration and thinking. You can change this setting in real-time to have a marker on your PDA for your objective.</text>
+	</string>
+
+	<!-- Helicopter Attack Order -->
+	<string id="ui_mcm_western_goods_heli_attack">
+		<text>Order helicopter to attack</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_heli_attack_desc">
+		<text>Key-bind used to send an attack order to an helicopter. Aim at a target and use the key-bind to send the order.</text>
+	</string>
+	
+	<!-- Items Per Corpse -->
+	<string id="ui_mcm_western_goods_max_item_per_corpse">
+		<text>Maximum number of items per corpse</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_max_item_per_corpse_desc">
+		<text>Defines the maximum amount of items X that can spawn in a single corpse. The game will select X items to spawn, and then run the drop rates for each of the selected items. In terms, you can get anywhere from 0 to X items.</text>
+	</string>
+
+	<!-- Magazines Psy-Regen -->
+	<string id="ui_mcm_western_goods_magazine_psy_regen">
+		<text>Psy-health regen for reading magazines</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_magazine_psy_regen_desc">
+		<text>Defines the the rate at which your psy-health (mental health) heals when you're reading a magazine.</text>
+	</string>
+	
+	<!--=================================================================================================================================================================
+		TECHNICAL SETTINGS
+	==================================================================================================================================================================-->
+	
+	<!-- Section Title -->
+	<string id="ui_mcm_western_goods_technical_title">
+		<text>TECHNICAL SETTINGS</text>
+	</string>
+	
+	<!-- Debug mode -->
+	<string id="ui_mcm_western_goods_debug_mode">
+		<text>Debug mode</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_debug_mode_desc">
+		<text>Makes the addon print out some information in the console/logs, for later reference when trying to identify problems.</text>
+	</string>
+	
+	<!-- Addon removal -->
+	<string id="ui_mcm_western_goods_addon_removal">
+		<text>Addon removal</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_addon_removal_desc">
+		<text>Allows for a safe removal of the addon. Enable this setting, then save your game. After this, you can remove the addon and load that save again, and continue playing without Western Goods.</text>
+	</string>
+
+</string_table>

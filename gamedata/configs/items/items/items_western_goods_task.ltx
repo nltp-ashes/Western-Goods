@@ -1,0 +1,95 @@
+;;--============================================================================--;;
+;;--================| Quest Items |=============================================--;;
+;;--============================================================================--;;
+
+[wg_quest_item]:identity_immunities
+GroupControlSection						= spawn_group 
+$spawn									= "quest\wg_quest_item"
+cform									= skeleton 
+class									= II_ATTCH
+kind			                        = i_dummy
+
+cost									= 0
+
+icons_texture				            = ui\icons\ui_icon_western_goods_task
+
+attach_angle_offset		                = -0.287979, 1.560923, 1.544060
+attach_position_offset		            = 0.096910, -0.013594, 0.107925
+attach_bone_name		                = bip01_r_hand
+auto_attach				                = false
+
+can_trade								= false
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_act_1_task_1_quest_item]:wg_quest_item
+$spawn                                  = "quest\wg_act_1_task_1_quest_item"
+visual                                  = dynamics\western_goods_task\wg_act_1_task_1_quest_item.ogf
+kind			                        = i_quest
+
+;sprint_allowed                         = true
+;quest_item                             = true
+story_id                                = stalker_western_goods_trader_task_1_act_1
+
+inv_name			                    = st_wg_act_1_task_1_quest_item
+inv_name_short			                = st_wg_act_1_task_1_quest_item_s
+description			                    = st_wg_act_1_task_1_quest_item_descr
+inv_weight			                    = 13.0
+
+inv_grid_width			                = 4
+inv_grid_height			                = 2
+inv_grid_x			                    = 0
+inv_grid_y			                    = 0
+
+tier 									= 3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_act_1_task_2_quest_item_1]:wg_quest_item
+$spawn                                  = "quest\wg_act_1_task_2_quest_item_1"
+visual                                  = dynamics\western_goods_task\wg_act_1_task_2_quest_item_1.ogf
+kind			                        = i_quest
+
+;sprint_allowed							= false
+;quest_item								= true
+story_id                                = stalker_western_goods_trader_task_2_act_1
+
+inv_name			                    = st_wg_act_1_task_2_quest_item_1
+inv_name_short			                = st_wg_act_1_task_2_quest_item_1_s
+description			                    = st_wg_act_1_task_2_quest_item_1_descr
+inv_weight			                    = 12.768
+
+inv_grid_width			                = 5
+inv_grid_height			                = 1
+inv_grid_x			                    = 4
+inv_grid_y			                    = 0
+
+tier 									= 3
+
+[wg_act_1_task_2_quest_item_2]:wg_quest_item
+$spawn                                  = "quest\wg_act_1_task_2_quest_item_2"
+visual                                  = dynamics\western_goods_task\wg_act_1_task_2_quest_item_2.ogf
+kind			                        = i_quest
+
+;sprint_allowed                         = true
+;quest_item								= true
+story_id                                = stalker_western_goods_trader_task_2_act_1
+
+use1_functor         					= western_goods_magazine_ui.menu_view
+use1_action_functor  					= western_goods_magazine_ui.func_mag
+use1_allow_db         					= true
+
+inv_name			                    = st_wg_act_1_task_2_quest_item_2
+inv_name_short			                = st_wg_act_1_task_2_quest_item_2_s
+description			                    = st_wg_act_1_task_2_quest_item_2_descr
+inv_weight			                    = 13.0
+
+inv_grid_width			                = 1
+inv_grid_height			                = 1
+inv_grid_x			                    = 4
+inv_grid_y			                    = 1
+
+use_sound                            	= paper
+snd_on_take								= paper
+
+tier 									= 3

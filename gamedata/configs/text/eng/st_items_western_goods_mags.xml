@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+	<string id="st_wg_magazine_view">
+		<text>View</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_1">
+		<text>PLAYBOY magazine (Chloe Khan)</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_1_s">
+		<text>PLAYBOY magazine</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_1_descr">
+		<text>
+			One of the last of these magazines to be printed before their switch to a digital version. Unlike soviet magazines of the same kind that are often found in the Zone, it does not look like it has been through hell and back. Besides a few missing pages, it is almost complete. It probably found its way in the Zone from mercs, they've been known to import western goods lately.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_2">
+		<text>PLAYBOY magazine (Nicole Whitehead)</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_2_s">
+		<text>PAPER magazine</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_2_descr">
+		<text>
+			One of the last of these magazines to be printed before their switch to a digital version. Unlike soviet magazines of the same kind that are often found in the Zone, it does not look like it has been through hell and back. Besides a few missing pages, it is almost complete. It probably found its way in the Zone from mercs, they've been known to import western goods lately.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_3">
+		<text>PLAYBOY magazine (Carrie Stevens)</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_3_s">
+		<text>PLAYBOY magazine</text>
+	</string>
+	
+	<string id="st_wg_porn_mag_3_descr">
+		<text>
+			One of the last of these magazines to be printed before their switch to a digital version. Unlike soviet magazines of the same kind that are often found in the Zone, it does not look like it has been through hell and back. Besides a few missing pages, it is almost complete. It probably found its way in the Zone from mercs, they've been known to import western goods lately.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+	
+	<string id="st_wg_xbox_mag_1">
+		<text>Xbox : The Official Magazine (March 2002)</text>
+	</string>
+	
+	<string id="st_wg_xbox_mag_1_s">
+		<text>Xbox magazine</text>
+	</string>
+	
+	<string id="st_wg_xbox_mag_1_descr">
+		<text>
+			An old Xbox magazine, dating back from 2002. It's the first issue released in the UK. Some sections of the magazine are missing, but at least one review remained complete.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+	
+	<string id="st_wg_xbox_mag_2">
+		<text>Xbox : The Official Magazine (December 2004)</text>
+	</string>
+	
+	<string id="st_wg_xbox_mag_2_s">
+		<text>Xbox magazine</text>
+	</string>
+	
+	<string id="st_wg_xbox_mag_2_descr">
+		<text>
+			An old Xbox magazine, dating back from 2004. It's the 36th issue released in the UK. Some sections of the magazine are missing, but at least one review remained complete.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+</string_table>

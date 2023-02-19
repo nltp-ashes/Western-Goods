@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
+<string_table>
+
+<!--=====================================================================================================================================================================
+	Core Strings
+======================================================================================================================================================================-->
+
+	<!-- Testing something real quick -->
+
+	<!-- Out-of-date trader auto_inject.script -->
+	<string id="st_err_outdated_trader_autoinject_script_title">
+		<text>Script trader_autoinject.script out-of-date or missing.</text>
+	</string>
+
+	<string id="st_err_outdated_trader_autoinject_script_what">
+		<text>The script trader_autoinject.script is out of date. Western Goods comes with an up-to-date one, meaning one of your addons overwrote it. Please arrange your addons so the latest version of that script gets enabled/added last.</text>
+	</string>
+
+	<string id="st_err_outdated_trader_autoinject_script_why">
+		<text>Western Goods requires this script to be up-to-date to enable certain trade features.</text>
+	</string>
+
+	<string id="st_err_outdated_trader_autoinject_script_where">
+		<text>You can download the latest version from Github : https://github.com/ahuyn/anomaly-dependencies/tree/master/trader_autoinject</text>
+	</string>
+
+	<!-- Out-of-date game -->
+	<string id="st_err_outdated_game_title">
+		<text>Game version invalid or out-of-date.</text>
+	</string>
+
+	<string id="st_err_outdated_game_what">
+		<text>Your game has an invalid version or is out-of-date. Please install version S.T.A.L.K.E.R. Anomaly 1.5.2.</text>
+	</string>
+
+	<string id="st_err_outdated_game_why">
+		<text>Western Goods requires some functionalities added only in 1.5.2, and/or uses prerequisites that themselves require version 1.5.2.</text>
+	</string>
+
+	<string id="st_err_outdated_game_where">
+		<text>You can download S.T.A.L.K.E.R. Anomaly 1.5.2 from ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+	</string>
+
+	<!-- Missing Barter UI Framework -->
+	<string id="st_err_missing_barter_ui_title">
+		<text>Prerequisite missing - Barter UI framework.</text>
+	</string>
+
+	<string id="st_err_missing_barter_ui_what">
+		<text>Barter UI framework is missing. Please install the framework before using Western Goods.</text>
+	</string>
+
+	<string id="st_err_missing_barter_ui_why">
+		<text>Western Goods requires this framework to enable some of the features for some special NPCs.</text>
+	</string>
+
+	<string id="st_err_missing_barter_ui_where">
+		<text>You can download the latest version from Github : https://github.com/ahuyn/anomaly-barter/releases/tag/latest</text>
+	</string>
+
+</string_table>

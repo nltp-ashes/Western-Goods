@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
+<string_table>
+
+<!-- Western Goods Trader (in Book Store) -->
+
+	<!-- Character name -->
+	<string id="western_goods_trader_name">
+		<text>Williams "Ashes" Heades</text>
+	</string>
+	
+	<!-- Character bio -->
+	<string id="western_goods_trader_bio">
+		<text>Williams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN taskforces. He fought the civil war in the 2010 rebelion in Altis, Greece. He was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.</text>
+	</string>
+	
+	<!-- Exchange line of dialog -->
+	<string id="western_goods_trader_dialog_init">
+		<text>I'd like to exchange some currency. %c[d_orange][Exchange]</text>
+	</string>
+	
+	<!-- Meet dialog -->
+	<string id="western_goods_trader_meet_0">
+		<text>Who are you?</text>
+	</string>
+	
+	<string id="western_goods_trader_meet_1">
+		<text>Do you just go around and ask random people who they are? Alright, if that's so, I'm Williams Heades, people call me "Ashes". I oversee imports from western countries for Mercenaries. I've been in the Zone for a while now, and business has never been this good.</text>
+	</string>
+	
+	<string id="western_goods_trader_meet_2">
+		<text>So you're the one who imports all those goods into the Zone? I've seen other traders in the Zone with imported goods, do they also import them?</text>
+	</string>
+	
+	<string id="western_goods_trader_meet_3">
+		<text>No, most of them get it through me. It's a real pain to get this many goods into the Zone, but as Mercenaries, we have the necessary resources to get it done.</text>
+	</string>
+	
+	<string id="western_goods_trader_meet_4">
+		<text>I see. So you do business with anyone?</text>
+	</string>
+	
+	<string id="western_goods_trader_meet_5">
+		<text>Well you know how we are. If you pay good money, we can always find an agreement. I don't believe in most of the Zone's bullshit anyway. I take no part in these wars faction wage to each others. So long as you're not a total dumbass, we can make business together.</text>
+	</string>
+	
+	<string id="western_goods_trader_meet_6">
+		<text>Alright.</text>
+	</string>
+	
+<!-- Western Goods Trader Barters -->
+
+	<!-- No more money barters available -->
+	<string id="st_wg_barter_money_desc_done"> 
+		<text>The trader want to keep some change for other clients, come back later.</text>
+	</string>
+	
+	
+	<!-- Dollars to Dollars barters -->
+	<string id="st_wg_barter_dollars_10_to_50_desc">
+		<text>Exchange five %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]50 dollars%c[ui_gray_2] bill.</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_50_to_10_desc">
+		<text>Exchange a %c[d_orange]50 dollars%c[ui_gray_2] bill for five %c[d_orange]10 dollars%c[ui_gray_2] bills.</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_50_to_100_desc">
+		<text>Exchange two %c[d_orange]50 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_100_to_50_desc">
+		<text>Exchange a %c[d_orange]100 dollars%c[ui_gray_2] bill for two %c[d_orange]50 dollars%c[ui_gray_2] bills.</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_100_to_10_desc">
+		<text>Exchange a %c[d_orange]100 dollars%c[ui_gray_2] bill for ten %c[d_orange]10 dollars%c[ui_gray_2] bills.</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_10_to_100_desc">
+		<text>Exchange ten %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
+	</string>
+	
+	
+	<!-- Euros to Euros barters -->
+	<string id="st_wg_barter_euros_10_to_50_desc">
+		<text>Exchange five %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]50 euros%c[ui_gray_2] bill.</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_50_to_10_desc">
+		<text>Exchange a %c[d_orange]50 euros%c[ui_gray_2] bill for five %c[d_orange]10 euros%c[ui_gray_2] bills.</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_50_to_100_desc">
+		<text>Exchange two %c[d_orange]50 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_100_to_50_desc">
+		<text>Exchange a %c[d_orange]100 euros%c[ui_gray_2] bill for two %c[d_orange]50 euros%c[ui_gray_2] bills.</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_100_to_10_desc">
+		<text>Exchange a %c[d_orange]100 euros%c[ui_gray_2] bill for ten %c[d_orange]10 euros%c[ui_gray_2] bills.</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_10_to_100_desc">
+		<text>Exchange ten %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
+	</string>
+	
+	
+	<!-- Dollars to Roubles barters -->
+	<string id="st_wg_barter_dollars_rouble_10_to_700_desc">
+		<text>Exchange %c[d_orange]10 dollars%c[ui_gray_2] for %c[d_orange]700 roubles%c[ui_gray_2].</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_rouble_50_to_3500_desc">
+		<text>Exchange %c[d_orange]50 dollars%c[ui_gray_2] for %c[d_orange]3500 roubles%c[ui_gray_2].</text>
+	</string>
+	
+	<string id="st_wg_barter_dollars_rouble_100_to_7000_desc">
+		<text>Exchange %c[d_orange]100 dollars%c[ui_gray_2] for %c[d_orange]7000 roubles%c[ui_gray_2].</text>
+	</string>
+	
+	
+	<!-- Euros to Roubles barters -->
+	<string id="st_wg_barter_euros_rouble_10_to_680_desc">
+		<text>Exchange %c[d_orange]10 euros%c[ui_gray_2] for %c[d_orange]680 roubles%c[ui_gray_2].</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_rouble_50_to_3400_desc">
+		<text>Exchange %c[d_orange]50 euros%c[ui_gray_2] for %c[d_orange]3400 roubles%c[ui_gray_2].</text>
+	</string>
+	
+	<string id="st_wg_barter_euros_rouble_100_to_6800_desc">
+		<text>Exchange %c[d_orange]100 euros%c[ui_gray_2] for %c[d_orange]6800 roubles%c[ui_gray_2].</text>
+	</string>
+	
+</string_table>

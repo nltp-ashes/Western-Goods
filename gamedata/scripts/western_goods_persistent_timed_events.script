@@ -1,0 +1,133 @@
+--[[
+-- Info
+-- 
+-- Original Author(s) : Unkown
+-- Edited : NLTP_ASHES
+-- Date : 15/01/2023
+-- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+-- 
+-- Script used to manage time events, that are persistent through saves. To be used like regular time events.
+--
+-- Note : the LOAD_DELAY variable is here because the game runs load_state before the save is finished loading, which makes some function calls happen before the save is ready to play.
+--]]
+
+--[[----------------------------------------------------------------------------------------------------
+	Constants and imported functions
+------------------------------------------------------------------------------------------------------]]
+
+local EVENT_QUEUE = {}
+local LOAD_DELAY = 7000
+
+local dbg_printf = western_goods_utils.dbg_printf
+
+--[[----------------------------------------------------------------------------------------------------
+	Main Script
+------------------------------------------------------------------------------------------------------]]
+
+function CreatePersistentTimeEvent(ev_id,act_id,timer,func,...)
+	if not (EVENT_QUEUE[ev_id]) then
+		EVENT_QUEUE[ev_id] = {}
+		EVENT_QUEUE[ev_id].__size = 0
+	end
+
+	if not (EVENT_QUEUE[ev_id][act_id]) then
+		EVENT_QUEUE[ev_id][act_id] = {}
+		EVENT_QUEUE[ev_id][act_id].added_at = time_global()
+		EVENT_QUEUE[ev_id][act_id].timer = time_global() + timer*1000
+		EVENT_QUEUE[ev_id][act_id].func = func
+		EVENT_QUEUE[ev_id][act_id].params = {...}
+		EVENT_QUEUE[ev_id].__size = EVENT_QUEUE[ev_id].__size + 1
+	end
+end
+
+function RemovePersistentTimeEvent(ev_id,act_id)
+	if (EVENT_QUEUE[ev_id] and EVENT_QUEUE[ev_id][act_id]) then
+		EVENT_QUEUE[ev_id][act_id] = nil
+		EVENT_QUEUE[ev_id].__size = EVENT_QUEUE[ev_id].__size - 1
+	end
+end
+
+function ResetPersistentTimeEvent(ev_id,act_id,timer)
+	if (EVENT_QUEUE[ev_id] and EVENT_QUEUE[ev_id][act_id]) then
+		EVENT_QUEUE[ev_id][act_id].added_at = time_global()
+		EVENT_QUEUE[ev_id][act_id].timer = time_global() + timer*1000
+	end
+end
+
+function ProcessPersistentEventQueue()
+	if has_alife_info("sleep_active") then
+		return false
+	end
+	
+	for event_id,actions in pairs(EVENT_QUEUE) do
+		for action_id,act in pairs(actions) do
+			if (action_id ~= "__size") then
+				if time_global() >= act.timer then
+					if (act.func(unpack(act.params)) == true) then
+						EVENT_QUEUE[event_id][action_id] = nil
+						EVENT_QUEUE[event_id].__size = EVENT_QUEUE[event_id].__size - 1
+					end
+				end
+			end
+		end
+
+		if (EVENT_QUEUE[event_id].__size == 0) then
+			EVENT_QUEUE[event_id] = nil
+		end
+	end
+	
+	return false
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Callbacks registration
+------------------------------------------------------------------------------------------------------]]
+
+function on_game_start()
+    RegisterScriptCallback("save_state", save_state)
+    RegisterScriptCallback("load_state", load_state)
+	RegisterScriptCallback("actor_on_update", ProcessPersistentEventQueue)
+end
+
+--[[----------------------------------------------------------------------------------------------------
+	Data persistence
+------------------------------------------------------------------------------------------------------]]
+
+function save_state(m_data)
+
+	local table_to_save = {}
+	
+	copy_table(table_to_save,EVENT_QUEUE)
+	
+	for event_id,actions in pairs(table_to_save) do
+		for action_id,act in pairs(actions) do
+			if (action_id ~= "__size") then
+				local timer = EVENT_QUEUE[event_id][action_id].timer
+				table_to_save[event_id][action_id].timer = timer - time_global()
+			end
+		end
+	end
+	
+	m_data.persistant_event_queue = table_to_save
+	
+	dbg_printf("[WG] Saved timed event table :\n%s", utils_data.print_table(table_to_save, false, true))
+end
+
+function load_state(m_data)
+	local table_to_load = m_data.persistant_event_queue or {}
+	
+	copy_table(EVENT_QUEUE,table_to_load)
+	
+	for event_id,actions in pairs(EVENT_QUEUE) do
+		for action_id,act in pairs(actions) do
+			if (action_id ~= "__size") then
+				local timer = EVENT_QUEUE[event_id][action_id].timer
+				EVENT_QUEUE[event_id][action_id].added_at = time_global() + LOAD_DELAY
+				EVENT_QUEUE[event_id][action_id].timer = time_global() + LOAD_DELAY + timer
+			end
+		end
+	end
+	
+	dbg_printf("[WG] Loaded timed event table :\n%s", utils_data.print_table(EVENT_QUEUE, false, true))
+end

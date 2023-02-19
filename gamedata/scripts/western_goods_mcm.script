@@ -1,0 +1,44 @@
+--[[
+-- Info
+-- 
+-- Original Author(s) : RavenAscendant
+-- Edited : NLTP_ASHES
+-- Date : 29/12/2022
+-- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+-- 
+-- Script used to define the options in MCM.
+--]]
+
+-- If you don't use MCM, change your defaults from here.
+local defaults = {
+	["max_item_per_corpse"] = 5,
+	["magazine_psy_regen"] = 0.0075,
+	["guided_tasks"] = false,
+	["heli_attack"] = DIK_keys.DIK_K,
+	["debug_mode"] = false,
+	["addon_removal"] = false,
+}
+
+-- Function called to get a certain setting defined in MCM. If MCM isn't installed, it defaults back to a value in defaults table.
+function get_config(key)
+	if ui_mcm then return ui_mcm.get("western_goods/"..key) else return defaults[key] end
+end
+
+-- MCM UI definition.
+function on_mcm_load()
+	op = { id="western_goods", sh=true, gr={
+			{ id="title", 					type="slide", 		link="ui_options_slider_disguise", 	text="ui_mcm_western_goods_title", size={512,50}, spacing=20 	},
+			{								type="title", 											text="ui_mcm_western_goods_general_settings_title"				},
+			{ id="guided_tasks", 			type="check", 		val=1, 												def=false 										},
+			{ id="heli_attack", 			type="key_bind",	val=2, 												def=DIK_keys.DIK_K 								},
+			{ id="max_item_per_corpse", 	type="track", 		val=2, min=1, 		max=5, 			step=1, 		def=5 											},
+			{ id="magazine_psy_regen", 		type="track", 		val=2, min=0.0040, 	max=0.0120, 	step=0.0010, 	def=0.0080 										},
+			{ id="divider", 				type="line" 																											},
+			{								type="title", 											text="ui_mcm_western_goods_technical_title"						},
+			{ id="debug_mode", 				type="check", 		val=1, 												def=false 										},
+			{ id="addon_removal", 			type="check", 		val=1, 												def=false 										},
+		}
+	}
+
+	return op
+end
