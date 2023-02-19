@@ -110,3 +110,107 @@ function as_boolean(var)
 
 	return nil
 end
+
+-- Function used to retrieve the server object of a unique NPC by its section name
+-- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds
+function find_unique_npc(sec)
+	for id = 1, 65534 do
+
+		local se = alife_object(id)
+
+		if se and se:section_name() == sec then return se end
+	end
+end
+
+-- Function used to spawn a story squad
+function spawn_story_squad(sec, pos, smart)
+	if not sec or not smart then return end
+
+	-- Make sure the squad isn't already spawned in
+	for id,_ in pairs(SIMBOARD.squads) do
+		if alife_object(id):section_name() == sec then
+			se_squad = alife_object(id)
+			dbg_printf("[WG] Squad already exists | %s", se_squad:section_name())
+			return se_squad
+		end
+	end
+
+	-- Spawn squad on the appropriate smart terrain
+	local se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id)
+	if not se_squad then return end
+
+	-- Force the squad to stay there
+	se_squad.scripted_target = smart:name()
+
+	dbg_printf("[WG] Story squad %s successfully created with id %s at %s", sec, se_squad.id, smart:name())
+
+	return se_squad
+end
+
+-- Function used to spawn a simulation squad, at a given point in space
+function spawn_squad(sec,pos,lvid,gvid)
+	local squad = alife_create(sec, pos, lvid, gvid)
+	if not squad then return end
+
+	squad:create_npc(nil, pos, lvid, gvid)
+
+	if squad.commander_id then
+		for k in squad:squad_members() do
+			local npc = k.object or k.id and alife_object(k.id)
+			if npc then
+				SIMBOARD:setup_squad_and_group(npc)
+			end
+		end
+	end
+
+	dbg_printf("[WG] Squad with id %s successfully created", squad.id)
+
+	return squad
+end
+
+-- Function used to spawn a dead squad, at a given point in space
+function spawn_dead_squad(sec,pos,lvid,gvid)
+	local squad = spawn_squad(sec, pos, lvid, gvid)
+	if not squad then return end
+
+	local member_id = nil
+
+	for npc in squad:squad_members() do
+		CreatePersistentTimeEvent("western_goods_delay_kill_squad",npc.id,math.random(5,10),surge_manager.make_dead,npc.id)
+		member_id = npc.id
+	end
+
+	dbg_printf("[WG] Squad with id %s successfully killed", squad.id)
+
+	return member_id
+end
+
+-- Function used to get the ID from a random member of a squad
+function get_member_id_from_squad(squad)
+	if not squad then return end
+
+	for member in squad:squad_members() do
+		return member.id
+	end
+end
+
+-- Function used to get a "random" member of a squad
+function get_member_from_squad(squad)
+	if not squad then return end
+
+	for member in squad:squad_members() do
+		return member
+	end
+end
+
+-- Function used to find an NPC by its section name in the player squad
+-- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds
+function find_npc_in_actor_squad(sec)
+	local actor_squad = axr_companions.list_actor_squad_by_id()
+	for _,id in pairs(actor_squad) do
+		local se_npc = alife_object(id)
+		if se_npc and se_npc:section_name() == sec then
+			return se_npc
+		end
+	end
+end

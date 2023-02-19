@@ -3,13 +3,14 @@
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
 ---
+
 ### ABOUT
 
 This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding consumables, readable magazines, trade items, new unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
 
 ---
 
-## REQUIREMENTS
+### REQUIREMENTS
 
 This addon **requires** the following :
 1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152)

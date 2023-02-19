@@ -18,25 +18,21 @@ local CONST_DIALOG_DISPLAY_TIME = 15
 local CONST_DIALOG_DELAY_MSG = 7
 local dialog_waiting_count = 0
 
--- Helicopter constants
-local CONST_HELICOPTER_UPDATE_FREQ = 5000
-local CONST_HELICOPTER_FLIGHT_ALT = 100
-local CONST_HELICOPTER_SPOT = "secondary_task_location"
-
--- Helicopter variables
-local HELICOPTERS_TABLE = {}
-local HELICOPTERS_TARGETS = {}
-
 -- Imported functions
 local get_translation = game.translate_string
-local has_translation = western_goods_utils.has_translation
 local dbg_printf = western_goods_utils.dbg_printf
-local round_number = western_goods_utils.round_number
 local get_distance = western_goods_utils.get_distance
-local table_contains = western_goods_utils.table_contains
-local table_random_id = western_goods_utils.table_random_id
 local find_object_by_id = western_goods_utils.find_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
+local heli_spawn = western_goods_helicopter.heli_spawn
+local heli_register = western_goods_helicopter.heli_register
+local spawn_story_squad = western_goods_utils.spawn_story_squad
+local spawn_squad = western_goods_utils.spawn_squad
+local spawn_dead_squad = western_goods_utils.spawn_dead_squad
+local get_member_id_from_squad = western_goods_utils.get_member_id_from_squad
+local get_member_from_squad = western_goods_utils.get_member_from_squad
+local find_unique_npc = western_goods_utils.find_unique_npc
+local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 
 -- Task variables
 local act_1_task_2_stage_1_heli_ready_timer = 0
@@ -396,9 +392,9 @@ function act_1_task_2_stage_0_status_f(tsk,task_id)
 	if new_heli_se and not string.find(new_heli_se:section_name(),"pri_a28_earth_helli_1") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
-	local informant_squad_id = load_var(db.actor,"wg_act_1_task_2_stage_0_target")
-	local informant_squad_se = informant_squad_id and alife_object(informant_squad_id)
-	if informant_squad_se and not string.find(informant_squad_se:section_name(),"stalker_jupiter_informant_squad") then return "fail" end
+	local informant_id = load_var(db.actor,"wg_act_1_task_2_informant_id")
+	local informant_se = informant_id and alife_object(informant_id)
+	if informant_se and not string.find(informant_se:section_name(),"stalker_jupiter_informant") then return "fail" end
 
 	-- Delete the old helicopter from the lake in Zaton
 	if not has_alife_info("wg_act_1_wps_helicopter_released_0") then
@@ -434,9 +430,12 @@ function act_1_task_2_stage_0_status_f(tsk,task_id)
 		local sec = "stalker_jupiter_informant_squad"
 		local pos = vector():set(-55,3.8,211)
 		local smart = SIMBOARD.smarts_by_names["jup_a6"]
-		informant_squad_se = spawn_story_squad(sec, pos, smart)
+		local informant_squad_se = spawn_story_squad(sec, pos, smart)
 
 		save_var(db.actor,"wg_act_1_task_2_stage_0_target",informant_squad_se.id)
+
+		-- This only works because the crew member squad contains only 1 NPC! Change this if you add more NPCs to the squad!
+		save_var(db.actor,"wg_act_1_task_2_informant_id",get_member_id_from_squad(informant_squad_se))
 
 		-- Give the player an info portions to prevent the informant from spawning again
 		give_info("wg_act_1_task_2_stage_0_informant_spawned")
@@ -446,7 +445,7 @@ function act_1_task_2_stage_0_status_f(tsk,task_id)
 	end
 
 	-- If by now in the script the informant isn't alive, the task is failed
-	if not informant_squad_se or not informant_squad_se:alive() then
+	if not informant_se or (informant_se and not informant_se:alive()) then
 		dbg_printf("[WG] Act 1 Task 2 Stage 0 | Informant died - task failed")
 		return "fail"
 	end
@@ -1000,7 +999,7 @@ function act_1_task_3_stage_0_status_f(tsk,task_id)
 	end
 
 	-- If by now in the script the crew member isn't alive, the task is failed
-	if not crew_member_se or not crew_member_se:alive() then
+	if not crew_member_se or (crew_member_se and not crew_member_se:alive()) then
 		dbg_printf("[WG] Act 1 Task 3 Stage 0 | Crew member died - task failed")
 		return "fail"
 	end
@@ -1046,7 +1045,7 @@ function act_1_task_3_stage_1_status_f(tsk,task_id)
 	if crew_member_se and not string.find(crew_member_se:section_name(),"stalker_crew_member") then return "fail" end
 
 	-- If by now in the script the crew member isn't alive, the task is failed
-	if not crew_member_se or not crew_member_se:alive() then
+	if not crew_member_se or (crew_member_se and not crew_member_se:alive()) then
 		dbg_printf("[WG] Act 1 Task 3 Stage 1 | Crew member died - task failed")
 		return "fail"
 	end
@@ -1200,7 +1199,7 @@ function act_1_task_3_stage_2_status_f(tsk,task_id)
 	if crew_member_se and not string.find(crew_member_se:section_name(),"stalker_crew_member") then return "fail" end
 
 	-- If by now in the script the crew member isn't alive, the task is failed
-	if not crew_member_se or not crew_member_se:alive() then
+	if not crew_member_se or (crew_member_se and not crew_member_se:alive()) then
 		dbg_printf("[WG] Act 1 Task 3 Stage 2 | Crew member died - task failed")
 		return "fail"
 	end
@@ -1274,7 +1273,7 @@ function act_1_task_3_stage_3_status_f(tsk,task_id)
 	end
 
 	-- If the crew member hasn't extracted, and isn't alive, the task is failed
-	if (not crew_member_se or not crew_member_se:alive()) and not has_alife_info("wg_act_1_task_3_crew_member_extracted") then
+	if (not crew_member_se or (crew_member_se and not crew_member_se:alive())) and not has_alife_info("wg_act_1_task_3_crew_member_extracted") then
 		dbg_printf("[WG] Act 1 Task 3 Stage 3 | Crew member died - task failed")
 		return "fail"
 	end
@@ -1508,8 +1507,6 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 function on_game_start()
-	RegisterScriptCallback("actor_on_update", refresh_helicopters)
-	RegisterScriptCallback("on_key_press",order_helicopter)
 	RegisterScriptCallback("save_state", save_state)
 	RegisterScriptCallback("load_state", load_state)
 end
@@ -1520,29 +1517,6 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 function save_state(m_data)
-	dbg_printf("[WG] Saving helicopter table...")
-	local table_to_save = {}
-
-	for id,_ in pairs(HELICOPTERS_TABLE) do
-		-- Save each field
-		table_to_save[id] = {}
-		table_to_save[id].mode = HELICOPTERS_TABLE[id].mode
-		table_to_save[id].last_mode = HELICOPTERS_TABLE[id].last_mode
-		table_to_save[id].spot = false
-		table_to_save[id].update_timer = time_global()
-		--table_to_save[id].enemy_id = HELICOPTERS_TABLE[id].enemy_id
-
-		-- Save the target position manually as this is an engine class
-		local target_to_save = HELICOPTERS_TABLE[id].target_pos
-		if target_to_save then
-			table_to_save[id].target_pos = { x = target_to_save.x, y = target_to_save.y, z = target_to_save.z}
-		end
-	end
-
-	m_data.heli_tbl = table_to_save
-	dbg_printf("[WG] Saved helicopter table :\n%s", utils_data.print_table(table_to_save, false, true))
-
-
 	dbg_printf("[WG] Saving task specific info...")
 	local print_task_specific_info = {}
 
@@ -1562,29 +1536,6 @@ function save_state(m_data)
 end
 
 function load_state(m_data)
-	dbg_printf("[WG] Loading helicopter table...")
-	local table_to_load = m_data.heli_tbl or {}
-
-	for id,_ in pairs(table_to_load) do
-		-- Load each field
-		HELICOPTERS_TABLE[id] = {}
-		HELICOPTERS_TABLE[id].mode = table_to_load[id].mode
-		HELICOPTERS_TABLE[id].last_mode = table_to_load[id].last_mode
-		HELICOPTERS_TABLE[id].spot = table_to_load[id].spot
-		HELICOPTERS_TABLE[id].update_timer = time_global()
-
-		-- Execute at the next frame, once the heli has spawned in the world
-		CreateTimeEvent("western_goods_heli_take_control", id, 0, take_control, id)
-
-		-- Load the target back into an engine class from the previously converted pos
-		local target_to_load = table_to_load[id].target_pos
-		if target_to_load then
-			HELICOPTERS_TABLE[id].target_pos = vector():set(target_to_load.x,target_to_load.y,target_to_load.z)
-		end
-	end
-	dbg_printf("[WG] Loaded helicopter table :\n%s", utils_data.print_table(HELICOPTERS_TABLE, false, true))
-
-
 	dbg_printf("[WG] Loading task specific info...")
 	local print_task_specific_info = {}
 
@@ -1625,382 +1576,4 @@ end
 -- Warning : This function should be called while a dialog is running
 function give_act_1_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")
-end
-
--- Function used to retrieve the server object of a unique NPC by its section name
--- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds
-function find_unique_npc(sec)
-	for id = 1, 65534 do
-
-		local se = alife_object(id)
-
-		if se and se:section_name() == sec then return se end
-	end
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Squad functions
-------------------------------------------------------------------------------------------------------]]
-
--- Function used to spawn a story squad
-function spawn_story_squad(sec, pos, smart)
-	if not sec or not smart then return end
-
-	-- Make sure the squad isn't already spawned in
-	for id,_ in pairs(SIMBOARD.squads) do
-		if alife_object(id):section_name() == sec then
-			se_squad = alife_object(id)
-			dbg_printf("[WG] Squad already exists | %s", se_squad:section_name())
-			return se_squad
-		end
-	end
-
-	-- Spawn squad on the appropriate smart terrain
-	local se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id)
-	if not se_squad then return end
-
-	-- Force the squad to stay there
-	se_squad.scripted_target = smart:name()
-
-	dbg_printf("[WG] Story squad %s successfully created with id %s at %s", sec, se_squad.id, smart:name())
-
-	return se_squad
-end
-
--- Function used to spawn a simulation squad, at a given point in space
-function spawn_squad(sec,pos,lvid,gvid)
-	local squad = alife_create(sec, pos, lvid, gvid)
-	if not squad then return end
-
-	squad:create_npc(nil, pos, lvid, gvid)
-
-	if squad.commander_id then
-		for k in squad:squad_members() do
-			local npc = k.object or k.id and alife_object(k.id)
-			if npc then
-				SIMBOARD:setup_squad_and_group(npc)
-			end
-		end
-	end
-
-	dbg_printf("[WG] Squad with id %s successfully created", squad.id)
-
-	return squad
-end
-
--- Function used to spawn a dead squad, at a given point in space
-function spawn_dead_squad(sec,pos,lvid,gvid)
-	local squad = spawn_squad(sec, pos, lvid, gvid)
-	if not squad then return end
-
-	local member_id = nil
-
-	for npc in squad:squad_members() do
-		CreatePersistentTimeEvent("western_goods_delay_kill_squad",npc.id,math.random(5,10),surge_manager.make_dead,npc.id)
-		member_id = npc.id
-	end
-
-	dbg_printf("[WG] Squad with id %s successfully killed", squad.id)
-
-	return member_id
-end
-
--- Function used to get the ID from a random member of a squad
-function get_member_id_from_squad(squad)
-	if not squad then return end
-
-	for member in squad:squad_members() do
-		return member.id
-	end
-end
-
--- Function used to get a "random" member of a squad
-function get_member_from_squad(squad)
-	if not squad then return end
-
-	for member in squad:squad_members() do
-		return member
-	end
-end
-
--- Function used to find an NPC by its section name in the player squad
--- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds
-function find_npc_in_actor_squad(sec)
-	local actor_squad = axr_companions.list_actor_squad_by_id()
-	for _,id in pairs(actor_squad) do
-		local se_npc = alife_object(id)
-		if se_npc and se_npc:section_name() == sec then
-			return se_npc
-		end
-	end
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Helicopters functions
-------------------------------------------------------------------------------------------------------]]
-
--- Function used to spawn an helicopter. The helicopter will automatically enter idle state
-function heli_spawn(sec,pos,lvid,gvid)
-	local se_heli = alife_create(sec,pos,lvid,gvid)
-
-	if not se_heli then return nil end
-
-	local visual = ini_sys:r_string_ex(sec,"visual")
-
-	-- Required to spawn by script
-	local data = utils_stpk.get_heli_data(se_heli)
-	if (data) then
-		data.visual_name = visual and visual ~="" and visual or [[dynamics\vehicles\mi2\veh_mi2_01]]
-		data.motion_name = [[helicopter\aaa.anm]]
-		data.startup_animation = "idle"
-		data.skeleton_name = "idle"
-		data.engine_sound = [[vehicles\helicopter\helicopter]]
-		utils_stpk.set_heli_data(data,se_heli)
-
-		se_heli.force_online = true
-
-		heli_register(se_heli.id,"idle",nil)
-
-		-- Execute at the next frame, once the heli has spawned in the world
-		CreateTimeEvent("western_goods_heli_take_control", se_heli.id, 0, take_control, se_heli.id)
-	else
-		safe_release_manager.release(se_heli)
-		return nil
-	end
-
-	dbg_printf("[WG] Helicopter with id %s successfully created", se_heli.id)
-
-	return se_heli
-end
-
--- Function used to give an order to the helicopter
--- Valid modes : "idle", "protect_actor", "move_to_point", "land_at_point", "leave_at_point"
-function heli_register(heli_id,mode,target_pos)
-	if not heli_id then return end
-
-	-- Get existing data (if there is any)
-	local heli_data = HELICOPTERS_TABLE[heli_id] or {}
-
-	-- Set the new data
-	heli_data.mode = mode or "idle"
-	heli_data.last_mode = heli_data.last_mode or "idle"
-	heli_data.target_pos = target_pos or heli_data.target_pos
-	heli_data.update_timer = heli_data.update_timer or time_global()
-	heli_data.spot = heli_data.spot or false
-	--heli_data.enemy_id = heli_data.enemy_id or nil
-
-	-- Add the helicopter to the refresh list
-	HELICOPTERS_TABLE[heli_id] = heli_data
-
-	-- Force the first update
-	local heli_obj = find_object_by_id(heli_id)
-
-	if heli_obj then
-		heli_update(heli_obj,mode,target_pos)
-	end
-end
-
--- Function used to remove an helicopter from the update table (use when the helicopter has been released from the level)
-function heli_unregister(heli_id)
-	if not heli_id then return end
-
-	-- Clear the heli from the refresh table
-	HELICOPTERS_TABLE[heli_id] = nil
-
-	-- Remove the helicopter's marker on the PDA
-	if level.map_has_object_spot(heli_id, CONST_HELICOPTER_SPOT) then
-		level.map_remove_object_spot(heli_id, CONST_HELICOPTER_SPOT)
-	end
-
-	-- Delete the helicopter from the world if it exists
-	alife_release(alife_object(heli_id))
-
-	dbg_printf("[WG] Helicopter with id %s successfully released", heli_id)
-end
-
--- Function used to refresh all the helicopters
-function refresh_helicopters()
-
-	for id,_ in pairs(HELICOPTERS_TABLE) do
-
-		local heli_se = alife_object(id)
-		if not simulation_objects.is_on_the_same_level(alife():actor(), heli_se) then return end
-
-		local mode = HELICOPTERS_TABLE[id].mode or "idle"
-		local last_mode = HELICOPTERS_TABLE[id].last_mode or "idle"
-		local target_pos = HELICOPTERS_TABLE[id].target_pos
-		local update_timer = HELICOPTERS_TABLE[id].update_timer or time_global()
-
-		-- Continue only if the mode has changed, or the timer has ticked
-		if mode == last_mode and update_timer > time_global() then return end
-
-		local heli_obj = find_object_by_id(id)
-		if not heli_obj then return end
-
-		-- If the heli is in combat, let it fight, and stop updating for now
-		if (db.storage[heli_se.id] and db.storage[heli_se.id].combat and db.storage[heli_se.id].combat:update()) then
-			return
-		end
-
-		-- Update the helicopter
-		heli_update(heli_obj,mode,target_pos)
-
-		-- Save the new state if the heli still exists (it could have been deleted during the update)
-		if HELICOPTERS_TABLE[id] then
-			HELICOPTERS_TABLE[id].last_mode = mode
-			HELICOPTERS_TABLE[id].update_timer = time_global() + CONST_HELICOPTER_UPDATE_FREQ
-
-			-- Refresh the helicopter's marker on the PDA
-			if not (HELICOPTERS_TABLE[id].spot) then
-				level.map_add_object_spot(heli_se.id, CONST_HELICOPTER_SPOT, "Helicopter")
-				HELICOPTERS_TABLE[id].spot = true
-			end
-		end
-	end
-end
-
--- Function used to refresh an helicopter, this function is called by refresh_helicopters()
-function heli_update(heli_obj,mode,target_pos)
-
-	if not heli_obj then return end
-
-	-- Set the helicopter to idle on its current position
-	if not mode or mode == "idle" then
-		dbg_printf("[WG] Helicopter target updated | idling | id:%s", heli_obj:id())
-	end
-
-	-- Set the helicopter to protect the player
-	if mode == "protect_actor" then
-		target_pos = db.actor:position()
-
-		-- Go 50 meters above the player, somewhere in a 20m radius around him
-		local intermediate_target = vector():set(target_pos.x+math.random(-10,10), target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z+math.random(-10,10))
-
-		-- Set the helicopter's destination
-		heli_set_target(heli_obj,intermediate_target)
-		dbg_printf("[WG] Helicopter target updated | protect actor | id:%s x:%s y:%s z:%s", heli_obj:id(), intermediate_target.x, intermediate_target.y, intermediate_target.z)
-	end
-
-	-- Set the helicopter to move to a certain point
-	if mode == "move_to_point" then
-		if not target_pos then return end
-
-		-- Set the helicopter to go 50 meters above the target
-		local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
-
-		-- Set the helicopter's destination
-		heli_set_target(heli_obj,intermediate_target)
-		dbg_printf("[WG] Helicopter target updated | move to point | id:%s x:%s y:%s z:%s", heli_obj:id(), intermediate_target.x, intermediate_target.y, intermediate_target.z)
-	end
-
-	-- Set the helicopter to land at a certain point
-	if mode == "land_at_point" then
-		if not target_pos then return end
-
-		local distance = get_distance(heli_obj:position(), target_pos)
-
-		if not distance or distance > 100 then
-			-- While the heli is 100m away from its destination, fly high
-			local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
-
-			heli_set_target(heli_obj,intermediate_target)
-			dbg_printf("[WG] Helicopter target updated | land at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
-		elseif distance > 10 then
-			-- Start lowering the altitude when we're closer than 10m
-			heli_set_target(heli_obj,target_pos)
-			dbg_printf("[WG] Helicopter target updated | land at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
-		else
-			-- Make the helicopter idle if it's closer than 10m
-			heli_register(heli_obj:id(),"idle")
-			dbg_printf("[WG] Helicopter target updated | idling | id:%s", heli_obj:id())
-		end
-	end
-
-	-- Set the helicopter to land a a certain point and get released
-	if mode == "leave_at_point" then
-		if not target_pos then return end
-
-		local distance = get_distance(heli_obj:position(), target_pos)
-
-		if not distance or distance > 100 then
-			-- While the heli is 100m away from its destination, fly high
-			local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
-
-			heli_set_target(heli_obj,intermediate_target)
-			dbg_printf("[WG] Helicopter target updated | leave at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
-		elseif distance > 10 then
-			-- Start lowering the altitude when we're closer than 10m
-			heli_set_target(heli_obj,target_pos)
-			dbg_printf("[WG] Helicopter target updated | leave at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
-		else
-			-- Make the helicopter idle if it's closer than 10m
-			heli_unregister(heli_obj:id())
-			dbg_printf("[WG] Helicopter target updated | unregister | id:%s", heli_obj:id())
-		end
-	end
-end
-
--- Function used to set the point in space where the helicopter has to go
-function heli_set_target(heli_obj,pos)
-	if not heli_obj then return end
-
-	heli_obj:get_helicopter():GoPatrolByRoundPath(pos, 7, true)
-end
-
--- Function used by the helicopter's IA to determine if an object is an enemy or not
-function is_enemy(self_combat,obj)
-	if not obj then return end
-
-	if not IsStalker(obj) or IsMonster(obj) then
-		return false
-	end
-
-	if not obj:alive() then
-		return false
-	end
-
-	if IsStalker(obj) and obj:character_community() == "killer" then
-		return false
-	end
-
-	return HELICOPTERS_TARGETS[obj:id()]
-end
-
--- Function used to take over the helicopter's combat IA (to force the helicopter to target certain objects)
-function take_control(heli_id)
-	local combat = db.storage[heli_id] and db.storage[heli_id].combat
-	if combat then
-		-- Take over is_enemy to control helicopter combat
-		db.storage[heli_id].combat.is_enemy = is_enemy
-		dbg_printf("[WG] Helicopter with id %s is now controled", heli_id)
-		return true
-	end
-end
-
--- Function used to tell the helicopter's combat IA to enter combat state an attack the target the player is currently aiming at
-function order_helicopter(dik)
-	if dik ~= western_goods_mcm.get_config("heli_attack") then return end
-
-	local target = level.get_target_obj()
-
-	for id,_ in pairs(HELICOPTERS_TABLE) do
-		if HELICOPTERS_TABLE[id].mode == "protect_actor" then
-
-			local combat = db.storage[id] and db.storage[id].combat
-
-			if target and combat and target:is_entity_alive() and target:alive() then
-				combat:set_enemy(target)
-				HELICOPTERS_TARGETS[target:id()] = true
-
-				dbg_printf("[WG] Helicopter sent to terminate enemy | %s", target:id())
-
-				local sender = "Mercenary helicopter"
-				local message = get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
-
-				dynamic_news_helper.send_tip(message,sender,nil,CONST_DIALOG_DISPLAY_TIME,"ui_inGame2_PD_DownToEarth",nil,"npc")
-			end
-		end
-	end
 end

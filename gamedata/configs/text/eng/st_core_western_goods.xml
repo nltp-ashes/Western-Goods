@@ -5,8 +5,6 @@
 	Core Strings
 ======================================================================================================================================================================-->
 
-	<!-- Testing something real quick -->
-
 	<!-- Out-of-date trader auto_inject.script -->
 	<string id="st_err_outdated_trader_autoinject_script_title">
 		<text>Script trader_autoinject.script out-of-date or missing.</text>
