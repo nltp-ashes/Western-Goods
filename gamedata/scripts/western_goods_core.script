@@ -423,11 +423,10 @@ function spawn_western_goods_in_trader(npc)
     elseif is_mechanic then
 		trader_table = table_inject_ready(item_table, community, CONST_MECHANIC_TYPE_BUY_LIST, supply_level)
     end
-	
-	if trader_table then
-		dbg_printf("[WG] Trader table :\n%s", utils_data.print_table(trader_table, false, true))
-		trader_autoinject.spawn_items(npc, trader_table, true)
-    end
+
+	dbg_printf("[WG] Trader table :\n%s", utils_data.print_table(trader_table, false, true))
+
+	trader_autoinject.spawn_items(npc, trader_table, true)
 end
 
 -- Monkey-patching trader_autoinject.update to inject western goods items in the traders

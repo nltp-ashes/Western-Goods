@@ -161,7 +161,6 @@ function on_xml_read()
         <phrase_list>
             <phrase id="0">
 				<script_text>modxml_western_goods_dialogs.crew_member_start_dialog</script_text>
-                <!--<text>stalker_crew_member_start_0</text>-->
             </phrase>
         </phrase_list>
     </dialog>

@@ -43,6 +43,7 @@ To **uninstall** the addon :
 > ```
 > • Added a new set of mini-storylines. Follow a multi-act story line, with multiple missions per act.
 > • Added MCM integration. You can now configure some settings, as well as prepare the addon for removal directly in MCM;
+> • Added a new magazine : Gameland magazine (November 1999);
 > • Added psy-health regen when reading magazines (configurable in MCM);
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);
 > • Added an option to have more guided tasks (for people that don't like thinking)(enable/disable in MCM);
