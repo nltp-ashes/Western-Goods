@@ -28,7 +28,7 @@ local get_translation = game.translate_string
 ------------------------------------------------------------------------------------------------------]]
 
 -- Function used to spawn the trader on the map.
-local function spawn_western_goods_trader()
+function spawn_western_goods_trader()
 	UnregisterScriptCallback("actor_on_update", spawn_western_goods_trader)
 
 	-- Make sure the trader isn't already spawned in
@@ -65,16 +65,16 @@ end
 -- Function used to retrieve the list of tradable items (items of type "money") with the western goods trader.
 local tradable_items = {}
 function retrieve_tradable_items()
-	UnregisterScriptCallback("actor_on_update", retrieve_tradable_items)
-	
+	-- Clear the cached list of tradable items
+	tradable_items = {}
+
 	-- Get the table of all items of the addon from western_goods_core
 	local item_table = dup_table(western_goods_core.item_table)
 	
 	dbg_printf("[WG] Table received from western_goods_core has size of %s", #item_table)
 	
 	-- Go through the list of items in the addon, and keep only the items of type "money"
-	for key,val in pairs(item_table) do
-	
+	for key,_ in pairs(item_table) do
 		if western_goods_core.table_item_field_by_key(item_table, key, "type") == "money" then
 		
 			dbg_printf("[WG] Item %s marked as tradable with western goods trader", western_goods_core.table_item_field_by_key(item_table, key, "section"))
@@ -87,17 +87,17 @@ function retrieve_tradable_items()
 end
 
 -- Function used to allow/disallow the player from moving items from one container to another when trading with the western goods trader.
-function ActorMenu_on_item_before_move(flags, npc_id, obj, mode, bag)
+function check_move_item(flags, npc_id, obj, mode, bag)
 	if mode ~= "trade" then return flags.ret_value end
 
-	local npc = get_object_by_id(npc_id)
-	local is_western_goods_trader = npc:section() == CONST_TRADER_SECTION
+	local npc = npc_id and alife_object(npc_id)
+	local is_western_goods_trader = npc:section_name() == CONST_TRADER_SECTION
 
 	-- If you are talking to the western goods trader and the item is not tradable, prevent the item from moving
 	flags.ret_value = flags.ret_value and not is_western_goods_trader or is_tradable(npc, obj)
 end
 
--- Function used to color the untradable items in the player inventory
+-- Function used to color the untradable items in the player inventory.
 local bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
 function tint_functor(cell)
 	local ui_instance = ui_inventory.GUI
@@ -141,9 +141,9 @@ end
 
 -- Function used to register callbacks.
 function on_game_start()
-	RegisterScriptCallback("actor_on_update", spawn_western_goods_trader)
-	RegisterScriptCallback("actor_on_update", retrieve_tradable_items)
-	RegisterScriptCallback("ActorMenu_on_item_before_move", ActorMenu_on_item_before_move)
+	RegisterScriptCallback("actor_on_first_update", spawn_western_goods_trader)
+	RegisterScriptCallback("actor_on_first_update", retrieve_tradable_items)
+	RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
 	rax_icon_tint.register("wg_tint_functor", tint_functor)
 end
 

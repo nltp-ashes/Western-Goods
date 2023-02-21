@@ -93,4 +93,22 @@
 			%c[d_blue] Х %c[ui_gray_2] imported\n
 		</text>
 	</string>
+
+	<string id="st_wg_strana_igr_mag_1">
+		<text>Gameland magazine (November 1999)</text>
+	</string>
+
+	<string id="st_wg_strana_igr_mag_1_s">
+		<text>Gameland magazine</text>
+	</string>
+
+	<string id="st_wg_strana_igr_mag_1_descr">
+		<text>
+			Strana Igr (Russian: —трана игр, Gameland) was a Russian magazine focused on video games. It was published by Gameland between January 1996 and November 2013 when the magazine was suspended due to financial problems.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] Х %c[ui_gray_2] everyday item\n
+			%c[d_blue] Х %c[ui_gray_2] imported\n
+		</text>
+	</string>
 </string_table>

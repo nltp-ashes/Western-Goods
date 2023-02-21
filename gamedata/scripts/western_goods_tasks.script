@@ -101,7 +101,6 @@ function act_1_task_1_stage_0_status_f(tsk,task_id)
 	local helicopter_id = load_var(db.actor,"wg_act_1_task_1_stage_0_target")
 	local helicopter_se = helicopter_id and alife_object(helicopter_id)
 	local helicopter_obj = helicopter_se and find_object_by_id(helicopter_se.id)
-	if helicopter_se and not string.find(helicopter_se:section_name(),"pri_a28_earth_helli_1") then return "fail" end
 
 	-- If the heli hasn't been created, then create it
 	if not has_alife_info("wg_act_1_task_1_stage_0_helicopter_spawned") then
@@ -165,7 +164,6 @@ function act_1_task_1_stage_1_status_f(tsk,task_id)
 	local supplies_id = load_var(db.actor,"wg_act_1_task_1_stage_2_target")
 	local supplies_se = supplies_id and alife_object(supplies_id)
 	local supplies_obj = supplies_se and find_object_by_id(supplies_se.id)
-	if supplies_se and not string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") then return "fail" end
 
 	-- Spawn the crew of the helicopter dead at the sawmill
 	if not has_alife_info("wg_act_1_task_1_stage_1_crew_spawned") then
@@ -253,7 +251,6 @@ function act_1_task_1_stage_2_status_f(tsk,task_id)
 	-- Retrieve the server object (they may not exist - if they have been picked up by the player)
 	local supplies_id = load_var(db.actor,"wg_act_1_task_1_stage_2_target")
 	local supplies_se = supplies_id and alife_object(supplies_id)
-	if supplies_se and not string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") then return "fail" end
 
 	-- If the player picked up the supplies, progress to stage 3
 	if not (supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id == 65535)) then
@@ -266,7 +263,6 @@ function act_1_task_1_stage_3_status_f(tsk,task_id)
 	-- Retrieve the server object (they may exist - if they have been dropped by the player)
 	local supplies_id = load_var(db.actor,"wg_act_1_task_1_stage_2_target")
 	local supplies_se = supplies_id and alife_object(supplies_id)
-	if supplies_se and not string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") then return "fail" end
 
 	-- If the player dropped the supplies, rollback to stage 2
 	if supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id == 65535) then
@@ -384,17 +380,14 @@ function act_1_task_2_stage_0_status_f(tsk,task_id)
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local old_heli_id = load_var(db.actor,"wg_act_1_task_1_stage_0_target")
 	local old_heli_se = old_heli_id and alife_object(old_heli_id)
-	if old_heli_se and not string.find(old_heli_se:section_name(),"pri_a28_earth_helli_1") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local new_heli_id = load_var(db.actor,"wg_act_1_wps_helicopter_id")
 	local new_heli_se = new_heli_id and alife_object(new_heli_id)
-	if new_heli_se and not string.find(new_heli_se:section_name(),"pri_a28_earth_helli_1") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local informant_id = load_var(db.actor,"wg_act_1_task_2_informant_id")
 	local informant_se = informant_id and alife_object(informant_id)
-	if informant_se and not string.find(informant_se:section_name(),"stalker_jupiter_informant") then return "fail" end
 
 	-- Delete the old helicopter from the lake in Zaton
 	if not has_alife_info("wg_act_1_wps_helicopter_released_0") then
@@ -483,22 +476,18 @@ function act_1_task_2_stage_1_status_f(tsk,task_id)
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local wps_helicopter_id = load_var(db.actor,"wg_act_1_wps_helicopter_id")
 	local wps_helicopter_se = wps_helicopter_id and alife_object(wps_helicopter_id)
-	if wps_helicopter_se and not string.find(wps_helicopter_se:section_name(),"pri_a28_earth_helli_1") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local helicopter_id = load_var(db.actor,"wg_act_1_task_2_stage_1_heli_id")
 	local helicopter_se = helicopter_id and alife_object(helicopter_id)
-	if helicopter_se and not string.find(helicopter_se:section_name(),"western_goods_helicopter") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local quest_item_1_id = load_var(db.actor,"wg_act_1_task_2_stage_1_target_1")
 	local quest_item_1 = quest_item_1_id and alife_object(quest_item_1_id)
-	if quest_item_1 and not string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local quest_item_2_id = load_var(db.actor,"wg_act_1_task_2_stage_1_target_2")
 	local quest_item_2 = quest_item_2_id and alife_object(quest_item_2_id)
-	if quest_item_2 and not string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") then return "fail" end
 
 	-- Populate the bandit camp
 	if not has_alife_info("wg_act_1_task_2_stage_1_bandits_spawned") then
@@ -736,17 +725,14 @@ function act_1_task_2_stage_2_status_f(tsk,task_id)
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local se_squad_1_id = load_var(db.actor,"wg_act_1_task_2_stage_2_squad_1")
 	local se_squad_1 = se_squad_1_id and alife_object(se_squad_1_id)
-	if se_squad_1 and not string.find(se_squad_1:section_name(),"bandit_sim_squad_novice") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local se_squad_2_id = load_var(db.actor,"wg_act_1_task_2_stage_2_squad_2")
 	local se_squad_2 = se_squad_2_id and alife_object(se_squad_2_id)
-	if se_squad_2 and not string.find(se_squad_2:section_name(),"bandit_sim_squad_advanced") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local se_squad_3_id = load_var(db.actor,"wg_act_1_task_2_stage_2_squad_3")
 	local se_squad_3 = se_squad_3_id and alife_object(se_squad_3_id)
-	if se_squad_3 and not string.find(se_squad_3:section_name(),"bandit_sim_squad_veteran") then return "fail" end
 
 	-- Spawn the bandit reinforcements around the Container Warehouse area
 	if not has_alife_info("wg_act_1_task_2_stage_2_bandit_squads_spawned") then
@@ -837,12 +823,10 @@ function act_1_task_2_stage_3_status_f(tsk,task_id)
 	-- Retrieve the server object (may not exist if the player picked it up)
 	local quest_item_1_id = load_var(db.actor,"wg_act_1_task_2_stage_1_target_1")
 	local quest_item_1 = quest_item_1_id and alife_object(quest_item_1_id)
-	if quest_item_1 and not string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") then return "fail" end
 
 	-- Retrieve the server object (may not exist if the player picked it up)
 	local quest_item_2_id = load_var(db.actor,"wg_act_1_task_2_stage_1_target_2")
 	local quest_item_2 = quest_item_2_id and alife_object(quest_item_2_id)
-	if quest_item_2 and not string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") then return "fail" end
 
 	-- If the player picked up both quest items, progress to stage 4
 	if not (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id == 65535)
@@ -857,12 +841,10 @@ function act_1_task_2_stage_4_status_f(tsk,task_id)
 	-- Retrieve the server object (may exist if the player dropped it down)
 	local quest_item_1_id = load_var(db.actor,"wg_act_1_task_2_stage_1_target_1")
 	local quest_item_1 = quest_item_1_id and alife_object(quest_item_1_id)
-	if quest_item_1 and not string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") then return "fail" end
 
 	-- Retrieve the server object (may exist if the player dropped it down)
 	local quest_item_2_id = load_var(db.actor,"wg_act_1_task_2_stage_1_target_2")
 	local quest_item_2 = quest_item_2_id and alife_object(quest_item_2_id)
-	if quest_item_2 and not string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") then return "fail" end
 
 	-- If the player dropped one of the quest items, rollback to stage 3
 	if (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id == 65535)
@@ -955,7 +937,6 @@ function act_1_task_3_stage_0_status_f(tsk,task_id)
 	local crew_member_id = load_var(db.actor,"wg_act_1_task_3_crew_member_id")
 	local crew_member_se = crew_member_id and alife_object(crew_member_id)
 	local crew_member_obj = crew_member_se and find_object_by_id(crew_member_se.id)
-	if crew_member_se and not string.find(crew_member_se:section_name(),"stalker_crew_member") then return "fail" end
 
 	-- Spawn monolith squads to guard the crew member
 	if not has_alife_info("wg_act_1_task_3_stage_0_mono_guard_spawned") then
@@ -1042,7 +1023,6 @@ function act_1_task_3_stage_1_status_f(tsk,task_id)
 	-- Retrieve the crew member's server and game objects (may not exist if he's on another map or dead for a while)
 	local crew_member_id = load_var(db.actor,"wg_act_1_task_3_crew_member_id")
 	local crew_member_se = crew_member_id and alife_object(crew_member_id)
-	if crew_member_se and not string.find(crew_member_se:section_name(),"stalker_crew_member") then return "fail" end
 
 	-- If by now in the script the crew member isn't alive, the task is failed
 	if not crew_member_se or (crew_member_se and not crew_member_se:alive()) then
@@ -1181,22 +1161,18 @@ function act_1_task_3_stage_2_status_f(tsk,task_id)
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local monolith_squad_1_id = load_var(db.actor,"wg_act_1_task_3_stage_2_squad_1_id")
 	local monolith_se_squad_1 = monolith_squad_1_id and alife_object(monolith_squad_1_id)
-	if monolith_se_squad_1 and not string.find(monolith_se_squad_1:section_name(),"monolith_sim_squad_advanced") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local monolith_squad_2_id = load_var(db.actor,"wg_act_1_task_3_stage_2_squad_2_id")
 	local monolith_se_squad_2 = monolith_squad_2_id and alife_object(monolith_squad_2_id)
-	if monolith_se_squad_2 and not string.find(monolith_se_squad_2:section_name(),"monolith_sim_squad_advanced") then return "fail" end
 
 	-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
 	local monolith_squad_3_id = load_var(db.actor,"wg_act_1_task_3_stage_2_squad_3_id")
 	local monolith_se_squad_3 = monolith_squad_3_id and alife_object(monolith_squad_3_id)
-	if monolith_se_squad_3 and not string.find(monolith_se_squad_3:section_name(),"monolith_sim_squad_advanced") then return "fail" end
 
 	-- Retrieve the crew member's server and game objects (may not exist if he's on another map or dead for a while)
 	local crew_member_id = load_var(db.actor,"wg_act_1_task_3_crew_member_id")
 	local crew_member_se = crew_member_id and alife_object(crew_member_id)
-	if crew_member_se and not string.find(crew_member_se:section_name(),"stalker_crew_member") then return "fail" end
 
 	-- If by now in the script the crew member isn't alive, the task is failed
 	if not crew_member_se or (crew_member_se and not crew_member_se:alive()) then
@@ -1221,19 +1197,16 @@ function act_1_task_3_stage_3_status_f(tsk,task_id)
 	-- Retrieve the server object of the helicopter at the Waste Processing Station
 	local wps_helicopter_id = load_var(db.actor,"wg_act_1_wps_helicopter_id")
 	local wps_helicopter_se = wps_helicopter_id and alife_object(wps_helicopter_id)
-	if wps_helicopter_se and not string.find(wps_helicopter_se:section_name(),"pri_a28_earth_helli_1") then return "fail" end
 
 	-- Retrieve the server object of the rescue helicopter
 	local helicopter_id = load_var(db.actor,"wg_act_1_task_3_stage_3_helicopter_id")
 	local helicopter_se = helicopter_id and alife_object(helicopter_id)
 	local helicopter_obj = helicopter_se and find_object_by_id(helicopter_se.id)
-	if helicopter_se and not string.find(helicopter_se:section_name(),"western_goods_helicopter") then return "fail" end
 
 	-- Retrieve the server and game object of the crew member
 	local crew_member_id = load_var(db.actor,"wg_act_1_task_3_crew_member_id")
 	local crew_member_se = crew_member_id and alife_object(crew_member_id)
 	local crew_member_obj = crew_member_se and find_object_by_id(crew_member_se.id)
-	if crew_member_se and not string.find(crew_member_se:section_name(),"stalker_crew_member") then return "fail" end
 
 	-- If the evac helicopter was destroyed, fail the task
 	if helicopter_obj and helicopter_obj:get_helicopter():GetfHealth() <= 0 then
@@ -1311,7 +1284,7 @@ function act_1_task_3_stage_3_status_f(tsk,task_id)
 		axr_companions.remove_from_actor_squad(crew_member_obj)
 
 		-- Force the npc logic back in, because dialogs_axr_companion fails to restore it for some reason
-		xr_logic.set_new_scheme_and_logic(find_object_by_id(crew_member_se.id),"beh","beh@get_to_heli","logic",nil,"scripts\\pripyat\\stalker_crew_member.ltx")
+		xr_logic.set_new_scheme_and_logic(crew_member_obj,"beh","beh@get_to_heli","logic",nil,"scripts\\pripyat\\stalker_crew_member.ltx")
 
 		crew_member_se.scripted_target = "red_smart_terrain_bridge"
 
@@ -1576,4 +1549,12 @@ end
 -- Warning : This function should be called while a dialog is running
 function give_act_1_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")
+end
+
+function xr_conditions.has_alife_info(actor,npc,p)
+	return has_alife_info(tostring(p[1]))
+end
+
+function xr_conditions.not_has_alife_info(actor,npc,p)
+	return not has_alife_info(tostring(p[1]))
 end

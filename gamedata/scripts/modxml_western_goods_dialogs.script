@@ -160,7 +160,8 @@ function on_xml_read()
 	<dialog id="stalker_crew_member_start">
         <phrase_list>
             <phrase id="0">
-                <text>stalker_crew_member_start_0</text>
+				<script_text>modxml_western_goods_dialogs.crew_member_start_dialog</script_text>
+                <!--<text>stalker_crew_member_start_0</text>-->
             </phrase>
         </phrase_list>
     </dialog>
@@ -223,7 +224,28 @@ function on_xml_read()
             xml_obj:insertFromXMLString(text_to_insert)
         end
     end)
-	
-	
 end
 
+-- I had no idea where to place this function, but I feel here makes the most sense? I don't know.
+function crew_member_start_dialog()
+    if not has_alife_info("wg_act_1_task_3_stage_0_crew_member_spawned") then
+        return game.translate_string("stalker_crew_member_start_0")
+
+    elseif not has_alife_info("stalker_crew_member_rescue_over") then
+        return game.translate_string("stalker_crew_member_start_1")
+
+    elseif not has_alife_info("wg_act_1_task_3_stage_1_dialog_1_sent") then
+        return game.translate_string("stalker_crew_member_start_2")
+
+    elseif not has_alife_info("wg_act_1_task_3_stage_1_dialog_2_sent") then
+        return game.translate_string("stalker_crew_member_start_3")
+
+    elseif not has_alife_info("wg_act_1_task_3_crew_member_extracted") then
+        return game.translate_string("stalker_crew_member_start_4")
+
+    elseif not has_alife_info("western_goods_act_1_task_3_finished") then
+        return game.translate_string("stalker_crew_member_start_5")
+
+    else return game.translate_string("stalker_crew_member_start_6")
+    end
+end

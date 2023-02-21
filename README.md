@@ -41,7 +41,7 @@ To **uninstall** the addon :
 
 > **v2.0.0 - 03/02/2023 - Major Update**
 > ```
-> • Added a new set of mini-storylines. Follow a multi-act story line, with 3 missions per act.
+> • Added a new set of mini-storylines. Follow a multi-act story line, with multiple missions per act.
 > • Added MCM integration. You can now configure some settings, as well as prepare the addon for removal directly in MCM;
 > • Added psy-health regen when reading magazines (configurable in MCM);
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);

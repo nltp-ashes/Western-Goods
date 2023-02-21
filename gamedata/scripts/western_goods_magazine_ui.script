@@ -35,7 +35,7 @@ function menu_view(obj)
 	local p = obj:parent()
 	if not (p and p:id() == AC_ID) then return end
 	
-	return game.translate_string("st_wg_magazine_view")
+	return get_translation("st_wg_magazine_view")
 end
 
 -- Function used to display the magazine on-screen
