@@ -6,7 +6,7 @@
 -- Date : 09/12/2022
 -- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 -- 
--- Script used to manage the GPS device from the Western Goods addon.
+-- Script used to manage the various usable items from the Western Goods addon.
 --]]
 
 --[[----------------------------------------------------------------------------------------------------
@@ -37,23 +37,24 @@ end
 
 -- Function called by callback when any object in the game is used. This redirects to the proper functions if the item used is one from Western Goods.
 function use_item(obj)
+
     -- GPS Locator
     if (obj:section() == "wg_gps") then
-        dbg_printf("[WG] Used GPS device")
+        dbg_printf("[WG] Used %s",obj:section())
         use_gps(obj)
         return
     end
 
     -- French MRE
     if (obj:section() == "wg_french_mre") then
-        dbg_printf("[WG] Used French MRE")
+        dbg_printf("[WG] Used %s",obj:section())
         use_french_mre(obj)
         return
     end
 
     -- Toblerone
     if (obj:section() == "wg_toblerone") then
-        dbg_printf("[WG] Used Toblerone")
+        dbg_printf("[WG] Used %s",obj:section())
         use_toblerone(obj)
         return
     end
@@ -62,6 +63,7 @@ function use_item(obj)
     local magazines = western_goods_core.table_items_by_type(western_goods_core.item_table, "magazine")
     for item_id,_ in pairs(magazines) do
         if western_goods_core.table_item_field_by_key(magazines, item_id, "section") == obj:section() then
+            dbg_printf("[WG] Used %s",obj:section())
             if (get_hud()) then
                 hide_hud_inventory()
             end

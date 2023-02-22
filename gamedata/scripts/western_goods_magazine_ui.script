@@ -30,27 +30,6 @@ local get_translation = game.translate_string
 	UI Item Property
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to return the text written when right clicking on the magazine.
-function menu_view(obj) 
-	local p = obj:parent()
-	if not (p and p:id() == AC_ID) then return end
-	
-	return get_translation("st_wg_magazine_view")
-end
-
--- Function used to display the magazine on-screen
-function func_mag(obj) 
-	local sec = obj:section()
-		
-	local hud = get_hud()
-	
-	if (hud) then
-		hide_hud_inventory()
-	end
-	
-	display(sec)
-end
-
 -- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
 get_psy_health_regenerationBase = arszi_psy.get_psy_health_regeneration
 function arszi_psy.get_psy_health_regeneration()
