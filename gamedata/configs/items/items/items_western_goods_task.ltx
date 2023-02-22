@@ -2,33 +2,29 @@
 ;;--================| Quest Items |=============================================--;;
 ;;--============================================================================--;;
 
-[wg_quest_item]:identity_immunities
+[wg_quest_item_base]:identity_immunities
 GroupControlSection						= spawn_group 
 $spawn									= "quest\wg_quest_item"
 cform									= skeleton 
 class									= II_ATTCH
 kind			                        = i_dummy
 
+;sprint_allowed                         = true
+;quest_item                             = true
+
 cost									= 0
 
 icons_texture				            = ui\icons\ui_icon_western_goods_task
-
-attach_angle_offset		                = -0.287979, 1.560923, 1.544060
-attach_position_offset		            = 0.096910, -0.013594, 0.107925
-attach_bone_name		                = bip01_r_hand
-auto_attach				                = false
 
 can_trade								= false
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_act_1_task_1_quest_item]:wg_quest_item
+[wg_act_1_task_1_quest_item]:wg_quest_item_base
 $spawn                                  = "quest\wg_act_1_task_1_quest_item"
 visual                                  = dynamics\western_goods_task\wg_act_1_task_1_quest_item.ogf
 kind			                        = i_quest
 
-;sprint_allowed                         = true
-;quest_item                             = true
 story_id                                = stalker_western_goods_trader_task_1_act_1
 
 inv_name			                    = st_wg_act_1_task_1_quest_item
@@ -45,7 +41,7 @@ tier 									= 3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_act_1_task_2_quest_item_1]:wg_quest_item
+[wg_act_1_task_2_quest_item_1]:wg_quest_item_base
 $spawn                                  = "quest\wg_act_1_task_2_quest_item_1"
 visual                                  = dynamics\western_goods_task\wg_act_1_task_2_quest_item_1.ogf
 kind			                        = i_quest
@@ -66,7 +62,7 @@ inv_grid_y			                    = 0
 
 tier 									= 3
 
-[wg_act_1_task_2_quest_item_2]:wg_quest_item
+[wg_act_1_task_2_quest_item_2]:wg_quest_item_base
 $spawn                                  = "quest\wg_act_1_task_2_quest_item_2"
 visual                                  = dynamics\western_goods_task\wg_act_1_task_2_quest_item_2.ogf
 kind			                        = i_quest

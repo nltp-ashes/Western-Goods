@@ -27,10 +27,259 @@ local has_translation = western_goods_utils.has_translation
 local get_translation = game.translate_string
 
 --[[----------------------------------------------------------------------------------------------------
+	Traders
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to spawn items in a specific npc with the help of trader_autoinject.script
+function spawn_western_goods_in_trader(npc)
+	
+    local is_supplier = trader_autoinject.get_trader_type(npc) == trader_autoinject.SUPPLIER
+    local is_barman = trader_autoinject.get_trader_type(npc) == trader_autoinject.BARMAN
+    local is_mechanic = trader_autoinject.get_trader_type(npc) == trader_autoinject.MECHANIC
+    
+	local community = trader_autoinject.get_real_community(npc, "stalker")
+    local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
+	
+	dbg_printf("[WG] Trader type | is_supplier %s | is_barman %s | is_mechanic %s",is_supplier,is_barman,is_mechanic)
+	dbg_printf("[WG] Trader comm | %s",community)
+	
+	local trader_table = {}
+	
+	if is_barman then
+		trader_table = table_inject_ready(item_table, community, CONST_BARMAN_TYPE_BUY_LIST, supply_level)
+		
+    elseif is_supplier then
+		trader_table = table_inject_ready(item_table, community, CONST_SUPPLIER_TYPE_BUY_LIST, supply_level)
+
+    elseif is_mechanic then
+		trader_table = table_inject_ready(item_table, community, CONST_MECHANIC_TYPE_BUY_LIST, supply_level)
+    end
+
+	dbg_printf("[WG] Trader table :\n%s", utils_data.print_table(trader_table, false, true))
+
+	trader_autoinject.spawn_items(npc, trader_table, true)
+end
+
+-- Monkey-patching trader_autoinject.update to inject western goods items in the traders
+TraderAuto = trader_autoinject.update
+function trader_autoinject.update(npc)
+    TraderAuto(npc)
+    spawn_western_goods_in_trader(npc)
+end
+
+-- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
+TraderUpdate = trade_manager.update
+function trade_manager.update(npc, force_refresh)
+	if npc:section() ~= "stalker_western_goods_trader" then
+		TraderUpdate(npc, force_refresh)
+	else
+		trader_autoinject.TraderUpdate(npc, force_refresh)
+	end
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Dead bodies
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to spawn items in a corpse
+function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
+	local items_to_spawn = table_corpse_ready(item_table, npc_comm)
+	for sec,qte in pairs(items_to_spawn) do
+		alife_create_item(sec, npc, {uses = qte})
+	end
+end
+
+-- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods
+SpawnCosmetics = death_manager.spawn_cosmetics
+function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
+    SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
+    spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Service functions
+------------------------------------------------------------------------------------------------------]]
+
+function print_addon_version()
+	UnregisterScriptCallback("on_game_load", print_addon_version)
+	printf("[WG] Western Goods version %s",VERSION)
+end
+
+function check_trader_auto_inject()
+	UnregisterScriptCallback("on_game_load", check_trader_auto_inject)
+
+	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+			get_translation("st_err_outdated_trader_autoinject_script_title"),
+			get_translation("st_err_outdated_trader_autoinject_script_what"),
+			get_translation("st_err_outdated_trader_autoinject_script_why"),
+			get_translation("st_err_outdated_trader_autoinject_script_where")
+	)
+
+	assert(trader_autoinject.get_real_community ~= nil, error_message)
+end
+
+function check_game_version()
+	UnregisterScriptCallback("on_game_load", check_game_version)
+
+	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+			get_translation("st_err_outdated_game_title"),
+			get_translation("st_err_outdated_game_what"),
+			get_translation("st_err_outdated_game_why"),
+			get_translation("st_err_outdated_game_where")
+	)
+
+	assert(string.find(GAME_VERSION,"1.5.2"), error_message)
+end
+
+function check_barter_ui_installed()
+	UnregisterScriptCallback("on_game_load", check_barter_ui_installed)
+
+	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+			get_translation("st_err_missing_barter_ui_title"),
+			get_translation("st_err_missing_barter_ui_what"),
+			get_translation("st_err_missing_barter_ui_why"),
+			get_translation("st_err_missing_barter_ui_where")
+	)
+
+	assert(barter_ui ~= nil, error_message)
+end
+
+function addon_removal()
+	if not western_goods_mcm.get_config("addon_removal") then return end
+	
+	local released_objects_count = 0
+
+	for id = 1, 65534 do
+
+		local se = alife_object(id)
+
+		if se then
+
+			for item_id,v in pairs(item_table) do
+			
+				if string.match(se:name(), table_item_field_by_key(item_table,item_id,"section"))
+				or string.match(se:name(), "stalker_western_goods_trader")
+				or string.match(se:name(), "stalker_jupiter_informant")
+				or string.match(se:name(), "stalker_crew_member")
+				then
+					alife_release(se)
+					
+					released_objects_count = released_objects_count + 1
+					break					
+				end
+			end
+		end		
+	end	  
+
+	news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects_count .. "%c[default] items added by Western Goods from the savegame.", nil, nil, 10000)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Callbacks registration
+------------------------------------------------------------------------------------------------------]]
+
+function on_game_start()
+	RegisterScriptCallback("on_game_load", print_addon_version)
+	RegisterScriptCallback("on_game_load", check_game_version)
+	RegisterScriptCallback("on_game_load", check_barter_ui_installed)
+	RegisterScriptCallback("on_game_load", check_trader_auto_inject)
+	RegisterScriptCallback("save_state", addon_removal)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Utility Functions
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to transform item_table into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
+function table_inject_ready(tab, comm, types, supply_level)
+    local res = {}
+	
+	-- Go through each of the addon's items
+	for k,_ in pairs(tab) do
+		local this_section = table_item_field_by_key(tab,k,"section")
+		local this_type = table_item_field_by_key(tab,k,"type")
+		local this_trader_params = table_item_field_by_key(tab,k,"trader_params")[comm]
+		
+		-- If there exists trader parameters for the trader's faction
+		if this_trader_params then
+			local this_quantity = table_item_field_by_key(tab,k,"trader_params")[comm][1]
+			local this_supply_level = table_item_field_by_key(tab,k,"trader_params")[comm][2]
+			local this_spawn_rate = table_item_field_by_key(tab,k,"trader_params")[comm][3]
+		
+			-- If we hit the spawn rate
+			if this_type and this_supply_level and math.random() < this_spawn_rate then
+				local correct_type = table_contains(types, this_type)
+				local correct_supply_level = this_supply_level == supply_level
+				
+				-- If the trader sells this kind of item and the player meets the required supply level
+				if correct_type and correct_supply_level then
+				
+					-- Add the item to the trader
+					res[this_section] = this_quantity
+				end
+			end
+		end
+	end
+	return res
+end
+
+-- Function used to transform item_table into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
+function table_corpse_ready(tab, npc_comm)
+    local res = {}
+	
+	-- For a user-defined number of tries
+	for i = 1, western_goods_mcm.get_config("max_item_per_corpse") do 
+	
+		-- Pick a random item from the table of all items from the addon
+		local picked_item = table_random_id(tab)
+		local this_section = table_item_field_by_key(tab,picked_item,"section")
+		local this_corpse_params = table_item_field_by_key(tab,picked_item,"corpse_params")[npc_comm]
+		
+		dbg_printf("[WG] Potential item for corpse loot (%s of %s) | sec: %s | prob: %s", i, western_goods_mcm.get_config("max_item_per_corpse"), this_section, this_corpse_params)
+		
+		-- If we hit the drop rate
+		if this_corpse_params and math.random() < this_corpse_params then
+			local is_multi_use = table_item_field_by_key(tab,picked_item,"multi_use")[1] or false
+			local multi_use_count = (is_multi_use and table_item_field_by_key(tab,picked_item,"multi_use")[2]) or 1
+			
+			dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, multi_use_count)
+			
+			-- Spawn the item in the corpse
+			res[this_section] = multi_use_count
+		end
+	end
+	return res
+end
+
+-- Function used to retrieve a certain field of item_table. Allows for a bit more flexibility on the table's structure.
+function table_item_field_by_key(tab, item_id, key)
+	return tab[item_id][key]
+end
+
+function table_items_by_type(tab, type)
+	local res = {}
+
+	-- Go through the list of items in the addon, and keep only the items of type "money"
+	for key,item in pairs(tab) do
+		if tab[key]["type"] == type then
+			table.insert(res, item)
+		end
+	end
+
+	dbg_printf("[WG] Matching elements for type %s :\n%s", type, utils_data.print_table(res, false, true))
+
+	return res
+end
+
+--[[----------------------------------------------------------------------------------------------------
 	Items pool
-	
+
 	Example :
-	
+
 	{
 		["section"] = "<section>",
 		["type"] = "<type>",
@@ -38,9 +287,9 @@ local get_translation = game.translate_string
 		["trader_params"] = { ["<faction>"] = { <quantity>, <supply_level>, <spawn_rate> }, ["<faction>"] = { <quantity>, <supply_level>, <spawn_rate> } },
 		["corpse_params"] = { ["<faction>"] = <drop_rate>, ["<faction>"] = <drop_rate>,},
 	},
-	
+
 	Legend :
-	
+
 	- <section> : Name of the section to spawn in traders/corpses.
 	- <type> : Type of the item. Give it a value between : "food", "drink", "magazine", "tech", "money". If you add a new one, don't forget to modify function spawn_western_goods_in_trader() to spawn the new type of item.
 	- <is_multi_use> : Set it to true or false according to what you've defined in the section definition of the item.
@@ -50,9 +299,9 @@ local get_translation = game.translate_string
 	- <supply_level> : Required supply level to access the item in traders. Give it a value between 1 and 5.
 	- <spawn_rate> : Spawn rate in traders. Give it a value from 0.0 to 1.0.
 	- <drop_rate> : Drop rate in corpses. Give it a value from 0.0 to 1.0.
-	
+
 	Note : If you want an item to spawn for a given faction trader, there must be all three values for that faction : trader_quantity, trader_supply_level and trader_prob. If one is missing, it either won't work or it'll CTD.
-	
+
 ------------------------------------------------------------------------------------------------------]]
 
 item_table = {
@@ -393,239 +642,3 @@ item_table = {
 		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
 	},
 }
-
-
---[[----------------------------------------------------------------------------------------------------
-	Traders
-------------------------------------------------------------------------------------------------------]]
-
--- Function used to spawn items in a specific npc with the help of trader_autoinject.script
-function spawn_western_goods_in_trader(npc)
-	
-    local is_supplier = trader_autoinject.get_trader_type(npc) == trader_autoinject.SUPPLIER
-    local is_barman = trader_autoinject.get_trader_type(npc) == trader_autoinject.BARMAN
-    local is_mechanic = trader_autoinject.get_trader_type(npc) == trader_autoinject.MECHANIC
-    
-	local community = trader_autoinject.get_real_community(npc, "stalker")
-    local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
-	
-	dbg_printf("[WG] Trader type | is_supplier %s | is_barman %s | is_mechanic %s",is_supplier,is_barman,is_mechanic)
-	dbg_printf("[WG] Trader comm | %s",community)
-	
-	local trader_table = {}
-	
-	if is_barman then
-		trader_table = table_inject_ready(item_table, community, CONST_BARMAN_TYPE_BUY_LIST, supply_level)
-		
-    elseif is_supplier then
-		trader_table = table_inject_ready(item_table, community, CONST_SUPPLIER_TYPE_BUY_LIST, supply_level)
-
-    elseif is_mechanic then
-		trader_table = table_inject_ready(item_table, community, CONST_MECHANIC_TYPE_BUY_LIST, supply_level)
-    end
-
-	dbg_printf("[WG] Trader table :\n%s", utils_data.print_table(trader_table, false, true))
-
-	trader_autoinject.spawn_items(npc, trader_table, true)
-end
-
--- Monkey-patching trader_autoinject.update to inject western goods items in the traders
-TraderAuto = trader_autoinject.update
-function trader_autoinject.update(npc)
-    TraderAuto(npc)
-    spawn_western_goods_in_trader(npc)
-end
-
--- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
-TraderUpdate = trade_manager.update
-function trade_manager.update(npc, force_refresh)
-	if npc:section() ~= "stalker_western_goods_trader" then
-		TraderUpdate(npc, force_refresh)
-	else
-		trader_autoinject.TraderUpdate(npc, force_refresh)
-	end
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Dead bodies
-------------------------------------------------------------------------------------------------------]]
-
--- Function used to spawn items in a corpse
-function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
-	local items_to_spawn = table_corpse_ready(item_table, npc_comm)
-	for sec,qte in pairs(items_to_spawn) do
-		alife_create_item(sec, npc, {uses = qte})
-	end
-end
-
--- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods
-SpawnCosmetics = death_manager.spawn_cosmetics
-function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Service functions
-------------------------------------------------------------------------------------------------------]]
-
-function print_addon_version()
-	UnregisterScriptCallback("on_game_load", print_addon_version)
-	printf("[WG] Western Goods version %s",VERSION)
-end
-
-function check_trader_auto_inject()
-	UnregisterScriptCallback("on_game_load", check_trader_auto_inject)
-
-	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			get_translation("st_err_outdated_trader_autoinject_script_title"),
-			get_translation("st_err_outdated_trader_autoinject_script_what"),
-			get_translation("st_err_outdated_trader_autoinject_script_why"),
-			get_translation("st_err_outdated_trader_autoinject_script_where")
-	)
-
-	assert(trader_autoinject.get_real_community ~= nil, error_message)
-end
-
-function check_game_version()
-	UnregisterScriptCallback("on_game_load", check_game_version)
-
-	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			get_translation("st_err_outdated_game_title"),
-			get_translation("st_err_outdated_game_what"),
-			get_translation("st_err_outdated_game_why"),
-			get_translation("st_err_outdated_game_where")
-	)
-
-	assert(string.find(GAME_VERSION,"1.5.2"), error_message)
-end
-
-function check_barter_ui_installed()
-	UnregisterScriptCallback("on_game_load", check_barter_ui_installed)
-
-	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			get_translation("st_err_missing_barter_ui_title"),
-			get_translation("st_err_missing_barter_ui_what"),
-			get_translation("st_err_missing_barter_ui_why"),
-			get_translation("st_err_missing_barter_ui_where")
-	)
-
-	assert(barter_ui ~= nil, error_message)
-end
-
-function addon_removal()
-	if not western_goods_mcm.get_config("addon_removal") then return end
-	
-	local released_objects_count = 0
-
-	for id = 1, 65534 do
-
-		local se = alife_object(id)
-
-		if se then
-
-			for item_id,v in pairs(item_table) do
-			
-				if string.match(se:name(), table_item_field_by_key(item_table,item_id,"section"))
-				or string.match(se:name(), "stalker_western_goods_trader")
-				or string.match(se:name(), "stalker_jupiter_informant")
-				or string.match(se:name(), "stalker_crew_member")
-				then
-					alife_release(se)
-					
-					released_objects_count = released_objects_count + 1
-					break					
-				end
-			end
-		end		
-	end	  
-
-	news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects_count .. "%c[default] items added by Western Goods from the savegame.", nil, nil, 10000)
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Callbacks registration
-------------------------------------------------------------------------------------------------------]]
-
-function on_game_start()
-	RegisterScriptCallback("on_game_load", print_addon_version)
-	RegisterScriptCallback("on_game_load", check_game_version)
-	RegisterScriptCallback("on_game_load", check_barter_ui_installed)
-	RegisterScriptCallback("on_game_load", check_trader_auto_inject)
-	RegisterScriptCallback("save_state", addon_removal)
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Utility Functions
-------------------------------------------------------------------------------------------------------]]
-
--- Function used to transform item_table into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
-function table_inject_ready(tab, comm, types, supply_level)
-    local res = {}
-	
-	-- Go through each of the addon's items
-	for k,_ in pairs(tab) do
-		local this_section = table_item_field_by_key(tab,k,"section")
-		local this_type = table_item_field_by_key(tab,k,"type")
-		local this_trader_params = table_item_field_by_key(tab,k,"trader_params")[comm]
-		
-		-- If there exists trader parameters for the trader's faction
-		if this_trader_params then
-			local this_quantity = table_item_field_by_key(tab,k,"trader_params")[comm][1]
-			local this_supply_level = table_item_field_by_key(tab,k,"trader_params")[comm][2]
-			local this_spawn_rate = table_item_field_by_key(tab,k,"trader_params")[comm][3]
-		
-			-- If we hit the spawn rate
-			if this_type and this_supply_level and math.random() < this_spawn_rate then
-				local correct_type = table_contains(types, this_type)
-				local correct_supply_level = this_supply_level == supply_level
-				
-				-- If the trader sells this kind of item and the player meets the required supply level
-				if correct_type and correct_supply_level then
-				
-					-- Add the item to the trader
-					res[this_section] = this_quantity
-				end
-			end
-		end
-	end
-	return res
-end
-
--- Function used to transform item_table into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
-function table_corpse_ready(tab, npc_comm)
-    local res = {}
-	
-	-- For a user-defined number of tries
-	for i = 1, western_goods_mcm.get_config("max_item_per_corpse") do 
-	
-		-- Pick a random item from the table of all items from the addon
-		local picked_item = table_random_id(tab)
-		local this_section = table_item_field_by_key(tab,picked_item,"section")
-		local this_corpse_params = table_item_field_by_key(tab,picked_item,"corpse_params")[npc_comm]
-		
-		dbg_printf("[WG] Potential item for corpse loot (%s of %s) | sec: %s | prob: %s", i, western_goods_mcm.get_config("max_item_per_corpse"), this_section, this_corpse_params)
-		
-		-- If we hit the drop rate
-		if this_corpse_params and math.random() < this_corpse_params then
-			local is_multi_use = table_item_field_by_key(tab,picked_item,"multi_use")[1] or false
-			local multi_use_count = (is_multi_use and table_item_field_by_key(tab,picked_item,"multi_use")[2]) or 1
-			
-			dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, multi_use_count)
-			
-			-- Spawn the item in the corpse
-			res[this_section] = multi_use_count
-		end
-	end
-	return res
-end
-
--- Function used to retrieve a certain field of item_table. Allows for a bit more flexibility on the table's structure.
-function table_item_field_by_key(tab, item_id, key)
-	if not tab then return end
-	return tab[item_id][key]
-end

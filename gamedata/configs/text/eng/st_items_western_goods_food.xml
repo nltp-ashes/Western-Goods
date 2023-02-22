@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <string_table>
+	<string id="st_wg_unpack">
+		<text>Unpack</text>
+	</string>
+
 	<string id="st_wg_hamborgir">
 		<text>Charal Hamburger (Cheese)</text>
 	</string>
@@ -89,7 +93,7 @@
 	
 	<string id="st_wg_milkyway_descr">
 		<text>
-			MilkyWay is a brand of chocolate-covered confectionery bar manufactured and marketed by Mars, Incorporated. This bar is one of the two kinds sold by the brand. Available outside of the US, this bar somehow made it into the Zone.\n
+			MilkyWay is a brand of chocolate-covered confectionery bar manufactured and marketed by Mars, Incorporated. This bar is one of the two kinds sold by the brand. Available outside the US, this bar somehow made it into the Zone.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -209,7 +213,7 @@
 	
 	<string id="st_wg_mnms_descr">
 		<text>
-			M&amp;M's are multi-colored button-shaped chocolates, consisting of a candy shell surrounding a filling which varies depending upon the variety of M&amp;M's.\n
+			M&amp;M's are multicolored button-shaped chocolates, consisting of a candy shell surrounding a filling which varies depending upon the variety of M&amp;M's.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -248,7 +252,7 @@
 	
 	<string id="st_wg_lays_descr">
 		<text>
-			Lays are fried potato chips. They contains a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			Lays are fried potato chips. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -267,7 +271,7 @@
 	
 	<string id="st_wg_doritos_descr">
 		<text>
-			Doritos are fried potato chips. They contains a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			Doritos are fried potato chips. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -286,11 +290,108 @@
 	
 	<string id="st_wg_pringles_descr">
 		<text>
-			Pringles are fried chips. Contrary to popular belief, they are not made from potato, but instead from a mix of corn, rice powder, wheat, maize and potato shavings. This mix is later grinded and layed into a sheet, curved, then fried for a few seconds. The fried chips are then blasted with aromated, salt powder. They contains a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			Pringles are fried chips. Contrary to popular belief, they are not made from potato, but instead from a mix of corn, rice powder, wheat, maize and potato shavings. This mix is later ground and laid into a sheet, curved, then fried for a few seconds. The fried chips are then blasted with flavored, salt powder. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
 			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_oreo">
+		<text>Oreo Original</text>
+	</string>
+
+	<string id="st_wg_oreo_s">
+		<text>Oreo</text>
+	</string>
+
+	<string id="st_wg_oreo_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_ferrero_rocher">
+		<text>Ferrero Rocher box</text>
+	</string>
+
+	<string id="st_wg_ferrero_rocher_s">
+		<text>Ferrero Rocher</text>
+	</string>
+
+	<string id="st_wg_ferrero_rocher_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_mon_cheri">
+		<text>Mon Cheri box</text>
+	</string>
+
+	<string id="st_wg_mon_cheri_s">
+		<text>Mon Cheri</text>
+	</string>
+
+	<string id="st_wg_mon_cheri_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_toblerone">
+		<text>Toblerone</text>
+	</string>
+
+	<string id="st_wg_toblerone_s">
+		<text>Toblerone</text>
+	</string>
+
+	<string id="st_wg_toblerone_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_french_mre">
+		<text>French Meal, Ready-to-Eat</text>
+	</string>
+
+	<string id="st_wg_french_mre_s">
+		<text>French MRE</text>
+	</string>
+
+	<string id="st_wg_french_mre_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
 			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
 		</text>
 	</string>
