@@ -44,6 +44,7 @@ To **uninstall** the addon :
 > • Added a new set of mini-storylines. Follow a multi-act story line, with multiple missions per act.
 > • Added MCM integration. You can now configure some settings, as well as prepare the addon for removal directly in MCM;
 > • Added a new magazine : Gameland magazine (November 1999);
+> • Added five new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE;
 > • Added psy-health regen when reading magazines (configurable in MCM);
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);
 > • Added an option to have more guided tasks (for people that don't like thinking)(enable/disable in MCM);
@@ -183,6 +184,7 @@ If you need help with anything, or if you have any suggestions of new items, you
 ### SPECIAL THANKS & CREDITS
 
 Credit goes to these people for their work contained in this addon :
+- **SvetkaDystopia** - Produced four models for consumables;
 - **Feel_Fried** - Reused some files from his Food, drug and drinks animations PD 1.0;
 - **arti** - Reused his trader_autoinject script;
 - **RavenAscendant** - Reused his rax_icon_tint script CC BY-NC-SA 3.0 Unported;
@@ -194,6 +196,7 @@ Credit goes to these people for their work contained in this addon :
 - **archive.org** - For providing the textures for the men magazines CC BY-NC-ND 4.0.
 
 Special thanks to these people for their help in the making of this addon :
+- **SvetkaDystopia** - For taking the time to make models for this addon, enormous thanks;
 - **xcvb**, **RavenAscendant** - Help for so many things it'd be too long to list. Huge thanks to these two;
 - **Starcry_**, **Rascal**, **lauta_ro** - Helped to mitigate a compatibility issue with DirectX 8;
 - **arti** - For making his Barter UI Framework;

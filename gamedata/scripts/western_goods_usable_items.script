@@ -197,8 +197,11 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 function use_toblerone(obj)
-    level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
-    CreateTimeEvent("western_goods_delay","force_sleep",5,function()
+    CreateTimeEvent("western_goods_delay","toblerone_mask",2,function()
+        level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
+        return true
+    end)
+    CreateTimeEvent("western_goods_delay","force_sleep",6,function()
         level.remove_pp_effector(57742)
         actor_status_thirst.force_sleep()
         return true

@@ -1550,11 +1550,3 @@ end
 function give_act_1_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")
 end
-
-function xr_conditions.has_alife_info(actor,npc,p)
-	return has_alife_info(tostring(p[1]))
-end
-
-function xr_conditions.not_has_alife_info(actor,npc,p)
-	return not has_alife_info(tostring(p[1]))
-end
