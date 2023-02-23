@@ -20,7 +20,7 @@
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_1_stage_0_descr">
-		<text>Williams Heades was awaiting a ressupply by helicopter, but the crew stop responding. Follow their GPS signal and see if everything is all right.</text>
+		<text>Williams Heades was awaiting a resupply by helicopter, but the crew stop responding. Follow their GPS signal and see if everything is all right.</text>
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_1_stage_1_descr">
@@ -36,7 +36,7 @@
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_1_job_descr">
-		<text>You want to help me? I'm awaiting a delivery. The shipment is being conveyed with an helicopter towards Zaton.\n \nProblem is, I've sent multiple messages to the crew of the helicopter, and they won't answer me. These guys are real pros, so I'm not too worried. I'd go out there and check myself, but I need to meet someone important here soon.\n \nCan you go to the delivery point, and see if everything is all right? Tell the crew I sent you. And tell them to answer the god damn messages, while you're at it.</text>
+		<text>You want to help me? I'm awaiting a delivery. The shipment is being conveyed with a helicopter towards Zaton.\n \nProblem is, I've sent multiple messages to the crew of the helicopter, and they won't answer me. These guys are real pros, so I'm not too worried. I'd go out there and check myself, but I need to meet someone important here soon.\n \nCan you go to the delivery point, and see if everything is all right? Tell the crew I sent you. And tell them to answer the god-damn messages, while you're at it.</text>
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_1_task_complete_descr">
@@ -116,11 +116,11 @@
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_2_job_descr">
-		<text>You remember the helicopter delivery you help me with? Well, I sent a few squads to secure and retrieve the helicopter. They spent hours getting its electronics back in shape. Half of it was fried. Anyway, thankfully they were able to get it flying again, helicopters aren't exactly cheap.\n \nI really don't like what's happening. I've heard rumors a group of bandits settled at the Container Warehouse in Jupiter. Some Stalkers over at Yanov station keep saying they see bright flashes at night coming from that place. The helicopter flew right over that place, so I worried the two might be connected.\n \nCould you go there and clarify just what is going on?</text>
+		<text>You remember the helicopter delivery you help me with? Well, I sent a few squads to secure and retrieve the helicopter. They spent hours getting its electronics back in shape. Half of it was fried. Anyway, thankfully they were able to get it flying again, helicopters aren't exactly cheap.\n \nI really don't like what's happening. I've heard rumors a group of bandits settled at the Container Warehouse in Jupiter. Some Stalkers over at Yanov station keep saying they see bright flashes at night coming from that place. The helicopter flew over that place, so I worried the two might be connected.\n \nCould you go there and clarify just what is going on?</text>
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_2_task_complete_descr">
-		<text>You made it back! Nice, did you find anything?\n \nLet's see... Hm so it was just Bandits? You see, this is exactly what I told you. I don't care about conflicts in the Zone, I take people for what they are. Except for Bandits. I don't know why Dushman wants to keep good relations with them. We should just eradicate them all. Vermin.\n \nAnyway - sorry, I got carried away - Thank you for helping me figuring this whole thing out. At least it wasn't a targetted attack, so business shouldn't be impacted too much.</text>
+		<text>You made it back! Nice, did you find anything?\n \nLet's see... Hm, so it was just Bandits? You see, this is exactly what I told you. I don't care about conflicts in the Zone, I take people for what they are. Except for Bandits. I don't know why Dushman wants to keep good relations with them. We should just eradicate them all. Vermin.\n \nAnyway - sorry, I got carried away - Thank you for helping me to figure this whole thing out. At least it wasn't a targeted attack, so business shouldn't be impacted too much.</text>
 	</string>
 	
 	<!-- Unique NPCs -->
@@ -178,7 +178,7 @@
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_2_stage_0_message_4">
-		<text>The helicopter, is operational again. I'll send it over to your location to assit you. We don't have a lot of fuel left, so make the best of it.</text>
+		<text>The helicopter, is operational again. I'll send it over to your location to assist you. We don't have a lot of fuel left, so make the best of it.</text>
 	</string>
 	
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_1">
@@ -445,7 +445,7 @@
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_cyan] • %c[ui_gray_2] higly valuable\n
+			%c[d_cyan] • %c[ui_gray_2] highly valuable\n
 		</text>
 	</string>
 	

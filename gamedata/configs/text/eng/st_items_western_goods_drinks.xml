@@ -76,7 +76,7 @@
 	
 	<string id="st_wg_yoohoo_bottle_descr">
 		<text>
-			First introduced in the 1920s by Natalie Olivieri, Yoo-hoo is a chocolate flavored cold drink. It is a 99 percent fat-free, 100 percent caffeine-free, and rich in both calcium and Vitamin D.\n
+			First introduced in the 1920s by Natalie Olivieri, Yoo-hoo is a chocolate flavored cold drink. It is a 99 percent fat-free, 100 percent caffeine-free, and rich in both calcium and vitamin D.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] drink\n
@@ -136,7 +136,7 @@
 	
 	<string id="st_wg_cola_can_descr">
 		<text>
-			Coca-Cola, informally known as Coke, is a carbonated soft drink. Originally marketed as a temperance drink and intended as a patent medicine. Some traders around the Zone occasionaly import a few bottles. While most stalkers enjoy it as a drink, it can also be used as a way to remove rust from old weapons.\n
+			Coca-Cola, informally known as Coke, is a carbonated soft drink. Originally marketed as a temperance drink and intended as a patent medicine. Some traders around the Zone occasionally import a few bottles. While most stalkers enjoy it as a drink, it can also be used as a way to remove rust from old weapons.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] drink\n
@@ -198,7 +198,7 @@
 	
 	<string id="st_wg_fanta_can_descr">
 		<text>
-			Bright, bubbly and popular, Fanta is a soft drink first introduced in 1940. Fanta is the second oldest brand of The Coca-Cola Company.\n
+			Bright, bubbly and popular, Fanta is a soft drink first introduced in 1940. Fanta is the second-oldest brand of The Coca-Cola Company.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] drink\n
@@ -362,7 +362,7 @@
 	
 	<string id="st_wg_dr_bob_can_descr">
 		<text>
-			Dr. Bob is a carbonated soft drink often described as a knock off of Dr. Pepper. While it tries to immitate it, it's taste is not quite like Dr. Pepper. The taste is more bitter and dry.\n
+			Dr. Bob is a carbonated soft drink often described as a knock off of Dr. Pepper. While it tries to imitate it, it's taste is not quite like Dr. Pepper. The taste is more bitter and dry.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] drink\n
@@ -382,7 +382,7 @@
 	
 	<string id="st_wg_lipton_icetea_can_descr">
 		<text>
-			Lipton Ice Tea is a non-carbonated soft drink with tea extract and peach juice, mixed with sugar and sweetener. It is low in calories, and does not contains preservatives, making it a quite healthy drink.\n
+			Lipton Ice Tea is a non-carbonated soft drink with tea extract and peach juice, mixed with sugar and sweetener. It is low in calories, and does not contain preservatives, making it a quite healthy drink.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] drink\n

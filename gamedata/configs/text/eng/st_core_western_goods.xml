@@ -49,7 +49,7 @@
 	</string>
 
 	<string id="st_err_missing_barter_ui_why">
-		<text>Western Goods requires this framework to enable some of the features for some special NPCs.</text>
+		<text>Western Goods requires this framework to enable some features for some special NPCs.</text>
 	</string>
 
 	<string id="st_err_missing_barter_ui_where">

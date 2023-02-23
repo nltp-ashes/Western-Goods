@@ -43,7 +43,7 @@
 	</string>
 
 	<string id="ui_mcm_western_goods_heli_attack_desc">
-		<text>Key-bind used to send an attack order to an helicopter. Aim at a target and use the key-bind to send the order.</text>
+		<text>Key-bind used to send an attack order to a helicopter. Aim at a target and use the key-bind to send the order.</text>
 	</string>
 	
 	<!-- Items Per Corpse -->
@@ -61,7 +61,7 @@
 	</string>
 
 	<string id="ui_mcm_western_goods_magazine_psy_regen_desc">
-		<text>Defines the the rate at which your psy-health (mental health) heals when you're reading a magazine.</text>
+		<text>Defines the rate at which your psy-health (mental health) heals when you're reading a magazine.</text>
 	</string>
 	
 	<!--=================================================================================================================================================================

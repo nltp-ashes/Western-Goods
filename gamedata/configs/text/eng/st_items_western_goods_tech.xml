@@ -10,7 +10,7 @@
 	
 	<string id="st_wg_laptop_descr">
 		<text>
-			The ZenBook 13 is a laptop of the ultraportable family. Produced by ASUS, it was surely brought into the zone by mercenaries. It seems to have been slightly damaged, making it unusable. Though its components are worth a furtune, and a trader could put a pretty price on it.\n
+			The ZenBook 13 is a laptop of the ultra-portable family. Produced by ASUS, it was surely brought into the zone by mercenaries. It seems to have been slightly damaged, making it unusable. Though its components are worth a fortune, and a trader could put a pretty price on it.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] technological item\n
@@ -49,7 +49,7 @@
 	
 	<string id="st_wg_keyboard_descr">
 		<text>
-			Damaged Logitech keyboard. It's none of those fancy keyboards for video games, but just a simple keyboard. It seems too damaged to be used, althrough it's still a good source of electronic components.\n
+			Damaged Logitech keyboard. It's none of those fancy keyboards for video games, but just a simple keyboard. It seems too damaged to be used, although it's still a good source of electronic components.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] technological item\n
@@ -88,7 +88,7 @@
 	</string>
 	
 	<string id="st_wg_gps_use_3">
-		<text>outside of satelite range</text>
+		<text>outside of satellite range</text>
 	</string>
 	
 	<string id="st_wg_gps_use_4">
@@ -105,7 +105,7 @@
 	
 	<string id="st_wg_military_decoder_descr">
 		<text>
-			This seems to be an advanced military decoder. It has english enscriptions allaround, so it probably comes from outside of the Zone. It's not really of any use for the everyday stalker, but traders often look for these rare devices.\n
+			This seems to be an advanced military decoder. It has english inscriptions all-around, so it probably comes from outside the Zone. It's not really of any use for the everyday stalker, but traders often look for these rare devices.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] technological item\n
@@ -126,7 +126,7 @@
 	
 	<string id="st_wg_military_radio_descr">
 		<text>
-			A military radio with a long range antena. It's very visibly not from the Zone. It seems to be in good condition. With the right equipment, someone could get it working. Traders often look for those long range radios to communicate with each others.\n
+			A military radio with a long range antenna. It's very visibly not from the Zone. It seems to be in good condition. With the right equipment, someone could get it working. Traders often look for those long range radios to communicate with each others.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] technological item\n
