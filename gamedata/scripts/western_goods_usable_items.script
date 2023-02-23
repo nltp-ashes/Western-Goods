@@ -189,6 +189,21 @@ end
 
 function use_french_mre(obj)
     alife_release(alife_object(obj:id()))
+
+    local content = str_explode(SYS_GetParam(0, obj:section(), "content"), ",")
+
+    for _,item in pairs(content) do
+        local section = str_explode(item, ":")[1]
+        local quantity = str_explode(item, ":")[2]
+
+        if (SYS_GetParam(1, obj:section(), "use_condition")) then
+            alife_create_item(section, db.actor, {uses = quantity})
+        else
+            for i=1,quantity do
+                alife_create_item(section, db.actor)
+            end
+        end
+    end
 end
 
 

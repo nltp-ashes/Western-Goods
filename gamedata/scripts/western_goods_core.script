@@ -270,8 +270,6 @@ function table_items_by_type(tab, type)
 		end
 	end
 
-	dbg_printf("[WG] Matching elements for type %s :\n%s", type, utils_data.print_table(res, false, true))
-
 	return res
 end
 

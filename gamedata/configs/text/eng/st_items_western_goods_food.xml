@@ -396,4 +396,23 @@
 		</text>
 	</string>
 
+	<string id="st_wg_sandwich">
+		<text>Sandwich</text>
+	</string>
+
+	<string id="st_wg_sandwich_s">
+		<text>Sandwich</text>
+	</string>
+
+	<string id="st_wg_sandwich_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] hand-made\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
 </string_table>
