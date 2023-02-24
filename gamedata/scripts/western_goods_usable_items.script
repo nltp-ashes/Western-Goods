@@ -20,6 +20,7 @@ local table_random_id = western_goods_utils.table_random_id
 local has_translation = western_goods_utils.has_translation
 local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
+local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 --[[----------------------------------------------------------------------------------------------------
 	Usable Items
@@ -212,11 +213,11 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 function use_toblerone(obj)
-    CreateTimeEvent("western_goods_delay","toblerone_mask",2,function()
+    CreatePersistentTimeEvent("western_goods_delay","toblerone_mask",2,function()
         level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
         return true
     end)
-    CreateTimeEvent("western_goods_delay","force_sleep",6,function()
+    CreatePersistentTimeEvent("western_goods_delay","force_sleep",6,function()
         level.remove_pp_effector(57742)
         actor_status_thirst.force_sleep()
         return true

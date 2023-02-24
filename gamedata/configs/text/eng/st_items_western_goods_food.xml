@@ -376,16 +376,16 @@
 	</string>
 
 	<string id="st_wg_french_mre">
-		<text>French Meal, Ready-to-Eat</text>
+		<text>Ration de Combat Individuelle Rechauffable</text>
 	</string>
 
 	<string id="st_wg_french_mre_s">
-		<text>French MRE</text>
+		<text>RCIR MRE</text>
 	</string>
 
 	<string id="st_wg_french_mre_descr">
 		<text>
-			TODO\n
+			Ration de Combat Individuelle Rechauffable (translated to Individual Reheatable Combat Ration) is the MRE used in the French military.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n

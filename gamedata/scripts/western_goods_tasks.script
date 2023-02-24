@@ -253,7 +253,7 @@ function act_1_task_1_stage_2_status_f(tsk,task_id)
 	local supplies_se = supplies_id and alife_object(supplies_id)
 
 	-- If the player picked up the supplies, progress to stage 3
-	if not (supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id == 65535)) then
+	if not (supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id ~= AC_ID)) then
 		dbg_printf("[WG] Act 1 Task 1 Stage 2 | Player picked up the supplies %s", supplies_id)
 		tsk.stage = 3
 	end
@@ -265,7 +265,7 @@ function act_1_task_1_stage_3_status_f(tsk,task_id)
 	local supplies_se = supplies_id and alife_object(supplies_id)
 
 	-- If the player dropped the supplies, rollback to stage 2
-	if supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id == 65535) then
+	if supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id ~= AC_ID) then
 		dbg_printf("[WG] Act 1 Task 1 Stage 3 | Player dropped the supplies %s", supplies_id)
 		tsk.stage = 2
 	end
@@ -829,8 +829,8 @@ function act_1_task_2_stage_3_status_f(tsk,task_id)
 	local quest_item_2 = quest_item_2_id and alife_object(quest_item_2_id)
 
 	-- If the player picked up both quest items, progress to stage 4
-	if not (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id == 65535)
-			and not (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id == 65535)
+	if not (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id ~= AC_ID)
+	and not (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id ~= AC_ID)
 	then
 		dbg_printf("[WG] Act 1 Task 2 Stage 3 | Player picked up the items | %s | %s", quest_item_1_id, quest_item_2_id)
 		tsk.stage = 4
@@ -847,8 +847,8 @@ function act_1_task_2_stage_4_status_f(tsk,task_id)
 	local quest_item_2 = quest_item_2_id and alife_object(quest_item_2_id)
 
 	-- If the player dropped one of the quest items, rollback to stage 3
-	if (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id == 65535)
-			or (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id == 65535)
+	if (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id ~= AC_ID)
+	or (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id ~= AC_ID)
 	then
 		dbg_printf("[WG] Act 1 Task 2 Stage 4 | Player dropped the items | %s | %s", quest_item_1_id, quest_item_2_id)
 		tsk.stage = 3
