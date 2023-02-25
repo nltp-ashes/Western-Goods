@@ -18,6 +18,7 @@ local CONST_TRADER_SQUAD = "stalker_western_goods_trader_squad"
 
 local dbg_printf = western_goods_utils.dbg_printf
 local table_contains = western_goods_utils.table_contains
+local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
 
 --[[----------------------------------------------------------------------------------------------------
@@ -124,6 +125,96 @@ function barter_ui.GUI_on_show(name, path)
 	if partner and partner:section() == CONST_TRADER_SECTION then return end
 	
 	GUI_on_showBase(name, path)
+end
+
+-- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader
+TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
+function ui_inventory.UIInventory.TMode_Sell(self)
+	-- If we aren't talking to the western goods trader, process normally
+	local npc = self:GetPartner()
+	if not npc or npc:section() ~= CONST_TRADER_SECTION then
+		TMode_SellBase(self)
+		return
+	end
+
+	make_exchange(self, npc)
+end
+
+-- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader
+TMode_BuyBase = ui_inventory.UIInventory.TMode_Buy
+function ui_inventory.UIInventory.TMode_Buy(self)
+	-- If we aren't talking to the western goods trader, process normally
+	local npc = self:GetPartner()
+	if not npc or npc:section() ~= CONST_TRADER_SECTION then
+		TMode_BuyBase(self)
+		return
+	end
+
+	make_exchange(self, npc)
+end
+
+
+function make_exchange(self, npc)
+	-- Get sell cells
+	local cc_sell = self.CC["actor_trade"]
+	if (not cc_sell) then
+		return
+	end
+	if size_table(cc_sell.indx_id) <= 0 then
+		self.message_box:InitMessageBox("message_box_ok")
+		self.message_box:SetText( get_translation("western_goods_trader_empty_sell") )
+		self.message_box:ShowDialog(true)
+		return
+	end
+
+	-- Get buy sells
+	local cc_buy = self.CC["npc_trade"]
+	if (not cc_buy) then
+		return
+	end
+	if size_table(cc_buy.indx_id) <= 0 then
+		self.message_box:InitMessageBox("message_box_ok")
+		self.message_box:SetText( get_translation("western_goods_trader_empty_buy") )
+		self.message_box:ShowDialog(true)
+		return
+	end
+
+	-- Calculate full sell price
+	local tot_sell_cost = 0
+	for _,ci in pairs(cc_sell.cell) do
+		tot_sell_cost = tot_sell_cost + cc_sell:GetCellCost(ci)
+	end
+	tot_sell_cost = math.floor(tot_sell_cost)
+
+	-- Calculate full buy price
+	local tot_buy_cost = 0
+	for _,ci in pairs(cc_buy.cell) do
+		tot_buy_cost = tot_buy_cost + cc_buy:GetCellCost(ci)
+	end
+	tot_buy_cost = math.floor(tot_buy_cost)
+
+	-- Don't processed the sell price < buy price
+	if tot_sell_cost < tot_buy_cost then
+		self.message_box:InitMessageBox("message_box_ok")
+		self.message_box:SetText( get_translation("western_goods_trader_uneven_value") )
+		self.message_box:ShowDialog(true)
+		return
+	end
+
+	-- Transfer items
+	for id,_ in pairs(cc_sell.indx_id) do
+		if cc_sell:GetCell_ID(id) then
+			alife_release(alife_object(id))
+		end
+	end
+	for id,_ in pairs(cc_buy.indx_id) do
+		if cc_buy:GetCell_ID(id) then
+			self:On_Item_Exchange(npc, db.actor, find_object_by_id(id))
+		end
+	end
+
+	-- Update UI
+	self.update_info = true
 end
 
 --[[----------------------------------------------------------------------------------------------------

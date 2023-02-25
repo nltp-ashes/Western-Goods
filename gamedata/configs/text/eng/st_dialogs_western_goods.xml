@@ -46,6 +46,18 @@
 	<string id="western_goods_trader_meet_6">
 		<text>Alright.</text>
 	</string>
+
+	<string id="western_goods_trader_empty_sell">
+		<text>You need to pay for the selected items (with Euros or Dollars).</text>
+	</string>
+
+	<string id="western_goods_trader_empty_buy">
+		<text>You haven't selected anything to buy.</text>
+	</string>
+
+	<string id="western_goods_trader_uneven_value">
+		<text>You need to give, in cash, an equal or great value to what you're buying.</text>
+	</string>
 	
 <!-- Western Goods Trader Barters -->
 
