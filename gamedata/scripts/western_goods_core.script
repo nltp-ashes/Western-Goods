@@ -20,10 +20,8 @@ local CONST_SUPPLIER_TYPE_BUY_LIST = {"food","magazine"}
 local CONST_MECHANIC_TYPE_BUY_LIST = {"tech"}
 
 local dbg_printf = western_goods_utils.dbg_printf
-local round_number = western_goods_utils.round_number
 local table_contains = western_goods_utils.table_contains
 local table_random_id = western_goods_utils.table_random_id
-local has_translation = western_goods_utils.has_translation
 local get_translation = game.translate_string
 
 --[[----------------------------------------------------------------------------------------------------

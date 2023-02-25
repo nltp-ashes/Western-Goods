@@ -211,7 +211,7 @@ function on_xml_read()
 			</phrase>
 			<phrase id="3">
                 <text>stalker_crew_member_reward_3</text>
-				<action>western_goods_tasks.give_act_1_reward</action>
+				<action>western_goods_tasks_act_1.give_act_1_reward</action>
 				<next>4</next>
 			</phrase>
 			<phrase id="4">

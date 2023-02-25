@@ -17,12 +17,8 @@ local CONST_TRADER_SECTION = "stalker_western_goods_trader"
 local CONST_TRADER_SQUAD = "stalker_western_goods_trader_squad"
 
 local dbg_printf = western_goods_utils.dbg_printf
-local round_number = western_goods_utils.round_number
 local table_contains = western_goods_utils.table_contains
-local table_random_id = western_goods_utils.table_random_id
-local has_translation = western_goods_utils.has_translation
 local find_object_by_id = western_goods_utils.find_object_by_id
-local get_translation = game.translate_string
 
 --[[----------------------------------------------------------------------------------------------------
 	Spawning the trader

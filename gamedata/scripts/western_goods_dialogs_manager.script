@@ -19,20 +19,8 @@ local CONST_DIALOG_DELAY_MSG = 7
 local dialog_waiting_count = 0
 
 -- Imported functions
-local get_translation = game.translate_string
 local dbg_printf = western_goods_utils.dbg_printf
-local get_distance = western_goods_utils.get_distance
-local find_object_by_id = western_goods_utils.find_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
-local heli_spawn = western_goods_helicopter.heli_spawn
-local heli_register = western_goods_helicopter.heli_register
-local spawn_story_squad = western_goods_utils.spawn_story_squad
-local spawn_squad = western_goods_utils.spawn_squad
-local spawn_dead_squad = western_goods_utils.spawn_dead_squad
-local get_member_id_from_squad = western_goods_utils.get_member_id_from_squad
-local get_member_from_squad = western_goods_utils.get_member_from_squad
-local find_unique_npc = western_goods_utils.find_unique_npc
-local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 
 --[[----------------------------------------------------------------------------------------------------
 	Callbacks registration

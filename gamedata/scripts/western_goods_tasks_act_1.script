@@ -1338,126 +1338,6 @@ end
 
 
 --[[----------------------------------------------------------------------------------------------------
-	ACT 2 - RETRIEVAL MISSION
-
-	TASK 1 - RETRIEVE THE DOCUMENTS
-------------------------------------------------------------------------------------------------------]]
-
--- Function used to retrieve the title of the mission (displayed in the PDA).
-function task_functor.act_2_task_1_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_2_task_1_title")
-end
-
--- Function used to retrieve the description of the mission (displayed in the PDA).
--- Warning : naming contract on the translation string : st_wg_trader_act_2_task_1_stage_<stage>_descr
-function task_functor.act_2_task_1_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_2_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
-end
-
--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
-function task_functor.act_2_task_1_target_f(task_id,field,p,tsk)
-	if tsk.stage == 0 then
-		return load_var(db.actor,"wg_act_2_task_1_stage_0_target")
-	end
-	if tsk.stage == 1 then
-		return tsk.task_giver_id
-	end
-end
-
--- Function used to manage the mission logic as a whole.
-function task_status_functor.act_2_task_1_status_f(tsk,task_id)
-
-	-- First stage :
-	if tsk.stage == 0 then
-		return act_2_task_1_stage_0_status_f(tsk,task_id)
-	end
-
-	-- Second stage :
-	if tsk.stage == 1 then
-		return act_2_task_1_stage_1_status_f(tsk,task_id)
-	end
-end
-
-function act_2_task_1_stage_0_status_f(tsk,task_id)
-
-	if not has_alife_info("wg_act_2_task_1_stage_0_btr_spawned") then
-		local sec =  { "veh_btr", 						}
-		local pos =  { vector():set(-174.8,-0.6,-6.8), 	}
-		local lvid = { 38003, 							}
-		local gvid = { 4991, 							}
-
-		-- Spawn the BTR
-		local btr_se = alife_create(sec[1], pos[1], lvid[1], gvid[1])
-
-		-- Prevent the player from getting in the BTR
-		logic_enforcer.assign(btr_se.id,'scripts\\tasks\\veh_idle.ltx','logic','ph_car@idle')
-
-		save_var(db.actor,"btr_id", btr_se.id)
-
-		dbg_printf("[WG] BTR spawned with id %s",btr_se.id)
-
-		-- Give the player an info portions to prevent the squads from spawning again
-		give_info("wg_act_2_task_1_stage_0_btr_spawned")
-
-
-		-- Return so the game can spawn the objects in the world before running the rest of the code
-		return
-	end
-
-	if not has_alife_info("wg_act_2_task_1_stage_0_killer_squad_spawned") then
-		local sec =  { "killer_sim_squad_alpha", 		}
-		local pos =  { vector():set(-168.8,-0.5,-24.3), }
-		local lvid = { 42026, 							}
-		local gvid = { 4962, 							}
-
-		-- Spawn the squad
-		local squad_se = spawn_squad(sec[1], pos[1], lvid[1], gvid[1])
-
-
-		-- Force them to stay at the house
-		squad_se.scripted_target = "lim_smart_terrain_6"
-
-		save_var(db.actor,"killer_squad_id", squad_se.id)
-
-		dbg_printf("[WG] Killer squad spawned with id %s",squad_se.id)
-
-		-- Give the player an info portions to prevent the squads from spawning again
-		give_info("wg_act_2_task_1_stage_0_killer_squad_spawned")
-
-		-- Return so the game can spawn the objects in the world before running the rest of the code
-		return
-	end
-
-	tsk.stage = 1
-end
-
-function act_2_task_1_stage_1_status_f(tsk,task_id)
-	-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-	local btr_id = load_var(db.actor,"btr_id")
-	local btr_se = btr_id and alife_object(btr_id)
-	local btr_obj = btr_se and find_object_by_id(btr_se.id)
-
-	-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-	local killer_squad_id = load_var(db.actor,"killer_squad_id")
-	local killer_squad_se = killer_squad_id and alife_object(killer_squad_id)
-
-	local one_of_squad_se = get_member_from_squad(killer_squad_se)
-	local one_of_squad_obj = one_of_squad_se and find_object_by_id(one_of_squad_se.id)
-
-	if btr_obj and one_of_squad_obj and not has_alife_info("destroy_btr_order_given") then
-
-		dbg_printf("[WG] Giving order to %s to destroy BTR %s",one_of_squad_obj:id(),btr_obj:id())
-
-		-- do stuff
-
-		dbg_printf("[WG] Order given to %s to destroy BTR %s",one_of_squad_obj:id(),btr_obj:id())
-
-		give_info("destroy_btr_order_given")
-	end
-end
-
-
---[[----------------------------------------------------------------------------------------------------
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
@@ -1472,35 +1352,19 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 function save_state(m_data)
-	dbg_printf("[WG] Saving task specific info...")
-	local print_task_specific_info = {}
-
 	m_data.act_1_task_2_stage_1_heli_ready_timer = (act_1_task_2_stage_1_heli_ready_timer or time_global()) - time_global()
-	print_task_specific_info["act_1_task_2_stage_1_heli_ready_timer"] = m_data.act_1_task_2_stage_1_heli_ready_timer
-
 	m_data.act_1_task_2_stage_2_show_targets_timer = (act_1_task_2_stage_2_show_targets_timer or time_global()) - time_global()
-	print_task_specific_info["act_1_task_2_stage_2_show_targets_timer"] = m_data.act_1_task_2_stage_2_show_targets_timer
-
 	m_data.act_1_task_3_stage_2_show_targets_timer = (act_1_task_3_stage_2_show_targets_timer or time_global()) - time_global()
-	print_task_specific_info["act_1_task_3_stage_2_show_targets_timer"] = m_data.act_1_task_3_stage_2_show_targets_timer
 
-	dbg_printf("[WG] Saving task specific info saved:\n%s", utils_data.print_table(print_task_specific_info, false, true))
+	dbg_printf("[WG] Saved act 1 task variables")
 end
 
 function load_state(m_data)
-	dbg_printf("[WG] Loading task specific info...")
-	local print_task_specific_info = {}
-
 	act_1_task_2_stage_1_heli_ready_timer = time_global() + (m_data.act_1_task_2_stage_1_heli_ready_timer or 0)
-	print_task_specific_info["act_1_task_2_stage_1_heli_ready_timer"] = act_1_task_2_stage_1_heli_ready_timer
-
 	act_1_task_2_stage_2_show_targets_timer = time_global() + (m_data.act_1_task_2_stage_2_show_targets_timer or 0)
-	print_task_specific_info["act_1_task_2_stage_2_show_targets_timer"] = act_1_task_2_stage_2_show_targets_timer
-
 	act_1_task_3_stage_2_show_targets_timer = time_global() + (m_data.act_1_task_3_stage_2_show_targets_timer or 0)
-	print_task_specific_info["act_1_task_3_stage_2_show_targets_timer"] = act_1_task_3_stage_2_show_targets_timer
 
-	dbg_printf("[WG] Loaded task specific info :\n%s", utils_data.print_table(print_task_specific_info, false, true))
+	dbg_printf("[WG] Loaded act 1 task variables")
 end
 
 
