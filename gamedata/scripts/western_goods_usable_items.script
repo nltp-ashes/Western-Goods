@@ -107,10 +107,8 @@ function find_info_from_game_world()
 	local closest_smart_name = smart:name()
 	local closest_smart_distance = smart.dist_to_actor
 	local closest_smart_level = alife():level_name(smart.level_id)
-		
-	dbg_printf("[WG] Closest smart name from game world : %s", closest_smart_name)
-	dbg_printf("[WG] Closest smart dist from game world : %s", closest_smart_distance)
-	dbg_printf("[WG] Closest smart level from game world : %s", closest_smart_level)
+
+    dbg_printf("[WG] Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
 	
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
@@ -135,11 +133,9 @@ function find_info_from_pda()
 		end
 	end
 	
-	dbg_printf("[WG] Closest smart name from PDA : %s", closest_smart_name)
-	dbg_printf("[WG] Closest smart dist from PDA : %s", closest_smart_distance)
-	dbg_printf("[WG] Closest smart level from PDA : %s", closest_smart_level)
+	dbg_printf("[WG] Closest smart (PDA) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
 	
-	return closest_smart_name, closest_smart_distance/2, closest_smart_level
+	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
 
 function build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level)

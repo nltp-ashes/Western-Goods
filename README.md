@@ -18,7 +18,7 @@ This addon **requires** the following :
 3. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest)
 
 This addon **does not require** the following :
-1. Food, drug and drinks animations (items just won't have animations if you don't have it)
+1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (items just won't have animations if you don't have it)
 
 ---
 
@@ -55,6 +55,7 @@ To **uninstall** the addon :
 > • Fixed an issue due to which some items were missing from traders/corpses;
 > • Fixed incorrect calories for the Yoo-hoo chocolate drink (Thanks Servalion);
 > • Changed the corpse loot generation logic : you can now get multiple items per corpse (upto five by default, configurable in MCM);
+> • Changed the GPS locator logic : it now has a slightly higher chance of finding the name of your location;
 > • Externalized all the changes made to BarterUI. Western Goods won't redistribute the framework anymore.
 > ```
 
