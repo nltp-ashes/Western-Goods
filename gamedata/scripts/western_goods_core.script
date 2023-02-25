@@ -242,7 +242,7 @@ function table_corpse_ready(tab, npc_comm)
 		-- If we hit the drop rate
 		if this_corpse_params and math.random() < this_corpse_params then
 			local is_multi_use = table_item_field_by_key(tab,picked_item,"multi_use")[1] or false
-			local multi_use_count = (is_multi_use and table_item_field_by_key(tab,picked_item,"multi_use")[2]) or 1
+			local multi_use_count = is_multi_use and table_item_field_by_key(tab,picked_item,"multi_use")[2] or 1
 			
 			dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, multi_use_count)
 			
@@ -263,7 +263,7 @@ function table_items_by_type(tab, type)
 
 	-- Go through the list of items in the addon, and keep only the items of type "money"
 	for key,item in pairs(tab) do
-		if tab[key]["type"] == type then
+		if table_item_field_by_key(tab, key, "type") == type then
 			table.insert(res, item)
 		end
 	end

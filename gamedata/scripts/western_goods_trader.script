@@ -66,18 +66,12 @@ function retrieve_tradable_items()
 	tradable_items = {}
 
 	-- Get the table of all items of the addon from western_goods_core
-	local item_table = dup_table(western_goods_core.item_table)
-	
-	dbg_printf("[WG] Table received from western_goods_core has size of %s", #item_table)
-	
+	local money_table = western_goods_core.table_items_by_type(western_goods_core.item_table, "money")
+
 	-- Go through the list of items in the addon, and keep only the items of type "money"
-	for key,_ in pairs(item_table) do
-		if western_goods_core.table_item_field_by_key(item_table, key, "type") == "money" then
-		
-			dbg_printf("[WG] Item %s marked as tradable with western goods trader", western_goods_core.table_item_field_by_key(item_table, key, "section"))
-			
-			table.insert(tradable_items, western_goods_core.table_item_field_by_key(item_table, key, "section"))
-		end
+	for key,_ in pairs(money_table) do
+		dbg_printf("[WG] Item %s marked as tradable with western goods trader", western_goods_core.table_item_field_by_key(money_table, key, "section"))
+		table.insert(tradable_items, western_goods_core.table_item_field_by_key(money_table, key, "section"))
 	end
 	
 	dbg_printf("[WG] Assembled trade table :\n%s", utils_data.print_table(tradable_items, false, true))
