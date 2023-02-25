@@ -31,9 +31,9 @@ local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
 
 -- Task variables
-local TASK_1_CACHE = {}
-local TASK_2_CACHE = {}
-local TASK_3_CACHE = {}
+TASK_1_CACHE = {}
+TASK_2_CACHE = {}
+TASK_3_CACHE = {}
 
 --[[----------------------------------------------------------------------------------------------------
 	ACT 2 - RETRIEVAL MISSION
