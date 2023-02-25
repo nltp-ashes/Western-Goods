@@ -1,0 +1,89 @@
+--[[
+-- Info
+-- 
+-- Original Author(s) : NLTP_ASHES
+-- Edited : N/A
+-- Date : 22/01/2023
+-- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+-- 
+-- Script used to manage the tasks of the Western Goods addon.
+--]]
+
+--[[----------------------------------------------------------------------------------------------------
+	Constants, global variables and imported functions
+------------------------------------------------------------------------------------------------------]]
+
+-- Dialog constants and variables
+local CONST_DIALOG_DISPLAY_TIME = 15
+local CONST_DIALOG_DELAY_MSG = 7
+local dialog_waiting_count = 0
+
+-- Imported functions
+local get_translation = game.translate_string
+local dbg_printf = western_goods_utils.dbg_printf
+local get_distance = western_goods_utils.get_distance
+local find_object_by_id = western_goods_utils.find_object_by_id
+local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
+local heli_spawn = western_goods_helicopter.heli_spawn
+local heli_register = western_goods_helicopter.heli_register
+local spawn_story_squad = western_goods_utils.spawn_story_squad
+local spawn_squad = western_goods_utils.spawn_squad
+local spawn_dead_squad = western_goods_utils.spawn_dead_squad
+local get_member_id_from_squad = western_goods_utils.get_member_id_from_squad
+local get_member_from_squad = western_goods_utils.get_member_from_squad
+local find_unique_npc = western_goods_utils.find_unique_npc
+local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
+
+--[[----------------------------------------------------------------------------------------------------
+	Callbacks registration
+------------------------------------------------------------------------------------------------------]]
+
+function on_game_start()
+	RegisterScriptCallback("save_state", save_state)
+	RegisterScriptCallback("load_state", load_state)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Data persistence
+------------------------------------------------------------------------------------------------------]]
+
+function save_state(m_data)
+	m_data.dialog_waiting_count = dialog_waiting_count or 0
+	dbg_printf("[WG] Saved dialog queue length : %s", dialog_waiting_count)
+end
+
+function load_state(m_data)
+	dialog_waiting_count = m_data.dialog_waiting_count or 0
+	dbg_printf("[WG] Loaded dialog queue length: %s", dialog_waiting_count)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	General functions
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to display a dialog on screen.
+-- Warning : IDs in the table have to be contiguous integers from 1 to n !
+function send_dialog(dialog_table)
+	for index=1, #dialog_table do
+		dialog_waiting_count = dialog_waiting_count + 1
+
+		-- Turn off dynamic news
+		dynamic_news_manager.enable_news = false
+
+		CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, CONST_DIALOG_DELAY_MSG*index, function ()
+			dialog_waiting_count = dialog_waiting_count - 1
+
+			-- Send the line of dialog
+			dynamic_news_helper.send_tip(dialog_table[index].message, dialog_table[index].sender, nil, CONST_DIALOG_DISPLAY_TIME, dialog_table[index].icon, nil, "npc")
+
+			-- Re-enable dynamic news if we're done sending dialogs
+			if dialog_waiting_count <= 0 then
+				dynamic_news_manager.enable_news = true
+			end
+
+			return true
+		end)
+	end
+end

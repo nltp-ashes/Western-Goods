@@ -9,6 +9,17 @@
 -- Script used to define various common functions defined in the scripts of the Western Goods addon.
 --]]
 
+--[[----------------------------------------------------------------------------------------------------
+	Constants and imported functions
+------------------------------------------------------------------------------------------------------]]
+
+local CreatePersistentTimeEvent
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Utils Functions
+------------------------------------------------------------------------------------------------------]]
+
 -- Function used to print information into the console/log file only when Western Goods' debug mode is enabled
 function dbg_printf(...)
     if not western_goods_mcm.get_config("debug_mode") then return end
@@ -213,4 +224,13 @@ function find_npc_in_actor_squad(sec)
 			return se_npc
 		end
 	end
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Load CreatePersistentTimeEvent function
+------------------------------------------------------------------------------------------------------]]
+
+function on_game_start()
+	CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 end

@@ -44,7 +44,7 @@ To **uninstall** the addon :
 > • Added a new set of mini-storylines. Follow a multi-act story line, with multiple missions per act.
 > • Added MCM integration. You can now configure some settings, as well as prepare the addon for removal directly in MCM;
 > • Added a new magazine : Gameland magazine (November 1999);
-> • Added five new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE;
+> • Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich;
 > • Added psy-health regen when reading magazines (configurable in MCM);
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);
 > • Added an option to have more guided tasks (for people that don't like thinking)(enable/disable in MCM);
@@ -188,19 +188,21 @@ Credit goes to these people for their work contained in this addon :
 - **Feel_Fried** - Reused some files from his Food, drug and drinks animations PD 1.0;
 - **arti** - Reused his trader_autoinject script;
 - **RavenAscendant** - Reused his rax_icon_tint script CC BY-NC-SA 3.0 Unported;
-- **RavenAscendant** - Wrote the code that manipulates helicopters' combat AI;
+- **RavenAscendant** - Wrote the code that takes control of helicopters' combat AI;
 - **lauta_ro** - Reused part of his More Guides addon;
 - **Aoldri** - Reused icons from his Hideout Furniture addon;
 - **A.R.E.A. mod** - Ported some models from their mod;
 - **segaretro.org** - For providing the textures for the xbox magazines CC BY 4.0;
 - **archive.org** - For providing the textures for the men magazines CC BY-NC-ND 4.0.
+- **commons.wikimedia.org** - For providing various logos and resources used in textures.
+- **freepik.com** - For providing various logos and resources used in textures.
 
 Special thanks to these people for their help in the making of this addon :
 - **SvetkaDystopia** - For taking the time to make models for this addon, enormous thanks;
 - **xcvb**, **RavenAscendant** - Help for so many things it'd be too long to list. Huge thanks to these two;
 - **Starcry_**, **Rascal**, **lauta_ro** - Helped to mitigate a compatibility issue with DirectX 8;
 - **arti** - For making his Barter UI Framework;
-- **arti** - For having updated the barters config files to work with the newer version of his addon.
+- **arti** - For having updated the barters config files to work with the newer version of his framework.
 
 If you are able to help in the following domains, please reach out :
 - Models and animations (To expand the variety of models, and add the missing use animations).

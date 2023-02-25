@@ -309,7 +309,7 @@
 
 	<string id="st_wg_oreo_descr">
 		<text>
-			TODO\n
+			Oreo is a brand of sandwich cookie consisting of two biscuits or cookie pieces with a sweet creme filling. Kids usually put a point to respect the proper way to eat them : Separate the two biscuits, eat the filling by licking it, put the two biscuits back together, dip them in milk, and eat it!\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -328,7 +328,7 @@
 
 	<string id="st_wg_ferrero_rocher_descr">
 		<text>
-			TODO\n
+			Ferrero Rocher is a chocolate a consisting of a whole crunchy hazelnut in the heart, a delicious creamy hazelnut filling, a crisp wafer shell covered with chocolate and gently roasted pieces. They come in a prestigious golden wrapper. They are quite popular in Western Europe, where they are usually sold during celebrations.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -347,7 +347,7 @@
 
 	<string id="st_wg_mon_cheri_descr">
 		<text>
-			TODO\n
+			The Mon Cheri is a single-wrapped chocolate consisting of a "heart" of cherry and liquor, contained in a dark chocolate housing. The liquor is quite concentrated, so it is recommended to not eat too many of them at once. They come in boxes of 30 pieces.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -366,7 +366,7 @@
 
 	<string id="st_wg_toblerone_descr">
 		<text>
-			TODO\n
+			Toblerone is a Swiss chocolate bar made with honey and almond nougat. Toblerone is very easily recognizable thanks to its unique looking packaging. People in the Zone often make jokes about how "if you eat it, the Zone will force you to finish it in one go!". But those are just jokes, a wise stalker would not eat it in one go, as to not have a liver attack.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -385,7 +385,7 @@
 
 	<string id="st_wg_french_mre_descr">
 		<text>
-			Ration de Combat Individuelle Rechauffable (translated to Individual Reheatable Combat Ration) is the MRE used in the French military.\n
+			Ration de Combat Individuelle Rechauffable (translated to Individual Reheatable Combat Ration) is the MRE used in the French military. Over the years, there has been several iteration of it. One in 1995, another one in 1999, and it was revised a final time in 2004. Luckily, this one is the latest iteration, so the contents are at least no older than 14 years old...\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n
@@ -406,7 +406,7 @@
 
 	<string id="st_wg_sandwich_descr">
 		<text>
-			TODO\n
+			A hand-made sandwich. Rather simple: bread, butter, cheese and slices of meat. Holding a Geiger counter against it doesn't seem to pick up radiation, so the ingredients were probably imported. Won't last you long, but it's always better than mutant meat.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] food\n

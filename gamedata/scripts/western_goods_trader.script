@@ -21,6 +21,7 @@ local round_number = western_goods_utils.round_number
 local table_contains = western_goods_utils.table_contains
 local table_random_id = western_goods_utils.table_random_id
 local has_translation = western_goods_utils.has_translation
+local find_object_by_id = western_goods_utils.find_object_by_id
 local get_translation = game.translate_string
 
 --[[----------------------------------------------------------------------------------------------------
@@ -90,8 +91,8 @@ end
 function check_move_item(flags, npc_id, obj, mode, bag)
 	if mode ~= "trade" then return flags.ret_value end
 
-	local npc = npc_id and alife_object(npc_id)
-	local is_western_goods_trader = npc:section_name() == CONST_TRADER_SECTION
+	local npc = npc_id and find_object_by_id(npc_id)
+	local is_western_goods_trader = npc:section() == CONST_TRADER_SECTION
 
 	-- If you are talking to the western goods trader and the item is not tradable, prevent the item from moving
 	flags.ret_value = flags.ret_value and not is_western_goods_trader or is_tradable(npc, obj)
