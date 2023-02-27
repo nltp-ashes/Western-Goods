@@ -1,0 +1,2 @@
+*.ltx linguist-language=INI
+*.script linguist-language=Lua
