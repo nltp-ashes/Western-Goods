@@ -67,7 +67,7 @@ function retrieve_tradable_items()
 	tradable_items = {}
 
 	-- Get the table of all items of the addon from western_goods_core
-	local money_table = western_goods_core.table_items_by_type(western_goods_core.item_table, "money")
+	local money_table = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "money")
 
 	-- Go through the list of items in the addon, and keep only the items of type "money"
 	for key,_ in pairs(money_table) do

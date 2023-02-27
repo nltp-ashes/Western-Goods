@@ -1,11 +1,11 @@
 --[[
 -- Info
--- 
+--
 -- Original Author(s) : NLTP_ASHES
 -- Edited : N/A
 -- Date : 26/12/2022
 -- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
+--
 -- Script used to spawn items in traders and corpses.
 --]]
 
@@ -16,7 +16,7 @@
 VERSION = "2.0.0"
 
 local CONST_BARMAN_TYPE_BUY_LIST = {"food","drink"}
-local CONST_SUPPLIER_TYPE_BUY_LIST = {"food","magazine"}
+local CONST_SUPPLIER_TYPE_BUY_LIST = {"magazine"}
 local CONST_MECHANIC_TYPE_BUY_LIST = {"tech"}
 
 local dbg_printf = western_goods_utils.dbg_printf
@@ -30,28 +30,28 @@ local get_translation = game.translate_string
 
 -- Function used to spawn items in a specific npc with the help of trader_autoinject.script
 function spawn_western_goods_in_trader(npc)
-	
-    local is_supplier = trader_autoinject.get_trader_type(npc) == trader_autoinject.SUPPLIER
-    local is_barman = trader_autoinject.get_trader_type(npc) == trader_autoinject.BARMAN
-    local is_mechanic = trader_autoinject.get_trader_type(npc) == trader_autoinject.MECHANIC
-    
+
+	local is_supplier = trader_autoinject.get_trader_type(npc) == trader_autoinject.SUPPLIER
+	local is_barman = trader_autoinject.get_trader_type(npc) == trader_autoinject.BARMAN
+	local is_mechanic = trader_autoinject.get_trader_type(npc) == trader_autoinject.MECHANIC
+
 	local community = trader_autoinject.get_real_community(npc, "stalker")
-    local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
-	
+	local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
+
 	dbg_printf("[WG] Trader type | is_supplier %s | is_barman %s | is_mechanic %s",is_supplier,is_barman,is_mechanic)
 	dbg_printf("[WG] Trader comm | %s",community)
-	
-	local trader_table = {}
-	
-	if is_barman then
-		trader_table = table_inject_ready(item_table, community, CONST_BARMAN_TYPE_BUY_LIST, supply_level)
-		
-    elseif is_supplier then
-		trader_table = table_inject_ready(item_table, community, CONST_SUPPLIER_TYPE_BUY_LIST, supply_level)
 
-    elseif is_mechanic then
-		trader_table = table_inject_ready(item_table, community, CONST_MECHANIC_TYPE_BUY_LIST, supply_level)
-    end
+	local trader_table = {}
+
+	if is_barman then
+		trader_table = table_inject_ready(western_goods_items, community, CONST_BARMAN_TYPE_BUY_LIST, supply_level)
+
+	elseif is_supplier then
+		trader_table = table_inject_ready(western_goods_items, community, CONST_SUPPLIER_TYPE_BUY_LIST, supply_level)
+
+	elseif is_mechanic then
+		trader_table = table_inject_ready(western_goods_items, community, CONST_MECHANIC_TYPE_BUY_LIST, supply_level)
+	end
 
 	dbg_printf("[WG] Trader table :\n%s", utils_data.print_table(trader_table, false, true))
 
@@ -61,8 +61,8 @@ end
 -- Monkey-patching trader_autoinject.update to inject western goods items in the traders
 TraderAuto = trader_autoinject.update
 function trader_autoinject.update(npc)
-    TraderAuto(npc)
-    spawn_western_goods_in_trader(npc)
+	TraderAuto(npc)
+	spawn_western_goods_in_trader(npc)
 end
 
 -- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
@@ -82,7 +82,7 @@ end
 
 -- Function used to spawn items in a corpse
 function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
-	local items_to_spawn = table_corpse_ready(item_table, npc_comm)
+	local items_to_spawn = table_corpse_ready(western_goods_items, npc_comm)
 	for sec,qte in pairs(items_to_spawn) do
 		alife_create_item(sec, npc, {uses = qte})
 	end
@@ -91,8 +91,8 @@ end
 -- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods
 SpawnCosmetics = death_manager.spawn_cosmetics
 function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
+	SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
+	spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
 end
 
 
@@ -146,7 +146,7 @@ end
 
 function addon_removal()
 	if not western_goods_mcm.get_config("addon_removal") then return end
-	
+
 	local released_objects_count = 0
 
 	for id = 1, 65534 do
@@ -155,23 +155,23 @@ function addon_removal()
 
 		if se then
 
-			for item_id,v in pairs(item_table) do
-			
-				if string.match(se:name(), table_item_field_by_key(item_table,item_id,"section"))
-				or string.match(se:name(), "stalker_western_goods_trader")
-				or string.match(se:name(), "stalker_jupiter_informant")
-				or string.match(se:name(), "stalker_crew_member")
+			for item_id,v in pairs(western_goods_items) do
+
+				if string.match(se:name(), table_item_field_by_key(western_goods_items,item_id,"section"))
+						or string.match(se:name(), "stalker_western_goods_trader")
+						or string.match(se:name(), "stalker_jupiter_informant")
+						or string.match(se:name(), "stalker_crew_member")
 				then
 					alife_release(se)
-					
+
 					released_objects_count = released_objects_count + 1
-					break					
+					break
 				end
 			end
-		end		
-	end	  
+		end
+	end
 
-	news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects_count .. "%c[default] items added by Western Goods from the savegame.", nil, nil, 10000)
+	news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects_count .. "%c[default] items added by Western Goods from the save-game.", nil, nil, 10000)
 end
 
 
@@ -192,30 +192,30 @@ end
 	Utility Functions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to transform item_table into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
+-- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
 function table_inject_ready(tab, comm, types, supply_level)
-    local res = {}
-	
+	local res = {}
+
 	-- Go through each of the addon's items
 	for k,_ in pairs(tab) do
 		local this_section = table_item_field_by_key(tab,k,"section")
 		local this_type = table_item_field_by_key(tab,k,"type")
 		local this_trader_params = table_item_field_by_key(tab,k,"trader_params")[comm]
-		
+
 		-- If there exists trader parameters for the trader's faction
 		if this_trader_params then
-			local this_quantity = table_item_field_by_key(tab,k,"trader_params")[comm][1]
-			local this_supply_level = table_item_field_by_key(tab,k,"trader_params")[comm][2]
-			local this_spawn_rate = table_item_field_by_key(tab,k,"trader_params")[comm][3]
-		
+			local this_quantity = this_trader_params.qte
+			local this_supply_level = this_trader_params.sl
+			local this_spawn_rate = this_trader_params.prob
+
 			-- If we hit the spawn rate
 			if this_type and this_supply_level and math.random() < this_spawn_rate then
 				local correct_type = table_contains(types, this_type)
 				local correct_supply_level = this_supply_level == supply_level
-				
+
 				-- If the trader sells this kind of item and the player meets the required supply level
 				if correct_type and correct_supply_level then
-				
+
 					-- Add the item to the trader
 					res[this_section] = this_quantity
 				end
@@ -225,35 +225,34 @@ function table_inject_ready(tab, comm, types, supply_level)
 	return res
 end
 
--- Function used to transform item_table into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
+-- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
 function table_corpse_ready(tab, npc_comm)
-    local res = {}
-	
+	local res = {}
+
 	-- For a user-defined number of tries
-	for i = 1, western_goods_mcm.get_config("max_item_per_corpse") do 
-	
+	for i = 1, western_goods_mcm.get_config("max_item_per_corpse") do
+
 		-- Pick a random item from the table of all items from the addon
 		local picked_item = table_random_id(tab)
 		local this_section = table_item_field_by_key(tab,picked_item,"section")
 		local this_corpse_params = table_item_field_by_key(tab,picked_item,"corpse_params")[npc_comm]
-		
-		dbg_printf("[WG] Potential item for corpse loot (%s of %s) | sec: %s | prob: %s", i, western_goods_mcm.get_config("max_item_per_corpse"), this_section, this_corpse_params)
-		
-		-- If we hit the drop rate
-		if this_corpse_params and math.random() < this_corpse_params then
-			local is_multi_use = table_item_field_by_key(tab,picked_item,"multi_use")[1] or false
-			local multi_use_count = is_multi_use and table_item_field_by_key(tab,picked_item,"multi_use")[2] or 1
-			
-			dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, multi_use_count)
-			
-			-- Spawn the item in the corpse
-			res[this_section] = multi_use_count
+
+		if this_corpse_params then
+			dbg_printf("[WG] Potential item for corpse loot (%s of %s) | sec: %s | prob: %s", i, western_goods_mcm.get_config("max_item_per_corpse"), this_section, this_corpse_params.prob)
+
+			-- If we hit the drop rate
+			if math.random() < this_corpse_params.prob then
+				dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, this_corpse_params.qte)
+
+				-- Spawn the item in the corpse
+				res[this_section] = this_corpse_params.qte
+			end
 		end
 	end
 	return res
 end
 
--- Function used to retrieve a certain field of item_table. Allows for a bit more flexibility on the table's structure.
+-- Function used to retrieve a certain field of western_goods_items. Allows for a bit more flexibility on the table's structure.
 function table_item_field_by_key(tab, item_id, key)
 	return tab[item_id][key]
 end
@@ -271,412 +270,878 @@ function table_items_by_type(tab, type)
 	return res
 end
 
+
 --[[----------------------------------------------------------------------------------------------------
-	Items pool
+	ITEMS POOL
+
 
 	Example :
-
 	{
 		["section"] = "<section>",
 		["type"] = "<type>",
-		["multi_use"] = { <is_multi_use>, <multi_use_value> },
-		["trader_params"] = { ["<faction>"] = { <quantity>, <supply_level>, <spawn_rate> }, ["<faction>"] = { <quantity>, <supply_level>, <spawn_rate> } },
-		["corpse_params"] = { ["<faction>"] = <drop_rate>, ["<faction>"] = <drop_rate>,},
+		["trader_params"] = {
+			["<faction>"] = { qte=<quantity>, sl=<supply_level>, prob=<probability> },
+			["<faction>"] = { qte=<quantity>, sl=<supply_level>, prob=<probability> }
+		},
+		["corpse_params"] = {
+			["<faction>"] = { qte=<quantity>, prob=<probability> },
+			["<faction>"] = { qte=<quantity>, prob=<probability> }
+		},
 	},
+
 
 	Legend :
 
-	- <section> : Name of the section to spawn in traders/corpses.
-	- <type> : Type of the item. Give it a value between : "food", "drink", "magazine", "tech", "money". If you add a new one, don't forget to modify function spawn_western_goods_in_trader() to spawn the new type of item.
-	- <is_multi_use> : Set it to true or false according to what you've defined in the section definition of the item.
-	- <multi_use_value> : If the item is multi-use, how many uses should spawn in corpses. Give it a value between 1 and the maximum number of uses defined in the section definition.
-	- <faction> : Faction of the game : "stalker", "bandit", "csky", "dolg", "freedom", "killer", "army", "ecolog", "monolith", "renegade", "greh", "isg" or "trader".
-	- <quantity> : Quantity of the item to spawn in traders. Give it any positive value.
-	- <supply_level> : Required supply level to access the item in traders. Give it a value between 1 and 5.
-	- <spawn_rate> : Spawn rate in traders. Give it a value from 0.0 to 1.0.
-	- <drop_rate> : Drop rate in corpses. Give it a value from 0.0 to 1.0.
+	- <section> : 		Name of the section to spawn in traders/corpses.
 
-	Note : If you want an item to spawn for a given faction trader, there must be all three values for that faction : trader_quantity, trader_supply_level and trader_prob. If one is missing, it either won't work or it'll CTD.
+	- <type> : 			Type of the item. If you add a new one, don't forget to modify function spawn_western_goods_in_trader() to spawn the new type of item.
+						Range: "food", "drink", "magazine", "tech", "money".
+
+	- <faction> : 		Faction allowed to spawn the item in trader/corpse.
+						Range: "stalker", "bandit", "csky", "dolg", "freedom", "killer", "army", "ecolog", "monolith", "renegade", "greh", "isg" or "trader".
+
+	- <quantity> : 		Quantity of the item to spawn in traders.
+						Range: any positive integer value.
+
+	- <supply_level> : 	Required supply level to access the item in traders.
+						Range: an integer value between 1 and 5.
+
+	- <probability> : 	Spawn rate in traders/corpses.
+						Range: a value from 0.0 to 1.0.
+
+
+	Note :
+
+	If you want an item to spawn for a given faction trader, there must be all three values for that faction : qte, sl and prob.
+	If one is missing, it most likely won't work or it'll crash to desktop.
 
 ------------------------------------------------------------------------------------------------------]]
 
-item_table = {
+western_goods_items = {
 	{
 		["section"] = "wg_twix",
 		["type"] = "food",
-		["multi_use"] = { true, 2 },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.9 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=2, prob=0.05 },
+			["freedom"] 	= { qte=2, prob=0.10 },
+			["killer"] 		= { qte=2, prob=0.15 },
+			["monolith"] 	= { qte=2, prob=0.10 },
+			["renegade"] 	= { qte=2, prob=0.05 },
+			["isg"] 		= { qte=2, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_mars",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.9 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"]	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.10 },
+			["killer"] 		= { qte=1, prob=0.15 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_milkyway",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.9 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.10 },
+			["killer"] 		= { qte=1, prob=0.15 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_snickers",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["bandit"] = { 1, 1, 0.8 }, ["freedom"] = { 1, 1, 0.9}, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["renegade"] = { 1, 2, 0.7}, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["bandit"] 		= { qte=1, sl=1, prob=0.8 },
+			["freedom"] 	= { qte=1, sl=1, prob=0.9},
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["renegade"] 	= { qte=1, sl=2, prob=0.7},
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.10 },
+			["killer"] 		= { qte=1, prob=0.15 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_mnms",
 		["type"] = "food",
-		["multi_use"] = { true, 5 },
-		["trader_params"] = { ["freedom"] = { 1, 2, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=5, prob=0.05 },
+			["freedom"] 	= { qte=5, prob=0.10 },
+			["killer"] 		= { qte=5, prob=0.15 },
+			["monolith"] 	= { qte=5, prob=0.10 },
+			["renegade"] 	= { qte=5, prob=0.05 },
+			["isg"] 		= { qte=5, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_mentos",
 		["type"] = "food",
-		["multi_use"] = { true, 3 },
-		["trader_params"] = { ["freedom"] = { 1, 2, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=3, prob=0.05 },
+			["freedom"] 	= { qte=3, prob=0.10 },
+			["killer"] 		= { qte=3, prob=0.15 },
+			["monolith"] 	= { qte=3, prob=0.10 },
+			["renegade"] 	= { qte=3, prob=0.05 },
+			["isg"] 		= { qte=3, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_bounty",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.9 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.10 },
+			["killer"] 		= { qte=1, prob=0.15 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"]			= { qte=1, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_kinder_maxi",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.10 },
+			["killer"] 		= { qte=1, prob=0.15 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_kinder_bueno",
 		["type"] = "food",
-		["multi_use"] = { true, 2 },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.10, ["killer"] = 0.15, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=2, prob=0.05 },
+			["freedom"] 	= { qte=2, prob=0.10 },
+			["killer"] 		= { qte=2, prob=0.15 },
+			["monolith"]	= { qte=2, prob=0.10 },
+			["renegade"] 	= { qte=2, prob=0.05 },
+			["isg"] 		= { qte=2, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_kitkat",
 		["type"] = "food",
-		["multi_use"] = { true, 4 },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=4, prob=0.02 },
+			["freedom"] 	= { qte=4, prob=0.05 },
+			["killer"] 		= { qte=4, prob=0.10 },
+			["monolith"] 	= { qte=4, prob=0.10 },
+			["renegade"] 	= { qte=4, prob=0.02 },
+			["isg"] 		= { qte=4, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_milka",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_lays",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["renegade"] = { 1, 2, 0.6 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.9 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["renegade"] 	= { qte=1, sl=2, prob=0.6 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_doritos",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["bandit"] = { 1, 2, 0.7 }, ["freedom"] = { 1, 1, 0.9 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["bandit"] 		= { qte=1, sl=2, prob=0.7 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"]	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_pringles",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.8 }, ["killer"] = { 2, 2, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.8 },
+			["killer"] 		= { qte=2, sl=2, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_hamborgir",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.01, ["freedom"] = 0.07, ["killer"] = 0.10, ["monolith"] = 0.0, ["renegade"] = 0.01, ["isg"] = 0.15 },
+		["trader_params"] = {
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.01 },
+			["freedom"] 	= { qte=1, prob=0.07 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.0 },
+			["renegade"] 	= { qte=1, prob=0.01 },
+			["isg"] 		= { qte=1, prob=0.15 }
+		},
 	},
 	{
 		["section"] = "wg_gorbatschow_bottle",
 		["type"] = "drink",
-		["multi_use"] = { true, 2 },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.8 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["renegade"] = { 1, 1, 0.6 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.15, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.10, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.8 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["renegade"] 	= { qte=1, sl=1, prob=0.6 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=2, prob=0.15 },
+			["freedom"] 	= { qte=2, prob=0.05 },
+			["killer"] 		= { qte=2, prob=0.10 },
+			["monolith"] 	= { qte=2, prob=0.10 },
+			["renegade"] 	= { qte=2, prob=0.10 },
+			["isg"] 		= { qte=2, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_cola_bottle",
 		["type"] = "drink",
-		["multi_use"] = { true, 3 },
-		["trader_params"] = { ["killer"] = { 2, 2, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=3, prob=0.02 },
+			["freedom"] 	= { qte=3, prob=0.05 },
+			["killer"] 		= { qte=3, prob=0.10 },
+			["monolith"] 	= { qte=3, prob=0.05 },
+			["renegade"] 	= { qte=3, prob=0.02 },
+			["isg"] 		= { qte=3, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_cola_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 2, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"]	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_sprite_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_redbull_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 2, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"]	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_perrier_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_rockstar_energy_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_monster_energy_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_wine_chateau_latour",
 		["type"] = "drink",
-		["multi_use"] = { true, 1 },
-		["trader_params"] = { ["killer"] = { 1, 2, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_yoohoo_bottle",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_nestea_icetea_bottle",
 		["type"] = "drink",
-		["multi_use"] = { true, 2 },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=2, prob=0.02 },
+			["freedom"] 	= { qte=2, prob=0.05 },
+			["killer"] 		= { qte=2, prob=0.10 },
+			["monolith"] 	= { qte=2, prob=0.05 },
+			["renegade"] 	= { qte=2, prob=0.02 },
+			["isg"] 		= { qte=2, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_mountain_dew_bottle",
 		["type"] = "drink",
-		["multi_use"] = { true, 2 },
-		["trader_params"] = { ["killer"] = { 2, 3, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=3, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=2, prob=0.02 },
+			["freedom"] 	= { qte=2, prob=0.05 },
+			["killer"] 		= { qte=2, prob=0.10 },
+			["monolith"] 	= { qte=2, prob=0.05 },
+			["renegade"] 	= { qte=2, prob=0.02 },
+			["isg"] 		= { qte=2, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_beer_86_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["bandit"] = { 1, 2, 0.8 }, ["freedom"] = { 1, 1, 0.8 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["bandit"] 		= { qte=1, sl=2, prob=0.8 },
+			["freedom"] 	= { qte=1, sl=1, prob=0.8 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"]	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_mountain_dew_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 2, 1.0 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=2, prob=1.0 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_fanta_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_pepsi_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_sevenup_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.8 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.8 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_dr_bob_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["freedom"] = { 1, 1, 0.8 }, ["killer"] = { 2, 1, 1.0 }, ["monolith"] = { 1, 1, 0.9 }, ["isg"] = { 3, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.10, ["renegade"] = 0.05, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["freedom"] 	= { qte=1, sl=1, prob=0.8 },
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["monolith"] 	= { qte=1, sl=1, prob=0.9 },
+			["isg"] 		= { qte=3, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.10 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_lipton_icetea_can",
 		["type"] = "drink",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 1, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.02, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.02, ["isg"] = 0.10 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.02 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.02 },
+			["isg"] 		= { qte=1, prob=0.10 }
+		},
 	},
 	{
 		["section"] = "wg_laptop",
 		["type"] = "tech",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 3, 1.0 }, ["isg"] = { 1, 1, 1.0 } },
-		["corpse_params"] = { ["killer"] = 0.02 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=3, prob=1.0 },
+			["isg"] 		= { qte=1, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["killer"] 		= { qte=1, prob=0.02 }
+		},
 	},
 	{
 		["section"] = "wg_military_radio",
 		["type"] = "tech",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 1, 1.0 }, ["isg"] = { 1, 1, 1.0 } },
-		["corpse_params"] = { ["killer"] = 0.05, ["isg"] = 0.05 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=1, prob=1.0 },
+			["isg"] 		= { qte=1, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["killer"] 		= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.05 }
+		},
 	},
 	{
 		["section"] = "wg_gps",
 		["type"] = "tech",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 2, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["killer"] = 0.10, ["isg"] = 0.20 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=1, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["killer"] 		= { qte=1, prob=0.10 },
+			["isg"] 		= { qte=1, prob=0.20 }
+		},
 	},
 	{
 		["section"] = "wg_porn_mag_1",
 		["type"] = "magazine",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.01, ["freedom"] = 0.02, ["killer"] = 0.03, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.01 },
+			["freedom"] 	= { qte=1, prob=0.02 },
+			["killer"] 		= { qte=1, prob=0.03 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_porn_mag_2",
 		["type"] = "magazine",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 3, 0.75 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.02, ["renegade"] = 0.05, ["isg"] = 0.05 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=3, prob=0.75 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.02 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.05 }
+		},
 	},
 	{
 		["section"] = "wg_porn_mag_3",
 		["type"] = "magazine",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 2, 0.75 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.02, ["renegade"] = 0.05, ["isg"] = 0.05 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=2, prob=0.75 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.02 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.05 }
+		},
 	},
 	{
 		["section"] = "wg_xbox_mag_1",
 		["type"] = "magazine",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 1, 0.85 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.05, ["isg"] = 0.05 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=1, prob=0.85 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.05 }
+		},
 	},
 	{
 		["section"] = "wg_xbox_mag_2",
 		["type"] = "magazine",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 2, 0.85 } },
-		["corpse_params"] = { ["bandit"] = 0.05, ["freedom"] = 0.05, ["killer"] = 0.10, ["monolith"] = 0.05, ["renegade"] = 0.05, ["isg"] = 0.05 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=2, prob=0.85 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.05 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["killer"] 		= { qte=1, prob=0.10 },
+			["monolith"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.05 }
+		},
 	},
 	{
 		["section"] = "wg_dollars_10",
 		["type"] = "money",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.10, ["freedom"] = 0.60, ["killer"] = 0.80, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.10 },
+			["freedom"] 	= { qte=1, prob=0.60 },
+			["killer"] 		= { qte=1, prob=0.80 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_dollars_50",
 		["type"] = "money",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.07, ["freedom"] = 0.50, ["killer"] = 0.70, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.07 },
+			["freedom"] 	= { qte=1, prob=0.50 },
+			["killer"] 		= { qte=1, prob=0.70 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_dollars_100",
 		["type"] = "money",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.40 },
+			["killer"] 		= { qte=1, prob=0.60 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_euros_10",
 		["type"] = "money",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.10, ["freedom"] = 0.60, ["killer"] = 0.80, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.10 },
+			["freedom"] 	= { qte=1, prob=0.60 },
+			["killer"] 		= { qte=1, prob=0.80 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_euros_50",
 		["type"] = "money",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.07, ["freedom"] = 0.50, ["killer"] = 0.70, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.07 },
+			["freedom"] 	= { qte=1, prob=0.50 },
+			["killer"] 		= { qte=1, prob=0.70 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_euros_100",
 		["type"] = "money",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.40 },
+			["killer"] 		= { qte=1, prob=0.60 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_french_mre",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 3, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["killer"] = 0.01, ["isg"] = 0.01 },
+		["trader_params"] = {
+			["killer"]		= { qte=1, sl=3, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["killer"] 		= { qte=1, prob=0.01 },
+			["isg"] 		= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_sandwich",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { },
-		["corpse_params"] = { },
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+		},
 	},
 	{
 		["section"] = "wg_oreo",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 2, 2, 1.0 }, ["isg"] = { 2, 1, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+			["killer"] 		= { qte=2, sl=2, prob=1.0 },
+			["isg"] 		= { qte=2, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.40 },
+			["killer"] 		= { qte=1, prob=0.60 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_ferrero_rocher",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 1, 0.5 } },
-		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=1, prob=0.5 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.40 },
+			["killer"] 		= { qte=1, prob=0.60 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_mon_cheri",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 2, 0.9 } },
-		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+			["killer"] 		= { qte=1, sl=2, prob=0.9 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.40 },
+			["killer"] 		= { qte=1, prob=0.60 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 	{
 		["section"] = "wg_toblerone",
 		["type"] = "food",
-		["multi_use"] = { false },
-		["trader_params"] = { ["killer"] = { 1, 2, 1.0 }, ["isg"] = { 1, 1, 1.0 }, ["stalker"] = { 1, 3, 1.0 } },
-		["corpse_params"] = { ["bandit"] = 0.04, ["freedom"] = 0.40, ["killer"] = 0.60, ["monolith"] = 0.01, ["renegade"] = 0.01 },
+		["trader_params"] = {
+			["isg"] 		= { qte=1, sl=1, prob=1.0 },
+			["stalker"] 	= { qte=1, sl=3, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.40 },
+			["killer"] 		= { qte=1, prob=0.60 },
+			["monolith"] 	= { qte=1, prob=0.01 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
 	},
 }

@@ -59,7 +59,7 @@ function use_item(obj)
     end
 
     -- Magazines
-    local magazines = western_goods_core.table_items_by_type(western_goods_core.item_table, "magazine")
+    local magazines = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "magazine")
     for item_id,_ in pairs(magazines) do
         if western_goods_core.table_item_field_by_key(magazines, item_id, "section") == obj:section() then
             dbg_printf("[WG] Used %s",obj:section())
