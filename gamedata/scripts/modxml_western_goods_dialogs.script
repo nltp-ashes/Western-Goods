@@ -57,6 +57,7 @@ function on_xml_read()
 			</phrase>
 			<phrase id="6"> <!-- actor -->
                 <text>western_goods_trader_meet_6</text>
+                <action>western_goods_trader.unlock_encyclopedia_wg_trader</action>
 				<give_info>western_goods_trader_first_meet_over</give_info>
 			</phrase>
         </phrase_list>
@@ -116,11 +117,11 @@ function on_xml_read()
 				<next>3</next>
 			</phrase>
 			<phrase id="2"> <!-- actor -->
-				<text>western_goods_trader_guide_2</text>
+				<text>western_goods_trader_guide_3</text>
 				<action>dialogs_mlr.wg_trader_guide_to_limansk</action>
 			</phrase>
 			<phrase id="3"> <!-- actor -->
-				<text>western_goods_trader_guide_3</text>
+				<text>western_goods_trader_guide_2</text>
 			</phrase>
 		</phrase_list>
 	</dialog>

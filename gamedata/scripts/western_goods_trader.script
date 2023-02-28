@@ -25,7 +25,7 @@ local heli_spawn = western_goods_helicopter.heli_spawn
 local heli_register = western_goods_helicopter.heli_register
 
 --[[----------------------------------------------------------------------------------------------------
-	Spawning the trader
+	Spawning function
 ------------------------------------------------------------------------------------------------------]]
 
 -- Function used to spawn the trader on the map.
@@ -57,6 +57,16 @@ function spawn_western_goods_trader()
 			end
 		end
 	end)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Encyclopedia entry
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to unlock the encyclopedia entry for the western goods trader.
+function unlock_encyclopedia_wg_trader()
+	ui_pda_encyclopedia_tab.unlock_article("encyclopedia_characters_western_goods_ashes")
 end
 
 

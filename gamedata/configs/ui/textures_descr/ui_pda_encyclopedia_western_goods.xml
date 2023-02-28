@@ -1,0 +1,8 @@
+<w>
+	<!-- Western Goods images for PDA encyclopedia -->
+	<file name="ui\guide\encyclopedia_western_goods">
+	    <texture id="encyclopedia_characters_western_goods_ashes_image" x="0" y="0" width="512" height="256"/>
+		<texture id="encyclopedia_items_western_goods_gps_image" x="512" y="0" width="512" height="256"/>
+    </file>
+
+</w>

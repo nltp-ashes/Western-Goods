@@ -11,9 +11,7 @@
 
 function on_xml_read()
 	RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-		if xml_file_name == [[ui\ui_barter.xml]]
-		then
-			-- Find string element with "id=ui_st_game_version" text inside it
+		if xml_file_name == [[ui\ui_barter.xml]] then
 			local query_1_res = xml_obj:query("background[] > texture")
 			if query_1_res[1] then
 				el = query_1_res[1]

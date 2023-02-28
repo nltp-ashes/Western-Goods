@@ -84,10 +84,12 @@ end
 	GPS Locator
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to run the gps device
+-- Function used to run the gps device.
 function use_gps(obj)
 	utils_xml.hide_menu()
-	
+
+    ui_pda_encyclopedia_tab.unlock_article("encyclopedia_items_western_goods_gps")
+
 	-- Get the name and distance to the closest smart terrain, as well as the level's name
     local closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_game_world()
 
@@ -100,6 +102,7 @@ function use_gps(obj)
 	actor_menu.set_msg(1, build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level), 7)
 end
 
+-- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the game world.
 function find_info_from_game_world()
 
 	local smart = alife_object(smart_terrain.nearest_to_actor_smart.id)
@@ -113,6 +116,7 @@ function find_info_from_game_world()
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
 
+-- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the pda map.
 function find_info_from_pda()
 
 	local closest_smart_name, closest_smart_distance, closest_smart_level
@@ -138,6 +142,7 @@ function find_info_from_pda()
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
 
+-- Function used to build the message the message displayed on screen when using the GPS device.
 function build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level)
 	-- Build the message to print on-screen
 	local message
