@@ -101,6 +101,29 @@ function on_xml_read()
 			</phrase>
 		</phrase_list>
     </dialog>
+
+    <dialog id="western_goods_trader_guide">
+		<has_info>western_goods_trader_first_meet_over</has_info>
+		<has_info>western_goods_act_1_finished</has_info>
+	    <phrase_list>
+			<phrase id="0"> <!-- actor -->
+				<text>western_goods_trader_guide_0</text>
+				<next>1</next>
+			</phrase>
+			<phrase id="1"> <!-- npc -->
+				<text>western_goods_trader_guide_1</text>
+				<next>2</next>
+				<next>3</next>
+			</phrase>
+			<phrase id="2"> <!-- actor -->
+				<text>western_goods_trader_guide_2</text>
+				<action>dialogs_mlr.wg_trader_guide_to_limansk</action>
+			</phrase>
+			<phrase id="3"> <!-- actor -->
+				<text>western_goods_trader_guide_3</text>
+			</phrase>
+		</phrase_list>
+	</dialog>
 	
 	<dialog id="western_goods_trader_task">
 		<has_info>western_goods_trader_first_meet_over</has_info>

@@ -13,7 +13,7 @@
 		<text>Williams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece. He was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.</text>
 	</string>
 	
-	<!-- Exchange line of dialog -->
+	<!-- Exchange line of dialog-->
 	<string id="western_goods_trader_dialog_init">
 		<text>I'd like to exchange some currency. %c[d_orange][Exchange]</text>
 	</string>
@@ -47,6 +47,25 @@
 		<text>Alright.</text>
 	</string>
 
+	<!-- Guide dialog -->
+	<string id="western_goods_trader_guide_0">
+		<text>Could one of your helicopters drop me somewhere?</text>
+	</string>
+
+	<string id="western_goods_trader_guide_1">
+		<text>Sure, that's the least I can do for you! Where would you like to go?</text>
+	</string>
+
+	<string id="western_goods_trader_guide_2">
+		<text>Limansk, south of the construction site. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_3">
+		<text>Actually, never-mind.</text>
+	</string>
+
+<!-- Western Goods Trader Trade strings -->
+
 	<string id="western_goods_trader_empty_sell">
 		<text>You need to pay for the selected items (with Euros or Dollars).</text>
 	</string>
@@ -59,7 +78,7 @@
 		<text>You need to give, in cash, an equal or great value to what you're buying.</text>
 	</string>
 	
-<!-- Western Goods Trader Barters -->
+<!-- Western Goods Trader Barters strings -->
 
 	<!-- No more money barters available -->
 	<string id="st_wg_barter_money_desc_done"> 

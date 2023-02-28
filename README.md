@@ -1,4 +1,4 @@
-# Western Goods ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC5-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# Western Goods ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC6-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -32,7 +32,7 @@ To **install** the addon :
 To **uninstall** the addon :
 1. Start your game and open the MCM settings;
 2. Enable the "Addon removal" option;
-3. Load your savegame. Once loaded, save again;
+3. Load your save-game. Once loaded, save again;
 4. Close your game, and remove the files added by the addon.
 
 ---
@@ -46,6 +46,7 @@ To **uninstall** the addon :
 > • Added a new magazine : Gameland magazine (November 1999);
 > • Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich;
 > • Added psy-health regen when reading magazines (configurable in MCM);
+> • Added the ability for the western goods trader to guide the player to certain locations after finishing act 1;
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);
 > • Added an option to have more guided tasks (for people that don't like thinking)(enable/disable in MCM);
 > • Added a CTD when trader_autoinject.script is outdated;
@@ -56,6 +57,7 @@ To **uninstall** the addon :
 > • Fixed incorrect calories for the Yoo-hoo chocolate drink (Thanks Servalion);
 > • Changed the corpse loot generation logic : you can now get multiple items per corpse (upto five by default, configurable in MCM);
 > • Changed the GPS locator logic : it now has a slightly higher chance of finding the name of your location;
+> • Changed the trading logic with the western goods trader : now you actually have to pay with Euros/Dollars;
 > • Externalized all the changes made to BarterUI. Western Goods won't redistribute the framework anymore.
 > ```
 

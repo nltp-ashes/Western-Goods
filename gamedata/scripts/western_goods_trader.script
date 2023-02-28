@@ -1,12 +1,13 @@
 --[[
 -- Info
 -- 
--- Original Author(s) : NLTP_ASHES and Lauta_ro 
+-- Original Author(s) : NLTP_ASHES
 -- Edited : N/A
 -- Date : 26/12/2022
 -- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 -- 
 -- Script used to spawn the western goods trader and to manage specific aspects of him.
+-- The code used to spawned the trader was edited but originally written by lauta_ro.
 --]]
 
 --[[----------------------------------------------------------------------------------------------------
@@ -20,6 +21,8 @@ local dbg_printf = western_goods_utils.dbg_printf
 local table_contains = western_goods_utils.table_contains
 local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
+local heli_spawn = western_goods_helicopter.heli_spawn
+local heli_register = western_goods_helicopter.heli_register
 
 --[[----------------------------------------------------------------------------------------------------
 	Spawning the trader
@@ -56,27 +59,10 @@ function spawn_western_goods_trader()
 	end)
 end
 
+
 --[[----------------------------------------------------------------------------------------------------
-	Specific actions/restrictions
+	Trading actions/restrictions
 ------------------------------------------------------------------------------------------------------]]
-
--- Function used to retrieve the list of tradable items (items of type "money") with the western goods trader.
-local tradable_items = {}
-function retrieve_tradable_items()
-	-- Clear the cached list of tradable items
-	tradable_items = {}
-
-	-- Get the table of all items of the addon from western_goods_core
-	local money_table = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "money")
-
-	-- Go through the list of items in the addon, and keep only the items of type "money"
-	for key,_ in pairs(money_table) do
-		dbg_printf("[WG] Item %s marked as tradable with western goods trader", western_goods_core.table_item_field_by_key(money_table, key, "section"))
-		table.insert(tradable_items, western_goods_core.table_item_field_by_key(money_table, key, "section"))
-	end
-	
-	dbg_printf("[WG] Assembled trade table :\n%s", utils_data.print_table(tradable_items, false, true))
-end
 
 -- Function used to allow/disallow the player from moving items from one container to another when trading with the western goods trader.
 function check_move_item(flags, npc_id, obj, mode, bag)
@@ -108,26 +94,7 @@ function tint_functor(cell)
 	return GetARGB(240, 250, 0, 0)
 end
 
--- Function used to initiate the Barter UI.
-function npc_barter()
-	utils_obj.play_sound("interface\\inv_open")
-	barter_ui.start()
-end
-
--- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
-GUI_on_showBase = barter_ui.GUI_on_show
-function barter_ui.GUI_on_show(name, path)
-	local ui_instance = ui_inventory.GUI
-	if name ~= "UIInventory" or (not ui_instance) then return end
-
-	local partner = ui_instance:GetPartner()
-
-	if partner and partner:section() == CONST_TRADER_SECTION then return end
-	
-	GUI_on_showBase(name, path)
-end
-
--- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader
+-- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader.
 TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
 function ui_inventory.UIInventory.TMode_Sell(self)
 	-- If we aren't talking to the western goods trader, process normally
@@ -140,7 +107,7 @@ function ui_inventory.UIInventory.TMode_Sell(self)
 	make_exchange(self, npc)
 end
 
--- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader
+-- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader.
 TMode_BuyBase = ui_inventory.UIInventory.TMode_Buy
 function ui_inventory.UIInventory.TMode_Buy(self)
 	-- If we aren't talking to the western goods trader, process normally
@@ -153,7 +120,7 @@ function ui_inventory.UIInventory.TMode_Buy(self)
 	make_exchange(self, npc)
 end
 
-
+-- Function called when the player clicks Sell/Buy in the trade UI. This function makes a few checks, and then proceeds to exchange the money for the items selected.
 function make_exchange(self, npc)
 	-- Get sell cells
 	local cc_sell = self.CC["actor_trade"]
@@ -217,6 +184,67 @@ function make_exchange(self, npc)
 	self.update_info = true
 end
 
+
+--[[----------------------------------------------------------------------------------------------------
+	Barter actions/restrictions
+------------------------------------------------------------------------------------------------------]]
+
+-- Function used to initiate the Barter UI.
+function npc_barter()
+	utils_obj.play_sound("interface\\inv_open")
+	barter_ui.start()
+end
+
+-- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
+GUI_on_showBase = barter_ui.GUI_on_show
+function barter_ui.GUI_on_show(name, path)
+	local ui_instance = ui_inventory.GUI
+	if name ~= "UIInventory" or (not ui_instance) then return end
+
+	local partner = ui_instance:GetPartner()
+
+	if partner and partner:section() == CONST_TRADER_SECTION then return end
+
+	GUI_on_showBase(name, path)
+end
+
+
+--[[----------------------------------------------------------------------------------------------------
+	Helicopter transport order
+------------------------------------------------------------------------------------------------------]]
+
+function go_to_level(level_name)
+
+	give_info("spawn_guide_helicopter")
+
+	local dest_info = western_goods_trade_guide_table[level_name]
+	local spawn_pos = vector():set(dest_info.sx, dest_info.sy, dest_info.sz)
+	local look_pos = vector():set(dest_info.lx, dest_info.ly, 0)
+	ChangeLevel(spawn_pos, dest_info.lvid, dest_info.gvid, look_pos, true)
+end
+
+function spawn_guide_helicopter()
+	if has_alife_info("spawn_guide_helicopter") then
+
+		disable_info("spawn_guide_helicopter")
+
+		local sec = "western_goods_helicopter"
+		local pos = db.actor:position()
+		pos.y = pos.y + 20
+		local lvid = db.actor:level_vertex_id()
+		local gvid = db.actor:game_vertex_id()
+		local helicopter_se = heli_spawn(sec,pos,lvid,gvid)
+
+		CreateTimeEvent("delay_order_heli",helicopter_se.id,0,function()
+			if find_object_by_id(helicopter_se.id) then
+				heli_register(helicopter_se.id,"leave_at_point",level.get_bounding_volume().max)
+				return true
+			end
+		end)
+	end
+end
+
+
 --[[----------------------------------------------------------------------------------------------------
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
@@ -225,13 +253,33 @@ end
 function on_game_start()
 	RegisterScriptCallback("actor_on_first_update", spawn_western_goods_trader)
 	RegisterScriptCallback("actor_on_first_update", retrieve_tradable_items)
+	RegisterScriptCallback("actor_on_first_update", spawn_guide_helicopter)
 	RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
 	rax_icon_tint.register("wg_tint_functor", tint_functor)
 end
 
+
 --[[----------------------------------------------------------------------------------------------------
 	Utility functions
 ------------------------------------------------------------------------------------------------------]]
+
+-- Function used to retrieve the list of tradable items (items of type "money") with the western goods trader.
+local tradable_items = {}
+function retrieve_tradable_items()
+	-- Clear the cached list of tradable items
+	tradable_items = {}
+
+	-- Get the table of all items of the addon from western_goods_core
+	local money_table = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "money")
+
+	-- Go through the list of items in the addon, and keep only the items of type "money"
+	for key,_ in pairs(money_table) do
+		dbg_printf("[WG] Item %s marked as tradable with western goods trader", western_goods_core.table_item_field_by_key(money_table, key, "section"))
+		table.insert(tradable_items, western_goods_core.table_item_field_by_key(money_table, key, "section"))
+	end
+
+	dbg_printf("[WG] Assembled trade table :\n%s", utils_data.print_table(tradable_items, false, true))
+end
 
 -- Function used to know if an object is tradable with the western goods trader.
 function is_tradable(npc, obj)
@@ -241,4 +289,16 @@ function is_tradable(npc, obj)
 
 	-- An item isn't tradable if it is in the player's and isn't present in the tradable_items table
 	return is_in_npc_inv or (is_tradable_item and is_in_actor_inv)
+end
+
+--[[----------------------------------------------------------------------------------------------------
+	Guide table
+------------------------------------------------------------------------------------------------------]]
+
+western_goods_trade_guide_table = {
+	limansk      = {sx=-72.8004, sy=-6.9772, sz=57.4624, lx=0.0, ly=-1.5, lvid=67, gvid=2455},
+}
+
+function dialogs_mlr.wg_trader_guide_to_limansk(actor,npc,p)
+	go_to_level("limansk")
 end
