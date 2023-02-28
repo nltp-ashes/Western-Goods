@@ -1144,4 +1144,42 @@ western_goods_items = {
 			["renegade"] 	= { qte=1, prob=0.01 }
 		},
 	},
+	{
+		["section"] = "wg_strana_igr_mag_1",
+		["type"] = "magazine",
+		["trader_params"] = {
+			["isg"] 		= { qte=1, sl=1, prob=1.0 },
+			["stalker"] 	= { qte=1, sl=3, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
+	},
+	{
+		["section"] = "wg_car_mag_1",
+		["type"] = "magazine",
+		["trader_params"] = {
+			["isg"] 		= { qte=1, sl=1, prob=1.0 },
+			["killer"] 		= { qte=1, sl=3, prob=0.9 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
+	},
+	{
+		["section"] = "wg_car_mag_2",
+		["type"] = "magazine",
+		["trader_params"] = {
+			["isg"] 		= { qte=1, sl=1, prob=1.0 }
+		},
+		["corpse_params"] = {
+			["bandit"] 		= { qte=1, prob=0.04 },
+			["freedom"] 	= { qte=1, prob=0.05 },
+			["renegade"] 	= { qte=1, prob=0.01 }
+		},
+	},
 }

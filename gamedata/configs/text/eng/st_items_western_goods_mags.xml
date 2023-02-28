@@ -111,4 +111,41 @@
 			%c[d_blue] • %c[ui_gray_2] imported\n
 		</text>
 	</string>
+
+	<string id="st_wg_car_mag_1">
+		<text>European Car magazine (August 2015)</text>
+	</string>
+
+	<string id="st_wg_car_mag_1_s">
+		<text>European Car magazine</text>
+	</string>
+
+	<string id="st_wg_car_mag_1_descr">
+		<text>
+			European Car was an American automotive enthusiast magazine published by the Motor Trend Group. The magazine was in circulation between 1978 and 2018. Many mercs came into the Zone with these magazines, to give them distraction on the hard days.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+
+	<string id="st_wg_car_mag_2">
+		<text>EVO magazine (December 2015)</text>
+	</string>
+
+	<string id="st_wg_car_mag_2_s">
+		<text>EVO magazine</text>
+	</string>
+
+	<string id="st_wg_car_mag_2_descr">
+		<text>
+			Evo is a British automobile magazine dedicated to performance cars. These magazines are more and more commonly found in the Zone, most likely because it gives a taste of the outside world to those stuck here.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+		</text>
+	</string>
+
 </string_table>
