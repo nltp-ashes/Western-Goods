@@ -124,32 +124,32 @@ function on_xml_read()
 				<next>10</next>
 			</phrase>
 			<phrase id="2"> <!-- actor -->
-				<text>western_goods_trader_guide_limansk</text>
-				<action>dialogs_mlr.wg_trader_guide_to_limansk</action>
-			</phrase>
-			<phrase id="3"> <!-- actor -->
-				<text>western_goods_trader_guide_swamps</text>
-				<action>dialogs_mlr.wg_trader_guide_to_swamps</action>
-			</phrase>
-			<phrase id="4"> <!-- actor -->
 				<text>western_goods_trader_guide_cordon</text>
 				<action>dialogs_mlr.wg_trader_guide_to_cordon</action>
 			</phrase>
-			<phrase id="5"> <!-- actor -->
+			<phrase id="3"> <!-- actor -->
 				<text>western_goods_trader_guide_darkscape</text>
 				<action>dialogs_mlr.wg_trader_guide_to_darkscape</action>
 			</phrase>
-			<phrase id="6"> <!-- actor -->
+			<phrase id="4"> <!-- actor -->
 				<text>western_goods_trader_guide_deadcity</text>
 				<action>dialogs_mlr.wg_trader_guide_to_deadcity</action>
 			</phrase>
-			<phrase id="7"> <!-- actor -->
-				<text>western_goods_trader_guide_red_forest</text>
-				<action>dialogs_mlr.wg_trader_guide_to_red_forest</action>
+			<phrase id="5"> <!-- actor -->
+				<text>western_goods_trader_guide_swamps</text>
+				<action>dialogs_mlr.wg_trader_guide_to_swamps</action>
 			</phrase>
-			<phrase id="8"> <!-- actor -->
+			<phrase id="6"> <!-- actor -->
 				<text>western_goods_trader_guide_jupiter</text>
 				<action>dialogs_mlr.wg_trader_guide_to_jupiter</action>
+			</phrase>
+			<phrase id="7"> <!-- actor -->
+				<text>western_goods_trader_guide_limansk</text>
+				<action>dialogs_mlr.wg_trader_guide_to_limansk</action>
+			</phrase>
+			<phrase id="8"> <!-- actor -->
+				<text>western_goods_trader_guide_red_forest</text>
+				<action>dialogs_mlr.wg_trader_guide_to_red_forest</action>
 			</phrase>
 			<phrase id="9"> <!-- actor -->
 				<text>western_goods_trader_guide_zaton</text>
