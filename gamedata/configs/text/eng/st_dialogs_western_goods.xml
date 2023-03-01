@@ -48,20 +48,48 @@
 	</string>
 
 	<!-- Guide dialog -->
-	<string id="western_goods_trader_guide_0">
+	<string id="western_goods_trader_guide_ask">
 		<text>Could one of your helicopters drop me somewhere?</text>
 	</string>
 
-	<string id="western_goods_trader_guide_1">
+	<string id="western_goods_trader_guide_dest">
 		<text>Sure, that's the least I can do for you! Where would you like to go?</text>
 	</string>
 
-	<string id="western_goods_trader_guide_2">
+	<string id="western_goods_trader_guide_back">
 		<text>Actually, never-mind.</text>
 	</string>
 
-	<string id="western_goods_trader_guide_3">
+	<string id="western_goods_trader_guide_limansk">
 		<text>Limansk, south of the construction site. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_swamps">
+		<text>Great Swamps, at the observation outpost. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_cordon">
+		<text>Cordon, south-east of the railway bridge. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_darkscape">
+		<text>Darkscape, on the plateau. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_deadcity">
+		<text>Deadcity, at the mercenary base. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_red_forest">
+		<text>Red Forest, next to the Forester's cabin. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_jupiter">
+		<text>Jupiter, south of the construction site. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_zaton">
+		<text>Zaton, near the old barge. %c[d_orange][Free]</text>
 	</string>
 
 <!-- Western Goods Trader Trade strings -->

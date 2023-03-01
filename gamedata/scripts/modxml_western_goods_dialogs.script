@@ -108,20 +108,55 @@ function on_xml_read()
 		<has_info>western_goods_act_1_finished</has_info>
 	    <phrase_list>
 			<phrase id="0"> <!-- actor -->
-				<text>western_goods_trader_guide_0</text>
+				<text>western_goods_trader_guide_ask</text>
 				<next>1</next>
 			</phrase>
 			<phrase id="1"> <!-- npc -->
-				<text>western_goods_trader_guide_1</text>
+				<text>western_goods_trader_guide_dest</text>
 				<next>2</next>
 				<next>3</next>
+				<next>4</next>
+				<next>5</next>
+				<next>6</next>
+				<next>7</next>
+				<next>8</next>
+				<next>9</next>
+				<next>10</next>
 			</phrase>
 			<phrase id="2"> <!-- actor -->
-				<text>western_goods_trader_guide_3</text>
+				<text>western_goods_trader_guide_limansk</text>
 				<action>dialogs_mlr.wg_trader_guide_to_limansk</action>
 			</phrase>
 			<phrase id="3"> <!-- actor -->
-				<text>western_goods_trader_guide_2</text>
+				<text>western_goods_trader_guide_swamps</text>
+				<action>dialogs_mlr.wg_trader_guide_to_swamps</action>
+			</phrase>
+			<phrase id="4"> <!-- actor -->
+				<text>western_goods_trader_guide_cordon</text>
+				<action>dialogs_mlr.wg_trader_guide_to_cordon</action>
+			</phrase>
+			<phrase id="5"> <!-- actor -->
+				<text>western_goods_trader_guide_darkscape</text>
+				<action>dialogs_mlr.wg_trader_guide_to_darkscape</action>
+			</phrase>
+			<phrase id="6"> <!-- actor -->
+				<text>western_goods_trader_guide_deadcity</text>
+				<action>dialogs_mlr.wg_trader_guide_to_deadcity</action>
+			</phrase>
+			<phrase id="7"> <!-- actor -->
+				<text>western_goods_trader_guide_red_forest</text>
+				<action>dialogs_mlr.wg_trader_guide_to_red_forest</action>
+			</phrase>
+			<phrase id="8"> <!-- actor -->
+				<text>western_goods_trader_guide_jupiter</text>
+				<action>dialogs_mlr.wg_trader_guide_to_jupiter</action>
+			</phrase>
+			<phrase id="9"> <!-- actor -->
+				<text>western_goods_trader_guide_zaton</text>
+				<action>dialogs_mlr.wg_trader_guide_to_zaton</action>
+			</phrase>
+			<phrase id="10"> <!-- actor -->
+				<text>western_goods_trader_guide_back</text>
 			</phrase>
 		</phrase_list>
 	</dialog>

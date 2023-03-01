@@ -239,8 +239,7 @@ function spawn_guide_helicopter()
 		disable_info("spawn_guide_helicopter")
 
 		local sec = "western_goods_helicopter"
-		local pos = db.actor:position()
-		pos.y = pos.y + 20
+		local pos = vector():set(db.actor:position().x, db.actor:position().y + 20, db.actor:position().z)
 		local lvid = db.actor:level_vertex_id()
 		local gvid = db.actor:game_vertex_id()
 		local helicopter_se = heli_spawn(sec,pos,lvid,gvid)
@@ -306,9 +305,44 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 western_goods_trade_guide_table = {
-	limansk      = {sx=-72.8004, sy=-6.9772, sz=57.4624, lx=0.0, ly=-1.5, lvid=67, gvid=2455},
+	limansk     = {sx=-72.8004, 	sy=-6.9772, 	sz=57.4624, 	lx=0.0, 	ly=-1.5, 	lvid=67, 		gvid=2455	},
+	swamps      = {sx=-270.8769, 	sy=0.4461, 		sz=1.2947, 		lx=0.0, 	ly=0.0, 	lvid=9620, 		gvid=155	},
+	cordon      = {sx=238.3653, 	sy=15.1026, 	sz=128.2282, 	lx=0.0, 	ly=2.5, 	lvid=550490, 	gvid=412	},
+	darkscape   = {sx=142.2322, 	sy=27.6325, 	sz=-410.7854, 	lx=0.0, 	ly=4.0, 	lvid=540403, 	gvid=1209	},
+	deadcity    = {sx=-35.6632, 	sy=1.2510, 		sz=60.7808, 	lx=0.0, 	ly=4.5, 	lvid=111749, 	gvid=2345	},
+	red_forest	= {sx=42.8533, 		sy=-0.0004, 	sz=-13.7107, 	lx=0.0, 	ly=1.5, 	lvid=86866, 	gvid=2768	},
+	jupiter		= {sx=-185.8170, 	sy=10.3172, 	sz=356.1926, 	lx=0.0, 	ly=1.0, 	lvid=402796, 	gvid=4574	},
+	zaton		= {sx=186.3917, 	sy=4.8224, 		sz=-184.4647, 	lx=0.0, 	ly=0.0, 	lvid=1283928, 	gvid=4215	},
 }
 
 function dialogs_mlr.wg_trader_guide_to_limansk(actor,npc,p)
 	go_to_level("limansk")
+end
+
+function dialogs_mlr.wg_trader_guide_to_swamps(actor,npc,p)
+	go_to_level("swamps")
+end
+
+function dialogs_mlr.wg_trader_guide_to_cordon(actor,npc,p)
+	go_to_level("cordon")
+end
+
+function dialogs_mlr.wg_trader_guide_to_darkscape(actor,npc,p)
+	go_to_level("darkscape")
+end
+
+function dialogs_mlr.wg_trader_guide_to_deadcity(actor,npc,p)
+	go_to_level("deadcity")
+end
+
+function dialogs_mlr.wg_trader_guide_to_red_forest(actor,npc,p)
+	go_to_level("red_forest")
+end
+
+function dialogs_mlr.wg_trader_guide_to_jupiter(actor,npc,p)
+	go_to_level("jupiter")
+end
+
+function dialogs_mlr.wg_trader_guide_to_zaton(actor,npc,p)
+	go_to_level("zaton")
 end
