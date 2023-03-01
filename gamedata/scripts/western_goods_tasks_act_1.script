@@ -31,9 +31,9 @@ local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
 
 -- Task variables
-local act_1_task_2_stage_1_heli_ready_timer = 0
-local act_1_task_2_stage_2_show_targets_timer = 0
-local act_1_task_3_stage_2_show_targets_timer = 0
+act_1_task_2_stage_1_heli_ready_timer = 0
+act_1_task_2_stage_2_show_targets_timer = 0
+act_1_task_3_stage_2_show_targets_timer = 0
 
 --[[----------------------------------------------------------------------------------------------------
 	ACT 1 - HELICOPTER DELIVERY
@@ -666,7 +666,7 @@ function act_1_task_2_stage_1_status_f(tsk,task_id)
 		dbg_printf("[WG] Act 1 Task 2 Stage 1 | Player picked up the items | %s | %s", quest_item_1_id, quest_item_2_id)
 
 		-- If the player is hostile to bandits, progress to stage 2, otherwise, progress to stage 3
-		if game_relations.is_factions_enemies(get_actor_true_community(), "bandit") then
+		if game_relations.is_factions_enemies(get_actor_true_community(), "bandit") and not gameplay_disguise.is_actor_disguised() then
 			tsk.stage = 2
 		else
 			-- Return the helicopter to the processing station
@@ -779,7 +779,6 @@ function act_1_task_2_stage_2_status_f(tsk,task_id)
 		local helicopter_id = load_var(db.actor,"wg_act_1_task_2_stage_1_heli_id")
 		local helicopter_se = helicopter_id and alife_object(helicopter_id)
 		local helicopter_obj = helicopter_se and find_object_by_id(helicopter_se.id)
-		if helicopter_se and not string.find(helicopter_se:section_name(),"western_goods_helicopter") then return "fail" end
 
 		-- Return the helicopter to the processing station (if it's still alive)
 		if helicopter_obj then

@@ -19,6 +19,7 @@ This addon **requires** the following :
 
 This addon **does not require** the following :
 1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (items just won't have animations if you don't have it)
+2. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (you'll need to edit defaults manually in western_goods_mcm.script if you don't have it)
 
 ---
 
@@ -47,7 +48,7 @@ To **uninstall** the addon :
 > • Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich;
 > • Added psy-health regen when reading magazines (configurable in MCM);
 > • Added the ability for the western goods trader to guide the player to certain locations after finishing act 1;
-> • Added encyclopedia entries for some items/characters;
+> • Added encyclopedia entries for some items/characters in the PDA's guide;
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);
 > • Added an option to have more guided tasks (for people that don't like thinking)(enable/disable in MCM);
 > • Added a CTD when trader_autoinject.script is outdated;
