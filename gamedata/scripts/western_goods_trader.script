@@ -21,8 +21,6 @@ local dbg_printf = western_goods_utils.dbg_printf
 local table_contains = western_goods_utils.table_contains
 local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
-local heli_spawn = western_goods_helicopter.heli_spawn
-local heli_register = western_goods_helicopter.heli_register
 
 --[[----------------------------------------------------------------------------------------------------
 	Spawning function
@@ -220,41 +218,6 @@ end
 
 
 --[[----------------------------------------------------------------------------------------------------
-	Helicopter transport order
-------------------------------------------------------------------------------------------------------]]
-
-function go_to_level(level_name)
-
-	give_info("spawn_guide_helicopter")
-
-	local dest_info = western_goods_trade_guide_table[level_name]
-	local spawn_pos = vector():set(dest_info.x, dest_info.y, dest_info.z)
-	local look_pos = vector():set(0.0, dest_info.look, 0.0)
-	ChangeLevel(spawn_pos, dest_info.lvid, dest_info.gvid, look_pos, true)
-end
-
-function spawn_guide_helicopter()
-	if has_alife_info("spawn_guide_helicopter") then
-
-		disable_info("spawn_guide_helicopter")
-
-		local sec = "western_goods_helicopter"
-		local pos = vector():set(db.actor:position().x, db.actor:position().y + 20, db.actor:position().z)
-		local lvid = db.actor:level_vertex_id()
-		local gvid = db.actor:game_vertex_id()
-		local helicopter_se = heli_spawn(sec,pos,lvid,gvid)
-
-		CreateTimeEvent("delay_order_heli",helicopter_se.id,0,function()
-			if find_object_by_id(helicopter_se.id) then
-				heli_register(helicopter_se.id,"leave_at_point",level.get_bounding_volume().max)
-				return true
-			end
-		end)
-	end
-end
-
-
---[[----------------------------------------------------------------------------------------------------
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
@@ -262,7 +225,6 @@ end
 function on_game_start()
 	RegisterScriptCallback("actor_on_first_update", spawn_western_goods_trader)
 	RegisterScriptCallback("actor_on_first_update", retrieve_tradable_items)
-	RegisterScriptCallback("actor_on_first_update", spawn_guide_helicopter)
 	RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
 	rax_icon_tint.register("wg_tint_functor", tint_functor)
 end
@@ -298,51 +260,4 @@ function is_tradable(npc, obj)
 
 	-- An item isn't tradable if it is in the player's and isn't present in the tradable_items table
 	return is_in_npc_inv or (is_tradable_item and is_in_actor_inv)
-end
-
---[[----------------------------------------------------------------------------------------------------
-	Guide table
-------------------------------------------------------------------------------------------------------]]
-
-western_goods_trade_guide_table = {
-	limansk     = { x=-72.8004, 	y=-6.9772, 		z=57.4624, 		look=-1.5, 		lvid=67, 		gvid=2455	},
-	swamps      = { x=-270.8769, 	y=0.4461, 		z=1.2947, 		look=0.0, 		lvid=9620, 		gvid=155	},
-	cordon      = { x=238.3653, 	y=15.1026, 		z=128.2282, 	look=2.5, 		lvid=550490, 	gvid=412	},
-	darkscape   = { x=142.2322, 	y=27.6325, 		z=-410.7854, 	look=4.0, 		lvid=540403, 	gvid=1209	},
-	deadcity    = { x=-35.6632, 	y=1.2510, 		z=60.7808, 		look=4.5, 		lvid=111749, 	gvid=2345	},
-	red_forest	= { x=42.8533, 		y=-0.0004, 		z=-13.7107, 	look=1.5, 		lvid=86866, 	gvid=2768	},
-	jupiter		= { x=-185.8170, 	y=10.3172, 		z=356.1926, 	look=1.0, 		lvid=402796, 	gvid=4574	},
-	zaton		= { x=186.3917, 	y=4.8224, 		z=-184.4647, 	look=0.0, 		lvid=1283928, 	gvid=4215	},
-}
-
-function dialogs_mlr.wg_trader_guide_to_limansk(actor,npc,p)
-	go_to_level("limansk")
-end
-
-function dialogs_mlr.wg_trader_guide_to_swamps(actor,npc,p)
-	go_to_level("swamps")
-end
-
-function dialogs_mlr.wg_trader_guide_to_cordon(actor,npc,p)
-	go_to_level("cordon")
-end
-
-function dialogs_mlr.wg_trader_guide_to_darkscape(actor,npc,p)
-	go_to_level("darkscape")
-end
-
-function dialogs_mlr.wg_trader_guide_to_deadcity(actor,npc,p)
-	go_to_level("deadcity")
-end
-
-function dialogs_mlr.wg_trader_guide_to_red_forest(actor,npc,p)
-	go_to_level("red_forest")
-end
-
-function dialogs_mlr.wg_trader_guide_to_jupiter(actor,npc,p)
-	go_to_level("jupiter")
-end
-
-function dialogs_mlr.wg_trader_guide_to_zaton(actor,npc,p)
-	go_to_level("zaton")
 end
