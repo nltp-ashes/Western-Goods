@@ -71,14 +71,15 @@ end
 ------------------------------------------------------------------------------------------------------]]
 
 western_goods_trade_guide_table = {
-    limansk     = { x=-72.8004, 	y=-6.9772, 		z=57.4624, 		look=-1.5, 		lvid=67, 		gvid=2455	},
-    swamps      = { x=-270.8769, 	y=0.4461, 		z=1.2947, 		look=0.0, 		lvid=9620, 		gvid=155	},
-    cordon      = { x=238.3653, 	y=15.1026, 		z=128.2282, 	look=2.5, 		lvid=550490, 	gvid=412	},
-    darkscape   = { x=142.2322, 	y=27.6325, 		z=-410.7854, 	look=4.0, 		lvid=540403, 	gvid=1209	},
-    deadcity    = { x=-35.6632, 	y=1.2510, 		z=60.7808, 		look=4.5, 		lvid=111749, 	gvid=2345	},
-    red_forest	= { x=42.8533, 		y=-0.0004, 		z=-13.7107, 	look=1.5, 		lvid=86866, 	gvid=2768	},
-    jupiter		= { x=-185.8170, 	y=10.3172, 		z=356.1926, 	look=-1.0, 		lvid=402796, 	gvid=4574	},
-    zaton		= { x=186.3917, 	y=4.8224, 		z=-184.4647, 	look=0.0, 		lvid=1283928, 	gvid=4215	},
+    limansk                 = { x=-72.8004, 	y=-6.9772, 		z=57.4624, 		look=-1.5, 		lvid=67, 		gvid=2455	},
+    swamps                  = { x=-270.8769, 	y=0.4461, 		z=1.2947, 		look=0.0, 		lvid=9620, 		gvid=155	},
+    cordon                  = { x=238.3653, 	y=15.1026, 		z=128.2282, 	look=2.5, 		lvid=550490, 	gvid=412	},
+    darkscape               = { x=142.2322, 	y=27.6325, 		z=-410.7854, 	look=4.0, 		lvid=540403, 	gvid=1209	},
+    deadcity                = { x=-35.6632, 	y=1.2510, 		z=60.7808, 		look=4.5, 		lvid=111749, 	gvid=2345	},
+    red_forest	            = { x=42.8533, 		y=-0.0004, 		z=-13.7107, 	look=1.5, 		lvid=86866, 	gvid=2768	},
+    jupiter		            = { x=-185.8170, 	y=10.3172, 		z=356.1926, 	look=-1.0, 		lvid=402796, 	gvid=4574	},
+    zaton		            = { x=186.3917, 	y=4.8224, 		z=-184.4647, 	look=0.0, 		lvid=1283928, 	gvid=4215	},
+    deserted_hospital		= { x=-78.4292, 	y=32.6084, 		z=847.4611, 	look=3.5, 		lvid=6384, 	    gvid=2887	},
 }
 
 function dialogs_mlr.wg_trader_guide_to_limansk(actor,npc,p)
@@ -111,4 +112,8 @@ end
 
 function dialogs_mlr.wg_trader_guide_to_zaton(actor,npc,p)
     go_to_level("zaton")
+end
+
+function dialogs_mlr.wg_trader_guide_to_deserted_hospital(actor,npc,p)
+    go_to_level("deserted_hospital")
 end

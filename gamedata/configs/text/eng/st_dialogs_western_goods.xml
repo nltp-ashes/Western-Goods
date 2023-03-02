@@ -92,6 +92,26 @@
 		<text>Zaton, near the old barge. %c[d_orange][Free]</text>
 	</string>
 
+	<string id="western_goods_trader_guide_deserted_hospital">
+		<text>Deserted Hospital, by the collapsed entrance. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_cnpp">
+		<text>CNPP, by the parking lot at the entrance. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_generators">
+		<text>Generators, at the northern checkpoint. %c[d_orange][Free]</text>
+	</string>
+
+	<string id="western_goods_trader_guide_no_cnpp">
+		<text>Sorry, it's too risky flying over there. Monolith got this area sealed tight.</text>
+	</string>
+
+	<string id="western_goods_trader_guide_no_generators">
+		<text>There's no way to fly safely over the CNPP, you'd get shot down before even reaching the Generators.</text>
+	</string>
+
 <!-- Western Goods Trader Trade strings -->
 
 	<string id="western_goods_trader_empty_sell">
