@@ -173,7 +173,8 @@ To **uninstall** the addon :
 
 ### KNOWN ISSUES
 
-- None
+- Dynamic news can get interrupted if you save while dialogs are waiting to unfold, then let the dialogs play, and then load the said save;
+- The helicopter that picks up the rescued crew member in act 1, task 3 can sometimes get stuck and never come pick the crew member up.
 
 ---
 
