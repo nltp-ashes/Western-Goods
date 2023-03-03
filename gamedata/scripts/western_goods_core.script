@@ -211,7 +211,7 @@ function table_inject_ready(tab, comm, types, supply_level)
 			local loot_factor = western_goods_mcm.get_config("loot_factor") or 1
 
 			-- If we hit the spawn rate
-			if this_type and this_supply_level and math.random() < math.clamp(this_spawn_rate * loot_factor,0.0,1.0) then
+			if this_type and this_supply_level and math.random() < clamp(this_spawn_rate * loot_factor,0.0,1.0) then
 				local correct_type = table_contains(types, this_type)
 				local correct_supply_level = this_supply_level == supply_level
 
@@ -245,7 +245,7 @@ function table_corpse_ready(tab, npc_comm)
 			local loot_factor = western_goods_mcm.get_config("loot_factor") or 1
 
 			-- If we hit the drop rate
-			if math.random() < math.clamp(this_corpse_params.prob * loot_factor,0.0,1.0) then
+			if math.random() < clamp(this_corpse_params.prob * loot_factor,0.0,1.0) then
 				dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, this_corpse_params.qte)
 
 				-- Spawn the item in the corpse
