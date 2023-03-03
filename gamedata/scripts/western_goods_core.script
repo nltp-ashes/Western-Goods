@@ -3,7 +3,7 @@
 --
 -- Original Author(s) : NLTP_ASHES
 -- Edited : N/A
--- Date : 26/12/2022
+-- Date : 03/03/2023
 -- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 --
 -- Script used to spawn items in traders and corpses.
@@ -208,8 +208,10 @@ function table_inject_ready(tab, comm, types, supply_level)
 			local this_supply_level = this_trader_params.sl
 			local this_spawn_rate = this_trader_params.prob
 
+			local loot_factor = western_goods_mcm.get_config("loot_factor") or 1
+
 			-- If we hit the spawn rate
-			if this_type and this_supply_level and math.random() < this_spawn_rate then
+			if this_type and this_supply_level and math.random() < math.clamp(this_spawn_rate * loot_factor,0.0,1.0) then
 				local correct_type = table_contains(types, this_type)
 				local correct_supply_level = this_supply_level == supply_level
 
@@ -240,8 +242,10 @@ function table_corpse_ready(tab, npc_comm)
 		if this_corpse_params then
 			dbg_printf("[WG] Potential item for corpse loot (%s of %s) | sec: %s | prob: %s", i, western_goods_mcm.get_config("max_item_per_corpse"), this_section, this_corpse_params.prob)
 
+			local loot_factor = western_goods_mcm.get_config("loot_factor") or 1
+
 			-- If we hit the drop rate
-			if math.random() < this_corpse_params.prob then
+			if math.random() < math.clamp(this_corpse_params.prob * loot_factor,0.0,1.0) then
 				dbg_printf("[WG] Added item to spawn list | sec: %s | qte: %s", this_section, this_corpse_params.qte)
 
 				-- Spawn the item in the corpse

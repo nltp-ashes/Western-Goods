@@ -45,7 +45,35 @@
 	<string id="ui_mcm_western_goods_heli_attack_desc">
 		<text>Key-bind used to send an attack order to a helicopter. Aim at a target and use the key-bind to send the order.</text>
 	</string>
-	
+
+
+	<!-- Magazines Psy-Regen -->
+	<string id="ui_mcm_western_goods_magazine_psi_regen">
+		<text>Psi-health regen factor for reading magazines</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_magazine_psi_regen_desc">
+		<text>Defines the factor by which to multiply your psi-health (mental health) regeneration when you're reading a magazine.</text>
+	</string>
+
+	<!--=================================================================================================================================================================
+		LOOT SETTINGS
+	==================================================================================================================================================================-->
+
+	<!-- Section Title -->
+	<string id="ui_mcm_western_goods_loot_settings_title">
+		<text>LOOT SETTINGS</text>
+	</string>
+
+	<!-- Loot Chance -->
+	<string id="ui_mcm_western_goods_loot_factor">
+		<text>Loot factor</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_loot_factor_desc">
+		<text>Defines the factor by which to affect loot spawn chance in corpses and traders. This only affects the probability of spawn, not the quantity.</text>
+	</string>
+
 	<!-- Items Per Corpse -->
 	<string id="ui_mcm_western_goods_max_item_per_corpse">
 		<text>Maximum number of items per corpse</text>
@@ -55,21 +83,12 @@
 		<text>Defines the maximum amount of items X that can spawn in a single corpse. The game will select X items to spawn, and then run the drop rates for each of the selected items. In terms, you can get anywhere from 0 to X items.</text>
 	</string>
 
-	<!-- Magazines Psy-Regen -->
-	<string id="ui_mcm_western_goods_magazine_psy_regen">
-		<text>Psy-health regen for reading magazines</text>
-	</string>
-
-	<string id="ui_mcm_western_goods_magazine_psy_regen_desc">
-		<text>Defines the rate at which your psy-health (mental health) heals when you're reading a magazine.</text>
-	</string>
-	
 	<!--=================================================================================================================================================================
 		TECHNICAL SETTINGS
 	==================================================================================================================================================================-->
 	
 	<!-- Section Title -->
-	<string id="ui_mcm_western_goods_technical_title">
+	<string id="ui_mcm_western_goods_technical_settings_title">
 		<text>TECHNICAL SETTINGS</text>
 	</string>
 	

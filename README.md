@@ -40,13 +40,14 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-> **v2.0.0 - 03/02/2023 - Major Update**
+> **v2.0.0 - 03/03/2023 - Major Update**
 > ```
 > • Added a new set of mini-storylines. Follow a multi-act story line, with multiple missions per act.
 > • Added MCM integration. You can now configure some settings, as well as prepare the addon for removal directly in MCM;
 > • Added three new magazine : European Car magazine, EVO magazine and Gameland magazine;
 > • Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich;
 > • Added psy-health regen when reading magazines (configurable in MCM);
+> • Added loot factor setting (configurable in MCM);
 > • Added the ability for the western goods trader to guide the player to certain locations after finishing act 1;
 > • Added encyclopedia entries for some items/characters in the PDA's guide;
 > • Added a debug mode that prints information in the console/log to make troubleshooting easier (enable/disable in MCM);
