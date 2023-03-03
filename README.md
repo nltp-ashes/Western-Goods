@@ -19,7 +19,7 @@ This addon **requires** the following :
 
 This addon **does not require** the following :
 1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (items just won't have animations if you don't have it)
-2. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (you'll need to edit defaults manually in western_goods_mcm.script if you don't have it)
+2. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (edit defaults manually in western_goods_mcm.script if you don't have it)
 
 ---
 
