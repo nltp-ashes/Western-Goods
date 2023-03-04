@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : Lauta_ro
--- Edited : NLTP_ASHES
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml
+---]]
 
 function on_xml_read()
     RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)

@@ -1,13 +1,11 @@
---[[
--- Info
---
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
---
--- Script used to spawn items in traders and corpses.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to spawn items in traders and corpses.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -28,7 +26,9 @@ local get_translation = game.translate_string
 	Traders
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to spawn items in a specific npc with the help of trader_autoinject.script
+--- Function used to spawn items in a specific npc with the help of trader_autoinject.script.
+--- @param npc cse_abstract
+--- @return nil
 function spawn_western_goods_in_trader(npc)
 
 	local is_supplier = trader_autoinject.get_trader_type(npc) == trader_autoinject.SUPPLIER
@@ -58,15 +58,20 @@ function spawn_western_goods_in_trader(npc)
 	trader_autoinject.spawn_items(npc, trader_table, true)
 end
 
--- Monkey-patching trader_autoinject.update to inject western goods items in the traders
 TraderAuto = trader_autoinject.update
+--- Monkey-patching trader_autoinject.update to inject western goods items in the traders.
+--- @param npc cse_abstract
+--- @return nil
 function trader_autoinject.update(npc)
 	TraderAuto(npc)
 	spawn_western_goods_in_trader(npc)
 end
 
--- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
 TraderUpdate = trade_manager.update
+--- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
+--- @param npc cse_abstract
+--- @param force_refresh boolean
+--- @return nil
 function trade_manager.update(npc, force_refresh)
 	if npc:section() ~= "stalker_western_goods_trader" then
 		TraderUpdate(npc, force_refresh)
@@ -80,7 +85,11 @@ end
 	Dead bodies
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to spawn items in a corpse
+--- Function used to spawn items in a corpse.
+--- @param npc cse_abstract
+--- @param npc_rank string
+--- @param npc_comm string
+--- @return nil
 function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
 	local items_to_spawn = table_corpse_ready(western_goods_items, npc_comm)
 	for sec,qte in pairs(items_to_spawn) do
@@ -88,8 +97,15 @@ function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
 	end
 end
 
--- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods
 SpawnCosmetics = death_manager.spawn_cosmetics
+--- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods.
+--- @param npc cse_abstract
+--- @param npc_id string
+--- @param npc_comm string
+--- @param npc_rank string
+--- @param visual string
+--- @param rand_condition string
+--- @return nil
 function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
 	SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
 	spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
@@ -100,11 +116,15 @@ end
 	Service functions
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to print the version of the addon in the console/log.
+--- @return nil
 function print_addon_version()
 	UnregisterScriptCallback("on_game_load", print_addon_version)
 	printf("[WG] Western Goods version %s",VERSION)
 end
 
+--- Function used to check the version of the trader_autoinject script.
+--- @return nil
 function check_trader_auto_inject()
 	UnregisterScriptCallback("on_game_load", check_trader_auto_inject)
 
@@ -118,6 +138,8 @@ function check_trader_auto_inject()
 	assert(trader_autoinject.get_real_community ~= nil, error_message)
 end
 
+--- Function used to check the version of the game.
+--- @return nil
 function check_game_version()
 	UnregisterScriptCallback("on_game_load", check_game_version)
 
@@ -131,6 +153,8 @@ function check_game_version()
 	assert(string.find(GAME_VERSION,"1.5.2"), error_message)
 end
 
+--- Function used to check if the Barter UI Framework is installed.
+--- @return nil
 function check_barter_ui_installed()
 	UnregisterScriptCallback("on_game_load", check_barter_ui_installed)
 
@@ -144,6 +168,8 @@ function check_barter_ui_installed()
 	assert(barter_ui ~= nil, error_message)
 end
 
+--- Function used to delete every item added by the addon from the save file.
+--- @return nil
 function addon_removal()
 	if not western_goods_mcm.get_config("addon_removal") then return end
 
@@ -155,7 +181,7 @@ function addon_removal()
 
 		if se then
 
-			for item_id,v in pairs(western_goods_items) do
+			for item_id,_ in pairs(western_goods_items) do
 
 				if string.match(se:name(), table_item_field_by_key(western_goods_items,item_id,"section"))
 						or string.match(se:name(), "stalker_western_goods_trader")
@@ -179,6 +205,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
 	RegisterScriptCallback("on_game_load", print_addon_version)
 	RegisterScriptCallback("on_game_load", check_game_version)
@@ -192,7 +220,9 @@ end
 	Utility Functions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
+--- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items.
+--- This function takes parameters to filter items to be kept in the final table.
+--- @return table
 function table_inject_ready(tab, comm, types, supply_level)
 	local res = {}
 
@@ -227,7 +257,9 @@ function table_inject_ready(tab, comm, types, supply_level)
 	return res
 end
 
--- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items. This function takes parameters to filter items to be kept in the final table.
+--- Function used to transform western_goods_items into a table ready for trader_autoinject.
+--- This function takes parameters to filter items to be kept in the final table.
+--- @return table
 function table_corpse_ready(tab, npc_comm)
 	local res = {}
 
@@ -256,11 +288,14 @@ function table_corpse_ready(tab, npc_comm)
 	return res
 end
 
--- Function used to retrieve a certain field of western_goods_items. Allows for a bit more flexibility on the table's structure.
+--- Function used to retrieve a certain field of western_goods_items. Allows for a bit more flexibility on the table's structure.
+--- @return any
 function table_item_field_by_key(tab, item_id, key)
 	return tab[item_id][key]
 end
 
+--- Filters the item table keeping only a given type.
+--- @return table
 function table_items_by_type(tab, type)
 	local res = {}
 

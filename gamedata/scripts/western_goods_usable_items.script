@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to manage the various usable items from the Western Goods addon.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to manage the various usable items from the Western Goods addon.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -24,17 +22,23 @@ local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePe
 	Usable Items
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to return the text written when right clicking on the magazine.
+--- Function used to return the text written when right clicking on the magazine.
+--- @param obj game_object
+--- @return string
 function menu_view(obj)
     return get_translation("st_wg_view")
 end
 
--- Function used to return the text written when right clicking on the magazine.
+--- Function used to return the text written when right clicking on the magazine.
+--- @param obj game_object
+--- @return string
 function menu_unpack(obj)
     return get_translation("st_wg_unpack")
 end
 
--- Function called by callback when any object in the game is used. This redirects to the proper functions if the item used is one from Western Goods.
+--- Function called by callback when any object in the game is used. This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
 function use_item(obj)
 
     -- GPS Locator
@@ -76,6 +80,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
     RegisterScriptCallback("actor_on_item_use", use_item)
 end
@@ -84,7 +90,9 @@ end
 	GPS Locator
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to run the gps device.
+--- Function called when the gps locator is used by the player.
+--- @param obj game_object
+--- @return nil
 function use_gps(obj)
 	utils_xml.hide_menu()
 
@@ -102,7 +110,10 @@ function use_gps(obj)
 	actor_menu.set_msg(1, build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level), 7)
 end
 
--- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the game world.
+--- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the game world.
+--- @return string
+--- @return string
+--- @return string
 function find_info_from_game_world()
 
 	local smart = alife_object(smart_terrain.nearest_to_actor_smart.id)
@@ -116,7 +127,10 @@ function find_info_from_game_world()
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
 
--- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the pda map.
+--- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the pda map.
+--- @return string
+--- @return string
+--- @return string
 function find_info_from_pda()
 
 	local closest_smart_name, closest_smart_distance, closest_smart_level
@@ -142,7 +156,11 @@ function find_info_from_pda()
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
 
--- Function used to build the message the message displayed on screen when using the GPS device.
+--- Function used to build the message the message displayed on screen when using the GPS device.
+--- @param closest_smart_name string
+--- @param closest_smart_distance string
+--- @param closest_smart_level string
+--- @return string
 function build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level)
 	-- Build the message to print on-screen
 	local message
@@ -187,6 +205,9 @@ end
 	French MRE
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function called when the RCIR item is used by the player.
+--- @param obj game_object
+--- @return nil
 function use_french_mre(obj)
     alife_release(alife_object(obj:id()))
 
@@ -211,6 +232,9 @@ end
 	Toblerone
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function called when the Toblorone item is used by the player.
+--- @param obj game_object
+--- @return nil
 function use_toblerone(obj)
     CreatePersistentTimeEvent("western_goods_delay","toblerone_mask",2,function()
         level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)

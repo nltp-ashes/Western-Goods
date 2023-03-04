@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to manage the tasks of the Western Goods addon.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to manage the tasks of the Western Goods addon.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants, global variables and imported functions
@@ -41,18 +39,33 @@ TASK_3_CACHE = {}
 	TASK 1 - RETRIEVE THE DOCUMENTS
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_2_task_1_title_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_2_task_1_title")
 end
 
--- Function used to retrieve the description of the mission (displayed in the PDA).
--- Warning : naming contract on the translation string : st_wg_trader_act_2_task_1_stage_<stage>_descr
+--- Function used to retrieve the description of the mission (displayed in the PDA).
+--- Warning : naming contract on the translation string : st_wg_trader_act_2_task_1_stage_<stage>_descr.
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_2_task_1_descr_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_2_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return number
 function task_functor.act_2_task_1_target_f(task_id,field,p,tsk)
 	if tsk.stage == 0 then
 		return TASK_1_CACHE.btr_id
@@ -62,7 +75,10 @@ function task_functor.act_2_task_1_target_f(task_id,field,p,tsk)
 	end
 end
 
--- Function used to manage the mission logic as a whole.
+--- Function used to manage the mission logic as a whole.
+--- @param tsk CGameTask
+--- @param task_id number
+--- @return string
 function task_status_functor.act_2_task_1_status_f(tsk,task_id)
 
 	-- First stage :
@@ -140,6 +156,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
 	RegisterScriptCallback("save_state", save_state)
 	RegisterScriptCallback("load_state", load_state)
@@ -150,6 +168,9 @@ end
 	Data persistence
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
 function save_state(m_data)
 	m_data.wg_act_2_task_1_cache = TASK_1_CACHE
 	m_data.wg_act_2_task_2_cache = TASK_2_CACHE
@@ -157,6 +178,9 @@ function save_state(m_data)
 	dbg_printf("[WG] Saved act 2 task variables")
 end
 
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
 function load_state(m_data)
 	TASK_1_CACHE = m_data.wg_act_1_tasks_cache
 	TASK_2_CACHE = m_data.wg_act_2_tasks_cache

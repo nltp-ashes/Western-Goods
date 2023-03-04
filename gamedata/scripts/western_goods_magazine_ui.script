@@ -1,17 +1,15 @@
---[[
--- Info
--- 
--- Original Author(s) : Tronex
--- Edited : NLTP_ASHES
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
---
--- Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon.
---
--- Naming for some files/folders is based on the following contract :
--- - textures must be located in 	: "gamedata\textures\ui\magazines\<name_of_the_section>\"
--- - textures must be named like	: "ui_items_<name_of_the_section>_page_<page_number>.dds"
---]]
+---[[
+--- Original Author(s) : Tronex
+--- Edited : NLTP_ASHES
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon.
+---
+--- Naming for some files/folders is based on the following contract :
+--- - textures must be located in 	: "gamedata\textures\ui\magazines\<name_of_the_section>\"
+--- - textures must be named like	: "ui_items_<name_of_the_section>_page_<page_number>.dds"
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -22,12 +20,15 @@ local CONST_MAGAZINE_PSI_REGEN = 0.0080
 
 local dbg_printf = western_goods_utils.dbg_printf
 
+GUI = nil -- instance, don't touch
+
 --[[----------------------------------------------------------------------------------------------------
 	UI Item Property
 ------------------------------------------------------------------------------------------------------]]
 
--- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
 get_psy_health_regenerationBase = arszi_psy.get_psy_health_regeneration
+--- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
+--- @return number
 function arszi_psy.get_psy_health_regeneration()
 	local base_psy_heal = get_psy_health_regenerationBase()
 	local bonus_psy_heal_magazine = get_telepatic_regen_magazine()
@@ -35,7 +36,8 @@ function arszi_psy.get_psy_health_regeneration()
 	return base_psy_heal + bonus_psy_heal_magazine
 end
 
--- Function used to get the bonus for reading a magazine. Returns a user defined value when the Magazine UI is shown, and 0 when it isn't.
+--- Function used to get the bonus for reading a magazine.
+--- @return number
 function get_telepatic_regen_magazine()
 	if GUI and GUI:IsShown() then
 		local psi_regen_factor = western_goods_mcm.get_config("magazine_psi_regen") or 1
@@ -45,8 +47,9 @@ function get_telepatic_regen_magazine()
 	end
 end
 
--- Function used to start displaying the magazine UI onto the screen.
-GUI = nil -- instance, don't touch
+--- Function used to start displaying the magazine UI onto the screen.
+--- @param sec string
+--- @return nil
 function display(sec) 
 	if (not sec) then
 		printf("!ERROR western_goods_magazine_ui | no section passed!")

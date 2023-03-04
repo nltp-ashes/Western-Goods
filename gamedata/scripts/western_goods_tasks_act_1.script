@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to manage the tasks of the Western Goods addon.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to manage the tasks of the Western Goods addon.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants, global variables and imported functions
@@ -41,18 +39,33 @@ act_1_task_3_stage_2_show_targets_timer = 0
 	TASK 1 - ROAD BUMPS
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_1_task_1_title_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_1_task_1_title")
 end
 
--- Function used to retrieve the description of the mission (displayed in the PDA).
--- Warning : naming contract on the translation string : st_wg_trader_act_1_task_1_stage_<stage>_descr
+--- Function used to retrieve the description of the mission (displayed in the PDA).
+--- Warning : naming contract on the translation string : st_wg_trader_act_1_task_1_stage_<stage>_descr.
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_1_task_1_descr_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return number
 function task_functor.act_1_task_1_target_f(task_id,field,p,tsk)
 	if tsk.stage == 0 then
 		return load_var(db.actor,"wg_act_1_task_1_stage_0_target")
@@ -68,7 +81,10 @@ function task_functor.act_1_task_1_target_f(task_id,field,p,tsk)
 	end
 end
 
--- Function used to manage the mission logic as a whole.
+--- Function used to manage the mission logic as a whole.
+--- @param tsk CGameTask
+--- @param task_id number
+--- @return string
 function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 
 	-- First stage : Get to the helicopter
@@ -270,18 +286,33 @@ end
 	TASK 2 - CONSPIRACY
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_1_task_2_title_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_1_task_2_title")
 end
 
--- Function used to retrieve the description of the mission (displayed in the PDA).
--- Warning : naming contract on the translation string : st_wg_trader_act_1_task_2_stage_<stage>_descr
+--- Function used to retrieve the description of the mission (displayed in the PDA).
+--- Warning : naming contract on the translation string : st_wg_trader_act_1_task_2_stage_<stage>_descr.
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_1_task_2_descr_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return number
 function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 	if tsk.stage == 0 then
 		if western_goods_mcm.get_config("guided_tasks") then
@@ -341,7 +372,10 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 	end
 end
 
--- Function used to manage the mission logic as a whole.
+--- Function used to manage the mission logic as a whole.
+--- @param tsk CGameTask
+--- @param task_id number
+--- @return string
 function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
 	-- First stage : Find and question the informant at Yanov Station
@@ -732,9 +766,9 @@ function act_1_task_2_stage_2_status_f(tsk,task_id)
 		local lvid = { 12910, 								52206, 							36889,						}
 		local gvid = { 4469, 								4470, 							4469,						}
 
-		local se_squad_1 = spawn_squad(sec[1], pos[1], lvid[1], gvid[1])
-		local se_squad_2 = spawn_squad(sec[2], pos[2], lvid[2], gvid[2])
-		local se_squad_3 = spawn_squad(sec[3], pos[3], lvid[3], gvid[3])
+		se_squad_1 = spawn_squad(sec[1], pos[1], lvid[1], gvid[1])
+		se_squad_2 = spawn_squad(sec[2], pos[2], lvid[2], gvid[2])
+		se_squad_3 = spawn_squad(sec[3], pos[3], lvid[3], gvid[3])
 
 		se_squad_1_id = se_squad_1.id
 		se_squad_2_id = se_squad_2.id
@@ -846,18 +880,33 @@ end
 	TASK 3 - THE RESCUE
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_1_task_3_title_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_1_task_3_title")
 end
 
--- Function used to retrieve the description of the mission (displayed in the PDA).
--- Warning : naming contract on the translation string : st_wg_trader_act_1_task_3_stage_<stage>_descr
+--- Function used to retrieve the description of the mission (displayed in the PDA).
+--- Warning : naming contract on the translation string : st_wg_trader_act_1_task_3_stage_<stage>_descr.
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
 function task_functor.act_1_task_3_descr_f(task_id,field,p,tsk)
 	return game.translate_string("st_wg_trader_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return number
 function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
 	if tsk.stage == 0 then
 		return load_var(db.actor,"wg_act_1_task_3_crew_member_id")
@@ -889,7 +938,10 @@ function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
 	end
 end
 
--- Function used to manage the mission logic as a whole.
+--- Function used to manage the mission logic as a whole.
+--- @param tsk CGameTask
+--- @param task_id number
+--- @return string
 function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 	-- First stage : Find and rescue the crew member
@@ -1340,6 +1392,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
 	RegisterScriptCallback("save_state", save_state)
 	RegisterScriptCallback("load_state", load_state)
@@ -1350,6 +1404,9 @@ end
 	Data persistence
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
 function save_state(m_data)
 	m_data.act_1_task_2_stage_1_heli_ready_timer = (act_1_task_2_stage_1_heli_ready_timer or time_global()) - time_global()
 	m_data.act_1_task_2_stage_2_show_targets_timer = (act_1_task_2_stage_2_show_targets_timer or time_global()) - time_global()
@@ -1358,6 +1415,9 @@ function save_state(m_data)
 	dbg_printf("[WG] Saved act 1 task variables")
 end
 
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
 function load_state(m_data)
 	act_1_task_2_stage_1_heli_ready_timer = time_global() + (m_data.act_1_task_2_stage_1_heli_ready_timer or 0)
 	act_1_task_2_stage_2_show_targets_timer = time_global() + (m_data.act_1_task_2_stage_2_show_targets_timer or 0)
@@ -1371,8 +1431,11 @@ end
 	General functions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to give the player a reward for finishing act 1
--- Warning : This function should be called while a dialog is running
+--- Function used to give the player a reward for finishing act 1.
+--- Warning : This function should be called while a dialog is running.
+--- @param first_speaker cse_abstract
+--- @param second_speaker cse_abstract
+--- @return nil
 function give_act_1_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")
 end

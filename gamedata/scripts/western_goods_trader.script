@@ -1,14 +1,12 @@
---[[
--- Info
--- 
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to spawn the western goods trader and to manage specific aspects of him.
--- The code used to spawned the trader was edited but originally written by lauta_ro.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to spawn the western goods trader and to manage specific aspects of him.
+--- The code used to spawned the trader was edited but originally written by lauta_ro.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -22,11 +20,15 @@ local table_contains = western_goods_utils.table_contains
 local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
 
+bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
+western_goods_trader_tradable_items = {}
+
 --[[----------------------------------------------------------------------------------------------------
 	Spawning function
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to spawn the trader on the map.
+--- Function used to spawn the trader on the map.
+--- @return nil
 function spawn_western_goods_trader()
 	UnregisterScriptCallback("actor_on_update", spawn_western_goods_trader)
 
@@ -62,7 +64,8 @@ end
 	Encyclopedia entry
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to unlock the encyclopedia entry for the western goods trader.
+--- Function used to unlock the encyclopedia entry for the western goods trader.
+--- @return nil
 function unlock_encyclopedia_wg_trader()
 	ui_pda_encyclopedia_tab.unlock_article("encyclopedia_characters_western_goods_ashes")
 end
@@ -72,7 +75,13 @@ end
 	Trading actions/restrictions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to allow/disallow the player from moving items from one container to another when trading with the western goods trader.
+--- Function used to allow/disallow the player from moving items from one container to another when trading with the western goods trader.
+--- @param flags table
+--- @param npc_id number
+--- @param obj game_object
+--- @param mode string
+--- @param bag string
+--- @return nil
 function check_move_item(flags, npc_id, obj, mode, bag)
 	if mode ~= "trade" then return flags.ret_value end
 
@@ -83,8 +92,9 @@ function check_move_item(flags, npc_id, obj, mode, bag)
 	flags.ret_value = flags.ret_value and not is_western_goods_trader or is_tradable(npc, obj)
 end
 
--- Function used to color the untradable items in the player inventory.
-local bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
+--- Function used to color the untradable items in the player inventory.
+--- @param cell table
+--- @return fcolor
 function tint_functor(cell)
 	local ui_instance = ui_inventory.GUI
 		
@@ -102,8 +112,9 @@ function tint_functor(cell)
 	return GetARGB(240, 250, 0, 0)
 end
 
--- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader.
 TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
+--- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader.
+--- @return nil
 function ui_inventory.UIInventory.TMode_Sell(self)
 	-- If we aren't talking to the western goods trader, process normally
 	local npc = self:GetPartner()
@@ -115,8 +126,9 @@ function ui_inventory.UIInventory.TMode_Sell(self)
 	make_exchange(self, npc)
 end
 
--- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader.
 TMode_BuyBase = ui_inventory.UIInventory.TMode_Buy
+--- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader.
+--- @return nil
 function ui_inventory.UIInventory.TMode_Buy(self)
 	-- If we aren't talking to the western goods trader, process normally
 	local npc = self:GetPartner()
@@ -128,7 +140,10 @@ function ui_inventory.UIInventory.TMode_Buy(self)
 	make_exchange(self, npc)
 end
 
--- Function called when the player clicks Sell/Buy in the trade UI. This function makes a few checks, and then proceeds to exchange the money for the items selected.
+--- Function called when the player clicks Sell/Buy in the trade UI. This function makes a few checks, and then proceeds to exchange the money for the items selected.
+--- @param self cse_abstract
+--- @param npc cse_abstract
+--- @return nil
 function make_exchange(self, npc)
 	-- Get sell cells
 	local cc_sell = self.CC["actor_trade"]
@@ -197,14 +212,18 @@ end
 	Barter actions/restrictions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to initiate the Barter UI.
+--- Function used to initiate the Barter UI.
+--- @return nil
 function npc_barter()
 	utils_obj.play_sound("interface\\inv_open")
 	barter_ui.start()
 end
 
--- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
 GUI_on_showBase = barter_ui.GUI_on_show
+--- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
+--- @param name string
+--- @param path string
+--- @return nil
 function barter_ui.GUI_on_show(name, path)
 	local ui_instance = ui_inventory.GUI
 	if name ~= "UIInventory" or (not ui_instance) then return end
@@ -221,7 +240,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to register callbacks.
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
 	RegisterScriptCallback("actor_on_first_update", spawn_western_goods_trader)
 	RegisterScriptCallback("actor_on_first_update", retrieve_tradable_items)
@@ -234,8 +254,8 @@ end
 	Utility functions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to retrieve the list of tradable items (items of type "money") with the western goods trader.
-western_goods_trader_tradable_items = {}
+--- Function used to retrieve the list of tradable items (items of type "money") with the western goods trader.
+--- @return nil
 function retrieve_tradable_items()
 	-- Clear the cached list of tradable items
 	western_goods_trader_tradable_items = {}
@@ -252,7 +272,10 @@ function retrieve_tradable_items()
 	dbg_printf("[WG] Assembled trade table :\n%s", utils_data.print_table(western_goods_trader_tradable_items, false, true))
 end
 
--- Function used to know if an object is tradable with the western goods trader.
+--- Function used to know if an object is tradable with the western goods trader.
+--- @param npc cse_abstract
+--- @param obj game_object
+--- @return boolean
 function is_tradable(npc, obj)
 	local is_in_npc_inv = utils_item.in_npc_inv(npc, obj)
 	local is_in_actor_inv = utils_item.in_actor_inv(obj)

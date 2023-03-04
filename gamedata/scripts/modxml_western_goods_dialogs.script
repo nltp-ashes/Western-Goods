@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : Lauta_ro
--- Edited : NLTP_ASHES
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script using the DXML functionality to edit configs\gameplay\dialogs_pripyat.xml
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script using the DXML functionality to edit configs\gameplay\dialogs_pripyat.xml
+---]]
 
 function on_xml_read()
     RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
@@ -305,7 +303,7 @@ function on_xml_read()
     end)
 end
 
--- I had no idea where to place this function, but I feel here makes the most sense? I don't know.
+--- I had no idea where to place this function, but I feel here makes the most sense? I don't know.
 function crew_member_start_dialog()
     if not has_alife_info("wg_act_1_task_3_stage_0_crew_member_spawned") then
         return game.translate_string("stalker_crew_member_start_0")

@@ -1,13 +1,11 @@
---[[
--- Info
---
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
---
--- Script used to manage the helicopter transport mechanic.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to manage the helicopter transport mechanic.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -22,6 +20,9 @@ local find_object_by_id = western_goods_utils.find_object_by_id
 	Helicopter transport order
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to teleport the player from one level to another and make an helicopter spawn on top of the player on spawn.
+--- @param level_name string
+--- @return nil
 function go_to_level(level_name)
 
     give_info("spawn_guide_helicopter")
@@ -35,6 +36,8 @@ function go_to_level(level_name)
     ChangeLevel(spawn_pos, dest_info.lvid, dest_info.gvid, look_pos, true)
 end
 
+--- Function used to spawn an helicopter above the player after using the helicopter transport service.
+--- @return nil
 function spawn_guide_helicopter()
     if has_alife_info("spawn_guide_helicopter") then
 
@@ -61,7 +64,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to register callbacks.
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
     RegisterScriptCallback("actor_on_first_update", spawn_guide_helicopter)
 end

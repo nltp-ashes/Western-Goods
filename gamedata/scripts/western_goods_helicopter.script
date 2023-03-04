@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to define various common functions defined in the scripts of the Western Goods addon.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to define various common functions defined in the scripts of the Western Goods addon.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants, global variables and imported functions
@@ -32,6 +30,8 @@ local find_object_by_id = western_goods_utils.find_object_by_id
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
 	RegisterScriptCallback("actor_on_update", refresh_helicopters)
 	RegisterScriptCallback("on_key_press",order_helicopter)
@@ -43,6 +43,9 @@ end
 	Data persistence
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
 function save_state(m_data)
 	dbg_printf("[WG] Saving helicopter table...")
 	local table_to_save = {}
@@ -67,6 +70,9 @@ function save_state(m_data)
 	dbg_printf("[WG] Saved helicopter table :\n%s", utils_data.print_table(table_to_save, false, true))
 end
 
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
 function load_state(m_data)
 	dbg_printf("[WG] Loading helicopter table...")
 	local table_to_load = m_data.heli_tbl or {}
@@ -95,7 +101,12 @@ end
 	Functions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to spawn an helicopter. The helicopter will automatically enter idle state
+--- Function used to spawn an helicopter. The helicopter will automatically enter idle state.
+--- @param sec string
+--- @param pos vector
+--- @param lvid number
+--- @param gvid number
+--- @return cse_abstract
 function heli_spawn(sec,pos,lvid,gvid)
 	local se_heli = alife_create(sec,pos,lvid,gvid)
 
@@ -129,8 +140,12 @@ function heli_spawn(sec,pos,lvid,gvid)
 	return se_heli
 end
 
--- Function used to give an order to the helicopter
--- Valid modes : "idle", "protect_actor", "move_to_point", "land_at_point", "leave_at_point"
+--- Function used to give an order to the helicopter.
+--- Valid modes : "idle", "protect_actor", "move_to_point", "land_at_point", "leave_at_point".
+--- @param heli_id number
+--- @param mode string
+--- @param target_pos vector
+--- @return nil
 function heli_register(heli_id,mode,target_pos)
 	if not heli_id then return end
 
@@ -143,7 +158,6 @@ function heli_register(heli_id,mode,target_pos)
 	heli_data.target_pos = target_pos or heli_data.target_pos
 	heli_data.update_timer = heli_data.update_timer or time_global()
 	heli_data.spot = heli_data.spot or false
-	--heli_data.enemy_id = heli_data.enemy_id or nil
 
 	-- Add the helicopter to the refresh list
 	HELICOPTERS_TABLE[heli_id] = heli_data
@@ -152,11 +166,13 @@ function heli_register(heli_id,mode,target_pos)
 	local heli_obj = find_object_by_id(heli_id)
 
 	if heli_obj then
-		heli_update(heli_obj,mode,target_pos)
+		heli_update(heli_obj,heli_data.mode,heli_data.target_pos)
 	end
 end
 
--- Function used to remove an helicopter from the update table (use when the helicopter has been released from the level)
+--- Function used to remove an helicopter from the update table (use when the helicopter has been released from the level).
+--- @param heli_id number
+--- @return nil
 function heli_unregister(heli_id)
 	if not heli_id then return end
 
@@ -174,7 +190,8 @@ function heli_unregister(heli_id)
 	dbg_printf("[WG] Helicopter with id %s successfully released", heli_id)
 end
 
--- Function used to refresh all the helicopters
+--- Function used to refresh all the helicopters.
+--- @return nil
 function refresh_helicopters()
 
 	for id,_ in pairs(HELICOPTERS_TABLE) do
@@ -215,7 +232,11 @@ function refresh_helicopters()
 	end
 end
 
--- Function used to refresh an helicopter, this function is called by refresh_helicopters()
+--- Function used to refresh an helicopter, this function is called by refresh_helicopters().
+--- @param heli_obj game_object
+--- @param mode string
+--- @param target_pos vector
+--- @return nil
 function heli_update(heli_obj,mode,target_pos)
 
 	if not heli_obj then return end
@@ -296,7 +317,10 @@ function heli_update(heli_obj,mode,target_pos)
 	end
 end
 
--- Function used to set the point in space where the helicopter has to go
+--- Function used to set the point in space where the helicopter has to go.
+--- @param heli_obj game_object
+--- @param pos vector
+--- @return nil
 function heli_set_target(heli_obj,pos)
 	if not heli_obj then return end
 
@@ -304,7 +328,10 @@ function heli_set_target(heli_obj,pos)
 	heli_obj:get_helicopter():GoPatrolByRoundPath(pos, 7, true)
 end
 
--- Function used by the helicopter's IA to determine if an object is an enemy or not
+--- Function used by the helicopter's IA to determine if an object is an enemy or not.
+--- @param self_combat any
+--- @param obj game_object
+--- @return boolean
 function is_enemy(self_combat,obj)
 	if not obj then return end
 
@@ -323,7 +350,9 @@ function is_enemy(self_combat,obj)
 	return HELICOPTERS_TARGETS[obj:id()]
 end
 
--- Function used to take over the helicopter's combat IA (to force the helicopter to target certain objects)
+--- Function used to take over the helicopter's combat IA (to force the helicopter to target certain objects).
+--- @param heli_id number
+--- @return boolean
 function take_control(heli_id)
 	local combat = db.storage[heli_id] and db.storage[heli_id].combat
 	if combat then
@@ -334,7 +363,9 @@ function take_control(heli_id)
 	end
 end
 
--- Function used to tell the helicopter's combat IA to enter combat state an attack the target the player is currently aiming at
+--- Function used to tell the helicopter's combat IA to enter combat state an attack the target the player is currently aiming at.
+--- @param dik DIK_keys
+--- @return nil
 function order_helicopter(dik)
 	if dik ~= western_goods_mcm.get_config("heli_attack") then return end
 

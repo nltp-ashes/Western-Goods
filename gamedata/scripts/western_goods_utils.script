@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : NLTP_ASHES
--- Edited : N/A
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to define various common functions defined in the scripts of the Western Goods addon.
---]]
+---[[
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to define various common functions defined in the scripts of the Western Goods addon.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -20,13 +18,17 @@ local CreatePersistentTimeEvent
 	Utils Functions
 ------------------------------------------------------------------------------------------------------]]
 
--- Function used to print information into the console/log file only when Western Goods' debug mode is enabled
+--- Function used to print information into the console/log file only when Western Goods' debug mode is enabled.
+--- @return nil
 function dbg_printf(...)
     if not western_goods_mcm.get_config("debug_mode") then return end
     printf(...)
 end
 
--- Function used to know if a certain value is contained in a table. This function is generic enough so that it'd work on any table.
+--- Function used to know if a certain value is contained in a table. This function is generic enough so that it'd work on any table.
+--- @param tab table
+--- @param val any
+--- @return boolean
 function table_contains(tab, val)
 	if not tab then return end
 	for key,value in pairs(tab) do
@@ -37,23 +39,32 @@ function table_contains(tab, val)
 	return false
 end
 
--- Function used to get a random id (as an int) from a given table. Returns a random number between 1 and the size of the table.
+--- Function used to get a random id (as an int) from a given table. Returns a random number between 1 and the size of the table.
+--- @param tab table
+--- @return number
 function table_random_id(tab)
 	if not tab then return end
 	return math.random(1,#tab)
 end
 
--- Function used to clear the code a bit.
+--- Function used to clear the code a bit.
+--- @param num number
+--- @return number
 function round_number(num)
 	return tostring(math.floor(num+0.5))
 end
 
--- Function used to know if there exists a translation for a given game string.
+--- Function used to know if there exists a translation for a given game string.
+--- @param str string
+--- @return boolean
 function has_translation(str)
 	return game.translate_string(str) ~= str
 end
 
--- Function used to get the distance between two points in 2D space.
+--- Function used to get the distance between two points in 2D space.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
 function get_distance(position_1, position_2)
 	if not (position_1 and position_2) then return nil end
 	
@@ -64,12 +75,16 @@ function get_distance(position_1, position_2)
     return distance
 end
 
--- Function used to get game object by its ID if it exists on the current level.
+--- Function used to get game object by its ID if it exists on the current level.
+--- @param id number
+--- @return game_object
 function find_object_by_id(id)
 	return db.storage[id] and db.storage[id].object or level.object_by_id(id)
 end
 
--- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
+--- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
+--- @param var any
+--- @return number
 function as_number(var)
 	if type(var) == "string" then
 		return tonumber(var)
@@ -84,7 +99,9 @@ function as_number(var)
 	return nil
 end
 
--- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
+--- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
+--- @param var any
+--- @return string
 function as_string(var)
 	if type(var) == "number" then
 		return tostring(var)
@@ -103,7 +120,9 @@ function as_string(var)
 	return nil
 end
 
--- Function used to get a given variable as a boolean. Returns nil if the variable cannot be casted.
+--- Function used to get a given variable as a boolean. Returns nil if the variable cannot be casted.
+--- @param var any
+--- @return boolean
 function as_boolean(var)
 	if type(var) == "string" then
 		if var == "true" then
@@ -122,8 +141,10 @@ function as_boolean(var)
 	return nil
 end
 
--- Function used to retrieve the server object of a unique NPC by its section name
--- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds
+--- Function used to retrieve the server object of a unique NPC by its section name.
+--- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds.
+--- @param sec string
+--- @return cse_abstract
 function find_unique_npc(sec)
 	for id = 1, 65534 do
 
@@ -133,7 +154,11 @@ function find_unique_npc(sec)
 	end
 end
 
--- Function used to spawn a story squad
+--- Function used to spawn a story squad.
+--- @param sec string
+--- @param pos vector
+--- @param smart cse_alife_smart_zone
+--- @return cse_alife_online_offline_group
 function spawn_story_squad(sec, pos, smart)
 	if not sec or not smart then return end
 
@@ -158,7 +183,12 @@ function spawn_story_squad(sec, pos, smart)
 	return se_squad
 end
 
--- Function used to spawn a simulation squad, at a given point in space
+--- Function used to spawn a simulation squad, at a given point in space.
+--- @param sec string
+--- @param pos vector
+--- @param lvid number
+--- @param gvid number
+--- @return cse_alife_online_offline_group
 function spawn_squad(sec,pos,lvid,gvid)
 	local squad = alife_create(sec, pos, lvid, gvid)
 	if not squad then return end
@@ -179,7 +209,12 @@ function spawn_squad(sec,pos,lvid,gvid)
 	return squad
 end
 
--- Function used to spawn a dead squad, at a given point in space
+--- Function used to spawn a dead squad, at a given point in space.
+--- @param sec string
+--- @param pos vector
+--- @param lvid number
+--- @param gvid number
+--- @return number
 function spawn_dead_squad(sec,pos,lvid,gvid)
 	local squad = spawn_squad(sec, pos, lvid, gvid)
 	if not squad then return end
@@ -196,7 +231,9 @@ function spawn_dead_squad(sec,pos,lvid,gvid)
 	return member_id
 end
 
--- Function used to get the ID from a random member of a squad
+--- Function used to get the ID from a random member of a squad.
+--- @param squad cse_alife_online_offline_group
+--- @return number
 function get_member_id_from_squad(squad)
 	if not squad then return end
 
@@ -205,7 +242,9 @@ function get_member_id_from_squad(squad)
 	end
 end
 
--- Function used to get a "random" member of a squad
+--- Function used to get a "random" member of a squad.
+--- @param squad cse_alife_online_offline_group
+--- @return cse_abstract
 function get_member_from_squad(squad)
 	if not squad then return end
 
@@ -214,8 +253,10 @@ function get_member_from_squad(squad)
 	end
 end
 
--- Function used to find an NPC by its section name in the player squad
--- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds
+--- Function used to find an NPC by its section name in the player squad.
+--- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds.
+--- @param sec string
+--- @return cse_abstract
 function find_npc_in_actor_squad(sec)
 	local actor_squad = axr_companions.list_actor_squad_by_id()
 	for _,id in pairs(actor_squad) do
@@ -231,6 +272,8 @@ end
 	Load CreatePersistentTimeEvent function
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return string
 function on_game_start()
 	CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 end

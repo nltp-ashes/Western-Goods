@@ -1,15 +1,13 @@
---[[
--- Info
--- 
--- Original Author(s) : Unkown
--- Edited : NLTP_ASHES
--- Date : 15/01/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to manage time events, that are persistent through saves. To be used like regular time events.
---
--- Note : the LOAD_DELAY variable is here because the game runs load_state before the save is finished loading, which makes some function calls happen before the save is ready to play.
---]]
+---[[
+--- Original Author(s) : Unknown
+--- Edited : NLTP_ASHES
+--- Date : 15/01/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to manage time events, that are persistent through saves. To be used like regular time events.
+---
+--- Note : the LOAD_DELAY variable is here because the game runs load_state before the save is finished loading, which makes some function calls happen before the save is ready to play.
+---]]
 
 --[[----------------------------------------------------------------------------------------------------
 	Constants and imported functions
@@ -24,6 +22,14 @@ local dbg_printf = western_goods_utils.dbg_printf
 	Main Script
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to create a time event that will still run after a save/load.
+--- Warning : DOES NOT TAKE ENGINE CLASSES !
+--- @param ev_id string
+--- @param act_id string
+--- @param timer number
+--- @param func function
+--- @param ... table
+--- @return nil
 function CreatePersistentTimeEvent(ev_id,act_id,timer,func,...)
 	if not (EVENT_QUEUE[ev_id]) then
 		EVENT_QUEUE[ev_id] = {}
@@ -40,6 +46,10 @@ function CreatePersistentTimeEvent(ev_id,act_id,timer,func,...)
 	end
 end
 
+--- Function used to remove a time event if it exists.
+--- @param ev_id string
+--- @param act_id string
+--- @return nil
 function RemovePersistentTimeEvent(ev_id,act_id)
 	if (EVENT_QUEUE[ev_id] and EVENT_QUEUE[ev_id][act_id]) then
 		EVENT_QUEUE[ev_id][act_id] = nil
@@ -47,6 +57,11 @@ function RemovePersistentTimeEvent(ev_id,act_id)
 	end
 end
 
+--- Function used to reset the timer of a time event if it exists.
+--- @param ev_id string
+--- @param act_id string
+--- @param timer number
+--- @return nil
 function ResetPersistentTimeEvent(ev_id,act_id,timer)
 	if (EVENT_QUEUE[ev_id] and EVENT_QUEUE[ev_id][act_id]) then
 		EVENT_QUEUE[ev_id][act_id].added_at = time_global()
@@ -54,6 +69,8 @@ function ResetPersistentTimeEvent(ev_id,act_id,timer)
 	end
 end
 
+--- Function called every frame to check if time events should run or not.
+--- @return boolean
 function ProcessPersistentEventQueue()
 	if has_alife_info("sleep_active") then
 		return false
@@ -84,6 +101,8 @@ end
 	Callbacks registration
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to register callbacks.
+--- @return nil
 function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
@@ -94,6 +113,9 @@ end
 	Data persistence
 ------------------------------------------------------------------------------------------------------]]
 
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
 function save_state(m_data)
 
 	local table_to_save = {}
@@ -114,6 +136,9 @@ function save_state(m_data)
 	dbg_printf("[WG] Saved timed event table :\n%s", utils_data.print_table(table_to_save, false, true))
 end
 
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
 function load_state(m_data)
 	local table_to_load = m_data.persistant_event_queue or {}
 	

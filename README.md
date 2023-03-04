@@ -173,8 +173,11 @@ To **uninstall** the addon :
 
 ### KNOWN ISSUES
 
-- Dynamic news can get interrupted if you save while dialogs are waiting to unfold, then let the dialogs play, and then load the said save;
-- The helicopter that picks up the rescued crew member in act 1, task 3 can sometimes get stuck and never come pick the crew member up.
+- An issue can cause dynamic news to get interrupted;
+- The helicopter that picks up the rescued crew member in act 1, task 3 can sometimes get stuck and never come pick the crew member up;
+- It isn't very obvious that you can order the helicopter to attack enemies during act 1, task 2;
+- The second to last stage of act 1, task 3 might be unnecessarily challenging;
+- Stutters may occur when the game spawns in new NPCs.
 
 ---
 

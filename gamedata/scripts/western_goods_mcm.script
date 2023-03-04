@@ -1,31 +1,32 @@
---[[
--- Info
--- 
--- Original Author(s) : RavenAscendant
--- Edited : NLTP_ASHES
--- Date : 03/03/2023
--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
--- 
--- Script used to define the options in MCM.
---]]
+---[[
+--- Original Author(s) : RavenAscendant
+--- Edited : NLTP_ASHES
+--- Date : 03/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to define the options in MCM.
+---]]
 
 -- If you don't use MCM, change your defaults from here.
 local defaults = {
-	["loot_factor"] = 1,
-	["max_item_per_corpse"] = 5,
-	["magazine_psi_regen"] = 1.0,
 	["guided_tasks"] = false,
 	["heli_attack"] = DIK_keys.DIK_K,
+	["magazine_psi_regen"] = 1.0,
+	["loot_factor"] = 1.0,
+	["max_item_per_corpse"] = 5,
 	["debug_mode"] = false,
 	["addon_removal"] = false,
 }
 
--- Function called to get a certain setting defined in MCM. If MCM isn't installed, it defaults back to a value in defaults table.
+--- Function called to get a certain setting defined in MCM. If MCM isn't installed, it defaults back to a value in defaults table.
+--- @param key string
+--- @return any
 function get_config(key)
 	if ui_mcm then return ui_mcm.get("western_goods/"..key) else return defaults[key] end
 end
 
--- MCM UI definition.
+--- MCM UI definition.
+--- @return table
 function on_mcm_load()
 	op = { id="western_goods", sh=true, gr={
 			{ id="title", 					type="slide", 		link="ui_options_slider_disguise", 	text="ui_mcm_western_goods_title", size={512,50}, spacing=20 	},

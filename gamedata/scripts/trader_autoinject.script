@@ -1,13 +1,11 @@
---[[
--- Info
--- 
--- Original Author(s) : arti
--- Edited : N/A
--- Date : 20/12/2022
---
--- Generic script used to make it easier to add items from addons to traders, without conflicts. Always use the latest version of that script.
---
---]]
+---[[
+--- Original Author(s) : arti
+--- Edited : N/A
+--- Date : 20/12/2022
+--- License : Shareware
+---
+--- Generic script used to make it easier to add items from addons to traders, without conflicts. Always use the latest version of that script.
+---]]
 
 --[[
 Wrapper class to let you autoinject things via monkey patch to all traders, respecting the restock time.
