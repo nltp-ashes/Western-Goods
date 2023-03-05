@@ -114,6 +114,7 @@ end
 
 TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
 --- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader.
+--- @param self UIInventory
 --- @return nil
 function ui_inventory.UIInventory.TMode_Sell(self)
 	-- If we aren't talking to the western goods trader, process normally
@@ -128,6 +129,7 @@ end
 
 TMode_BuyBase = ui_inventory.UIInventory.TMode_Buy
 --- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader.
+--- @param self UIInventory
 --- @return nil
 function ui_inventory.UIInventory.TMode_Buy(self)
 	-- If we aren't talking to the western goods trader, process normally
@@ -141,8 +143,8 @@ function ui_inventory.UIInventory.TMode_Buy(self)
 end
 
 --- Function called when the player clicks Sell/Buy in the trade UI. This function makes a few checks, and then proceeds to exchange the money for the items selected.
---- @param self cse_abstract
---- @param npc cse_abstract
+--- @param self UIInventory
+--- @param npc game_object
 --- @return nil
 function make_exchange(self, npc)
 	-- Get sell cells
@@ -191,20 +193,37 @@ function make_exchange(self, npc)
 		return
 	end
 
-	-- Transfer items
+	-- Make the trade
+	dbg_printf("[WG] Traded :")
 	for id,_ in pairs(cc_sell.indx_id) do
 		if cc_sell:GetCell_ID(id) then
-			alife_release(alife_object(id))
+			local obj = find_object_by_id(id)
+			dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+			self:On_Item_Exchange(db.actor, npc, obj)
 		end
 	end
+	dbg_printf("[WG] In exchange for :")
 	for id,_ in pairs(cc_buy.indx_id) do
 		if cc_buy:GetCell_ID(id) then
-			self:On_Item_Exchange(npc, db.actor, find_object_by_id(id))
+			local obj = find_object_by_id(id)
+			dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+			self:On_Item_Exchange(npc, db.actor, obj)
 		end
 	end
 
 	-- Update UI
-	self.update_info = true
+	self:UpdateInfo(true)
+
+	CreateTimeEvent("delete_traded_items",npc:id(),0.01,function()
+		dbg_printf("[WG] Cleaning traded items :")
+		npc:iterate_inventory(function(owner, obj)
+			if table_contains(western_goods_trader_tradable_items, obj:section()) then
+				dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+				alife_release(alife_object(obj:id()))
+			end
+		end)
+		return true
+	end)
 end
 
 
