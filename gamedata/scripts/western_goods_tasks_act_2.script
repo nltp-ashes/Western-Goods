@@ -182,9 +182,9 @@ end
 --- @param m_data table
 --- @return nil
 function load_state(m_data)
-	TASK_1_CACHE = m_data.wg_act_1_tasks_cache
-	TASK_2_CACHE = m_data.wg_act_2_tasks_cache
-	TASK_3_CACHE = m_data.wg_act_3_tasks_cache
+	TASK_1_CACHE = m_data.wg_act_2_task_1_cache or {}
+	TASK_2_CACHE = m_data.wg_act_2_task_2_cache or {}
+	TASK_3_CACHE = m_data.wg_act_2_task_3_cache or {}
 	dbg_printf("[WG] Loaded act 2 task variables")
 end
 
