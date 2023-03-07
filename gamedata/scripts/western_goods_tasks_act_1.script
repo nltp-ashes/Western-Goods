@@ -27,8 +27,13 @@ local get_member_from_squad = western_goods_utils.get_member_from_squad
 local find_unique_npc = western_goods_utils.find_unique_npc
 local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
+local se_object_by_sid = western_goods_utils.se_object_by_sid
+local game_object_by_sid = western_goods_utils.game_object_by_sid
 
 -- Task variables
+TASK_1_CACHE = {}
+TASK_2_CACHE = {}
+TASK_3_CACHE = {}
 act_1_task_2_stage_1_heli_ready_timer = 0
 act_1_task_2_stage_2_show_targets_timer = 0
 act_1_task_3_stage_2_show_targets_timer = 0
@@ -68,13 +73,16 @@ end
 --- @return number
 function task_functor.act_1_task_1_target_f(task_id,field,p,tsk)
 	if tsk.stage == 0 then
-		return load_var(db.actor,"wg_act_1_task_1_stage_0_target")
+		local heli_se = se_object_by_sid("western_goods_helicopter_landed")
+		return heli_se and heli_se.id
 	end
 	if tsk.stage == 1 then
-		return load_var(db.actor,"wg_act_1_task_1_stage_1_target")
+		local quest_item_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+		return quest_item_se and quest_item_se.id
 	end
 	if tsk.stage == 2 then
-		return load_var(db.actor,"wg_act_1_task_1_stage_2_target")
+		local quest_item_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+		return quest_item_se and quest_item_se.id
 	end
 	if tsk.stage == 3 then
 		return tsk.task_giver_id
@@ -110,26 +118,18 @@ end
 
 function act_1_task_1_stage_0_status_f(tsk,task_id)
 	-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-	local helicopter_id = load_var(db.actor,"wg_act_1_task_1_stage_0_target")
-	local helicopter_se = helicopter_id and alife_object(helicopter_id)
-	local helicopter_obj = helicopter_se and find_object_by_id(helicopter_se.id)
+	local helicopter_se = se_object_by_sid("western_goods_helicopter_landed")
+	local helicopter_obj = helicopter_se and game_object_by_sid("western_goods_helicopter_landed")
 
 	-- If the heli hasn't been created, then create it
-	if not has_alife_info("wg_act_1_task_1_stage_0_helicopter_spawned") then
-		local sec = "pri_a28_earth_helli_1"
+	if not helicopter_se then
+		local sec = "western_goods_helicopter_landed"
 		local pos = vector():set(-4.5,-7,536.8)
 		local lvid = 676572
 		local gvid = 4330
 		helicopter_se = alife_create(sec,pos,lvid,gvid)
-		helicopter_id = helicopter_se.id
 
-		-- Save the helicopter's ID for later use
-		save_var(db.actor,"wg_act_1_task_1_stage_0_target", helicopter_id)
-
-		-- Give an info portion so the spawning code doesn't run twice
-		give_info("wg_act_1_task_1_stage_0_helicopter_spawned")
-
-		dbg_printf("[WG] Act 1 Task 1 Stage 0 | Helicopter successfully created %s", helicopter_id)
+		dbg_printf("[WG] Act 1 Task 1 Stage 0 | Helicopter successfully created %s", helicopter_se.id)
 
 		-- Return so the game can spawn the objects in the world before running the rest of the code
 		return
@@ -139,7 +139,7 @@ function act_1_task_1_stage_0_status_f(tsk,task_id)
 	if not helicopter_obj or get_distance(helicopter_obj:position(), db.actor:position()) > 25 then return end
 
 	-- Send a dialog between the task giver and the player
-	if not has_alife_info("wg_act_1_task_1_stage_0_dialog_sent") then
+	if not TASK_1_CACHE.stage_0_dialog_sent then
 		local sender_1 = alife():actor()
 		local sender_2 = tsk.task_giver_id and alife_object(tsk.task_giver_id)
 
@@ -159,56 +159,64 @@ function act_1_task_1_stage_0_status_f(tsk,task_id)
 
 		dbg_printf("[WG] Act 1 Task 1 Stage 1 | Dialog between %s and %s ready", dialog_sender_1.name, dialog_sender_2.name)
 
-		give_info("wg_act_1_task_1_stage_0_dialog_sent")
+		TASK_1_CACHE.stage_0_dialog_sent = true
 	end
 
 	dbg_printf("[WG] Act 1 Task 1 Stage 0 | Player arrived at helicopter")
 
 	-- Progress the task
 	tsk.stage = 1
+	return
 end
 
 function act_1_task_1_stage_1_status_f(tsk,task_id)
-	local squad_member_id = load_var(db.actor,"wg_act_1_task_1_stage_1_target")
-
 	-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-	local supplies_id = load_var(db.actor,"wg_act_1_task_1_stage_2_target")
-	local supplies_se = supplies_id and alife_object(supplies_id)
-	local supplies_obj = supplies_se and find_object_by_id(supplies_se.id)
+	local supplies_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+	local supplies_obj = supplies_se and game_object_by_sid("wg_act_1_task_1_quest_item")
 
 	-- Spawn the crew of the helicopter dead at the sawmill
-	if not has_alife_info("wg_act_1_task_1_stage_1_crew_spawned") then
+	if not TASK_1_CACHE.stage_1_npcs_spawned then
 		-- Spawn the merc squad, dead, at the sawmill
-		local sec = "killer_sim_squad_alpha"
-		local pos = vector():set(-317.5,9.8,424.5)
-		local lvid = 313868
-		local gvid = 4137
-		squad_member_id = spawn_dead_squad(sec, pos, lvid, gvid)
-
-		-- Save the ID of one of the squad members, so we can display a PDA marker once the squad is dead
-		save_var(db.actor,"wg_act_1_task_1_stage_1_target",squad_member_id)
-
-		-- Squads	 			squad 1							squad 2								squad 3								squad 4
-		sec =  { "zombied_sim_squad_mix", 			"zombied_sim_squad_mix", 		"zombied_sim_squad_mix",			"zombied_sim_squad_mix" 		}
-		pos =  { vector():set(-310.8,9.9,425.8), 	vector():set(-311.7,9.8,420), 	vector():set(-315.1,9.8,415.7),		vector():set(-315.6,9.8,422)	}
-		lvid = { 327181, 							325881, 						319205,								317841 							}
-		gvid = { 4137, 								4137, 							4137,								4137							}
+		local sec_1 = "western_goods_act_1_task_1_heli_crew_squad"
+		local pos_1 = vector():set(-317.5,9.8,424.5)
+		local lvid_1 = 313868
+		local gvid_1 = 4137
+		spawn_dead_squad(sec_1, pos_1, lvid_1, gvid_1)
 
 		-- Spawn the zombies that supposedly killed them
-		spawn_dead_squad(sec[1], pos[1], lvid[1], gvid[1])
-		spawn_dead_squad(sec[2], pos[2], lvid[2], gvid[2])
-		spawn_dead_squad(sec[3], pos[3], lvid[3], gvid[3])
-		spawn_dead_squad(sec[4], pos[4], lvid[4], gvid[4])
+		local sec_2 = "western_goods_act_1_task_1_zombie_1_squad"
+		local pos_2 = vector():set(-317.5,9.8,424.5)
+		local lvid_2 = 313868
+		local gvid_2 = 4137
+		spawn_dead_squad(sec_2, pos_2, lvid_2, gvid_2)
+
+		local sec_3 = "western_goods_act_1_task_1_zombie_2_squad"
+		local pos_3 = vector():set(-317.5,9.8,424.5)
+		local lvid_3 = 313868
+		local gvid_3 = 4137
+		spawn_dead_squad(sec_3, pos_3, lvid_3, gvid_3)
+
+		local sec_4 = "western_goods_act_1_task_1_zombie_3_squad"
+		local pos_4 = vector():set(-317.5,9.8,424.5)
+		local lvid_4 = 313868
+		local gvid_4 = 4137
+		spawn_dead_squad(sec_4, pos_4, lvid_4, gvid_4)
+
+		local sec_5 = "western_goods_act_1_task_1_zombie_4_squad"
+		local pos_5 = vector():set(-317.5,9.8,424.5)
+		local lvid_5 = 313868
+		local gvid_5 = 4137
+		spawn_dead_squad(sec_5, pos_5, lvid_5, gvid_5)
 
 		-- Give an info portion so the spawning code doesn't run twice
-		give_info("wg_act_1_task_1_stage_1_crew_spawned")
+		TASK_1_CACHE.stage_1_npcs_spawned = true
 
 		-- Return so the squad has time to spawn in the game world
 		return
 	end
 
 	-- Spawn the supplies if they don't exist in the world
-	if not has_alife_info("wg_act_1_task_1_stage_1_supplies_spawned") then
+	if not supplies_se then
 
 		-- Spawn the supplies, objective the player has to retrieve
 		local sec = "wg_act_1_task_1_quest_item"
@@ -220,7 +228,7 @@ function act_1_task_1_stage_1_status_f(tsk,task_id)
 
 		save_var(db.actor,"wg_act_1_task_1_stage_2_target",supplies_id)
 
-		give_info("wg_act_1_task_1_stage_1_supplies_spawned")
+		TASK_1_CACHE.stage_1_supplies_spawned = true
 
 		-- Return so the game has time to spawn the supplies in the game world
 		return
@@ -230,7 +238,7 @@ function act_1_task_1_stage_1_status_f(tsk,task_id)
 	if not supplies_obj or get_distance(supplies_obj:position(), db.actor:position()) > 5 then return end
 
 	-- Send a dialog between the task giver and the player
-	if not has_alife_info("wg_act_1_task_1_stage_1_dialog_sent") then
+	if not TASK_1_CACHE.stage_1_dialog_sent then
 		local sender_1 = alife():actor()
 		local sender_2 = tsk.task_giver_id and alife_object(tsk.task_giver_id)
 
@@ -248,36 +256,51 @@ function act_1_task_1_stage_1_status_f(tsk,task_id)
 
 		dbg_printf("[WG] Act 1 Task 1 Stage 1 | Dialog between %s and %s ready", dialog_sender_1.name, dialog_sender_2.name)
 
-		give_info("wg_act_1_task_1_stage_1_dialog_sent")
+		TASK_1_CACHE.stage_1_dialog_sent = true
 	end
 
 	dbg_printf("[WG] Act 1 Task 1 Stage 1 | Player arrived at the dead squad")
 
 	-- Progress the task
 	tsk.stage = 2
+	return
 end
 
 function act_1_task_1_stage_2_status_f(tsk,task_id)
 	-- Retrieve the server object (they may not exist - if they have been picked up by the player)
-	local supplies_id = load_var(db.actor,"wg_act_1_task_1_stage_2_target")
-	local supplies_se = supplies_id and alife_object(supplies_id)
+	local supplies_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+
+	-- If the supplies cannot be found (which is odd), roll back to stage 1
+	if not supplies_se then
+		dbg_printf("[WG] Act 1 Task 1 Stage 2 | Supplies disappeared, rolling back to stage 1...")
+		tsk.stage = 1
+		return
+	end
 
 	-- If the player picked up the supplies, progress to stage 3
-	if not (supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id ~= AC_ID)) then
-		dbg_printf("[WG] Act 1 Task 1 Stage 2 | Player picked up the supplies %s", supplies_id)
+	if not (supplies_se and (supplies_se.parent_id ~= AC_ID)) then
+		dbg_printf("[WG] Act 1 Task 1 Stage 2 | Player picked up the supplies %s", supplies_se.id)
 		tsk.stage = 3
+		return
 	end
 end
 
 function act_1_task_1_stage_3_status_f(tsk,task_id)
 	-- Retrieve the server object (they may exist - if they have been dropped by the player)
-	local supplies_id = load_var(db.actor,"wg_act_1_task_1_stage_2_target")
-	local supplies_se = supplies_id and alife_object(supplies_id)
+	local supplies_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+
+	-- If the supplies cannot be found (which is odd), roll back to stage 2
+	if not supplies_se then
+		dbg_printf("[WG] Act 1 Task 1 Stage 3 | Supplies disappeared, rolling back to stage 2...")
+		tsk.stage = 2
+		return
+	end
 
 	-- If the player dropped the supplies, rollback to stage 2
-	if supplies_se and string.find(supplies_se:section_name(),"wg_act_1_task_1_quest_item") and (supplies_se.parent_id ~= AC_ID) then
-		dbg_printf("[WG] Act 1 Task 1 Stage 3 | Player dropped the supplies %s", supplies_id)
+	if supplies_se and (supplies_se.parent_id ~= AC_ID) then
+		dbg_printf("[WG] Act 1 Task 1 Stage 3 | Player dropped the supplies %s", supplies_se.id)
 		tsk.stage = 2
+		return
 	end
 end
 
@@ -497,6 +520,7 @@ function act_1_task_2_stage_0_status_f(tsk,task_id)
 	end
 
 	tsk.stage = 1
+	return
 end
 
 function act_1_task_2_stage_1_status_f(tsk,task_id)
@@ -702,6 +726,7 @@ function act_1_task_2_stage_1_status_f(tsk,task_id)
 		-- If the player is hostile to bandits, progress to stage 2, otherwise, progress to stage 3
 		if game_relations.is_factions_enemies(get_actor_true_community(), "bandit") and not gameplay_disguise.is_actor_disguised() then
 			tsk.stage = 2
+			return
 		else
 			-- Return the helicopter to the processing station
 			heli_register(helicopter_id,"leave_at_point",vector():set(346.7,7,984.4))
@@ -740,6 +765,7 @@ function act_1_task_2_stage_1_status_f(tsk,task_id)
 			end
 
 			tsk.stage = 3
+			return
 		end
 	end
 end
@@ -836,6 +862,7 @@ function act_1_task_2_stage_2_status_f(tsk,task_id)
 
 		-- And progress the task
 		tsk.stage = 3
+		return
 	end
 end
 
@@ -850,10 +877,11 @@ function act_1_task_2_stage_3_status_f(tsk,task_id)
 
 	-- If the player picked up both quest items, progress to stage 4
 	if not (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id ~= AC_ID)
-	and not (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id ~= AC_ID)
+			and not (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id ~= AC_ID)
 	then
 		dbg_printf("[WG] Act 1 Task 2 Stage 3 | Player picked up the items | %s | %s", quest_item_1_id, quest_item_2_id)
 		tsk.stage = 4
+		return
 	end
 end
 
@@ -868,10 +896,11 @@ function act_1_task_2_stage_4_status_f(tsk,task_id)
 
 	-- If the player dropped one of the quest items, rollback to stage 3
 	if (quest_item_1 and string.find(quest_item_1:section_name(),"wg_act_1_task_2_quest_item_1") and quest_item_1.parent_id ~= AC_ID)
-	or (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id ~= AC_ID)
+			or (quest_item_2 and string.find(quest_item_2:section_name(),"wg_act_1_task_2_quest_item_2") and quest_item_2.parent_id ~= AC_ID)
 	then
 		dbg_printf("[WG] Act 1 Task 2 Stage 4 | Player dropped the items | %s | %s", quest_item_1_id, quest_item_2_id)
 		tsk.stage = 3
+		return
 	end
 end
 
@@ -1054,6 +1083,7 @@ function act_1_task_3_stage_0_status_f(tsk,task_id)
 
 	-- Progress the task
 	tsk.stage = 1
+	return
 end
 
 function act_1_task_3_stage_1_status_f(tsk,task_id)
@@ -1188,6 +1218,7 @@ function act_1_task_3_stage_1_status_f(tsk,task_id)
 
 		-- Progress the task
 		tsk.stage = 2
+		return
 	end
 end
 
@@ -1221,6 +1252,7 @@ function act_1_task_3_stage_2_status_f(tsk,task_id)
 
 	-- Progress the task
 	tsk.stage = 3
+	return
 end
 
 function act_1_task_3_stage_3_status_f(tsk,task_id)
@@ -1363,6 +1395,7 @@ function act_1_task_3_stage_3_status_f(tsk,task_id)
 
 	-- Progress the task
 	tsk.stage = 4
+	return
 end
 
 function act_1_task_3_stage_4_status_f(tsk,task_id)

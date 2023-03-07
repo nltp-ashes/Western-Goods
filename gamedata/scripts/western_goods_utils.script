@@ -267,6 +267,46 @@ function find_npc_in_actor_squad(sec)
 	end
 end
 
+--- Function used to find an NPC by its section name in the player squad.
+--- @author mr_demonized
+--- @param func function
+--- @param ... table
+--- @return nil
+function next_tick(func,...)
+	local args = {...}
+	AddUniqueCall(function()
+		f(unpack(args))
+		return true
+	end)
+end
+
+item_object_id_by_story_id = {}
+function se_object_by_sid(story_id)
+	if not (item_object_id_by_story_id[story_id]) or not (alife_object(item_object_id_by_story_id[story_id])) then
+		printf("/ Story Objects Patched | failsafe for %s", story_id)
+		local sim = alife()
+		local found = false
+		for i=1,65534 do
+			local se_obj = sim:object(i)
+			if se_obj and (se_obj:section_name() == story_id) then -- assuming that section is similar to the story id
+				printf("/ Story Objects Patched | found [%s] with id (%s)", story_id, i)
+				found = i
+				break
+			end
+		end
+		item_object_id_by_story_id[story_id] = found
+	end
+
+	local id = item_object_id_by_story_id[story_id]
+	return id and alife_object(id)
+end
+
+function game_object_by_sid(story_id)
+	local se_obj = se_object_by_sid(story_id)
+	if se_obj then
+		return find_object_by_id(se_obj.id)
+	end
+end
 
 --[[----------------------------------------------------------------------------------------------------
 	Load CreatePersistentTimeEvent function
