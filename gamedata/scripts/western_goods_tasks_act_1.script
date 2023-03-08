@@ -73,14 +73,17 @@ function task_functor.act_1_task_1_target_f(task_id,field,p,tsk)
 		local heli_se = se_object_by_sid("western_goods_helicopter_landed")
 		return heli_se and heli_se.id
 	end
+
 	if tsk.stage == 1 then
 		local quest_item_se = se_object_by_sid("wg_act_1_task_1_quest_item")
 		return quest_item_se and quest_item_se.parent_id == 65535 and quest_item_se.id
 	end
+
 	if tsk.stage == 2 then
 		local quest_item_se = se_object_by_sid("wg_act_1_task_1_quest_item")
 		return quest_item_se and quest_item_se.parent_id == 65535 and quest_item_se.id
 	end
+
 	if tsk.stage == 3 then
 		return tsk.task_giver_id
 	end
@@ -301,6 +304,7 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 			return informant_se and informant_se.id
 		end
 	end
+
 	if tsk.stage == 1 then
 		if western_goods_mcm.get_config("guided_tasks") then
 			local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
@@ -308,6 +312,7 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 			return (quest_item_1 and quest_item_1.parent_id == 65535 and quest_item_1.id) or (quest_item_2 and quest_item_2.parent_id == 65535 and quest_item_2.id)
 		end
 	end
+
 	if tsk.stage == 2 then
 		local timer = TASK_2_CACHE.stage_2_show_targets_timer
 		if timer and timer <= time_global() then
@@ -317,11 +322,13 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 			return (squad_1_se and squad_1_se.id) or (squad_2_se and squad_2_se.id) or (squad_3_se and squad_3_se.id)
 		end
 	end
+
 	if tsk.stage == 3 then
 		local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
 		local quest_item_2 = se_object_by_sid("wg_act_1_task_2_quest_item_2")
 		return (quest_item_1 and quest_item_1.parent_id == 65535 and quest_item_1.id) or (quest_item_2 and quest_item_2.parent_id == 65535 and quest_item_2.id)
 	end
+
 	if tsk.stage == 4 then
 		return tsk.task_giver_id
 	end
@@ -452,7 +459,7 @@ function act_1_task_2_stage_1_status_f(tsk,task_id)
 
 	-- Spawn the Gauss rifle if it hasn't been spawned yet
 	if not quest_item_1_se then
-		local quest_item_1_se = alife_create("wg_act_1_task_2_quest_item_1",vector():set(-445,0.8,-356.8),1056,4818)
+		quest_item_1_se = alife_create("wg_act_1_task_2_quest_item_1",vector():set(-445,0.8,-356.8),1056,4818)
 		dbg_printf("[WG] Act 1 Task 2 Stage 1 | Quest item no 1 spawned %s", quest_item_1_se.id)
 
 		return
@@ -460,7 +467,7 @@ function act_1_task_2_stage_1_status_f(tsk,task_id)
 
 	-- Spawn the note if it hasn't been spawned yet
 	if not quest_item_2_se then
-		local quest_item_2_se = alife_create("wg_act_1_task_2_quest_item_2",vector():set(-446.9,1.2,-384.3),756,4818)
+		quest_item_2_se = alife_create("wg_act_1_task_2_quest_item_2",vector():set(-446.9,1.2,-384.3),756,4818)
 		dbg_printf("[WG] Act 1 Task 2 Stage 1 | Quest item no 2 spawned %s", quest_item_2_se.id)
 
 		return
@@ -579,22 +586,12 @@ function act_1_task_2_stage_2_status_f(tsk,task_id)
 
 	-- Spawn the bandit reinforcements around the Container Warehouse area
 	if not TASK_2_CACHE.stage_2_bandit_squads_spawned then
-		local pos_1 = vector():set(-424.8,0,-339.4)
-		local lvid_1 = 12910
-		local gvid_1 = 4469
-		squad_1_se = spawn_squad("western_goods_act_1_task_2_bandit_4_squad", pos_1, lvid_1, gvid_1)
+		squad_1_se = spawn_squad("western_goods_act_1_task_2_bandit_4_squad", vector():set(-424.8,0,-339.4), 12910, 4469)
+		squad_2_se = spawn_squad("western_goods_act_1_task_2_bandit_5_squad", vector():set(-394.9,0,-386.9), 52206, 4470)
+		squad_3_se = spawn_squad("western_goods_act_1_task_2_bandit_6_squad", vector():set(-405,0,-344), 36889, 4469)
+
 		squad_1_se.scripted_target = "jup_a12"
-
-		local pos_2 = vector():set(-394.9,0,-386.9)
-		local lvid_2 = 52206
-		local gvid_2 = 4470
-		squad_2_se = spawn_squad("western_goods_act_1_task_2_bandit_5_squad", pos_2, lvid_2, gvid_2)
 		squad_2_se.scripted_target = "jup_a12"
-
-		local pos_3 = vector():set(-405,0,-344)
-		local lvid_3 = 36889
-		local gvid_3 = 4469
-		squad_3_se = spawn_squad("western_goods_act_1_task_2_bandit_6_squad", pos_3, lvid_3, gvid_3)
 		squad_3_se.scripted_target = "jup_a12"
 
 		-- Save the time the fight was started at, to indicate the targets after 2 in-game hours
@@ -647,10 +644,7 @@ function act_1_task_2_stage_3_status_f(tsk,task_id)
 
 	-- Spawn the Gauss rifle if it disappeared
 	if not quest_item_1 then
-		local pos = vector():set(-445,0.8,-356.8)
-		local lvid = 1056
-		local gvid = 4818
-		quest_item_1 = alife_create("wg_act_1_task_2_quest_item_1",pos,lvid,gvid)
+		quest_item_1 = alife_create("wg_act_1_task_2_quest_item_1",vector():set(-445,0.8,-356.8),1056,4818)
 
 		dbg_printf("[WG] Act 1 Task 2 Stage 3 | Quest item no 1 respawned %s", quest_item_1.id)
 		return
@@ -658,10 +652,7 @@ function act_1_task_2_stage_3_status_f(tsk,task_id)
 
 	-- Spawn the note if it disappeared
 	if not quest_item_2 then
-		local pos = vector():set(-446.9,1.2,-384.3)
-		local lvid = 756
-		local gvid = 4818
-		quest_item_2 = alife_create("wg_act_1_task_2_quest_item_2",pos,lvid,gvid)
+		quest_item_2 = alife_create("wg_act_1_task_2_quest_item_2",vector():set(-446.9,1.2,-384.3),756,4818)
 
 		dbg_printf("[WG] Act 1 Task 2 Stage 3 | Quest item no 2 respawned %s", quest_item_2.id)
 		return
@@ -725,10 +716,12 @@ function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
 		local crew_member_se = se_object_by_sid("stalker_crew_member")
 		return crew_member_se and crew_member_se.id
 	end
+
 	if tsk.stage == 1 then
 		local smart = SIMBOARD:get_smart_by_name("red_smart_terrain_bridge")
 		return smart and smart.id
 	end
+
 	if tsk.stage == 2 then
 		-- Wait 5 real life minutes before starting to indicate where the remaining enemies are
 		local timer = TASK_3_CACHE.stage_2_show_targets_timer
@@ -739,10 +732,12 @@ function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
 			return (squad_1_se and squad_1_se.id) or (squad_2_se and squad_2_se.id) or (squad_3_se and squad_3_se.id)
 		end
 	end
+
 	if tsk.stage == 3 then
 		local smart = SIMBOARD:get_smart_by_name("red_smart_terrain_bridge")
 		return smart and smart.id
 	end
+
 	if tsk.stage == 4 then
 		return tsk.task_giver_id
 	end
@@ -1021,11 +1016,10 @@ function act_1_task_3_stage_3_status_f(tsk,task_id)
 		helicopter_se = heli_spawn("western_goods_helicopter",heli_spawn_pos,8256,2792)
 		heli_register(helicopter_se.id,"land_at_point", heli_landing_pos)
 
-		dbg_printf("[WG] Act 1 Task 3 Stage 3 | Helicopter spawned %s", helicopter_se.id)
-
 		TASK_3_CACHE.stage_3_helicopter_id = helicopter_se.id
 		TASK_3_CACHE.stage_3_helicopter_spawned = true
 
+		dbg_printf("[WG] Act 1 Task 3 Stage 3 | Helicopter spawned %s", helicopter_se.id)
 		return
 	end
 
