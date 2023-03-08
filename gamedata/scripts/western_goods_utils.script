@@ -283,7 +283,7 @@ end
 item_object_id_by_story_id = {}
 function se_object_by_sid(story_id)
 	if not (item_object_id_by_story_id[story_id]) or not (alife_object(item_object_id_by_story_id[story_id])) then
-		printf("/ Story Objects Patched | failsafe for %s", story_id)
+		--printf("/ Story Objects Patched | failsafe for %s", story_id)
 		local sim = alife()
 		local found = false
 		for i=1,65534 do
