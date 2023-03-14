@@ -335,7 +335,7 @@ end
 function is_enemy(self_combat,obj)
 	if not obj then return end
 
-	if not IsStalker(obj) or IsMonster(obj) then
+	if not IsStalker(obj) and not IsMonster(obj) then
 		return false
 	end
 
