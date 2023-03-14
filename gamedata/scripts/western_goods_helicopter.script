@@ -328,18 +328,17 @@ function heli_set_target(heli_obj,pos)
 	heli_obj:get_helicopter():GoPatrolByRoundPath(pos, 7, true)
 end
 
---- Function used by the helicopter's IA to determine if an object is an enemy or not.
---- @param self_combat any
+--- Function used to know if an object is a valid target for the helicopter or not
 --- @param obj game_object
 --- @return boolean
-function is_enemy(self_combat,obj)
+function valid_target(obj)
 	if not obj then return end
 
 	if not IsStalker(obj) and not IsMonster(obj) then
 		return false
 	end
 
-	if not obj:alive() then
+	if not (obj:is_entity_alive() and obj:alive()) then
 		return false
 	end
 
@@ -347,7 +346,17 @@ function is_enemy(self_combat,obj)
 		return false
 	end
 
-	return HELICOPTERS_TARGETS[obj:id()]
+	return true
+end
+
+--- Function used by the helicopter's IA to determine if an object is an enemy or not.
+--- @param self_combat any
+--- @param obj game_object
+--- @return boolean
+function is_enemy(self_combat,obj)
+	if not obj then return end
+
+	return valid_target(obj) and HELICOPTERS_TARGETS[obj:id()]
 end
 
 --- Function used to take over the helicopter's combat IA (to force the helicopter to target certain objects).
@@ -358,7 +367,7 @@ function take_control(heli_id)
 	if combat then
 		-- Take over is_enemy to control helicopter combat
 		db.storage[heli_id].combat.is_enemy = is_enemy
-		dbg_printf("[WG] Helicopter with id %s is now controled", heli_id)
+		dbg_printf("[WG] Helicopter with id %s is now controlled", heli_id)
 		return true
 	end
 end
@@ -376,16 +385,18 @@ function order_helicopter(dik)
 
 			local combat = db.storage[id] and db.storage[id].combat
 
-			if target and combat and target:is_entity_alive() and target:alive() then
+			if target and combat and valid_target(target) then
 				combat:set_enemy(target)
 				HELICOPTERS_TARGETS[target:id()] = true
 
-				dbg_printf("[WG] Helicopter sent to terminate enemy | %s", target:id())
+				dbg_printf("[WG] Helicopter sent to terminate enemy | %s (%s)", target:section(), target:id())
 
 				local sender = "Mercenary helicopter"
 				local message = get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
 
-				dynamic_news_helper.send_tip(message,sender,nil,CONST_DIALOG_DISPLAY_TIME,"ui_inGame2_PD_DownToEarth",nil,"npc")
+				dynamic_news_helper.send_tip(message,sender,nil,15,"ui_inGame2_PD_DownToEarth",nil,"npc")
+			else
+				dbg_printf("[WG] Invalid target for helicopter | %s (%s)", target:section(), target:id())
 			end
 		end
 	end
