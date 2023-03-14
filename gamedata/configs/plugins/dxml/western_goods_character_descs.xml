@@ -1,0 +1,104 @@
+<DXML>
+    <!--=================================================================================================================================================================
+		Western Goods Trader
+	==================================================================================================================================================================-->
+
+    <specific_character id="stalker_western_goods_trader" team_default="1">
+        <name>western_goods_trader_name</name>
+        <icon>ui_npc_u_stalker_ki_nauchniy</icon>
+        <map_icon x="1" y="0"></map_icon>
+        <bio>western_goods_trader_bio</bio>
+
+        <class>stalker_western_goods_trader</class>
+        <community>killer</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
+
+        <rank>15000</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>2200</reputation>
+
+        <visual>actors\stalker_merc\stalker_mercenary3</visual>
+
+        <supplies>
+            [spawn] \n
+            wpn_scar_acog \n
+            ammo_5.56x45_ap = 1 \n
+            wpn_usp = 1 \n
+            ammo_11.43x23_fmj = 1 \n
+        </supplies>
+
+        <actor_dialog>western_goods_trader_meet</actor_dialog>
+        <actor_dialog>western_goods_trader_trade</actor_dialog>
+        <actor_dialog>western_goods_trader_barter</actor_dialog>
+        <actor_dialog>western_goods_trader_guide</actor_dialog>
+        <actor_dialog>western_goods_trader_task</actor_dialog>
+        <actor_dialog>western_goods_trader_task_completed</actor_dialog>
+        <actor_dialog>buy_route</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!--=================================================================================================================================================================
+        Jupiter Informant
+    ==================================================================================================================================================================-->
+
+    <specific_character id="stalker_jupiter_informant" team_default="1">
+        <name>western_goods_jupiter_informant_name</name>
+        <icon>ui_npc_small_neutral_2</icon>
+        <map_icon x="1" y="0"></map_icon>
+        <bio>western_goods_jupiter_informant_bio</bio>
+
+        <class>stalker_jupiter_informant</class>
+        <community>stalker</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+        <snd_config>characters_voice\human\stalker_3\</snd_config>
+
+        <rank>3000</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>220</reputation>
+
+        <visual>actors\stalker_neutral\stalker_neutral_2_gp5</visual>
+
+        <supplies>
+            [spawn] \n
+            wpn_usp = 1 \n
+            ammo_11.43x23_fmj = 1 \n
+        </supplies>
+
+        <actor_dialog>western_goods_jupiter_informant_meet</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!--=================================================================================================================================================================
+        Helicopter Crew Member
+    ==================================================================================================================================================================-->
+
+    <specific_character id="stalker_crew_member" team_default="1">
+        <name>western_goods_crew_member_name</name>
+        <icon>ui_npc_u_stalker_militari_2</icon>
+        <map_icon x="1" y="0"></map_icon>
+        <bio>western_goods_crew_member_bio</bio>
+
+        <class>stalker_crew_member</class>
+        <community>trader</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
+
+        <rank>15540</rank>
+        <money min="0" max="0" infinitive="1"/>
+        <reputation>500</reputation>
+
+        <visual>actors\stalker_merc\stalker_merc_4_skat</visual>
+
+        <supplies>
+            [spawn] \n
+            wpn_usp = 1 \n
+        </supplies>
+
+        <start_dialog>stalker_crew_member_start</start_dialog>
+
+        <actor_dialog>stalker_crew_member_rescue</actor_dialog>
+        <actor_dialog>stalker_crew_member_reward</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+</DXML>

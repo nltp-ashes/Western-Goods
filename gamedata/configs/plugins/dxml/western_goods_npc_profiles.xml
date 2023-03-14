@@ -1,0 +1,16 @@
+<DXML>
+    <character id="stalker_western_goods_trader">
+        <class>stalker_western_goods_trader</class>
+        <specific_character>stalker_western_goods_trader</specific_character>
+    </character>
+
+    <character id="stalker_jupiter_informant">
+        <class>stalker_jupiter_informant</class>
+        <specific_character>stalker_jupiter_informant</specific_character>
+    </character>
+
+    <character id="stalker_crew_member">
+        <class>stalker_crew_member</class>
+        <specific_character>stalker_crew_member</specific_character>
+    </character>
+</DXML>

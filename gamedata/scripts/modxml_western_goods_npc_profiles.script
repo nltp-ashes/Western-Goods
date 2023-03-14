@@ -9,32 +9,8 @@
 
 function on_xml_read()
     RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-        -- XML file i want to change
-        local xml_to_change = [[gameplay\npc_profile_mlr.xml]]
-
-        -- Check if its the file i want to change
-        if xml_file_name == xml_to_change then
-            -- Here is my code to change XML
-            local text_to_insert = 
-[[
-
-<character id="stalker_western_goods_trader">
-	<class>stalker_western_goods_trader</class>
-	<specific_character>stalker_western_goods_trader</specific_character>
-</character>
-
-<character id="stalker_jupiter_informant">
-	<class>stalker_jupiter_informant</class>
-	<specific_character>stalker_jupiter_informant</specific_character>
-</character>
-
-<character id="stalker_crew_member">
-	<class>stalker_crew_member</class>
-	<specific_character>stalker_crew_member</specific_character>
-</character>
-
-]]
-            xml_obj:insertFromXMLString(text_to_insert)
+        if xml_file_name == [[gameplay\npc_profile_mlr.xml]] then
+            xml_obj:insertFromXMLFile("plugins\\dxml\\western_goods_npc_profiles.xml", nil, nil, true)
         end
     end)
 end
