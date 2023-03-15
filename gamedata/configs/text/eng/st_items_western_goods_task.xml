@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+	<!-- Supply case -->
+	<string id="st_wg_act_1_task_1_quest_item">
+		<text>Supply case</text>
+	</string>
+
+	<string id="st_wg_act_1_task_1_quest_item_s">
+		<text>Supplies</text>
+	</string>
+
+	<string id="st_wg_act_1_task_1_quest_item_descr">
+		<text>
+			A sealed case found near the corpses of the helicopter crew. The exact contents of the case are unknown, but since it was to be delivered to Williams Heades, it must contain western goods.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] highly valuable\n
+		</text>
+	</string>
+
+	<!-- Unidentified weapon -->
+	<string id="st_wg_act_1_task_2_quest_item_1">
+		<text>Unidentified weapon</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_quest_item_1_s">
+		<text>Unidentified weapon</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_quest_item_1_descr">
+		<text>
+			An unknown weapon, the firing mechanism of which has not been established. The weapon appears to be out of ammunition - squeezing the trigger doesn't do anything. It's very heavy and definitely high-tech. Of note is that it appears not to fire bullets based on ignition. Most probably, the rounds are propelled by electro-magnetic forces. One can only suspect what kind of destructive potential it possesses.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+
+	<!-- Bandit's note -->
+	<string id="st_wg_act_1_task_2_quest_item_2">
+		<text>Bandit's note</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_quest_item_2_s">
+		<text>Bandit's note</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_quest_item_2_descr">
+		<text>
+			A paper note found at the container warehouse. Judging by the writing, it was definitely written by one of the bandits...
+		</text>
+	</string>
+
+</string_table>

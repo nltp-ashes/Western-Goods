@@ -48,7 +48,7 @@ TASK_3_CACHE = {}
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_1_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_1_task_1_title")
+	return game.translate_string("st_wg_act_1_task_1_title")
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -59,7 +59,7 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_1_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+	return game.translate_string("st_wg_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -257,9 +257,14 @@ function act_1_task_1_stage_3_status_f(tsk,task_id)
 		return
 	end
 
+	give_info("western_goods_act_1_task_1_ready_finished")
+
 	-- If the player dropped the supplies, rollback to stage 2
 	if supplies_se and (supplies_se.parent_id ~= AC_ID) then
 		dbg_printf("[WG] Act 1 Task 1 Stage 3 | Player dropped the supplies %s", supplies_se.id)
+
+		disable_info("western_goods_act_1_task_1_ready_finished")
+
 		tsk.stage = 2
 		return
 	end
@@ -277,7 +282,7 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_2_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_1_task_2_title")
+	return game.translate_string("st_wg_act_1_task_2_title")
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -288,7 +293,7 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_2_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+	return game.translate_string("st_wg_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -671,9 +676,14 @@ function act_1_task_2_stage_4_status_f(tsk,task_id)
 	local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
 	local quest_item_2 = se_object_by_sid("wg_act_1_task_2_quest_item_2")
 
+	give_info("western_goods_act_1_task_2_ready_finished")
+
 	-- If the player dropped one of the quest items, rollback to stage 3
 	if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID)	then
 		dbg_printf("[WG] Act 1 Task 2 Stage 4 | Player dropped the items | %s | %s", quest_item_1.id, quest_item_2.id)
+
+		disable_info("western_goods_act_1_task_2_ready_finished")
+
 		tsk.stage = 3
 		return
 	end
@@ -691,7 +701,7 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_3_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_1_task_3_title")
+	return game.translate_string("st_wg_act_1_task_3_title")
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -702,7 +712,7 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_3_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
+	return game.translate_string("st_wg_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -1093,11 +1103,12 @@ end
 function act_1_task_3_stage_4_status_f(tsk,task_id)
 	local crew_member_squad_se = se_object_by_sid("stalker_crew_member_squad")
 
+	give_info("western_goods_act_1_task_3_ready_finished")
+
 	-- Spawn the rescued crew member in the book store
 	if not crew_member_squad_se then
 		crew_member_squad_se = spawn_squad("stalker_crew_member_squad", vector():set(-182.1,0.6,-343.9), 33349, 5019)
 		crew_member_squad_se.scripted_target = "pri_a18_smart_terrain"
-
 		return
 	end
 end
@@ -1142,6 +1153,34 @@ end
 --[[----------------------------------------------------------------------------------------------------
 	General functions
 ------------------------------------------------------------------------------------------------------]]
+
+function start_task_1(first_speaker, second_speaker)
+	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+	task_manager.get_task_manager():give_task("western_goods_act_1_task_1", npc:id())
+end
+
+function end_task_1()
+	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_1")
+end
+
+function start_task_2(first_speaker, second_speaker)
+	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+	task_manager.get_task_manager():give_task("western_goods_act_1_task_2", npc:id())
+end
+
+function end_task_2()
+	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_2")
+end
+
+function start_task_3(first_speaker, second_speaker)
+	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+	task_manager.get_task_manager():give_task("western_goods_act_1_task_3", npc:id())
+end
+
+function end_task_3()
+	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_3")
+end
+
 
 --- Function used to spawn a static helicopter at the Waste Processing Station if it doesn't exist.
 --- @param location string

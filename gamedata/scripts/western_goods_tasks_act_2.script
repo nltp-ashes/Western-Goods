@@ -34,9 +34,9 @@ TASK_2_CACHE = {}
 TASK_3_CACHE = {}
 
 --[[----------------------------------------------------------------------------------------------------
-	ACT 2 - RETRIEVAL MISSION
+	ACT 2 - CONTRACT WORK
 
-	TASK 1 - RETRIEVE THE DOCUMENTS
+	TASK 1 - KOLOBOK
 ------------------------------------------------------------------------------------------------------]]
 
 --- Function used to retrieve the title of the mission (displayed in the PDA).
@@ -46,7 +46,7 @@ TASK_3_CACHE = {}
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_2_task_1_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_2_task_1_title")
+	return game.translate_string("st_wg_act_2_task_1_title")
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -57,7 +57,7 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_2_task_1_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_trader_act_2_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+	return game.translate_string("st_wg_act_2_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -68,7 +68,7 @@ end
 --- @return number
 function task_functor.act_2_task_1_target_f(task_id,field,p,tsk)
 	if tsk.stage == 0 then
-		return TASK_1_CACHE.btr_id
+		return nil
 	end
 	if tsk.stage == 1 then
 		return tsk.task_giver_id
@@ -94,61 +94,201 @@ end
 
 function act_2_task_1_stage_0_status_f(tsk,task_id)
 
-	if not TASK_1_CACHE.btr_spawned then
-		local sec = "veh_btr"
-		local pos = vector():set(-174.8,-0.6,-6.8)
-		local lvid = 38003
-		local gvid = 4991
-		local btr_se = alife_create(sec, pos, lvid, gvid)
+	disable_info("western_goods_act_2_task_1_ready_finished")
 
-		logic_enforcer.assign(btr_se.id,'scripts\\tasks\\veh_idle.ltx','logic','ph_car@idle')
-
-		TASK_1_CACHE.btr_id = btr_se.id
-		TASK_1_CACHE.btr_spawned = true
-
-		dbg_printf("[WG] BTR spawned with id %s",btr_se.id)
-
-		return
-	end
-
-	if not TASK_1_CACHE.killer_squad_spawned then
-		local sec = "killer_sim_squad_alpha"
-		local pos = vector():set(-168.8,-0.5,-24.3)
-		local lvid = 42026
-		local gvid = 4962
-		local squad_se = spawn_squad(sec, pos, lvid, gvid)
-
-		squad_se.scripted_target = "lim_smart_terrain_6"
-
-		TASK_1_CACHE.killer_squad_id = squad_se.id
-		TASK_1_CACHE.killer_squad_spawned = true
-
-		dbg_printf("[WG] Killer squad spawned with id %s",squad_se.id)
-
-		return
-	end
-
-	tsk.stage = 1
+	tsk.stage = curr_stage
 end
 
 function act_2_task_1_stage_1_status_f(tsk,task_id)
-	local btr_se = TASK_1_CACHE.btr_id and alife_object(TASK_1_CACHE.btr_id)
-	local btr_obj = btr_se and find_object_by_id(btr_se.id)
 
-	local killer_squad_se = TASK_1_CACHE.killer_squad_id and alife_object(TASK_1_CACHE.killer_squad_id)
-	local one_of_squad_se = killer_squad_se and get_member_from_squad(killer_squad_se)
-	local one_of_squad_obj = one_of_squad_se and find_object_by_id(one_of_squad_se.id)
+	give_info("western_goods_act_2_task_1_ready_finished")
 
-	if btr_obj and one_of_squad_obj and not TASK_1_CACHE.destroy_btr_order_given then
+	tsk.stage = curr_stage
+end
 
-		dbg_printf("[WG] Giving order to %s to destroy BTR %s",one_of_squad_obj:id(),btr_obj:id())
 
-		-- do stuff
+--[[----------------------------------------------------------------------------------------------------
+	TASK 2 - RETRIEVAL MISSION
+------------------------------------------------------------------------------------------------------]]
 
-		dbg_printf("[WG] Order given to %s to destroy BTR %s",one_of_squad_obj:id(),btr_obj:id())
+--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
+function task_functor.act_2_task_2_title_f(task_id,field,p,tsk)
+	return game.translate_string("st_wg_act_2_task_2_title")
+end
 
-		TASK_1_CACHE.destroy_btr_order_given = true
+--- Function used to retrieve the description of the mission (displayed in the PDA).
+--- Warning : naming contract on the translation string : st_wg_trader_act_2_task_2_stage_<stage>_descr.
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
+function task_functor.act_2_task_2_descr_f(task_id,field,p,tsk)
+	return game.translate_string("st_wg_act_2_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+end
+
+--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return number
+function task_functor.act_2_task_2_target_f(task_id,field,p,tsk)
+	if tsk.stage == 0 then
+		return nil
 	end
+	if tsk.stage == 1 then
+		return nil
+	end
+	if tsk.stage == 2 then
+		return nil
+	end
+	if tsk.stage == 3 then
+		return nil
+	end
+	if tsk.stage == 4 then
+		return nil
+	end
+	if tsk.stage == 5 then
+		return nil
+	end
+	if tsk.stage == 6 then
+		return nil
+	end
+	if tsk.stage == 7 then
+		return nil
+	end
+	if tsk.stage == 8 then
+		return nil
+	end
+	if tsk.stage == 9 then
+		return nil
+	end
+	if tsk.stage == 10 then
+		return tsk.task_giver_id
+	end
+end
+
+--- Function used to manage the mission logic as a whole.
+--- @param tsk CGameTask
+--- @param task_id number
+--- @return string
+function task_status_functor.act_2_task_2_status_f(tsk,task_id)
+
+	-- First stage :
+	if tsk.stage == 0 then
+		return act_2_task_2_stage_0_status_f(tsk,task_id)
+	end
+
+	-- Second stage :
+	if tsk.stage == 1 then
+		return act_2_task_2_stage_1_status_f(tsk,task_id)
+	end
+
+	-- Third stage :
+	if tsk.stage == 2 then
+		return act_2_task_2_stage_2_status_f(tsk,task_id)
+	end
+
+	-- Fourth stage :
+	if tsk.stage == 3 then
+		return act_2_task_2_stage_3_status_f(tsk,task_id)
+	end
+
+	-- Fifth stage :
+	if tsk.stage == 4 then
+		return act_2_task_2_stage_4_status_f(tsk,task_id)
+	end
+
+	-- Sixth stage :
+	if tsk.stage == 5 then
+		return act_2_task_2_stage_5_status_f(tsk,task_id)
+	end
+
+	-- Seventh stage :
+	if tsk.stage == 6 then
+		return act_2_task_2_stage_6_status_f(tsk,task_id)
+	end
+
+	-- Eighth stage :
+	if tsk.stage == 7 then
+		return act_2_task_2_stage_7_status_f(tsk,task_id)
+	end
+
+	-- Ninth stage :
+	if tsk.stage == 8 then
+		return act_2_task_2_stage_8_status_f(tsk,task_id)
+	end
+
+	-- Tenth stage :
+	if tsk.stage == 9 then
+		return act_2_task_2_stage_9_status_f(tsk,task_id)
+	end
+
+	-- Eleventh stage :
+	if tsk.stage == 10 then
+		return act_2_task_2_stage_10_status_f(tsk,task_id)
+	end
+end
+
+function act_2_task_2_stage_0_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_1_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_2_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_3_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_4_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_5_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_6_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_7_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_8_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_9_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
+end
+
+function act_2_task_2_stage_10_status_f(tsk,task_id)
+
+	tsk.stage = curr_stage
 end
 
 
@@ -161,6 +301,8 @@ end
 function on_game_start()
 	RegisterScriptCallback("save_state", save_state)
 	RegisterScriptCallback("load_state", load_state)
+	RegisterScriptCallback("on_key_press",progress_task)
+	RegisterScriptCallback("on_key_press",regress_task)
 end
 
 
@@ -175,6 +317,9 @@ function save_state(m_data)
 	m_data.wg_act_2_task_1_cache = TASK_1_CACHE
 	m_data.wg_act_2_task_2_cache = TASK_2_CACHE
 	m_data.wg_act_2_task_3_cache = TASK_3_CACHE
+
+	m_data.curr_stage = curr_stage
+
 	dbg_printf("[WG] Saved act 2 task variables")
 end
 
@@ -185,6 +330,9 @@ function load_state(m_data)
 	TASK_1_CACHE = m_data.wg_act_2_task_1_cache or {}
 	TASK_2_CACHE = m_data.wg_act_2_task_2_cache or {}
 	TASK_3_CACHE = m_data.wg_act_2_task_3_cache or {}
+
+	curr_stage = m_data.curr_stage or 0
+
 	dbg_printf("[WG] Loaded act 2 task variables")
 end
 
@@ -192,3 +340,52 @@ end
 --[[----------------------------------------------------------------------------------------------------
 	General functions
 ------------------------------------------------------------------------------------------------------]]
+
+function start_task_1(first_speaker, second_speaker)
+	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+	task_manager.get_task_manager():give_task("western_goods_act_2_task_1", npc:id())
+end
+
+function end_task_1()
+	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_1")
+end
+
+function start_task_2(first_speaker, second_speaker)
+	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+	task_manager.get_task_manager():give_task("western_goods_act_2_task_2", npc:id())
+end
+
+function end_task_2()
+	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_2")
+end
+
+--[[
+	local btr_se = alife_create("veh_btr", vector():set(-174.8,-0.6,-6.8), 38003, 4991)
+
+	logic_enforcer.assign(btr_se.id,'scripts\\tasks\\veh_idle.ltx','logic','ph_car@idle')
+
+	TASK_1_CACHE.btr_id = btr_se.id
+	TASK_1_CACHE.btr_spawned = true
+
+	dbg_printf("[WG] BTR spawned with id %s",btr_se.id)
+
+	return
+--]]
+
+curr_stage = 0
+
+function progress_task(dik)
+	if dik ~= DIK_keys.DIK_PRIOR then return end
+
+	if curr_stage < 1 then
+		curr_stage = curr_stage + 1
+	end
+end
+
+function regress_task(dik)
+	if dik ~= DIK_keys.DIK_NEXT then return end
+
+	if curr_stage > 0 then
+		curr_stage = curr_stage - 1
+	end
+end

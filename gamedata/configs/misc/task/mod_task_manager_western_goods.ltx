@@ -8,20 +8,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;--================| ACT 1 |===================================================--;;
 
-[stalker_western_goods_trader_task_1_act_1]
+[western_goods_act_1_task_1]
 
 title_functor 			= act_1_task_1_title_f
 descr_functor 			= act_1_task_1_descr_f
 target_functor 			= act_1_task_1_target_f
 status_functor 			= act_1_task_1_status_f
 
-job_descr 				= st_wg_trader_act_1_task_1_job_descr
-task_complete_descr 	= st_wg_trader_act_1_task_1_task_complete_descr
+job_descr 				= st_wg_act_1_task_1_job_descr
+task_complete_descr 	= st_wg_act_1_task_1_task_complete_descr
 
 icon 					= ui_inGame2_Skat_1
 storyline 				= true
-repeat_timeout 			= 0
-precondition 			= {-western_goods_act_1_task_1_finished} true, false
 
 stage_complete 			= 3
 
@@ -31,20 +29,18 @@ on_fail 				= %-western_goods_act_1_task_1_active =fail_task_dec_goodwill(75:kil
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[stalker_western_goods_trader_task_2_act_1]
+[western_goods_act_1_task_2]
 
 title_functor 			= act_1_task_2_title_f
 descr_functor 			= act_1_task_2_descr_f
 target_functor 			= act_1_task_2_target_f
 status_functor 			= act_1_task_2_status_f
 
-job_descr 				= st_wg_trader_act_1_task_2_job_descr
-task_complete_descr 	= st_wg_trader_act_1_task_2_task_complete_descr
+job_descr 				= st_wg_act_1_task_2_job_descr
+task_complete_descr 	= st_wg_act_1_task_2_task_complete_descr
 
 icon 					= ui_inGame2_Skat_1
 storyline 				= true
-repeat_timeout 			= 0
-precondition 			= {+western_goods_act_1_task_1_finished -western_goods_act_1_task_2_finished} true, false
 
 stage_complete 			= 4
 
@@ -54,20 +50,18 @@ on_fail 				= %-western_goods_act_1_task_2_active -western_goods_jupiter_informa
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[stalker_western_goods_trader_task_3_act_1]
+[western_goods_act_1_task_3]
 
 title_functor 			= act_1_task_3_title_f
 descr_functor 			= act_1_task_3_descr_f
 target_functor 			= act_1_task_3_target_f
 status_functor 			= act_1_task_3_status_f
 
-job_descr 				= st_wg_trader_act_1_task_3_job_descr
-task_complete_descr 	= st_wg_trader_act_1_task_3_task_complete_descr
+job_descr 				= st_wg_act_1_task_3_job_descr
+task_complete_descr 	= st_wg_act_1_task_3_task_complete_descr
 
 icon 					= ui_inGame2_Skat_1
 storyline 				= true
-repeat_timeout 			= 0
-precondition 			= {+western_goods_act_1_task_2_finished -western_goods_act_1_task_3_finished} true, false
 
 stage_complete 			= 4
 
@@ -79,34 +73,28 @@ on_fail 				= %-western_goods_act_1_task_3_active -stalker_crew_member_rescue_ov
 ;;--================| ACT 2 |===================================================--;;
 
 
-[stalker_western_goods_trader_task_1_act_2]
+[western_goods_act_2_task_1]
 
 title_functor 			= act_2_task_1_title_f
 descr_functor 			= act_2_task_1_descr_f
 target_functor 			= act_2_task_1_target_f
 status_functor 			= act_2_task_1_status_f
 
-job_descr 				= st_wg_trader_act_2_task_1_job_descr
-task_complete_descr 	= st_wg_trader_act_2_task_1_task_complete_descr
+job_descr 				= st_wg_act_2_task_1_job_descr
+task_complete_descr 	= st_wg_act_2_task_1_task_complete_descr
 
 icon 					= ui_inGame2_Skat_1
 storyline 				= true
-repeat_timeout 			= 0
-precondition 			= {+western_goods_act_1_finished -western_goods_act_2_task_1_finished} true, false
 
 stage_complete 			= 1
 
 on_init					= %+western_goods_act_2_task_1_active%
-on_complete 			= %-western_goods_act_2_task_1_active =reward_random_money(10000:15000) =reward_stash(true) =complete_task_inc_goodwill(100:killer)%
+on_complete 			= %-western_goods_act_2_task_1_active +western_goods_act_2_task_1_finished =reward_random_money(10000:15000) =reward_stash(true) =complete_task_inc_goodwill(100:killer)%
 on_fail 				= %-western_goods_act_2_task_1_active =fail_task_dec_goodwill(35:killer)%
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;[stalker_western_goods_trader_task_2_act_2]
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;[stalker_western_goods_trader_task_3_act_2]
+;[western_goods_act_2_task_2]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;--================| ACT 3 |===================================================--;;

@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
 <string_table>
 
-<!-- Western Goods Trader (in Book Store) -->
+	<!--=================================================================================================================================================================
+		Western Goods Trader (in Book Store)
+	==================================================================================================================================================================-->
 
-	<!-- Character name -->
-	<string id="western_goods_trader_name">
-		<text>Williams "Ashes" Heades</text>
-	</string>
-	
-	<!-- Character bio -->
-	<string id="western_goods_trader_bio">
-		<text>Williams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece. He was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.</text>
-	</string>
-	
 	<!-- Exchange line of dialog-->
 	<string id="western_goods_trader_dialog_init">
 		<text>I'd like to exchange some currency. %c[d_orange][Exchange]</text>
@@ -112,8 +104,7 @@
 		<text>There's no way to fly safely over the CNPP, you'd get shot down before even reaching the Generators.</text>
 	</string>
 
-<!-- Western Goods Trader Trade strings -->
-
+	<!-- Western Goods Trader Trade strings -->
 	<string id="western_goods_trader_empty_sell">
 		<text>You need to pay for the selected items (with Euros or Dollars).</text>
 	</string>
@@ -126,14 +117,13 @@
 		<text>You need to give, in cash, an equal or great value to what you're buying.</text>
 	</string>
 	
-<!-- Western Goods Trader Barters strings -->
+	<!-- Western Goods Trader Barters strings -->
 
 	<!-- No more money barters available -->
 	<string id="st_wg_barter_money_desc_done"> 
 		<text>The trader want to keep some change for other clients, come back later.</text>
 	</string>
-	
-	
+
 	<!-- Dollars to Dollars barters -->
 	<string id="st_wg_barter_dollars_10_to_50_desc">
 		<text>Exchange five %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]50 dollars%c[ui_gray_2] bill.</text>
@@ -158,8 +148,7 @@
 	<string id="st_wg_barter_dollars_10_to_100_desc">
 		<text>Exchange ten %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
 	</string>
-	
-	
+
 	<!-- Euros to Euros barters -->
 	<string id="st_wg_barter_euros_10_to_50_desc">
 		<text>Exchange five %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]50 euros%c[ui_gray_2] bill.</text>
@@ -184,8 +173,7 @@
 	<string id="st_wg_barter_euros_10_to_100_desc">
 		<text>Exchange ten %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
 	</string>
-	
-	
+
 	<!-- Dollars to Roubles barters -->
 	<string id="st_wg_barter_dollars_rouble_10_to_700_desc">
 		<text>Exchange %c[d_orange]10 dollars%c[ui_gray_2] for %c[d_orange]700 roubles%c[ui_gray_2].</text>
@@ -198,8 +186,7 @@
 	<string id="st_wg_barter_dollars_rouble_100_to_7000_desc">
 		<text>Exchange %c[d_orange]100 dollars%c[ui_gray_2] for %c[d_orange]7000 roubles%c[ui_gray_2].</text>
 	</string>
-	
-	
+
 	<!-- Euros to Roubles barters -->
 	<string id="st_wg_barter_euros_rouble_10_to_680_desc">
 		<text>Exchange %c[d_orange]10 euros%c[ui_gray_2] for %c[d_orange]680 roubles%c[ui_gray_2].</text>
@@ -212,5 +199,409 @@
 	<string id="st_wg_barter_euros_rouble_100_to_6800_desc">
 		<text>Exchange %c[d_orange]100 euros%c[ui_gray_2] for %c[d_orange]6800 roubles%c[ui_gray_2].</text>
 	</string>
-	
+
+
+	<!--=================================================================================================================================================================
+		Act 1, Task 1 Dialogs
+	==================================================================================================================================================================-->
+
+	<!-- Job dialog strings -->
+	<string id="st_wg_act_1_task_1_ask_work">
+		<text>Is there anything I can help you with?</text>
+	</string>
+
+	<string id="st_wg_act_1_task_1_accept_work">
+		<text>I can do that.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_1_refuse_work">
+		<text>Actually, let me think about it.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_answer">
+		<text>Don't wander around for too long, they should be there soon.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_1_finish_work">
+		<text>I'm back, and I have the supplies.</text>
+	</string>
+
+	<!-- Messages strings -->
+
+	<string id="st_wg_trader_act_1_task_1_stage_0_message_1">
+		<text>You made it to the helicopter?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_0_message_2">
+		<text>Yes, but there's no-one here. The helicopter is landed in the middle of nowhere.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_0_message_3">
+		<text>Where's the crew?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_0_message_4">
+		<text>I don't know. Do you have any way to locate them or the supplies?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_0_message_5">
+		<text>Some of the supplies have a GPS tracker, let me check.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_0_message_6">
+		<text>I have a signal active at the sawmill, not far from you. Get over there, double time!</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_1_message_1">
+		<text>I've located the crew... They are all dead. It seems they tried to take cover in a house... And got overwhelmed by zombies.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_1_message_2">
+		<text>They are all dead? Damn it. Can you see any of the supplies?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_1_message_3">
+		<text>I think I see a transport case.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_1_stage_1_message_4">
+		<text>Only one? There should be a lot more! Doesn't matter. Take what you can and get the hell out of here before the zombies get you too!</text>
+	</string>
+
+
+	<!--=================================================================================================================================================================
+        Act 1, Task 2 Dialogs
+    ==================================================================================================================================================================-->
+
+	<!-- Job dialog strings -->
+	<string id="st_wg_act_1_task_2_ask_work_0">
+		<text>How are things?</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_ask_work_1">
+		<text>Could be better...</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_ask_work_2">
+		<text>How's that?</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_accept_work">
+		<text>Consider it done.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_refuse_work">
+		<text>Sorry, I'm busy with other things at the moment.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_answer">
+		<text>Thank you, contact me if you discover anything.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_finish_work">
+		<text>I went to Jupiter, to investigate the rumors.</text>
+	</string>
+
+	<!-- Dialogs strings -->
+
+	<string id="western_goods_jupiter_informant_meet_0">
+		<text>Hi. I'm looking for information.</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_meet_1">
+		<text>Yeah? What kind exactly?</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_meet_2">
+		<text>I've heard some rumors are going around the place about "strange lights"? Do you know anything about that?</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_meet_3">
+		<text>Oh yeah, everyone here does. You know the Container Warehouse, south of here? I don't know what's going on there but a few nights ago it was a real firework.</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_meet_4">
+		<text>Do you know what these lights could be? Perhaps an anomaly?</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_meet_5">
+		<text>I'm not sure. And to be honest, I'm not sure if I want to know either.</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_meet_6">
+		<text>Alright. Thanks.</text>
+	</string>
+
+	<!-- Messages strings -->
+
+	<string id="st_wg_trader_act_1_task_2_stage_0_message_1">
+		<text>I found someone at Yanov station. He said he saw strange lights coming from the Container Warehouse.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_0_message_2">
+		<text>Hm. The helicopter flew over that area when we lost contact with the crew.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_0_message_3">
+		<text>I'll make my way there, see what's going on.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_0_message_4">
+		<text>The helicopter, is operational again. I'll send it over to your location to assist you. We don't have a lot of fuel left, so make the best of it.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_1_message_1">
+		<text>We're in route to your location. Heades said you might need some covering fire. Just designate the targets, and we'll take care of the rest.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_1_message_2">
+		<text>We're running now on fuel. We'll return to the Waste Processing Station. Good luck out there.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_1_message_3">
+		<text>What are you doing, stealing our stuff. Dumb ass.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_1_message_4">
+		<text>Stealing our stuff? I'll tell the boys who you really are.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_2_message_1">
+		<text>Be advised, multiple Bandit squads moving in to your position.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_stage_2_message_2">
+		<text>We're running now on fuel. We'll return to the Waste Processing Station. Good luck out there.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_heli_attack_1">
+		<text>Target acquired.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_heli_attack_2">
+		<text>Roger that.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_heli_attack_3">
+		<text>Solid copy.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_heli_attack_4">
+		<text>Opening fire.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_2_heli_attack_5">
+		<text>Stand clear.</text>
+	</string>
+
+
+	<!--=================================================================================================================================================================
+        Act 1, Task 3 Dialogs
+    ==================================================================================================================================================================-->
+
+	<!-- Job dialog strings -->
+	<string id="st_wg_act_1_task_3_ask_work">
+		<text>Is there any work you'd want done?</text>
+	</string>
+
+	<string id="st_wg_act_1_task_3_accept_work">
+		<text>Monolithians again... I'm on it.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_3_refuse_work">
+		<text>I can't help you with that for the moment, sorry.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_3_answer">
+		<text>Thank you, and please, keep me posted.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_3_finish_work">
+		<text>I'm back, your copilot should have been dropped-off here by now?</text>
+	</string>
+
+	<!-- Start dialog strings -->
+
+	<string id="stalker_crew_member_start_0">
+		<text>How come you are even talking to me yet?! We're supposed to meet in act 1, task 3. I'll send you to Brazil be careful !</text>
+	</string>
+
+	<string id="stalker_crew_member_start_1">
+		<text>Uhh... Wh-wh...</text>
+	</string>
+
+	<string id="stalker_crew_member_start_2">
+		<text>Wha-what's... going on?</text>
+	</string>
+
+	<string id="stalker_crew_member_start_3">
+		<text>Where are you... taking me?</text>
+	</string>
+
+	<string id="stalker_crew_member_start_4">
+		<text>We should get moving, I don't like staying here...</text>
+	</string>
+
+	<string id="stalker_crew_member_start_5">
+		<text>Good to see you again.</text>
+	</string>
+
+	<string id="stalker_crew_member_start_6">
+		<text>Hey friend, I'm happy to see you!</text>
+	</string>
+
+	<!-- Dialogs strings -->
+
+	<string id="stalker_crew_member_rescue_0">
+		<text>Hey, you're still with us? Get hold of yourself, and come with me, fast!</text>
+	</string>
+
+	<string id="stalker_crew_member_rescue_1">
+		<text>Hmm. Wh-who are you?</text>
+	</string>
+
+	<string id="stalker_crew_member_rescue_2">
+		<text>A scout team spotted you some time ago, I'm getting you out of here.</text>
+	</string>
+
+	<string id="stalker_crew_member_rescue_3">
+		<text>My head...</text>
+	</string>
+
+	<string id="stalker_crew_member_rescue_4">
+		<text>Come on! We don't have a lot of time before the Monolith squads nearby will call for reinforcements. Come!</text>
+	</string>
+
+	<string id="stalker_crew_member_reward_0">
+		<text>Hey, Heades said you wanted to see me?</text>
+	</string>
+
+	<string id="stalker_crew_member_reward_1">
+		<text>Yes. I wanted to personally thank you for coming to my rescue. You know, these days it's hard to find people that don't take the opportunity to screw over others when they can.</text>
+	</string>
+
+	<string id="stalker_crew_member_reward_2">
+		<text>I'm just not that kind of person. I'm glad I made it in time before the Monolith could brainwash you.</text>
+	</string>
+
+	<string id="stalker_crew_member_reward_3">
+		<text>Yeah, tell me about it! Anyway, I wanted to give you a little something, to make my thank just a little more than a word.\n \nHere, take this. It's an artefact my friends and I found when we last went hunting. I can't believe they are all dead... An artefact isn't exactly the same as saving a life, but I heard it's quite valuable.</text>
+	</string>
+
+	<string id="stalker_crew_member_reward_4">
+		<text>Thank you.</text>
+	</string>
+
+	<!-- Messages strings -->
+
+	<string id="st_wg_trader_act_1_task_3_stage_0_message_1">
+		<text>Heades, I found the captured merc. He's shaken, but alive.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_0_message_2">
+		<text>Good. Can you escort him back to the Book Store?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_0_message_3">
+		<text>He is really confused, I doubt he'll even be able to fire a gun. The Book Store isn't exactly close to our position...</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_0_message_4">
+		<text>Can you get to the bridge, in the Red Forest? I'll arrange the helicopter to go pick him up.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_0_message_5">
+		<text>That would work. Have the helicopter stand by, I'll tell you when to send them to our location.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_1">
+		<text>H-how... How d-did you find me again?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_2">
+		<text>Heades told me a scout team found you when they were looking for enemy movements and safe air corridors for his helicopters.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_3">
+		<text>Are you feeling better?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_4">
+		<text>Yeah I'm... I'm alright. My memory is a bit fuzzy...</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_5">
+		<text>You remember who you are at least? I hope these Monolithians didn't have time to start working on you.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_6">
+		<text>Yeah no don't worry. I remember. I'm copilot for one of Heades' helicopters.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_7">
+		<text>Wait, you said you're a copilot? How come Heades didn't notice you were missing?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_8">
+		<text>I don't know... All I remember is, we were flying some cargo to the Water Processing Station in Zaton, and we had to land in emergency...</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_9">
+		<text>You're the copilot of the helicopter I found abandoned in Zaton?! You just forgot to mention that?</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_1_message_10">
+		<text>Sorry I'm still a bit confused. Anyway, I'm probably still alive because those Monolithians wanted me to fly one of their own helicopters.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_3_message_1">
+		<text>The area is safe enough. You can send the helicopter over.</text>
+	</string>
+
+	<string id="st_wg_trader_act_1_task_3_stage_3_message_2">
+		<text>Roger that, we're on our way. Hang tight.</text>
+	</string>
+
+
+	<!--=================================================================================================================================================================
+		Act 2, Task 1 Dialogs
+	==================================================================================================================================================================-->
+
+	<!-- Job dialog strings -->
+	<string id="st_wg_act_2_task_1_ask_work">
+		<text>Do you have any special jobs up for the taking?</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_accept_work">
+		<text>Deal.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_refuse_work">
+		<text>I'll think about it.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_answer">
+		<text>Alright, get back to me when you have the artefact.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_finish_work">
+		<text>I found the artefact your client wants.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_opt_in">
+		<text>For sure.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_opt_out">
+		<text>You know, never-mind.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_opted_in">
+		<text>Good, they'll contact you soon.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_opted_out">
+		<text>Why did you not sell the artefact for money then? I thought you wanted to prove yourself...</text>
+	</string>
+
 </string_table>

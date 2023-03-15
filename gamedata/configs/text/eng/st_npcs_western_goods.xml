@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+
+	<!-- Williams Heades -->
+	<string id="western_goods_trader_name">
+		<text>Williams "Ashes" Heades</text>
+	</string>
+
+	<string id="western_goods_trader_bio">
+		<text>Williams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece. He was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.</text>
+	</string>
+
+	<!-- Sergei Karlovskiy -->
+	<string id="western_goods_jupiter_informant_name">
+		<text>Sergei Karlovskiy</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_bio">
+		<text>No information.</text>
+	</string>
+
+	<!-- Patrick Dunbar -->
+	<string id="western_goods_crew_member_name">
+		<text>Patrick "Odysseus" Dunbar</text>
+	</string>
+
+	<string id="western_goods_crew_member_bio">
+		<text>One of the members of the helicopter.</text>
+	</string>
+
+</string_table>
