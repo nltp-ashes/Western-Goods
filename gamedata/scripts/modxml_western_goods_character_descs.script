@@ -12,5 +12,15 @@ function on_xml_read()
         if xml_file_name == [[gameplay\character_desc_pripyat.xml]] then
             xml_obj:insertFromXMLFile("plugins\\dxml\\western_goods_character_descs.xml", nil, nil, true)
         end
+
+        if xml_file_name == [[gameplay\character_desc_deadcity.xml]] then
+            local xml_inject = [[
+            <actor_dialog>western_goods_act_2_task_1_start</actor_dialog>
+            <actor_dialog>western_goods_act_2_task_1_end</actor_dialog>
+            ]]
+            local query_1_res = xml_obj:query("specific_character[id=cit_killers_merc_trader_stalker]")
+            local xml_elem = query_1_res[1]
+            xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
+        end
     end)
 end

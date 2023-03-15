@@ -145,4 +145,60 @@
 		TASK 2 - RETRIEVAL MISSION
 	==================================================================================================================================================================-->
 
+	<string id="st_wg_act_2_task_2_title">
+		<text>Contract Work : Retrieval Mission</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_0_descr">
+		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_1_descr">
+		<text>Zombies lie in your way, clear them out before advancing.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_2_descr">
+		<text>A deployment of soldiers is clearing a group of zombies. Wait for them to move on or clear the path yourself.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_3_descr">
+		<text>Hide in the basement while the convoy arrives.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_4_descr">
+		<text>Hide in the basement while the convoy arrives.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_5_descr">
+		<text>Hide in the basement while the convoy arrives.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_6_descr">
+		<text>Get in position to ambush the convoy. Wait for confirmation from your contact before opening fire.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_7_descr">
+		<text>The convoy has been attacked by bandits. Wait for confirmation from your contact before opening fire.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_8_descr">
+		<text>An emission is about to hit, take cover in the basement now !</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_9_descr">
+		<text>The scientists fled during the emission. Get to their last known GPS location.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_10_descr">
+		<text>You have found the package. Retrieve it to your contact.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_job_descr">
+		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_task_complete_descr">
+		<text>TODO</text>
+	</string>
+
 </string_table>

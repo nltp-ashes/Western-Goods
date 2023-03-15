@@ -61,26 +61,30 @@ end
 --- Warning :IDs in the table have to be contiguous integers from 1 to n !
 --- @param dialog_table table
 --- @return nil
-function send_dialog(dialog_table)
+function send_dialog(dialog_table, no_delay)
 	for index=1, #dialog_table do
-		dialog_waiting_count = dialog_waiting_count + 1
-
-		-- Turn off dynamic news
-		dynamic_news_manager.enable_news = false
-
-		CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, CONST_DIALOG_DELAY_MSG*index, function ()
-
-			-- Send the line of dialog
+		if no_delay then
 			dynamic_news_helper.send_tip(dialog_table[index].message, dialog_table[index].sender, nil, CONST_DIALOG_DISPLAY_TIME, dialog_table[index].icon, nil, "npc")
+		else
+			dialog_waiting_count = dialog_waiting_count + 1
 
-			-- Re-enable dynamic news if we're done sending dialogs
-			if dialog_waiting_count <= 0 then
-				dynamic_news_manager.enable_news = true
-			end
+			-- Turn off dynamic news
+			dynamic_news_manager.enable_news = false
 
-			dialog_waiting_count = dialog_waiting_count - 1
+			CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, CONST_DIALOG_DELAY_MSG*index, function ()
 
-			return true
-		end)
+				-- Send the line of dialog
+				dynamic_news_helper.send_tip(dialog_table[index].message, dialog_table[index].sender, nil, CONST_DIALOG_DISPLAY_TIME, dialog_table[index].icon, nil, "npc")
+
+				-- Re-enable dynamic news if we're done sending dialogs
+				if dialog_waiting_count <= 0 then
+					dynamic_news_manager.enable_news = true
+				end
+
+				dialog_waiting_count = dialog_waiting_count - 1
+
+				return true
+			end)
+		end
 	end
 end

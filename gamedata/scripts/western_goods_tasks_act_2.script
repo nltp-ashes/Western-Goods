@@ -27,6 +27,8 @@ local get_member_from_squad = western_goods_utils.get_member_from_squad
 local find_unique_npc = western_goods_utils.find_unique_npc
 local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
+local se_object_by_sid = western_goods_utils.se_object_by_sid
+local game_object_by_sid = western_goods_utils.game_object_by_sid
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -38,6 +40,50 @@ TASK_3_CACHE = {}
 
 	TASK 1 - KOLOBOK
 ------------------------------------------------------------------------------------------------------]]
+
+function start_task_1(first_speaker, second_speaker)
+	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+	task_manager.get_task_manager():give_task("western_goods_act_2_task_1", npc:id())
+
+	TASK_1_CACHE.main_item = "af_fuzz_kolobok"
+	TASK_1_CACHE.secondary_items = {
+		"af_fuzz_kolobok_lead_box",
+		"af_fuzz_kolobok_af_aac",
+		"af_fuzz_kolobok_af_aam",
+		"af_fuzz_kolobok_af_iam"
+	}
+end
+
+function end_task_1()
+	local kolobok_found = false
+
+	-- Items in player inventory that have a section among the ones in fallback_items
+	local secondary_items_found = {}
+
+	-- Iterate player inventory to find if he has kolobok, and gather fallback items in the process
+	db.actor:iterate_inventory(function(owner, obj)
+		local is_main_item = obj:section() == TASK_1_CACHE.main_item
+		local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
+		if is_main_item then
+			kolobok_found = true
+			return
+		elseif is_secondary_item then
+			table.insert(secondary_items_found, obj)
+		end
+	end)
+
+	-- If the player doesn't have a Kolobok, use one of the fallback items
+	if not kolobok_found then
+		for _,obj in pairs(secondary_items_found) do
+			itms_manager.use_arty_container(obj)
+			break
+		end
+	end
+
+	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_1")
+
+	TASK_2_CACHE.available_time = time_global() + 30000
+end
 
 --- Function used to retrieve the title of the mission (displayed in the PDA).
 --- @param task_id number
@@ -93,23 +139,49 @@ function task_status_functor.act_2_task_1_status_f(tsk,task_id)
 end
 
 function act_2_task_1_stage_0_status_f(tsk,task_id)
-
-	disable_info("western_goods_act_2_task_1_ready_finished")
-
-	tsk.stage = curr_stage
+	db.actor:iterate_inventory(function(owner, obj)
+		local is_main_item = obj:section() == TASK_1_CACHE.main_item
+		local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
+		if is_main_item or is_secondary_item then
+			tsk.stage = 1
+			return
+		end
+	end)
 end
 
 function act_2_task_1_stage_1_status_f(tsk,task_id)
 
-	give_info("western_goods_act_2_task_1_ready_finished")
+	local has_item = false
 
-	tsk.stage = curr_stage
+	db.actor:iterate_inventory(function(owner, obj)
+		local is_main_item = obj:section() == TASK_1_CACHE.main_item
+		local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
+		if is_main_item or is_secondary_item then
+			has_item = true
+			return
+		end
+	end)
+
+	if not has_item then
+		disable_info("western_goods_act_2_task_1_ready_finished")
+		tsk.stage = 0
+	else
+		give_info("western_goods_act_2_task_1_ready_finished")
+	end
 end
 
 
 --[[----------------------------------------------------------------------------------------------------
 	TASK 2 - RETRIEVAL MISSION
 ------------------------------------------------------------------------------------------------------]]
+
+function start_task_2(task_giver)
+	task_manager.get_task_manager():give_task("western_goods_act_2_task_2", task_giver.id)
+end
+
+function end_task_2()
+	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_2")
+end
 
 --- Function used to retrieve the title of the mission (displayed in the PDA).
 --- @param task_id number
@@ -314,6 +386,13 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
+
+	-- Pre-process tables
+	TASK_2_CACHE.available_time = (TASK_2_CACHE.available_time or 0) - time_global()
+
+	dbg_printf("[WG] TASK_2_CACHE.available_time : %s", TASK_2_CACHE.available_time)
+
+	-- Save tables
 	m_data.wg_act_2_task_1_cache = TASK_1_CACHE
 	m_data.wg_act_2_task_2_cache = TASK_2_CACHE
 	m_data.wg_act_2_task_3_cache = TASK_3_CACHE
@@ -327,13 +406,21 @@ end
 --- @param m_data table
 --- @return nil
 function load_state(m_data)
+	-- Retrieve tables
 	TASK_1_CACHE = m_data.wg_act_2_task_1_cache or {}
 	TASK_2_CACHE = m_data.wg_act_2_task_2_cache or {}
 	TASK_3_CACHE = m_data.wg_act_2_task_3_cache or {}
 
+	-- Post-process tables
+	TASK_2_CACHE.available_time = (TASK_2_CACHE.available_time or 0) + time_global()
+
+	dbg_printf("[WG] TASK_2_CACHE.available_time : %s", TASK_2_CACHE.available_time)
+
 	curr_stage = m_data.curr_stage or 0
 
 	dbg_printf("[WG] Loaded act 2 task variables")
+
+	setup_act_2_task_2()
 end
 
 
@@ -341,23 +428,6 @@ end
 	General functions
 ------------------------------------------------------------------------------------------------------]]
 
-function start_task_1(first_speaker, second_speaker)
-	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
-	task_manager.get_task_manager():give_task("western_goods_act_2_task_1", npc:id())
-end
-
-function end_task_1()
-	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_1")
-end
-
-function start_task_2(first_speaker, second_speaker)
-	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
-	task_manager.get_task_manager():give_task("western_goods_act_2_task_2", npc:id())
-end
-
-function end_task_2()
-	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_2")
-end
 
 --[[
 	local btr_se = alife_create("veh_btr", vector():set(-174.8,-0.6,-6.8), 38003, 4991)
@@ -371,6 +441,38 @@ end
 
 	return
 --]]
+
+function setup_act_2_task_2()
+	CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 30), function ()
+		local task_available = has_alife_info("western_goods_act_2_task_1_finished")
+		local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
+		local task_not_setup = not has_alife_info("western_goods_act_2_task_2_setup")
+		local timeout_ready = time_global() > TASK_2_CACHE.available_time
+
+		dbg_printf("[WG] What's missing? task_available:%s task_opted_in:%s task_not_setup:%s timeout_ready:%s", task_available, task_opted_in, task_not_setup, timeout_ready)
+		dbg_printf("[WG] Timeout ready? %s (%s vs %s)", timeout_ready, time_global(), TASK_2_CACHE.available_time)
+
+		-- If the task is ready to be started
+		if task_available and task_opted_in and task_not_setup and timeout_ready then
+			dbg_printf("[WG] Act 2 task 2 available...")
+
+			-- Give the task some time after loading the save
+			start_task_2(se_object_by_sid("stalker_western_goods_trader"))
+			dbg_printf("[WG] Act 2 task 2 started...")
+
+			-- Send a message to the player
+			dbg_printf("[WG] Act 2 Task 2 | Preparing message from %s", "Anonymous")
+			send_dialog({
+				{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_act_2_task_2_job_descr")}
+			}, true)
+			dbg_printf("[WG] Act 2 Task 2 | Message from %s ready", "Anonymous")
+
+			give_info("western_goods_act_2_task_2_setup")
+		end
+
+		return true
+	end)
+end
 
 curr_stage = 0
 
