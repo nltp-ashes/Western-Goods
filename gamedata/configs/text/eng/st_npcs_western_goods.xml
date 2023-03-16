@@ -28,4 +28,12 @@
 		<text>One of the members of the helicopter.</text>
 	</string>
 
+	<!-- Dunn Lynn -->
+	<string id="western_goods_dunn_lynn_name">
+		<text>Lt. Dunn Lynn</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_bio">
+		<text>UNISG agent.</text>
+	</string>
 </string_table>

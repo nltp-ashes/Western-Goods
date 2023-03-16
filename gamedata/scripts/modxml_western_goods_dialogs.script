@@ -38,3 +38,8 @@ function crew_member_start_dialog()
     else return game.translate_string("stalker_crew_member_start_6")
     end
 end
+
+--- I had no idea where to place this function, but I feel here makes the most sense? I don't know.
+function dunn_lynn_start_dialog()
+    return game.translate_string("stalker_dunn_lynn_start_" .. math.random(0,5))
+end

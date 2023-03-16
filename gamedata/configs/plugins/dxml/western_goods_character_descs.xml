@@ -105,4 +105,35 @@
         <actor_dialog>stalker_crew_member_reward</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
+
+    <!--=================================================================================================================================================================
+        Lt Dunn Lynn
+    ==================================================================================================================================================================-->
+
+    <specific_character id="stalker_dunn_lynn" team_default="1">
+        <name>western_goods_dunn_lynn_name</name>
+        <icon>ui_npc_u_stalker_militari_2</icon>
+        <map_icon x="1" y="0"></map_icon>
+        <bio>western_goods_dunn_lynn_bio</bio>
+
+        <class>stalker_dunn_lynn</class>
+        <community>isg</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
+
+        <rank>22550</rank>
+        <money min="35000" max="50000" infinitive="1"/>
+        <reputation>780</reputation>
+
+        <visual>actors\stalker_merc\stalker_merc_4_skat</visual>
+
+        <supplies>
+            [spawn] \n
+            wpn_usp = 1 \n
+        </supplies>
+
+        <start_dialog>stalker_dunn_lynn_start</start_dialog>
+
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
 </DXML>
