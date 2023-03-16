@@ -375,6 +375,8 @@ function on_game_start()
 	RegisterScriptCallback("load_state", load_state)
 	RegisterScriptCallback("on_key_press",progress_task)
 	RegisterScriptCallback("on_key_press",regress_task)
+	RegisterScriptCallback("on_key_press",spawn_dunn)
+
 end
 
 
@@ -443,7 +445,7 @@ end
 --]]
 
 function setup_act_2_task_2()
-	CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 30), function ()
+	CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 900), function ()
 		local task_available = has_alife_info("western_goods_act_2_task_1_finished")
 		local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
 		local task_not_setup = not has_alife_info("western_goods_act_2_task_2_setup")
@@ -490,4 +492,10 @@ function regress_task(dik)
 	if curr_stage > 0 then
 		curr_stage = curr_stage - 1
 	end
+end
+
+function spawn_dunn(dik)
+	if dik ~= DIK_keys.DIK_L then return end
+
+	local dunn = spawn_squad("stalker_dunn_lynn_squad", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
 end

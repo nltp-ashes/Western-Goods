@@ -112,7 +112,7 @@
 
     <specific_character id="stalker_dunn_lynn" team_default="1">
         <name>western_goods_dunn_lynn_name</name>
-        <icon>ui_npc_u_stalker_militari_2</icon>
+        <icon>ui_inGame2_no_data</icon>
         <map_icon x="1" y="0"></map_icon>
         <bio>western_goods_dunn_lynn_bio</bio>
 
@@ -125,11 +125,11 @@
         <money min="35000" max="50000" infinitive="1"/>
         <reputation>780</reputation>
 
-        <visual>actors\stalker_merc\stalker_merc_4_skat</visual>
+        <visual>actors\stalker_isg\stalker_isg_1c_sci</visual>
 
         <supplies>
             [spawn] \n
-            wpn_usp = 1 \n
+            wg_porn_mag_1 = 1 \n
         </supplies>
 
         <start_dialog>stalker_dunn_lynn_start</start_dialog>
