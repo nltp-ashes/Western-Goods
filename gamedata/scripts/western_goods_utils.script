@@ -1,22 +1,22 @@
----[[
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
 --- Date : 03/03/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to define various common functions defined in the scripts of the Western Goods addon.
----]]
 
---[[----------------------------------------------------------------------------------------------------
-	Constants and imported functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+item_object_id_by_story_id = {}
 
 local CreatePersistentTimeEvent
 
 
---[[----------------------------------------------------------------------------------------------------
-	Utils Functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Utils Functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print information into the console/log file only when Western Goods' debug mode is enabled.
 --- @return nil
@@ -280,7 +280,6 @@ function next_tick(func,...)
 	end)
 end
 
-item_object_id_by_story_id = {}
 function se_object_by_sid(story_id)
 	if not (item_object_id_by_story_id[story_id]) or not (alife_object(item_object_id_by_story_id[story_id])) then
 		--printf("/ Story Objects Patched | failsafe for %s", story_id)
@@ -308,9 +307,10 @@ function game_object_by_sid(story_id)
 	end
 end
 
---[[----------------------------------------------------------------------------------------------------
-	Load CreatePersistentTimeEvent function
-------------------------------------------------------------------------------------------------------]]
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Load CreatePersistentTimeEvent function
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to register callbacks.
 --- @return string

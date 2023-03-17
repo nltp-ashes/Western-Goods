@@ -1,11 +1,9 @@
----[[
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
 --- Date : 15/02/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script using the DXML functionality to edit configs\gameplay\npc_profile_mlr.xml
----]]
 
 function on_xml_read()
     RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)

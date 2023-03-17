@@ -1,15 +1,13 @@
----[[
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
 --- Date : 03/03/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to define various common functions defined in the scripts of the Western Goods addon.
----]]
 
---[[----------------------------------------------------------------------------------------------------
-	Constants, global variables and imported functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 -- Helicopter constants
 local CONST_HELICOPTER_UPDATE_FREQ = 5000
@@ -26,80 +24,10 @@ local dbg_printf = western_goods_utils.dbg_printf
 local get_distance = western_goods_utils.get_distance
 local find_object_by_id = western_goods_utils.find_object_by_id
 
---[[----------------------------------------------------------------------------------------------------
-	Callbacks registration
-------------------------------------------------------------------------------------------------------]]
 
---- Function used to register callbacks.
---- @return nil
-function on_game_start()
-	RegisterScriptCallback("actor_on_update", refresh_helicopters)
-	RegisterScriptCallback("on_key_press",order_helicopter)
-	RegisterScriptCallback("save_state", save_state)
-	RegisterScriptCallback("load_state", load_state)
-end
-
---[[----------------------------------------------------------------------------------------------------
-	Data persistence
-------------------------------------------------------------------------------------------------------]]
-
---- Function used to store information in the save file.
---- @param m_data table
---- @return nil
-function save_state(m_data)
-	dbg_printf("[WG] Saving helicopter table...")
-	local table_to_save = {}
-
-	for id,_ in pairs(HELICOPTERS_TABLE) do
-		-- Save each field
-		table_to_save[id] = {}
-		table_to_save[id].mode = HELICOPTERS_TABLE[id].mode
-		table_to_save[id].last_mode = HELICOPTERS_TABLE[id].last_mode
-		table_to_save[id].spot = false
-		table_to_save[id].update_timer = time_global()
-		--table_to_save[id].enemy_id = HELICOPTERS_TABLE[id].enemy_id
-
-		-- Save the target position manually as this is an engine class
-		local target_to_save = HELICOPTERS_TABLE[id].target_pos
-		if target_to_save then
-			table_to_save[id].target_pos = { x = target_to_save.x, y = target_to_save.y, z = target_to_save.z}
-		end
-	end
-
-	m_data.heli_tbl = table_to_save
-	dbg_printf("[WG] Saved helicopter table :\n%s", utils_data.print_table(table_to_save, false, true))
-end
-
---- Function used to load information stored in the save file.
---- @param m_data table
---- @return nil
-function load_state(m_data)
-	dbg_printf("[WG] Loading helicopter table...")
-	local table_to_load = m_data.heli_tbl or {}
-
-	for id,_ in pairs(table_to_load) do
-		-- Load each field
-		HELICOPTERS_TABLE[id] = {}
-		HELICOPTERS_TABLE[id].mode = table_to_load[id].mode
-		HELICOPTERS_TABLE[id].last_mode = table_to_load[id].last_mode
-		HELICOPTERS_TABLE[id].spot = table_to_load[id].spot
-		HELICOPTERS_TABLE[id].update_timer = time_global()
-
-		-- Execute at the next frame, once the heli has spawned in the world
-		CreateTimeEvent("western_goods_heli_take_control", id, 0, take_control, id)
-
-		-- Load the target back into an engine class from the previously converted pos
-		local target_to_load = table_to_load[id].target_pos
-		if target_to_load then
-			HELICOPTERS_TABLE[id].target_pos = vector():set(target_to_load.x,target_to_load.y,target_to_load.z)
-		end
-	end
-	dbg_printf("[WG] Loaded helicopter table :\n%s", utils_data.print_table(HELICOPTERS_TABLE, false, true))
-end
-
---[[----------------------------------------------------------------------------------------------------
-	Functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn an helicopter. The helicopter will automatically enter idle state.
 --- @param sec string
@@ -400,4 +328,77 @@ function order_helicopter(dik)
 			end
 		end
 	end
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+	RegisterScriptCallback("actor_on_update", refresh_helicopters)
+	RegisterScriptCallback("on_key_press",order_helicopter)
+	RegisterScriptCallback("save_state", save_state)
+	RegisterScriptCallback("load_state", load_state)
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Data persistence
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
+function save_state(m_data)
+	dbg_printf("[WG] Saving helicopter table...")
+	local table_to_save = {}
+
+	for id,_ in pairs(HELICOPTERS_TABLE) do
+		-- Save each field
+		table_to_save[id] = {}
+		table_to_save[id].mode = HELICOPTERS_TABLE[id].mode
+		table_to_save[id].last_mode = HELICOPTERS_TABLE[id].last_mode
+		table_to_save[id].spot = false
+		table_to_save[id].update_timer = time_global()
+		--table_to_save[id].enemy_id = HELICOPTERS_TABLE[id].enemy_id
+
+		-- Save the target position manually as this is an engine class
+		local target_to_save = HELICOPTERS_TABLE[id].target_pos
+		if target_to_save then
+			table_to_save[id].target_pos = { x = target_to_save.x, y = target_to_save.y, z = target_to_save.z}
+		end
+	end
+
+	m_data.heli_tbl = table_to_save
+	dbg_printf("[WG] Saved helicopter table :\n%s", utils_data.print_table(table_to_save, false, true))
+end
+
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
+function load_state(m_data)
+	dbg_printf("[WG] Loading helicopter table...")
+	local table_to_load = m_data.heli_tbl or {}
+
+	for id,_ in pairs(table_to_load) do
+		-- Load each field
+		HELICOPTERS_TABLE[id] = {}
+		HELICOPTERS_TABLE[id].mode = table_to_load[id].mode
+		HELICOPTERS_TABLE[id].last_mode = table_to_load[id].last_mode
+		HELICOPTERS_TABLE[id].spot = table_to_load[id].spot
+		HELICOPTERS_TABLE[id].update_timer = time_global()
+
+		-- Execute at the next frame, once the heli has spawned in the world
+		CreateTimeEvent("western_goods_heli_take_control", id, 0, take_control, id)
+
+		-- Load the target back into an engine class from the previously converted pos
+		local target_to_load = table_to_load[id].target_pos
+		if target_to_load then
+			HELICOPTERS_TABLE[id].target_pos = vector():set(target_to_load.x,target_to_load.y,target_to_load.z)
+		end
+	end
+	dbg_printf("[WG] Loaded helicopter table :\n%s", utils_data.print_table(HELICOPTERS_TABLE, false, true))
 end

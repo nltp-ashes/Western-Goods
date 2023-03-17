@@ -1,15 +1,13 @@
----[[
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
 --- Date : 03/03/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the various usable items from the Western Goods addon.
----]]
 
---[[----------------------------------------------------------------------------------------------------
-	Constants and imported functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 local dbg_printf = western_goods_utils.dbg_printf
 local round_number = western_goods_utils.round_number
@@ -18,9 +16,10 @@ local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
---[[----------------------------------------------------------------------------------------------------
-	Usable Items
-------------------------------------------------------------------------------------------------------]]
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Usable Items
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to return the text written when right clicking on the magazine.
 --- @param obj game_object
@@ -76,19 +75,9 @@ function use_item(obj)
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	Callbacks registration
-------------------------------------------------------------------------------------------------------]]
-
---- Function used to register callbacks.
---- @return nil
-function on_game_start()
-    RegisterScriptCallback("actor_on_item_use", use_item)
-end
-
---[[----------------------------------------------------------------------------------------------------
-	GPS Locator
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- GPS Locator
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function called when the gps locator is used by the player.
 --- @param obj game_object
@@ -201,9 +190,9 @@ function build_on_screen_message(closest_smart_name, closest_smart_distance, clo
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	French MRE
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- French MRE
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function called when the RCIR item is used by the player.
 --- @param obj game_object
@@ -228,9 +217,9 @@ function use_french_mre(obj)
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	Toblerone
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Toblerone
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function called when the Toblorone item is used by the player.
 --- @param obj game_object
@@ -247,10 +236,22 @@ function use_toblerone(obj)
     end)
 end
 
---[[----------------------------------------------------------------------------------------------------
-	pda.script's primary_objects_tbl table.
-	Cannot be accessed from outside the script so this is the next best thing.
-------------------------------------------------------------------------------------------------------]]
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("actor_on_item_use", use_item)
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- pda.script's primary_objects_tbl table.
+-- Cannot be accessed from outside the script so this is the next best thing.
+-- ---------------------------------------------------------------------------------------------------------------------
 
 pda_primary_objects_tbl = {
     {target="mar_2c_01_anomaly_spot",					        hint="st_mar_2c_01_anomaly_spot_name"},

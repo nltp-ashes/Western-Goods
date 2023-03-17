@@ -1,15 +1,14 @@
----[[
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
 --- Date : 03/03/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the tasks of the Western Goods addon.
----]]
 
---[[----------------------------------------------------------------------------------------------------
-	Constants, global variables and imported functions
-------------------------------------------------------------------------------------------------------]]
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
 local get_translation = game.translate_string
@@ -35,19 +34,55 @@ TASK_1_CACHE = {}
 TASK_2_CACHE = {}
 TASK_3_CACHE = {}
 
---[[----------------------------------------------------------------------------------------------------
-	ACT 1 - HELICOPTER DELIVERY
+-- ---------------------------------------------------------------------------------------------------------------------
+--	ACT 1 - HELICOPTER DELIVERY
+-- ---------------------------------------------------------------------------------------------------------------------
+--	TASK 1 - ROAD BUMPS
+-- ---------------------------------------------------------------------------------------------------------------------
 
-	TASK 1 - ROAD BUMPS
-------------------------------------------------------------------------------------------------------]]
-
+--- Function used to start Act 1, Task 1.
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
+--- @return nil
 function start_task_1(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_1_task_1", npc:id())
 end
 
+--- Function used to end Act 1, Task 1.
+--- @return nil
 function end_task_1()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_1")
+end
+
+--- Function called when the task is initiated.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_1_init(actor,npc)
+	give_info("western_goods_act_1_task_1_active")
+end
+
+--- Function called when the task is successfully completed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_1_complete(actor,npc)
+	disable_info("western_goods_act_1_task_1_active")
+	give_info("western_goods_act_1_task_1_finished")
+	xr_effects.reward_random_money(actor,npc,{"5000","10000"})
+	xr_effects.reward_stash(actor,npc,{"true"})
+	xr_effects.remove_item(actor, npc, {"wg_act_1_task_1_quest_item"})
+	xr_effects.complete_task_inc_goodwill(actor,npc,{"75","killer"})
+end
+
+--- Function called when the task is failed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_1_fail(actor,npc)
+	disable_info("western_goods_act_1_task_1_active")
+	xr_effects.fail_task_dec_goodwill(actor,npc,{"75","killer"})
 end
 
 --- Function used to retrieve the title of the mission (displayed in the PDA).
@@ -280,17 +315,54 @@ function act_1_task_1_stage_3_status_f(tsk,task_id)
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	TASK 2 - CONSPIRACY
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+--	TASK 2 - CONSPIRACY
+-- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to start Act 1, Task 2.
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
+--- @return nil
 function start_task_2(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_1_task_2", npc:id())
 end
 
+--- Function used to end Act 1, Task 2.
+--- @return nil
 function end_task_2()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_2")
+end
+
+--- Function called when the task is initiated.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_2_init(actor,npc)
+	give_info("western_goods_act_1_task_2_active")
+end
+
+--- Function called when the task is successfully completed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_2_complete(actor,npc)
+	disable_info("western_goods_act_1_task_2_active")
+	give_info("western_goods_act_1_task_2_finished")
+	xr_effects.reward_random_money(actor,npc,{"10000","20000"})
+	xr_effects.remove_item(actor, npc, {"wg_act_1_task_2_quest_item_1"})
+	xr_effects.remove_item(actor, npc, {"wg_act_1_task_2_quest_item_2"})
+	xr_effects.complete_task_inc_goodwill(actor,npc,{"75","killer"})
+end
+
+--- Function called when the task is failed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_2_fail(actor,npc)
+	disable_info("western_goods_act_1_task_2_active")
+	disable_info("western_goods_jupiter_informant_first_meet_over")
+	xr_effects.fail_task_dec_goodwill(actor,npc,{"50","killer"})
 end
 
 --- Function used to retrieve the title of the mission (displayed in the PDA).
@@ -708,17 +780,53 @@ function act_1_task_2_stage_4_status_f(tsk,task_id)
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	TASK 3 - THE RESCUE
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+--	TASK 3 - THE RESCUE
+-- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to start Act 1, Task 3.
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
+--- @return nil
 function start_task_3(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_1_task_3", npc:id())
 end
 
+--- Function used to end Act 1, Task 3.
+--- @return nil
 function end_task_3()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_3")
+end
+
+--- Function called when the task is initiated.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_3_init(actor,npc)
+	give_info("western_goods_act_1_task_3_active")
+end
+
+--- Function called when the task is successfully completed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_3_complete(actor,npc)
+	disable_info("western_goods_act_1_task_3_active")
+	give_info("western_goods_act_1_task_3_finished")
+	give_info("western_goods_act_1_finished")
+	xr_effects.reward_random_money(actor,npc,{"10000","15000"})
+	xr_effects.complete_task_inc_goodwill(actor,npc,{"100","killer"})
+end
+
+--- Function called when the task is failed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.western_goods_act_1_task_3_fail(actor,npc)
+	disable_info("western_goods_act_1_task_3_active")
+	disable_info("stalker_crew_member_rescue_over")
+	xr_effects.fail_task_dec_goodwill(actor,npc,{"35","killer"})
 end
 
 --- Function used to retrieve the title of the mission (displayed in the PDA).
@@ -1141,9 +1249,9 @@ function act_1_task_3_stage_4_status_f(tsk,task_id)
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	Callbacks registration
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+--	Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to register callbacks.
 --- @return nil
@@ -1153,9 +1261,9 @@ function on_game_start()
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	Data persistence
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+--	Data persistence
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to store information in the save file.
 --- @param m_data table
@@ -1177,9 +1285,9 @@ function load_state(m_data)
 	dbg_printf("[WG] Loaded act 1 task variables")
 end
 
---[[----------------------------------------------------------------------------------------------------
-	General functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+--	General functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn a static helicopter at the Waste Processing Station if it doesn't exist.
 --- @param location string

@@ -1,4 +1,3 @@
----[[
 --- Original Author(s) : Tronex
 --- Edited : NLTP_ASHES
 --- Date : 03/03/2023
@@ -9,11 +8,10 @@
 --- Naming for some files/folders is based on the following contract :
 --- - textures must be located in 	: "gamedata\textures\ui\magazines\<name_of_the_section>\"
 --- - textures must be named like	: "ui_items_<name_of_the_section>_page_<page_number>.dds"
----]]
 
---[[----------------------------------------------------------------------------------------------------
-	Constants and imported functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 local CONST_PATH_TO_TEXTURES = "ui\\magazines\\"
 local CONST_MAGAZINE_PSI_REGEN = 0.0080
@@ -22,9 +20,10 @@ local dbg_printf = western_goods_utils.dbg_printf
 
 GUI = nil -- instance, don't touch
 
---[[----------------------------------------------------------------------------------------------------
-	UI Item Property
-------------------------------------------------------------------------------------------------------]]
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Item Property
+-- ---------------------------------------------------------------------------------------------------------------------
 
 get_psy_health_regenerationBase = arszi_psy.get_psy_health_regeneration
 --- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
@@ -68,9 +67,9 @@ function display(sec)
 end
 
 
---[[----------------------------------------------------------------------------------------------------
-	UI 
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
 
 class "UIMagazine" (CUIScriptWnd)
 
@@ -173,7 +172,9 @@ function UIMagazine:GetNumberOfPages()
 end
 
 function UIMagazine:GetPageTexturePath(page_number)
-	return CONST_PATH_TO_TEXTURES .. self.section .. "\\" .. "ui_items_" .. self.section .. "_page_" .. page_number
+	local expected_path = CONST_PATH_TO_TEXTURES .. self.section
+	local expected_filename = "ui_items_" .. self.section .. "_page_" .. tostring(page_number)
+	return expected_path .. "\\" .. expected_filename
 end
 
 function UIMagazine:InitCallBacks()
@@ -181,8 +182,6 @@ function UIMagazine:InitCallBacks()
 	self:AddCallback("btn_next", ui_events.BUTTON_CLICKED, self.OnNext, self)
 	self:AddCallback("btn_previous", ui_events.BUTTON_CLICKED, self.OnPrevious, self)
 end
-
-
 
 function UIMagazine:Reset(sec)
 	self.section = sec

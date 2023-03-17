@@ -1,11 +1,9 @@
----[[
 --- Original Author(s) : RavenAscendant
 --- Edited : N/A
 --- Date : 06/01/2022
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported
 ---
 --- Dynamic tint for anomaly inventory.
----]]
 
 function pr(txt, ...)
     --  printf("RAXPH: "..txt, ...)

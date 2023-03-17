@@ -1,15 +1,13 @@
----[[
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
 --- Date : 03/03/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the dialogs of the Western Goods addon.
----]]
 
---[[----------------------------------------------------------------------------------------------------
-	Constants, global variables and imported functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 -- Dialog constants and variables
 local CONST_DIALOG_DISPLAY_TIME = 15
@@ -20,42 +18,10 @@ local dialog_waiting_count = 0
 local dbg_printf = western_goods_utils.dbg_printf
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
---[[----------------------------------------------------------------------------------------------------
-	Callbacks registration
-------------------------------------------------------------------------------------------------------]]
 
---- Function used to register callbacks.
---- @return nil
-function on_game_start()
-	RegisterScriptCallback("save_state", save_state)
-	RegisterScriptCallback("load_state", load_state)
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	Data persistence
-------------------------------------------------------------------------------------------------------]]
-
---- Function used to store information in the save file.
---- @param m_data table
---- @return nil
-function save_state(m_data)
-	m_data.dialog_waiting_count = dialog_waiting_count or 0
-	dbg_printf("[WG] Saved dialog queue length : %s", dialog_waiting_count)
-end
-
---- Function used to load information stored in the save file.
---- @param m_data table
---- @return nil
-function load_state(m_data)
-	dialog_waiting_count = m_data.dialog_waiting_count or 0
-	dbg_printf("[WG] Loaded dialog queue length : %s", dialog_waiting_count)
-end
-
-
---[[----------------------------------------------------------------------------------------------------
-	General functions
-------------------------------------------------------------------------------------------------------]]
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to display a dialog on screen.
 --- Warning :IDs in the table have to be contiguous integers from 1 to n !
@@ -87,4 +53,37 @@ function send_dialog(dialog_table, no_delay)
 			end)
 		end
 	end
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+	RegisterScriptCallback("save_state", save_state)
+	RegisterScriptCallback("load_state", load_state)
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Data persistence
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
+function save_state(m_data)
+	m_data.dialog_waiting_count = dialog_waiting_count or 0
+	dbg_printf("[WG] Saved dialog queue length : %s", dialog_waiting_count)
+end
+
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
+function load_state(m_data)
+	dialog_waiting_count = m_data.dialog_waiting_count or 0
+	dbg_printf("[WG] Loaded dialog queue length : %s", dialog_waiting_count)
 end
