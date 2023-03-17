@@ -438,20 +438,28 @@
 		<text>I found the artefact your client wants.</text>
 	</string>
 
-	<string id="st_wg_act_2_task_1_opt_in">
+	<string id="st_wg_act_2_task_2_opt_in">
 		<text>For sure.</text>
 	</string>
 
-	<string id="st_wg_act_2_task_1_opt_out">
+	<string id="st_wg_act_2_task_2_opt_out">
 		<text>You know, never-mind.</text>
 	</string>
 
-	<string id="st_wg_act_2_task_1_opted_in">
+	<string id="st_wg_act_2_task_2_opted_in">
 		<text>Good, they'll contact you soon.</text>
 	</string>
 
-	<string id="st_wg_act_2_task_1_opted_out">
+	<string id="st_wg_act_2_task_2_opted_out">
 		<text>Why did you not sell the artefact for money then? I thought you wanted to prove yourself...</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_differed_opt_in">
+		<text>I've changed my mind, can you tell your client I'm looking for more work?</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_differed_opted_in">
+		<text>What are you, bipolar? I'll be nice with you this time, and relay your message. Make sense of yourself next time.</text>
 	</string>
 
 	<!-- Act 1, Task 1 Messages -->
