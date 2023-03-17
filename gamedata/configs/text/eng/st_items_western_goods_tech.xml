@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2022																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' tech items.															     -->
+<!-- ================================================================================================================-->
 <string_table>
 	<string id="st_wg_laptop">
 		<text>ASUS Laptop</text>
@@ -79,22 +87,6 @@
 		</text>
 	</string>
 
-	<string id="st_wg_gps_use_1">
-		<text>Location :</text>
-	</string>
-	
-	<string id="st_wg_gps_use_2">
-		<text>unknown</text>
-	</string>
-	
-	<string id="st_wg_gps_use_3">
-		<text>outside of satellite range</text>
-	</string>
-	
-	<string id="st_wg_gps_use_4">
-		<text>unknown in database</text>
-	</string>
-	
 	<string id="st_wg_military_decoder">
 		<text>Military decoder</text>
 	</string>

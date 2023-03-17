@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2022																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' tasks.																     -->
+<!-- ================================================================================================================-->
 <string_table>
 
-<!--=====================================================================================================================================================================
-	Western Goods Trader Tasks
-======================================================================================================================================================================-->
-
-	<!--=================================================================================================================================================================
-		ACT 1 - HELICOPTER DELIVERY
-	==================================================================================================================================================================-->
-	
-	<!--=================================================================================================================================================================
-		TASK 1 - ROAD BUMPS
-	==================================================================================================================================================================-->
+	<!--=============================================================================================================-->
+	<!--	ACT 1 - HELICOPTER DELIVERY																			     -->
+	<!-- ============================================================================================================-->
+	<!--	TASK 1 - ROAD BUMPS																			  		     -->
+	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_1_task_1_title">
 		<text>Helicopter Delivery : Road Bumps</text>
@@ -40,10 +42,10 @@
 	<string id="st_wg_act_1_task_1_task_complete_descr">
 		<text>You made it! Thank god... This whole delivery is such a mess. So, the crew was dead? Damn it. These guys were tough, whatever got them must be serious business. At least you were able to recover some of it. I wonder where the rest went. Hell, I wonder why they even left the helicopter behind.\n \nI'll ask the guys at the Waste Processing Station in Zaton to go investigate. I cannot have that happen again. It's hard enough getting these supplies in the Zone, I don't need stuff like this to happen everytime.\n \nAnyway, thanks for your help Stalker. Good to know I can count on you.</text>
 	</string>
-	
-	<!--=================================================================================================================================================================
-		TASK 2 - CONSPIRACY
-	==================================================================================================================================================================-->
+
+	<!-- ============================================================================================================-->
+	<!--	TASK 2 - CONSPIRACY																			  		     -->
+	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_1_task_2_title">
 		<text>Helicopter Delivery : Conspiracy</text>
@@ -77,9 +79,9 @@
 		<text>Good, did you find anything?\n \nLet's see... Hm, so it was just Bandits? You see, this is exactly what I told you. I don't care about conflicts in the Zone, I take people for what they are. Except for Bandits. I don't know why Dushman wants to keep good relations with them. We should just eradicate them all. Vermin.\n \nAnyway - sorry, I got carried away - Thank you for helping me to figure this whole thing out. At least it wasn't a targeted attack, so business shouldn't be impacted too much.</text>
 	</string>
 
-	<!--=================================================================================================================================================================
-		TASK 3 - THE RESCUE
-	==================================================================================================================================================================-->
+	<!-- ============================================================================================================-->
+	<!--	TASK 3 - THE RESCUE																		  		    	 -->
+	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_1_task_3_title">
 		<text>Helicopter Delivery : The Rescue</text>
@@ -113,13 +115,11 @@
 		<text>Yeah, the helicopter dropped him off here about an hour ago. Thanks for rescuing him!\n \nI don't know if he was able to tell you when you escorted him back to the Red Forest, but he was actually the co-pilot from the first crew of the helicopter, the one you found dead in the Sawmill at Zaton.\n \nAnyway, I gave him some meds to try and tame his confusion.\n \nOh, before I forget, he said he wanted to see you.</text>
 	</string>
 
-	<!--=================================================================================================================================================================
-		ACT 2 - CONTRACT WORK
-	==================================================================================================================================================================-->
-
-	<!--=================================================================================================================================================================
-		TASK 1 - KOLOBOK
-	==================================================================================================================================================================-->
+	<!-- ============================================================================================================-->
+	<!--	ACT 2 - CONTRACT WORK																			  		 -->
+	<!-- ============================================================================================================-->
+	<!--	TASK 1 - KOLOBOK																			  		     -->
+	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_2_task_1_title">
 		<text>Contract Work : Kolobok</text>
@@ -141,9 +141,9 @@
 		<text>Alright, so you are indeed a man of your word.\n \nYou held your end of the deal, and I'll hold mine. Do you still want me to tell my client you're looking for more work?</text>
 	</string>
 
-	<!--=================================================================================================================================================================
-		TASK 2 - RETRIEVAL MISSION
-	==================================================================================================================================================================-->
+	<!-- ============================================================================================================-->
+	<!--	TASK 2 - RETRIEVAL MISSION																		  		 -->
+	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_2_task_2_title">
 		<text>Contract Work : Retrieval Mission</text>

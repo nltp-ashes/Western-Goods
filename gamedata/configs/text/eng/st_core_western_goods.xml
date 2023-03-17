@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
+<!--=================================================================================================================-->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2022																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' general purpose strings.											     -->
+<!-- ================================================================================================================-->
 <string_table>
 
-<!--=====================================================================================================================================================================
-	Core Strings
-======================================================================================================================================================================-->
+	<!-- ============================================================================================================-->
+	<!--	Fatal Errors																					  		 -->
+	<!-- ============================================================================================================-->
 
 	<!-- Out-of-date trader auto_inject.script -->
 	<string id="st_err_outdated_trader_autoinject_script_title">
@@ -56,4 +64,34 @@
 		<text>You can download the latest version from Github : https://github.com/ahuyn/anomaly-barter/releases/tag/latest</text>
 	</string>
 
+	<!-- ============================================================================================================-->
+	<!--	Core Strings																					  		 -->
+	<!-- ============================================================================================================-->
+
+	<!-- Unpacking inventory string -->
+	<string id="st_wg_unpack">
+		<text>Unpack</text>
+	</string>
+
+	<!-- Reading inventory string -->
+	<string id="st_wg_view">
+		<text>View</text>
+	</string>
+
+	<!-- GPS Locator use strings -->
+	<string id="st_wg_gps_use_1">
+		<text>Location :</text>
+	</string>
+
+	<string id="st_wg_gps_use_2">
+		<text>unknown</text>
+	</string>
+
+	<string id="st_wg_gps_use_3">
+		<text>outside of satellite range</text>
+	</string>
+
+	<string id="st_wg_gps_use_4">
+		<text>unknown in database</text>
+	</string>
 </string_table>

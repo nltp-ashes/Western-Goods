@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2022																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' magazines items.													     -->
+<!-- ================================================================================================================-->
 <string_table>
-	<string id="st_wg_view">
-		<text>View</text>
-	</string>
-	
+
 	<string id="st_wg_porn_mag_1">
 		<text>PLAYBOY magazine (Chloe Khan)</text>
 	</string>

@@ -1,18 +1,42 @@
+<!--=================================================================================================================-->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2022																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	DXML injection file used to add npc profiles to the game. 				            					     -->
+<!-- ================================================================================================================-->
 <DXML>
+    <!-- ============================================================================================================-->
+    <!--	Williams Heades																		        	  		 -->
+    <!-- ============================================================================================================-->
+
     <character id="stalker_western_goods_trader">
         <class>stalker_western_goods_trader</class>
         <specific_character>stalker_western_goods_trader</specific_character>
     </character>
+
+    <!-- ============================================================================================================-->
+    <!--	Jupiter Informant																			  		     -->
+    <!-- ============================================================================================================-->
 
     <character id="stalker_jupiter_informant">
         <class>stalker_jupiter_informant</class>
         <specific_character>stalker_jupiter_informant</specific_character>
     </character>
 
+    <!-- ============================================================================================================-->
+    <!--	Helicopter Crew Member																			  		 -->
+    <!-- ============================================================================================================-->
+
     <character id="stalker_crew_member">
         <class>stalker_crew_member</class>
         <specific_character>stalker_crew_member</specific_character>
     </character>
+
+    <!-- ============================================================================================================-->
+    <!--	Lt Dunn Lynn																			  		         -->
+    <!-- ============================================================================================================-->
 
     <character id="stalker_dunn_lynn">
         <class>stalker_dunn_lynn</class>
