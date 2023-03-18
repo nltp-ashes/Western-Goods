@@ -1202,7 +1202,7 @@ function act_1_task_3_stage_3_status_f(tsk,task_id)
 		axr_companions.remove_from_actor_squad(crew_member_obj)
 
 		-- Force the npc logic back in, because dialogs_axr_companion fails to restore it for some reason
-		xr_logic.set_new_scheme_and_logic(crew_member_obj,"beh","beh@get_to_heli","logic",nil,"scripts\\pripyat\\stalker_crew_member.ltx")
+		xr_logic.set_new_scheme_and_logic(crew_member_obj,"beh","beh@get_to_heli","logic",nil,"scripts\\western_goods_crew_member.ltx")
 
 		crew_member_se.scripted_target = "red_smart_terrain_bridge"
 

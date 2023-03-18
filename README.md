@@ -194,25 +194,32 @@ If you need help with anything, or if you have any suggestions of new items, you
 ### SPECIAL THANKS & CREDITS
 
 Credit goes to these people for their work contained in this addon :
-- **SvetkaDystopia** - Produced four models for consumables;
-- **Feel_Fried** - Reused some files from his Food, drug and drinks animations PD 1.0;
-- **arti** - Reused his trader_autoinject script;
-- **RavenAscendant** - Reused his rax_icon_tint script CC BY-NC-SA 3.0 Unported;
-- **RavenAscendant** - Wrote the code that takes control of helicopters' combat AI;
-- **lauta_ro** - Reused part of his More Guides addon;
-- **Aoldri** - Reused icons from his Hideout Furniture addon;
-- **A.R.E.A. mod** - Ported some models from their mod;
-- **segaretro.org** - For providing the textures for the xbox magazines CC BY 4.0;
-- **archive.org** - For providing the textures for the men magazines CC BY-NC-ND 4.0.
-- **commons.wikimedia.org** - For providing various logos and resources used in textures.
-- **freepik.com** - For providing various logos and resources used in textures.
+
+|           Name            |                              Motive                              |         License          |
+|:-------------------------:|:----------------------------------------------------------------:|:------------------------:|
+|       **GhenTuong**       |                  Reused his xr_logic_ex script                   |           N/A            |
+|         **arti**          |               Reused his trader_autoinject script                |           N/A            |
+|    **RavenAscendant**     |                 Reused his rax_icon_tint script                  | CC BY-NC-SA 3.0 Unported |
+|    **SvetkaDystopia**     |               Produced four models for consumables               |           N/A            |
+|      **Feel_Fried**       |   Reused some files from his Food, drug and drinks animations    |          PD 1.0          |
+|    **RavenAscendant**     |   Wrote the code that takes control of helicopters' combat AI    |           N/A            |
+|       **lauta_ro**        |               Reused part of his More Guides addon               |           N/A            |
+|        **Aoldri**         |          Reused icons from his Hideout Furniture addon           |           N/A            |
+|     **A.R.E.A. mod**      |                Ported some models from their mod                 |           N/A            |
+|     **segaretro.org**     |        For providing the textures for the xbox magazines         |        CC BY 4.0         |
+|      **archive.org**      |         For providing the textures for the men magazines         |     CC BY-NC-ND 4.0      |
+| **commons.wikimedia.org** |    For providing various logos and resources used in textures    |          PD 1.0          |
+|      **freepik.com**      |    For providing various logos and resources used in textures    |           N/A            |
 
 Special thanks to these people for their help in the making of this addon :
-- **SvetkaDystopia** - For taking the time to make models for this addon, enormous thanks;
-- **xcvb**, **RavenAscendant** - Help for so many things it'd be too long to list. Huge thanks to these two;
-- **Starcry_**, **Rascal**, **lauta_ro** - Helped to mitigate a compatibility issue with DirectX 8;
-- **arti** - For making his Barter UI Framework;
-- **arti** - For having updated the barters config files to work with the newer version of his framework.
+
+|                  Name                   |                                           Motive                                            |
+|:---------------------------------------:|:-------------------------------------------------------------------------------------------:|
+|           **SvetkaDystopia**            |             For taking the time to make models for this addon, enormous thanks              |
+|      **xcvb**, **RavenAscendant**       |         Help for so many things it'd be too long to list. Huge thanks to these two          |
+| **Starcry\_**, **Rascal**, **lauta_ro** |                   Helped to mitigate a compatibility issue with DirectX 8                   |
+|                **arti**                 |                             For making his Barter UI Framework                              |
+|                **arti**                 | For having updated the barters config files to work with the newer version of his framework |
 
 If you are able to help in the following domains, please reach out :
 - Models and animations (To expand the variety of models, and add the missing use animations).
