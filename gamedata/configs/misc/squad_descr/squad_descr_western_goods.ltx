@@ -172,16 +172,23 @@ always_arrived          = true
 
 ;;--================| Act 2, Task 2 |===========================================--;;
 
-[western_goods_act_2_task_2_zombie_squad]:online_offline_group
-story_id                = western_goods_act_2_task_2_zombie_squad
+[western_goods_act_2_task_2_zombie_1_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_zombie_1_squad
 npc                     = sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
 target_smart            = pri_sim_3
 faction                 = zombied
-logic				    = scripts\western_goods_a2_t2_zombie.ltx
+logic				    = scripts\western_goods_a2_t2_s0_zombie.ltx
 
 [western_goods_act_2_task_2_snork_squad]:online_offline_group
 story_id                = western_goods_act_2_task_2_snork_squad
 npc                     = snork_indoor, snork_indoor, snork_indoor, snork_indoor
 target_smart            = pri_b301
 faction                 = monster_zombied_day
-logic				    = scripts\western_goods_a2_t2_snork.ltx
+logic				    = scripts\western_goods_a2_t2_s3_snork.ltx
+
+[western_goods_act_2_task_2_bandit_1_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_bandit_1_squad
+npc                     = sim_default_bandit_0, sim_default_bandit_1, sim_default_bandit_1
+target_smart            = pri_b301
+faction                 = bandit
+logic				    = scripts\western_goods_a2_t2_s4_bandit.ltx

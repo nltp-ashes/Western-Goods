@@ -211,7 +211,7 @@
     <dialog id="stalker_crew_member_start">
         <phrase_list>
             <phrase id="0">
-                <script_text>modxml_western_goods_dialogs.crew_member_start_dialog</script_text>
+                <script_text>western_goods_dialogs_manager.crew_member_start_dialog</script_text>
             </phrase>
         </phrase_list>
     </dialog>
@@ -278,7 +278,7 @@
     <dialog id="stalker_dunn_lynn_start">
         <phrase_list>
             <phrase id="0">
-                <script_text>modxml_western_goods_dialogs.dunn_lynn_start_dialog</script_text>
+                <script_text>western_goods_dialogs_manager.dunn_lynn_start_dialog</script_text>
             </phrase>
         </phrase_list>
     </dialog>

@@ -6,29 +6,29 @@
 target@base 					= pri_sim_3
 
 [section@logic]
-logic@western_goods_act_2_task_2_zombie_1
-logic@western_goods_act_2_task_2_zombie_2
-logic@western_goods_act_2_task_2_zombie_3
-logic@western_goods_act_2_task_2_zombie_4
+logic@zombie_1
+logic@zombie_2
+logic@zombie_3
+logic@zombie_4
 
 ;;--================================================================================================================--;;
 ;;--================| Logic |=======================================================================================--;;
 ;;--================================================================================================================--;;
 
 [logic@base]
-suitable                        = {=npc_squad_name(western_goods_act_2_task_2_zombie_squad)} true
+suitable                        = {=npc_squad_name(western_goods_act_2_task_2_zombie_1_squad)} true
 net_spawn						= pt1
 
-[logic@western_goods_act_2_task_2_zombie_1]:logic@base
+[logic@zombie_1]:logic@base
 active                          = beh@point_a
 
-[logic@western_goods_act_2_task_2_zombie_2]:logic@base
+[logic@zombie_2]:logic@base
 active                          = beh@point_b
 
-[logic@western_goods_act_2_task_2_zombie_3]:logic@base
+[logic@zombie_3]:logic@base
 active                          = beh@point_c
 
-[logic@western_goods_act_2_task_2_zombie_4]:logic@base
+[logic@zombie_4]:logic@base
 active                          = beh@point_d
 
 ;;--================================================================================================================--;;
