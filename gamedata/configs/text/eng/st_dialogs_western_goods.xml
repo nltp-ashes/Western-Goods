@@ -438,6 +438,7 @@
 		<text>I found the artefact your client wants.</text>
 	</string>
 
+	<!-- Act 2, Task 2 -->
 	<string id="st_wg_act_2_task_2_opt_in">
 		<text>For sure.</text>
 	</string>

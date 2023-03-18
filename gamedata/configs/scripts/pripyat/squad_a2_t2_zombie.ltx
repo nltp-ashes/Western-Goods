@@ -1,0 +1,48 @@
+[section@squad]
+    target@base 					= pri_sim_3
+
+[section@logic]
+	logic@western_goods_act_2_task_2_zombie_1
+	logic@western_goods_act_2_task_2_zombie_2
+	logic@western_goods_act_2_task_2_zombie_3
+	logic@western_goods_act_2_task_2_zombie_4
+
+[logic@western_goods_act_2_task_2_zombie_1]
+    suitable                        = true
+    active                          = beh@point_a
+	net_spawn						= pt1
+
+[logic@western_goods_act_2_task_2_zombie_2]
+    suitable                        = true
+    active                          = beh@point_b
+	net_spawn						= pt1
+
+[logic@western_goods_act_2_task_2_zombie_3]
+    suitable                        = true
+    active                          = beh@point_c
+	net_spawn						= pt1
+
+[logic@western_goods_act_2_task_2_zombie_4]
+    suitable                        = true
+    active                          = beh@point_d
+	net_spawn						= pt1
+
+[beh@general]
+	behavior_state 					= beh_move
+	target 							= waypoint
+
+[beh@point_a]:beh@general
+    pt1                             = 88860000, guard | pos:-96.534225463867,-0.33206990361214,-55.652004241943 look:-95.743728578091,-0.33206990361214,-56.236250936985
+    path_end                         = loop
+
+[beh@point_b]:beh@general
+    pt1                             = 88860000, guard | pos:-95.271690368652,-0.34150111675262,-57.976509094238 look:-95.431712403893,-0.34150111675262,-58.923809289932
+    path_end                         = loop
+
+[beh@point_c]:beh@general
+    pt1                             = 88860000, guard | pos:-93.854927062988,-0.35468396544456,-60.822334289551 look:-93.042621016502,-0.35468396544456,-61.382510900497
+    path_end                         = loop
+
+[beh@point_d]:beh@general
+    pt1                             = 88860000, guard | pos:-90.801055908203,-0.48545730113983,-58.648422241211 look:-90.3498005867,-0.48545730113983,-57.769573152065
+    path_end                         = loop
