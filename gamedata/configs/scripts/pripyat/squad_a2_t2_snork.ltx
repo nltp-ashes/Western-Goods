@@ -1,0 +1,51 @@
+[section@squad]
+    target@base 					= pri_b301
+
+[section@logic]
+	logic@western_goods_act_2_task_2_snork_1
+	logic@western_goods_act_2_task_2_snork_2
+	logic@western_goods_act_2_task_2_snork_3
+	logic@western_goods_act_2_task_2_snork_4
+
+[logic@western_goods_act_2_task_2_snork_1]
+    suitable                        = {=npc_squad_name(western_goods_act_2_task_2_snork_squad)} true
+    active                          = mob_home@point_a
+    monster_job                     = true
+	net_spawn						= pt1
+
+[logic@western_goods_act_2_task_2_snork_2]
+    suitable                        = {=npc_squad_name(western_goods_act_2_task_2_snork_squad)} true
+    active                          = mob_home@point_b
+    monster_job                     = true
+	net_spawn						= pt1
+
+[logic@western_goods_act_2_task_2_snork_3]
+    suitable                        = {=npc_squad_name(western_goods_act_2_task_2_snork_squad)} true
+    active                          = mob_home@point_c
+    monster_job                     = true
+	net_spawn						= pt1
+
+[logic@western_goods_act_2_task_2_snork_4]
+    suitable                        = {=npc_squad_name(western_goods_act_2_task_2_snork_squad)} true
+    active                          = mob_home@point_d
+    monster_job                     = true
+	net_spawn						= pt1
+
+[mob_home@general]
+    target				            = %=mutant_path()%
+
+[mob_home@point_a]:mob_home@general
+    pt1                             = 88860000, guard | pos:28.771755218506,-4.3248405456543,126.83431243896 dir:-25
+    path_end                        = loop
+
+[mob_home@point_b]:mob_home@general
+    pt1                             = 88860000, guard | pos:30.584522247314,-3.9664533138275,123.28659057617 dir:60
+    path_end                        = loop
+
+[mob_home@point_c]:mob_home@general
+    pt1                             = 88860000, guard | pos:23.563053131104,-4.3246669769287,123.42362976074 dir:-60
+    path_end                        = loop
+
+[mob_home@point_d]:mob_home@general
+    pt1                             = 88860000, guard | pos:23.498825073242,-4.3250093460083,127.86427307129 dir:180
+    path_end                        = loop
