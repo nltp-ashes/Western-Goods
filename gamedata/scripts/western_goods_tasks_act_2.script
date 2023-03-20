@@ -230,6 +230,10 @@ end
 --- @return nil
 function xr_effects.western_goods_act_2_task_2_init(actor,npc)
 	give_info("western_goods_act_2_task_2_active")
+
+	TASK_2_CACHE.zombie_1_spawn_data = {x=-94.6,y=-0.3,z=-58.3,lvid=96550,gvid=4947}
+	TASK_2_CACHE.snork_spawn_data = {x=25.8,y=-4.3,z=123.5,lvid=231878,gvid=4970}
+	TASK_2_CACHE.bandit_1_spawn_data = {x=26.5,y=-0.6,z=133.0,lvid=232810,gvid=4970}
 end
 
 --- Function called when the task is successfully completed.
@@ -500,19 +504,6 @@ end
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
---[[
-	local btr_se = alife_create("veh_btr", vector():set(-174.8,-0.6,-6.8), 38003, 4991)
-
-	logic_enforcer.assign(btr_se.id,'scripts\\tasks\\veh_idle.ltx','logic','ph_car@idle')
-
-	TASK_1_CACHE.btr_id = btr_se.id
-	TASK_1_CACHE.btr_spawned = true
-
-	dbg_printf("[WG] BTR spawned with id %s",btr_se.id)
-
-	return
---]]
-
 function setup_act_2_task_2()
 	CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 900), function ()
 		local task_available = has_alife_info("western_goods_act_2_task_1_finished")
@@ -563,6 +554,16 @@ function regress_task(dik)
 	end
 end
 
+function spawn_btr(x, y, z, lvid, gvid)
+	local btr_se = alife_create("veh_btr", vector():set(x, y, z), lvid, gvid)
+
+	logic_enforcer.assign(btr_se.id,'scripts\\tasks\\veh_idle.ltx','logic','ph_car@idle')
+
+	dbg_printf("[WG] BTR spawned with id %s",btr_se.id)
+
+	return btr_se
+end
+
 function spawn_dunn(dik)
 	if dik ~= DIK_keys.DIK_L then return end
 
@@ -572,12 +573,27 @@ end
 function spawn_test_squads(dik)
 	if dik ~= DIK_keys.DIK_P then return end
 
+	--local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+	--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_1_squad")
+
+	--local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+	--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_2_squad")
+
 	local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
-	local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_1_squad")
+	local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_army_squad")
 
-	local smart = SIMBOARD.smarts_by_names["pri_b301"]
-	local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_snork_squad")
+	local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+	local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_mono_squad")
 
-	local smart = SIMBOARD.smarts_by_names["pri_b301"]
-	local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_bandit_squad")
+	local btr_se = spawn_btr(-32.9, -0.5, 20.9, 155155, 4971)
+	btr_se.angle = vector():set(0,-1.5708,0)
+
+	--local smart = SIMBOARD.smarts_by_names["pri_b301"]
+	--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_snork_squad")
+	--local squad = spawn_squad("western_goods_act_2_task_2_snork_squad", vector():set(25.842678070068,-4.3245229721069,123.48170471191), 231878, 4970)
+
+	--local smart = SIMBOARD.smarts_by_names["pri_b301"]
+	--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_bandit_1_squad")
+
 end
+

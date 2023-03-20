@@ -6,29 +6,29 @@
 target@base 					= pri_sim_3
 
 [section@logic]
-logic@zombie_1
-logic@zombie_2
-logic@zombie_3
-logic@zombie_4
+logic@army_1
+logic@army_2
+logic@army_3
+logic@army_4
 
 ;;--================================================================================================================--;;
 ;;--================| Logic |=======================================================================================--;;
 ;;--================================================================================================================--;;
 
 [logic@base]
-suitable                        = {=npc_squad_name(western_goods_act_2_task_2_zombie_1_squad)} true
+suitable                        = {=npc_squad_name(western_goods_act_2_task_2_army_squad)} true
 net_spawn						= pt1
 
-[logic@zombie_1]:logic@base
+[logic@army_1]:logic@base
 active                          = beh@point_a
 
-[logic@zombie_2]:logic@base
+[logic@army_2]:logic@base
 active                          = beh@point_b
 
-[logic@zombie_3]:logic@base
+[logic@army_3]:logic@base
 active                          = beh@point_c
 
-[logic@zombie_4]:logic@base
+[logic@army_4]:logic@base
 active                          = beh@point_d
 
 ;;--================================================================================================================--;;
@@ -41,13 +41,13 @@ target 							= waypoint
 path_end                        = loop
 
 [beh@point_a]:beh@base
-pt1                             = 88860000, guard | pos:-96.534225463867,-0.33206990361214,-55.652004241943 look:-95.0,0.0,-56.0
+pt1                             = 30000, sneak | pos:-34.722633361816,-0.42227184772491,17.666744232178 look:-34.0,0.0,16.0
 
 [beh@point_b]:beh@base
-pt1                             = 88860000, guard | pos:-95.271690368652,-0.34150111675262,-57.976509094238 look:-95.0,0.0,-59.0
+pt1                             = 30000, threat_danger | pos:-30.289098739624,-0.42137783765793,17.239654541016 look:-29.0,0.0,17.0
 
 [beh@point_c]:beh@base
-pt1                             = 88860000, guard | pos:-93.854927062988,-0.35468396544456,-60.822334289551 look:-93.0,0.0,-61.0
+pt1                             = 30000, give_orders | pos:-30.92230796814,-0.42331829667091,24.481842041016 look:-29.5,0.0,25.5
 
 [beh@point_d]:beh@base
-pt1                             = 88860000, guard | pos:-90.801055908203,-0.48545730113983,-58.648422241211 look:-90.0,0.0,-57.0
+pt1                             = 30000, raid | pos:-36.745723724365,-0.4214800298214,24.870613098145 look:-37.0,0.0,26.5
