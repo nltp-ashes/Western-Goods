@@ -1,0 +1,158 @@
+;;--================================================================================================================--;;
+;;--================| Logic Extension (GhenTuong's xr_logic_ex.script) |============================================--;;
+;;--================================================================================================================--;;
+
+[section@squad]
+target@base 					= pri_a28_school
+
+[section@logic]
+logic@ecolog_1
+logic@ecolog_2
+logic@ecolog_3
+logic@ecolog_4
+logic@ecolog_5
+logic@ecolog_6
+
+;;--================================================================================================================--;;
+;;--================| Logic |=======================================================================================--;;
+;;--================================================================================================================--;;
+
+[logic@base]
+suitable                        = {=npc_squad_name(western_goods_act_2_task_2_ecolog_squad)} true
+net_spawn						= pt1
+
+[logic@ecolog_1]:logic@base
+suitable                        = {=check_npc_name(sim_default_ecolog_1) =npc_squad_name(western_goods_act_2_task_2_ecolog_squad)} true
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_a, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_a, beh@point_flee_a
+
+[logic@ecolog_2]:logic@base
+suitable                        = {=check_npc_name(sim_default_ecolog_1) =npc_squad_name(western_goods_act_2_task_2_ecolog_squad)} true
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_b, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_b, beh@point_flee_b
+
+[logic@ecolog_3]:logic@base
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_c, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_c, beh@point_flee_c
+
+[logic@ecolog_4]:logic@base
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_d, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_d, beh@point_flee_d
+
+[logic@ecolog_5]:logic@base
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_e, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_e, beh@point_flee_e
+
+[logic@ecolog_6]:logic@base
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_f, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_f, beh@point_flee_f
+
+;;--================================================================================================================--;;
+;;--================| Scheme |======================================================================================--;;
+;;--================================================================================================================--;;
+
+[beh@base]
+behavior_state 					= beh_move
+target 							= waypoint
+
+walk_dist 						= 50
+jog_dist 						= 100
+run_dist 						= 150
+
+walk_anim 						= walk
+jog_anim 						= panic
+run_anim 						= panic
+
+before_hit						= invulnerable
+
+path_end                        = loop
+
+;;;;; ecolog_1 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[beh@point_spawn_a]:beh@base
+pt1                             = 88860000, guard | pos:71.0,0.0,176.0 look:71.0,0.0,176.0
+on_timer                        = 18000 | beh@point_research_a %+western_goods_act_2_task_2_ecolog_moved%
+
+[beh@point_research_a]:beh@base
+pt1                             = 88860000, probe_stand | pos:62.0,0.0,153.0 look:61.5,0.0,152.5
+on_info                         = {+western_goods_act_2_task_2_ecolog_flee} beh@point_worry_a
+
+[beh@point_worry_a]:beh@base
+pt1                             = 88860000, threat_danger | pos:62.0,0.0,153.0 look:61.5,0.0,152.5
+on_timer                        = 10000 | beh@point_flee_a %+western_goods_act_2_task_2_ecolog_fled%
+
+[beh@point_flee_a]:beh@base
+pt1                             = 88860000, guard | pos:-138.7,0.0,-200.9 look:-139.2,0.0,-201.8
+
+;;;;; ecolog_2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[beh@point_spawn_b]:beh@base
+pt1                             = 88860000, guard | pos:72.0,0.0,176.0 look:72.0,0.0,176.0
+on_timer                        = 15000 | beh@point_research_b %+western_goods_act_2_task_2_ecolog_moved%
+
+[beh@point_research_b]:beh@base
+pt1                             = 88860000, probe_crouch | pos:65.0,0.0,150.0 look:65.5,0.0,149.0
+on_info                         = {+western_goods_act_2_task_2_ecolog_flee} beh@point_worry_b
+
+[beh@point_worry_b]:beh@base
+pt1                             = 88860000, threat_danger | pos:65.0,0.0,150.0 look:65.5,0.0,149.0
+on_timer                        = 11000 | beh@point_flee_b %+western_goods_act_2_task_2_ecolog_fled%
+
+[beh@point_flee_b]:beh@base
+pt1                             = 88860000, guard | pos:-141.0,0.0,-200.9 look:-141.5,0.0,-201.8
+
+;;;;; ecolog_3 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[beh@point_spawn_c]:beh@base
+pt1                             = 88860000, guard | pos:71.0,0.0,177.0 look:71.0,0.0,177.0
+on_timer                        = 12000 | beh@point_research_c %+western_goods_act_2_task_2_ecolog_moved%
+
+[beh@point_research_c]:beh@base
+pt1                             = 88860000, guard | pos:56.5,0.0,152.5 look:55.5,0.0,152.5
+on_info                         = {+western_goods_act_2_task_2_ecolog_flee} beh@point_worry_c
+
+[beh@point_worry_c]:beh@base
+pt1                             = 88860000, threat_danger | pos:56.5,0.0,152.5 look:55.5,0.0,152.5
+on_timer                        = 12000 | beh@point_flee_c %+western_goods_act_2_task_2_ecolog_fled%
+
+[beh@point_flee_c]:beh@base
+pt1                             = 88860000, guard | pos:-138.0,0.0,-200.0 look:-138.5,0.0,-200.9
+
+;;;;; ecolog_4 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[beh@point_spawn_d]:beh@base
+pt1                             = 88860000, guard | pos:72.0,0.0,177.0 look:72.0,0.0,177.0
+on_timer                        = 9000 | beh@point_research_d %+western_goods_act_2_task_2_ecolog_moved%
+
+[beh@point_research_d]:beh@base
+pt1                             = 88860000, guard | pos:71.0,0.0,156.0 look:72.0,0.0,156.5
+on_info                         = {+western_goods_act_2_task_2_ecolog_flee} beh@point_worry_d
+
+[beh@point_worry_d]:beh@base
+pt1                             = 88860000, threat_danger | pos:71.0,0.0,156.0 look:72.0,0.0,156.5
+on_timer                        = 13000 | beh@point_flee_d %+western_goods_act_2_task_2_ecolog_fled%
+
+[beh@point_flee_d]:beh@base
+pt1                             = 88860000, guard | pos:-140.0,0.0,-199.4 look:-140.5,0.0,-200.2
+
+;;;;; ecolog_5 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[beh@point_spawn_e]:beh@base
+pt1                             = 88860000, guard | pos:71.0,0.0,178.0 look:71.0,0.0,178.0
+on_timer                        = 6000 | beh@point_research_e %+western_goods_act_2_task_2_ecolog_moved%
+
+[beh@point_research_e]:beh@base
+pt1                             = 88860000, guard | pos:72.5,0.0,149.5 look:73.5,0.0,149.0
+on_info                         = {+western_goods_act_2_task_2_ecolog_flee} beh@point_worry_e
+
+[beh@point_worry_e]:beh@base
+pt1                             = 88860000, threat_danger | pos:72.5,0.0,149.5 look:73.5,0.0,149.0
+on_timer                        = 14000 | beh@point_flee_e %+western_goods_act_2_task_2_ecolog_fled%
+
+[beh@point_flee_e]:beh@base
+pt1                             = 88860000, guard | pos:-137.2,0.0,-199.0 look:-137.8,0.0,-199.9
+
+;;;;; ecolog_6 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[beh@point_spawn_f]:beh@base
+pt1                             = 88860000, guard | pos:72.0,0.0,178.0 look:72.0,0.0,178.0
+on_timer                        = 3000 | beh@point_research_f %+western_goods_act_2_task_2_ecolog_moved%
+
+[beh@point_research_f]:beh@base
+pt1                             = 88860000, guard | pos:70.0,0.0,142.0 look:70.8,0.0,141.2
+on_info                         = {+western_goods_act_2_task_2_ecolog_flee} beh@point_worry_f
+
+[beh@point_worry_f]:beh@base
+pt1                             = 88860000, threat_danger | pos:70.0,0.0,142.0 look:70.8,0.0,141.2
+on_timer                        = 15000 | beh@point_flee_f %+western_goods_act_2_task_2_ecolog_fled%
+
+[beh@point_flee_f]:beh@base
+pt1                             = 88860000, guard | pos:-139.0,0.0,-197.9 look:-139.6,0.0,-198.7

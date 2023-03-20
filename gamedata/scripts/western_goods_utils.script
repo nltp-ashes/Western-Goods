@@ -165,7 +165,7 @@ function spawn_story_squad(sec, pos, smart)
 	-- Make sure the squad isn't already spawned in
 	for id,_ in pairs(SIMBOARD.squads) do
 		if alife_object(id):section_name() == sec then
-			se_squad = alife_object(id)
+			local se_squad = alife_object(id)
 			dbg_printf("[WG] Squad already exists | %s", se_squad:section_name())
 			return se_squad
 		end
@@ -188,19 +188,30 @@ end
 --- @param pos vector
 --- @param lvid number
 --- @param gvid number
+--- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
-function spawn_squad(sec,pos,lvid,gvid)
+function spawn_squad(sec,pos,lvid,gvid,smart)
+
 	local squad = alife_create(sec, pos, lvid, gvid)
-	if not squad then return end
 
-	squad:create_npc(nil, pos, lvid, gvid)
+	if not squad then
+		printe("!ERROR : failed to create squad (%s)",sec)
+		return
+	end
 
-	if squad.commander_id then
-		for k in squad:squad_members() do
-			local npc = k.object or k.id and alife_object(k.id)
-			if npc then
-				SIMBOARD:setup_squad_and_group(npc)
-			end
+	squad:create_npc(smart, pos, lvid, gvid)
+
+	if smart then
+		SIMBOARD:assign_squad_to_smart(squad, smart.id)
+	else
+		SIMBOARD:assign_squad_to_smart(squad)
+	end
+
+	for k in squad:squad_members() do
+		local se_obj = k.object or k.id and alife_object(k.id)
+		if (se_obj) then
+			SIMBOARD:setup_squad_and_group(se_obj)
+			SendScriptCallback("squad_on_npc_creation",squad,se_obj,smart)
 		end
 	end
 
