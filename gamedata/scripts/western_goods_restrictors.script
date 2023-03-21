@@ -1,0 +1,22 @@
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 21/03/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to manage the fake space restrictors used in the Western Goods addon.
+
+function in_bounds(who,data)
+
+	local posx = who:position().x
+	local posy = who:position().y
+	local posz = who:position().z
+
+	if data then
+		if (posx > data.ax) and (posz < data.az) and (posx < data.bx) and (posz > data.bz) and (posy < data.by) then
+			dbg_printf("[WG] %s in restrictor bounds", who:name())
+			return true
+		else
+			return false
+		end
+	end
+end
