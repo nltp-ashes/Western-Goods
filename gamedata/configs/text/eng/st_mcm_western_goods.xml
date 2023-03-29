@@ -68,13 +68,22 @@
 		<text>LOOT SETTINGS</text>
 	</string>
 
-	<!-- Loot Chance -->
-	<string id="ui_mcm_western_goods_loot_factor">
-		<text>Loot factor</text>
+	<!-- Trader Loot Chance -->
+	<string id="ui_mcm_western_goods_trader_loot_factor">
+		<text>Trader loot factor</text>
 	</string>
 
-	<string id="ui_mcm_western_goods_loot_factor_desc">
-		<text>Defines the factor by which to affect loot spawn chance in corpses and traders. This only affects the probability of spawn, not the quantity.</text>
+	<string id="ui_mcm_western_goods_trader_loot_factor_desc">
+		<text>Defines the factor by which to affect loot spawn chance in traders. This only affects the probability of spawn, not the quantity.</text>
+	</string>
+
+	<!-- Corpse Loot Chance -->
+	<string id="ui_mcm_western_goods_corpse_loot_factor">
+		<text>Corpse loot factor</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_corpse_loot_factor_desc">
+		<text>Defines the factor by which to affect loot spawn chance in corpses. This only affects the probability of spawn, not the quantity.</text>
 	</string>
 
 	<!-- Items Per Corpse -->

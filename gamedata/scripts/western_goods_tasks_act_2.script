@@ -228,7 +228,7 @@ function setup_act_2_task_2()
 	local task_2_done = has_alife_info("western_goods_act_2_task_2_finished")
 	local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
 	local task_setup = has_alife_info("western_goods_act_2_task_2_setup")
-	local timeout_ready = time_global() > TASK_2_CACHE.available_time or 0
+	local timeout_ready = time_global() > (TASK_2_CACHE.available_time or 0)
 
 	-- If the task is ready to be started
 	if task_1_done and not task_2_started and not task_2_done and task_opted_in and not task_setup and timeout_ready then
