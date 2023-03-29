@@ -220,6 +220,14 @@ function spawn_squad(sec,pos,lvid,gvid,smart)
 	return squad
 end
 
+function spawn_squad_smart(sec, smart)
+	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart],sec)
+	if squad then
+		dbg_printf("[WG] Squad with id %s successfully created", squad.id)
+	end
+	return squad
+end
+
 --- Function used to spawn a dead squad, at a given point in space.
 --- @param sec string
 --- @param pos vector
@@ -286,7 +294,7 @@ end
 function next_tick(func,...)
 	local args = {...}
 	AddUniqueCall(function()
-		f(unpack(args))
+		func(unpack(args))
 		return true
 	end)
 end

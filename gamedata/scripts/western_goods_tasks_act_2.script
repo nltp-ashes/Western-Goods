@@ -49,6 +49,7 @@ TASK_3_CACHE = {}
 function start_task_1(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_2_task_1", npc:id())
+	dbg_printf("[WG] Act 2, Task 1 started...")
 end
 
 --- Function used to end Act 2, Task 1.
@@ -82,6 +83,7 @@ function end_task_1()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_1")
 
 	TASK_2_CACHE.available_time = time_global() + 30000
+	dbg_printf("[WG] Act 2, Task 1 completed...")
 end
 
 --- Function called when the task is initiated.
@@ -89,8 +91,6 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.western_goods_act_2_task_1_init(actor,npc)
-	give_info("western_goods_act_2_task_1_active")
-
 	TASK_1_CACHE.main_item = "af_fuzz_kolobok"
 	TASK_1_CACHE.secondary_items = {
 		"af_fuzz_kolobok_lead_box",
@@ -98,6 +98,10 @@ function xr_effects.western_goods_act_2_task_1_init(actor,npc)
 		"af_fuzz_kolobok_af_aam",
 		"af_fuzz_kolobok_af_iam"
 	}
+
+	-- Process info portions
+	give_info("western_goods_act_2_task_1_active")
+	give_info("western_goods_act_2_task_1_init")
 end
 
 --- Function called when the task is successfully completed.
@@ -105,10 +109,16 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.western_goods_act_2_task_1_complete(actor,npc)
+	-- Process info portions
 	disable_info("western_goods_act_2_task_1_active")
+	disable_info("western_goods_act_2_task_1_init")
 	give_info("western_goods_act_2_task_1_finished")
-	xr_effects.reward_random_money(actor,npc,{"10000","15000"})
+
+	-- Process quest items
 	xr_effects.remove_item(actor, npc, {"af_fuzz_kolobok"})
+
+	-- Process reward
+	xr_effects.reward_random_money(actor,npc,{"10000","15000"})
 	xr_effects.complete_task_inc_goodwill(actor,npc,{"25","killer"})
 end
 
@@ -117,7 +127,11 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.western_goods_act_2_task_1_fail(actor,npc)
+	-- Process info portions
 	disable_info("western_goods_act_2_task_1_active")
+	disable_info("western_goods_act_2_task_1_init")
+
+	-- Process penalty
 	xr_effects.fail_task_dec_goodwill(actor,npc,{"35","killer"})
 end
 
@@ -149,11 +163,13 @@ end
 --- @param tsk CGameTask
 --- @return number
 function task_functor.act_2_task_1_target_f(task_id,field,p,tsk)
-	if tsk.stage == 0 then
-		return nil
-	end
-	if tsk.stage == 1 then
-		return tsk.task_giver_id
+	if has_alife_info("western_goods_act_2_task_1_init") then
+		if tsk.stage == 0 then
+			return nil
+		end
+		if tsk.stage == 1 then
+			return tsk.task_giver_id
+		end
 	end
 end
 
@@ -162,47 +178,39 @@ end
 --- @param task_id number
 --- @return string
 function task_status_functor.act_2_task_1_status_f(tsk,task_id)
-
-	-- First stage :
-	if tsk.stage == 0 then
-		return act_2_task_1_stage_0_status_f(tsk,task_id)
-	end
-
-	-- Second stage :
-	if tsk.stage == 1 then
-		return act_2_task_1_stage_1_status_f(tsk,task_id)
-	end
-end
-
-function act_2_task_1_stage_0_status_f(tsk,task_id)
-	db.actor:iterate_inventory(function(owner, obj)
-		local is_main_item = obj:section() == TASK_1_CACHE.main_item
-		local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
-		if is_main_item or is_secondary_item then
-			tsk.stage = 1
-			return
+	if has_alife_info("western_goods_act_2_task_1_init") then
+		-- First stage : Find the artefact
+		if tsk.stage == 0 then
+			db.actor:iterate_inventory(function(owner, obj)
+				local is_main_item = obj:section() == TASK_1_CACHE.main_item
+				local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
+				if is_main_item or is_secondary_item then
+					tsk.stage = 1
+					return
+				end
+			end)
 		end
-	end)
-end
 
-function act_2_task_1_stage_1_status_f(tsk,task_id)
+		-- Second stage : Deliver the artefact
+		if tsk.stage == 1 then
+			local has_item = false
 
-	local has_item = false
+			db.actor:iterate_inventory(function(owner, obj)
+				local is_main_item = obj:section() == TASK_1_CACHE.main_item
+				local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
+				if is_main_item or is_secondary_item then
+					has_item = true
+					return
+				end
+			end)
 
-	db.actor:iterate_inventory(function(owner, obj)
-		local is_main_item = obj:section() == TASK_1_CACHE.main_item
-		local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
-		if is_main_item or is_secondary_item then
-			has_item = true
-			return
+			if not has_item then
+				disable_info("western_goods_act_2_task_1_ready_finished")
+				tsk.stage = 0
+			else
+				give_info("western_goods_act_2_task_1_ready_finished")
+			end
 		end
-	end)
-
-	if not has_item then
-		disable_info("western_goods_act_2_task_1_ready_finished")
-		tsk.stage = 0
-	else
-		give_info("western_goods_act_2_task_1_ready_finished")
 	end
 end
 
@@ -211,17 +219,52 @@ end
 -- TASK 2 - RETRIEVAL MISSION
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to setup the automatic start of Act 2, Task 2.
+--- @return nil
+function setup_act_2_task_2()
+	if has_alife_info("western_goods_act_2_task_1_finished") and not has_alife_info("western_goods_act_2_task_2_finished") then
+		CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 900), function ()
+			local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
+			local task_not_setup = not has_alife_info("western_goods_act_2_task_2_setup")
+			local timeout_ready = time_global() > TASK_2_CACHE.available_time
+
+			-- If the task is ready to be started
+			if task_opted_in and task_not_setup and timeout_ready then
+				dbg_printf("[WG] Act 2 task 2 available...")
+
+				-- Give the task some time after loading the save
+				start_task_2(se_object_by_sid("stalker_western_goods_trader"))
+
+				-- Send a message to the player
+				dbg_printf("[WG] Act 2 Task 2 | Preparing message from %s", "Anonymous")
+				send_dialog({
+					{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_act_2_task_2_job_descr")}
+				}, true)
+				dbg_printf("[WG] Act 2 Task 2 | Message from %s ready", "Anonymous")
+
+				give_info("western_goods_act_2_task_2_setup")
+			else
+				dbg_printf("[WG] What's missing? task_opted_in:%s task_not_setup:%s timeout_ready:%s (%s/%s)", task_opted_in, task_not_setup, timeout_ready, time_global(), TASK_2_CACHE.available_time)
+			end
+
+			return true
+		end)
+	end
+end
+
 --- Function used to start Act 2, Task 2.
 --- @param task_giver cse_alife_object
 --- @return nil
 function start_task_2(task_giver)
 	task_manager.get_task_manager():give_task("western_goods_act_2_task_2", task_giver.id)
+	dbg_printf("[WG] Act 2, Task 1 started...")
 end
 
 --- Function used to end Act 2, Task 2.
 --- @return nil
 function end_task_2()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_2")
+	dbg_printf("[WG] Act 2, Task 2 completed...")
 end
 
 --- Function called when the task is initiated.
@@ -229,25 +272,31 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.western_goods_act_2_task_2_init(actor,npc)
-	give_info("western_goods_act_2_task_2_active")
-
 	TASK_2_CACHE = {
+		objects = {
+			btr 			= { sec="veh_btr",x=-32.9,y=-0.5,z=20.9,lvid=155155,gvid=4971 		},
+			sleeping_bag 	= { sec="itm_sleepbag",x=26.6,y=-4.3,z=129.2,lvid=232806,gvid=4970 	}
+		},
 		squads = {
-			army_spawn_data 	= { squad="western_goods_act_2_task_2_army_squad", 		smart="pri_sim_3" },
-			mono_spawn_data 	= { squad="western_goods_act_2_task_2_mono_squad", 		smart="pri_sim_3" },
-			snork_spawn_data 	= { squad="western_goods_act_2_task_2_snork_squad", 	smart="pri_b301" },
-			ecolog_spawn_data 	= { squad="western_goods_act_2_task_2_ecolog_squad", 	smart="pri_a28_school" },
-			zombie_1_spawn_data = { squad="western_goods_act_2_task_2_zombie_1_squad", 	smart="pri_sim_3" },
-			zombie_2_spawn_data = { squad="western_goods_act_2_task_2_zombie_2_squad", 	smart="pri_sim_3" },
-			bandit_1_spawn_data = { squad="western_goods_act_2_task_2_bandit_1_squad", 	smart="pri_b301" },
-			bandit_2_spawn_data = { squad="western_goods_act_2_task_2_bandit_2_squad", 	smart="pri_a28_school" }
+			army_spawn_data 	= { sec="western_goods_act_2_task_2_army_squad", 	 smart="pri_sim_3" 		},
+			mono_spawn_data 	= { sec="western_goods_act_2_task_2_mono_squad", 	 smart="pri_sim_3" 		},
+			snork_spawn_data 	= { sec="western_goods_act_2_task_2_snork_squad", 	 smart="pri_b301" 		},
+			ecolog_spawn_data 	= { sec="western_goods_act_2_task_2_ecolog_squad", 	 smart="pri_a28_school" },
+			zombie_1_spawn_data = { sec="western_goods_act_2_task_2_zombie_1_squad", smart="pri_sim_3" 		},
+			zombie_2_spawn_data = { sec="western_goods_act_2_task_2_zombie_2_squad", smart="pri_sim_3" 		},
+			bandit_1_spawn_data = { sec="western_goods_act_2_task_2_bandit_1_squad", smart="pri_b301" 		},
+			bandit_2_spawn_data = { sec="western_goods_act_2_task_2_bandit_2_squad", smart="pri_a28_school" }
 		},
 		restrictors = {
 			zombie 		= { ax=-97.150344848633,ay=-1.1752129793167,az=-45.473430633545,bx=-81.533813476563,by=5.2640190124512,	bz=-64.902114868164 },
-			snork 		= { ax=17.24550819397,	ay=-4.823212146759,	az=129.98883056641,	bx=29.521947860718,	by=-1.0844190120697,bz=121.89762878418 },
-			overlook 	= { ax=27.744569778442,	ay=7.3748621940613,	az=129.99130249023,	bx=53.035232543945,	by=16.793748855591,	bz=121.89153289795 }
+			snork 		= { ax=17.24550819397,	ay=-4.823212146759,	az=129.98883056641,	bx=29.521947860718,	by=-1.0844190120697,bz=121.89762878418 	},
+			overlook 	= { ax=27.744569778442,	ay=7.3748621940613,	az=129.99130249023,	bx=53.035232543945,	by=16.793748855591,	bz=121.89153289795 	}
 		}
 	}
+
+	-- Process info portions
+	give_info("western_goods_act_2_task_2_active")
+	give_info("western_goods_act_2_task_2_init")
 end
 
 --- Function called when the task is successfully completed.
@@ -255,8 +304,13 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.western_goods_act_2_task_2_complete(actor,npc)
+	-- Process info portions
 	disable_info("western_goods_act_2_task_2_active")
+	disable_info("western_goods_act_2_task_2_init")
 	give_info("western_goods_act_2_task_2_finished")
+	give_info("western_goods_act_2_finished")
+
+	-- Process reward
 	xr_effects.reward_random_money(actor,npc,{"15000","20000"})
 	xr_effects.complete_task_inc_goodwill(actor,npc,{"100","killer"})
 end
@@ -266,7 +320,11 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.western_goods_act_2_task_2_fail(actor,npc)
+	-- Process info portions
 	disable_info("western_goods_act_2_task_2_active")
+	disable_info("western_goods_act_2_task_2_init")
+
+	-- Process penalty
 	xr_effects.fail_task_dec_goodwill(actor,npc,{"40","killer"})
 end
 
@@ -298,38 +356,49 @@ end
 --- @param tsk CGameTask
 --- @return number
 function task_functor.act_2_task_2_target_f(task_id,field,p,tsk)
-	if tsk.stage == 0 then
-		return nil
-	end
-	if tsk.stage == 1 then
-		return nil
-	end
-	if tsk.stage == 2 then
-		return nil
-	end
-	if tsk.stage == 3 then
-		return nil
-	end
-	if tsk.stage == 4 then
-		return nil
-	end
-	if tsk.stage == 5 then
-		return nil
-	end
-	if tsk.stage == 6 then
-		return nil
-	end
-	if tsk.stage == 7 then
-		return nil
-	end
-	if tsk.stage == 8 then
-		return nil
-	end
-	if tsk.stage == 9 then
-		return nil
-	end
-	if tsk.stage == 10 then
-		return tsk.task_giver_id
+	if has_alife_info("western_goods_act_2_task_2_init") then
+		if tsk.stage == 0 then
+			local smart = SIMBOARD:get_smart_by_name("pri_sim_3")
+			return smart and smart.id
+		end
+		if tsk.stage == 1 then
+			local zombie_1_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_1_spawn_data.sec)
+			return zombie_1_squad_se and zombie_1_squad_se.id
+		end
+		if tsk.stage == 2 then
+			local zombie_2_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_2_spawn_data.sec)
+			return zombie_2_squad_se and zombie_2_squad_se.id
+		end
+		if tsk.stage == 3 then
+			local snork_squad_se = se_object_by_sid(TASK_2_CACHE.squads.snork_spawn_data.sec)
+			return snork_squad_se and snork_squad_se.id
+		end
+		if tsk.stage == 4 then
+			local restrictor = db.zone_by_name["pri_surge_hide_b301"]
+			return restrictor and restrictor:id()
+		end
+		if tsk.stage == 5 then
+			local smart = SIMBOARD:get_smart_by_name("pri_b301")
+			return smart and smart.id
+		end
+		if tsk.stage == 6 then
+			local smart = SIMBOARD:get_smart_by_name("pri_b301")
+			return smart and smart.id
+		end
+		if tsk.stage == 7 then
+			local smart = SIMBOARD:get_smart_by_name("pri_b301")
+			return smart and smart.id
+		end
+		if tsk.stage == 8 then
+			local restrictor = db.zone_by_name["pri_surge_hide_b301"]
+			return restrictor and restrictor:id()
+		end
+		if tsk.stage == 9 then
+			return tsk.task_giver_id
+		end
+		if tsk.stage == 10 then
+			return tsk.task_giver_id
+		end
 	end
 end
 
@@ -338,116 +407,322 @@ end
 --- @param task_id number
 --- @return string
 function task_status_functor.act_2_task_2_status_f(tsk,task_id)
+	if has_alife_info("western_goods_act_2_task_2_init") then
+		-- First stage : Get to the Outskirts, somewhere close to the zombies
+		if tsk.stage == 0 then
+			local zombie_1_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_1_spawn_data.sec)
 
-	-- First stage :
-	if tsk.stage == 0 then
-		return act_2_task_2_stage_0_status_f(tsk,task_id)
+			-- Spawn Zombie squad
+			if not TASK_2_CACHE.zombie_1_spawned and not zombie_1_squad_se then
+				local spawn_data = TASK_2_CACHE.squads.zombie_1_spawn_data
+				zombie_1_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+				if zombie_1_squad_se then
+					TASK_2_CACHE.zombie_1_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+					return "fail"
+				end
+			end
+
+			if level.name() ~= "pripyat" then return end
+
+			local dist_to_zombies = zombie_1_squad_se and zombie_1_squad_se.position:distance_to(db.actor:position())
+			if dist_to_zombies and dist_to_zombies > 150 then return end
+
+			tsk.stage = 1
+		end
+
+		-- Second stage : Kill the zombies
+		if tsk.stage == 1 then
+			local zombie_1_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_1_spawn_data.sec)
+
+			-- If the zombie squad is dead, and the player is near them
+			if not zombie_1_squad_se and western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.zombie) then
+
+				local zombie_2_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_2_spawn_data.sec)
+
+				-- Spawn Zombie squad for next stage
+				if not TASK_2_CACHE.zombie_2_spawned and not zombie_2_squad_se then
+					local spawn_data = TASK_2_CACHE.squads.zombie_2_spawn_data
+					zombie_2_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+					if zombie_2_squad_se then
+						TASK_2_CACHE.spawn_throttle = time_global() + 5000
+						TASK_2_CACHE.zombie_2_spawned = true
+						return
+					else
+						printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+						return "fail"
+					end
+				end
+
+				tsk.stage = 2
+			end
+		end
+
+		-- Third stage : Wait for army soldiers to die or take part in the fight
+		if tsk.stage == 2 then
+			local zombie_2_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_2_spawn_data.sec)
+			local army_squad_se = se_object_by_sid(TASK_2_CACHE.squads.army_spawn_data.sec)
+			local mono_squad_se = se_object_by_sid(TASK_2_CACHE.squads.mono_spawn_data.sec)
+
+			-- Spawn Army squad
+			if TASK_2_CACHE.spawn_throttle < time_global() and not TASK_2_CACHE.army_squad_spawned and not army_squad_se then
+				local spawn_data = TASK_2_CACHE.squads.army_spawn_data
+				army_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+				if army_squad_se then
+					TASK_2_CACHE.spawn_throttle = time_global() + 5000
+					TASK_2_CACHE.army_squad_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+					return "fail"
+				end
+			end
+
+			-- Spawn Army BTR
+			if TASK_2_CACHE.spawn_throttle < time_global() and not TASK_2_CACHE.army_btr_spawned then
+				local spawn_data = TASK_2_CACHE.objects.btr
+				local btr_se = alife_create(spawn_data.sec, vector():set(spawn_data.x, spawn_data.y, spawn_data.z), spawn_data.lvid, spawn_data.gvid)
+
+				if btr_se then
+					btr_se.angle = vector():set(0,-1.5708,0)
+
+					logic_enforcer.assign(btr_se.id,'scripts\\tasks\\veh_idle.ltx','logic','ph_car@idle')
+
+					TASK_2_CACHE.spawn_throttle = time_global() + 5000
+					TASK_2_CACHE.army_btr_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s x:%s y:%s z:%s lvid:%s gvid:%s",spawn_data.sec, spawn_data.x, spawn_data.y, spawn_data.z, spawn_data.lvid, spawn_data.gvid)
+					return "fail"
+				end
+			end
+
+			-- After 10s, spawn Monolith squad
+			if false and TASK_2_CACHE.spawn_throttle < time_global() and not TASK_2_CACHE.mono_squad_spawned and not mono_squad_se then
+				local spawn_data = TASK_2_CACHE.squads.mono_spawn_data
+				mono_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+				if mono_squad_se then
+					TASK_2_CACHE.mono_squad_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+					return "fail"
+				end
+			end
+
+			-- If they didn't survive
+			if TASK_2_CACHE.zombie_2_spawned and not zombie_2_squad_se then
+
+				local snork_squad_se = se_object_by_sid(TASK_2_CACHE.squads.snork_spawn_data.sec)
+
+				-- Spawn snork squad for next stage
+				if not TASK_2_CACHE.snork_spawned and not snork_squad_se then
+					local spawn_data = TASK_2_CACHE.squads.snork_spawn_data
+					snork_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+					if snork_squad_se then
+						TASK_2_CACHE.snork_spawned = true
+						return
+					else
+						printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+						return "fail"
+					end
+				end
+
+				tsk.stage = 3
+			end
+		end
+
+		-- Fourth stage : Get to the basement of the school & kill the snorks
+		if tsk.stage == 3 then
+			local snork_squad_se = se_object_by_sid(TASK_2_CACHE.squads.snork_spawn_data.sec)
+
+			-- Spawn sleeping bag
+			if not TASK_2_CACHE.sleeping_bag_spawned then
+				local spawn_data = TASK_2_CACHE.objects.sleeping_bag
+				local sleep_bag_se = alife_create(spawn_data.sec, vector():set(spawn_data.x, spawn_data.y, spawn_data.z), spawn_data.lvid, spawn_data.gvid)
+
+				if sleep_bag_se then
+					TASK_2_CACHE.sleeping_bag_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s x:%s y:%s z:%s lvid:%s gvid:%s",spawn_data.sec, spawn_data.x, spawn_data.y, spawn_data.z, spawn_data.lvid, spawn_data.gvid)
+					return "fail"
+				end
+			end
+
+			-- If the zombie squad is dead, and the player is near them
+			if TASK_2_CACHE.snork_spawned and not snork_squad_se and western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.snork) then
+
+				local bandit_1_squad_se = se_object_by_sid(TASK_2_CACHE.squads.bandit_1_spawn_data.sec)
+
+				-- Spawn bandit squad for next stage
+				if not TASK_2_CACHE.bandit_1_spawned and not bandit_1_squad_se then
+					local spawn_data = TASK_2_CACHE.squads.bandit_1_spawn_data
+					bandit_1_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+					if bandit_1_squad_se then
+						TASK_2_CACHE.bandit_1_spawned = true
+						return
+					else
+						printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+						return "fail"
+					end
+				end
+
+				tsk.stage = 4
+			end
+		end
+
+		-- Fifth stage : Kill the bandits (if they are enemies)
+		if tsk.stage == 4 then
+			local bandit_1_squad_se = se_object_by_sid(TASK_2_CACHE.squads.bandit_1_spawn_data.sec)
+
+			-- Fail task if player gets out of basement
+			if not western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.snork) then
+				-- TODO : Send dialog saying player should have stayed hidden
+				return "fail"
+			end
+
+			-- If bandits are dead, or if they are not enemy with the player
+			if (TASK_2_CACHE.bandit_1_spawned and not bandit_1_squad_se) or (not game_relations.is_factions_enemies(get_actor_true_community(), "bandit")) then
+
+				if not TASK_2_CACHE.stage_3_dialog_sent then
+					-- TODO : Send dialog between player and task giver
+
+					TASK_2_CACHE.progress_timer = time_global() + 30000
+					TASK_2_CACHE.stage_3_dialog_sent = true
+				end
+
+				if TASK_2_CACHE.progress_timer < time_global() then
+					tsk.stage = 5
+				end
+			end
+		end
+
+		-- Sixth stage : Get to the 3rd floor of the school
+		if tsk.stage == 5 then
+			-- When the player gets in position, progress task
+			if western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.overlook) then
+				tsk.stage = 6
+			end
+		end
+
+		-- Seventh stage : Wait for ecologs to arrive
+		if tsk.stage == 6 then
+			local ecolog_squad_se = se_object_by_sid(TASK_2_CACHE.squads.ecolog_spawn_data.sec)
+
+			-- Spawn Ecolog squad
+			if not TASK_2_CACHE.ecolog_spawned and not ecolog_squad_se then
+				local spawn_data = TASK_2_CACHE.squads.ecolog_spawn_data
+				ecolog_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+				if ecolog_squad_se then
+					TASK_2_CACHE.progress_timer = time_global() + 45000
+					TASK_2_CACHE.ecolog_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+					return "fail"
+				end
+			end
+
+			-- If player leaves his position, fail task
+			if not western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.overlook) then
+				-- TODO : Send dialog saying player should have stayed hidden
+				return "fail"
+			end
+
+			-- After 45s, progress task
+			if TASK_2_CACHE.progress_timer < time_global() then
+				tsk.stage = 7
+			end
+		end
+
+		-- Eighth stage : Wait for the bandits to die
+		if tsk.stage == 7 then
+			local bandit_1_squad_se = se_object_by_sid(TASK_2_CACHE.squads.bandit_1_spawn_data.sec)
+			local bandit_2_squad_se = se_object_by_sid(TASK_2_CACHE.squads.bandit_2_spawn_data.sec)
+
+			-- Spawn Bandit squad
+			if not TASK_2_CACHE.bandit_2_squad_spawned and not bandit_2_squad_se then
+				local spawn_data = TASK_2_CACHE.squads.bandit_2_spawn_data
+				bandit_2_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
+
+				if bandit_2_squad_se then
+					TASK_2_CACHE.bandit_2_autokill_timer = time_global() + 20000
+					TASK_2_CACHE.bandit_2_squad_spawned = true
+					return
+				else
+					printe("!ERROR failed to spawn %s smart:%s",spawn_data.sec, spawn_data.smart)
+					return "fail"
+				end
+			end
+
+			-- If player leaves his position, fail task
+			if not western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.overlook) then
+				-- TODO : Send dialog saying player should have stayed hidden
+				return "fail"
+			end
+
+			-- After 20s, start killing the bandits (both bandit_1 and bandit_2 squads) automatically
+			if not TASK_2_CACHE.bandit_2_autokilled and TASK_2_CACHE.bandit_2_autokill_timer < time_global() then
+				if bandit_1_squad_se then
+					for npc in bandit_1_squad_se:squad_members() do
+						local npc_obj = db.storage[npc.id] and db.storage[npc.id].object
+						if (npc_obj and npc_obj:alive()) then
+							western_goods_utils.next_tick(surge_manager.make_dead,npc_obj:id())
+						end
+					end
+				end
+				if bandit_2_squad_se then
+					for npc in bandit_2_squad_se:squad_members() do
+						local npc_obj = db.storage[npc.id] and db.storage[npc.id].object
+						if (npc_obj and npc_obj:alive()) then
+							western_goods_utils.next_tick(surge_manager.make_dead,npc_obj:id())
+						end
+					end
+				end
+				TASK_2_CACHE.progress_timer = time_global() + 20000
+				TASK_2_CACHE.bandit_2_autokilled = true
+			end
+
+			-- When all bandits are dead, progress task
+			if not bandit_1_squad_se and not bandit_2_squad_se and TASK_2_CACHE.progress_timer < time_global() then
+				tsk.stage = 8
+			end
+		end
+
+		-- Ninth stage : Take cover from the emission
+		if tsk.stage == 8 then
+			-- Start emission and make ecologs flee
+			if not TASK_2_CACHE.surge_started then
+				surge_manager.start_surge()
+				give_info("western_goods_act_2_task_2_ecolog_flee")
+				TASK_2_CACHE.surge_started = true
+			end
+
+			if surge_manager.is_finished() then
+				tsk.stage = 9
+			end
+		end
+
+		-- Tenth stage : Task done - for now
+		if tsk.stage == 9 then
+			return "complete"
+		end
+
+		-- Eleventh stage : N/A
+		if tsk.stage == 10 then
+			return
+		end
 	end
-
-	-- Second stage :
-	if tsk.stage == 1 then
-		return act_2_task_2_stage_1_status_f(tsk,task_id)
-	end
-
-	-- Third stage :
-	if tsk.stage == 2 then
-		return act_2_task_2_stage_2_status_f(tsk,task_id)
-	end
-
-	-- Fourth stage :
-	if tsk.stage == 3 then
-		return act_2_task_2_stage_3_status_f(tsk,task_id)
-	end
-
-	-- Fifth stage :
-	if tsk.stage == 4 then
-		return act_2_task_2_stage_4_status_f(tsk,task_id)
-	end
-
-	-- Sixth stage :
-	if tsk.stage == 5 then
-		return act_2_task_2_stage_5_status_f(tsk,task_id)
-	end
-
-	-- Seventh stage :
-	if tsk.stage == 6 then
-		return act_2_task_2_stage_6_status_f(tsk,task_id)
-	end
-
-	-- Eighth stage :
-	if tsk.stage == 7 then
-		return act_2_task_2_stage_7_status_f(tsk,task_id)
-	end
-
-	-- Ninth stage :
-	if tsk.stage == 8 then
-		return act_2_task_2_stage_8_status_f(tsk,task_id)
-	end
-
-	-- Tenth stage :
-	if tsk.stage == 9 then
-		return act_2_task_2_stage_9_status_f(tsk,task_id)
-	end
-
-	-- Eleventh stage :
-	if tsk.stage == 10 then
-		return act_2_task_2_stage_10_status_f(tsk,task_id)
-	end
-end
-
-function act_2_task_2_stage_0_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_1_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_2_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_3_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_4_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_5_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_6_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_7_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_8_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_9_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
-end
-
-function act_2_task_2_stage_10_status_f(tsk,task_id)
-
-	tsk.stage = curr_stage
 end
 
 
@@ -460,11 +735,11 @@ end
 function on_game_start()
 	RegisterScriptCallback("save_state", save_state)
 	RegisterScriptCallback("load_state", load_state)
-	RegisterScriptCallback("on_key_press",progress_task)
-	RegisterScriptCallback("on_key_press",regress_task)
+	RegisterScriptCallback("actor_on_first_update", setup_act_2_task_2)
+
+	-- TODO : Test code - to be removed
 	RegisterScriptCallback("on_key_press",spawn_dunn)
 	RegisterScriptCallback("on_key_press",spawn_test_squads)
-
 end
 
 
@@ -476,18 +751,32 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
+	-- Prepare save tables
+	local TASK_1_SAVE = {}
+	local TASK_2_SAVE = {}
+	local TASK_3_SAVE = {}
+
+	-- Make copies of task caches
+	copy_table(TASK_1_SAVE, TASK_1_CACHE)
+	copy_table(TASK_2_SAVE, TASK_2_CACHE)
+	copy_table(TASK_3_SAVE, TASK_3_CACHE)
 
 	-- Pre-process tables
-	TASK_2_CACHE.available_time = (TASK_2_CACHE.available_time or 0) - time_global()
+	TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) - time_global()
+	TASK_2_SAVE.spawn_throttle = (TASK_2_SAVE.spawn_throttle or 0) - time_global()
+	TASK_2_SAVE.progress_timer = (TASK_2_SAVE.progress_timer or 0) - time_global()
+	TASK_2_SAVE.bandit_2_autokill_timer = (TASK_2_SAVE.bandit_2_autokill_timer or 0) - time_global()
 
-	dbg_printf("[WG] TASK_2_CACHE.available_time : %s", TASK_2_CACHE.available_time)
+	-- Debug prints
+	dbg_printf("[WG] TASK_2_CACHE.available_time : %s", TASK_2_SAVE.available_time)
+	dbg_printf("[WG] TASK_2_CACHE.spawn_throttle : %s", TASK_2_SAVE.spawn_throttle)
+	dbg_printf("[WG] TASK_2_CACHE.progress_timer : %s", TASK_2_SAVE.progress_timer)
+	dbg_printf("[WG] TASK_2_CACHE.bandit_2_autokill_timer : %s", TASK_2_SAVE.bandit_2_autokill_timer)
 
 	-- Save tables
-	m_data.wg_act_2_task_1_cache = TASK_1_CACHE
-	m_data.wg_act_2_task_2_cache = TASK_2_CACHE
-	m_data.wg_act_2_task_3_cache = TASK_3_CACHE
-
-	m_data.curr_stage = curr_stage
+	m_data.wg_act_2_task_1_cache = TASK_1_SAVE
+	m_data.wg_act_2_task_2_cache = TASK_2_SAVE
+	m_data.wg_act_2_task_3_cache = TASK_3_SAVE
 
 	dbg_printf("[WG] Saved act 2 task variables")
 end
@@ -496,77 +785,35 @@ end
 --- @param m_data table
 --- @return nil
 function load_state(m_data)
-	-- Retrieve tables
-	TASK_1_CACHE = m_data.wg_act_2_task_1_cache or {}
-	TASK_2_CACHE = m_data.wg_act_2_task_2_cache or {}
-	TASK_3_CACHE = m_data.wg_act_2_task_3_cache or {}
+	-- Retrieve save tables
+	local TASK_1_SAVE = m_data.wg_act_2_task_1_cache or {}
+	local TASK_2_SAVE = m_data.wg_act_2_task_2_cache or {}
+	local TASK_3_SAVE = m_data.wg_act_2_task_3_cache or {}
 
 	-- Post-process tables
-	TASK_2_CACHE.available_time = (TASK_2_CACHE.available_time or 0) + time_global()
+	TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) + time_global()
+	TASK_2_SAVE.spawn_throttle = (TASK_2_SAVE.spawn_throttle or 0) + time_global()
+	TASK_2_SAVE.progress_timer = (TASK_2_SAVE.progress_timer or 0) + time_global()
+	TASK_2_SAVE.bandit_2_autokill_timer = (TASK_2_SAVE.bandit_2_autokill_timer or 0) + time_global()
 
-	dbg_printf("[WG] TASK_2_CACHE.available_time : %s", TASK_2_CACHE.available_time)
+	-- Debug prints
+	dbg_printf("[WG] TASK_2_CACHE.available_time : %s", TASK_2_SAVE.available_time)
+	dbg_printf("[WG] TASK_2_CACHE.spawn_throttle : %s", TASK_2_SAVE.spawn_throttle)
+	dbg_printf("[WG] TASK_2_CACHE.progress_timer : %s", TASK_2_SAVE.progress_timer)
+	dbg_printf("[WG] TASK_2_CACHE.bandit_2_autokill_timer : %s", TASK_2_SAVE.bandit_2_autokill_timer)
 
-	curr_stage = m_data.curr_stage or 0
+	-- Restore task caches
+	copy_table(TASK_1_CACHE, TASK_1_SAVE)
+	copy_table(TASK_2_CACHE, TASK_2_SAVE)
+	copy_table(TASK_3_CACHE, TASK_3_SAVE)
 
 	dbg_printf("[WG] Loaded act 2 task variables")
-
-	setup_act_2_task_2()
 end
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
-
-function setup_act_2_task_2()
-	CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 900), function ()
-		local task_available = has_alife_info("western_goods_act_2_task_1_finished")
-		local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
-		local task_not_setup = not has_alife_info("western_goods_act_2_task_2_setup")
-		local timeout_ready = time_global() > TASK_2_CACHE.available_time
-
-		dbg_printf("[WG] What's missing? task_available:%s task_opted_in:%s task_not_setup:%s timeout_ready:%s", task_available, task_opted_in, task_not_setup, timeout_ready)
-		dbg_printf("[WG] Timeout ready? %s (%s vs %s)", timeout_ready, time_global(), TASK_2_CACHE.available_time)
-
-		-- If the task is ready to be started
-		if task_available and task_opted_in and task_not_setup and timeout_ready then
-			dbg_printf("[WG] Act 2 task 2 available...")
-
-			-- Give the task some time after loading the save
-			start_task_2(se_object_by_sid("stalker_western_goods_trader"))
-			dbg_printf("[WG] Act 2 task 2 started...")
-
-			-- Send a message to the player
-			dbg_printf("[WG] Act 2 Task 2 | Preparing message from %s", "Anonymous")
-			send_dialog({
-				{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_act_2_task_2_job_descr")}
-			}, true)
-			dbg_printf("[WG] Act 2 Task 2 | Message from %s ready", "Anonymous")
-
-			give_info("western_goods_act_2_task_2_setup")
-		end
-
-		return true
-	end)
-end
-
-curr_stage = 0
-
-function progress_task(dik)
-	if dik ~= DIK_keys.DIK_PRIOR then return end
-
-	if curr_stage < 1 then
-		curr_stage = curr_stage + 1
-	end
-end
-
-function regress_task(dik)
-	if dik ~= DIK_keys.DIK_NEXT then return end
-
-	if curr_stage > 0 then
-		curr_stage = curr_stage - 1
-	end
-end
 
 function spawn_btr(x, y, z, lvid, gvid)
 	local btr_se = alife_create("veh_btr", vector():set(x, y, z), lvid, gvid)
@@ -588,82 +835,97 @@ local stage = 0
 function spawn_test_squads(dik)
 	if dik ~= DIK_keys.DIK_P then return end
 
-	--[[if stage == 0 and false then
-		local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_1_squad")
+	dbg_printf("[WG] spawn_test_squads")
 
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 1 and false then
-		local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_2_squad")
+	local squad = western_goods_utils.spawn_squad_smart("western_goods_act_2_task_2_snork_squad", "pri_b301")
 
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 2 and false then
-		local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_army_squad")
-
-		local btr_se = spawn_btr(-32.9, -0.5, 20.9, 155155, 4971)
-		btr_se.angle = vector():set(0,-1.5708,0)
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 3 and false then
-		local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_mono_squad")
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 4 and false then
-		local smart = SIMBOARD.smarts_by_names["pri_b301"]
-		--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_snork_squad")
-		local squad = spawn_squad("western_goods_act_2_task_2_snork_squad", vector():set(25.842678070068,-4.3245229721069,123.48170471191), 231878, 4970)
-		squad.scripted_target = "pri_b301"
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 5 and false then
-		local smart = SIMBOARD.smarts_by_names["pri_b301"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_bandit_1_squad")
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end--]]
-	if stage == 0 then
-		local smart = SIMBOARD.smarts_by_names["pri_a28_school"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_ecolog_squad")
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 1 then
-		local smart = SIMBOARD.smarts_by_names["pri_a28_school"]
-		local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_bandit_2_squad")
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
-	if stage == 2 then
-		surge_manager.start_surge()
-		give_info("western_goods_act_2_task_2_ecolog_flee")
-
-		dbg_printf("[WG] Test stage %s",stage)
-		stage = stage + 1
-		return
-	end
+	--local smart = SIMBOARD.smarts_by_names["pri_b301"]
+	--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_snork_squad")
 end
 
+--[[
+if stage == 0 then
+    local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_1_squad")
+
+    RegisterScriptCallback("actor_on_update",function ()
+        local zombie_1_squad_se = se_object_by_sid("western_goods_act_2_task_2_zombie_1_squad")
+
+        local dist = zombie_1_squad_se and zombie_1_squad_se.position:distance_to(db.actor:position())
+        dbg_printf("[WG] Dist to zombies %s", dist)
+    end)
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 1 then
+    local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_zombie_2_squad")
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 2 then
+    local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_army_squad")
+
+    local btr_se = spawn_btr(-32.9, -0.5, 20.9, 155155, 4971)
+    btr_se.angle = vector():set(0,-1.5708,0)
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 3 then
+    local smart = SIMBOARD.smarts_by_names["pri_sim_3"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_mono_squad")
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 4 then
+    local smart = SIMBOARD.smarts_by_names["pri_b301"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_snork_squad")
+    --local squad = spawn_squad("western_goods_act_2_task_2_snork_squad", vector():set(25.842678070068,-4.3245229721069,123.48170471191), 231878, 4970)
+    --squad.scripted_target = "pri_b301"
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 5 then
+    local smart = SIMBOARD.smarts_by_names["pri_b301"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_bandit_1_squad")
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 6 then
+    local smart = SIMBOARD.smarts_by_names["pri_a28_school"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_ecolog_squad")
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 7 then
+    local smart = SIMBOARD.smarts_by_names["pri_a28_school"]
+    local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_bandit_2_squad")
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+if stage == 8 then
+    surge_manager.start_surge()
+    give_info("western_goods_act_2_task_2_ecolog_flee")
+
+    dbg_printf("[WG] Test stage %s",stage)
+    stage = stage + 1
+    return
+end
+--]]
