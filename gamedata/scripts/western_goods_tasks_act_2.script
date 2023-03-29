@@ -82,7 +82,7 @@ function end_task_1()
 
 	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_1")
 
-	TASK_2_CACHE.available_time = time_global() + 30000
+	TASK_2_CACHE.available_time = time_global() + 1800000
 	dbg_printf("[WG] Act 2, Task 1 completed...")
 end
 
@@ -222,33 +222,35 @@ end
 --- Function used to setup the automatic start of Act 2, Task 2.
 --- @return nil
 function setup_act_2_task_2()
-	if has_alife_info("western_goods_act_2_task_1_finished") and not has_alife_info("western_goods_act_2_task_2_finished") then
-		CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(30, 900), function ()
-			local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
-			local task_not_setup = not has_alife_info("western_goods_act_2_task_2_setup")
-			local timeout_ready = time_global() > TASK_2_CACHE.available_time
+	-- Conditions
+	local task_1_done = has_alife_info("western_goods_act_2_task_1_finished")
+	local task_2_started = has_alife_info("western_goods_act_2_task_2_active")
+	local task_2_done = has_alife_info("western_goods_act_2_task_2_finished")
+	local task_opted_in = has_alife_info("western_goods_act_2_task_2_opted_in")
+	local task_setup = has_alife_info("western_goods_act_2_task_2_setup")
+	local timeout_ready = time_global() > TASK_2_CACHE.available_time or 0
 
-			-- If the task is ready to be started
-			if task_opted_in and task_not_setup and timeout_ready then
-				dbg_printf("[WG] Act 2 task 2 available...")
+	-- If the task is ready to be started
+	if task_1_done and not task_2_started and not task_2_done and task_opted_in and not task_setup and timeout_ready then
+		CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(600, 1800), function ()
+			dbg_printf("[WG] Act 2 task 2 available...")
 
-				-- Give the task some time after loading the save
-				start_task_2(se_object_by_sid("stalker_western_goods_trader"))
+			-- Give the task some time after loading the save
+			start_task_2(se_object_by_sid("stalker_western_goods_trader"))
 
-				-- Send a message to the player
-				dbg_printf("[WG] Act 2 Task 2 | Preparing message from %s", "Anonymous")
-				send_dialog({
-					{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_act_2_task_2_job_descr")}
-				}, true)
-				dbg_printf("[WG] Act 2 Task 2 | Message from %s ready", "Anonymous")
+			-- Send a message to the player
+			dbg_printf("[WG] Act 2 Task 2 | Preparing message from %s", "Anonymous")
+			send_dialog({
+				{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_act_2_task_2_job_descr")}
+			}, true)
+			dbg_printf("[WG] Act 2 Task 2 | Message from %s ready", "Anonymous")
 
-				give_info("western_goods_act_2_task_2_setup")
-			else
-				dbg_printf("[WG] What's missing? task_opted_in:%s task_not_setup:%s timeout_ready:%s (%s/%s)", task_opted_in, task_not_setup, timeout_ready, time_global(), TASK_2_CACHE.available_time)
-			end
+			give_info("western_goods_act_2_task_2_setup")
 
 			return true
 		end)
+	else
+		dbg_printf("[WG] What's missing? task_opted_in:%s task_not_setup:%s timeout_ready:%s (%s/%s)", task_opted_in, not task_setup, timeout_ready, time_global(), TASK_2_CACHE.available_time)
 	end
 end
 
@@ -738,8 +740,8 @@ function on_game_start()
 	RegisterScriptCallback("actor_on_first_update", setup_act_2_task_2)
 
 	-- TODO : Test code - to be removed
-	RegisterScriptCallback("on_key_press",spawn_dunn)
-	RegisterScriptCallback("on_key_press",spawn_test_squads)
+	-- RegisterScriptCallback("on_key_press",spawn_dunn)
+	-- RegisterScriptCallback("on_key_press",spawn_test_squads)
 end
 
 
@@ -837,7 +839,7 @@ function spawn_test_squads(dik)
 
 	dbg_printf("[WG] spawn_test_squads")
 
-	local squad = western_goods_utils.spawn_squad_smart("western_goods_act_2_task_2_snork_squad", "pri_b301")
+	--local squad = western_goods_utils.spawn_squad_smart("western_goods_act_2_task_2_snork_squad", "pri_b301")
 
 	--local smart = SIMBOARD.smarts_by_names["pri_b301"]
 	--local squad = SIMBOARD:create_squad(smart,"western_goods_act_2_task_2_snork_squad")
