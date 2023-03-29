@@ -1330,6 +1330,15 @@ end
 --- @param first_speaker cse_abstract
 --- @param second_speaker cse_abstract
 --- @return nil
+function give_act_1_task_1_item(first_speaker, second_speaker)
+	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "wg_gps")
+end
+
+--- Function used to give the player a reward for finishing act 1.
+--- Warning : This function should be called while a dialog is running.
+--- @param first_speaker cse_abstract
+--- @param second_speaker cse_abstract
+--- @return nil
 function give_act_1_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")
 end

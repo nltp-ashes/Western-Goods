@@ -309,8 +309,21 @@
                 <text>st_wg_act_1_task_1_refuse_work</text>
             </phrase>
             <phrase id="4"> <!-- npc -->
-                <text>st_wg_act_2_task_1_answer</text>
+                <text>st_wg_act_2_task_1_answer_0</text>
                 <action>western_goods_tasks_act_1.start_task_1</action>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- actor -->
+                <text>st_wg_act_2_task_1_answer_1</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="6"> <!-- npc -->
+                <text>st_wg_act_2_task_1_answer_2</text>
+                <action>western_goods_tasks_act_1.give_act_1_task_1_item</action>
+                <next>7</next>
+            </phrase>
+            <phrase id="7"> <!-- actor -->
+                <text>st_wg_act_2_task_1_answer_3</text>
             </phrase>
         </phrase_list>
     </dialog>

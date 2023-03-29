@@ -359,8 +359,20 @@
 		<text>Actually, let me think about it.</text>
 	</string>
 
-	<string id="st_wg_act_2_task_1_answer">
+	<string id="st_wg_act_2_task_1_answer_0">
 		<text>Don't wander around for too long, they should be there soon.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_answer_1">
+		<text>Alright, I'll go now.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_answer_2">
+		<text>Oh and before I forget, take this. It'll help you find the LZ.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_1_answer_3">
+		<text>Thanks.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_1_finish_work">
