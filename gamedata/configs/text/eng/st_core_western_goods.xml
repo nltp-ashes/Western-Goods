@@ -64,6 +64,23 @@
 		<text>You can download the latest version from Github : https://github.com/ahuyn/anomaly-barter/releases/tag/latest</text>
 	</string>
 
+	<!-- Missing DXML -->
+	<string id="st_err_missing_dxml_title">
+		<text>Prerequisite missing - DXML.</text>
+	</string>
+
+	<string id="st_err_missing_dxml_what">
+		<text>DXML is missing. Please install or update your modded exes before using Western Goods.</text>
+	</string>
+
+	<string id="st_err_missing_dxml_why">
+		<text>Western Goods requires DXML to increase compatibility with other addons and to avoid overwriting vanilla files.</text>
+	</string>
+
+	<string id="st_err_missing_dxml_where">
+		<text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+	</string>
+
 	<!-- ============================================================================================================-->
 	<!--	Core Strings																					  		 -->
 	<!-- ============================================================================================================-->

@@ -166,6 +166,21 @@ function check_barter_ui_installed()
 	assert(barter_ui ~= nil, error_message)
 end
 
+--- Function used to check if DXML is installed.
+--- @return nil
+function check_dxml_installed()
+	UnregisterScriptCallback("on_game_load", check_dxml_installed)
+
+	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+			get_translation("st_err_missing_dxml_title"),
+			get_translation("st_err_missing_dxml_what"),
+			get_translation("st_err_missing_dxml_why"),
+			get_translation("st_err_missing_dxml_where")
+	)
+
+	assert(dxml_core ~= nil, error_message)
+end
+
 --- Function used to delete every item added by the addon from the save file.
 --- @return nil
 function addon_removal()
@@ -209,6 +224,7 @@ function on_game_start()
 	RegisterScriptCallback("on_game_load", print_addon_version)
 	RegisterScriptCallback("on_game_load", check_game_version)
 	RegisterScriptCallback("on_game_load", check_barter_ui_installed)
+	RegisterScriptCallback("on_game_load", check_dxml_installed)
 	RegisterScriptCallback("on_game_load", check_trader_auto_inject)
 	RegisterScriptCallback("save_state", addon_removal)
 end
