@@ -144,7 +144,7 @@ end
 --- Function used to retrieve the server object of a unique NPC by its section name.
 --- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds.
 --- @param sec string
---- @return cse_abstract
+--- @return cse_alife_object
 function find_unique_npc(sec)
 	for id = 1, 65534 do
 
@@ -220,6 +220,10 @@ function spawn_squad(sec,pos,lvid,gvid,smart)
 	return squad
 end
 
+--- Function used to spawn a simulation squad, at a given smart terrain.
+--- @param sec string
+--- @param smart cse_alife_smart_zone
+--- @return cse_alife_online_offline_group
 function spawn_squad_smart(sec, smart)
 	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart],sec)
 	if squad then
@@ -263,7 +267,7 @@ end
 
 --- Function used to get a "random" member of a squad.
 --- @param squad cse_alife_online_offline_group
---- @return cse_abstract
+--- @return cse_alife_object
 function get_member_from_squad(squad)
 	if not squad then return end
 
@@ -275,7 +279,7 @@ end
 --- Function used to find an NPC by its section name in the player squad.
 --- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds.
 --- @param sec string
---- @return cse_abstract
+--- @return cse_alife_object
 function find_npc_in_actor_squad(sec)
 	local actor_squad = axr_companions.list_actor_squad_by_id()
 	for _,id in pairs(actor_squad) do
@@ -299,6 +303,9 @@ function next_tick(func,...)
 	end)
 end
 
+--- Function used to retrieve a server object by its story ID.
+--- @param story_id string
+--- @return cse_alife_object
 function se_object_by_sid(story_id)
 	if not (item_object_id_by_story_id[story_id]) or not (alife_object(item_object_id_by_story_id[story_id])) then
 		--printf("/ Story Objects Patched | failsafe for %s", story_id)
@@ -319,10 +326,31 @@ function se_object_by_sid(story_id)
 	return id and alife_object(id)
 end
 
+--- Function used to retrieve a server object by its story ID.
+--- @param story_id string
+--- @return CGame_Object
 function game_object_by_sid(story_id)
 	local se_obj = se_object_by_sid(story_id)
 	if se_obj then
 		return find_object_by_id(se_obj.id)
+	end
+end
+
+--- Function used to iterate through each existing server object.
+--- The function passed in arguments will be called once per game object, with a guarantee that the server object exists and isn't nil.
+--- Extra arguments passed to 'server_objects_iter' function are passed on to 'func' function.
+--- If 'func' function returns true, then the iteration stops.
+--- @param func function
+--- @param ... table
+--- @return nil
+function server_objects_iter(func,...)
+	local args = {...}
+
+	for id=0, 65534 do
+		local se_obj = alife_object(id)
+		if se_obj and func(se_obj, args) then
+			return
+		end
 	end
 end
 

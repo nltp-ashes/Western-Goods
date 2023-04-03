@@ -280,7 +280,7 @@ function retrieve_tradable_items()
 end
 
 --- Function used to know if an object is tradable with the western goods trader.
---- @param npc cse_abstract
+--- @param npc cse_alife_object
 --- @param obj game_object
 --- @return boolean
 function is_tradable(npc, obj)

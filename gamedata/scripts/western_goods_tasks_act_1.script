@@ -106,7 +106,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_1_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_1_task_1_title")
+	if true then
+		return game.translate_string("st_wg_act_1_task_1_title")
+	end
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -117,7 +119,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_1_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+	if true then
+		return game.translate_string("st_wg_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+	end
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -387,7 +391,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_2_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_1_task_2_title")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_1_task_2_title")
+	end
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -398,7 +404,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_2_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+	end
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -846,7 +854,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_3_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_1_task_3_title")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_1_task_3_title")
+	end
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -857,7 +867,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_1_task_3_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
+	end
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -1284,7 +1296,7 @@ end
 
 --- Function used to spawn a static helicopter at the Waste Processing Station if it doesn't exist.
 --- @param location string
---- @return nil
+--- @return boolean
 function create_story_helicopter(location)
 	if not se_object_by_sid("western_goods_helicopter_landed") then
 
@@ -1327,8 +1339,8 @@ end
 
 --- Function used to give the player a reward for finishing act 1.
 --- Warning : This function should be called while a dialog is running.
---- @param first_speaker cse_abstract
---- @param second_speaker cse_abstract
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
 --- @return nil
 function give_act_1_task_1_item(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "wg_gps")
@@ -1336,8 +1348,8 @@ end
 
 --- Function used to give the player a reward for finishing act 1.
 --- Warning : This function should be called while a dialog is running.
---- @param first_speaker cse_abstract
---- @param second_speaker cse_abstract
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
 --- @return nil
 function give_act_1_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")

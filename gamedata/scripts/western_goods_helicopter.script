@@ -34,7 +34,7 @@ local find_object_by_id = western_goods_utils.find_object_by_id
 --- @param pos vector
 --- @param lvid number
 --- @param gvid number
---- @return cse_abstract
+--- @return cse_alife_object
 function heli_spawn(sec,pos,lvid,gvid)
 	local se_heli = alife_create(sec,pos,lvid,gvid)
 

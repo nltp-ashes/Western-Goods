@@ -12,20 +12,8 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local get_translation = game.translate_string
 local dbg_printf = western_goods_utils.dbg_printf
-local get_distance = western_goods_utils.get_distance
-local find_object_by_id = western_goods_utils.find_object_by_id
-local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
-local heli_spawn = western_goods_helicopter.heli_spawn
-local heli_register = western_goods_helicopter.heli_register
-local spawn_story_squad = western_goods_utils.spawn_story_squad
 local spawn_squad = western_goods_utils.spawn_squad
-local spawn_dead_squad = western_goods_utils.spawn_dead_squad
-local get_member_id_from_squad = western_goods_utils.get_member_id_from_squad
-local get_member_from_squad = western_goods_utils.get_member_from_squad
-local find_unique_npc = western_goods_utils.find_unique_npc
-local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
 local se_object_by_sid = western_goods_utils.se_object_by_sid
 local game_object_by_sid = western_goods_utils.game_object_by_sid
@@ -49,7 +37,7 @@ TASK_3_CACHE = {}
 function start_task_1(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_2_task_1", npc:id())
-	dbg_printf("[WG] Act 2, Task 1 started...")
+	dbg_printf("[WG] Act 2, Task 1 | Task started...")
 end
 
 --- Function used to end Act 2, Task 1.
@@ -83,7 +71,7 @@ function end_task_1()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_1")
 
 	TASK_2_CACHE.available_time = time_global() + 1800000
-	dbg_printf("[WG] Act 2, Task 1 completed...")
+	dbg_printf("[WG] Act 2, Task 1 | Task completed...")
 end
 
 --- Function called when the task is initiated.
@@ -98,6 +86,29 @@ function xr_effects.western_goods_act_2_task_1_init(actor,npc)
 		"af_fuzz_kolobok_af_aam",
 		"af_fuzz_kolobok_af_iam"
 	}
+
+	local main_item_exists = false
+
+	western_goods_utils.server_objects_iter(function(se_obj)
+		if se_obj:section_name() == TASK_1_CACHE.main_item then
+			dbg_printf("[WG] Act 2, Task 1 | Main target already exist in the world %s", se_obj.id)
+			main_item_exists = true
+			return true
+		end
+	end)
+
+	if not main_item_exists then
+		dbg_printf("[WG] Act 2, Task 1 | Main target does not exist in the world...")
+
+		local viable_spawn_anomalies = get_static_chemical_anomalies() or {}
+		local spawn_anomaly_id = random_key_table(viable_spawn_anomalies)
+		local spawn_anomaly = spawn_anomaly_id and alife_object(spawn_anomaly_id)
+
+		if spawn_anomaly then
+			alife_create(TASK_1_CACHE.main_item, spawn_anomaly.position, spawn_anomaly.m_level_vertex_id, spawn_anomaly.m_game_vertex_id)
+			dbg_printf("[WG] Act 2, Task 2 | Spawned main target at pos:%s lvid:%s gvid:%s", spawn_anomaly.position, spawn_anomaly.m_level_vertex_id, spawn_anomaly.m_game_vertex_id)
+		end
+	end
 
 	-- Process info portions
 	give_info("western_goods_act_2_task_1_active")
@@ -142,7 +153,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_2_task_1_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_2_task_1_title")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_2_task_1_title")
+	end
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -153,7 +166,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_2_task_1_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_2_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_2_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+	end
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -233,7 +248,7 @@ function setup_act_2_task_2()
 	-- If the task is ready to be started
 	if task_1_done and not task_2_started and not task_2_done and task_opted_in and not task_setup and timeout_ready then
 		CreateTimeEvent("western_goods_setup_task", "act_2_task_2", math.random(600, 1800), function ()
-			dbg_printf("[WG] Act 2 task 2 available...")
+			dbg_printf("[WG] Act 2, Task 2 | Task available...")
 
 			-- Give the task some time after loading the save
 			start_task_2(se_object_by_sid("stalker_western_goods_trader"))
@@ -241,7 +256,7 @@ function setup_act_2_task_2()
 			-- Send a message to the player
 			dbg_printf("[WG] Act 2 Task 2 | Preparing message from %s", "Anonymous")
 			send_dialog({
-				{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_act_2_task_2_job_descr")}
+				{sender="Anonymous", icon="ui_inGame2_no_data", message=game.translate_string("st_wg_act_2_task_2_job_descr")}
 			}, true)
 			dbg_printf("[WG] Act 2 Task 2 | Message from %s ready", "Anonymous")
 
@@ -259,14 +274,14 @@ end
 --- @return nil
 function start_task_2(task_giver)
 	task_manager.get_task_manager():give_task("western_goods_act_2_task_2", task_giver.id)
-	dbg_printf("[WG] Act 2, Task 1 started...")
+	dbg_printf("[WG] Act 2, Task 2 | Task started...")
 end
 
 --- Function used to end Act 2, Task 2.
 --- @return nil
 function end_task_2()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_2_task_2")
-	dbg_printf("[WG] Act 2, Task 2 completed...")
+	dbg_printf("[WG] Act 2, Task 2 | Task completed...")
 end
 
 --- Function called when the task is initiated.
@@ -337,7 +352,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_2_task_2_title_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_2_task_2_title")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_2_task_2_title")
+	end
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
@@ -348,7 +365,9 @@ end
 --- @param tsk CGameTask
 --- @return string
 function task_functor.act_2_task_2_descr_f(task_id,field,p,tsk)
-	return game.translate_string("st_wg_act_2_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+	if true then -- Cond to force my IDE to fold this fucking function correctly
+		return game.translate_string("st_wg_act_2_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+	end
 end
 
 --- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
@@ -815,6 +834,44 @@ end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get a table where keys are IDs of chemical anomalies and values are boolean true.
+--- @return table
+function get_static_chemical_anomalies()
+
+	local viable_anomalies = {}
+
+	-- Set to false all dynamic anomalies
+	for _,v in pairs(bind_anomaly_field.dyn_anomalies) do
+		for id, _ in pairs(v) do
+			viable_anomalies[id] = false
+		end
+	end
+
+	-- Go through all IDs
+	western_goods_utils.server_objects_iter(function(se_obj)
+		if IsAnomaly(se_obj) then
+			if viable_anomalies[se_obj.id] == nil then
+				-- If the ID is unknown, then check for correct type of anomalies
+				if string.find(se_obj:section_name(), "chemical") or string.find(se_obj:section_name(), "acidic") then
+					viable_anomalies[se_obj.id] = true
+				end
+			else
+				-- If the ID isn't nil, then it's a dynamic anomaly, we set to nil
+				viable_anomalies[se_obj.id] = nil
+			end
+		end
+	end)
+
+	dbg_printf("[WG] Number of matching anomalies : %s", size_table(viable_anomalies))
+
+	return viable_anomalies
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Test functions		TODO : Remove this section
 -- ---------------------------------------------------------------------------------------------------------------------
 
 function spawn_btr(x, y, z, lvid, gvid)

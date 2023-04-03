@@ -25,7 +25,7 @@ local get_translation = game.translate_string
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn items in a specific npc with the help of trader_autoinject.script.
---- @param npc cse_abstract
+--- @param npc cse_alife_object
 --- @return nil
 function spawn_western_goods_in_trader(npc)
 
@@ -58,7 +58,7 @@ end
 
 TraderAuto = trader_autoinject.update
 --- Monkey-patching trader_autoinject.update to inject western goods items in the traders.
---- @param npc cse_abstract
+--- @param npc cse_alife_object
 --- @return nil
 function trader_autoinject.update(npc)
 	TraderAuto(npc)
@@ -67,7 +67,7 @@ end
 
 TraderUpdate = trade_manager.update
 --- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
---- @param npc cse_abstract
+--- @param npc cse_alife_object
 --- @param force_refresh boolean
 --- @return nil
 function trade_manager.update(npc, force_refresh)
@@ -84,7 +84,7 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn items in a corpse.
---- @param npc cse_abstract
+--- @param npc cse_alife_object
 --- @param npc_rank string
 --- @param npc_comm string
 --- @return nil
@@ -97,7 +97,7 @@ end
 
 SpawnCosmetics = death_manager.spawn_cosmetics
 --- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods.
---- @param npc cse_abstract
+--- @param npc cse_alife_object
 --- @param npc_id string
 --- @param npc_comm string
 --- @param npc_rank string
