@@ -40,7 +40,6 @@
             </phrase>
             <phrase id="6"> <!-- actor -->
                 <text>western_goods_trader_meet_6</text>
-                <action>western_goods_trader.unlock_encyclopedia_wg_trader</action>
                 <give_info>western_goods_trader_first_meet_over</give_info>
             </phrase>
         </phrase_list>

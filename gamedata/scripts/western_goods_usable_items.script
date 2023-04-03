@@ -85,8 +85,6 @@ end
 function use_gps(obj)
 	utils_xml.hide_menu()
 
-    ui_pda_encyclopedia_tab.unlock_article("encyclopedia_items_western_goods_gps")
-
 	-- Get the name and distance to the closest smart terrain, as well as the level's name
     local closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_game_world()
 
