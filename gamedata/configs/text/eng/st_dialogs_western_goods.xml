@@ -630,4 +630,25 @@
 		<text>Roger that, we're on our way. Hang tight.</text>
 	</string>
 
+	<!-- Act 2, Task 2 Messages -->
+	<string id="st_wg_trader_act_2_task_2_message_left_position">
+		<text>You left your position? You were spotted, mission aborted.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_4_message_1">
+		<text>The convoy will arrive soon. When it does, get to the third floor of the school.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_4_message_2">
+		<text>What do you want me to do when I'll see them?</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_4_message_3">
+		<text>Get rid of their escort, but not before we give you the signal. We'll tell you when to open fire.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_4_message_4">
+		<text>Understood.</text>
+	</string>
+
 </string_table>

@@ -162,34 +162,42 @@
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_3_descr">
-		<text>Hide in the basement while the convoy arrives.</text>
+		<text>Get to the school, but kill or escape any pursuer before you get there.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_4_descr">
-		<text>Hide in the basement while the convoy arrives.</text>
+		<text>Get to the school, and avoid being noticed while getting there.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_5_descr">
-		<text>Hide in the basement while the convoy arrives.</text>
+		<text>Get to the school, and hide in the basement while the convoy arrives.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_6_descr">
-		<text>Get in position to ambush the convoy. Wait for confirmation from your contact before opening fire.</text>
+		<text>Get to the school, and hide in the basement while the convoy arrives.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_7_descr">
-		<text>The convoy has been attacked by bandits. Wait for confirmation from your contact before opening fire.</text>
+		<text>The convoy is about to arrive, get to the third floor of the school.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_8_descr">
-		<text>An emission is about to hit, take cover in the basement now !</text>
+		<text>The convoy is about to arrive, find a position at one of the windows to ambush the convoy. Wait for confirmation from your contact before opening fire.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_9_descr">
-		<text>The scientists fled during the emission. Get to their last known GPS location.</text>
+		<text>The convoy has been attacked by bandits. Wait for confirmation from your contact before opening fire.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_10_descr">
+		<text>An emission is about to hit, take cover in the basement now !</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_11_descr">
+		<text>The scientists fled during the emission. Get to their last known GPS location.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_12_descr">
 		<text>You have found the package. Retrieve it to your contact.</text>
 	</string>
 
