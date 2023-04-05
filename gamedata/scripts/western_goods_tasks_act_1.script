@@ -1311,13 +1311,19 @@ function create_story_helicopter(location)
 			lvid = 1598393
 			gvid = 4454
 		else
+			printe("!ERROR Invalid spawn location for western_goods_helicopter_landed : loc:%s", location)
 			return false
 		end
 
-		local wps_heli_se = alife_create("western_goods_helicopter_landed",pos,lvid,gvid)
+		local heli_se = alife_create("western_goods_helicopter_landed",pos,lvid,gvid)
 
-		dbg_printf("[WG] Created western_goods_helicopter_landed [%s] at x:%s,y:%s,z:%s lvid:%s gvid:%s", wps_heli_se.id, pos.x, pos.y, pos.z, lvid, gvid)
-		return true
+		if heli_se then
+			dbg_printf("[WG] Created western_goods_helicopter_landed [%s] at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", heli_se.id, location, pos.x, pos.y, pos.z, lvid, gvid)
+			return true
+		else
+			printe("!ERROR Failed to create western_goods_helicopter_landed at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", location, pos.x, pos.y, pos.z, lvid, gvid)
+			return false
+		end
 	end
 
 	return false
@@ -1330,7 +1336,7 @@ function release_story_helicopter()
 	if wps_heli_se then
 		alife_release(wps_heli_se)
 
-		dbg_printf("[WG] Released helicopter at Waste Processing Station successfully %s", wps_heli_se.id)
+		dbg_printf("[WG] Released western_goods_helicopter_landed successfully %s", wps_heli_se.id)
 		return true
 	end
 
