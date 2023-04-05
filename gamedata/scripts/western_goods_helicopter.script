@@ -307,24 +307,25 @@ function order_helicopter(dik)
 	if dik ~= western_goods_mcm.get_config("heli_attack") then return end
 
 	local target = level.get_target_obj()
+	if target then
+		for id,_ in pairs(HELICOPTERS_TABLE) do
+			if HELICOPTERS_TABLE[id].mode == "protect_actor" then
 
-	for id,_ in pairs(HELICOPTERS_TABLE) do
-		if HELICOPTERS_TABLE[id].mode == "protect_actor" then
+				local combat = db.storage[id] and db.storage[id].combat
 
-			local combat = db.storage[id] and db.storage[id].combat
+				if combat and valid_target(target) then
+					combat:set_enemy(target)
+					HELICOPTERS_TARGETS[target:id()] = true
 
-			if target and combat and valid_target(target) then
-				combat:set_enemy(target)
-				HELICOPTERS_TARGETS[target:id()] = true
+					dbg_printf("[WG] Helicopter sent to terminate enemy | %s (%s)", target:section(), target:id())
 
-				dbg_printf("[WG] Helicopter sent to terminate enemy | %s (%s)", target:section(), target:id())
+					local sender = "Mercenary helicopter"
+					local message = get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
 
-				local sender = "Mercenary helicopter"
-				local message = get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
-
-				dynamic_news_helper.send_tip(message,sender,nil,15,"ui_inGame2_PD_DownToEarth",nil,"npc")
-			else
-				dbg_printf("[WG] Invalid target for helicopter | %s (%s)", target:section(), target:id())
+					dynamic_news_helper.send_tip(message,sender,nil,15,"ui_inGame2_PD_DownToEarth",nil,"npc")
+				else
+					dbg_printf("[WG] Invalid target for helicopter | %s (%s)", target:section(), target:id())
+				end
 			end
 		end
 	end
