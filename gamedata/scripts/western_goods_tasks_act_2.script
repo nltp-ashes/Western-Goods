@@ -510,7 +510,7 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 			end
 		end
 
-		-- Third stage : Wait for army soldiers to die or take part in the fight
+		-- Third stage : Wait for zombies to die or take part in the fight
 		if tsk.stage == 2 then
 			local zombie_2_squad_se = se_object_by_sid(TASK_2_CACHE.squads.zombie_2_spawn_data.sec)
 			local army_squad_se = se_object_by_sid(TASK_2_CACHE.squads.army_spawn_data.sec)
@@ -569,6 +569,12 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 
 				dbg_printf("[WG] Act 2 Task 2 Stage 2 | Second Zombied squad is dead")
 
+				dbg_printf("[WG] Act 2 Task 2 Stage 2 | Preparing message from %s", "Anonymous")
+				send_dialog({
+					{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_trader_act_2_task_2_stage_2_message_1")}
+				})
+				dbg_printf("[WG] Act 2 Task 2 Stage 2 | Message from %s ready", "Anonymous")
+
 				if is_player_fighting() then
 					dbg_printf("[WG] Act 2 Task 2 Stage 2 | Player is fighting :\n%s", utils_data.print_table(xr_combat_ignore.fighting_with_actor_npcs, false, true))
 					tsk.stage = 3
@@ -588,22 +594,25 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 				dbg_printf("[WG] Act 2 Task 2 Stage 3 | Player is fighting :\n%s", utils_data.print_table(xr_combat_ignore.fighting_with_actor_npcs, false, true))
 
 				if dist_to_basement and dist_to_basement <= 50 and dist_to_basement >= 25 then
-					send_dialog({
-						{sender="Anonymous", icon="ui_inGame2_no_data", message="Be careful, you're getting close to the school. If people see you get there, we'll have to abort the mission."}
-					},true)
-					-- TODO dialog warning school with pursuers
+					if not TASK_2_CACHE.message_school_pursuers_far_sent then
+						send_dialog({
+							{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_trader_act_2_task_2_message_school_pursuers_far")}
+						},true)
+						TASK_2_CACHE.message_school_pursuers_far_sent = true
+					end
 					return
 				elseif dist_to_basement and dist_to_basement < 25 then
 					send_dialog({
-						{sender="Anonymous", icon="ui_inGame2_no_data", message="Someone saw you get in the school. Mission aborted."}
+						{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_trader_act_2_task_2_message_school_pursuers_close")}
 					},true)
-					-- TODO dialog got to the school with pursuers
 					return "fail"
 				else
+					TASK_2_CACHE.message_school_pursuers_far_sent = false
 					return
 				end
 			else
 				dbg_printf("[WG] Act 2 Task 2 Stage 3 | Player is not fighting")
+				TASK_2_CACHE.message_school_pursuers_far_sent = false
 				tsk.stage = 4
 			end
 		end
@@ -641,6 +650,22 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 		-- Sixth stage : Get to the basement of the school & kill the snorks
 		if tsk.stage == 5 then
 			local snork_squad_se = se_object_by_sid(TASK_2_CACHE.squads.snork_spawn_data.sec)
+
+			-- Dialog when player reaches school
+			if not TASK_2_CACHE.stage_5_dialog_sent then
+
+				local dialog_sender_1 = { name=alife():actor():character_name(), icon=alife():actor():character_icon()}
+				local dialog_sender_2 = { name="Anonymous", icon="ui_inGame2_no_data"}
+
+				dbg_printf("[WG] Act 2 Task 2 Stage 5 | Preparing dialog between %s and %s", dialog_sender_1.name, dialog_sender_2.name)
+				send_dialog({
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_5_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_5_message_2")}
+				})
+				dbg_printf("[WG] Act 2 Task 2 Stage 5 | Dialog between %s and %s ready", dialog_sender_1.name, dialog_sender_2.name)
+
+				TASK_2_CACHE.stage_5_dialog_sent = true
+			end
 
 			-- Spawn sleeping bag
 			if not TASK_2_CACHE.sleeping_bag_spawned then
@@ -690,7 +715,7 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 				dbg_printf("[WG] Act 2 Task 2 Stage 4 | Preparing message from %s", "Anonymous")
 				send_dialog({
 					{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_trader_act_2_task_2_message_left_position")}
-				})
+				},true)
 				dbg_printf("[WG] Act 2 Task 2 Stage 4 | Message from %s ready", "Anonymous")
 				return "fail"
 			end
@@ -698,24 +723,24 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 			-- If bandits are dead, or if they are not enemy with the player
 			if TASK_2_CACHE.bandit_1_spawned and not bandit_1_squad_se then
 
-				if not TASK_2_CACHE.stage_3_dialog_sent then
+				if not TASK_2_CACHE.stage_6_dialog_sent then
 
-					dbg_printf("[WG] Act 2 Task 2 Stage 6 | First squad is dead")
+					dbg_printf("[WG] Act 2 Task 2 Stage 6 | First bandit squad is dead")
 
 					local dialog_sender_1 = { name="Anonymous", icon="ui_inGame2_no_data"}
 					local dialog_sender_2 = { name=alife():actor():character_name(), icon=alife():actor():character_icon()}
 
-					dbg_printf("[WG] Act 2 Task 2 Stage 4 | Preparing dialog between %s and %s", dialog_sender_1.name, dialog_sender_2.name)
+					dbg_printf("[WG] Act 2 Task 2 Stage 6 | Preparing dialog between %s and %s", dialog_sender_1.name, dialog_sender_2.name)
 					send_dialog({
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_4_message_1")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_4_message_2")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_4_message_3")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_4_message_4")}
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_6_message_1")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_6_message_2")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_6_message_3")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_2_task_2_stage_6_message_4")}
 					})
-					dbg_printf("[WG] Act 2 Task 2 Stage 4 | Dialog between %s and %s ready", dialog_sender_1.name, dialog_sender_2.name)
+					dbg_printf("[WG] Act 2 Task 2 Stage 6 | Dialog between %s and %s ready", dialog_sender_1.name, dialog_sender_2.name)
 
 					TASK_2_CACHE.progress_timer = time_global() + 30000
-					TASK_2_CACHE.stage_3_dialog_sent = true
+					TASK_2_CACHE.stage_6_dialog_sent = true
 				end
 
 				if TASK_2_CACHE.progress_timer < time_global() then
@@ -753,7 +778,11 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 
 			-- If player leaves his position, fail task
 			if not western_goods_restrictors.in_bounds(db.actor, TASK_2_CACHE.restrictors.overlook) then
-				-- TODO : Send dialog saying player should have stayed hidden
+				dbg_printf("[WG] Act 2 Task 2 Stage 4 | Preparing message from %s", "Anonymous")
+				send_dialog({
+					{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_trader_act_2_task_2_message_left_position")}
+				},true)
+				dbg_printf("[WG] Act 2 Task 2 Stage 4 | Message from %s ready", "Anonymous")
 				return "fail"
 			end
 
@@ -774,7 +803,7 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 				bandit_2_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart)
 
 				if bandit_2_squad_se then
-					TASK_2_CACHE.bandit_2_autokill_timer = time_global() + 20000
+					TASK_2_CACHE.bandit_2_autokill_timer = time_global() + 40000
 					TASK_2_CACHE.bandit_2_squad_spawned = true
 					return
 				else
@@ -788,7 +817,7 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 				dbg_printf("[WG] Act 2 Task 2 Stage 7 | Preparing message from %s", "Anonymous")
 				send_dialog({
 					{sender="Anonymous", icon="ui_inGame2_no_data", message=get_translation("st_wg_trader_act_2_task_2_message_left_position")}
-				})
+				},true)
 				dbg_printf("[WG] Act 2 Task 2 Stage 7 | Message from %s ready", "Anonymous")
 				return "fail"
 			end
