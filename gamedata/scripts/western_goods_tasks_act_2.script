@@ -899,7 +899,7 @@ function on_game_start()
 
 	-- TODO : Test code - to be removed
 	-- RegisterScriptCallback("on_key_press",spawn_dunn)
-	RegisterScriptCallback("on_key_press",spawn_test_squads)
+	-- RegisterScriptCallback("on_key_press",spawn_test_squads)
 end
 
 
@@ -1038,7 +1038,7 @@ function mark_current_enemies()
 	for id,_ in pairs(xr_combat_ignore.fighting_with_actor_npcs) do
 		if not western_goods_utils.table_contains(marked_enemies, id) then
 			table.insert(marked_enemies, id)
-			level.map_add_object_spot_ser(id, "anomaly_thermal", "id : " .. id)
+			level.map_add_object_spot_ser(id, "anomaly_thermal", "Enemy")
 		end
 	end
 end
