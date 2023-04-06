@@ -62,7 +62,7 @@ end
 --- Function called to determine the start dialog's text of the crew member.
 --- @return string
 function crew_member_start_dialog()
-	if not has_alife_info("wg_act_1_task_3_stage_0_crew_member_spawned") then
+	if not (has_alife_info("western_goods_act_1_task_3_active") or has_alife_info("western_goods_act_1_task_3_finished")) then
 		return game.translate_string("stalker_crew_member_start_0")
 
 	elseif not has_alife_info("stalker_crew_member_rescue_over") then
