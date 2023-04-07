@@ -11,7 +11,7 @@
 
 local dbg_printf = western_goods_utils.dbg_printf
 
-local fob_enabled = true
+local fob_enabled = false
 local fob_no_anomaly_restrictor = { ax=-32.640064239502,ay=-3.688939332962,az=214.10537719727,bx=119.68379211426,by=12.376997947693,bz=89.003326416016 }
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ function on_game_start()
     RegisterScriptCallback("load_state", load_state)
 
     -- TODO : Test code - to be removed
-    RegisterScriptCallback("on_key_press",test_func)
+    -- RegisterScriptCallback("on_key_press",test_func)
 end
 
 
