@@ -1244,4 +1244,28 @@ western_goods_items = {
 			["renegade"] 	= { qte=1, prob=0.01 }
 		},
 	},
+	{
+		["section"] = "wg_act_1_task_1_quest_item",
+		["type"] = "special",
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+		},
+	},
+	{
+		["section"] = "wg_act_1_task_2_quest_item_1",
+		["type"] = "special",
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+		},
+	},
+	{
+		["section"] = "wg_act_1_task_2_quest_item_2",
+		["type"] = "magazine",
+		["trader_params"] = {
+		},
+		["corpse_params"] = {
+		},
+	}
 }

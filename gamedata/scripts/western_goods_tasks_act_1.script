@@ -26,8 +26,6 @@ local get_member_from_squad = western_goods_utils.get_member_from_squad
 local find_unique_npc = western_goods_utils.find_unique_npc
 local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
-local se_object_by_sid = western_goods_utils.se_object_by_sid
-local game_object_by_sid = western_goods_utils.game_object_by_sid
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -133,17 +131,17 @@ end
 function task_functor.act_1_task_1_target_f(task_id,field,p,tsk)
 	if has_alife_info("western_goods_act_1_task_1_init") then
 		if tsk.stage == 0 then
-			local heli_se = se_object_by_sid("western_goods_helicopter_landed")
+			local heli_se = western_goods_utils.se_object_by_sid("western_goods_helicopter_landed")
 			return heli_se and heli_se.id
 		end
 
 		if tsk.stage == 1 then
-			local quest_item_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+			local quest_item_se = western_goods_utils.se_object_by_sid("wg_act_1_task_1_quest_item")
 			return quest_item_se and quest_item_se.parent_id == 65535 and quest_item_se.id
 		end
 
 		if tsk.stage == 2 then
-			local quest_item_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+			local quest_item_se = western_goods_utils.se_object_by_sid("wg_act_1_task_1_quest_item")
 			return quest_item_se and quest_item_se.parent_id == 65535 and quest_item_se.id
 		end
 
@@ -162,8 +160,8 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 		-- First stage : Get to the helicopter
 		if tsk.stage == 0 then
 			-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-			local helicopter_se = se_object_by_sid("western_goods_helicopter_landed")
-			local helicopter_obj = helicopter_se and game_object_by_sid("western_goods_helicopter_landed")
+			local helicopter_se = western_goods_utils.se_object_by_sid("western_goods_helicopter_landed")
+			local helicopter_obj = western_goods_utils.level_object_by_sid("western_goods_helicopter_landed")
 
 			-- If the heli hasn't been created, then create it
 			if not helicopter_se then
@@ -208,8 +206,8 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 		-- Second stage : Get to the crew at the sawmill and recover the supplies
 		if tsk.stage == 1 then
 			-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-			local supplies_se = se_object_by_sid("wg_act_1_task_1_quest_item")
-			local supplies_obj = supplies_se and game_object_by_sid("wg_act_1_task_1_quest_item")
+			local supplies_se = western_goods_utils.se_object_by_sid("wg_act_1_task_1_quest_item")
+			local supplies_obj = western_goods_utils.level_object_by_sid("wg_act_1_task_1_quest_item")
 
 			-- Spawn the crew of the helicopter dead at the sawmill
 			if not TASK_1_CACHE.stage_1_npcs_spawned then
@@ -272,7 +270,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 		-- Third stage : Take the supplies and bring them back to the trader
 		if tsk.stage == 2 then
 			-- Retrieve the server object (they may not exist - if they have been picked up by the player)
-			local supplies_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+			local supplies_se = western_goods_utils.se_object_by_sid("wg_act_1_task_1_quest_item")
 
 			-- If the supplies cannot be found (which is odd), roll back to stage 1
 			if not supplies_se then
@@ -295,7 +293,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 		-- Fourth stage : Bringing the supplies to the trader. If the supplies are dropped, rollback to the previous stage
 		if tsk.stage == 3 then
 			-- Retrieve the server object (they may exist - if they have been dropped by the player)
-			local supplies_se = se_object_by_sid("wg_act_1_task_1_quest_item")
+			local supplies_se = western_goods_utils.se_object_by_sid("wg_act_1_task_1_quest_item")
 
 			-- If the supplies cannot be found (which is odd), roll back to stage 2
 			if not supplies_se then
@@ -419,15 +417,15 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 	if has_alife_info("western_goods_act_1_task_2_init") then
 		if tsk.stage == 0 then
 			if western_goods_mcm.get_config("guided_tasks") then
-				local informant_se = se_object_by_sid("stalker_jupiter_informant_squad")
+				local informant_se = western_goods_utils.se_object_by_sid("stalker_jupiter_informant_squad")
 				return informant_se and informant_se.id
 			end
 		end
 
 		if tsk.stage == 1 then
 			if western_goods_mcm.get_config("guided_tasks") then
-				local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
-				local quest_item_2 = se_object_by_sid("wg_act_1_task_2_quest_item_2")
+				local quest_item_1 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
+				local quest_item_2 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 				return (quest_item_1 and quest_item_1.parent_id == 65535 and quest_item_1.id) or (quest_item_2 and quest_item_2.parent_id == 65535 and quest_item_2.id)
 			end
 		end
@@ -435,16 +433,16 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 		if tsk.stage == 2 then
 			local timer = TASK_2_CACHE.stage_2_show_targets_timer
 			if timer and timer <= time_global() then
-				local squad_1_se = se_object_by_sid("western_goods_act_1_task_2_bandit_4_squad")
-				local squad_2_se = se_object_by_sid("western_goods_act_1_task_2_bandit_5_squad")
-				local squad_3_se = se_object_by_sid("western_goods_act_1_task_2_bandit_6_squad")
+				local squad_1_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_4_squad")
+				local squad_2_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_5_squad")
+				local squad_3_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_6_squad")
 				return (squad_1_se and squad_1_se.id) or (squad_2_se and squad_2_se.id) or (squad_3_se and squad_3_se.id)
 			end
 		end
 
 		if tsk.stage == 3 then
-			local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
-			local quest_item_2 = se_object_by_sid("wg_act_1_task_2_quest_item_2")
+			local quest_item_1 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
+			local quest_item_2 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 			return (quest_item_1 and quest_item_1.parent_id == 65535 and quest_item_1.id) or (quest_item_2 and quest_item_2.parent_id == 65535 and quest_item_2.id)
 		end
 
@@ -463,7 +461,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 		-- First stage : Find and question the informant at Yanov Station
 		if tsk.stage == 0 then
 			-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
-			local informant_squad_se = se_object_by_sid("stalker_jupiter_informant_squad")
+			local informant_squad_se = western_goods_utils.se_object_by_sid("stalker_jupiter_informant_squad")
 
 			-- Delete the old helicopter from the lake in Zaton
 			if not TASK_2_CACHE.stage_0_zaton_heli_released then
@@ -477,7 +475,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 				TASK_2_CACHE.stage_0_wps_heli_created = true
 			end
 
-			-- If by now in the script the informant isn't alive, the task is failed
+			-- Spawn the informant if it doesn't exist
 			if not informant_squad_se then
 				informant_squad_se = spawn_story_squad("stalker_jupiter_informant_squad", vector():set(-55,3.8,211), SIMBOARD.smarts_by_names["jup_a6"])
 
@@ -518,8 +516,8 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			local helicopter_se = TASK_2_CACHE.stage_1_helicopter_id and alife_object(TASK_2_CACHE.stage_1_helicopter_id)
 
 			-- Retrieve the server objects (they may not always exist - if they aren't spawned yet)
-			local quest_item_1_se = se_object_by_sid("wg_act_1_task_2_quest_item_1")
-			local quest_item_2_se = se_object_by_sid("wg_act_1_task_2_quest_item_2")
+			local quest_item_1_se = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
+			local quest_item_2_se = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 
 			-- Populate the bandit camp
 			if not TASK_2_CACHE.stage_1_bandits_spawned then
@@ -677,9 +675,9 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 		-- Third stage : Face off the bandits reinforcements
 		if tsk.stage == 2 then
 			-- Retrieve the server objects (they may not always exist - if they aren't spawned yet or unavailable)
-			local squad_1_se = se_object_by_sid("western_goods_act_1_task_2_bandit_4_squad")
-			local squad_2_se = se_object_by_sid("western_goods_act_1_task_2_bandit_5_squad")
-			local squad_3_se = se_object_by_sid("western_goods_act_1_task_2_bandit_6_squad")
+			local squad_1_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_4_squad")
+			local squad_2_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_5_squad")
+			local squad_3_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_6_squad")
 
 			-- Spawn the bandit reinforcements around the Container Warehouse area
 			if not TASK_2_CACHE.stage_2_bandit_squads_spawned then
@@ -737,8 +735,8 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 		-- Fourth stage : Bring back the quest items
 		if tsk.stage == 3 then
 			-- Retrieve the server objects
-			local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
-			local quest_item_2 = se_object_by_sid("wg_act_1_task_2_quest_item_2")
+			local quest_item_1 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
+			local quest_item_2 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 
 			-- Spawn the Gauss rifle if it disappeared
 			if not quest_item_1 then
@@ -767,8 +765,8 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 		-- Fifth stage : If one of the quest items are dropped, roll back to fourth stage
 		if tsk.stage == 4 then
 			-- Retrieve the server objects
-			local quest_item_1 = se_object_by_sid("wg_act_1_task_2_quest_item_1")
-			local quest_item_2 = se_object_by_sid("wg_act_1_task_2_quest_item_2")
+			local quest_item_1 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
+			local quest_item_2 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 
 			give_info("western_goods_act_1_task_2_ready_finished")
 
@@ -881,7 +879,7 @@ end
 function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
 	if has_alife_info("western_goods_act_1_task_3_init") then
 		if tsk.stage == 0 then
-			local crew_member_se = se_object_by_sid("stalker_crew_member")
+			local crew_member_se = western_goods_utils.se_object_by_sid("stalker_crew_member")
 			return crew_member_se and crew_member_se.id
 		end
 
@@ -894,9 +892,9 @@ function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
 			-- Wait 5 real life minutes before starting to indicate where the remaining enemies are
 			local timer = TASK_3_CACHE.stage_2_show_targets_timer
 			if timer and timer <= time_global() then
-				local squad_1_se = se_object_by_sid("western_goods_act_1_task_3_mono_bridge_1_squad")
-				local squad_2_se = se_object_by_sid("western_goods_act_1_task_3_mono_bridge_2_squad")
-				local squad_3_se = se_object_by_sid("western_goods_act_1_task_3_mono_bridge_3_squad")
+				local squad_1_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_1_squad")
+				local squad_2_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_2_squad")
+				local squad_3_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_3_squad")
 				return (squad_1_se and squad_1_se.id) or (squad_2_se and squad_2_se.id) or (squad_3_se and squad_3_se.id)
 			end
 		end
@@ -921,11 +919,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 		-- First stage : Find and rescue the crew member
 		if tsk.stage == 0 then
 			-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-			local crew_member_se = se_object_by_sid("stalker_crew_member")
+			local crew_member_se = western_goods_utils.se_object_by_sid("stalker_crew_member")
 			local crew_member_obj = crew_member_se and find_object_by_id(crew_member_se.id)
 
 			-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
-			local crew_member_squad_se = se_object_by_sid("stalker_crew_member_squad")
+			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
 			-- Spawn the crew member squad
 			if not crew_member_squad_se then
@@ -986,7 +984,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 		-- Second stage : Get to the bridge in the Red Forest
 		if tsk.stage == 1 then
 			-- Retrieve the server and game objects
-			local crew_member_squad_se = se_object_by_sid("stalker_crew_member_squad")
+			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
 			-- Respawn the crew member squad
 			if not crew_member_squad_se then
@@ -1029,7 +1027,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 				if dist_to_dialog_1 and dist_to_dialog_1 < 25 and not TASK_3_CACHE.stage_1_dialog_1_sent then
 					local sender_1 = alife():actor()
-					local sender_2 = se_object_by_sid("stalker_crew_member")
+					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
 					local dialog_sender_1 = { name=sender_1:character_name(), icon=sender_1:character_icon()}
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
@@ -1046,7 +1044,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 				if dist_to_dialog_2 and dist_to_dialog_2 < 25 and not TASK_3_CACHE.stage_1_dialog_2_sent then
 					local sender_1 = alife():actor()
-					local sender_2 = se_object_by_sid("stalker_crew_member")
+					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
 					local dialog_sender_1 = { name=sender_1:character_name(), icon=sender_1:character_icon()}
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
@@ -1065,7 +1063,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 				if dist_to_dialog_3 and dist_to_dialog_3 < 50 and not TASK_3_CACHE.stage_1_dialog_3_sent then
 					local sender_1 = alife():actor()
-					local sender_2 = se_object_by_sid("stalker_crew_member")
+					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
 					local dialog_sender_1 = { name=sender_1:character_name(), icon=sender_1:character_icon()}
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
@@ -1104,12 +1102,12 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 		-- Third stage : Fight off the enemy squads
 		if tsk.stage == 2 then
 			-- Retrieve the server objects (they may not always exist - if they aren't spawned yet or unavailable)
-			local monolith_se_squad_1 = se_object_by_sid("western_goods_act_1_task_3_mono_bridge_1_squad")
-			local monolith_se_squad_2 = se_object_by_sid("western_goods_act_1_task_3_mono_bridge_2_squad")
-			local monolith_se_squad_3 = se_object_by_sid("western_goods_act_1_task_3_mono_bridge_3_squad")
+			local monolith_se_squad_1 = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_1_squad")
+			local monolith_se_squad_2 = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_2_squad")
+			local monolith_se_squad_3 = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_3_squad")
 
 			-- Retrieve the server objects
-			local crew_member_squad_se = se_object_by_sid("stalker_crew_member_squad")
+			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
 			-- Respawn the crew member squad
 			if not crew_member_squad_se then
@@ -1136,11 +1134,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			local helicopter_obj = helicopter_se and find_object_by_id(helicopter_se.id)
 
 			-- Retrieve the server and game object of the crew member
-			local crew_member_se = se_object_by_sid("stalker_crew_member")
+			local crew_member_se = western_goods_utils.se_object_by_sid("stalker_crew_member")
 			local crew_member_obj = crew_member_se and find_object_by_id(crew_member_se.id)
 
 			-- Retrieve the server and game object of the crew member's squad
-			local crew_member_squad_se = se_object_by_sid("stalker_crew_member_squad")
+			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
 			-- Define the helicopter spawn and landing positions
 			local heli_spawn_pos = vector():set(348.8,10.9,149.2)
@@ -1239,7 +1237,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 		-- Fifth stage : Return for the reward
 		if tsk.stage == 4 then
-			local crew_member_squad_se = se_object_by_sid("stalker_crew_member_squad")
+			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
 			give_info("western_goods_act_1_task_3_ready_finished")
 
@@ -1298,7 +1296,7 @@ end
 --- @param location string
 --- @return boolean
 function create_story_helicopter(location)
-	if not se_object_by_sid("western_goods_helicopter_landed") then
+	if not western_goods_utils.se_object_by_sid("western_goods_helicopter_landed") then
 
 		local pos, lvid, gvid
 
@@ -1332,7 +1330,7 @@ end
 --- Function used to release the helicopter at the Waste Processing Station if it exists.
 --- @return nil
 function release_story_helicopter()
-	local wps_heli_se = se_object_by_sid("western_goods_helicopter_landed")
+	local wps_heli_se = western_goods_utils.se_object_by_sid("western_goods_helicopter_landed")
 	if wps_heli_se then
 		alife_release(wps_heli_se)
 

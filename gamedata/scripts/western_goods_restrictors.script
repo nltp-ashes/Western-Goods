@@ -35,3 +35,7 @@ function in_bounds(who,data)
 		return false
 	end
 end
+
+function xr_conditions.in_bounds(enemy,npc,p)
+	return in_bounds(enemy, { ax=p[1],ay=p[2],az=p[3],bx=p[4],by=p[5],bz=p[6] })
+end
