@@ -16,11 +16,6 @@ local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
-local ini_cigarette_tools = ini_file([[plugins\cigarettes\cigarette_tools.ltx]])
-local ini_campfire_tools = ini_file([[plugins\campfires\campfire_tools.ltx]])
-local cigarette_tools = {}
-local campfire_tools = {}
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Usable Items
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -74,12 +69,11 @@ function use_item(obj,_,cf)
     end
 
     -- Campfires
-    for _,tool in pairs(campfire_tools) do
-        if obj:section() == tool then
-            dbg_printf("[WG] Used %s",obj:section())
-            bind_campfire.campfire_go_on(obj, cf)
-            return
-        end
+    local can_light = ini_sys:r_string_ex(obj:section(), "can_light_strong")
+    if can_light then
+        dbg_printf("[WG] Used %s",obj:section())
+        bind_campfire.campfire_go_on(obj, cf)
+        return
     end
 
     -- Magazines
@@ -262,22 +256,17 @@ function itms_manager.actor_on_item_before_use(obj,flags)
     local pwr_boost 	= ini_sys:r_float_ex(sec, "boost_power_restore") or 0
 
     -- if an item is required
-    local required_tool_legacy = ini_sys:r_string_ex(sec, "required_tool")
-    local required_tools = ini_sys:r_string_ex(sec, "require_cig_tool") and cigarette_tools or {}
-
-    if required_tool_legacy and not western_goods_utils.table_contains(required_tools, required_tool_legacy) then
-        table.insert(required_tools, required_tool_legacy)
-    end
+    local requires_tool = ini_sys:r_bool_ex(sec, "requires_light_weak")
 
     local obj_tool
-    if not is_empty(required_tools) then
-        for _,tool in pairs(required_tools) do
-            local curr_tool = tool and ini_sys:section_exist(tool) and db.actor:object(tool)
-            if curr_tool then
-                obj_tool = curr_tool
-                break
+    if requires_tool then
+        db.actor:iterate_inventory(function(owner, obj)
+            local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_weak")
+            if can_light then
+                obj_tool = obj
+                return true
             end
-        end
+        end)
     end
 
     -- store boosts in a table
@@ -290,13 +279,10 @@ function itms_manager.actor_on_item_before_use(obj,flags)
     curr_booster["rad"]       = (rad_boost > itms_manager.boost_min) and rad_boost or 0
 
     -- A required tool is missing -> no eat
-    if not is_empty(required_tools) and not obj_tool then
-        dbg_printf("[WG] Before Use Item | Require tools\n%s", utils_data.print_table(required_tools, false, true))
+    if requires_tool and not obj_tool then
+        dbg_printf("[WG] Before Use Item | Require tools '%s'",requires_tool)
         dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool)
-        for pos,tool in pairs(required_tools) do
-            str = str .. ui_item.get_sec_name(tool) .. (western_goods_utils.has_next(required_tools,pos) and " or " or " ")
-        end
-        str = str .. game.translate_string("st_wg_missing_requirements_ext")
+        str = game.translate_string("st_wg_missing_requirements_ext")
         pass = false
 
     -- older booster is still active
@@ -341,14 +327,14 @@ function itms_manager.actor_on_item_before_use(obj,flags)
         flags.ret_value = true
         copy_table(itms_manager.old_booster, curr_booster)
         if obj_tool then
-            dbg_printf("[WG] Before Use Item | Require tools\n%s", utils_data.print_table(required_tools, false, true))
+            dbg_printf("[WG] Before Use Item | Requires tool '%s'",requires_tool)
             dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool:section())
-            if IsItem("multiuse",obj_tool:section()) then
-                dbg_printf("[WG] Before Use Item | Discharging '%s'",obj_tool:section())
-                utils_item.discharge(obj_tool, 1)
-            else
+            if utils_item.is_degradable(obj_tool, obj_tool:section()) then
                 dbg_printf("[WG] Before Use Item | Degrading '%s'",obj_tool:section())
                 utils_item.degrade(obj_tool, 0.05)
+            else
+                dbg_printf("[WG] Before Use Item | Discharging '%s'",obj_tool:section())
+                utils_item.discharge(obj_tool, 1)
             end
         end
     else
@@ -407,12 +393,12 @@ function bind_campfire.campfire_go_on(obj, cf)
     end
 
     dbg_printf("[WG] Campfire Go On | Object tool '%s'",obj:section())
-    if IsItem("multiuse",obj:section()) then
-        dbg_printf("[WG] Campfire Go On | Discharging '%s'",obj:section())
-        utils_item.discharge(obj, 1)
-    else
+    if utils_item.is_degradable(obj, obj:section()) then
         dbg_printf("[WG] Campfire Go On | Degrading '%s'",obj:section())
         utils_item.degrade(obj, 0.05)
+    else
+        dbg_printf("[WG] Campfire Go On | Discharging '%s'",obj:section())
+        utils_item.discharge(obj, 1)
     end
 end
 
@@ -429,16 +415,19 @@ function bind_campfire.use_campfire(actor,zone,p)
                 if (binder.campfire:is_on()) then
                     bind_campfire.campfire_go_off(binder.campfire)
                 else
-                    for _,tool in pairs(campfire_tools) do
-                        local obj_item = ini_sys:section_exist(tool) and db.actor:object(tool)
-                        if obj_item then
-                            dbg_printf("[WG] Use Campfire | Campfire tools\n%s", utils_data.print_table(campfire_tools, false, true))
-                            dbg_printf("[WG] Use Campfire | Object item '%s'",obj_item:section())
-                            use_item(obj_item, nil, binder.campfire)
-                            return
+                    local obj_tool
+                    db.actor:iterate_inventory(function(owner, obj)
+                        local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
+                        if can_light then
+                            obj_tool = obj
+                            return true
                         end
-
-                        actor_menu.set_msg(1, game.translate_string("st_ui_campfire_prereq"),3)
+                    end)
+                    if obj_tool then
+                        dbg_printf("[WG] Use Campfire | Object tool '%s'",obj_tool:section())
+                        use_item(obj_tool, nil, binder.campfire)
+                    else
+                        actor_menu.set_msg(1, game.translate_string("st_wg_missing_requirements_ext"),3)
                     end
                 end
             end
@@ -446,29 +435,6 @@ function bind_campfire.use_campfire(actor,zone,p)
     end
 end
 
-function retrieve_cigarette_tools()
-    ini_cigarette_tools:section_for_each(function(section)
-        local section = utils_data.collect_section(ini_cigarette_tools, section, true)
-        for tool,_ in pairs (section) do
-            if not western_goods_utils.table_contains(cigarette_tools, tool) then
-                table.insert(cigarette_tools, tool)
-            end
-        end
-    end)
-    dbg_printf("[WG] Retrieve Cigarette Tools | cigarette_tools :\n%s", utils_data.print_table(cigarette_tools, false, true))
-end
-
-function retrieve_campfire_tools()
-    ini_campfire_tools:section_for_each(function(section)
-        local section = utils_data.collect_section(ini_campfire_tools, section, true)
-        for tool,_ in pairs (section) do
-            if not western_goods_utils.table_contains(campfire_tools, tool) then
-                table.insert(campfire_tools, tool)
-            end
-        end
-    end)
-    dbg_printf("[WG] Retrieve Campfire Tools | campfire_tools :\n%s", utils_data.print_table(campfire_tools, false, true))
-end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- French MRE
@@ -525,8 +491,6 @@ end
 --- @return nil
 function on_game_start()
     RegisterScriptCallback("actor_on_item_use", use_item)
-    RegisterScriptCallback("actor_on_first_update", retrieve_cigarette_tools)
-    RegisterScriptCallback("actor_on_first_update", retrieve_campfire_tools)
 end
 
 

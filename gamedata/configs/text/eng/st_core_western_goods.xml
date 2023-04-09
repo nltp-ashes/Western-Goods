@@ -121,7 +121,7 @@
 	</string>
 
 	<string id="st_wg_missing_requirements_ext">
-		<text>is required!</text>
+		<text>A tool is required!</text>
 	</string>
 
 </string_table>
