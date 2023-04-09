@@ -111,4 +111,17 @@
 	<string id="st_wg_gps_use_4">
 		<text>unknown in database</text>
 	</string>
+
+	<!-- Lighter use strings -->
+	<string id="st_wg_use">
+		<text>Use</text>
+	</string>
+	<string id="st_wg_fill">
+		<text>Fill</text>
+	</string>
+
+	<string id="st_wg_missing_requirements_ext">
+		<text>is required!</text>
+	</string>
+
 </string_table>

@@ -84,6 +84,7 @@
 			%c[d_blue] • %c[ui_gray_2] military item\n
 			%c[d_blue] • %c[ui_gray_2] imported\n
 			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
 		</text>
 	</string>
 
@@ -126,6 +127,26 @@
 			%c[d_blue] • %c[ui_gray_2] imported\n
 			%c[d_cyan] • %c[ui_gray_2] valuable\n
 			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+
+	<string id="st_wg_lighter_bic">
+		<text>BIC lighter</text>
+	</string>
+
+	<string id="st_wg_lighter_bic_s">
+		<text>BIC lighter</text>
+	</string>
+
+	<string id="st_wg_lighter_bic_descr">
+		<text>
+			A standard BIC lighter. Not commonly found in the Zone, this lighter is readily available in western European countries. A full lighter can usually light up 20 cigarettes.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
 		</text>
 	</string>
 </string_table>

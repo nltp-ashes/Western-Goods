@@ -16,19 +16,31 @@ local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
+local ini_cigarette_tools = ini_file([[plugins\cigarettes\cigarette_tools.ltx]])
+local ini_campfire_tools = ini_file([[plugins\campfires\campfire_tools.ltx]])
+local cigarette_tools = {}
+local campfire_tools = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Usable Items
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to return the text written when right clicking on the magazine.
+
+--- Function used to return the text written when right clicking on a lighter.
+--- @param obj game_object
+--- @return string
+function menu_use(obj)
+    return get_translation("st_wg_use")
+end
+
+--- Function used to return the text written when right clicking on a magazine.
 --- @param obj game_object
 --- @return string
 function menu_view(obj)
     return get_translation("st_wg_view")
 end
 
---- Function used to return the text written when right clicking on the magazine.
+--- Function used to return the text written when right clicking on an MRE.
 --- @param obj game_object
 --- @return string
 function menu_unpack(obj)
@@ -38,7 +50,7 @@ end
 --- Function called by callback when any object in the game is used. This redirects to the proper functions if the item used is one from Western Goods.
 --- @param obj game_object
 --- @return nil
-function use_item(obj)
+function use_item(obj,_,cf)
 
     -- GPS Locator
     if (obj:section() == "wg_gps") then
@@ -61,6 +73,15 @@ function use_item(obj)
         return
     end
 
+    -- Campfires
+    for _,tool in pairs(campfire_tools) do
+        if obj:section() == tool then
+            dbg_printf("[WG] Used %s",obj:section())
+            bind_campfire.campfire_go_on(obj, cf)
+            return
+        end
+    end
+
     -- Magazines
     local magazines = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "magazine")
     for item_id,_ in pairs(magazines) do
@@ -70,6 +91,7 @@ function use_item(obj)
                 hide_hud_inventory()
             end
             western_goods_magazine_ui.display(obj:section())
+            return
         end
     end
 end
@@ -189,6 +211,249 @@ end
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Lighter
+-- ---------------------------------------------------------------------------------------------------------------------
+
+BuildHeader = ui_item.build_desc_header
+--- Function used to display the fill level of the lighter in the inventory.
+--- @param obj game_object
+--- @param sec string
+--- @param str string
+function ui_item.build_desc_header(obj, sec, str)
+    str = str or gc(ini_sys:r_string_ex(sec, "description"))
+    if (not str) then return "" end
+
+    if obj:section() == "wg_lighter_bic" then
+        local con = math.ceil(obj:condition() * 100)
+        local clr = utils_xml.get_color_con(con)
+        local clr_2  = utils_xml.get_color("ui_gray_1")
+        local _str = clr .. " • " .. clr_2 .. game.translate_string("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
+        return _str .. BuildHeader(obj, sec, str)
+    end
+
+    return BuildHeader(obj, sec, str)
+end
+
+BeforeUse = itms_manager.actor_on_item_before_use
+--- Function used to allow the lighter to light cigarettes.
+--- @param obj game_object
+--- @param flags table
+function itms_manager.actor_on_item_before_use(obj,flags)
+    local sec = obj:section()
+
+    -- no need to check for tools
+    if IsItem("tool",sec) then
+        --printf("- actor_on_item_before_use [%s] | ignore utility item", sec)
+        flags.ret_value = true
+        return
+    end
+
+    local curr_booster = {}
+    local time_g = time_global()
+    local str = ""
+    local pass = true
+
+    -- read important boosts
+    local period		= ini_sys:r_float_ex(sec, "boost_time") or 0
+    local rad_boost 	= ini_sys:r_float_ex(sec, "boost_radiation_restore") or 0
+    local psy_boost 	= ini_sys:r_float_ex(sec, "boost_telepat_protection") or 0
+    local bld_boost 	= ini_sys:r_float_ex(sec, "boost_bleeding_restore") or 0
+    local hp_boost 		= ini_sys:r_float_ex(sec, "boost_health_restore") or 0
+    local pwr_boost 	= ini_sys:r_float_ex(sec, "boost_power_restore") or 0
+
+    -- if an item is required
+    local required_tool_legacy = ini_sys:r_string_ex(sec, "required_tool")
+    local required_tools = ini_sys:r_string_ex(sec, "require_cig_tool") and cigarette_tools or {}
+
+    if required_tool_legacy and not western_goods_utils.table_contains(required_tools, required_tool_legacy) then
+        table.insert(required_tools, required_tool_legacy)
+    end
+
+    local obj_tool
+    if not is_empty(required_tools) then
+        for _,tool in pairs(required_tools) do
+            local curr_tool = tool and ini_sys:section_exist(tool) and db.actor:object(tool)
+            if curr_tool then
+                obj_tool = curr_tool
+                break
+            end
+        end
+    end
+
+    -- store boosts in a table
+    curr_booster["section"]   = sec
+    curr_booster["period"]	  = (period > 0) and (time_g + period*1000) or time_g
+    curr_booster["pwr"]       = (pwr_boost > itms_manager.boost_min) and pwr_boost or 0
+    curr_booster["psy"]       = (psy_boost > itms_manager.boost_min) and psy_boost or 0
+    curr_booster["bld"]       = (bld_boost > itms_manager.boost_min) and bld_boost or 0
+    curr_booster["hp"]        = (hp_boost > itms_manager.boost_min) and hp_boost or 0
+    curr_booster["rad"]       = (rad_boost > itms_manager.boost_min) and rad_boost or 0
+
+    -- A required tool is missing -> no eat
+    if not is_empty(required_tools) and not obj_tool then
+        dbg_printf("[WG] Before Use Item | Require tools\n%s", utils_data.print_table(required_tools, false, true))
+        dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool)
+        for pos,tool in pairs(required_tools) do
+            str = str .. ui_item.get_sec_name(tool) .. (western_goods_utils.has_next(required_tools,pos) and " or " or " ")
+        end
+        str = str .. game.translate_string("st_wg_missing_requirements_ext")
+        pass = false
+
+    -- older booster is still active
+    elseif itms_manager.old_booster["period"] and (itms_manager.old_booster["period"] > time_g) then
+        --printf("~ actor_on_item_before_use [%s] | older booster [%s] is still active", sec, old_booster['section'])
+        local weaker_effect
+        local stronger_effect
+        for k,v in pairs(curr_booster) do
+            if (k ~= "section") and (k ~= "period") then
+                local v2 = itms_manager.old_booster[k]
+                if v2  and (v > itms_manager.boost_min) and (v2 > itms_manager.boost_min) then
+                    if (v <= v2) then
+                        weaker_effect = k
+                    else
+                        stronger_effect = k
+                    end
+                elseif (v2 == 0) and (v > itms_manager.boost_min) then
+                    stronger_effect = k
+                end
+            end
+        end
+
+        -- older booster has some stronger effect, while new one doesn't have any stronger effect
+        if weaker_effect and (not stronger_effect) then
+            --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
+            local boost_str = game.translate_string(itms_manager.booster_string[weaker_effect])
+            str = strformat(game.translate_string("st_itm_manager_greater_effect"),boost_str)
+            pass = false
+        end
+
+    -- prevent player to take anabiotic during combat
+    elseif sec == "drug_anabiotic" then
+        if (not is_empty(xr_combat_ignore.fighting_with_actor_npcs)) then
+            str = game.translate_string("st_anabiotic_combat")
+            pass = false
+        end
+    end
+
+    -- to eat or not to eat
+    if pass then
+        --printf("- actor_on_item_before_use [%s] | pass = true", sec)
+        flags.ret_value = true
+        copy_table(itms_manager.old_booster, curr_booster)
+        if obj_tool then
+            dbg_printf("[WG] Before Use Item | Require tools\n%s", utils_data.print_table(required_tools, false, true))
+            dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool:section())
+            if IsItem("multiuse",obj_tool:section()) then
+                dbg_printf("[WG] Before Use Item | Discharging '%s'",obj_tool:section())
+                utils_item.discharge(obj_tool, 1)
+            else
+                dbg_printf("[WG] Before Use Item | Degrading '%s'",obj_tool:section())
+                utils_item.degrade(obj_tool, 0.05)
+            end
+        end
+    else
+        --printf("! actor_on_item_before_use [%s] | pass = false", sec)
+        flags.ret_value = false
+
+        utils_xml.hide_menu()
+        actor_menu.set_msg(1, str,3)
+    end
+end
+
+CampfireGoOn = bind_campfire.campfire_go_on
+--- Function used to light up a campfire if the conditions are right.
+--- @param obj game_object
+--- @param cf campfire_binder
+function bind_campfire.campfire_go_on(obj, cf)
+    local cf = cf or bind_campfire.get_nearby_campfire(bind_campfire.dist_cf,true)
+    if (not cf) then
+        return
+    end
+
+    if (cf:is_on()) then
+        return
+    end
+
+    if bind_campfire.rain_pass() then
+        if (bind_campfire.k_rain < 1)then
+            bind_campfire.k_rain = bind_campfire.k_rain + 1
+            actor_menu.set_msg(1, game.translate_string("st_camp_help"),3)
+        end
+        actor_effects.play_item_fx("matches_script")
+        --local snd_obj = sound_object("interface\\inv_matches")
+        --snd_obj:play(db.actor,0,sound_object.s2d)
+        xr_sound.set_sound_play(AC_ID,"inv_matches")
+        cf:turn_on()
+    else
+        actor_effects.play_item_fx("matches_script")
+        actor_menu.set_msg(1, game.translate_string("st_fail"),3)
+    end
+
+    dbg_printf("[WG] Campfire Go On | Object tool '%s'",obj:section())
+    if IsItem("multiuse",obj:section()) then
+        dbg_printf("[WG] Campfire Go On | Discharging '%s'",obj:section())
+        utils_item.discharge(obj, 1)
+    else
+        dbg_printf("[WG] Campfire Go On | Degrading '%s'",obj:section())
+        utils_item.degrade(obj, 0.05)
+    end
+end
+
+UseCampfire = bind_campfire.use_campfire
+--- Function called from game_tutorials.xml when the player interacts with a campfire.
+--- @param actor game_object
+--- @param zone space_restrictor
+--- @param p table
+function bind_campfire.use_campfire(actor,zone,p)
+    local pos = db.actor:position()
+    for id,binder in pairs(bind_campfire.campfires_all) do
+        if (binder and binder.campfire) then
+            if (pos:distance_to_sqr(binder.object:position()) <= 2) then
+                if (binder.campfire:is_on()) then
+                    bind_campfire.campfire_go_off(binder.campfire)
+                else
+                    for _,tool in pairs(campfire_tools) do
+                        local obj_item = ini_sys:section_exist(tool) and db.actor:object(tool)
+                        if obj_item then
+                            dbg_printf("[WG] Use Campfire | Campfire tools\n%s", utils_data.print_table(campfire_tools, false, true))
+                            dbg_printf("[WG] Use Campfire | Object item '%s'",obj_item:section())
+                            use_item(obj_item, nil, binder.campfire)
+                            return
+                        end
+
+                        actor_menu.set_msg(1, game.translate_string("st_ui_campfire_prereq"),3)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function retrieve_cigarette_tools()
+    ini_cigarette_tools:section_for_each(function(section)
+        local section = utils_data.collect_section(ini_cigarette_tools, section, true)
+        for tool,_ in pairs (section) do
+            if not western_goods_utils.table_contains(cigarette_tools, tool) then
+                table.insert(cigarette_tools, tool)
+            end
+        end
+    end)
+    dbg_printf("[WG] Retrieve Cigarette Tools | cigarette_tools :\n%s", utils_data.print_table(cigarette_tools, false, true))
+end
+
+function retrieve_campfire_tools()
+    ini_campfire_tools:section_for_each(function(section)
+        local section = utils_data.collect_section(ini_campfire_tools, section, true)
+        for tool,_ in pairs (section) do
+            if not western_goods_utils.table_contains(campfire_tools, tool) then
+                table.insert(campfire_tools, tool)
+            end
+        end
+    end)
+    dbg_printf("[WG] Retrieve Campfire Tools | campfire_tools :\n%s", utils_data.print_table(campfire_tools, false, true))
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- French MRE
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -243,6 +508,8 @@ end
 --- @return nil
 function on_game_start()
     RegisterScriptCallback("actor_on_item_use", use_item)
+    RegisterScriptCallback("actor_on_first_update", retrieve_cigarette_tools)
+    RegisterScriptCallback("actor_on_first_update", retrieve_campfire_tools)
 end
 
 

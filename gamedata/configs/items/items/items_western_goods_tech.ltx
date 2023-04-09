@@ -68,13 +68,17 @@ tier  									 = 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_gps]:tch_junk,booster
+[wg_gps]:tch_junk
 GroupControlSection                      = spawn_group
 $spawn                                   = "misc\wg_gps"
 $prefetch                                = 32
 cform                                    = skeleton
 visual                                   = dynamics\western_goods_tech\wg_gps.ogf
 kind			                         = i_device
+
+use1_functor                             = western_goods_usable_items.menu_use
+use1_action_functor                      = western_goods_usable_items.use_item
+use1_allow_db                            = true
 
 inv_name			                     = st_wg_gps
 inv_name_short			                 = st_wg_gps_s
@@ -134,5 +138,34 @@ inv_grid_width			                 = 2
 inv_grid_height			                 = 1
 inv_grid_x			                     = 3
 inv_grid_y			                     = 2
+
+tier 									 = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_lighter_bic]:tch_junk
+$spawn                                   = "misc\wg_lighter_bic"
+cform                                    = skeleton
+visual                                   = dynamics\western_goods_tech\wg_lighter_bic.ogf
+kind			                         = i_tool
+
+use1_functor                             = western_goods_usable_items.menu_use
+use1_action_functor                      = western_goods_usable_items.use_item
+use1_allow_db                            = true
+
+inv_name			                     = st_wg_lighter_bic
+inv_name_short			                 = st_wg_lighter_bic_s
+description			                     = st_wg_lighter_bic_descr
+inv_weight			                     = 0.025
+cost				                     = 1950
+
+icons_texture				             = ui\icons\ui_icon_western_goods_tech
+inv_grid_width			                 = 1
+inv_grid_height			                 = 1
+inv_grid_x			                     = 8
+inv_grid_y			                     = 1
+
+use_condition                            = true
+allow_repair                             = false
 
 tier 									 = 2

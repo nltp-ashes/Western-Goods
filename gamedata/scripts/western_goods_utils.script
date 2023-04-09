@@ -336,6 +336,9 @@ function server_objects_iter(func,...)
 	end
 end
 
+function has_next(tab,pos)
+	return next(tab,pos) ~= nil
+end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Load CreatePersistentTimeEvent function
