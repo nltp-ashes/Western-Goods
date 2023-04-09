@@ -358,6 +358,23 @@ function itms_manager.actor_on_item_before_use(obj,flags)
         utils_xml.hide_menu()
         actor_menu.set_msg(1, str,3)
     end
+
+    -- FDDA Compatibility
+    if enhanced_animations then
+        dbg_printf("[WG] Before Use Item | FDDA Compatibility")
+        local item = obj:section()
+        if IsMoveState("mcClimb") then
+            actor_menu.set_msg(1, game.translate_string("st_EA_ladder_item_not_allowed"),3)
+            flags.ret_value = false
+            return
+        end
+        if enhanced_animations.ini_eff:r_string_ex(item, "snd") and enhanced_animations.enable_animations and flags.ret_value then
+            enhanced_animations.use_item(obj)
+            flags.ret_value = false
+            return
+        end
+        return
+    end
 end
 
 CampfireGoOn = bind_campfire.campfire_go_on
