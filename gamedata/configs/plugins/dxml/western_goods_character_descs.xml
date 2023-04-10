@@ -13,20 +13,19 @@
 
     <specific_character id="stalker_western_goods_trader" team_default="1">
         <name>western_goods_trader_name</name>
-        <icon>ui_npc_u_stalker_ki_nauchniy</icon>
-        <map_icon x="1" y="0"></map_icon>
         <bio>western_goods_trader_bio</bio>
+        <icon>ui_npc_u_stalker_ki_nauchniy</icon>
+        <visual>actors\stalker_merc\stalker_mercenary3</visual>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
 
+        <map_icon x="1" y="0"></map_icon>
         <class>stalker_western_goods_trader</class>
         <community>killer</community>
         <terrain_sect>stalker_terrain</terrain_sect>
-        <snd_config>characters_voice\human\killer_3\</snd_config>
 
         <rank>15000</rank>
         <money min="0" max="0" infinitive="0"/>
         <reputation>2200</reputation>
-
-        <visual>actors\stalker_merc\stalker_mercenary3</visual>
 
         <supplies>
             [spawn] \n
@@ -56,20 +55,19 @@
 
     <specific_character id="stalker_jupiter_informant" team_default="1">
         <name>western_goods_jupiter_informant_name</name>
-        <icon>ui_npc_small_neutral_2</icon>
-        <map_icon x="1" y="0"></map_icon>
         <bio>western_goods_jupiter_informant_bio</bio>
+        <icon>ui_npc_small_neutral_2</icon>
+        <visual>actors\stalker_neutral\stalker_neutral_2_gp5</visual>
+        <snd_config>characters_voice\human\stalker_3\</snd_config>
 
+        <map_icon x="1" y="0"></map_icon>
         <class>stalker_jupiter_informant</class>
         <community>stalker</community>
         <terrain_sect>stalker_terrain</terrain_sect>
-        <snd_config>characters_voice\human\stalker_3\</snd_config>
 
         <rank>3000</rank>
         <money min="0" max="0" infinitive="0"/>
         <reputation>220</reputation>
-
-        <visual>actors\stalker_neutral\stalker_neutral_2_gp5</visual>
 
         <supplies>
             [spawn] \n
@@ -87,20 +85,19 @@
 
     <specific_character id="stalker_crew_member" team_default="1">
         <name>western_goods_crew_member_name</name>
-        <icon>ui_npc_u_stalker_militari_2</icon>
-        <map_icon x="1" y="0"></map_icon>
         <bio>western_goods_crew_member_bio</bio>
+        <icon>ui_npc_u_stalker_militari_2</icon>
+        <visual>actors\stalker_merc\stalker_merc_4_skat</visual>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
 
+        <map_icon x="1" y="0"></map_icon>
         <class>stalker_crew_member</class>
         <community>trader</community>
         <terrain_sect>stalker_terrain</terrain_sect>
-        <snd_config>characters_voice\human\killer_3\</snd_config>
 
         <rank>15540</rank>
         <money min="0" max="0" infinitive="1"/>
         <reputation>500</reputation>
-
-        <visual>actors\stalker_merc\stalker_merc_4_skat</visual>
 
         <supplies>
             [spawn] \n
@@ -120,20 +117,19 @@
 
     <specific_character id="stalker_dunn_lynn" team_default="1">
         <name>western_goods_dunn_lynn_name</name>
-        <icon>ui_inGame2_no_data</icon>
-        <map_icon x="1" y="0"></map_icon>
         <bio>western_goods_dunn_lynn_bio</bio>
+        <icon>ui_inGame2_no_data</icon>
+        <visual>actors\stalker_isg\stalker_isg_1c_sci</visual>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
 
+        <map_icon x="1" y="0"></map_icon>
         <class>stalker_dunn_lynn</class>
         <community>isg</community>
         <terrain_sect>stalker_terrain</terrain_sect>
-        <snd_config>characters_voice\human\killer_3\</snd_config>
 
         <rank>22550</rank>
         <money min="35000" max="50000" infinitive="1"/>
         <reputation>780</reputation>
-
-        <visual>actors\stalker_isg\stalker_isg_1c_sci</visual>
 
         <supplies>
             [spawn] \n
@@ -141,6 +137,60 @@
         </supplies>
 
         <start_dialog>stalker_dunn_lynn_start</start_dialog>
+
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!-- ============================================================================================================-->
+    <!--	Golubev Nikolaj																			  		         -->
+    <!-- ============================================================================================================-->
+
+    <specific_character id="stalker_ecolog_convoy_yellow" team_default="1">
+        <name>western_goods_ecolog_convoy_yellow_name</name>
+        <bio>western_goods_ecolog_convoy_yellow_bio</bio>
+        <icon>ui_inGame2_ecolog_yellow</icon>
+        <visual>actors\stalker_ecologist\stalker_ecolog_yellow</visual>
+        <snd_config>characters_voice\human\ecolog_3\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_ecolog_convoy_yellow</class>
+        <community>ecolog</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>1450</rank>
+        <money min="2500" max="7650" infinitive="1"/>
+        <reputation>1100</reputation>
+
+        <supplies>
+            [spawn] \n
+        </supplies>
+
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!-- ============================================================================================================-->
+    <!--	Other Science NPC																		  		         -->
+    <!-- ============================================================================================================-->
+
+    <specific_character id="stalker_ecolog_convoy_orange" team_default="1">
+        <name>GENERATE_NAME_science</name>
+        <bio>stalker_ecolog_convoy_orange_bio</bio>
+        <icon>ui_inGame2_ecolog_orange</icon>
+        <visual>actors\stalker_ecologist\stalker_ecolog</visual>
+        <snd_config>characters_voice\human\ecolog_3\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_ecolog_convoy_orange</class>
+        <community>ecolog</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>1450</rank>
+        <money min="6500" max="11200" infinitive="1"/>
+        <reputation>650</reputation>
+
+        <supplies>
+            [spawn] \n
+        </supplies>
 
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>

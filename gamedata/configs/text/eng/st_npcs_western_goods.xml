@@ -54,6 +54,26 @@
 	</string>
 
 	<string id="western_goods_dunn_lynn_bio">
-		<text>UNISG agent.</text>
+		<text>UNISG agent. Detailed information is missing.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Golubev Nikolaj																			  		         -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_ecolog_convoy_yellow_name">
+		<text>Golubev Nikolaj</text>
+	</string>
+
+	<string id="western_goods_ecolog_convoy_yellow_bio">
+		<text>Member of mobile science camp. Detailed information is missing.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Other Science NPC																		  		         -->
+	<!-- ============================================================================================================-->
+
+	<string id="stalker_ecolog_convoy_orange_bio">
+		<text>Member of mobile science camp. Detailed information is missing.</text>
 	</string>
 </string_table>

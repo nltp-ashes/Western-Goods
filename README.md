@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC12-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC16-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -51,6 +51,7 @@ To **uninstall** the addon :
 >    - Added a debug mode that prints information in the console/log to make troubleshooting easier;
 >    - Moved addon removal into a check box in MCM;
 > • New items :
+>    - Added a new tech item : a BIC lighter, usable to light cigarettes and campfires;
 >    - Added three new magazine : European Car magazine, EVO magazine and Gameland magazine;
 >    - Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich;
 > • Other additions :

@@ -297,14 +297,14 @@ function xr_effects.western_goods_act_2_task_2_init(actor,npc)
 			sleeping_bag 	= { sec="itm_sleepbag",x=26.6,y=-4.3,z=129.2,lvid=232806,gvid=4970 	}
 		},
 		squads = {
-			army_spawn_data 	= { sec="western_goods_act_2_task_2_army_squad", 	 smart="pri_sim_3" 		},
-			mono_spawn_data 	= { sec="western_goods_act_2_task_2_mono_squad", 	 smart="pri_sim_3" 		},
-			snork_spawn_data 	= { sec="western_goods_act_2_task_2_snork_squad", 	 smart="pri_b301" 		},
-			ecolog_spawn_data 	= { sec="western_goods_act_2_task_2_ecolog_squad", 	 smart="pri_a28_school" },
-			zombie_1_spawn_data = { sec="western_goods_act_2_task_2_zombie_1_squad", smart="pri_sim_3" 		},
-			zombie_2_spawn_data = { sec="western_goods_act_2_task_2_zombie_2_squad", smart="pri_sim_3" 		},
-			bandit_1_spawn_data = { sec="western_goods_act_2_task_2_bandit_1_squad", smart="pri_b301" 		},
-			bandit_2_spawn_data = { sec="western_goods_act_2_task_2_bandit_2_squad", smart="pri_a28_school" }
+			army_spawn_data 	= { sec="western_goods_act_2_task_2_army_squad", 	 smart="pri_sim_3" 								},
+			mono_spawn_data 	= { sec="western_goods_act_2_task_2_mono_squad", 	 smart="pri_sim_3" 								},
+			snork_spawn_data 	= { sec="western_goods_act_2_task_2_snork_squad", 	 smart="pri_b301" 								},
+			ecolog_spawn_data 	= { sec="western_goods_act_2_task_2_ecolog_squad", 	 smart="pri_a28_school",	smart2="pri_b303" 	},
+			zombie_1_spawn_data = { sec="western_goods_act_2_task_2_zombie_1_squad", smart="pri_sim_3" 								},
+			zombie_2_spawn_data = { sec="western_goods_act_2_task_2_zombie_2_squad", smart="pri_sim_3" 								},
+			bandit_1_spawn_data = { sec="western_goods_act_2_task_2_bandit_1_squad", smart="pri_b301" 								},
+			bandit_2_spawn_data = { sec="western_goods_act_2_task_2_bandit_2_squad", smart="pri_a28_school" 						}
 		},
 		restrictors = {
 			zombie 		= { ax=-97.150344848633,ay=-1.1752129793167,az=-45.473430633545,bx=-81.533813476563,by=5.2640190124512,	bz=-64.902114868164 },
@@ -850,14 +850,28 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 
 		-- Eleventh stage : Take cover from the emission
 		if tsk.stage == 10 then
+			local ecolog_squad_se = western_goods_utils.se_object_by_sid(TASK_2_CACHE.squads.ecolog_spawn_data.sec)
+
 			-- Start emission and make ecologs flee
 			if not TASK_2_CACHE.surge_started then
 				surge_manager.start_surge()
 
 				-- Give info to link script with logic scheme
 				give_info("western_goods_act_2_task_2_ecolog_flee")
+				TASK_2_CACHE.ecolog_teleport_timer = time_global() + 50000
 
 				TASK_2_CACHE.surge_started = true
+			end
+
+			if not TASK_2_CACHE.ecolog_teleported and TASK_2_CACHE.ecolog_teleport_timer < time_global() and ecolog_squad_se then
+				-- Release 'old' squad
+				SIMBOARD:remove_squad(ecolog_squad_se)
+
+				-- Create 'new' squad at new location
+				local spawn_data = TASK_2_CACHE.squads.ecolog_spawn_data
+				ecolog_squad_se = western_goods_utils.spawn_squad_smart(spawn_data.sec, spawn_data.smart2 or "pri_b303") -- TODO remove place holder
+
+				TASK_2_CACHE.ecolog_teleported = true
 			end
 
 			if TASK_2_CACHE.surge_started and surge_manager.is_finished() then
@@ -865,15 +879,17 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 			end
 		end
 
-		-- Twelfth stage : Task done - for now
+		-- Twelfth stage :
 		if tsk.stage == 11 then
 			local ecolog_squad_se = western_goods_utils.se_object_by_sid(TASK_2_CACHE.squads.ecolog_spawn_data.sec)
 
 			if ecolog_squad_se then
-				SIMBOARD:remove_squad(ecolog_squad_se)
+				for member in ecolog_squad_se:squad_members() do
+					if alife_object(member.id):section_name() ~= "stalker_ecolog_convoy_yellow" then
+						CreateTimeEvent("western_goods_delay_kill_squad",member.id,0,surge_manager.make_dead,member.id)
+					end
+				end
 			end
-
-			return "complete"
 		end
 
 		-- Thirteenth stage : N/A
@@ -1067,10 +1083,6 @@ function spawn_test_squads(dik)
 	if dik ~= DIK_keys.DIK_P then return end
 
 	dbg_printf("[WG] spawn_test_squads")
-
-	dbg_printf("[WG] Fighting with player :\n%s", utils_data.print_table(xr_combat_ignore.fighting_with_actor_npcs, false, true))
-	dbg_printf("[WG] Fighting player : %s", not is_empty(xr_combat_ignore.fighting_with_actor_npcs))
-
 end
 
 --[[

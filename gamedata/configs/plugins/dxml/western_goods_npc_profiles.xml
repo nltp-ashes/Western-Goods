@@ -42,4 +42,22 @@
         <class>stalker_dunn_lynn</class>
         <specific_character>stalker_dunn_lynn</specific_character>
     </character>
+
+    <!-- ============================================================================================================-->
+    <!--	Golubev Nikolaj																			  		         -->
+    <!-- ============================================================================================================-->
+
+    <character id="stalker_ecolog_convoy_yellow">
+        <class>stalker_ecolog_convoy_yellow</class>
+        <specific_character>stalker_ecolog_convoy_yellow</specific_character>
+    </character>
+
+    <!-- ============================================================================================================-->
+    <!--	Other Science NPC																		  		         -->
+    <!-- ============================================================================================================-->
+
+    <character id="stalker_ecolog_convoy_orange">
+        <class>stalker_ecolog_convoy_orange</class>
+        <specific_character>stalker_ecolog_convoy_orange</specific_character>
+    </character>
 </DXML>

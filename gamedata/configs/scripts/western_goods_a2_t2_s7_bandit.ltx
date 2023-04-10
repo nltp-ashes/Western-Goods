@@ -37,10 +37,6 @@ behavior_state 					= beh_move
 target 							= waypoint
 path_end                        = loop
 
-enemy_ignore_cond				= {!is_enemy_actor !fighting_dist_le(40)} true
-combat_ignore_cond 				= {=is_warfare} false, {=actor_true_enemy =check_enemy_name(actor)} false, true
-combat_ignore_keep_when_attacked= {=is_warfare} false, true
-
 ;;;;; bandit_1 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [beh@point_spawn_a]:beh@base
 pt1                             = 88860000, guard | pos:99.7,0.3,145.3 look:100.6,0.3,144.7
