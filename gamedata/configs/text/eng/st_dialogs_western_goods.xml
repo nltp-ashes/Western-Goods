@@ -302,28 +302,90 @@
 	<!-- ============================================================================================================-->
 
 	<!-- Start dialog strings -->
-	<string id="stalker_dunn_lynn_start_0">
+	<string id="western_goods_dunn_lynn_first_start">
+		<text>At least we meet.</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_start_x">
+		<text>Hello young Padawan.</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_start_0">
 		<text>Hello.</text>
 	</string>
 
-	<string id="stalker_dunn_lynn_start_1">
+	<string id="western_goods_dunn_lynn_start_1">
 		<text>Hi.</text>
 	</string>
 
-	<string id="stalker_dunn_lynn_start_2">
+	<string id="western_goods_dunn_lynn_start_2">
 		<text>What do you want, Stalker.</text>
 	</string>
 
-	<string id="stalker_dunn_lynn_start_3">
+	<string id="western_goods_dunn_lynn_start_3">
 		<text>What is it?</text>
 	</string>
 
-	<string id="stalker_dunn_lynn_start_4">
+	<string id="western_goods_dunn_lynn_start_4">
 		<text>Yes?</text>
 	</string>
 
-	<string id="stalker_dunn_lynn_start_5">
+	<string id="western_goods_dunn_lynn_start_5">
 		<text>What do you want?</text>
+	</string>
+
+	<!-- Dialogs strings -->
+	<string id="western_goods_dunn_lynn_meet_0">
+		<text>So you're the "anonymous" contact I've been talking with?</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_meet_1">
+		<text>Yes. We don't want to telegraph our presence.</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_meet_2">
+		<text>I see. Well, I have what you asked for.</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_meet_3">
+		<text>Good. Goes to show working with local stalkers can prove... Useful. I understand you don't work for free, so here, take this.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Golubev Nikolaj																			  		   		 -->
+	<!-- ============================================================================================================-->
+
+	<!-- Dialogs strings -->
+	<string id="stalker_ecolog_convoy_yellow_meet_0">
+		<text>Identify yourself!</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_meet_1">
+		<text>Shhh! It's... It's here...</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_meet_2">
+		<text>What is here?</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_second_meet_0">
+		<text>You're transporting something I need.</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_second_meet_1">
+		<text>This case? Why do you want it? I mean no offense, but it's far too complex for you to understand...</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_second_meet_2">
+		<text>I'm just a contractor. Hand it to me, slowly.</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_second_meet_3">
+		<text>You know, I value my life more than this research...</text>
+	</string>
+
+	<string id="stalker_ecolog_convoy_yellow_second_meet_4">
+		<text>...</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -457,6 +519,34 @@
 
 	<string id="st_wg_act_2_task_2_differed_opted_in">
 		<text>What are you, bipolar? I'll be nice with you this time, and relay your message. Make sense of yourself next time.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_0">
+		<text>So you're the "anonymous" contact I've been talking with?</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_1">
+		<text>Yes. Our operations require... Discretion.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_2">
+		<text>I see. Well, I have what you asked for.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_3">
+		<text>Good. Goes to show working with local stalkers can prove... Useful. I understand you don't work for free, so here, take this.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_4">
+		<text>Thanks.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_5">
+		<text>As I understand you're quite reputable around here?\n \nListen to this then. We're setting up an operation here. I cannot give you details yet, but, I'll contact you in a few days when we have made progress with our preparations.\n \nIf you're looking for more work, come and meet us. I'll tell you where to look for us then, we won't be staying here for much longer.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_finish_work_6">
+		<text>Alright.</text>
 	</string>
 
 	<!-- Act 1, Task 1 Messages -->

@@ -198,6 +198,10 @@
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_12_descr">
+		<text>Get the package from the Ecologist, in the KBO.</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_stage_13_descr">
 		<text>You have found the package. Retrieve it to your contact.</text>
 	</string>
 

@@ -75,6 +75,11 @@ function get_distance(position_1, position_2)
     return distance
 end
 
+function get_distance_sqr(position_1, position_2)
+	if not (position_1 and position_2) then return nil end
+	return position_1:distance_to_sqr(position_2)
+end
+
 --- Function used to get game object by its ID if it exists on the current level.
 --- @param id number
 --- @return game_object

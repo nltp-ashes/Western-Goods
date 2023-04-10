@@ -23,7 +23,7 @@ net_spawn						= pt1
 
 [logic@ecolog_1]:logic@base
 suitable                        = {=check_npc_name(stalker_ecolog_convoy_yellow) =npc_squad_name(western_goods_act_2_task_2_ecolog_squad)} true
-active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_a, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_a, beh@point_flee_a
+active                          = {-western_goods_act_2_task_2_ecolog_moved} beh@point_spawn_a, {-western_goods_act_2_task_2_ecolog_fled} beh@point_research_a, {-western_goods_act_2_task_2_ecolog_calm} beh@point_flee_a, beh@point_calm_a
 
 [logic@ecolog_2]:logic@base
 suitable                        = {=check_npc_name(stalker_ecolog_convoy_orange) =npc_squad_name(western_goods_act_2_task_2_ecolog_squad)} true
@@ -60,7 +60,7 @@ run_anim 						= panic
 invulnerable 					= true
 before_hit						= invulnerable
 
-enemy_ignore_cond				= {!is_enemy_actor !fighting_dist_le(40)} true
+enemy_ignore_cond				= {!is_enemy_actor !fighting_dist_le(40)} true, false
 combat_ignore_cond 				= {=in_bounds(27.744569778442:7.3748621940613:129.99130249023:53.035232543945:16.793748855591:121.89153289795)} true, false
 
 path_end                        = loop
@@ -79,7 +79,23 @@ pt1                             = 88860000, threat_danger | pos:62.0,0.0,153.0 l
 on_timer                        = 10000 | beh@point_flee_a %+western_goods_act_2_task_2_ecolog_fled%
 
 [beh@point_flee_a]:beh@base
-pt1                             = 88860000, threat_danger | pos:5.3869428634644,4.5321626663208,270.55911254883 look:6.1054433584213,4.5321626663208,269.8706151247
+meet 							= meet@base
+pt1                             = 88860000, hands_up | pos:5.3869428634644,4.5321626663208,270.55911254883 look:6.1054433584213,4.5321626663208,269.8706151247
+on_info                         = {+western_goods_act_2_task_2_ecolog_calm} beh@point_calm_a
+
+[beh@point_calm_a]:beh@base
+enemy_ignore_cond				= true
+combat_ignore_cond 				= true
+meet 							= meet@base
+pt1                             = 88860000, guard | pos:5.3869428634644,4.5321626663208,270.55911254883 look:6.1054433584213,4.5321626663208,269.8706151247
+on_info                         = {+western_goods_act_2_task_2_controller_spawned} beh@point_controlled_a
+
+[beh@point_controlled_a]:beh@base
+enemy_ignore_cond				= true
+combat_ignore_cond 				= true
+meet 							= meet@base
+pt1                             = 88860000, psy_pain | pos:5.3869428634644,4.5321626663208,270.55911254883 look:6.1054433584213,4.5321626663208,269.8706151247
+on_info                         = {+western_goods_act_2_task_2_controller_killed} beh@point_calm_a
 
 ;;;;; ecolog_2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [beh@point_spawn_b]:beh@base
@@ -160,3 +176,19 @@ on_timer                        = 15000 | beh@point_flee_f %+western_goods_act_2
 
 [beh@point_flee_f]:beh@base
 pt1                             = 88860000, threat_danger | pos:11.585246086121,4.6,273.80361938477 look:10.618902564049,4.4937272071838,273.95135597885
+
+;;--================================================================================================================--;;
+;;--================| Meet |========================================================================================--;;
+;;--================================================================================================================--;;
+
+[meet@base]
+close_snd_hello = meet_hello
+close_snd_bye   = nil
+close_anim 		= nil
+close_victim 	= nil
+close_distance  = 0
+far_anim 		= nil
+far_victim 		= nil
+far_distance 	= 0
+meet_on_talking	= false
+use				= true

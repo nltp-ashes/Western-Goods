@@ -3,27 +3,20 @@
 ;;--================================================================================================================--;;
 
 [section@squad]
-target@base 				    = pri_a18_smart_terrain
+target@base 				    = ds2_lager_st
 
 [section@logic]
-logic@western_goods_trader
+logic@dunn_lynn
 
 ;;--================================================================================================================--;;
 ;;--================| Logic |=======================================================================================--;;
 ;;--================================================================================================================--;;
 
-[logic@western_goods_trader]
-suitable 						= {=check_npc_name(stalker_western_goods_trader)} true
-prior 							= 140
+[logic@dunn_lynn]
+suitable 						= {=check_npc_name(stalker_dunn_lynn)} true
 active 							= beh@stand
-level_spot 						= quest_npc
-trade							= items\trade\trade_western_goods_trader.ltx
 relationship 					= neutral
-dont_keep_items 				= true
 net_spawn						= pt1
-
-;backwards compat
-[logic@stalker_western_goods_trader]:logic@western_goods_trader
 
 ;;--================================================================================================================--;;
 ;;--================| Scheme |======================================================================================--;;
@@ -31,33 +24,19 @@ net_spawn						= pt1
 
 [beh@general]
 behavior_state 					= beh_move
-
 target 							= waypoint
-walk_dist 						= 100
-jog_dist 						= 220
 
-walk_anim 						= walk
-jog_anim 						= rush
-run_anim 						= rush
-
-gather_items_enabled 			= false
-help_wounded_enabled 			= false
-corpse_detection_enabled 		= false
 invulnerable 					= true
-relationship 					= neutral
-meet 							= meet@base
 before_hit						= invulnerable
-	
-enemy_ignore_cond				= {!is_enemy_actor !fighting_dist_le(40)} true
-combat_ignore_cond 				= {=is_warfare} false, {=actor_true_enemy =check_enemy_name(actor)} false, true
-combat_ignore_keep_when_attacked= {=is_warfare} false, true
+meet 							= meet@base
+
+use_camp                        = true
+turn_on_campfire                = true
+
+path_end                        = loop
 
 [beh@stand]:beh@general
-pt1 							= 25000, smoking_stand | pos:-166.6178894043,6.8274946212769,-343.42572021484 look:-166.06583356857,6.8274946212769,-344.25690186024
-pt2 							= 25000, smoking_stand | pos:-166.6178894043,6.8274946212769,-343.42572021484 look:-166.06583356857,6.8274946212769,-344.25690186024
-pt3 							= 25000, fold_arms  | pos:-166.6178894043,6.8274946212769,-343.42572021484 look:-166.06583356857,6.8274946212769,-344.25690186024
-pt4								= 25000, fold_arms  | pos:-166.6178894043,6.8274946212769,-343.42572021484 look:-166.06583356857,6.8274946212769,-344.25690186024
-path_end 						= loop
+pt1 							= 88860000, guard | pos:-188.3874206543,0.27924370765686,-151.80142211914 look:-188.39450782351,0.27924370765686,-152.79586738348
 
 ;;--================================================================================================================--;;
 ;;--================| Meet |========================================================================================--;;

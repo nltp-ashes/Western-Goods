@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC16-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC17-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -40,7 +40,7 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-> **v2.0.0 - 01/04/2023 - Major Update**
+> **v2.0.0 - 10/04/2023 - Major Update**
 > ```
 > • New storylines :
 >    - Added a first act (3 tasks) centered around a mysterious event regarding a helicopter used by mercs to smuggle goods into the Zone;

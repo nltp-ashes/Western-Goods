@@ -21,7 +21,6 @@ local HELICOPTERS_TARGETS = {}
 -- Imported functions
 local get_translation = game.translate_string
 local dbg_printf = western_goods_utils.dbg_printf
-local get_distance = western_goods_utils.get_distance
 local find_object_by_id = western_goods_utils.find_object_by_id
 
 
@@ -202,18 +201,18 @@ function heli_update(heli_obj,mode,target_pos)
 	if mode == "land_at_point" then
 		if not target_pos then return end
 
-		local distance = get_distance(heli_obj:position(), target_pos)
+		local distance = western_goods_utils.get_distance_sqr(heli_obj:position(), target_pos)
 
-		if not distance or distance > 100 then
+		if not distance or distance > 10000 then
 			-- While the heli is 100m away from its destination, fly high
 			local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
 
 			heli_set_target(heli_obj,intermediate_target)
-			dbg_printf("[WG] Helicopter target updated | land at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
-		elseif distance > 10 then
+			dbg_printf("[WG] Helicopter target updated | land at point | id:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
+		elseif distance > 100 then
 			-- Start lowering the altitude when we're closer than 10m
 			heli_set_target(heli_obj,target_pos)
-			dbg_printf("[WG] Helicopter target updated | land at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
+			dbg_printf("[WG] Helicopter target updated | land at point | id:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
 		else
 			-- Make the helicopter idle if it's closer than 10m
 			heli_register(heli_obj:id(),"idle")
@@ -225,18 +224,18 @@ function heli_update(heli_obj,mode,target_pos)
 	if mode == "leave_at_point" then
 		if not target_pos then return end
 
-		local distance = get_distance(heli_obj:position(), target_pos)
+		local distance = western_goods_utils.get_distance_sqr(heli_obj:position(), target_pos)
 
-		if not distance or distance > 100 then
+		if not distance or distance > 10000 then
 			-- While the heli is 100m away from its destination, fly high
 			local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
 
 			heli_set_target(heli_obj,intermediate_target)
-			dbg_printf("[WG] Helicopter target updated | leave at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
-		elseif distance > 10 then
+			dbg_printf("[WG] Helicopter target updated | leave at point | id:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
+		elseif distance > 100 then
 			-- Start lowering the altitude when we're closer than 10m
 			heli_set_target(heli_obj,target_pos)
-			dbg_printf("[WG] Helicopter target updated | leave at point | id:%s dist:%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
+			dbg_printf("[WG] Helicopter target updated | leave at point | id:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
 		else
 			-- Make the helicopter idle if it's closer than 10m
 			heli_unregister(heli_obj:id())

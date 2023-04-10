@@ -61,4 +61,22 @@
 		</text>
 	</string>
 
+	<!-- Research case -->
+	<string id="st_wg_act_2_task_2_quest_item">
+		<text>Documents case</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_quest_item_s">
+		<text>Documents</text>
+	</string>
+
+	<string id="st_wg_act_2_task_2_quest_item_descr">
+		<text>
+			A sealed case supposedly containing research documents. It was being carried by a convoy of scientists to an unknown location. Dushman's client wants this, but it's unknown who they are and why they are interested in this.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_cyan] • %c[ui_gray_2] highly valuable\n
+		</text>
+	</string>
+
 </string_table>

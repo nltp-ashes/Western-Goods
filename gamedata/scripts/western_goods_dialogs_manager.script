@@ -87,7 +87,13 @@ end
 --- Function called to determine the start dialog's text of Dunn Lynn.
 --- @return string
 function dunn_lynn_start_dialog()
-	return game.translate_string("stalker_dunn_lynn_start_" .. math.random(0,5))
+	if has_alife_info("western_goods_act_2_task_2_active") and not has_alife_info("western_goods_act_2_task_2_finished") then
+		return game.translate_string("western_goods_dunn_lynn_first_start")
+	elseif math.random() < 0.0001 then
+		return game.translate_string("western_goods_dunn_lynn_start_x")
+	else
+		return game.translate_string("western_goods_dunn_lynn_start_" .. math.random(0,5))
+	end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

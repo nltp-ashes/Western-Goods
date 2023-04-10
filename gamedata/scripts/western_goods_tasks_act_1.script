@@ -13,18 +13,12 @@
 -- Imported functions
 local get_translation = game.translate_string
 local dbg_printf = western_goods_utils.dbg_printf
-local get_distance = western_goods_utils.get_distance
 local find_object_by_id = western_goods_utils.find_object_by_id
-local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 local heli_spawn = western_goods_helicopter.heli_spawn
 local heli_register = western_goods_helicopter.heli_register
 local spawn_story_squad = western_goods_utils.spawn_story_squad
 local spawn_squad = western_goods_utils.spawn_squad
 local spawn_dead_squad = western_goods_utils.spawn_dead_squad
-local get_member_id_from_squad = western_goods_utils.get_member_id_from_squad
-local get_member_from_squad = western_goods_utils.get_member_from_squad
-local find_unique_npc = western_goods_utils.find_unique_npc
-local find_npc_in_actor_squad = western_goods_utils.find_npc_in_actor_squad
 local send_dialog = western_goods_dialogs_manager.send_dialog
 
 -- Task variables
@@ -172,7 +166,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 			end
 
 			-- Continue if the player is closer than 25m from the helicopter
-			if not helicopter_obj or get_distance(helicopter_obj:position(), db.actor:position()) > 25 then return end
+			if not helicopter_obj or western_goods_utils.get_distance_sqr(helicopter_obj:position(), db.actor:position()) > 625 then return end
 
 			-- Send a dialog between the task giver and the player
 			if not TASK_1_CACHE.stage_0_dialog_sent then
@@ -238,7 +232,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 			end
 
 			-- Wait for the player to be close to the supplies
-			if not supplies_obj or get_distance(supplies_obj:position(), db.actor:position()) > 5 then return end
+			if not supplies_obj or western_goods_utils.get_distance_sqr(supplies_obj:position(), db.actor:position()) > 25 then return end
 
 			-- Send a dialog between the task giver and the player
 			if not TASK_1_CACHE.stage_1_dialog_sent then
@@ -1021,11 +1015,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local dialog_3_activation_pos = SIMBOARD:get_smart_by_name("lim_smart_terrain_1").position
 
 				-- Distances between the player and the smart terrains
-				local dist_to_dialog_1 = dialog_1_activation_pos and get_distance(player_pos, dialog_1_activation_pos)
-				local dist_to_dialog_2 = dialog_2_activation_pos and get_distance(player_pos, dialog_2_activation_pos)
-				local dist_to_dialog_3 = dialog_3_activation_pos and get_distance(player_pos, dialog_3_activation_pos)
+				local dist_to_dialog_1 = dialog_1_activation_pos and western_goods_utils.get_distance_sqr(player_pos, dialog_1_activation_pos)
+				local dist_to_dialog_2 = dialog_2_activation_pos and western_goods_utils.get_distance_sqr(player_pos, dialog_2_activation_pos)
+				local dist_to_dialog_3 = dialog_3_activation_pos and western_goods_utils.get_distance_sqr(player_pos, dialog_3_activation_pos)
 
-				if dist_to_dialog_1 and dist_to_dialog_1 < 25 and not TASK_3_CACHE.stage_1_dialog_1_sent then
+				if dist_to_dialog_1 and dist_to_dialog_1 < 625 and not TASK_3_CACHE.stage_1_dialog_1_sent then
 					local sender_1 = alife():actor()
 					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
@@ -1042,7 +1036,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					TASK_3_CACHE.stage_1_dialog_1_sent = true
 				end
 
-				if dist_to_dialog_2 and dist_to_dialog_2 < 25 and not TASK_3_CACHE.stage_1_dialog_2_sent then
+				if dist_to_dialog_2 and dist_to_dialog_2 < 625 and not TASK_3_CACHE.stage_1_dialog_2_sent then
 					local sender_1 = alife():actor()
 					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
@@ -1061,7 +1055,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					TASK_3_CACHE.stage_1_dialog_2_sent = true
 				end
 
-				if dist_to_dialog_3 and dist_to_dialog_3 < 50 and not TASK_3_CACHE.stage_1_dialog_3_sent then
+				if dist_to_dialog_3 and dist_to_dialog_3 < 2500 and not TASK_3_CACHE.stage_1_dialog_3_sent then
 					local sender_1 = alife():actor()
 					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
@@ -1088,7 +1082,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local objective_pos = SIMBOARD:get_smart_by_name("red_smart_terrain_bridge").position
 
 				-- Wait for the player to be closer than 100m from the bridge
-				if not objective_pos or get_distance(player_pos, objective_pos) > 100 then return end
+				if not objective_pos or western_goods_utils.get_distance_sqr(player_pos, objective_pos) > 10000 then return end
 
 				-- Save the time to indicate the remaining enemies on the PDA 5 real-life mins later
 				TASK_3_CACHE.stage_2_show_targets_timer = time_global() + 300000
@@ -1193,8 +1187,8 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			end
 
 			-- Get the distance between the helicopter and the landing zone, and wait for it to be smaller than 5m
-			local dist_to_landing = helicopter_obj and get_distance(helicopter_obj:position(), heli_landing_pos)
-			if dist_to_landing and dist_to_landing > 10 then return end
+			local dist_to_landing = helicopter_obj and western_goods_utils.get_distance_sqr(helicopter_obj:position(), heli_landing_pos)
+			if dist_to_landing and dist_to_landing > 100 then return end
 
 			-- Set the rescued companion to head towards the helicopter
 			if not TASK_3_CACHE.stage_3_evac_order_given then
@@ -1210,8 +1204,8 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			end
 
 			-- Get the distance to the heli, and wait for it to be smaller than 5m
-			local dist_to_heli = crew_member_obj and get_distance(crew_member_obj:position(), heli_landing_pos)
-			if dist_to_heli and dist_to_heli > 5 then return end
+			local dist_to_heli = crew_member_obj and western_goods_utils.get_distance_sqr(crew_member_obj:position(), heli_landing_pos)
+			if dist_to_heli and dist_to_heli > 25 then return end
 
 			-- Extract the squad member
 			if not TASK_3_CACHE.stage_3_crew_member_extracted then
