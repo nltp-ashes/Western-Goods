@@ -9,10 +9,16 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
--- Dialog constants and variables
-local CONST_DIALOG_DISPLAY_TIME = 15
-local CONST_DIALOG_DELAY_MSG = 7
+-- Dialog constants
+local CONST_DISPLAY_TIME = 15
+local CONST_DELAY_MSG = 7
+local CONST_DEFAULT_NAME = game.translate_string("st_western_goods_dialog_manager_default_name")
+local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
+
+-- Dialog variables
 local dialog_waiting_count = 0
+local sound = false
+local last_sender = nil
 
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
@@ -23,36 +29,49 @@ local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePe
 -- Dynamic News Dialog Manager
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to display a dialog on screen.
---- Warning :IDs in the table have to be contiguous integers from 1 to n !
+--- Function used to display a dialog on screen. Default values exist for each line's 'sender' and 'icon'. 'message' is required.
 --- @param dialog_table table
 --- @return nil
 function send_dialog(dialog_table, no_delay)
-	for index=1, #dialog_table do
-		if no_delay then
-			dynamic_news_helper.send_tip(dialog_table[index].message, dialog_table[index].sender, nil, CONST_DIALOG_DISPLAY_TIME, dialog_table[index].icon, nil, "npc")
-		else
-			dialog_waiting_count = dialog_waiting_count + 1
+	dbg_printf("[WG] Dialogs Manager | Preparing dialog (length: %s)", size_table(dialog_table))
+	for _,dialog in pairs(dialog_table) do
+		-- Default values
+		dialog.sender = dialog.sender or CONST_DEFAULT_NAME
+		dialog.icon = dialog.icon or CONST_DEFAULT_ICON
 
+		if no_delay then
+			dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, "beep_1", "npc")
+		else
 			-- Turn off dynamic news
 			dynamic_news_manager.enable_news = false
 
-			CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, CONST_DIALOG_DELAY_MSG*index, function ()
+			dialog_waiting_count = dialog_waiting_count + 1
+
+			CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, CONST_DELAY_MSG*dialog_waiting_count, function ()
+
+				dbg_printf("[WG] Dialogs Manager | Pushing dialog (from: %s)", dialog.sender)
+
+				-- Invert sound effect if from different sender
+				if not last_sender or (last_sender ~= dialog.sender) then
+					sound = not sound
+					last_sender = dialog.sender
+				end
 
 				-- Send the line of dialog
-				dynamic_news_helper.send_tip(dialog_table[index].message, dialog_table[index].sender, nil, CONST_DIALOG_DISPLAY_TIME, dialog_table[index].icon, nil, "npc")
+				dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, sound and "beep_1" or "beep_2", "npc")
+
+				dialog_waiting_count = dialog_waiting_count - 1
 
 				-- Re-enable dynamic news if we're done sending dialogs
 				if dialog_waiting_count <= 0 then
 					dynamic_news_manager.enable_news = true
 				end
 
-				dialog_waiting_count = dialog_waiting_count - 1
-
 				return true
 			end)
 		end
 	end
+	dbg_printf("[WG] Dialogs Manager | Dialog ready (waiting queue: %s)", dialog_waiting_count)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

@@ -311,7 +311,7 @@
             </phrase>
             <phrase id="3"> <!-- npc -->
                 <text>stalker_ecolog_convoy_yellow_second_meet_3</text>
-                <action>western_goods_tasks_act_2.give_task_2_quest_item</action>
+                <action>western_goods_tasks_act_2.task_2_give_quest_item</action>
                 <give_info>western_goods_ecolog_convoy_yellow_second_meet_over</give_info>
                 <next>4</next>
             </phrase>

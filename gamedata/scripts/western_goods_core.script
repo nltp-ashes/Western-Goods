@@ -195,14 +195,7 @@ function addon_removal()
 		local se_obj = alife_object(id)
 		if se_obj then
 			for item_id,_ in pairs(western_goods_items) do
-				if string.match(se_obj:name(), table_item_field_by_key(western_goods_items,item_id,"section"))
-						or string.match(se_obj:name(), "stalker_western_goods_trader")
-						or string.match(se_obj:name(), "stalker_jupiter_informant")
-						or string.match(se_obj:name(), "stalker_crew_member")
-						or string.match(se_obj:name(), "stalker_dunn_lynn")
-						or string.match(se_obj:name(), "western_goods_helicopter")
-						or string.match(se_obj:name(), "western_goods_helicopter_landed")
-				then
+				if se_obj:section_name() == table_item_field_by_key(western_goods_items,item_id,"section")	then
 					alife_release(se_obj)
 					released_objects_count = released_objects_count + 1
 					break
@@ -339,13 +332,13 @@ end
 
 	Example :
 	{
-		["section"] = "<section>",
-		["type"] = "<type>",
-		["trader_params"] = {
+		section = "<section>",
+		type = "<type>",
+		trader_params = {
 			["<faction>"] = { qte=<quantity>, sl=<supply_level>, prob=<probability> },
 			["<faction>"] = { qte=<quantity>, sl=<supply_level>, prob=<probability> }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["<faction>"] = { qte=<quantity>, prob=<probability> },
 			["<faction>"] = { qte=<quantity>, prob=<probability> }
 		},
@@ -381,15 +374,15 @@ end
 
 western_goods_items = {
 	{
-		["section"] = "wg_twix",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_twix",
+		type = "food",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.2 },
 			["killer"] 		= { qte=2, sl=1, prob=0.5 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.5 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=2, prob=0.02 },
 			["freedom"] 	= { qte=2, prob=0.05 },
 			["killer"] 		= { qte=2, prob=0.10 },
@@ -399,15 +392,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_mars",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_mars",
+		type = "food",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.1 },
 			["killer"] 		= { qte=2, sl=1, prob=0.5 },
 			["monolith"]	= { qte=1, sl=1, prob=0.1 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.10 },
@@ -417,15 +410,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_milkyway",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_milkyway",
+		type = "food",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.2 },
 			["killer"] 		= { qte=2, sl=1, prob=0.5 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.4 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.10 },
@@ -435,9 +428,9 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_snickers",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_snickers",
+		type = "food",
+		trader_params = {
 			["bandit"] 		= { qte=1, sl=1, prob=0.8 },
 			["freedom"] 	= { qte=1, sl=1, prob=0.3 },
 			["killer"] 		= { qte=2, sl=1, prob=0.8 },
@@ -445,7 +438,7 @@ western_goods_items = {
 			["renegade"] 	= { qte=1, sl=2, prob=0.7 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.10 },
@@ -455,14 +448,14 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_mnms",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_mnms",
+		type = "food",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=1, prob=0.3 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.2 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=5, prob=0.02 },
 			["freedom"] 	= { qte=5, prob=0.05 },
 			["killer"] 		= { qte=5, prob=0.10 },
@@ -472,13 +465,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_mentos",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_mentos",
+		type = "food",
+		trader_params = {
 			["monolith"] 	= { qte=1, sl=1, prob=0.2 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=3, prob=0.02 },
 			["freedom"] 	= { qte=3, prob=0.05 },
 			["killer"] 		= { qte=3, prob=0.10 },
@@ -488,15 +481,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_bounty",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_bounty",
+		type = "food",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.3 },
 			["killer"] 		= { qte=2, sl=1, prob=0.6 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.4 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.10 },
@@ -506,13 +499,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_kinder_maxi",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_kinder_maxi",
+		type = "food",
+		trader_params = {
 			["monolith"] 	= { qte=1, sl=1, prob=0.3 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.10 },
@@ -522,13 +515,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_kinder_bueno",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_kinder_bueno",
+		type = "food",
+		trader_params = {
 			["monolith"] 	= { qte=1, sl=1, prob=0.3 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=2, prob=0.02 },
 			["freedom"] 	= { qte=2, prob=0.05 },
 			["killer"] 		= { qte=2, prob=0.10 },
@@ -538,13 +531,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_kitkat",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_kitkat",
+		type = "food",
+		trader_params = {
 			["monolith"] 	= { qte=1, sl=1, prob=0.2 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=4, prob=0.01 },
 			["freedom"] 	= { qte=4, prob=0.02 },
 			["killer"] 		= { qte=4, prob=0.05 },
@@ -554,13 +547,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_milka",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_milka",
+		type = "food",
+		trader_params = {
 			["monolith"] 	= { qte=1, sl=1, prob=0.2 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -570,15 +563,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_lays",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_lays",
+		type = "food",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.4 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.3 },
 			["renegade"] 	= { qte=1, sl=2, prob=0.6 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -588,14 +581,14 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_doritos",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_doritos",
+		type = "food",
+		trader_params = {
 			["bandit"] 		= { qte=1, sl=2, prob=0.7 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.2 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -605,15 +598,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_pringles",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_pringles",
+		type = "food",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.3 },
 			["killer"] 		= { qte=2, sl=2, prob=0.4 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.2 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -623,13 +616,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_hamborgir",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_hamborgir",
+		type = "food",
+		trader_params = {
 			["monolith"] 	= { qte=1, sl=1, prob=0.5 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.03 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -639,16 +632,16 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_gorbatschow_bottle",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_gorbatschow_bottle",
+		type = "drink",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.6 },
 			["killer"] 		= { qte=2, sl=1, prob=0.5 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.3 },
 			["renegade"] 	= { qte=1, sl=1, prob=0.8 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=2, prob=0.10 },
 			["freedom"] 	= { qte=2, prob=0.02 },
 			["killer"] 		= { qte=2, prob=0.05 },
@@ -658,12 +651,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_cola_bottle",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_cola_bottle",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=3, prob=0.01 },
 			["freedom"] 	= { qte=3, prob=0.02 },
 			["killer"] 		= { qte=3, prob=0.05 },
@@ -673,12 +666,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_cola_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_cola_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -688,13 +681,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_sprite_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_sprite_can",
+		type = "drink",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=1, prob=0.7 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -704,12 +697,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_redbull_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_redbull_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -719,12 +712,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_perrier_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_perrier_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -734,12 +727,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_rockstar_energy_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_rockstar_energy_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -749,12 +742,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_monster_energy_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_monster_energy_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=2, sl=1, prob=0.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -764,11 +757,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_wine_chateau_latour",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_wine_chateau_latour",
+		type = "drink",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -778,13 +771,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_yoohoo_bottle",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_yoohoo_bottle",
+		type = "drink",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=1, prob=0.1 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -794,13 +787,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_nestea_icetea_bottle",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_nestea_icetea_bottle",
+		type = "drink",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=1, prob=0.3 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=2, prob=0.01 },
 			["freedom"] 	= { qte=2, prob=0.02 },
 			["killer"] 		= { qte=2, prob=0.05 },
@@ -810,13 +803,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_mountain_dew_bottle",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_mountain_dew_bottle",
+		type = "drink",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=3, prob=0.2 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=2, prob=0.01 },
 			["freedom"] 	= { qte=2, prob=0.02 },
 			["killer"] 		= { qte=2, prob=0.05 },
@@ -826,16 +819,16 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_beer_86_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_beer_86_can",
+		type = "drink",
+		trader_params = {
 			["bandit"] 		= { qte=1, sl=2, prob=0.9 },
 			["freedom"] 	= { qte=1, sl=1, prob=0.1 },
 			["killer"] 		= { qte=2, sl=1, prob=0.6 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.3 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -845,13 +838,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_mountain_dew_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_mountain_dew_can",
+		type = "drink",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=2, prob=0.8 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -861,12 +854,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_fanta_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_fanta_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -876,12 +869,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_pepsi_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_pepsi_can",
+		type = "drink",
+		trader_params = {
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -891,15 +884,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_sevenup_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_sevenup_can",
+		type = "drink",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.5 },
 			["killer"] 		= { qte=2, sl=1, prob=0.8 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.5 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -909,15 +902,15 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_dr_bob_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_dr_bob_can",
+		type = "drink",
+		trader_params = {
 			["freedom"] 	= { qte=1, sl=1, prob=0.6 },
 			["killer"] 		= { qte=2, sl=1, prob=0.8 },
 			["monolith"] 	= { qte=1, sl=1, prob=0.5 },
 			["isg"] 		= { qte=3, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -927,13 +920,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_lipton_icetea_can",
-		["type"] = "drink",
-		["trader_params"] = {
+		section = "wg_lipton_icetea_can",
+		type = "drink",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=1, prob=0.8 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -943,46 +936,46 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_laptop",
-		["type"] = "tech",
-		["trader_params"] = {
+		section = "wg_laptop",
+		type = "tech",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=3, prob=0.2 },
 			["isg"] 		= { qte=1, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["killer"] 		= { qte=1, prob=0.01 }
 		},
 	},
 	{
-		["section"] = "wg_military_radio",
-		["type"] = "tech",
-		["trader_params"] = {
+		section = "wg_military_radio",
+		type = "tech",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=1, prob=0.3 },
 			["isg"] 		= { qte=1, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["killer"] 		= { qte=1, prob=0.02 },
 			["isg"] 		= { qte=1, prob=0.02 }
 		},
 	},
 	{
-		["section"] = "wg_gps",
-		["type"] = "tech",
-		["trader_params"] = {
+		section = "wg_gps",
+		type = "tech",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=1, prob=0.9 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["killer"] 		= { qte=1, prob=0.05 },
 			["isg"] 		= { qte=1, prob=0.10 }
 		},
 	},
 	{
-		["section"] = "wg_porn_mag_1",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_porn_mag_1",
+		type = "magazine",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.01 },
 			["freedom"] 	= { qte=1, prob=0.01 },
 			["killer"] 		= { qte=1, prob=0.02 },
@@ -991,12 +984,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_porn_mag_2",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_porn_mag_2",
+		type = "magazine",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=3, prob=0.4 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1006,12 +999,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_porn_mag_3",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_porn_mag_3",
+		type = "magazine",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=2, prob=0.4 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1021,12 +1014,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_xbox_mag_1",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_xbox_mag_1",
+		type = "magazine",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=1, prob=0.6 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1036,12 +1029,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_xbox_mag_2",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_xbox_mag_2",
+		type = "magazine",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=2, prob=0.6 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.02 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1051,11 +1044,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_dollars_10",
-		["type"] = "money",
-		["trader_params"] = {
+		section = "wg_dollars_10",
+		type = "money",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.10 },
 			["freedom"] 	= { qte=1, prob=0.60 },
 			["killer"] 		= { qte=1, prob=0.80 },
@@ -1064,11 +1057,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_dollars_50",
-		["type"] = "money",
-		["trader_params"] = {
+		section = "wg_dollars_50",
+		type = "money",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.07 },
 			["freedom"] 	= { qte=1, prob=0.50 },
 			["killer"] 		= { qte=1, prob=0.70 },
@@ -1077,11 +1070,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_dollars_100",
-		["type"] = "money",
-		["trader_params"] = {
+		section = "wg_dollars_100",
+		type = "money",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.04 },
 			["freedom"] 	= { qte=1, prob=0.40 },
 			["killer"] 		= { qte=1, prob=0.60 },
@@ -1090,11 +1083,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_euros_10",
-		["type"] = "money",
-		["trader_params"] = {
+		section = "wg_euros_10",
+		type = "money",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.10 },
 			["freedom"] 	= { qte=1, prob=0.60 },
 			["killer"] 		= { qte=1, prob=0.80 },
@@ -1103,11 +1096,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_euros_50",
-		["type"] = "money",
-		["trader_params"] = {
+		section = "wg_euros_50",
+		type = "money",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.07 },
 			["freedom"] 	= { qte=1, prob=0.50 },
 			["killer"] 		= { qte=1, prob=0.70 },
@@ -1116,11 +1109,11 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_euros_100",
-		["type"] = "money",
-		["trader_params"] = {
+		section = "wg_euros_100",
+		type = "money",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.04 },
 			["freedom"] 	= { qte=1, prob=0.40 },
 			["killer"] 		= { qte=1, prob=0.60 },
@@ -1129,33 +1122,33 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_french_mre",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_french_mre",
+		type = "food",
+		trader_params = {
 			["killer"]		= { qte=1, sl=3, prob=0.25 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["killer"] 		= { qte=1, prob=0.01 },
 			["isg"] 		= { qte=1, prob=0.01 }
 		},
 	},
 	{
-		["section"] = "wg_sandwich",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_sandwich",
+		type = "food",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 		},
 	},
 	{
-		["section"] = "wg_oreo",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_oreo",
+		type = "food",
+		trader_params = {
 			["killer"] 		= { qte=2, sl=2, prob=1.0 },
 			["isg"] 		= { qte=2, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1164,12 +1157,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_ferrero_rocher",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_ferrero_rocher",
+		type = "food",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=1, prob=0.5 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1178,12 +1171,12 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_mon_cheri",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_mon_cheri",
+		type = "food",
+		trader_params = {
 			["killer"] 		= { qte=1, sl=2, prob=0.6 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1192,13 +1185,13 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_toblerone",
-		["type"] = "food",
-		["trader_params"] = {
+		section = "wg_toblerone",
+		type = "food",
+		trader_params = {
 			["isg"] 		= { qte=1, sl=1, prob=1.0 },
 			["stalker"] 	= { qte=1, sl=3, prob=0.5 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["killer"] 		= { qte=1, prob=0.05 },
@@ -1207,65 +1200,89 @@ western_goods_items = {
 		},
 	},
 	{
-		["section"] = "wg_strana_igr_mag_1",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_strana_igr_mag_1",
+		type = "magazine",
+		trader_params = {
 			["isg"] 		= { qte=1, sl=1, prob=1.0 },
 			["stalker"] 	= { qte=1, sl=3, prob=0.4 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.02 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["renegade"] 	= { qte=1, prob=0.01 }
 		},
 	},
 	{
-		["section"] = "wg_car_mag_1",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_car_mag_1",
+		type = "magazine",
+		trader_params = {
 			["isg"] 		= { qte=1, sl=1, prob=1.0 },
 			["killer"] 		= { qte=1, sl=3, prob=0.6 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.04 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["renegade"] 	= { qte=1, prob=0.01 }
 		},
 	},
 	{
-		["section"] = "wg_car_mag_2",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_car_mag_2",
+		type = "magazine",
+		trader_params = {
 			["isg"] 		= { qte=1, sl=1, prob=1.0 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
 			["bandit"] 		= { qte=1, prob=0.04 },
 			["freedom"] 	= { qte=1, prob=0.05 },
 			["renegade"] 	= { qte=1, prob=0.01 }
 		},
 	},
 	{
-		["section"] = "wg_act_1_task_1_quest_item",
-		["type"] = "special",
-		["trader_params"] = {
+		section = "wg_lighter_bic",
+		type = "tech",
+		trader_params = {
+			["isg"] 		= { qte=1, sl=1, prob=1.0 },
+			["killer"] 		= { qte=2, sl=2, prob=0.9 }
 		},
-		["corpse_params"] = {
+		corpse_params = {
+			["stalker"] 	= { qte=1, prob=0.03 },
+			["bandit"] 		= { qte=1, prob=0.03 },
+			["freedom"] 	= { qte=1, prob=0.03 },
+			["renegade"] 	= { qte=1, prob=0.03 },
+			["killer"] 		= { qte=1, prob=0.05 },
+			["isg"] 		= { qte=1, prob=0.10 }
 		},
 	},
 	{
-		["section"] = "wg_act_1_task_2_quest_item_1",
-		["type"] = "special",
-		["trader_params"] = {
+		section = "wg_act_1_task_1_quest_item",
+		type = "special",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 		},
 	},
 	{
-		["section"] = "wg_act_1_task_2_quest_item_2",
-		["type"] = "magazine",
-		["trader_params"] = {
+		section = "wg_act_1_task_2_quest_item_1",
+		type = "special",
+		trader_params = {
 		},
-		["corpse_params"] = {
+		corpse_params = {
 		},
-	}
+	},
+	{
+		section = "wg_act_1_task_2_quest_item_2",
+		type = "magazine",
+		trader_params = {
+		},
+		corpse_params = {
+		},
+	},
+	{
+		section = "wg_act_2_task_2_quest_item",
+		type = "special",
+		trader_params = {
+		},
+		corpse_params = {
+		},
+	},
 }

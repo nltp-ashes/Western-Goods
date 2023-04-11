@@ -317,7 +317,7 @@ end
 
 --- Function used to retrieve a level object by its story ID.
 --- @param story_id string
---- @return CGame_Object|nil
+--- @return game_object|nil
 function level_object_by_sid(story_id)
 	local se_obj = se_object_by_sid(story_id)
 	return se_obj and find_object_by_id(se_obj.id)
@@ -341,8 +341,33 @@ function server_objects_iter(func,...)
 	end
 end
 
+--- Function used to know if an element of a table has a next.
+--- @param tab table
+--- @param pos number
+--- @return boolean
 function has_next(tab,pos)
 	return next(tab,pos) ~= nil
+end
+
+--- Function used to check if there are NPCs currently in a fight with the player.
+--- @return boolean
+function is_player_fighting()
+	return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
+end
+
+--- Function used to check if a given object id is a member of a given squad.
+--- @param squad cse_alife_online_offline_group
+--- @param id number
+--- @return boolean
+function is_id_from_squad(squad,id)
+	if not squad then return end
+
+	for member in squad:squad_members() do
+		if member.id == id then
+			return true
+		end
+	end
+	return false
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
