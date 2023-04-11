@@ -233,6 +233,10 @@ BeforeUse = itms_manager.actor_on_item_before_use
 function itms_manager.actor_on_item_before_use(obj,flags)
     local sec = obj:section()
 
+    local unlocalized_boost_min = itms_manager.boost_min
+    local unlocalized_old_booster = itms_manager.old_booster
+    local unlocalized_booster_string = itms_manager.booster_string
+
     -- no need to check for tools
     if IsItem("tool",sec) then
         --printf("- actor_on_item_before_use [%s] | ignore utility item", sec)
@@ -255,12 +259,14 @@ function itms_manager.actor_on_item_before_use(obj,flags)
 
     -- if an item is required
     local requires_tool = ini_sys:r_bool_ex(sec, "requires_light_weak")
+    local required_tool_legacy = ini_sys:r_string_ex(sec, "required_tool")
 
     local obj_tool
-    if requires_tool then
+    if requires_tool or required_tool_legacy then
         db.actor:iterate_inventory(function(owner, obj)
             local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_weak")
-            if can_light then
+            local is_legacy_tool = obj:section() == required_tool_legacy
+            if can_light or is_legacy_tool then
                 obj_tool = obj
                 return true
             end
@@ -270,11 +276,11 @@ function itms_manager.actor_on_item_before_use(obj,flags)
     -- store boosts in a table
     curr_booster["section"]   = sec
     curr_booster["period"]	  = (period > 0) and (time_g + period*1000) or time_g
-    curr_booster["pwr"]       = (pwr_boost > itms_manager.boost_min) and pwr_boost or 0
-    curr_booster["psy"]       = (psy_boost > itms_manager.boost_min) and psy_boost or 0
-    curr_booster["bld"]       = (bld_boost > itms_manager.boost_min) and bld_boost or 0
-    curr_booster["hp"]        = (hp_boost > itms_manager.boost_min) and hp_boost or 0
-    curr_booster["rad"]       = (rad_boost > itms_manager.boost_min) and rad_boost or 0
+    curr_booster["pwr"]       = (pwr_boost > unlocalized_boost_min) and pwr_boost or 0
+    curr_booster["psy"]       = (psy_boost > unlocalized_boost_min) and psy_boost or 0
+    curr_booster["bld"]       = (bld_boost > unlocalized_boost_min) and bld_boost or 0
+    curr_booster["hp"]        = (hp_boost > unlocalized_boost_min) and hp_boost or 0
+    curr_booster["rad"]       = (rad_boost > unlocalized_boost_min) and rad_boost or 0
 
     -- A required tool is missing -> no eat
     if requires_tool and not obj_tool then
@@ -284,31 +290,33 @@ function itms_manager.actor_on_item_before_use(obj,flags)
         pass = false
 
     -- older booster is still active
-    elseif itms_manager.old_booster["period"] and (itms_manager.old_booster["period"] > time_g) then
-        --printf("~ actor_on_item_before_use [%s] | older booster [%s] is still active", sec, old_booster['section'])
-        local weaker_effect
-        local stronger_effect
-        for k,v in pairs(curr_booster) do
-            if (k ~= "section") and (k ~= "period") then
-                local v2 = itms_manager.old_booster[k]
-                if v2  and (v > itms_manager.boost_min) and (v2 > itms_manager.boost_min) then
-                    if (v <= v2) then
-                        weaker_effect = k
-                    else
+    elseif not western_goods_mcm.get_config("compat_no_drug_limit") then
+        if unlocalized_old_booster["period"] and (unlocalized_old_booster["period"] > time_g) then
+            --printf("~ actor_on_item_before_use [%s] | older booster [%s] is still active", sec, old_booster['section'])
+            local weaker_effect
+            local stronger_effect
+            for k,v in pairs(curr_booster) do
+                if (k ~= "section") and (k ~= "period") then
+                    local v2 = unlocalized_old_booster[k]
+                    if v2  and (v > unlocalized_boost_min) and (v2 > unlocalized_boost_min) then
+                        if (v <= v2) then
+                            weaker_effect = k
+                        else
+                            stronger_effect = k
+                        end
+                    elseif (v2 == 0) and (v > unlocalized_boost_min) then
                         stronger_effect = k
                     end
-                elseif (v2 == 0) and (v > itms_manager.boost_min) then
-                    stronger_effect = k
                 end
             end
-        end
 
-        -- older booster has some stronger effect, while new one doesn't have any stronger effect
-        if weaker_effect and (not stronger_effect) then
-            --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
-            local boost_str = game.translate_string(itms_manager.booster_string[weaker_effect])
-            str = strformat(game.translate_string("st_itm_manager_greater_effect"),boost_str)
-            pass = false
+            -- older booster has some stronger effect, while new one doesn't have any stronger effect
+            if weaker_effect and (not stronger_effect) then
+                --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
+                local boost_str = game.translate_string(unlocalized_booster_string[weaker_effect])
+                str = strformat(game.translate_string("st_itm_manager_greater_effect"),boost_str)
+                pass = false
+            end
         end
 
     -- prevent player to take anabiotic during combat
@@ -323,7 +331,7 @@ function itms_manager.actor_on_item_before_use(obj,flags)
     if pass then
         --printf("- actor_on_item_before_use [%s] | pass = true", sec)
         flags.ret_value = true
-        copy_table(itms_manager.old_booster, curr_booster)
+        copy_table(unlocalized_old_booster, curr_booster)
         if obj_tool then
             dbg_printf("[WG] Before Use Item | Requires tool '%s'",requires_tool)
             dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool:section())
@@ -344,7 +352,7 @@ function itms_manager.actor_on_item_before_use(obj,flags)
     end
 
     -- FDDA Compatibility
-    if enhanced_animations then
+    if enhanced_animations or western_goods_mcm.get_config("compat_fdda") then
         dbg_printf("[WG] Before Use Item | FDDA Compatibility")
         local item = obj:section()
         if IsMoveState("mcClimb") then

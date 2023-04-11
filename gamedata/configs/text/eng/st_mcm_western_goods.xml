@@ -96,6 +96,24 @@
 	</string>
 
 	<!-- ============================================================================================================-->
+	<!--	COMPATIBILITY SETTINGS																			  		     -->
+	<!-- ============================================================================================================-->
+
+	<!-- Section Title -->
+	<string id="ui_mcm_western_goods_compatibility_title">
+		<text>COMPATIBILITY SETTINGS</text>
+	</string>
+
+	<!-- Compatibility with 'No drug limit' -->
+	<string id="ui_mcm_western_goods_compat_no_drug_limit">
+		<text>Compatibility 'No Drug Limit'</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_compat_no_drug_limit_desc">
+		<text>Enables compatibility with No Drug Limit. If enabled, the 'You already have a similar effect with greater efficiency' thing will be disabled, and it'll let you use whatever items you want.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
 	<!--	TECHNICAL SETTINGS																			  		     -->
 	<!-- ============================================================================================================-->
 
