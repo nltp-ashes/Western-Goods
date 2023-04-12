@@ -12,7 +12,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 local EVENT_QUEUE = {}
-local LOAD_DELAY = 7000
+local LOAD_DELAY = 15000
 
 local dbg_printf = western_goods_utils.dbg_printf
 
@@ -117,7 +117,6 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
-
 	local table_to_save = {}
 	
 	copy_table(table_to_save,EVENT_QUEUE)
@@ -125,7 +124,7 @@ function save_state(m_data)
 	for event_id,actions in pairs(table_to_save) do
 		for action_id,act in pairs(actions) do
 			if (action_id ~= "__size") then
-				local timer = EVENT_QUEUE[event_id][action_id].timer
+				local timer = table_to_save[event_id][action_id].timer
 				table_to_save[event_id][action_id].timer = timer - time_global()
 			end
 		end
@@ -133,7 +132,7 @@ function save_state(m_data)
 	
 	m_data.persistant_event_queue = table_to_save
 	
-	dbg_printf("[WG] Saved timed event table :\n%s", utils_data.print_table(table_to_save, false, true))
+	dbg_printf("[WG] Persistent Time Events | Saved timed event table :\n%s", utils_data.print_table(table_to_save, false, true))
 end
 
 --- Function used to load information stored in the save file.
@@ -141,18 +140,18 @@ end
 --- @return nil
 function load_state(m_data)
 	local table_to_load = m_data.persistant_event_queue or {}
-	
-	copy_table(EVENT_QUEUE,table_to_load)
-	
-	for event_id,actions in pairs(EVENT_QUEUE) do
+
+	for event_id,actions in pairs(table_to_load) do
 		for action_id,act in pairs(actions) do
 			if (action_id ~= "__size") then
-				local timer = EVENT_QUEUE[event_id][action_id].timer
-				EVENT_QUEUE[event_id][action_id].added_at = time_global() + LOAD_DELAY
-				EVENT_QUEUE[event_id][action_id].timer = time_global() + LOAD_DELAY + timer
+				local timer = table_to_load[event_id][action_id].timer
+				table_to_load[event_id][action_id].added_at = time_global() + LOAD_DELAY
+				table_to_load[event_id][action_id].timer = timer + time_global() + LOAD_DELAY
 			end
 		end
 	end
-	
-	dbg_printf("[WG] Loaded timed event table :\n%s", utils_data.print_table(EVENT_QUEUE, false, true))
+
+	copy_table(EVENT_QUEUE,table_to_load)
+
+	dbg_printf("[WG] Persistent Time Events | Loaded timed event table :\n%s", utils_data.print_table(EVENT_QUEUE, false, true))
 end

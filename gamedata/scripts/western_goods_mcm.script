@@ -22,7 +22,7 @@ local defaults = {
 --- @param key string
 --- @return any
 function get_config(key)
-	if ui_mcm then return ui_mcm.get("western_goods/"..key) else return defaults[key] end
+	if ui_mcm then return ui_mcm.get("western_goods/"..key)	else return defaults[key] end
 end
 
 --- MCM UI definition.

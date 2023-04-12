@@ -245,7 +245,7 @@
             </phrase>
             <phrase id="3">
                 <text>stalker_crew_member_reward_3</text>
-                <action>western_goods_tasks_act_1.give_act_1_reward</action>
+                <action>western_goods_tasks_act_1.give_final_reward</action>
                 <next>4</next>
             </phrase>
             <phrase id="4">
@@ -358,7 +358,7 @@
             </phrase>
             <phrase id="6"> <!-- npc -->
                 <text>st_wg_act_2_task_1_answer_2</text>
-                <action>western_goods_tasks_act_1.give_act_1_task_1_item</action>
+                <action>western_goods_tasks_act_1.task_1_give_item</action>
                 <next>7</next>
             </phrase>
             <phrase id="7"> <!-- actor -->

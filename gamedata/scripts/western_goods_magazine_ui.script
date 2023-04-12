@@ -51,7 +51,7 @@ end
 --- @return nil
 function display(sec) 
 	if (not sec) then
-		printf("!ERROR western_goods_magazine_ui | no section passed!")
+		printe("![WG] ERROR | Magazine UI | No section passed!")
 		return
 	end
 	
@@ -80,6 +80,8 @@ function UIMagazine:__init(sec) super()
 
 	self:InitControls()
 	self:InitCallBacks()
+
+	dbg_printf("[WG] Magazine UI | Constructed GUI - %s (%s/%s)",self.section,self.page_current,self.page_count)
 end
 
 function UIMagazine:__finalize()
@@ -132,7 +134,9 @@ function UIMagazine:OnNext()
 	utils_obj.play_sound("interface\\inv_page")
 	self.page_current = self.page_current+1
 	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
-		
+
+	dbg_printf("[WG] Magazine UI | To next page - %s (%s/%s)",self.section,self.page_current,self.page_count)
+
 	self:RefreshNavigationButtons()
 end
 
@@ -142,7 +146,9 @@ function UIMagazine:OnPrevious()
 	utils_obj.play_sound("interface\\inv_page")
 	self.page_current = self.page_current-1
 	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
-		
+
+	dbg_printf("[WG] Magazine UI | To previous page - %s (%s/%s)",self.section,self.page_current,self.page_count)
+
 	self:RefreshNavigationButtons()
 end
 
@@ -151,10 +157,7 @@ function UIMagazine:RefreshNavigationButtons()
 	self.btn_previous:Show(true)
 	self.btn_next_pic:Show(true)
 	self.btn_next:Show(true)
-	
-	printf("[WG] Current page %s", self.page_current)
-	printf("[WG] Max page %s", self.page_count)
-	
+
 	if (self.page_current <= 1) then
 		self.btn_previous_pic:Show(false)
 		self.btn_previous:Show(false)
@@ -189,7 +192,9 @@ function UIMagazine:Reset(sec)
 	self.page_count = self:GetNumberOfPages()
 	
 	self.page:InitTexture(self:GetPageTexturePath(self.page_current))
-	
+
+	dbg_printf("[WG] Magazine UI | Reset for section %s", self.section)
+
 	self:RefreshNavigationButtons()
 end
 

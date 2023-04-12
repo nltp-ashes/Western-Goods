@@ -12,6 +12,7 @@
 -- Dialog constants
 local CONST_DISPLAY_TIME = 15
 local CONST_DELAY_MSG = 7
+local CONST_DELAY_QUICK_MSG = 1
 local CONST_DEFAULT_NAME = game.translate_string("st_western_goods_dialog_manager_default_name")
 local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
 
@@ -32,44 +33,40 @@ local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePe
 --- Function used to display a dialog on screen. Default values exist for each line's 'sender' and 'icon'. 'message' is required.
 --- @param dialog_table table
 --- @return nil
-function send_dialog(dialog_table, no_delay)
-	dbg_printf("[WG] Dialogs Manager | Preparing dialog (length: %s)", size_table(dialog_table))
+function send_dialog(dialog_table, quick_delay)
+	dbg_printf("[WG] Dialogs Manager | Preparing dialog (length:%s)", size_table(dialog_table))
 	for _,dialog in pairs(dialog_table) do
 		-- Default values
 		dialog.sender = dialog.sender or CONST_DEFAULT_NAME
 		dialog.icon = dialog.icon or CONST_DEFAULT_ICON
 
-		if no_delay then
-			dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, "beep_1", "npc")
-		else
-			-- Turn off dynamic news
-			dynamic_news_manager.enable_news = false
+		-- Turn off dynamic news
+		dynamic_news_manager.enable_news = false
 
-			dialog_waiting_count = dialog_waiting_count + 1
+		dialog_waiting_count = dialog_waiting_count + 1
 
-			CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, CONST_DELAY_MSG*dialog_waiting_count, function ()
+		CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, (quick_delay and CONST_DELAY_QUICK_MSG or CONST_DELAY_MSG)*dialog_waiting_count, function ()
 
-				dbg_printf("[WG] Dialogs Manager | Pushing dialog (from: %s)", dialog.sender)
+			dbg_printf("[WG] Dialogs Manager | Pushing dialog (from:%s) (pos in queue:%s)", dialog.sender,dialog_waiting_count)
 
-				-- Invert sound effect if from different sender
-				if not last_sender or (last_sender ~= dialog.sender) then
-					sound = not sound
-					last_sender = dialog.sender
-				end
+			-- Invert sound effect if from different sender
+			if not last_sender or (last_sender ~= dialog.sender) then
+				sound = not sound
+				last_sender = dialog.sender
+			end
 
-				-- Send the line of dialog
-				dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, sound and "beep_1" or "beep_2", "npc")
+			-- Send the line of dialog
+			dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, sound and "beep_1" or "beep_2", "npc")
 
-				dialog_waiting_count = dialog_waiting_count - 1
+			dialog_waiting_count = dialog_waiting_count - 1
 
-				-- Re-enable dynamic news if we're done sending dialogs
-				if dialog_waiting_count <= 0 then
-					dynamic_news_manager.enable_news = true
-				end
+			-- Re-enable dynamic news if we're done sending dialogs
+			if dialog_waiting_count <= 0 then
+				dynamic_news_manager.enable_news = true
+			end
 
-				return true
-			end)
-		end
+			return true
+		end)
 	end
 	dbg_printf("[WG] Dialogs Manager | Dialog ready (waiting queue: %s)", dialog_waiting_count)
 end
@@ -100,6 +97,16 @@ function crew_member_start_dialog()
 		return game.translate_string("stalker_crew_member_start_5")
 
 	else return game.translate_string("stalker_crew_member_start_6")
+	end
+end
+
+--- Function called to determine the start dialog's text of yellow crewmate.
+--- @return string
+function yellow_ecolog_start_dialog()
+	if has_alife_info("western_goods_act_2_task_2_controller_spawned") and not has_alife_info("western_goods_act_2_task_2_controller_killed") then
+		return game.translate_string("western_goods_yellow_ecolog_start_0")
+	else
+		return game.translate_string("western_goods_yellow_ecolog_start_1")
 	end
 end
 
@@ -135,8 +142,8 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
-	m_data.dialog_waiting_count = dialog_waiting_count or 0
-	dbg_printf("[WG] Saved dialog queue length : %s", dialog_waiting_count)
+	m_data.dialog_waiting_count = dialog_waiting_count
+	dbg_printf("[WG] Dialogs Manager | Saved dialog queue length : %s", m_data.dialog_waiting_count)
 end
 
 --- Function used to load information stored in the save file.
@@ -144,5 +151,5 @@ end
 --- @return nil
 function load_state(m_data)
 	dialog_waiting_count = m_data.dialog_waiting_count or 0
-	dbg_printf("[WG] Loaded dialog queue length : %s", dialog_waiting_count)
+	dbg_printf("[WG] Dialogs Manager | Loaded dialog queue length : %s", dialog_waiting_count)
 end

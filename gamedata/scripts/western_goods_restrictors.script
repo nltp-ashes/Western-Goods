@@ -17,10 +17,10 @@ local dbg_printf = western_goods_utils.dbg_printf
 
 function in_bounds(who,data)
 	if not who then
-		printe("!ERROR western_goods_restrictors.in_bounds called with no game object !")
+		printe("![WG] ERROR | Fake Restrictor | in_bounds called with no game object !")
 		return false
 	elseif not data then
-		printe("!ERROR western_goods_restrictors.in_bounds called with no restrictor data !")
+		printe("![WG] ERROR | Fake Restrictor | in_bounds called with no restrictor data !")
 		return false
 	end
 
@@ -29,7 +29,7 @@ function in_bounds(who,data)
 	local posz = who:position().z
 
 	if (posx > data.ax) and (posz < data.az) and (posy > data.ay) and (posx < data.bx) and (posz > data.bz) and (posy < data.by) then
-		dbg_printf("[WG] %s in restrictor bounds", who:name())
+		dbg_printf("[WG] Fake Restrictor | %s in restrictor bounds", who:name())
 		return true
 	else
 		return false

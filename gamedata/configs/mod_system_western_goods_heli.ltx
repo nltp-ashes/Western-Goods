@@ -3,33 +3,32 @@
 ;;--============================================================================--;;
 
 [western_goods_helicopter]:helicopter
-visual                  	= dynamics\vehicles\mi24\veh_mi24_army.ogf
-faction						= killer
-player_id					= killer_heli
-immunities_sect				= sect_western_goods_helicopter_immunities
-force_explode_time			= 15000
+visual                  	  = dynamics\vehicles\mi24\veh_mi24_army.ogf
+faction						  = killer
+player_id					  = killer_heli
+immunities_sect				  = sect_western_goods_helicopter_immunities
+force_explode_time			  = 15000
 
-actor_always_enemy			= false
+actor_always_enemy			  = false
 
-safe_altitude				= 1.0
-velocity					= 30
+safe_altitude				  = 1.0
+velocity					  = 30
 
-vis_inc						= 50
-vis_dec						= 5
-forget_timeout				= 90
+vis_inc						  = 50
+vis_dec						  = 5
+forget_timeout				  = 90
 
-use_mgun					= true
-combat_use_mgun				= true
-rpm                     	= 500
-min_mgun_attack_dist		= 15 
-max_mgun_attack_dist		= 100
+use_mgun					  = true
+combat_use_mgun				  = true
+rpm                     	  = 500
+min_mgun_attack_dist		  = 15
+max_mgun_attack_dist		  = 100
 
-use_rocket					= true
-combat_use_rocket			= true
-time_between_rocket_attack	= 25000
-min_rocket_attack_dist		= 30
-max_rocket_attack_dist		= 150
-
+use_rocket					  = true
+combat_use_rocket			  = true
+time_between_rocket_attack	  = 25000
+min_rocket_attack_dist		  = 30
+max_rocket_attack_dist		  = 150
 
 [sect_western_goods_helicopter_immunities]
 burn_immunity			= 0.0
@@ -41,3 +40,9 @@ telepatic_immunity		= 0.0
 chemical_burn_immunity	= 0.0
 fire_wound_immunity		= 0.0
 explosion_immunity		= 0.0
+
+[western_goods_helicopter_task]:western_goods_helicopter
+story_id                      = western_goods_helicopter_task
+
+[western_goods_helicopter_guide]:western_goods_helicopter
+story_id                      = western_goods_helicopter_guide

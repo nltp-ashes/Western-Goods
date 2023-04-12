@@ -149,10 +149,6 @@ cform                                    = skeleton
 visual                                   = dynamics\western_goods_tech\wg_lighter_bic.ogf
 kind			                         = i_tool
 
-use1_functor                             = western_goods_usable_items.menu_use
-use1_action_functor                      = western_goods_usable_items.use_item
-use1_allow_db                            = true
-
 inv_name			                     = st_wg_lighter_bic
 inv_name_short			                 = st_wg_lighter_bic_s
 description			                     = st_wg_lighter_bic_descr
@@ -168,6 +164,7 @@ inv_grid_y			                     = 1
 use_condition                            = true
 condition_bar                            = condition_progess_bar
 allow_repair                             = false
+remove_after_use                         = false
 
 can_light_weak                           = true
 can_light_strong                         = true

@@ -10,8 +10,20 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- Constants
+local CONST_TASK_1_HELI_DIST = 625							-- meters squared
+local CONST_TASK_1_SUPPLIES_DIST = 25						-- meters squared
+local CONST_TASK_2_HELI_DELAY = 50000						-- milliseconds
+local CONST_TASK_2_SHOW_TARGETS_DELAY = 300000				-- milliseconds
+local CONST_TASK_2_REP_THEFT = -100							-- reputation points
+local CONST_TASK_3_SHOW_TARGETS_DELAY = 300000				-- milliseconds
+local CONST_TASK_3_DIALOG_DIST = 625						-- meters squared
+local CONST_TASK_3_DIALOG_EX_DIST = 2500					-- meters squared
+local CONST_TASK_3_BRIDGE_DIST = 10000						-- meters squared
+local CONST_TASK_3_HELI_DIST = 100						-- meters squared
+local CONST_TASK_3_NPC_DIST = 25						-- meters squared
+
 -- Imported functions
-local get_translation = game.translate_string
 local dbg_printf = western_goods_utils.dbg_printf
 local find_object_by_id = western_goods_utils.find_object_by_id
 local heli_spawn = western_goods_helicopter.heli_spawn
@@ -39,14 +51,14 @@ TASK_3_CACHE = {}
 function start_task_1(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_1_task_1", npc:id())
-	dbg_printf("[WG] Act 1, Task 1 started...")
+	dbg_printf("[WG] Tasks Act 1 | Task 1 - Task started...")
 end
 
 --- Function used to end Act 1, Task 1.
 --- @return nil
 function end_task_1()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_1")
-	dbg_printf("[WG] Act 1, Task 1 completed...")
+	dbg_printf("[WG] Tasks Act 1 | Task 1 - Task completed...")
 end
 
 --- Function called when the task is initiated.
@@ -166,7 +178,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 			end
 
 			-- Continue if the player is closer than 25m from the helicopter
-			if not helicopter_obj or western_goods_utils.get_distance_sqr(helicopter_obj:position(), db.actor:position()) > 625 then return end
+			if not helicopter_obj or western_goods_utils.get_distance_sqr(helicopter_obj:position(), db.actor:position()) > CONST_TASK_1_HELI_DIST then return end
 
 			-- Send a dialog between the task giver and the player
 			if not TASK_1_CACHE.stage_0_dialog_sent then
@@ -177,18 +189,18 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_0_message_1")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_0_message_2")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_0_message_3")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_0_message_4")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_0_message_5")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_0_message_6")}
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_1")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_2")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_3")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_4")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_5")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_6")}
 				})
 
 				TASK_1_CACHE.stage_0_dialog_sent = true
 			end
 
-			dbg_printf("[WG] Act 1 Task 1 Stage 0 | Player arrived at helicopter")
+			dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 0 - Player arrived at helicopter...")
 
 			-- Progress the task
 			tsk.stage = 1
@@ -223,14 +235,14 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 			if not supplies_se then
 				-- Spawn the supplies, objective the player has to retrieve
 				supplies_se = alife_create("wg_act_1_task_1_quest_item", vector():set(-317.4,9.8,425.5), 327181, 4137)
-				dbg_printf("[WG] Act 1 Task 1 Stage 1 | Quest item spawned %s", supplies_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 1 - Quest item spawned %s", supplies_se.id)
 
 				-- Return so the game has time to spawn the supplies in the game world
 				return
 			end
 
 			-- Wait for the player to be close to the supplies
-			if not supplies_obj or western_goods_utils.get_distance_sqr(supplies_obj:position(), db.actor:position()) > 25 then return end
+			if not supplies_obj or western_goods_utils.get_distance_sqr(supplies_obj:position(), db.actor:position()) > CONST_TASK_1_SUPPLIES_DIST then return end
 
 			-- Send a dialog between the task giver and the player
 			if not TASK_1_CACHE.stage_1_dialog_sent then
@@ -241,16 +253,16 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_1_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_1_message_2")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_1_message_3")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_1_stage_1_message_4")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_2")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_3")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_4")}
 				})
 
 				TASK_1_CACHE.stage_1_dialog_sent = true
 			end
 
-			dbg_printf("[WG] Act 1 Task 1 Stage 1 | Player arrived at the dead squad")
+			dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 1 - Player arrived at the dead squad...")
 
 			-- Progress the task
 			tsk.stage = 2
@@ -266,7 +278,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 			if not supplies_se then
 				-- Spawn the supplies, objective the player has to retrieve
 				supplies_se = alife_create("wg_act_1_task_1_quest_item", vector():set(-317.4,9.8,425.5), 327181, 4137)
-				dbg_printf("[WG] Act 1 Task 1 Stage 2 | Quest item respawned %s", supplies_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 2 - Quest item respawned %s", supplies_se.id)
 
 				-- Return so the game has time to spawn the supplies in the game world
 				return
@@ -274,7 +286,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 
 			-- If the player picked up the supplies, progress to stage 3
 			if not (supplies_se and (supplies_se.parent_id ~= AC_ID)) then
-				dbg_printf("[WG] Act 1 Task 1 Stage 2 | Player picked up the supplies %s", supplies_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 2 - Player picked up the supplies %s", supplies_se.id)
 				tsk.stage = 3
 				return
 			end
@@ -287,18 +299,24 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 
 			-- If the supplies cannot be found (which is odd), roll back to stage 2
 			if not supplies_se then
-				dbg_printf("[WG] Act 1 Task 1 Stage 3 | Supplies disappeared, rolling back to stage 2...")
+				dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 3 - Supplies disappeared, rolling back to stage 2...")
 				tsk.stage = 2
 				return
 			end
 
-			give_info("western_goods_act_1_task_1_ready_finished")
+			if not has_alife_info("western_goods_act_1_task_1_ready_finished") then
+				dbg_printf("[WG] Tasks Act 1 | Task 1 - Task ready to be completed...")
+				give_info("western_goods_act_1_task_1_ready_finished")
+			end
 
 			-- If the player dropped the supplies, rollback to stage 2
 			if supplies_se and (supplies_se.parent_id ~= AC_ID) then
-				dbg_printf("[WG] Act 1 Task 1 Stage 3 | Player dropped the supplies %s", supplies_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 3 - Player dropped the supplies %s", supplies_se.id)
 
-				disable_info("western_goods_act_1_task_1_ready_finished")
+				if has_alife_info("western_goods_act_1_task_1_ready_finished") then
+					dbg_printf("[WG] Tasks Act 1 | Task 1 - Task no longer ready to be completed...")
+					disable_info("western_goods_act_1_task_1_ready_finished")
+				end
 
 				tsk.stage = 2
 				return
@@ -319,14 +337,14 @@ end
 function start_task_2(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_1_task_2", npc:id())
-	dbg_printf("[WG] Act 1, Task 2 started...")
+	dbg_printf("[WG] Tasks Act 1 | Task 2 - Task started...")
 end
 
 --- Function used to end Act 1, Task 2.
 --- @return nil
 function end_task_2()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_2")
-	dbg_printf("[WG] Act 1, Task 2 completed...")
+	dbg_printf("[WG] Tasks Act 1 | Task 2 - Task completed...")
 end
 
 --- Function called when the task is initiated.
@@ -422,7 +440,7 @@ function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
 
 		if tsk.stage == 2 then
 			local timer = TASK_2_CACHE.stage_2_show_targets_timer
-			if timer and timer <= time_global() then
+			if timer and timer < time_global() then
 				local squad_1_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_4_squad")
 				local squad_2_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_5_squad")
 				local squad_3_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_6_squad")
@@ -478,6 +496,9 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
 			-- Send a dialog between the task giver and the player
 			if not TASK_2_CACHE.stage_0_dialog_sent then
+
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 0 - Player met informant...")
+
 				local sender_1 = alife():actor()
 				local sender_2 = tsk.task_giver_id and alife_object(tsk.task_giver_id)
 
@@ -485,10 +506,10 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_0_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_0_message_2")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_0_message_3")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_0_message_4")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_2")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_3")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_4")}
 				})
 
 				TASK_2_CACHE.stage_0_dialog_sent = true
@@ -532,7 +553,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			if not TASK_2_CACHE.stage_1_helicopter_spawned then
 				helicopter_se = heli_spawn("western_goods_helicopter",vector():set(346.7,7,984.4),674394,4724)
 
-				TASK_2_CACHE.stage_1_heli_ready_timer = time_global() + 50000
+				TASK_2_CACHE.stage_1_heli_ready_timer = time_global() + CONST_TASK_2_HELI_DELAY
 				TASK_2_CACHE.stage_1_helicopter_id = helicopter_se.id
 				TASK_2_CACHE.stage_1_helicopter_spawned = true
 
@@ -542,7 +563,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			-- Spawn the Gauss rifle if it hasn't been spawned yet
 			if not quest_item_1_se then
 				quest_item_1_se = alife_create("wg_act_1_task_2_quest_item_1",vector():set(-445,0.8,-356.8),1056,4818)
-				dbg_printf("[WG] Act 1 Task 2 Stage 1 | Quest item no 1 spawned %s", quest_item_1_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Quest item no 1 spawned %s", quest_item_1_se.id)
 
 				return
 			end
@@ -550,7 +571,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			-- Spawn the note if it hasn't been spawned yet
 			if not quest_item_2_se then
 				quest_item_2_se = alife_create("wg_act_1_task_2_quest_item_2",vector():set(-446.9,1.2,-384.3),756,4818)
-				dbg_printf("[WG] Act 1 Task 2 Stage 1 | Quest item no 2 spawned %s", quest_item_2_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Quest item no 2 spawned %s", quest_item_2_se.id)
 
 				return
 			end
@@ -561,13 +582,15 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
 			-- Send the helicopter to protect the player, and send a dialog to the player
 			if not TASK_2_CACHE.stage_1_helicopter_sent then
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Helicopter moving to player...")
+
 				heli_register(TASK_2_CACHE.stage_1_helicopter_id,"protect_actor",nil)
 
 				-- Send a dialog to the player to inform him the helicopter is coming
 				local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 				send_dialog({
-					{sender=dialog_sender.name, icon=dialog_sender.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_1_message_1")}
+					{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_1")}
 				})
 
 				TASK_2_CACHE.stage_1_helicopter_sent = true
@@ -580,18 +603,18 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
 				-- Punish the player if he's not wearing a disguise, and a bandit is close to him
 				if nearest_npc_dist and nearest_npc:character_community() == "bandit" and nearest_npc_dist < 10 and not gameplay_disguise.is_actor_disguised() then
-					dbg_printf("[WG] Act 1 Task 2 Stage 1 | Nearest %s %s is %s m away", nearest_npc:character_community(), nearest_npc:section(), nearest_npc_dist)
+					dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Nearest %s %s is %s m away", nearest_npc:character_community(), nearest_npc:section(), nearest_npc_dist)
 
 					-- Degrade player reputation
-					game_relations.change_faction_relations("bandit", get_actor_true_community(), -100)
-					dbg_printf("[WG] Act 1 Task 2 Stage 1 | Player punished for stealing %s", -100)
+					game_relations.change_faction_relations("bandit", get_actor_true_community(), CONST_TASK_2_REP_THEFT)
+					dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Player punished for stealing %s", CONST_TASK_2_REP_THEFT)
 
 					-- Make the npc send a message to the player
 					local dialog_sender = { name= nearest_npc:character_name(), icon= nearest_npc:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_1_message_3")}
-					})
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_3")}
+					},true)
 				end
 
 				-- Save that the item has been robbed (so that the player doesn't get punished if he gets exposed way later)
@@ -605,18 +628,18 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
 				-- Punish the player if he's not wearing a disguise, and a bandit is close to him
 				if nearest_npc_dist and nearest_npc:character_community() == "bandit" and nearest_npc_dist < 10 and not gameplay_disguise.is_actor_disguised() then
-					dbg_printf("[WG] Act 1 Task 2 Stage 1 | Nearest %s %s is %s m away", nearest_npc:character_community(), nearest_npc:section(), nearest_npc_dist)
+					dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Nearest %s %s is %s m away", nearest_npc:character_community(), nearest_npc:section(), nearest_npc_dist)
 
 					-- Degrade player reputation
-					game_relations.change_faction_relations("bandit", get_actor_true_community(), -100)
-					dbg_printf("[WG] Act 1 Task 2 Stage 1 | Player punished for stealing %s", -100)
+					game_relations.change_faction_relations("bandit", get_actor_true_community(), CONST_TASK_2_REP_THEFT)
+					dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Player punished for stealing %s", CONST_TASK_2_REP_THEFT)
 
 					-- Make the npc send a message to the player
 					local dialog_sender = { name= nearest_npc:character_name(), icon= nearest_npc:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_1_message_4")}
-					})
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_4")}
+					},true)
 				end
 
 				-- Save that the item has been robbed (so that the player doesn't get punished if he gets exposed way later)
@@ -626,10 +649,35 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			-- If the player picked up both quest items, progress the task
 			if not (quest_item_1_se and quest_item_1_se.parent_id == 65535) and not (quest_item_2_se and quest_item_2_se.parent_id == 65535) then
 
-				dbg_printf("[WG] Act 1 Task 2 Stage 1 | Player picked up the items | %s | %s", quest_item_1_se.id, quest_item_2_se.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Player picked up the items - %s - %s", quest_item_1_se.id, quest_item_2_se.id)
 
 				-- If the player is hostile to bandits, progress to stage 2, otherwise, progress to stage 3
 				if game_relations.is_factions_enemies(get_actor_true_community(), "bandit") and not gameplay_disguise.is_actor_disguised() then
+
+					-- Spawn the bandit reinforcements around the Container Warehouse area
+					if not TASK_2_CACHE.stage_2_bandit_squads_spawned then
+						local squad_1_se = spawn_squad("western_goods_act_1_task_2_bandit_4_squad", vector():set(-424.8,0,-339.4), 12910, 4469)
+						local squad_2_se = spawn_squad("western_goods_act_1_task_2_bandit_5_squad", vector():set(-394.9,0,-386.9), 52206, 4470)
+						local squad_3_se = spawn_squad("western_goods_act_1_task_2_bandit_6_squad", vector():set(-405,0,-344), 36889, 4469)
+
+						squad_1_se.scripted_target = "jup_a12"
+						squad_2_se.scripted_target = "jup_a12"
+						squad_3_se.scripted_target = "jup_a12"
+
+						-- Save the time the fight was started at, to indicate the targets after 2 in-game hours
+						TASK_2_CACHE.stage_2_show_targets_timer = time_global() + CONST_TASK_2_SHOW_TARGETS_DELAY
+						TASK_2_CACHE.stage_2_bandit_squads_spawned = true
+
+						-- Alert the player about the incoming bandits
+						local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
+
+						send_dialog({
+							{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_2_message_1")}
+						})
+
+						return
+					end
+
 					tsk.stage = 2
 					return
 				else
@@ -643,7 +691,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 					local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_1_message_2")}
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_2")}
 					})
 
 					tsk.stage = 3
@@ -659,32 +707,10 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			local squad_2_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_5_squad")
 			local squad_3_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_2_bandit_6_squad")
 
-			-- Spawn the bandit reinforcements around the Container Warehouse area
-			if not TASK_2_CACHE.stage_2_bandit_squads_spawned then
-				squad_1_se = spawn_squad("western_goods_act_1_task_2_bandit_4_squad", vector():set(-424.8,0,-339.4), 12910, 4469)
-				squad_2_se = spawn_squad("western_goods_act_1_task_2_bandit_5_squad", vector():set(-394.9,0,-386.9), 52206, 4470)
-				squad_3_se = spawn_squad("western_goods_act_1_task_2_bandit_6_squad", vector():set(-405,0,-344), 36889, 4469)
-
-				squad_1_se.scripted_target = "jup_a12"
-				squad_2_se.scripted_target = "jup_a12"
-				squad_3_se.scripted_target = "jup_a12"
-
-				-- Save the time the fight was started at, to indicate the targets after 2 in-game hours
-				TASK_2_CACHE.stage_2_show_targets_timer = time_global() + 300000
-				TASK_2_CACHE.stage_2_bandit_squads_spawned = true
-
-				-- Alert the player about the incoming bandits
-				local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
-
-				send_dialog({
-					{sender=dialog_sender.name, icon=dialog_sender.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_2_message_1")}
-				})
-
-				return
-			end
-
 			-- If all of the squads are dead, or the player is wearing a disguise
 			if (not squad_1_se and not squad_2_se and not squad_3_se) or gameplay_disguise.is_actor_disguised() then
+
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 2 - Bandit squads cleared...")
 
 				-- Retrieve the game object (may not exist if the helicopter has been destroyed)
 				local helicopter_se = TASK_2_CACHE.stage_1_helicopter_id and alife_object(TASK_2_CACHE.stage_1_helicopter_id)
@@ -694,11 +720,13 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 					-- Return the helicopter to the processing station
 					heli_register(helicopter_obj:id(),"leave_at_point",vector():set(346.7,7,984.4))
 
+					dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 2 - Helicopter moving out to WPS...")
+
 					-- Inform the player that the helicopter is leaving
 					local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=get_translation("st_wg_trader_act_1_task_2_stage_2_message_2")}
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_2_message_2")}
 					})
 				end
 
@@ -718,7 +746,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			if not quest_item_1 then
 				quest_item_1 = alife_create("wg_act_1_task_2_quest_item_1",vector():set(-445,0.8,-356.8),1056,4818)
 
-				dbg_printf("[WG] Act 1 Task 2 Stage 3 | Quest item no 1 respawned %s", quest_item_1.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 3 - Quest item no 1 respawned %s", quest_item_1.id)
 				return
 			end
 
@@ -726,13 +754,13 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			if not quest_item_2 then
 				quest_item_2 = alife_create("wg_act_1_task_2_quest_item_2",vector():set(-446.9,1.2,-384.3),756,4818)
 
-				dbg_printf("[WG] Act 1 Task 2 Stage 3 | Quest item no 2 respawned %s", quest_item_2.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 3 - Quest item no 2 respawned %s", quest_item_2.id)
 				return
 			end
 
 			-- If the player picked up both quest items, progress to stage 4
 			if not (quest_item_1 and quest_item_1.parent_id ~= AC_ID) and not (quest_item_2 and quest_item_2.parent_id ~= AC_ID) then
-				dbg_printf("[WG] Act 1 Task 2 Stage 3 | Player picked up the items | %s | %s", quest_item_1.id, quest_item_2.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 3 - Player picked up the items - %s - %s", quest_item_1.id, quest_item_2.id)
 				tsk.stage = 4
 				return
 			end
@@ -744,13 +772,19 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			local quest_item_1 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
 			local quest_item_2 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 
-			give_info("western_goods_act_1_task_2_ready_finished")
+			if not has_alife_info("western_goods_act_1_task_2_ready_finished") then
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Task ready to be completed...")
+				give_info("western_goods_act_1_task_2_ready_finished")
+			end
 
 			-- If the player dropped one of the quest items, rollback to stage 3
 			if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID)	then
-				dbg_printf("[WG] Act 1 Task 2 Stage 4 | Player dropped the items | %s | %s", quest_item_1.id, quest_item_2.id)
+				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 4 - Player dropped the items - %s - %s", quest_item_1.id, quest_item_2.id)
 
-				disable_info("western_goods_act_1_task_2_ready_finished")
+				if has_alife_info("western_goods_act_1_task_2_ready_finished") then
+					dbg_printf("[WG] Tasks Act 1 | Task 2 - Task no longer ready to be completed...")
+					disable_info("western_goods_act_1_task_2_ready_finished")
+				end
 
 				tsk.stage = 3
 				return
@@ -771,14 +805,14 @@ end
 function start_task_3(first_speaker, second_speaker)
 	local npc = dialogs.who_is_npc(first_speaker, second_speaker)
 	task_manager.get_task_manager():give_task("western_goods_act_1_task_3", npc:id())
-	dbg_printf("[WG] Act 1, Task 3 started...")
+	dbg_printf("[WG] Tasks Act 1 | Task 3 - Task started...")
 end
 
 --- Function used to end Act 1, Task 3.
 --- @return nil
 function end_task_3()
 	task_manager.get_task_manager():set_task_completed("western_goods_act_1_task_3")
-	dbg_printf("[WG] Act 1, Task 3 completed...")
+	dbg_printf("[WG] Tasks Act 1 | Task 3 - Task completed...")
 end
 
 --- Function called when the task is initiated.
@@ -928,11 +962,14 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 			if not crew_member_obj then return end
 
+			dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 0 - Player rescued crew member...")
+
 			-- Add the crew member to the player squad
 			dialogs_axr_companion.become_actor_companion(db.actor,crew_member_obj)
 
 			-- Send a dialog between the player and the task giver
 			if not TASK_3_CACHE.stage_0_dialog_sent then
+
 				local sender_1 = alife():actor()
 				local sender_2 = alife_object(tsk.task_giver_id)
 
@@ -940,11 +977,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_0_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_0_message_2")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_0_message_3")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_0_message_4")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_0_message_5")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_2")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_3")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_4")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_5")}
 				})
 
 				TASK_3_CACHE.stage_0_dialog_sent = true
@@ -999,7 +1036,9 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local dist_to_dialog_2 = dialog_2_activation_pos and western_goods_utils.get_distance_sqr(player_pos, dialog_2_activation_pos)
 				local dist_to_dialog_3 = dialog_3_activation_pos and western_goods_utils.get_distance_sqr(player_pos, dialog_3_activation_pos)
 
-				if dist_to_dialog_1 and dist_to_dialog_1 < 625 and not TASK_3_CACHE.stage_1_dialog_1_sent then
+				if dist_to_dialog_1 and dist_to_dialog_1 < CONST_TASK_3_DIALOG_DIST and not TASK_3_CACHE.stage_1_dialog_1_sent then
+					dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 1 - Player reached dialog point 1...")
+
 					local sender_1 = alife():actor()
 					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
@@ -1007,14 +1046,16 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_1")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_2")}
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_1")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_2")}
 					})
 
 					TASK_3_CACHE.stage_1_dialog_1_sent = true
 				end
 
-				if dist_to_dialog_2 and dist_to_dialog_2 < 625 and not TASK_3_CACHE.stage_1_dialog_2_sent then
+				if dist_to_dialog_2 and dist_to_dialog_2 < CONST_TASK_3_DIALOG_DIST and not TASK_3_CACHE.stage_1_dialog_2_sent then
+					dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 1 - Player reached dialog point 2...")
+
 					local sender_1 = alife():actor()
 					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
@@ -1022,16 +1063,18 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_3")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_4")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_5")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_6")}
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_3")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_4")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_5")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_6")}
 					})
 
 					TASK_3_CACHE.stage_1_dialog_2_sent = true
 				end
 
-				if dist_to_dialog_3 and dist_to_dialog_3 < 2500 and not TASK_3_CACHE.stage_1_dialog_3_sent then
+				if dist_to_dialog_3 and dist_to_dialog_3 < CONST_TASK_3_DIALOG_EX_DIST and not TASK_3_CACHE.stage_1_dialog_3_sent then
+					dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 1 - Player reached dialog point 3...")
+
 					local sender_1 = alife():actor()
 					local sender_2 = western_goods_utils.se_object_by_sid("stalker_crew_member")
 
@@ -1039,10 +1082,10 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_7")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_8")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_9")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_1_message_10")}
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_7")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_8")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_9")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_10")}
 					})
 
 					TASK_3_CACHE.stage_1_dialog_3_sent = true
@@ -1050,21 +1093,23 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			end
 
 			-- Wait for the player to be in the Red Forest
-			if level.name() == "l10_red_forest" then
-				-- Retrieve the player and target positions
-				local player_pos = db.actor:position()
-				local objective_pos = SIMBOARD:get_smart_by_name("red_smart_terrain_bridge").position
+			if not (level.name() == "l10_red_forest") then return end
 
-				-- Wait for the player to be closer than 100m from the bridge
-				if not objective_pos or western_goods_utils.get_distance_sqr(player_pos, objective_pos) > 10000 then return end
+			-- Retrieve the player and target positions
+			local player_pos = db.actor:position()
+			local objective_pos = SIMBOARD:get_smart_by_name("red_smart_terrain_bridge").position
 
-				-- Save the time to indicate the remaining enemies on the PDA 5 real-life mins later
-				TASK_3_CACHE.stage_2_show_targets_timer = time_global() + 300000
+			-- Wait for the player to be closer than 100m from the bridge
+			if not objective_pos or western_goods_utils.get_distance_sqr(player_pos, objective_pos) > CONST_TASK_3_BRIDGE_DIST then return end
 
-				-- Progress the task
-				tsk.stage = 2
-				return
-			end
+			dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 1 - Player reached Read Forest's bridge to Limansk...")
+
+			-- Save the time to indicate the remaining enemies on the PDA 5 real-life mins later
+			TASK_3_CACHE.stage_2_show_targets_timer = time_global() + CONST_TASK_3_SHOW_TARGETS_DELAY
+
+			-- Progress the task
+			tsk.stage = 2
+			return
 		end
 
 		-- Third stage : Fight off the enemy squads
@@ -1088,7 +1133,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			-- Progress only when all enemy squads are dead
 			if monolith_se_squad_1 or monolith_se_squad_2 or monolith_se_squad_3 then return end
 
-			dbg_printf("[WG] Act 1 Task 3 Stage 2 | All Monolith squads dead")
+			dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 2 - All Monolith squads dead...")
 
 			-- Progress the task
 			tsk.stage = 3
@@ -1112,12 +1157,6 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			local heli_spawn_pos = vector():set(348.8,10.9,149.2)
 			local heli_landing_pos = vector():set(-188.7,5.3,-195.8)
 
-			-- If the evac helicopter was destroyed, fail the task
-			if helicopter_obj and helicopter_obj:get_helicopter():GetfHealth() <= 0 then
-				dbg_printf("[WG] Act 1 Task 3 Stage 3 | Helicopter was destroyed - task failed")
-				return "fail"
-			end
-
 			-- Delete the old helicopter from the Water Processing Station in Zaton
 			if not TASK_3_CACHE.stage_3_wps_heli_released then
 				release_story_helicopter()
@@ -1127,13 +1166,21 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			-- Spawn the helicopter and direct it to the landing zone
 			if not TASK_3_CACHE.stage_3_helicopter_spawned then
 				helicopter_se = heli_spawn("western_goods_helicopter",heli_spawn_pos,8256,2792)
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter spawned %s", helicopter_se.id)
+
 				heli_register(helicopter_se.id,"land_at_point", heli_landing_pos)
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter moving to player...")
 
 				TASK_3_CACHE.stage_3_helicopter_id = helicopter_se.id
 				TASK_3_CACHE.stage_3_helicopter_spawned = true
 
-				dbg_printf("[WG] Act 1 Task 3 Stage 3 | Helicopter spawned %s", helicopter_se.id)
 				return
+			end
+
+			-- If the evac helicopter was destroyed, fail the task
+			if helicopter_obj and helicopter_obj:get_helicopter():GetfHealth() <= 0 then
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter was destroyed - task failed")
+				return "fail"
 			end
 
 			-- If the crew member hasn't extracted, and isn't alive, the task is failed
@@ -1151,8 +1198,8 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local dialog_sender_2 = { name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_3_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=get_translation("st_wg_trader_act_1_task_3_stage_3_message_2")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_3_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_3_message_2")}
 				})
 
 				TASK_3_CACHE.stage_3_dialog_sent = true
@@ -1160,10 +1207,12 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 			-- Get the distance between the helicopter and the landing zone, and wait for it to be smaller than 5m
 			local dist_to_landing = helicopter_obj and western_goods_utils.get_distance_sqr(helicopter_obj:position(), heli_landing_pos)
-			if dist_to_landing and dist_to_landing > 100 then return end
+			if (not dist_to_landing) or dist_to_landing and dist_to_landing > CONST_TASK_3_HELI_DIST then return end
 
 			-- Set the rescued companion to head towards the helicopter
 			if not TASK_3_CACHE.stage_3_evac_order_given then
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter reached landing zone (dist:%s)", dist_to_landing)
+
 				-- Remove companion from player squad
 				axr_companions.remove_from_actor_squad(crew_member_obj)
 
@@ -1172,12 +1221,14 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 
 				crew_member_se.scripted_target = "red_smart_terrain_bridge"
 
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Crew member freed and moving to helicopter...")
+
 				TASK_3_CACHE.stage_3_evac_order_given = true
 			end
 
 			-- Get the distance to the heli, and wait for it to be smaller than 5m
 			local dist_to_heli = crew_member_obj and western_goods_utils.get_distance_sqr(crew_member_obj:position(), heli_landing_pos)
-			if dist_to_heli and dist_to_heli > 25 then return end
+			if (not dist_to_heli) or dist_to_heli and dist_to_heli > CONST_TASK_3_NPC_DIST then return end
 
 			-- Extract the squad member
 			if not TASK_3_CACHE.stage_3_crew_member_extracted then
@@ -1187,11 +1238,15 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				-- Give the info that the crew member was successfully extracted
 				give_info("wg_act_1_task_3_crew_member_extracted")
 
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Crew member extracted...")
+
 				-- Make the heli leave the level
 				heli_register(helicopter_se.id,"leave_at_point",heli_spawn_pos)
 
 				-- Spawn a new one at the Water Processing Station
 				create_story_helicopter("wps")
+
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter leaving to Book Store...")
 
 				TASK_3_CACHE.stage_3_crew_member_extracted = true
 			end
@@ -1205,7 +1260,10 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 		if tsk.stage == 4 then
 			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
-			give_info("western_goods_act_1_task_3_ready_finished")
+			if not has_alife_info("western_goods_act_1_task_3_ready_finished") then
+				dbg_printf("[WG] Tasks Act 1 | Task 3 - Task ready to be completed...")
+				give_info("western_goods_act_1_task_3_ready_finished")
+			end
 
 			-- Spawn the rescued crew member in the book store
 			if not crew_member_squad_se then
@@ -1238,25 +1296,69 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
-	m_data.wg_act_1_task_1_cache = TASK_1_CACHE
-	m_data.wg_act_1_task_2_cache = TASK_2_CACHE
-	m_data.wg_act_1_task_3_cache = TASK_3_CACHE
-	dbg_printf("[WG] Saved act 1 task variables")
+	-- Prepare save tables
+	local TASK_1_SAVE = {}
+	local TASK_2_SAVE = {}
+	local TASK_3_SAVE = {}
+
+	-- Make copies of task caches
+	copy_table(TASK_1_SAVE, TASK_1_CACHE)
+	copy_table(TASK_2_SAVE, TASK_2_CACHE)
+	copy_table(TASK_3_SAVE, TASK_3_CACHE)
+
+	-- Pre-process tables
+	TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) - time_global()
+	TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) - time_global()
+	TASK_3_SAVE.stage_2_show_targets_timer = (TASK_3_SAVE.stage_2_show_targets_timer or 0) - time_global()
+
+	-- Save tables
+	m_data.wg_act_1_task_1_cache = TASK_1_SAVE
+	m_data.wg_act_1_task_2_cache = TASK_2_SAVE
+	m_data.wg_act_1_task_3_cache = TASK_3_SAVE
+
+	-- Debug prints
+	dbg_printf("[WG] Tasks Act 1 | Task 1 - Saved variables...\n%s",utils_data.print_table(TASK_1_SAVE, false, true))
+	dbg_printf("[WG] Tasks Act 1 | Task 2 - Saved variables...\n%s",utils_data.print_table(TASK_2_SAVE, false, true))
+	dbg_printf("[WG] Tasks Act 1 | Task 3 - Saved variables...\n%s",utils_data.print_table(TASK_3_SAVE, false, true))
 end
 
 --- Function used to load information stored in the save file.
 --- @param m_data table
 --- @return nil
 function load_state(m_data)
-	TASK_1_CACHE = m_data.wg_act_1_task_1_cache or {}
-	TASK_2_CACHE = m_data.wg_act_1_task_2_cache or {}
-	TASK_3_CACHE = m_data.wg_act_1_task_3_cache or {}
-	dbg_printf("[WG] Loaded act 1 task variables")
+	-- Retrieve save tables
+	local TASK_1_SAVE = m_data.wg_act_1_task_1_cache or {}
+	local TASK_2_SAVE = m_data.wg_act_1_task_2_cache or {}
+	local TASK_3_SAVE = m_data.wg_act_1_task_3_cache or {}
+
+	-- Post-process tables
+	TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) + time_global()
+	TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) + time_global()
+	TASK_3_SAVE.stage_2_show_targets_timer = (TASK_3_SAVE.stage_2_show_targets_timer or 0) + time_global()
+
+	-- Restore task caches
+	copy_table(TASK_1_CACHE, TASK_1_SAVE)
+	copy_table(TASK_2_CACHE, TASK_2_SAVE)
+	copy_table(TASK_3_CACHE, TASK_3_SAVE)
+
+	-- Debug prints
+	dbg_printf("[WG] Tasks Act 1 | Task 1 - Loaded variables...\n%s",utils_data.print_table(TASK_1_CACHE, false, true))
+	dbg_printf("[WG] Tasks Act 1 | Task 2 - Loaded variables...\n%s",utils_data.print_table(TASK_2_CACHE, false, true))
+	dbg_printf("[WG] Tasks Act 1 | Task 3 - Loaded variables...\n%s",utils_data.print_table(TASK_3_CACHE, false, true))
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 --	General functions
 -- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to give the player a reward for finishing act 1.
+--- Warning : This function should be called while a dialog is running.
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
+--- @return nil
+function task_1_give_item(first_speaker, second_speaker)
+	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "wg_gps")
+end
 
 --- Function used to spawn a static helicopter at the Waste Processing Station if it doesn't exist.
 --- @param location string
@@ -1282,7 +1384,7 @@ function create_story_helicopter(location)
 		local heli_se = alife_create("western_goods_helicopter_landed",pos,lvid,gvid)
 
 		if heli_se then
-			dbg_printf("[WG] Created western_goods_helicopter_landed [%s] at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", heli_se.id, location, pos.x, pos.y, pos.z, lvid, gvid)
+			dbg_printf("[WG] Tasks Act 1 | Created western_goods_helicopter_landed(%s) at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", heli_se.id, location, pos.x, pos.y, pos.z, lvid, gvid)
 			return true
 		else
 			printe("!ERROR Failed to create western_goods_helicopter_landed at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", location, pos.x, pos.y, pos.z, lvid, gvid)
@@ -1300,7 +1402,7 @@ function release_story_helicopter()
 	if wps_heli_se then
 		alife_release(wps_heli_se)
 
-		dbg_printf("[WG] Released western_goods_helicopter_landed successfully %s", wps_heli_se.id)
+		dbg_printf("[WG] Tasks Act 1 | Released western_goods_helicopter_landed(%s)", wps_heli_se.id)
 		return true
 	end
 
@@ -1312,15 +1414,6 @@ end
 --- @param first_speaker cse_alife_object
 --- @param second_speaker cse_alife_object
 --- @return nil
-function give_act_1_task_1_item(first_speaker, second_speaker)
-	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "wg_gps")
-end
-
---- Function used to give the player a reward for finishing act 1.
---- Warning : This function should be called while a dialog is running.
---- @param first_speaker cse_alife_object
---- @param second_speaker cse_alife_object
---- @return nil
-function give_act_1_reward(first_speaker, second_speaker)
+function give_final_reward(first_speaker, second_speaker)
 	dialogs.relocate_item_section_to_actor(first_speaker, second_speaker, "af_compass_af_aam")
 end

@@ -171,7 +171,7 @@ function spawn_story_squad(sec, pos, smart)
 	for id,_ in pairs(SIMBOARD.squads) do
 		if alife_object(id):section_name() == sec then
 			local se_squad = alife_object(id)
-			dbg_printf("[WG] Squad already exists | %s", se_squad:section_name())
+			printe("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
 			return se_squad
 		end
 	end
@@ -183,7 +183,7 @@ function spawn_story_squad(sec, pos, smart)
 	-- Force the squad to stay there
 	se_squad.scripted_target = smart:name()
 
-	dbg_printf("[WG] Story squad %s successfully created with id %s at %s", sec, se_squad.id, smart:name())
+	dbg_printf("[WG] Utils | Story squad %s(%s) created at %s", sec, se_squad.id, smart:name())
 
 	return se_squad
 end
@@ -220,7 +220,7 @@ function spawn_squad(sec,pos,lvid,gvid,smart)
 		end
 	end
 
-	dbg_printf("[WG] Squad with id %s successfully created", squad.id)
+	dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
 
 	return squad
 end
@@ -232,7 +232,7 @@ end
 function spawn_squad_smart(sec, smart)
 	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart],sec)
 	if squad then
-		dbg_printf("[WG] Squad with id %s successfully created", squad.id)
+		dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
 	end
 	return squad
 end
@@ -254,7 +254,7 @@ function spawn_dead_squad(sec,pos,lvid,gvid)
 		member_id = npc.id
 	end
 
-	dbg_printf("[WG] Squad with id %s successfully killed", squad.id)
+	dbg_printf("[WG] Utils | Squad with id %s killed", squad.id)
 
 	return member_id
 end

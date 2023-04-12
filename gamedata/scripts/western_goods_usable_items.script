@@ -8,6 +8,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
+local TEMP_LIGHTER_LOCK = true                          -- Disables the lighter - temporary solution
 
 local dbg_printf = western_goods_utils.dbg_printf
 local round_number = western_goods_utils.round_number
@@ -49,38 +50,43 @@ function use_item(obj,_,cf)
 
     -- GPS Locator
     if (obj:section() == "wg_gps") then
-        dbg_printf("[WG] Used %s",obj:section())
+        dbg_printf("[WG] Usable Items | Used %s",obj:section())
         use_gps(obj)
         return
     end
 
     -- French MRE
     if (obj:section() == "wg_french_mre") then
-        dbg_printf("[WG] Used %s",obj:section())
+        dbg_printf("[WG] Usable Items | Used %s",obj:section())
         use_french_mre(obj)
         return
     end
 
     -- Toblerone
     if (obj:section() == "wg_toblerone") then
-        dbg_printf("[WG] Used %s",obj:section())
+        dbg_printf("[WG] Usable Items | Used %s",obj:section())
         use_toblerone(obj)
         return
     end
 
     -- Campfires
-    local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
-    if can_light then
-        dbg_printf("[WG] Used %s",obj:section())
-        bind_campfire.campfire_go_on(obj, cf)
-        return
+    if not TEMP_LIGHTER_LOCK then
+        local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
+        if can_light then
+            dbg_printf("[WG] Usable Items | Used %s",obj:section())
+            if (get_hud()) then
+                hide_hud_inventory()
+            end
+            bind_campfire.campfire_go_on(obj, cf)
+            return
+        end
     end
 
     -- Magazines
     local magazines = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "magazine")
     for item_id,_ in pairs(magazines) do
         if western_goods_core.table_item_field_by_key(magazines, item_id, "section") == obj:section() then
-            dbg_printf("[WG] Used %s",obj:section())
+            dbg_printf("[WG] Usable Items | Used %s",obj:section())
             if (get_hud()) then
                 hide_hud_inventory()
             end
@@ -106,7 +112,7 @@ function use_gps(obj)
 
 	-- If the smart terrain doesn't have a translation, we retry using the PDA instead
 	if closest_smart_name and not has_translation(closest_smart_name) then
-		dbg_printf("[WG] Smart terrain found but no translation. Fallback to PDA info")
+		dbg_printf("[WG] Usable Items | GPS Locator - Smart terrain found but no translation. Fallback to PDA info")
 		closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_pda()
 	end
 
@@ -124,7 +130,7 @@ function find_info_from_game_world()
 	local closest_smart_distance = smart.dist_to_actor
 	local closest_smart_level = alife():level_name(smart.level_id)
 
-    dbg_printf("[WG] Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
+    dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
 	
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
@@ -141,7 +147,7 @@ function find_info_from_pda()
         local smart_obj = find_object_by_id(smart_id)
 		if smart_obj then
 			local this_smart_name = v.target
-			local this_smart_distance = smart_obj:position():distance_to(db.actor:position())
+            local this_smart_distance = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
 			local this_smart_level = level.name()	
 
 			if (this_smart_distance <= (closest_smart_distance or this_smart_distance)) then
@@ -152,7 +158,7 @@ function find_info_from_pda()
 		end
 	end
 	
-	dbg_printf("[WG] Closest smart (PDA) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
+	dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (PDA) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
 	
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end
@@ -226,214 +232,216 @@ function ui_item.build_desc_header(obj, sec, str)
     return BuildHeader(obj, sec, str)
 end
 
-BeforeUse = itms_manager.actor_on_item_before_use
---- Function used to allow the lighter to light cigarettes.
---- @param obj game_object
---- @param flags table
-function itms_manager.actor_on_item_before_use(obj,flags)
-    local sec = obj:section()
+if not TEMP_LIGHTER_LOCK then
+    BeforeUse = itms_manager.actor_on_item_before_use
+    --- Function used to allow the lighter to light cigarettes.
+    --- @param obj game_object
+    --- @param flags table
+    function itms_manager.actor_on_item_before_use(obj,flags)
+        local sec = obj:section()
 
-    local unlocalized_boost_min = itms_manager.boost_min
-    local unlocalized_old_booster = itms_manager.old_booster
-    local unlocalized_booster_string = itms_manager.booster_string
+        local unlocalized_boost_min = itms_manager.boost_min
+        local unlocalized_old_booster = itms_manager.old_booster
+        local unlocalized_booster_string = itms_manager.booster_string
 
-    -- no need to check for tools
-    if IsItem("tool",sec) then
-        --printf("- actor_on_item_before_use [%s] | ignore utility item", sec)
-        flags.ret_value = true
-        return
-    end
+        -- no need to check for tools
+        if IsItem("tool",sec) then
+            --printf("- actor_on_item_before_use [%s] | ignore utility item", sec)
+            flags.ret_value = true
+            return
+        end
 
-    local curr_booster = {}
-    local time_g = time_global()
-    local str = ""
-    local pass = true
+        local curr_booster = {}
+        local time_g = time_global()
+        local str = ""
+        local pass = true
 
-    -- read important boosts
-    local period		= ini_sys:r_float_ex(sec, "boost_time") or 0
-    local rad_boost 	= ini_sys:r_float_ex(sec, "boost_radiation_restore") or 0
-    local psy_boost 	= ini_sys:r_float_ex(sec, "boost_telepat_protection") or 0
-    local bld_boost 	= ini_sys:r_float_ex(sec, "boost_bleeding_restore") or 0
-    local hp_boost 		= ini_sys:r_float_ex(sec, "boost_health_restore") or 0
-    local pwr_boost 	= ini_sys:r_float_ex(sec, "boost_power_restore") or 0
+        -- read important boosts
+        local period		= ini_sys:r_float_ex(sec, "boost_time") or 0
+        local rad_boost 	= ini_sys:r_float_ex(sec, "boost_radiation_restore") or 0
+        local psy_boost 	= ini_sys:r_float_ex(sec, "boost_telepat_protection") or 0
+        local bld_boost 	= ini_sys:r_float_ex(sec, "boost_bleeding_restore") or 0
+        local hp_boost 		= ini_sys:r_float_ex(sec, "boost_health_restore") or 0
+        local pwr_boost 	= ini_sys:r_float_ex(sec, "boost_power_restore") or 0
 
-    -- if an item is required
-    local requires_tool = ini_sys:r_bool_ex(sec, "requires_light_weak")
-    local required_tool_legacy = ini_sys:r_string_ex(sec, "required_tool")
+        -- if an item is required
+        local requires_tool = ini_sys:r_bool_ex(sec, "requires_light_weak")
+        local required_tool_legacy = ini_sys:r_string_ex(sec, "required_tool")
 
-    local obj_tool
-    if requires_tool or required_tool_legacy then
-        db.actor:iterate_inventory(function(owner, obj)
-            local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_weak")
-            local is_legacy_tool = obj:section() == required_tool_legacy
-            if can_light or is_legacy_tool then
-                obj_tool = obj
-                return true
-            end
-        end)
-    end
+        local obj_tool
+        if requires_tool or required_tool_legacy then
+            db.actor:iterate_inventory(function(owner, obj)
+                local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_weak")
+                local is_legacy_tool = obj:section() == required_tool_legacy
+                if can_light or is_legacy_tool then
+                    obj_tool = obj
+                    return true
+                end
+            end)
+        end
 
-    -- store boosts in a table
-    curr_booster["section"]   = sec
-    curr_booster["period"]	  = (period > 0) and (time_g + period*1000) or time_g
-    curr_booster["pwr"]       = (pwr_boost > unlocalized_boost_min) and pwr_boost or 0
-    curr_booster["psy"]       = (psy_boost > unlocalized_boost_min) and psy_boost or 0
-    curr_booster["bld"]       = (bld_boost > unlocalized_boost_min) and bld_boost or 0
-    curr_booster["hp"]        = (hp_boost > unlocalized_boost_min) and hp_boost or 0
-    curr_booster["rad"]       = (rad_boost > unlocalized_boost_min) and rad_boost or 0
+        -- store boosts in a table
+        curr_booster["section"]   = sec
+        curr_booster["period"]	  = (period > 0) and (time_g + period*1000) or time_g
+        curr_booster["pwr"]       = (pwr_boost > unlocalized_boost_min) and pwr_boost or 0
+        curr_booster["psy"]       = (psy_boost > unlocalized_boost_min) and psy_boost or 0
+        curr_booster["bld"]       = (bld_boost > unlocalized_boost_min) and bld_boost or 0
+        curr_booster["hp"]        = (hp_boost > unlocalized_boost_min) and hp_boost or 0
+        curr_booster["rad"]       = (rad_boost > unlocalized_boost_min) and rad_boost or 0
 
-    -- A required tool is missing -> no eat
-    if requires_tool and not obj_tool then
-        dbg_printf("[WG] Before Use Item | Require tools '%s'",requires_tool)
-        dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool)
-        str = game.translate_string("st_wg_missing_requirements_ext")
-        pass = false
+        -- A required tool is missing -> no eat
+        if requires_tool and not obj_tool then
+            dbg_printf("[WG] Usable Items | Before use - Require tools '%s'",requires_tool)
+            dbg_printf("[WG] Usable Items | Before use - Object tool '%s'",obj_tool)
+            str = game.translate_string("st_wg_missing_requirements_ext")
+            pass = false
 
-    -- older booster is still active
-    elseif not western_goods_mcm.get_config("compat_no_drug_limit") then
-        if unlocalized_old_booster["period"] and (unlocalized_old_booster["period"] > time_g) then
-            --printf("~ actor_on_item_before_use [%s] | older booster [%s] is still active", sec, old_booster['section'])
-            local weaker_effect
-            local stronger_effect
-            for k,v in pairs(curr_booster) do
-                if (k ~= "section") and (k ~= "period") then
-                    local v2 = unlocalized_old_booster[k]
-                    if v2  and (v > unlocalized_boost_min) and (v2 > unlocalized_boost_min) then
-                        if (v <= v2) then
-                            weaker_effect = k
-                        else
+            -- older booster is still active
+        elseif not western_goods_mcm.get_config("compat_no_drug_limit") then
+            if unlocalized_old_booster["period"] and (unlocalized_old_booster["period"] > time_g) then
+                --printf("~ actor_on_item_before_use [%s] | older booster [%s] is still active", sec, old_booster['section'])
+                local weaker_effect
+                local stronger_effect
+                for k,v in pairs(curr_booster) do
+                    if (k ~= "section") and (k ~= "period") then
+                        local v2 = unlocalized_old_booster[k]
+                        if v2  and (v > unlocalized_boost_min) and (v2 > unlocalized_boost_min) then
+                            if (v <= v2) then
+                                weaker_effect = k
+                            else
+                                stronger_effect = k
+                            end
+                        elseif (v2 == 0) and (v > unlocalized_boost_min) then
                             stronger_effect = k
                         end
-                    elseif (v2 == 0) and (v > unlocalized_boost_min) then
-                        stronger_effect = k
                     end
+                end
+
+                -- older booster has some stronger effect, while new one doesn't have any stronger effect
+                if weaker_effect and (not stronger_effect) then
+                    --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
+                    local boost_str = game.translate_string(unlocalized_booster_string[weaker_effect])
+                    str = strformat(game.translate_string("st_itm_manager_greater_effect"),boost_str)
+                    pass = false
                 end
             end
 
-            -- older booster has some stronger effect, while new one doesn't have any stronger effect
-            if weaker_effect and (not stronger_effect) then
-                --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
-                local boost_str = game.translate_string(unlocalized_booster_string[weaker_effect])
-                str = strformat(game.translate_string("st_itm_manager_greater_effect"),boost_str)
+            -- prevent player to take anabiotic during combat
+        elseif sec == "drug_anabiotic" then
+            if (not is_empty(xr_combat_ignore.fighting_with_actor_npcs)) then
+                str = game.translate_string("st_anabiotic_combat")
                 pass = false
             end
         end
 
-    -- prevent player to take anabiotic during combat
-    elseif sec == "drug_anabiotic" then
-        if (not is_empty(xr_combat_ignore.fighting_with_actor_npcs)) then
-            str = game.translate_string("st_anabiotic_combat")
-            pass = false
-        end
-    end
-
-    -- to eat or not to eat
-    if pass then
-        --printf("- actor_on_item_before_use [%s] | pass = true", sec)
-        flags.ret_value = true
-        copy_table(unlocalized_old_booster, curr_booster)
-        if obj_tool then
-            dbg_printf("[WG] Before Use Item | Requires tool '%s'",requires_tool)
-            dbg_printf("[WG] Before Use Item | Object tool '%s'",obj_tool:section())
-            if utils_item.is_degradable(obj_tool, obj_tool:section()) then
-                dbg_printf("[WG] Before Use Item | Degrading '%s'",obj_tool:section())
-                utils_item.degrade(obj_tool, 0.05)
-            else
-                dbg_printf("[WG] Before Use Item | Discharging '%s'",obj_tool:section())
-                utils_item.discharge(obj_tool, 1)
-            end
-        end
-    else
-        --printf("! actor_on_item_before_use [%s] | pass = false", sec)
-        flags.ret_value = false
-
-        utils_xml.hide_menu()
-        actor_menu.set_msg(1, str,3)
-    end
-
-    -- FDDA Compatibility
-    if enhanced_animations or western_goods_mcm.get_config("compat_fdda") then
-        dbg_printf("[WG] Before Use Item | FDDA Compatibility")
-        local item = obj:section()
-        if IsMoveState("mcClimb") then
-            actor_menu.set_msg(1, game.translate_string("st_EA_ladder_item_not_allowed"),3)
-            flags.ret_value = false
-            return
-        end
-        if enhanced_animations.ini_eff:r_string_ex(item, "snd") and enhanced_animations.enable_animations and flags.ret_value then
-            enhanced_animations.use_item(obj)
-            flags.ret_value = false
-            return
-        end
-        return
-    end
-end
-
-CampfireGoOn = bind_campfire.campfire_go_on
---- Function used to light up a campfire if the conditions are right.
---- @param obj game_object
---- @param cf campfire_binder
-function bind_campfire.campfire_go_on(obj, cf)
-    local cf = cf or bind_campfire.get_nearby_campfire(bind_campfire.dist_cf,true)
-    if (not cf) then
-        return
-    end
-
-    if (cf:is_on()) then
-        return
-    end
-
-    if bind_campfire.rain_pass() then
-        if (bind_campfire.k_rain < 1)then
-            bind_campfire.k_rain = bind_campfire.k_rain + 1
-            actor_menu.set_msg(1, game.translate_string("st_camp_help"),3)
-        end
-        actor_effects.play_item_fx("matches_script")
-        --local snd_obj = sound_object("interface\\inv_matches")
-        --snd_obj:play(db.actor,0,sound_object.s2d)
-        xr_sound.set_sound_play(AC_ID,"inv_matches")
-        cf:turn_on()
-    else
-        actor_effects.play_item_fx("matches_script")
-        actor_menu.set_msg(1, game.translate_string("st_fail"),3)
-    end
-
-    dbg_printf("[WG] Campfire Go On | Object tool '%s'",obj:section())
-    if utils_item.is_degradable(obj, obj:section()) then
-        dbg_printf("[WG] Campfire Go On | Degrading '%s'",obj:section())
-        utils_item.degrade(obj, 0.05)
-    else
-        dbg_printf("[WG] Campfire Go On | Discharging '%s'",obj:section())
-        utils_item.discharge(obj, 1)
-    end
-end
-
-UseCampfire = bind_campfire.use_campfire
---- Function called from game_tutorials.xml when the player interacts with a campfire.
---- @param actor game_object
---- @param zone space_restrictor
---- @param p table
-function bind_campfire.use_campfire(actor,zone,p)
-    local pos = db.actor:position()
-    for id,binder in pairs(bind_campfire.campfires_all) do
-        if (binder and binder.campfire) then
-            if (pos:distance_to_sqr(binder.object:position()) <= 2) then
-                if (binder.campfire:is_on()) then
-                    bind_campfire.campfire_go_off(binder.campfire)
+        -- to eat or not to eat
+        if pass then
+            --printf("- actor_on_item_before_use [%s] | pass = true", sec)
+            flags.ret_value = true
+            copy_table(unlocalized_old_booster, curr_booster)
+            if obj_tool then
+                dbg_printf("[WG] Usable Items | Before use - Requires tool '%s'",requires_tool)
+                dbg_printf("[WG] Usable Items | Before use - Object tool '%s'",obj_tool:section())
+                if utils_item.is_degradable(obj_tool, obj_tool:section()) then
+                    dbg_printf("[WG] Usable Items | Before use - Degrading '%s'",obj_tool:section())
+                    utils_item.degrade(obj_tool, 0.05)
                 else
-                    local obj_tool
-                    db.actor:iterate_inventory(function(owner, obj)
-                        local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
-                        if can_light then
-                            obj_tool = obj
-                            return true
-                        end
-                    end)
-                    if obj_tool then
-                        dbg_printf("[WG] Use Campfire | Object tool '%s'",obj_tool:section())
-                        use_item(obj_tool, nil, binder.campfire)
+                    dbg_printf("[WG] Usable Items | Before use - Discharging '%s'",obj_tool:section())
+                    utils_item.discharge(obj_tool, 1)
+                end
+            end
+        else
+            --printf("! actor_on_item_before_use [%s] | pass = false", sec)
+            flags.ret_value = false
+
+            utils_xml.hide_menu()
+            actor_menu.set_msg(1, str,3)
+        end
+
+        -- FDDA Compatibility
+        if enhanced_animations or western_goods_mcm.get_config("compat_fdda") then
+            dbg_printf("[WG] Usable Items | Before use - FDDA Compatibility")
+            local item = obj:section()
+            if IsMoveState("mcClimb") then
+                actor_menu.set_msg(1, game.translate_string("st_EA_ladder_item_not_allowed"),3)
+                flags.ret_value = false
+                return
+            end
+            if enhanced_animations.ini_eff:r_string_ex(item, "snd") and enhanced_animations.enable_animations and flags.ret_value then
+                enhanced_animations.use_item(obj)
+                flags.ret_value = false
+                return
+            end
+            return
+        end
+    end
+
+    CampfireGoOn = bind_campfire.campfire_go_on
+    --- Function used to light up a campfire if the conditions are right.
+    --- @param obj game_object
+    --- @param cf campfire_binder
+    function bind_campfire.campfire_go_on(obj, cf)
+        local cf = cf or bind_campfire.get_nearby_campfire(bind_campfire.dist_cf,true)
+        if (not cf) then
+            return
+        end
+
+        if (cf:is_on()) then
+            return
+        end
+
+        if bind_campfire.rain_pass() then
+            if (bind_campfire.k_rain < 1)then
+                bind_campfire.k_rain = bind_campfire.k_rain + 1
+                actor_menu.set_msg(1, game.translate_string("st_camp_help"),3)
+            end
+            actor_effects.play_item_fx("matches_script")
+            --local snd_obj = sound_object("interface\\inv_matches")
+            --snd_obj:play(db.actor,0,sound_object.s2d)
+            xr_sound.set_sound_play(AC_ID,"inv_matches")
+            cf:turn_on()
+        else
+            actor_effects.play_item_fx("matches_script")
+            actor_menu.set_msg(1, game.translate_string("st_fail"),3)
+        end
+
+        dbg_printf("[WG] Usable Items | Campfire go on - Object tool '%s'",obj:section())
+        if utils_item.is_degradable(obj, obj:section()) then
+            dbg_printf("[WG] Usable Items | Campfire go on - Degrading '%s'",obj:section())
+            utils_item.degrade(obj, 0.05)
+        else
+            dbg_printf("[WG] Usable Items | Campfire go on - Discharging '%s'",obj:section())
+            utils_item.discharge(obj, 1)
+        end
+    end
+
+    UseCampfire = bind_campfire.use_campfire
+    --- Function called from game_tutorials.xml when the player interacts with a campfire.
+    --- @param actor game_object
+    --- @param zone space_restrictor
+    --- @param p table
+    function bind_campfire.use_campfire(actor,zone,p)
+        local pos = db.actor:position()
+        for id,binder in pairs(bind_campfire.campfires_all) do
+            if (binder and binder.campfire) then
+                if (pos:distance_to_sqr(binder.object:position()) <= 2) then
+                    if (binder.campfire:is_on()) then
+                        bind_campfire.campfire_go_off(binder.campfire)
                     else
-                        actor_menu.set_msg(1, game.translate_string("st_wg_missing_requirements_ext"),3)
+                        local obj_tool
+                        db.actor:iterate_inventory(function(owner, obj)
+                            local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
+                            if can_light then
+                                obj_tool = obj
+                                return true
+                            end
+                        end)
+                        if obj_tool then
+                            dbg_printf("[WG] Usable Items | Use campfire - Object tool '%s'",obj_tool:section())
+                            use_item(obj_tool, nil, binder.campfire)
+                        else
+                            actor_menu.set_msg(1, game.translate_string("st_wg_missing_requirements_ext"),3)
+                        end
                     end
                 end
             end
@@ -450,22 +458,24 @@ end
 --- @param obj game_object
 --- @return nil
 function use_french_mre(obj)
-    alife_release(alife_object(obj:id()))
-
-    local content = str_explode(SYS_GetParam(0, obj:section(), "content"), ",")
+    local content = parse_list(ini_sys, obj:section(), "content")
 
     for _,item in pairs(content) do
         local section = str_explode(item, ":")[1]
         local quantity = str_explode(item, ":")[2]
 
-        if (SYS_GetParam(1, obj:section(), "use_condition")) then
+        if IsItem("multiuse",section) then
+            dbg_printf("[WG] Usable Items | French MRE - Unpacked '%s' (%s uses)",section,quantity)
             alife_create_item(section, db.actor, {uses = quantity})
         else
             for i=1,quantity do
                 alife_create_item(section, db.actor)
             end
+            dbg_printf("[WG] Usable Items | French MRE - Unpacked '%s' (%s pcs)",section,quantity)
         end
     end
+
+    alife_release(alife_object(obj:id()))
 end
 
 
@@ -479,10 +489,12 @@ end
 function use_toblerone(obj)
     CreatePersistentTimeEvent("western_goods_delay","toblerone_mask",2,function()
         level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
+        dbg_printf("[WG] Usable Items | Toblerone - Started ppe effect '%s'",57742)
         return true
     end)
     CreatePersistentTimeEvent("western_goods_delay","force_sleep",6,function()
         level.remove_pp_effector(57742)
+        dbg_printf("[WG] Usable Items | Toblerone - Stopped ppe effect '%s'",57742)
         actor_status_thirst.force_sleep()
         return true
     end)

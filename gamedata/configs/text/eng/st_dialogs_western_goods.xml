@@ -363,6 +363,15 @@
 	<!--	Golubev Nikolaj																			  		   		 -->
 	<!-- ============================================================================================================-->
 
+	<!-- Start dialog strings -->
+	<string id="western_goods_yellow_ecolog_start_0">
+		<text>My head... my head!</text>
+	</string>
+
+	<string id="western_goods_yellow_ecolog_start_1">
+		<text>...</text>
+	</string>
+
 	<!-- Dialogs strings -->
 	<string id="stalker_ecolog_convoy_yellow_meet_0">
 		<text>Identify yourself!</text>
@@ -767,6 +776,26 @@
 
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_4">
 		<text>Understood.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_9_message">
+		<text>Be advised, a group of bandits is approaching. Don't intervene yet, we don't know if the convoy has the documents.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_10_message_1">
+		<text>... you... copy? We're trying to amplify our signal. The convoy fled. We have a GPS signal active at the old service center.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_10_message_2">
+		<text>If you receive this, I'm on my way there.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_10_message_3">
+		<text>10-4. We have confirmation the convoy is carrying the documents. You have green light to engage.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_11_message">
+		<text>You've got the documents? Good. We're in the Darkscape. We'll be waiting for you at the camp, under the cliff.</text>
 	</string>
 
 </string_table>

@@ -23,14 +23,13 @@ local find_object_by_id = western_goods_utils.find_object_by_id
 --- @param level_name string
 --- @return nil
 function go_to_level(level_name)
-
-    give_info("spawn_guide_helicopter")
-
     local dest_info = western_goods_trade_guide_table[level_name]
     local spawn_pos = vector():set(dest_info.x, dest_info.y, dest_info.z)
     local look_pos = vector():set(0.0, dest_info.look, 0.0)
 
-    dbg_printf("[WG] Using helicopter transport to %s [lvid:%s | gvid:%s | pos:%s,%s,%s]",level_name, dest_info.lvid, dest_info.gvid, dest_info.x, dest_info.y, dest_info.z)
+    dbg_printf("[WG] Helicopter Transport | Transporting to %s [lvid:%s | gvid:%s | pos:%s,%s,%s]", level_name, dest_info.lvid, dest_info.gvid, dest_info.x, dest_info.y, dest_info.z)
+
+    give_info("spawn_guide_helicopter")
 
     ChangeLevel(spawn_pos, dest_info.lvid, dest_info.gvid, look_pos, true)
 end
@@ -48,7 +47,7 @@ function spawn_guide_helicopter()
         local gvid = db.actor:game_vertex_id()
         local helicopter_se = heli_spawn(sec,pos,lvid,gvid)
 
-        dbg_printf("[WG] Used helicopter transport, spawning helicopter in %s [lvid:%s | gvid:%s | pos:%s,%s,%s]",level.name(), lvid, gvid, pos.x, pos.y, pos.z)
+        dbg_printf("[WG] Helicopter Transport | Spawned transport helicopter in %s [lvid:%s | gvid:%s | pos:%s,%s,%s]",level.name(), lvid, gvid, pos.x, pos.y, pos.z)
 
         CreateTimeEvent("delay_order_heli",helicopter_se.id,0,function()
             if find_object_by_id(helicopter_se.id) then
