@@ -11,64 +11,83 @@
 
 -- Dialog constants
 local CONST_DISPLAY_TIME = 15
-local CONST_DELAY_MSG = 7
-local CONST_DELAY_QUICK_MSG = 1
+local CONST_DELAY_MSG = 7000
+local CONST_DELAY_QUICK_MSG = 1000
 local CONST_DEFAULT_NAME = game.translate_string("st_western_goods_dialog_manager_default_name")
 local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
 
 -- Dialog variables
-local dialog_waiting_count = 0
-local sound = false
+DIALOGS_TABLE = {}
+local sound = true
 local last_sender = nil
 
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
-local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Dynamic News Dialog Manager
+-- Dialog Manager
 -- ---------------------------------------------------------------------------------------------------------------------
+
+function update_dialogs()
+	-- Turn off dynamic news
+	if size_table(DIALOGS_TABLE) > 0 and dynamic_news_manager.enable_news then
+		dynamic_news_manager.enable_news = false
+		dbg_printf("[WG] Dialogs Manager | Disabled dynamic news (now:%s)", dynamic_news_manager.enable_news)
+	end
+
+	-- Process dialogs
+	for index,dialog in pairs(DIALOGS_TABLE) do
+		if dialog.timer < time_global() then
+			-- Send the line of dialog
+			dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, dialog.sound, "npc")
+			DIALOGS_TABLE[index] = nil
+			dbg_printf("[WG] Dialogs Manager | Pushed dialog (from:%s) (left:%s)", dialog.sender, size_table(DIALOGS_TABLE))
+		end
+	end
+
+	-- Re-enable dynamic news if we're done sending dialogs
+	if size_table(DIALOGS_TABLE) < 1 and not dynamic_news_manager.enable_news then
+		dynamic_news_manager.enable_news = true
+		dbg_printf("[WG] Dialogs Manager | Re-enabled dynamic news (now:%s)", dynamic_news_manager.enable_news)
+	end
+end
 
 --- Function used to display a dialog on screen. Default values exist for each line's 'sender' and 'icon'. 'message' is required.
 --- @param dialog_table table
 --- @return nil
 function send_dialog(dialog_table, quick_delay)
 	dbg_printf("[WG] Dialogs Manager | Preparing dialog (length:%s)", size_table(dialog_table))
-	for _,dialog in pairs(dialog_table) do
+
+	for index,dialog in pairs(dialog_table) do
 		-- Default values
 		dialog.sender = dialog.sender or CONST_DEFAULT_NAME
 		dialog.icon = dialog.icon or CONST_DEFAULT_ICON
+		dialog.timer = (quick_delay and CONST_DELAY_QUICK_MSG or CONST_DELAY_MSG) * (size_table(DIALOGS_TABLE) + 1) + time_global()
+		dialog.sound = sound and "beep_1" or "beep_2"
 
-		-- Turn off dynamic news
-		dynamic_news_manager.enable_news = false
+		-- Invert sound effect if from different sender
+		if not last_sender or (last_sender ~= dialog.sender) then
+			sound = not sound
+			last_sender = dialog.sender
+		end
 
-		dialog_waiting_count = dialog_waiting_count + 1
-
-		CreatePersistentTimeEvent("western_goods_delay_message", dialog_waiting_count, (quick_delay and CONST_DELAY_QUICK_MSG or CONST_DELAY_MSG)*dialog_waiting_count, function ()
-
-			dbg_printf("[WG] Dialogs Manager | Pushing dialog (from:%s) (pos in queue:%s)", dialog.sender,dialog_waiting_count)
-
-			-- Invert sound effect if from different sender
-			if not last_sender or (last_sender ~= dialog.sender) then
-				sound = not sound
-				last_sender = dialog.sender
-			end
-
-			-- Send the line of dialog
-			dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, sound and "beep_1" or "beep_2", "npc")
-
-			dialog_waiting_count = dialog_waiting_count - 1
-
-			-- Re-enable dynamic news if we're done sending dialogs
-			if dialog_waiting_count <= 0 then
-				dynamic_news_manager.enable_news = true
-			end
-
-			return true
-		end)
+		this.send_message(dialog.message, dialog.sender, dialog.icon, dialog.timer, dialog.sound)
 	end
-	dbg_printf("[WG] Dialogs Manager | Dialog ready (waiting queue: %s)", dialog_waiting_count)
+
+	dbg_printf("[WG] Dialogs Manager | Dialog ready (waiting queue: %s(+%s))", size_table(DIALOGS_TABLE), size_table(dialog_table))
+end
+
+function send_message(message, sender, icon, timer, sound)
+	-- Default values
+	sender = sender or CONST_DEFAULT_NAME
+	icon = icon or CONST_DEFAULT_ICON
+	timer = timer or (CONST_DELAY_QUICK_MSG + time_global())
+	sound = sound or "beep_1"
+
+	table.insert(DIALOGS_TABLE, { message=message, sender=sender, icon=icon, timer=timer, sound=sound })
+
+	dbg_printf("[WG] Dialogs Manager | Registered dialog (from:%s)", sender)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -131,6 +150,7 @@ end
 function on_game_start()
 	RegisterScriptCallback("save_state", save_state)
 	RegisterScriptCallback("load_state", load_state)
+	RegisterScriptCallback("actor_on_update", update_dialogs)
 end
 
 
@@ -142,14 +162,37 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
-	m_data.dialog_waiting_count = dialog_waiting_count
-	dbg_printf("[WG] Dialogs Manager | Saved dialog queue length : %s", m_data.dialog_waiting_count)
+	-- Prepare save table
+	local DIALOGS_SAVE = {}
+
+	-- Make copies of dialog table
+	copy_table(DIALOGS_SAVE, DIALOGS_TABLE)
+
+	-- Pre-process timers
+	for _,dialog in pairs(DIALOGS_SAVE) do
+		dialog.timer = dialog.timer - time_global()
+	end
+
+	-- Save dialog table
+	m_data.wg_dialogs_table = DIALOGS_SAVE
+
+	-- Debug print
+	dbg_printf("[WG] Dialogs Manager | Saved dialog table...\n%s",utils_data.print_table(DIALOGS_SAVE, false, true))
 end
 
 --- Function used to load information stored in the save file.
 --- @param m_data table
 --- @return nil
 function load_state(m_data)
-	dialog_waiting_count = m_data.dialog_waiting_count or 0
-	dbg_printf("[WG] Dialogs Manager | Loaded dialog queue length : %s", dialog_waiting_count)
+	local DIALOGS_SAVE = m_data.wg_dialogs_table or {}
+
+	-- Post-process timers
+	for _,dialog in pairs(DIALOGS_SAVE) do
+		dialog.timer = dialog.timer + time_global()
+	end
+
+	copy_table(DIALOGS_TABLE, DIALOGS_SAVE)
+
+	-- Debug print
+	dbg_printf("[WG] Dialogs Manager | Loaded dialog table...\n%s",utils_data.print_table(DIALOGS_TABLE, false, true))
 end

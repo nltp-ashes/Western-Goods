@@ -359,7 +359,7 @@ if not TEMP_LIGHTER_LOCK then
         end
 
         -- FDDA Compatibility
-        if enhanced_animations or western_goods_mcm.get_config("compat_fdda") then
+        if enhanced_animations then
             dbg_printf("[WG] Usable Items | Before use - FDDA Compatibility")
             local item = obj:section()
             if IsMoveState("mcClimb") then

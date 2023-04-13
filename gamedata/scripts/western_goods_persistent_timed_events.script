@@ -95,6 +95,10 @@ function ProcessPersistentEventQueue()
 	return false
 end
 
+function GetPersistentTimeEventsCount(ev_id)
+	return EVENT_QUEUE[ev_id] and EVENT_QUEUE[ev_id].__size or 0
+end
+
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration

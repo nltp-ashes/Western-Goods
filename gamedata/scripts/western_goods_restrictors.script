@@ -17,10 +17,10 @@ local dbg_printf = western_goods_utils.dbg_printf
 
 function in_bounds(who,data)
 	if not who then
-		printe("![WG] ERROR | Fake Restrictor | in_bounds called with no game object !")
+		printf("![WG] ERROR | Fake Restrictor | in_bounds() called with no game object !")
 		return false
 	elseif not data then
-		printe("![WG] ERROR | Fake Restrictor | in_bounds called with no restrictor data !")
+		printf("![WG] ERROR | Fake Restrictor | in_bounds() called with no restrictor data !")
 		return false
 	end
 

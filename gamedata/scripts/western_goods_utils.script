@@ -15,7 +15,7 @@ local CreatePersistentTimeEvent
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Utils Functions
+-- Debug Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print information into the console/log file only when Western Goods' debug mode is enabled.
@@ -25,12 +25,16 @@ function dbg_printf(...)
     printf(...)
 end
 
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
 --- Function used to know if a certain value is contained in a table. This function is generic enough so that it'd work on any table.
 --- @param tab table
 --- @param val any
 --- @return boolean
 function table_contains(tab, val)
-	if not tab then return end
+	if not validate_params({tab,val,"table_contains"}) then return end
 	for key,value in pairs(tab) do
 		if val == value then
 			return true
@@ -43,14 +47,90 @@ end
 --- @param tab table
 --- @return number
 function table_random_id(tab)
-	if not tab then return end
+	if not validate_params({tab,"table_random_id"}) then return end
 	return math.random(1,#tab)
+end
+
+--- Function used to know if an element of a table has a next.
+--- @param tab table
+--- @param pos number
+--- @return boolean
+function has_next(tab,pos)
+	if not validate_params({tab,pos,"has_next"}) then return end
+	return next(tab,pos) ~= nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Data Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
+--- @param var any
+--- @return number
+function as_number(var)
+	if not validate_params({var,"as_number"}) then return end
+
+	if type(var) == "string" then
+		return tonumber(var)
+	end
+	if type(var) == "number" then
+		return var
+	end
+
+	printf("![WG] ERROR | Utils | Cannot cast variable to number")
+
+	return var
+end
+
+--- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
+--- @param var any
+--- @return string
+function as_string(var)
+	if not validate_params({var,"as_string"}) then return end
+
+	if type(var) == "number" then
+		return tostring(var)
+	end
+	if type(var) == "boolean" then
+		return tostring(var)
+	end
+	if type(var) == "string" then
+		return var
+	end
+
+	printf("![WG] ERROR | Utils | Cannot cast variable to string")
+
+	return var
+end
+
+--- Function used to get a given variable as a boolean. Returns nil if the variable cannot be casted.
+--- @param var any
+--- @return boolean
+function as_boolean(var)
+	if not validate_params({var,"as_boolean"}) then return end
+
+	if type(var) == "string" then
+		if var == "true" then
+			return true
+		elseif var == "false" then
+			return false
+		end
+	end
+	if type(var) == "boolean" then
+		return var
+	end
+
+	printf("![WG] ERROR | Utils | Cannot cast variable to boolean")
+
+	return var
 end
 
 --- Function used to clear the code a bit.
 --- @param num number
 --- @return number
 function round_number(num)
+	if not validate_params({num,"round_number"}) then return end
+
 	return tostring(math.floor(num+0.5))
 end
 
@@ -58,15 +138,30 @@ end
 --- @param str string
 --- @return boolean
 function has_translation(str)
+	if not validate_params({str,"has_translation"}) then return end
+
 	return game.translate_string(str) ~= str
 end
+
+--- Function used to know if there exists a translation for a given game string.
+--- @param str string
+--- @return boolean
+function get_translation(str)
+	if not validate_params({str,"get_translation"}) then return end
+
+	return has_translation(str) and game.translate_string(str) or "No translation"
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Distance Functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the distance between two points in 2D space.
 --- @param position_1 vector
 --- @param position_2 vector
 --- @return number
 function get_distance(position_1, position_2)
-	if not (position_1 and position_2) then return nil end
+	if not validate_params({position_1,position_2,"get_distance"}) then return end
 	
     local x = math.abs(position_1.x - position_2.x)
     local z = math.abs(position_1.z - position_2.z)
@@ -76,88 +171,65 @@ function get_distance(position_1, position_2)
 end
 
 function get_distance_sqr(position_1, position_2)
-	if not (position_1 and position_2) then return nil end
+	if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
+
 	return position_1:distance_to_sqr(position_2)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Objects Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to iterate through each existing server object.
+--- The function passed in arguments will be called once per game object, with a guarantee that the server object exists and isn't nil.
+--- Extra arguments passed to 'server_objects_iter' function are passed on to 'func' function.
+--- If 'func' function returns true, then the iteration stops.
+--- @param func function
+--- @param ... table
+--- @return nil
+function server_objects_iter(func,...)
+	if not validate_params({func,"server_objects_iter"}) then return end
+
+	local args = {...}
+	for id=0, 65534 do
+		local se_obj = alife_object(id)
+		if se_obj and func(se_obj, args) then
+			return
+		end
+	end
+end
+
+--- Function used to retrieve a server object by its story ID.
+--- @param story_id string
+--- @return cse_alife_object|nil
+function se_object_by_sid(story_id)
+	if not validate_params({story_id,"se_object_by_sid"}) then return end
+
+	return get_story_se_object(story_id)
+end
+
+--- Function used to retrieve a level object by its story ID.
+--- @param story_id string
+--- @return game_object|nil
+function level_object_by_sid(story_id)
+	if not validate_params({story_id,"level_object_by_sid"}) then return end
+
+	local se_obj = se_object_by_sid(story_id)
+	return se_obj and find_object_by_id(se_obj.id)
 end
 
 --- Function used to get game object by its ID if it exists on the current level.
 --- @param id number
 --- @return game_object
 function find_object_by_id(id)
+	if not validate_params({id,"find_object_by_id"}) then return end
+
 	return db.storage[id] and db.storage[id].object or level.object_by_id(id)
 end
 
---- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
---- @param var any
---- @return number
-function as_number(var)
-	if type(var) == "string" then
-		return tonumber(var)
-	end
-
-	if type(var) == "number" then
-		return var
-	end
-
-	printe("!ERROR : cannot cast variable to number")
-
-	return nil
-end
-
---- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
---- @param var any
---- @return string
-function as_string(var)
-	if type(var) == "number" then
-		return tostring(var)
-	end
-
-	if type(var) == "boolean" then
-		return tostring(var)
-	end
-
-	if type(var) == "string" then
-		return var
-	end
-
-	printe("!ERROR : cannot cast variable to string")
-
-	return nil
-end
-
---- Function used to get a given variable as a boolean. Returns nil if the variable cannot be casted.
---- @param var any
---- @return boolean
-function as_boolean(var)
-	if type(var) == "string" then
-		if var == "true" then
-			return true
-		elseif var == "false" then
-			return false
-		end
-	end
-
-	if type(var) == "boolean" then
-		return var
-	end
-
-	printe("!ERROR : cannot cast variable to boolean")
-
-	return nil
-end
-
---- Function used to retrieve the server object of a unique NPC by its section name.
---- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds.
---- @param sec string
---- @return cse_alife_object
-function find_unique_npc(sec)
-	for id = 1, 65534 do
-
-		local se = alife_object(id)
-
-		if se and se:section_name() == sec then return se end
-	end
-end
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Squads Functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn a story squad.
 --- @param sec string
@@ -165,27 +237,29 @@ end
 --- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
 function spawn_story_squad(sec, pos, smart)
-	if not sec or not smart then return end
+	if not validate_params({sec,pos,smart,"spawn_story_squad"}) then return end
 
 	-- Make sure the squad isn't already spawned in
 	for id,_ in pairs(SIMBOARD.squads) do
 		if alife_object(id):section_name() == sec then
 			local se_squad = alife_object(id)
-			printe("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
+			printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
 			return se_squad
 		end
 	end
 
 	-- Spawn squad on the appropriate smart terrain
 	local se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id)
-	if not se_squad then return end
+	if se_squad then
+		-- Force the squad to stay there
+		se_squad.scripted_target = smart:name()
 
-	-- Force the squad to stay there
-	se_squad.scripted_target = smart:name()
-
-	dbg_printf("[WG] Utils | Story squad %s(%s) created at %s", sec, se_squad.id, smart:name())
-
-	return se_squad
+		dbg_printf("[WG] Utils | Story squad %s(%s) created at %s", sec, se_squad.id, smart:name())
+		return se_squad
+	else
+		printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
+		return
+	end
 end
 
 --- Function used to spawn a simulation squad, at a given point in space.
@@ -196,45 +270,50 @@ end
 --- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
 function spawn_squad(sec,pos,lvid,gvid,smart)
+	if not validate_params({sec,pos,lvid,gvid,"spawn_squad"}) then return end
 
 	local squad = alife_create(sec, pos, lvid, gvid)
+	if squad then
+		squad:create_npc(smart, pos, lvid, gvid)
 
-	if not squad then
-		printe("!ERROR : failed to create squad (%s)",sec)
+		if smart then
+			SIMBOARD:assign_squad_to_smart(squad, smart.id)
+		else
+			SIMBOARD:assign_squad_to_smart(squad)
+		end
+
+		for k in squad:squad_members() do
+			local se_obj = k.object or k.id and alife_object(k.id)
+			if (se_obj) then
+				SIMBOARD:setup_squad_and_group(se_obj)
+				SendScriptCallback("squad_on_npc_creation",squad,se_obj,smart)
+			end
+		end
+
+		dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
+
+		return squad
+	else
+		printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
 		return
 	end
-
-	squad:create_npc(smart, pos, lvid, gvid)
-
-	if smart then
-		SIMBOARD:assign_squad_to_smart(squad, smart.id)
-	else
-		SIMBOARD:assign_squad_to_smart(squad)
-	end
-
-	for k in squad:squad_members() do
-		local se_obj = k.object or k.id and alife_object(k.id)
-		if (se_obj) then
-			SIMBOARD:setup_squad_and_group(se_obj)
-			SendScriptCallback("squad_on_npc_creation",squad,se_obj,smart)
-		end
-	end
-
-	dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
-
-	return squad
 end
 
 --- Function used to spawn a simulation squad, at a given smart terrain.
 --- @param sec string
---- @param smart cse_alife_smart_zone
+--- @param smart string
 --- @return cse_alife_online_offline_group
 function spawn_squad_smart(sec, smart)
+	if not validate_params({sec, smart,"spawn_squad_smart"}) then return end
+
 	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart],sec)
 	if squad then
 		dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
+		return squad
+	else
+		printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
+		return
 	end
-	return squad
 end
 
 --- Function used to spawn a dead squad, at a given point in space.
@@ -244,26 +323,30 @@ end
 --- @param gvid number
 --- @return number
 function spawn_dead_squad(sec,pos,lvid,gvid)
+	if not validate_params({sec,pos,lvid,gvid,"spawn_dead_squad"}) then return end
+
 	local squad = spawn_squad(sec, pos, lvid, gvid)
-	if not squad then return end
+	if squad then
+		local member_id = nil
 
-	local member_id = nil
+		for npc in squad:squad_members() do
+			CreatePersistentTimeEvent("western_goods_delay_kill_squad",npc.id,math.random(5,10),surge_manager.make_dead,npc.id)
+			member_id = npc.id
+		end
 
-	for npc in squad:squad_members() do
-		CreatePersistentTimeEvent("western_goods_delay_kill_squad",npc.id,math.random(5,10),surge_manager.make_dead,npc.id)
-		member_id = npc.id
+		dbg_printf("[WG] Utils | Squad with id %s killed", squad.id)
+		return member_id
+	else
+		printf("![WG] ERROR | Utils | Failed to create dead squad (%s)",sec)
+		return
 	end
-
-	dbg_printf("[WG] Utils | Squad with id %s killed", squad.id)
-
-	return member_id
 end
 
 --- Function used to get the ID from a random member of a squad.
 --- @param squad cse_alife_online_offline_group
 --- @return number
 function get_member_id_from_squad(squad)
-	if not squad then return end
+	if not validate_params({squad,"get_member_id_from_squad"}) then return end
 
 	for member in squad:squad_members() do
 		return member.id
@@ -274,7 +357,7 @@ end
 --- @param squad cse_alife_online_offline_group
 --- @return cse_alife_object
 function get_member_from_squad(squad)
-	if not squad then return end
+	if not validate_params({squad,"get_member_from_squad"}) then return end
 
 	for member in squad:squad_members() do
 		return member
@@ -286,6 +369,8 @@ end
 --- @param sec string
 --- @return cse_alife_object
 function find_npc_in_actor_squad(sec)
+	if not validate_params({sec,"find_npc_in_actor_squad"}) then return end
+
 	local actor_squad = axr_companions.list_actor_squad_by_id()
 	for _,id in pairs(actor_squad) do
 		local se_npc = alife_object(id)
@@ -295,58 +380,38 @@ function find_npc_in_actor_squad(sec)
 	end
 end
 
+--- Function used to check if a given object id is a member of a given squad.
+--- @param squad cse_alife_online_offline_group
+--- @param id number
+--- @return boolean
+function is_id_from_squad(squad,id)
+	if not validate_params({squad,id,"is_id_from_squad"}) then return end
+
+	for member in squad:squad_members() do
+		if member.id == id then
+			return true
+		end
+	end
+	return false
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Other Utils Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
 --- Function used to find an NPC by its section name in the player squad.
 --- @author mr_demonized
 --- @param func function
 --- @param ... table
 --- @return nil
 function next_tick(func,...)
+	if not validate_params({func,"next_tick"}) then return end
+
 	local args = {...}
 	AddUniqueCall(function()
 		func(unpack(args))
 		return true
 	end)
-end
-
---- Function used to retrieve a server object by its story ID.
---- @param story_id string
---- @return cse_alife_object|nil
-function se_object_by_sid(story_id)
-	return get_story_se_object(story_id)
-end
-
---- Function used to retrieve a level object by its story ID.
---- @param story_id string
---- @return game_object|nil
-function level_object_by_sid(story_id)
-	local se_obj = se_object_by_sid(story_id)
-	return se_obj and find_object_by_id(se_obj.id)
-end
-
---- Function used to iterate through each existing server object.
---- The function passed in arguments will be called once per game object, with a guarantee that the server object exists and isn't nil.
---- Extra arguments passed to 'server_objects_iter' function are passed on to 'func' function.
---- If 'func' function returns true, then the iteration stops.
---- @param func function
---- @param ... table
---- @return nil
-function server_objects_iter(func,...)
-	local args = {...}
-
-	for id=0, 65534 do
-		local se_obj = alife_object(id)
-		if se_obj and func(se_obj, args) then
-			return
-		end
-	end
-end
-
---- Function used to know if an element of a table has a next.
---- @param tab table
---- @param pos number
---- @return boolean
-function has_next(tab,pos)
-	return next(tab,pos) ~= nil
 end
 
 --- Function used to check if there are NPCs currently in a fight with the player.
@@ -355,19 +420,16 @@ function is_player_fighting()
 	return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
---- Function used to check if a given object id is a member of a given squad.
---- @param squad cse_alife_online_offline_group
---- @param id number
---- @return boolean
-function is_id_from_squad(squad,id)
-	if not squad then return end
-
-	for member in squad:squad_members() do
-		if member.id == id then
-			return true
+function validate_params(params)
+	local index = 1
+	for i,_ in pairs(params) do
+		if i ~= index then
+			printf("![WG] ERROR | Utils | Missing argument no %s for '%s()'!",index,params[#params])
+			return false
 		end
+		index = index + 1
 	end
-	return false
+	return true
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

@@ -51,7 +51,7 @@ end
 --- @return nil
 function display(sec) 
 	if (not sec) then
-		printe("![WG] ERROR | Magazine UI | No section passed!")
+		printf("![WG] ERROR | Magazine UI | No section passed!")
 		return
 	end
 	

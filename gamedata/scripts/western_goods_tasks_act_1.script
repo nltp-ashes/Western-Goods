@@ -1364,7 +1364,9 @@ end
 --- @param location string
 --- @return boolean
 function create_story_helicopter(location)
-	if not western_goods_utils.se_object_by_sid("western_goods_helicopter_landed") then
+	local const_sec = "western_goods_helicopter_landed"
+
+	if not western_goods_utils.se_object_by_sid(const_sec) then
 
 		local pos, lvid, gvid
 
@@ -1377,17 +1379,17 @@ function create_story_helicopter(location)
 			lvid = 1598393
 			gvid = 4454
 		else
-			printe("!ERROR Invalid spawn location for western_goods_helicopter_landed : loc:%s", location)
+			printf("![WG] ERROR | Tasks Act 1 | Invalid spawn location for %s : loc:%s", const_sec, location)
 			return false
 		end
 
-		local heli_se = alife_create("western_goods_helicopter_landed",pos,lvid,gvid)
+		local heli_se = alife_create(const_sec,pos,lvid,gvid)
 
 		if heli_se then
-			dbg_printf("[WG] Tasks Act 1 | Created western_goods_helicopter_landed(%s) at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", heli_se.id, location, pos.x, pos.y, pos.z, lvid, gvid)
+			dbg_printf("[WG] Tasks Act 1 | Created %s(%s) at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", const_sec, heli_se.id, location, pos.x, pos.y, pos.z, lvid, gvid)
 			return true
 		else
-			printe("!ERROR Failed to create western_goods_helicopter_landed at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", location, pos.x, pos.y, pos.z, lvid, gvid)
+			printf("![WG] ERROR | Tasks Act 1 | Failed to create %s at loc:%s x:%s,y:%s,z:%s lvid:%s gvid:%s", const_sec, location, pos.x, pos.y, pos.z, lvid, gvid)
 			return false
 		end
 	end
