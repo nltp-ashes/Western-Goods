@@ -29,7 +29,7 @@ function in_bounds(who,data)
 	local posz = who:position().z
 
 	if (posx > data.ax) and (posz < data.az) and (posy > data.ay) and (posx < data.bx) and (posz > data.bz) and (posy < data.by) then
-		dbg_printf("[WG] Fake Restrictor | %s in restrictor bounds", who:name())
+		dbg_printf("[WG] Fake Restrictor | '%s' in restrictor bounds", who:name())
 		return true
 	else
 		return false

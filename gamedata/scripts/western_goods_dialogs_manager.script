@@ -29,6 +29,9 @@ local dbg_printf = western_goods_utils.dbg_printf
 -- Dialog Manager
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function called every frame to update the Dialog Manager and check if some messages should be fired.
+--- When dialogs are waiting to be played, the Dialog Manager will disable dynamic random news.
+--- @return nil
 function update_dialogs()
 	-- Turn off dynamic news
 	if size_table(DIALOGS_TABLE) > 0 and dynamic_news_manager.enable_news then
@@ -53,8 +56,10 @@ function update_dialogs()
 	end
 end
 
---- Function used to display a dialog on screen. Default values exist for each line's 'sender' and 'icon'. 'message' is required.
+--- Function used to register multiple dialog lines to the Dialog Manager.
+--- For each line of dialog, default values exist 'sender' and 'icon'; 'message' is required.
 --- @param dialog_table table
+--- @param quick_delay boolean
 --- @return nil
 function send_dialog(dialog_table, quick_delay)
 	dbg_printf("[WG] Dialogs Manager | Preparing dialog (length:%s)", size_table(dialog_table))
@@ -78,6 +83,14 @@ function send_dialog(dialog_table, quick_delay)
 	dbg_printf("[WG] Dialogs Manager | Dialog ready (waiting queue: %s(+%s))", size_table(DIALOGS_TABLE), size_table(dialog_table))
 end
 
+--- Function used to register a single dialog line to the Dialog Manager.
+--- Default values exist 'sender', 'icon', 'timer' and 'sound'; 'message' is required.
+--- @param message string
+--- @param sender string
+--- @param icon string
+--- @param timer number
+--- @param sound string
+--- @return nil
 function send_message(message, sender, icon, timer, sound)
 	-- Default values
 	sender = sender or CONST_DEFAULT_NAME

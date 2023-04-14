@@ -144,16 +144,16 @@ function find_info_from_pda()
 
 	for _,v in pairs(pda.primary_objects_tbl) do
 		local smart_id = get_story_object_id(v.target)
-        local smart_obj = find_object_by_id(smart_id)
+        local smart_obj = smart_id and find_object_by_id(smart_id)
 		if smart_obj then
-			local this_smart_name = v.target
-            local this_smart_distance = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
-			local this_smart_level = level.name()	
+			local smart_name = v.target
+            local smart_distance = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
+			local smart_level = level.name()
 
-			if (this_smart_distance <= (closest_smart_distance or this_smart_distance)) then
-				closest_smart_name = this_smart_name
-				closest_smart_distance = this_smart_distance
-				closest_smart_level = this_smart_level
+			if (smart_distance <= (closest_smart_distance or smart_distance)) then
+				closest_smart_name = smart_name
+                closest_smart_distance = smart_distance
+                closest_smart_level = smart_level
 			end
 		end
 	end
