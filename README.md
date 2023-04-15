@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC17-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-1.4.4-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.0.0%20RC19-brightgreen) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -6,7 +6,7 @@ The Zone is host to people from various horizons. Overtime, the demand for goods
 
 ### ABOUT
 
-This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding consumables, readable magazines, trade items, new unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
+This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding new mechanics, consumables, readable magazines, trade items, new unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
 
 ---
 
@@ -28,7 +28,17 @@ This addon **does not require** the following :
 To **install** the addon :
 1. Download and install the requirements;
 2. Download this addon;
-3. Merge the contents of the gamedata folder with your game's folder of the same name.
+3. Merge the contents of the gamedata folder with your game's folder of the same name;
+   1. Either with a mod manager JSGME/MO2 (highly recommended);
+   2. Or manually (highly unrecommended).
+
+To **update** the addon :
+1. Delete the files from the previous version;
+   1. By disabling the addon in your mod manager, and then deleting the files;
+   2. Or by deleting the files one by one if you added them manually;
+2. Add in the new files from the new version
+    1. Either with a mod manager JSGME/MO2 (highly recommended);
+    2. Or manually (highly unrecommended).
 
 To **uninstall** the addon :
 1. Start your game and open the MCM settings;
@@ -36,11 +46,12 @@ To **uninstall** the addon :
 3. Load your save-game. Once loaded, save again;
 4. Close your game, and remove the files added by the addon.
 
+
 ---
 
 ### CHANGELOG
 
-> **v2.0.0 - 10/04/2023 - Major Update**
+> **v2.0.0 - 15/04/2023 - Major Update**
 > ```
 > • New storylines :
 >    - Added a first act (3 tasks) centered around a mysterious event regarding a helicopter used by mercs to smuggle goods into the Zone;
@@ -49,6 +60,7 @@ To **uninstall** the addon :
 >    - Added loot factor settings : one for coprse loot and one for trader loot;
 >    - Added an option to have more guided tasks;
 >    - Added a debug mode that prints information in the console/log to make troubleshooting easier;
+>    - Added a compatibility section, where you can enable patches when WG is unable to autonomously detect the other conflicting addon;
 >    - Moved addon removal into a check box in MCM;
 > • New items :
 >    - Added a new tech item : a BIC lighter, usable to light cigarettes and campfires;
@@ -63,6 +75,7 @@ To **uninstall** the addon :
 >    - Changed the corpse loot generation logic : you can now get multiple items per corpse (upto five by default, configurable in MCM);
 >    - Changed the GPS locator logic : it now has a slightly higher chance of finding the name of your location;
 >    - Changed the trading logic with the western goods trader : now you actually have to pay with Euros/Dollars;
+>    - Changed the general loot availability : western goods are now a lot rarer to find on bodies;
 >    - Externalized all the changes made to BarterUI. Western Goods won't redistribute the framework anymore.
 > • Safety checks for proper addon installation :
 >    - Added a CTD when using a different game version than Anomaly 1.5.2;
@@ -184,11 +197,11 @@ To **uninstall** the addon :
 
 ### KNOWN ISSUES
 
-- An issue can cause dynamic news to get interrupted;
-- The helicopter that picks up the rescued crew member in act 1, task 3 can sometimes get stuck and never come pick the crew member up;
 - It isn't very obvious that you can order the helicopter to attack enemies during act 1, task 2;
 - The second to last stage of act 1, task 3 might be unnecessarily challenging;
 - Stutters may occur when the game spawns in new NPCs.
+
+**Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
 ---
 

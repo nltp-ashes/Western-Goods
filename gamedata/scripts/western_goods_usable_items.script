@@ -8,7 +8,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
-local TEMP_LIGHTER_LOCK = true                          -- Disables the lighter - temporary solution
+local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
 
 local dbg_printf = western_goods_utils.dbg_printf
 local round_number = western_goods_utils.round_number
@@ -70,7 +70,7 @@ function use_item(obj,_,cf)
     end
 
     -- Campfires
-    if not TEMP_LIGHTER_LOCK then
+    if TEMP_LIGHTER_ENABLED then
         local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
         if can_light then
             dbg_printf("[WG] Usable Items | Used %s",obj:section())
@@ -225,14 +225,14 @@ function ui_item.build_desc_header(obj, sec, str)
         local con = math.ceil(obj:condition() * 100)
         local clr = utils_xml.get_color_con(con)
         local clr_2  = utils_xml.get_color("ui_gray_1")
-        local _str = clr .. " • " .. clr_2 .. game.translate_string("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
+        local _str = clr .. " " .. game.translate_string("st_wg_bullet_point") .. " " .. clr_2 .. game.translate_string("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
         return _str .. BuildHeader(obj, sec, str)
     end
 
     return BuildHeader(obj, sec, str)
 end
 
-if not TEMP_LIGHTER_LOCK then
+if TEMP_LIGHTER_ENABLED then
     BeforeUse = itms_manager.actor_on_item_before_use
     --- Function used to allow the lighter to light cigarettes.
     --- @param obj game_object
