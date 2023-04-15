@@ -344,7 +344,8 @@ if TEMP_LIGHTER_ENABLED then
                 dbg_printf("[WG] Usable Items | Before use - Object tool '%s'",obj_tool:section())
                 if utils_item.is_degradable(obj_tool, obj_tool:section()) then
                     dbg_printf("[WG] Usable Items | Before use - Degrading '%s'",obj_tool:section())
-                    utils_item.degrade(obj_tool, 0.05)
+                    local degradation = ini_sys:r_float_ex(obj:section(), "degradation_factor") or 0.05
+                    utils_item.degrade(obj_tool, degradation)
                 else
                     dbg_printf("[WG] Usable Items | Before use - Discharging '%s'",obj_tool:section())
                     utils_item.discharge(obj_tool, 1)

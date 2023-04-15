@@ -13,7 +13,11 @@
 	<!--	Dialog Manager Strings																					 -->
 	<!-- ============================================================================================================-->
 
-	<string id="st_western_goods_dialog_manager_default_name">
+	<string id="st_western_goods_dm_message_header">
+		<text>Message:</text>
+	</string>
+
+	<string id="st_western_goods_dm_default_name">
 		<text>Anonymous</text>
 	</string>
 
@@ -342,23 +346,6 @@
 		<text>What do you want?</text>
 	</string>
 
-	<!-- Dialogs strings -->
-	<string id="western_goods_dunn_lynn_meet_0">
-		<text>So you're the "anonymous" contact I've been talking with?</text>
-	</string>
-
-	<string id="western_goods_dunn_lynn_meet_1">
-		<text>Yes. We don't want to telegraph our presence.</text>
-	</string>
-
-	<string id="western_goods_dunn_lynn_meet_2">
-		<text>I see. Well, I have what you asked for.</text>
-	</string>
-
-	<string id="western_goods_dunn_lynn_meet_3">
-		<text>Good. Goes to show working with local stalkers can prove... Useful. I understand you don't work for free, so here, take this.</text>
-	</string>
-
 	<!-- ============================================================================================================-->
 	<!--	Golubev Nikolaj																			  		   		 -->
 	<!-- ============================================================================================================-->
@@ -543,7 +530,7 @@
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_1">
-		<text>Yes. Our operations require... Discretion.</text>
+		<text>Yes. We're trying to keep a low profile. We don't want to telegraph our presence.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_2">
@@ -794,8 +781,12 @@
 		<text>10-4. We have confirmation the convoy is carrying the documents. You have green light to engage.</text>
 	</string>
 
-	<string id="st_wg_trader_act_2_task_2_stage_11_message">
-		<text>You've got the documents? Good. We're in the Darkscape. We'll be waiting for you at the camp, under the cliff.</text>
+	<string id="st_wg_trader_act_2_task_2_stage_11_message_1">
+		<text>I've got the documents.</text>
+	</string>
+
+	<string id="st_wg_trader_act_2_task_2_stage_11_message_2">
+		<text>Good. Meet us in the Darkscape. We'll be waiting for you at the camp, under the cliff.</text>
 	</string>
 
 </string_table>

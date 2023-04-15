@@ -153,20 +153,20 @@ end
 -- Distance Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to get the distance between two points in 2D space.
+--- Function used to get the distance between two points in on the X and Z axis.
 --- @param position_1 vector
 --- @param position_2 vector
 --- @return number
 function get_distance(position_1, position_2)
 	if not validate_params({position_1,position_2,"get_distance"}) then return end
-	
-    local x = math.abs(position_1.x - position_2.x)
-    local z = math.abs(position_1.z - position_2.z)
-    local distance = math.sqrt((x * x) + (z * z))
-	
-    return distance
+
+	return position_1:distance_to(position_2)
 end
 
+--- Function used to get the distance between two points in on the X and Z axis.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
 function get_distance_sqr(position_1, position_2)
 	if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
 
@@ -186,6 +186,8 @@ end
 --- @return nil
 function server_objects_iter(func,...)
 	if not validate_params({func,"server_objects_iter"}) then return end
+
+	dbg_printf("[WG] Utils | Iterating through all possible IDs...")
 
 	local args = {...}
 	for id=0, 65534 do
@@ -237,16 +239,14 @@ function spawn_story_squad(sec, pos, smart)
 	if not validate_params({sec,pos,smart,"spawn_story_squad"}) then return end
 
 	-- Make sure the squad isn't already spawned in
-	for id,_ in pairs(SIMBOARD.squads) do
-		if alife_object(id):section_name() == sec then
-			local se_squad = alife_object(id)
-			printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
-			return se_squad
-		end
+	local se_squad = this.se_object_by_sid(sec)
+	if se_squad then
+		printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
+		return se_squad
 	end
 
 	-- Spawn squad on the appropriate smart terrain
-	local se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id)
+	se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id, smart)
 	if se_squad then
 		-- Force the squad to stay there
 		se_squad.scripted_target = smart:name()
@@ -363,8 +363,8 @@ end
 --- Warning : if multiple NPCs with that section exist, it'll only return the first one it finds.
 --- @param sec string
 --- @return cse_alife_object
-function find_npc_in_actor_squad(sec)
-	if not validate_params({sec,"find_npc_in_actor_squad"}) then return end
+function get_member_from_actor_squad(sec)
+	if not validate_params({sec,"get_member_from_actor_squad"}) then return end
 
 	local actor_squad = axr_companions.list_actor_squad_by_id()
 	for _,id in pairs(actor_squad) do
@@ -415,6 +415,11 @@ function is_player_fighting()
 	return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
+--- Function used to check if all necessary parameters were correctly passed to a function.
+--- Last element of the table has to be the name of the function calling validate_params.
+--- Use like this : 'if not validate_params({param_1,param_1,"my_function"}) then return end'
+--- @param params table
+--- @return boolean
 function validate_params(params)
 	local index = 1
 	for i,_ in pairs(params) do

@@ -26,6 +26,10 @@ function get_config(key)
 	if ui_mcm then return ui_mcm.get("western_goods/"..key)	else return defaults[key] end
 end
 
+function set_config(key,value)
+	if ui_mcm then return ui_mcm.set("western_goods/"..key, value) else defaults[key] = value end
+end
+
 --- MCM UI definition.
 --- @return table
 function on_mcm_load()

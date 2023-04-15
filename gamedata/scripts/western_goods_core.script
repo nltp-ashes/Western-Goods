@@ -158,29 +158,28 @@ function check_dxml_installed()
 end
 
 --- Function used to delete every item added by the addon from the save file.
+--- @author Leviathan
 --- @return nil
-function addon_removal()
-	if not western_goods_mcm.get_config("addon_removal") then return end
+function check_addon_removal(status)
+	if not status or not western_goods_mcm.get_config("addon_removal") then return end
 
 	dbg_printf("[WG] Core | Addon removal started...")
 
 	local released_objects = 0
 
-	-- TODO : Find why some items don't get deleted
-
 	dbg_printf("[WG] Core | Addon removal checking server objects...")
 
 	-- Release Western Goods items
 	western_goods_utils.server_objects_iter(function(se_obj)
-		dbg_printf("[WG] Core | Addon removal checking '%s' for deletion...", se_obj:name())
+		dbg_printf("[WG] Core | Addon removal checking '%s' for deletion...", se_obj:section_name())
 
 		-- Check if is Western Goods item
 		for item_id,_ in pairs(western_goods_items) do
 			if se_obj:section_name() == table_item_field_by_key(western_goods_items,item_id,"section")	then
 				released_objects = released_objects + 1
+				dbg_printf("[WG] Core | Addon removal releasing item '%s'", se_obj:section_name())
 				alife_release(se_obj)
-				dbg_printf("[WG] Core | Addon removal deleted item '%s'", se_obj:name())
-				break
+				return
 			end
 		end
 
@@ -188,29 +187,29 @@ function addon_removal()
 		for _,sec in pairs(western_goods_special_items) do
 			if se_obj:section_name() == sec	then
 				released_objects = released_objects + 1
+				dbg_printf("[WG] Core | Addon removal releasing special item '%s'", se_obj:section_name())
 				alife_release(se_obj)
-				dbg_printf("[WG] Core | Addon removal deleted special item '%s'", se_obj:name())
-				break
+				return
 			end
 		end
 
 		-- Check if is Western Goods squad
 		for _,sec in pairs(western_goods_squads) do
 			if se_obj:section_name() == sec	then
-				released_objects = released_objects + 1 + size_table(se_obj:squad_members())
+				released_objects = released_objects + 1 + se_obj:npc_count()
+				dbg_printf("[WG] Core | Addon removal releasing squad '%s'", se_obj:section_name())
 				SIMBOARD:remove_squad(se_obj)
-				dbg_printf("[WG] Core | Addon removal deleted squad '%s'", se_obj:name())
-				break
+				return
 			end
 		end
 
 		-- Check if is Western Goods NPC
 		for _,sec in pairs(western_goods_npcs) do
-			if se_obj:section_name() == sec	then
+			if se_obj:section_name() == sec and (not get_object_squad(se_obj)) then
 				released_objects = released_objects + 1
-				alife_release(se_obj)
-				dbg_printf("[WG] Core | Addon removal deleted NPC '%s'", se_obj:name())
-				break
+				dbg_printf("[WG] Core | Addon removal releasing squad-less NPC '%s'", se_obj:section_name())
+				alife():release(se_obj)
+				return
 			end
 		end
 	end)
@@ -227,6 +226,8 @@ function addon_removal()
 	news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects .. "%c[default] items added by Western Goods from the save-game.", nil, nil, 10000)
 
 	dbg_printf("[WG] Core | Addon removal finished : %s", released_objects)
+
+	western_goods_mcm.set_config("addon_removal", false)
 end
 
 
@@ -242,7 +243,7 @@ function on_game_start()
 	RegisterScriptCallback("on_game_load", check_barter_ui_installed)
 	RegisterScriptCallback("on_game_load", check_dxml_installed)
 	RegisterScriptCallback("on_game_load", check_trader_auto_inject)
-	RegisterScriptCallback("save_state", addon_removal)
+	RegisterScriptCallback("on_option_change", check_addon_removal)
 end
 
 
@@ -1323,6 +1324,15 @@ western_goods_squads = {
 }
 
 western_goods_npcs = {
+	"stalker_western_goods_trader",
+	"stalker_jupiter_informant",
+	"stalker_crew_member",
+	"stalker_dunn_lynn",
+	"stalker_ecolog_convoy_yellow",
+	"stalker_ecolog_convoy_orange"
+}
+
+western_goods_task = {
 	"stalker_western_goods_trader",
 	"stalker_jupiter_informant",
 	"stalker_crew_member",

@@ -992,10 +992,12 @@ function task_status_functor.act_2_task_2_status_f(tsk,task_id)
 
 				if lynn_squad_se then
 
-					local dialog_sender = { name="Anonymous", icon="ui_inGame2_no_data"}
+					local dialog_sender_1 = { name=alife():actor():character_name(), icon=alife():actor():character_icon()}
+					local dialog_sender_2 = { name="Anonymous", icon="ui_inGame2_no_data"}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_2_task_2_stage_11_message")}
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_2_task_2_stage_11_message_1")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_2_task_2_stage_11_message_2")}
 					})
 
 					TASK_2_CACHE.lynn_squad_spawned = true

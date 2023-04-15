@@ -1183,7 +1183,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				return "fail"
 			end
 
-			-- If the crew member hasn't extracted, and isn't alive, the task is failed
+			-- If the crew member hasn't extracted, and isn't alive, respawn him
 			if not crew_member_squad_se and not has_alife_info("wg_act_1_task_3_crew_member_extracted") then
 				crew_member_squad_se = spawn_story_squad("stalker_crew_member_squad", vector():set(35.3,1,42.9), SIMBOARD.smarts_by_names["lim_smart_terrain_6"])
 

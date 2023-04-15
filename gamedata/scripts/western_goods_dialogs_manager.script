@@ -13,7 +13,9 @@
 local CONST_DISPLAY_TIME = 15
 local CONST_DELAY_MSG = 7000
 local CONST_DELAY_QUICK_MSG = 1000
-local CONST_DEFAULT_NAME = game.translate_string("st_western_goods_dialog_manager_default_name")
+local CONST_DELAY_LOAD = 15000
+local CONST_MSG_HEADER = game.translate_string("st_western_goods_dm_message_header")
+local CONST_DEFAULT_NAME = game.translate_string("st_western_goods_dm_default_name")
 local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
 
 -- Dialog variables
@@ -43,7 +45,7 @@ function update_dialogs()
 	for index,dialog in pairs(DIALOGS_TABLE) do
 		if dialog.timer < time_global() then
 			-- Send the line of dialog
-			dynamic_news_helper.send_tip(dialog.message, dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, dialog.sound, "npc")
+			dynamic_news_helper.send_tip(dialog.message, CONST_MSG_HEADER .. " " .. dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, dialog.sound, "npc")
 			DIALOGS_TABLE[index] = nil
 			dbg_printf("[WG] Dialogs Manager | Pushed dialog (from:%s) (left:%s)", dialog.sender, size_table(DIALOGS_TABLE))
 		end
@@ -201,7 +203,7 @@ function load_state(m_data)
 
 	-- Post-process timers
 	for _,dialog in pairs(DIALOGS_SAVE) do
-		dialog.timer = dialog.timer + time_global()
+		dialog.timer = dialog.timer + time_global() + CONST_DELAY_LOAD
 	end
 
 	copy_table(DIALOGS_TABLE, DIALOGS_SAVE)
