@@ -216,13 +216,13 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 			-- Spawn the crew of the helicopter dead at the sawmill
 			if not TASK_1_CACHE.stage_1_npcs_spawned then
 				-- Spawn the merc squad, dead, at the sawmill
-				spawn_dead_squad("western_goods_act_1_task_1_heli_crew_squad", vector():set(-317.5,9.8,424.5), 313868, 4137)
+				spawn_dead_squad("western_goods_act_1_task_1_heli_crew_squad", "zat_b104_zombied")
 
 				-- Spawn the zombies that supposedly killed them
-				spawn_dead_squad("western_goods_act_1_task_1_zombie_1_squad", vector():set(-317.5,9.8,424.5), 313868, 4137)
-				spawn_dead_squad("western_goods_act_1_task_1_zombie_2_squad", vector():set(-317.5,9.8,424.5), 313868, 4137)
-				spawn_dead_squad("western_goods_act_1_task_1_zombie_3_squad", vector():set(-317.5,9.8,424.5), 313868, 4137)
-				spawn_dead_squad("western_goods_act_1_task_1_zombie_4_squad", vector():set(-317.5,9.8,424.5), 313868, 4137)
+				spawn_dead_squad("western_goods_act_1_task_1_zombie_1_squad", "zat_b104_zombied")
+				spawn_dead_squad("western_goods_act_1_task_1_zombie_2_squad", "zat_b104_zombied")
+				spawn_dead_squad("western_goods_act_1_task_1_zombie_3_squad", "zat_b104_zombied")
+				spawn_dead_squad("western_goods_act_1_task_1_zombie_4_squad", "zat_b104_zombied")
 
 				-- Give an info portion so the spawning code doesn't run twice
 				TASK_1_CACHE.stage_1_npcs_spawned = true

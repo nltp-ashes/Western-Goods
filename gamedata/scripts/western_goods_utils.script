@@ -11,9 +11,6 @@
 
 item_object_id_by_story_id = {}
 
-local CreatePersistentTimeEvent
-
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -301,12 +298,12 @@ end
 
 --- Function used to spawn a simulation squad, at a given smart terrain.
 --- @param sec string
---- @param smart string
+--- @param smart_name string
 --- @return cse_alife_online_offline_group
-function spawn_squad_smart(sec, smart)
-	if not validate_params({sec, smart,"spawn_squad_smart"}) then return end
+function spawn_squad_smart(sec, smart_name)
+	if not validate_params({sec, smart_name,"spawn_squad_smart"}) then return end
 
-	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart],sec)
+	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart_name],sec)
 	if squad then
 		dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
 		return squad
@@ -316,21 +313,19 @@ function spawn_squad_smart(sec, smart)
 	end
 end
 
---- Function used to spawn a dead squad, at a given point in space.
+--- Function used to spawn a dead squad, at a given smart terrain.
 --- @param sec string
---- @param pos vector
---- @param lvid number
---- @param gvid number
+--- @param smart_name string
 --- @return number
-function spawn_dead_squad(sec,pos,lvid,gvid)
-	if not validate_params({sec,pos,lvid,gvid,"spawn_dead_squad"}) then return end
+function spawn_dead_squad(sec,smart_name)
+	if not validate_params({sec,smart_name,"spawn_dead_squad"}) then return end
 
-	local squad = spawn_squad(sec, pos, lvid, gvid)
+	local squad = spawn_squad_smart(sec, smart_name)
 	if squad then
 		local member_id = nil
 
 		for npc in squad:squad_members() do
-			CreatePersistentTimeEvent("western_goods_delay_kill_squad",npc.id,math.random(5,10),surge_manager.make_dead,npc.id)
+			CreateTimeEvent("western_goods_delay_kill_squad",npc.id,1,surge_manager.make_dead,npc.id)
 			member_id = npc.id
 		end
 
@@ -430,14 +425,4 @@ function validate_params(params)
 		index = index + 1
 	end
 	return true
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Load CreatePersistentTimeEvent function
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to register callbacks.
---- @return string
-function on_game_start()
-	CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 end
