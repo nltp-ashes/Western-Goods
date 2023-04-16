@@ -1,13 +1,16 @@
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
---- Date : 03/03/2023
+--- Date : 17/04/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the various usable items from the Western Goods addon.
+--- This script contains functions used to return the text displayed when right clicking on items in the inventory.
+--- It also contains a use_item(...) function where items will be filtered to their respective functions.
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
+
 local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
 
 local dbg_printf = western_goods_utils.dbg_printf

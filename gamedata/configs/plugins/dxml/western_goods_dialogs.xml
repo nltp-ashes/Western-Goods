@@ -349,7 +349,7 @@
             </phrase>
             <phrase id="4"> <!-- npc -->
                 <text>st_wg_act_2_task_1_answer_0</text>
-                <action>western_goods_tasks_act_1.start_task_1</action>
+                <action>western_goods_tasks_act_1.act_1_task_1_start</action>
                 <next>5</next>
             </phrase>
             <phrase id="5"> <!-- actor -->
@@ -379,7 +379,7 @@
             </phrase>
             <phrase id="1"> <!-- npc -->
                 <text>st_wg_act_1_task_1_task_complete_descr</text>
-                <action>western_goods_tasks_act_1.end_task_1</action>
+                <action>western_goods_tasks_act_1.act_1_task_1_end</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -416,7 +416,7 @@
             </phrase>
             <phrase id="6"> <!-- npc -->
                 <text>st_wg_act_2_task_2_answer</text>
-                <action>western_goods_tasks_act_1.start_task_2</action>
+                <action>western_goods_tasks_act_1.act_1_task_2_start</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -433,7 +433,7 @@
             </phrase>
             <phrase id="1"> <!-- npc -->
                 <text>st_wg_act_1_task_2_task_complete_descr</text>
-                <action>western_goods_tasks_act_1.end_task_2</action>
+                <action>western_goods_tasks_act_1.act_1_task_2_end</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -462,7 +462,7 @@
             </phrase>
             <phrase id="4"> <!-- npc -->
                 <text>st_wg_act_2_task_3_answer</text>
-                <action>western_goods_tasks_act_1.start_task_3</action>
+                <action>western_goods_tasks_act_1.act_1_task_3_start</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -479,7 +479,7 @@
             </phrase>
             <phrase id="1"> <!-- npc -->
                 <text>st_wg_act_1_task_3_task_complete_descr</text>
-                <action>western_goods_tasks_act_1.end_task_3</action>
+                <action>western_goods_tasks_act_1.act_1_task_3_end</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -507,7 +507,7 @@
             </phrase>
             <phrase id="4"> <!-- npc -->
                 <text>st_wg_act_2_task_1_answer</text>
-                <action>western_goods_tasks_act_2.start_task_1</action>
+                <action>western_goods_tasks_act_2.act_2_task_1_start</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -523,7 +523,7 @@
             </phrase>
             <phrase id="1"> <!-- npc -->
                 <text>st_wg_act_2_task_1_task_complete_descr</text>
-                <action>western_goods_tasks_act_2.end_task_1</action>
+                <action>western_goods_tasks_act_2.act_2_task_1_end</action>
                 <next>2</next>
                 <next>3</next>
             </phrase>
@@ -581,7 +581,7 @@
             </phrase>
             <phrase id="3"> <!-- npc -->
                 <text>st_wg_act_2_task_2_finish_work_3</text>
-                <action>western_goods_tasks_act_2.end_task_2</action>
+                <action>western_goods_tasks_act_2.act_2_task_2_end</action>
                 <next>4</next>
             </phrase>
             <phrase id="4"> <!-- actor -->

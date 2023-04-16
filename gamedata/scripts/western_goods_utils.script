@@ -1,6 +1,6 @@
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
---- Date : 03/03/2023
+--- Date : 17/04/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to define various common functions defined in the scripts of the Western Goods addon.
@@ -8,8 +8,6 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
-
-item_object_id_by_story_id = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
@@ -31,21 +29,21 @@ end
 --- @param val any
 --- @return boolean
 function table_contains(tab, val)
-	if not validate_params({tab,val,"table_contains"}) then return end
-	for key,value in pairs(tab) do
-		if val == value then
-			return true
-		end
-	end
-	return false
+    if not validate_params({tab,val,"table_contains"}) then return end
+    for key,value in pairs(tab) do
+        if val == value then
+            return true
+        end
+    end
+    return false
 end
 
 --- Function used to get a random id (as an int) from a given table. Returns a random number between 1 and the size of the table.
 --- @param tab table
 --- @return number
 function table_random_id(tab)
-	if not validate_params({tab,"table_random_id"}) then return end
-	return math.random(1,#tab)
+    if not validate_params({tab,"table_random_id"}) then return end
+    return math.random(1,#tab)
 end
 
 --- Function used to know if an element of a table has a next.
@@ -53,8 +51,8 @@ end
 --- @param pos number
 --- @return boolean
 function has_next(tab,pos)
-	if not validate_params({tab,pos,"has_next"}) then return end
-	return next(tab,pos) ~= nil
+    if not validate_params({tab,pos,"has_next"}) then return end
+    return next(tab,pos) ~= nil
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -65,125 +63,140 @@ end
 --- @param var any
 --- @return number
 function as_number(var)
-	if not validate_params({var,"as_number"}) then return end
+    if not validate_params({var,"as_number"}) then return end
 
-	if type(var) == "string" then
-		return tonumber(var)
-	end
-	if type(var) == "number" then
-		return var
-	end
+    if type(var) == "string" then
+        return tonumber(var)
+    end
+    if type(var) == "number" then
+        return var
+    end
 
-	printf("![WG] ERROR | Utils | Cannot cast variable to number")
+    printf("![WG] ERROR | Utils | Cannot cast variable to number")
 
-	return var
+    return var
 end
 
 --- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
 --- @param var any
 --- @return string
 function as_string(var)
-	if not validate_params({var,"as_string"}) then return end
+    if not validate_params({var,"as_string"}) then return end
 
-	if type(var) == "number" then
-		return tostring(var)
-	end
-	if type(var) == "boolean" then
-		return tostring(var)
-	end
-	if type(var) == "string" then
-		return var
-	end
+    if type(var) == "number" then
+        return tostring(var)
+    end
+    if type(var) == "boolean" then
+        return tostring(var)
+    end
+    if type(var) == "string" then
+        return var
+    end
 
-	printf("![WG] ERROR | Utils | Cannot cast variable to string")
+    printf("![WG] ERROR | Utils | Cannot cast variable to string")
 
-	return var
+    return var
 end
 
 --- Function used to get a given variable as a boolean. Returns nil if the variable cannot be casted.
 --- @param var any
 --- @return boolean
 function as_boolean(var)
-	if not validate_params({var,"as_boolean"}) then return end
+    if not validate_params({var,"as_boolean"}) then return end
 
-	if type(var) == "string" then
-		if var == "true" then
-			return true
-		elseif var == "false" then
-			return false
-		end
-	end
-	if type(var) == "boolean" then
-		return var
-	end
+    if type(var) == "string" then
+        if var == "true" then
+            return true
+        elseif var == "false" then
+            return false
+        end
+    end
+    if type(var) == "boolean" then
+        return var
+    end
 
-	printf("![WG] ERROR | Utils | Cannot cast variable to boolean")
+    printf("![WG] ERROR | Utils | Cannot cast variable to boolean")
 
-	return var
+    return var
 end
 
 --- Function used to clear the code a bit.
 --- @param num number
 --- @return number
 function round_number(num)
-	if not validate_params({num,"round_number"}) then return end
+    if not validate_params({num,"round_number"}) then return end
 
-	return tostring(math.floor(num+0.5))
+    return tostring(math.floor(num+0.5))
 end
 
 --- Function used to know if there exists a translation for a given game string.
 --- @param str string
 --- @return boolean
 function has_translation(str)
-	if not validate_params({str,"has_translation"}) then return end
+    if not validate_params({str,"has_translation"}) then return end
 
-	return game.translate_string(str) ~= str
+    return game.translate_string(str) ~= str
 end
 
 --- Function used to know if there exists a translation for a given game string.
 --- @param str string
 --- @return boolean
 function get_translation(str)
-	if not validate_params({str,"get_translation"}) then return end
+    if not validate_params({str,"get_translation"}) then return end
 
-	return has_translation(str) and game.translate_string(str) or "No translation"
+    return has_translation(str) and game.translate_string(str) or "No translation"
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Info Portions Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to give an info portion to a game object.
+--- If no game object is passed, defaults back to db.actor.
+--- @param info_name string
+--- @param who game_object
+--- @return nil
 function give_info(info_name,who)
-	if not validate_params({info_name,"give_info"}) then return end
+    if not validate_params({info_name,"give_info"}) then return end
 
-	-- Default values
-	who = who or db.actor
+    -- Default values
+    who = who or db.actor
 
-	if not has_info(info_name,who) then
-		who:give_info_portion(info_name)
-		dbg_printf("[WG] Utils | Info portion '%s' added to '%'", info_name, who:name())
-	end
+    if not has_info(info_name,who) then
+        who:give_info_portion(info_name)
+        dbg_printf("[WG] Utils | Info portion '%s' added to '%s'", info_name, who:name())
+    end
 end
 
+--- Function used to check if a game object has a given info portion.
+--- If no game object is passed, defaults back to db.actor.
+--- @param info_name string
+--- @param who game_object
+--- @return nil
 function has_info(info_name,who)
-	if not validate_params({info_name,"has_info"}) then return end
+    if not validate_params({info_name,"has_info"}) then return end
 
-	-- Default values
-	who = who or db.actor
+    -- Default values
+    who = who or db.actor
 
-	return alife():has_info(who:id(), info_name)
+    return alife():has_info(who:id(), info_name)
 end
 
+--- Function used to remove an info portion from a game object.
+--- If no game object is passed, defaults back to db.actor.
+--- @param info_name string
+--- @param who game_object
+--- @return nil
 function rem_info(info_name,who)
-	if not validate_params({info_name,"rem_info"}) then return end
+    if not validate_params({info_name,"rem_info"}) then return end
 
-	-- Default values
-	who = who or db.actor
+    -- Default values
+    who = who or db.actor
 
-	if has_info(info_name,who) then
-		who:disable_info_portion(info_name)
-		dbg_printf("[WG] Utils | Info portion '%s' disabled from '%'", info_name, who:name())
-	end
+    if has_info(info_name,who) then
+        who:disable_info_portion(info_name)
+        dbg_printf("[WG] Utils | Info portion '%s' disabled from '%s'", info_name, who:name())
+    end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -195,9 +208,9 @@ end
 --- @param position_2 vector
 --- @return number
 function get_distance(position_1, position_2)
-	if not validate_params({position_1,position_2,"get_distance"}) then return end
+    if not validate_params({position_1,position_2,"get_distance"}) then return end
 
-	return position_1:distance_to(position_2)
+    return position_1:distance_to(position_2)
 end
 
 --- Function used to get the distance between two points in on the X and Z axis.
@@ -205,9 +218,9 @@ end
 --- @param position_2 vector
 --- @return number
 function get_distance_sqr(position_1, position_2)
-	if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
+    if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
 
-	return position_1:distance_to_sqr(position_2)
+    return position_1:distance_to_sqr(position_2)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -222,45 +235,45 @@ end
 --- @param ... table
 --- @return nil
 function server_objects_iter(func,...)
-	if not validate_params({func,"server_objects_iter"}) then return end
+    if not validate_params({func,"server_objects_iter"}) then return end
 
-	dbg_printf("[WG] Utils | Iterating through all possible IDs...")
+    dbg_printf("[WG] Utils | Iterating through all possible IDs...")
 
-	local args = {...}
-	for id=0, 65534 do
-		local se_obj = alife_object(id)
-		if se_obj and func(se_obj, args) then
-			return
-		end
-	end
+    local args = {...}
+    for id=0, 65534 do
+        local se_obj = alife_object(id)
+        if se_obj and func(se_obj, args) then
+            return
+        end
+    end
 end
 
 --- Function used to retrieve a server object by its story ID.
 --- @param story_id string
 --- @return cse_alife_object|nil
 function se_object_by_sid(story_id)
-	if not validate_params({story_id,"se_object_by_sid"}) then return end
+    if not validate_params({story_id,"se_object_by_sid"}) then return end
 
-	return get_story_se_object(story_id)
+    return get_story_se_object(story_id)
 end
 
 --- Function used to retrieve a level object by its story ID.
 --- @param story_id string
 --- @return game_object|nil
 function level_object_by_sid(story_id)
-	if not validate_params({story_id,"level_object_by_sid"}) then return end
+    if not validate_params({story_id,"level_object_by_sid"}) then return end
 
-	local se_obj = se_object_by_sid(story_id)
-	return se_obj and find_object_by_id(se_obj.id)
+    local se_obj = se_object_by_sid(story_id)
+    return se_obj and find_object_by_id(se_obj.id)
 end
 
 --- Function used to get game object by its ID if it exists on the current level.
 --- @param id number
 --- @return game_object
 function find_object_by_id(id)
-	if not validate_params({id,"find_object_by_id"}) then return end
+    if not validate_params({id,"find_object_by_id"}) then return end
 
-	return db.storage[id] and db.storage[id].object or level.object_by_id(id)
+    return db.storage[id] and db.storage[id].object or level.object_by_id(id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -273,27 +286,27 @@ end
 --- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
 function spawn_story_squad(sec, pos, smart)
-	if not validate_params({sec,pos,smart,"spawn_story_squad"}) then return end
+    if not validate_params({sec,pos,smart,"spawn_story_squad"}) then return end
 
-	-- Make sure the squad isn't already spawned in
-	local se_squad = this.se_object_by_sid(sec)
-	if se_squad then
-		printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
-		return se_squad
-	end
+    -- Make sure the squad isn't already spawned in
+    local se_squad = this.se_object_by_sid(sec)
+    if se_squad then
+        printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
+        return se_squad
+    end
 
-	-- Spawn squad on the appropriate smart terrain
-	se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id, smart)
-	if se_squad then
-		-- Force the squad to stay there
-		se_squad.scripted_target = smart:name()
+    -- Spawn squad on the appropriate smart terrain
+    se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id, smart)
+    if se_squad then
+        -- Force the squad to stay there
+        se_squad.scripted_target = smart:name()
 
-		dbg_printf("[WG] Utils | Story squad %s(%s) created at %s", sec, se_squad.id, smart:name())
-		return se_squad
-	else
-		printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
-		return
-	end
+        dbg_printf("[WG] Utils | Story squad %s(%s) created at %s", sec, se_squad.id, smart:name())
+        return se_squad
+    else
+        printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
+        return
+    end
 end
 
 --- Function used to spawn a simulation squad, at a given point in space.
@@ -304,33 +317,33 @@ end
 --- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
 function spawn_squad(sec,pos,lvid,gvid,smart)
-	if not validate_params({sec,pos,lvid,gvid,"spawn_squad"}) then return end
+    if not validate_params({sec,pos,lvid,gvid,"spawn_squad"}) then return end
 
-	local squad = alife_create(sec, pos, lvid, gvid)
-	if squad then
-		squad:create_npc(smart, pos, lvid, gvid)
+    local squad = alife_create(sec, pos, lvid, gvid)
+    if squad then
+        squad:create_npc(smart, pos, lvid, gvid)
 
-		if smart then
-			SIMBOARD:assign_squad_to_smart(squad, smart.id)
-		else
-			SIMBOARD:assign_squad_to_smart(squad)
-		end
+        if smart then
+            SIMBOARD:assign_squad_to_smart(squad, smart.id)
+        else
+            SIMBOARD:assign_squad_to_smart(squad)
+        end
 
-		for k in squad:squad_members() do
-			local se_obj = k.object or k.id and alife_object(k.id)
-			if (se_obj) then
-				SIMBOARD:setup_squad_and_group(se_obj)
-				SendScriptCallback("squad_on_npc_creation",squad,se_obj,smart)
-			end
-		end
+        for k in squad:squad_members() do
+            local se_obj = k.object or k.id and alife_object(k.id)
+            if (se_obj) then
+                SIMBOARD:setup_squad_and_group(se_obj)
+                SendScriptCallback("squad_on_npc_creation",squad,se_obj,smart)
+            end
+        end
 
-		dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
+        dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
 
-		return squad
-	else
-		printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
-		return
-	end
+        return squad
+    else
+        printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
+        return
+    end
 end
 
 --- Function used to spawn a simulation squad, at a given smart terrain.
@@ -338,16 +351,16 @@ end
 --- @param smart_name string
 --- @return cse_alife_online_offline_group
 function spawn_squad_smart(sec, smart_name)
-	if not validate_params({sec, smart_name,"spawn_squad_smart"}) then return end
+    if not validate_params({sec, smart_name,"spawn_squad_smart"}) then return end
 
-	local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart_name],sec)
-	if squad then
-		dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
-		return squad
-	else
-		printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
-		return
-	end
+    local squad = SIMBOARD:create_squad(SIMBOARD.smarts_by_names[smart_name],sec)
+    if squad then
+        dbg_printf("[WG] Utils | Squad with id %s created", squad.id)
+        return squad
+    else
+        printf("![WG] ERROR | Utils | Failed to create squad (%s)",sec)
+        return
+    end
 end
 
 --- Function used to spawn a dead squad, at a given smart terrain.
@@ -355,45 +368,45 @@ end
 --- @param smart_name string
 --- @return number
 function spawn_dead_squad(sec,smart_name)
-	if not validate_params({sec,smart_name,"spawn_dead_squad"}) then return end
+    if not validate_params({sec,smart_name,"spawn_dead_squad"}) then return end
 
-	local squad = spawn_squad_smart(sec, smart_name)
-	if squad then
-		local member_id = nil
+    local squad = spawn_squad_smart(sec, smart_name)
+    if squad then
+        local member_id = nil
 
-		for npc in squad:squad_members() do
-			CreateTimeEvent("western_goods_delay_kill_squad",npc.id,1,surge_manager.make_dead,npc.id)
-			member_id = npc.id
-		end
+        for npc in squad:squad_members() do
+            CreateTimeEvent("western_goods_delay_kill_squad",npc.id,1,surge_manager.make_dead,npc.id)
+            member_id = npc.id
+        end
 
-		dbg_printf("[WG] Utils | Squad with id %s killed", squad.id)
-		return member_id
-	else
-		printf("![WG] ERROR | Utils | Failed to create dead squad (%s)",sec)
-		return
-	end
+        dbg_printf("[WG] Utils | Squad with id %s killed", squad.id)
+        return member_id
+    else
+        printf("![WG] ERROR | Utils | Failed to create dead squad (%s)",sec)
+        return
+    end
 end
 
 --- Function used to get the ID from a random member of a squad.
 --- @param squad cse_alife_online_offline_group
 --- @return number
 function get_member_id_from_squad(squad)
-	if not validate_params({squad,"get_member_id_from_squad"}) then return end
+    if not validate_params({squad,"get_member_id_from_squad"}) then return end
 
-	for member in squad:squad_members() do
-		return member.id
-	end
+    for member in squad:squad_members() do
+        return member.id
+    end
 end
 
 --- Function used to get a "random" member of a squad.
 --- @param squad cse_alife_online_offline_group
 --- @return cse_alife_object
 function get_member_from_squad(squad)
-	if not validate_params({squad,"get_member_from_squad"}) then return end
+    if not validate_params({squad,"get_member_from_squad"}) then return end
 
-	for member in squad:squad_members() do
-		return member
-	end
+    for member in squad:squad_members() do
+        return member
+    end
 end
 
 --- Function used to find an NPC by its section name in the player squad.
@@ -401,15 +414,15 @@ end
 --- @param sec string
 --- @return cse_alife_object
 function get_member_from_actor_squad(sec)
-	if not validate_params({sec,"get_member_from_actor_squad"}) then return end
+    if not validate_params({sec,"get_member_from_actor_squad"}) then return end
 
-	local actor_squad = axr_companions.list_actor_squad_by_id()
-	for _,id in pairs(actor_squad) do
-		local se_npc = alife_object(id)
-		if se_npc and se_npc:section_name() == sec then
-			return se_npc
-		end
-	end
+    local actor_squad = axr_companions.list_actor_squad_by_id()
+    for _,id in pairs(actor_squad) do
+        local se_npc = alife_object(id)
+        if se_npc and se_npc:section_name() == sec then
+            return se_npc
+        end
+    end
 end
 
 --- Function used to check if a given object id is a member of a given squad.
@@ -417,14 +430,14 @@ end
 --- @param id number
 --- @return boolean
 function is_id_from_squad(squad,id)
-	if not validate_params({squad,id,"is_id_from_squad"}) then return end
+    if not validate_params({squad,id,"is_id_from_squad"}) then return end
 
-	for member in squad:squad_members() do
-		if member.id == id then
-			return true
-		end
-	end
-	return false
+    for member in squad:squad_members() do
+        if member.id == id then
+            return true
+        end
+    end
+    return false
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -437,19 +450,19 @@ end
 --- @param ... table
 --- @return nil
 function next_tick(func,...)
-	if not validate_params({func,"next_tick"}) then return end
+    if not validate_params({func,"next_tick"}) then return end
 
-	local args = {...}
-	AddUniqueCall(function()
-		func(unpack(args))
-		return true
-	end)
+    local args = {...}
+    AddUniqueCall(function()
+        func(unpack(args))
+        return true
+    end)
 end
 
 --- Function used to check if there are NPCs currently in a fight with the player.
 --- @return boolean
 function is_player_fighting()
-	return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
+    return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
 --- Function used to check if all necessary parameters were correctly passed to a function.
@@ -458,13 +471,13 @@ end
 --- @param params table
 --- @return boolean
 function validate_params(params)
-	local index = 1
-	for i,_ in pairs(params) do
-		if i ~= index then
-			printf("![WG] ERROR | Utils | Missing argument no %s for '%s()'!",index,params[#params])
-			return false
-		end
-		index = index + 1
-	end
-	return true
+    local index = 1
+    for i,_ in pairs(params) do
+        if i ~= index then
+            printf("![WG] ERROR | Utils | Missing argument no %s for '%s()'!",index,params[#params])
+            return false
+        end
+        index = index + 1
+    end
+    return true
 end
