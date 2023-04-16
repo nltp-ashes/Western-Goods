@@ -71,7 +71,7 @@ end
 --- Function called every frame to check if time events should run or not.
 --- @return boolean
 function ProcessPersistentEventQueue()
-	if has_alife_info("sleep_active") then
+	if western_goods_utils.has_info("sleep_active") then
 		return false
 	end
 	

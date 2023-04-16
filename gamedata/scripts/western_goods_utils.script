@@ -150,6 +150,43 @@ function get_translation(str)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Info Portions Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function give_info(info_name,who)
+	if not validate_params({info_name,"give_info"}) then return end
+
+	-- Default values
+	who = who or db.actor
+
+	if not has_info(info_name,who) then
+		who:give_info_portion(info_name)
+		dbg_printf("[WG] Utils | Info portion '%s' added to '%'", info_name, who:name())
+	end
+end
+
+function has_info(info_name,who)
+	if not validate_params({info_name,"has_info"}) then return end
+
+	-- Default values
+	who = who or db.actor
+
+	return alife():has_info(who:id(), info_name)
+end
+
+function rem_info(info_name,who)
+	if not validate_params({info_name,"rem_info"}) then return end
+
+	-- Default values
+	who = who or db.actor
+
+	if has_info(info_name,who) then
+		who:disable_info_portion(info_name)
+		dbg_printf("[WG] Utils | Info portion '%s' disabled from '%'", info_name, who:name())
+	end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Distance Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 

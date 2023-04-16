@@ -20,7 +20,6 @@ local HELICOPTERS_TABLE = {}
 local HELICOPTERS_TARGETS = {}
 
 -- Imported functions
-local get_translation = game.translate_string
 local dbg_printf = western_goods_utils.dbg_printf
 local find_object_by_id = western_goods_utils.find_object_by_id
 

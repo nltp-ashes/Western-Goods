@@ -13,11 +13,11 @@
 	<!--	Dialog Manager Strings																					 -->
 	<!-- ============================================================================================================-->
 
-	<string id="st_western_goods_dm_message_header">
+	<string id="st_wg_dm_message_header">
 		<text>Message:</text>
 	</string>
 
-	<string id="st_western_goods_dm_default_name">
+	<string id="st_wg_dm_default_name">
 		<text>Anonymous</text>
 	</string>
 
@@ -109,15 +109,15 @@
 	</string>
 
 	<!-- Western Goods Trader Trade strings -->
-	<string id="western_goods_trader_empty_sell">
+	<string id="st_wg_trader_empty_sell">
 		<text>You need to pay for the selected items (with Euros or Dollars).</text>
 	</string>
 
-	<string id="western_goods_trader_empty_buy">
+	<string id="st_wg_trader_empty_buy">
 		<text>You haven't selected anything to buy.</text>
 	</string>
 
-	<string id="western_goods_trader_uneven_value">
+	<string id="st_wg_trader_uneven_value">
 		<text>You need to give, in cash, an equal or great value to what you're buying.</text>
 	</string>
 
@@ -240,31 +240,31 @@
 	<!-- ============================================================================================================-->
 
 	<!-- Start dialog strings -->
-	<string id="stalker_crew_member_start_0">
+	<string id="st_stalker_crew_member_start_0">
 		<text>How come you are even talking to me yet?! We're supposed to meet in act 1, task 3. I'll send you to Brazil be careful !</text>
 	</string>
 
-	<string id="stalker_crew_member_start_1">
+	<string id="st_stalker_crew_member_start_1">
 		<text>Uhh... Wh-wh...</text>
 	</string>
 
-	<string id="stalker_crew_member_start_2">
+	<string id="st_stalker_crew_member_start_2">
 		<text>Wha-what's... going on?</text>
 	</string>
 
-	<string id="stalker_crew_member_start_3">
+	<string id="st_stalker_crew_member_start_3">
 		<text>Where are you... taking me?</text>
 	</string>
 
-	<string id="stalker_crew_member_start_4">
+	<string id="st_stalker_crew_member_start_4">
 		<text>We should get moving, I don't like staying here...</text>
 	</string>
 
-	<string id="stalker_crew_member_start_5">
+	<string id="st_stalker_crew_member_start_5">
 		<text>Good to see you again.</text>
 	</string>
 
-	<string id="stalker_crew_member_start_6">
+	<string id="st_stalker_crew_member_start_6">
 		<text>Hey friend, I'm happy to see you!</text>
 	</string>
 
@@ -314,35 +314,35 @@
 	<!-- ============================================================================================================-->
 
 	<!-- Start dialog strings -->
-	<string id="western_goods_dunn_lynn_first_start">
+	<string id="st_wg_dunn_lynn_first_start">
 		<text>At least we meet.</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_x">
+	<string id="st_wg_dunn_lynn_start_x">
 		<text>Hello young Padawan.</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_0">
+	<string id="st_wg_dunn_lynn_start_0">
 		<text>Hello.</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_1">
+	<string id="st_wg_dunn_lynn_start_1">
 		<text>Hi.</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_2">
+	<string id="st_wg_dunn_lynn_start_2">
 		<text>What do you want, Stalker.</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_3">
+	<string id="st_wg_dunn_lynn_start_3">
 		<text>What is it?</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_4">
+	<string id="st_wg_dunn_lynn_start_4">
 		<text>Yes?</text>
 	</string>
 
-	<string id="western_goods_dunn_lynn_start_5">
+	<string id="st_wg_dunn_lynn_start_5">
 		<text>What do you want?</text>
 	</string>
 
@@ -351,11 +351,11 @@
 	<!-- ============================================================================================================-->
 
 	<!-- Start dialog strings -->
-	<string id="western_goods_yellow_ecolog_start_0">
+	<string id="st_wg_yellow_ecolog_start_0">
 		<text>My head... my head!</text>
 	</string>
 
-	<string id="western_goods_yellow_ecolog_start_1">
+	<string id="st_wg_yellow_ecolog_start_1">
 		<text>...</text>
 	</string>
 

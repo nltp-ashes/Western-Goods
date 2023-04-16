@@ -13,7 +13,6 @@ local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- 
 local dbg_printf = western_goods_utils.dbg_printf
 local round_number = western_goods_utils.round_number
 local has_translation = western_goods_utils.has_translation
-local get_translation = game.translate_string
 local find_object_by_id = western_goods_utils.find_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
@@ -225,7 +224,7 @@ function ui_item.build_desc_header(obj, sec, str)
         local con = math.ceil(obj:condition() * 100)
         local clr = utils_xml.get_color_con(con)
         local clr_2  = utils_xml.get_color("ui_gray_1")
-        local _str = clr .. " " .. game.translate_string("st_wg_bullet_point") .. " " .. clr_2 .. game.translate_string("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
+        local _str = clr .. " " .. western_goods_utils.get_translation("st_wg_bullet_point") .. " " .. clr_2 .. western_goods_utils.get_translation("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
         return _str .. BuildHeader(obj, sec, str)
     end
 
@@ -293,7 +292,7 @@ if TEMP_LIGHTER_ENABLED then
         if requires_tool and not obj_tool then
             dbg_printf("[WG] Usable Items | Before use - Require tools '%s'",requires_tool)
             dbg_printf("[WG] Usable Items | Before use - Object tool '%s'",obj_tool)
-            str = game.translate_string("st_wg_missing_requirements_ext")
+            str = western_goods_utils.get_translation("st_wg_missing_requirements_ext")
             pass = false
 
             -- older booster is still active
@@ -320,8 +319,8 @@ if TEMP_LIGHTER_ENABLED then
                 -- older booster has some stronger effect, while new one doesn't have any stronger effect
                 if weaker_effect and (not stronger_effect) then
                     --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
-                    local boost_str = game.translate_string(unlocalized_booster_string[weaker_effect])
-                    str = strformat(game.translate_string("st_itm_manager_greater_effect"),boost_str)
+                    local boost_str = western_goods_utils.get_translation(unlocalized_booster_string[weaker_effect])
+                    str = strformat(western_goods_utils.get_translation("st_itm_manager_greater_effect"),boost_str)
                     pass = false
                 end
             end
@@ -329,7 +328,7 @@ if TEMP_LIGHTER_ENABLED then
             -- prevent player to take anabiotic during combat
         elseif sec == "drug_anabiotic" then
             if (not is_empty(xr_combat_ignore.fighting_with_actor_npcs)) then
-                str = game.translate_string("st_anabiotic_combat")
+                str = western_goods_utils.get_translation("st_anabiotic_combat")
                 pass = false
             end
         end
@@ -364,7 +363,7 @@ if TEMP_LIGHTER_ENABLED then
             dbg_printf("[WG] Usable Items | Before use - FDDA Compatibility")
             local item = obj:section()
             if IsMoveState("mcClimb") then
-                actor_menu.set_msg(1, game.translate_string("st_EA_ladder_item_not_allowed"),3)
+                actor_menu.set_msg(1, western_goods_utils.get_translation("st_EA_ladder_item_not_allowed"),3)
                 flags.ret_value = false
                 return
             end
@@ -394,7 +393,7 @@ if TEMP_LIGHTER_ENABLED then
         if bind_campfire.rain_pass() then
             if (bind_campfire.k_rain < 1)then
                 bind_campfire.k_rain = bind_campfire.k_rain + 1
-                actor_menu.set_msg(1, game.translate_string("st_camp_help"),3)
+                actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"),3)
             end
             actor_effects.play_item_fx("matches_script")
             --local snd_obj = sound_object("interface\\inv_matches")
@@ -403,7 +402,7 @@ if TEMP_LIGHTER_ENABLED then
             cf:turn_on()
         else
             actor_effects.play_item_fx("matches_script")
-            actor_menu.set_msg(1, game.translate_string("st_fail"),3)
+            actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"),3)
         end
 
         dbg_printf("[WG] Usable Items | Campfire go on - Object tool '%s'",obj:section())
@@ -441,7 +440,7 @@ if TEMP_LIGHTER_ENABLED then
                             dbg_printf("[WG] Usable Items | Use campfire - Object tool '%s'",obj_tool:section())
                             use_item(obj_tool, nil, binder.campfire)
                         else
-                            actor_menu.set_msg(1, game.translate_string("st_wg_missing_requirements_ext"),3)
+                            actor_menu.set_msg(1, western_goods_utils.get_translation("st_wg_missing_requirements_ext"),3)
                         end
                     end
                 end

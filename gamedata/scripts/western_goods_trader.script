@@ -116,7 +116,7 @@ function make_exchange(self, npc)
 	end
 	if size_table(cc_sell.indx_id) <= 0 then
 		self.message_box:InitMessageBox("message_box_ok")
-		self.message_box:SetText( game.translate_string("western_goods_trader_empty_sell") )
+		self.message_box:SetText( western_goods_utils.get_translation("st_wg_trader_empty_sell") )
 		self.message_box:ShowDialog(true)
 		return
 	end
@@ -128,7 +128,7 @@ function make_exchange(self, npc)
 	end
 	if size_table(cc_buy.indx_id) <= 0 then
 		self.message_box:InitMessageBox("message_box_ok")
-		self.message_box:SetText( game.translate_string("western_goods_trader_empty_buy") )
+		self.message_box:SetText( western_goods_utils.get_translation("st_wg_trader_empty_buy") )
 		self.message_box:ShowDialog(true)
 		return
 	end
@@ -150,7 +150,7 @@ function make_exchange(self, npc)
 	-- Don't processed the sell price < buy price
 	if tot_sell_cost < tot_buy_cost then
 		self.message_box:InitMessageBox("message_box_ok")
-		self.message_box:SetText( game.translate_string("western_goods_trader_uneven_value") )
+		self.message_box:SetText( western_goods_utils.get_translation("st_wg_trader_uneven_value") )
 		self.message_box:ShowDialog(true)
 		return
 	end

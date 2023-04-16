@@ -29,7 +29,7 @@ function go_to_level(level_name)
 
     dbg_printf("[WG] Helicopter Transport | Transporting to %s [lvid:%s | gvid:%s | pos:%s,%s,%s]", level_name, dest_info.lvid, dest_info.gvid, dest_info.x, dest_info.y, dest_info.z)
 
-    give_info("spawn_guide_helicopter")
+    western_goods_utils.give_info("western_goods_spawn_guide_helicopter")
 
     ChangeLevel(spawn_pos, dest_info.lvid, dest_info.gvid, look_pos, true)
 end
@@ -37,9 +37,9 @@ end
 --- Function used to spawn an helicopter above the player after using the helicopter transport service.
 --- @return nil
 function spawn_guide_helicopter()
-    if has_alife_info("spawn_guide_helicopter") then
+    if western_goods_utils.has_info("western_goods_spawn_guide_helicopter") then
 
-        disable_info("spawn_guide_helicopter")
+        western_goods_utils.rem_info("western_goods_spawn_guide_helicopter")
 
         local sec = "western_goods_helicopter"
         local pos = vector():set(db.actor:position().x, db.actor:position().y + 20, db.actor:position().z)

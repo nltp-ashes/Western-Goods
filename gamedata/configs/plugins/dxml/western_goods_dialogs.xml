@@ -201,7 +201,7 @@
 
     <dialog id="stalker_crew_member_rescue">
         <has_info>western_goods_act_1_task_3_active</has_info>
-        <dont_has_info>stalker_crew_member_rescue_over</dont_has_info>
+        <dont_has_info>western_goods_crew_member_rescue_over</dont_has_info>
         <phrase_list>
             <phrase id="0">
                 <text>stalker_crew_member_rescue_0</text>
@@ -221,18 +221,18 @@
             </phrase>
             <phrase id="4">
                 <text>stalker_crew_member_rescue_4</text>
-                <give_info>stalker_crew_member_rescue_over</give_info>
+                <give_info>western_goods_crew_member_rescue_over</give_info>
             </phrase>
         </phrase_list>
     </dialog>
 
     <dialog id="stalker_crew_member_reward">
         <has_info>western_goods_act_1_task_3_finished</has_info>
-        <dont_has_info>stalker_crew_member_reward_over</dont_has_info>
+        <dont_has_info>western_goods_crew_member_reward_over</dont_has_info>
         <phrase_list>
             <phrase id="0">
                 <text>stalker_crew_member_reward_0</text>
-                <give_info>stalker_crew_member_reward_over</give_info>
+                <give_info>western_goods_crew_member_reward_over</give_info>
                 <next>1</next>
             </phrase>
             <phrase id="1">

@@ -103,10 +103,10 @@ function check_trader_auto_inject()
 	UnregisterScriptCallback("on_game_load", check_trader_auto_inject)
 
 	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			game.translate_string("st_err_outdated_trader_autoinject_script_title"),
-			game.translate_string("st_err_outdated_trader_autoinject_script_what"),
-			game.translate_string("st_err_outdated_trader_autoinject_script_why"),
-			game.translate_string("st_err_outdated_trader_autoinject_script_where")
+			western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_title"),
+			western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_what"),
+			western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_why"),
+			western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_where")
 	)
 
 	assert(trader_autoinject.get_real_community ~= nil, error_message)
@@ -118,10 +118,10 @@ function check_game_version()
 	UnregisterScriptCallback("on_game_load", check_game_version)
 
 	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			game.translate_string("st_err_outdated_game_title"),
-			game.translate_string("st_err_outdated_game_what"),
-			game.translate_string("st_err_outdated_game_why"),
-			game.translate_string("st_err_outdated_game_where")
+			western_goods_utils.get_translation("st_err_outdated_game_title"),
+			western_goods_utils.get_translation("st_err_outdated_game_what"),
+			western_goods_utils.get_translation("st_err_outdated_game_why"),
+			western_goods_utils.get_translation("st_err_outdated_game_where")
 	)
 
 	assert(string.find(GAME_VERSION,"1.5.2"), error_message)
@@ -133,10 +133,10 @@ function check_barter_ui_installed()
 	UnregisterScriptCallback("on_game_load", check_barter_ui_installed)
 
 	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			game.translate_string("st_err_missing_barter_ui_title"),
-			game.translate_string("st_err_missing_barter_ui_what"),
-			game.translate_string("st_err_missing_barter_ui_why"),
-			game.translate_string("st_err_missing_barter_ui_where")
+			western_goods_utils.get_translation("st_err_missing_barter_ui_title"),
+			western_goods_utils.get_translation("st_err_missing_barter_ui_what"),
+			western_goods_utils.get_translation("st_err_missing_barter_ui_why"),
+			western_goods_utils.get_translation("st_err_missing_barter_ui_where")
 	)
 
 	assert(barter_ui ~= nil, error_message)
@@ -148,10 +148,10 @@ function check_dxml_installed()
 	UnregisterScriptCallback("on_game_load", check_dxml_installed)
 
 	local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-			game.translate_string("st_err_missing_dxml_title"),
-			game.translate_string("st_err_missing_dxml_what"),
-			game.translate_string("st_err_missing_dxml_why"),
-			game.translate_string("st_err_missing_dxml_where")
+			western_goods_utils.get_translation("st_err_missing_dxml_title"),
+			western_goods_utils.get_translation("st_err_missing_dxml_what"),
+			western_goods_utils.get_translation("st_err_missing_dxml_why"),
+			western_goods_utils.get_translation("st_err_missing_dxml_where")
 	)
 
 	assert(dxml_core ~= nil, error_message)
@@ -214,14 +214,18 @@ function check_addon_removal(status)
 		end
 	end)
 
+	dbg_printf("[WG] Core | Addon removal checking info portions...")
+
+	for _,info_name in pairs(western_goods_info) do
+		western_goods_utils.rem_info(info_name)
+	end
+
 	dbg_printf("[WG] Core | Addon removal checking tasks...")
 
 	-- Cancel Western Goods tasks
-	task_manager.get_task_manager():set_task_cancelled("western_goods_act_1_task_1")
-	task_manager.get_task_manager():set_task_cancelled("western_goods_act_1_task_2")
-	task_manager.get_task_manager():set_task_cancelled("western_goods_act_1_task_3")
-	task_manager.get_task_manager():set_task_cancelled("western_goods_act_2_task_1")
-	task_manager.get_task_manager():set_task_cancelled("western_goods_act_2_task_2")
+	for _,task_id in pairs(western_goods_task) do
+		task_manager.get_task_manager():set_task_cancelled(task_id)
+	end
 
 	news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects .. "%c[default] items added by Western Goods from the save-game.", nil, nil, 10000)
 
@@ -1333,10 +1337,52 @@ western_goods_npcs = {
 }
 
 western_goods_task = {
-	"stalker_western_goods_trader",
-	"stalker_jupiter_informant",
-	"stalker_crew_member",
-	"stalker_dunn_lynn",
-	"stalker_ecolog_convoy_yellow",
-	"stalker_ecolog_convoy_orange"
+	"western_goods_act_1_task_1",
+	"western_goods_act_1_task_2",
+	"western_goods_act_1_task_3",
+	"western_goods_act_2_task_1",
+	"western_goods_act_2_task_2"
+}
+
+western_goods_info = {
+	"western_goods_spawn_guide_helicopter",
+	"western_goods_trader_first_meet_over",
+	"western_goods_jupiter_informant_first_meet_over",
+	"western_goods_crew_member_rescue_over",
+	"western_goods_crew_member_reward_over",
+	"western_goods_ecolog_convoy_yellow_meet_over",
+	"western_goods_ecolog_convoy_yellow_second_meet_over",
+	"western_goods_act_1_task_3_crew_member_extracted",
+	"western_goods_act_2_task_2_controller_spawned",
+	"western_goods_act_2_task_2_controller_killed",
+	"western_goods_act_2_task_2_controller_killed",
+	"western_goods_act_2_task_2_opted_in",
+	"western_goods_act_2_task_2_opted_out",
+	"western_goods_act_2_task_2_opted_in",
+	"western_goods_act_1_task_1_init",
+	"western_goods_act_1_task_2_init",
+	"western_goods_act_1_task_3_init",
+	"western_goods_act_2_task_1_init",
+	"western_goods_act_2_task_2_init",
+	"western_goods_act_1_task_1_active",
+	"western_goods_act_1_task_2_active",
+	"western_goods_act_1_task_3_active",
+	"western_goods_act_2_task_1_active",
+	"western_goods_act_2_task_2_active",
+	"western_goods_act_1_task_1_ready_finished",
+	"western_goods_act_1_task_2_ready_finished",
+	"western_goods_act_1_task_3_ready_finished",
+	"western_goods_act_2_task_1_ready_finished",
+	"western_goods_act_2_task_2_ready_finished",
+	"western_goods_act_1_task_1_finished",
+	"western_goods_act_1_task_2_finished",
+	"western_goods_act_1_task_3_finished",
+	"western_goods_act_2_task_1_finished",
+	"western_goods_act_2_task_2_finished",
+	"western_goods_act_2_task_2_ecolog_flee",
+	"western_goods_act_2_task_2_ecolog_calm",
+	"western_goods_act_2_task_2_ecolog_calm",
+	"western_goods_act_2_task_2_setup",
+	"western_goods_act_1_finished",
+	"western_goods_act_2_finished"
 }

@@ -67,8 +67,8 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_1_init(actor,npc)
 	-- Process info portions
-	give_info("western_goods_act_1_task_1_active")
-	give_info("western_goods_act_1_task_1_init")
+	western_goods_utils.give_info("western_goods_act_1_task_1_active")
+	western_goods_utils.give_info("western_goods_act_1_task_1_init")
 end
 
 --- Function called when the task is successfully completed.
@@ -77,9 +77,9 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_1_complete(actor,npc)
 	-- Process info portions
-	disable_info("western_goods_act_1_task_1_active")
-	give_info("western_goods_act_1_task_1_finished")
-	disable_info("western_goods_act_1_task_1_init")
+	western_goods_utils.rem_info("western_goods_act_1_task_1_active")
+	western_goods_utils.give_info("western_goods_act_1_task_1_finished")
+	western_goods_utils.rem_info("western_goods_act_1_task_1_init")
 
 	-- Process quest items
 	xr_effects.remove_item(actor, npc, {"wg_act_1_task_1_quest_item"})
@@ -96,8 +96,8 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_1_fail(actor,npc)
 	-- Process info portions
-	disable_info("western_goods_act_1_task_1_active")
-	disable_info("western_goods_act_1_task_1_init")
+	western_goods_utils.rem_info("western_goods_act_1_task_1_active")
+	western_goods_utils.rem_info("western_goods_act_1_task_1_init")
 
 	-- Process penalty
 	xr_effects.fail_task_dec_goodwill(actor,npc,{"75","killer"})
@@ -111,7 +111,7 @@ end
 --- @return string
 function task_functor.act_1_task_1_title_f(task_id,field,p,tsk)
 	if true then
-		return game.translate_string("st_wg_act_1_task_1_title")
+		return western_goods_utils.get_translation("st_wg_act_1_task_1_title")
 	end
 end
 
@@ -124,7 +124,7 @@ end
 --- @return string
 function task_functor.act_1_task_1_descr_f(task_id,field,p,tsk)
 	if true then
-		return game.translate_string("st_wg_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
+		return western_goods_utils.get_translation("st_wg_act_1_task_1_stage_" .. tostring(tsk.stage) .. "_descr")
 	end
 end
 
@@ -135,7 +135,7 @@ end
 --- @param tsk CGameTask
 --- @return number
 function task_functor.act_1_task_1_target_f(task_id,field,p,tsk)
-	if has_alife_info("western_goods_act_1_task_1_init") then
+	if western_goods_utils.has_info("western_goods_act_1_task_1_init") then
 		if tsk.stage == 0 then
 			local heli_se = western_goods_utils.se_object_by_sid("western_goods_helicopter_landed")
 			return heli_se and heli_se.id
@@ -162,7 +162,7 @@ end
 --- @param task_id number
 --- @return string
 function task_status_functor.act_1_task_1_status_f(tsk,task_id)
-	if has_alife_info("western_goods_act_1_task_1_init") then
+	if western_goods_utils.has_info("western_goods_act_1_task_1_init") then
 		-- First stage : Get to the helicopter
 		if tsk.stage == 0 then
 			-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
@@ -189,12 +189,12 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_1")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_2")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_3")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_4")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_5")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_0_message_6")}
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_1")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_2")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_3")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_4")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_5")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_6")}
 				})
 
 				TASK_1_CACHE.stage_0_dialog_sent = true
@@ -253,10 +253,10 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_2")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_3")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_1_stage_1_message_4")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_1_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_1_message_2")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_1_message_3")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_1_message_4")}
 				})
 
 				TASK_1_CACHE.stage_1_dialog_sent = true
@@ -304,18 +304,18 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 				return
 			end
 
-			if not has_alife_info("western_goods_act_1_task_1_ready_finished") then
+			if not western_goods_utils.has_info("western_goods_act_1_task_1_ready_finished") then
 				dbg_printf("[WG] Tasks Act 1 | Task 1 - Task ready to be completed...")
-				give_info("western_goods_act_1_task_1_ready_finished")
+				western_goods_utils.give_info("western_goods_act_1_task_1_ready_finished")
 			end
 
 			-- If the player dropped the supplies, rollback to stage 2
 			if supplies_se and (supplies_se.parent_id ~= AC_ID) then
 				dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 3 - Player dropped the supplies %s", supplies_se.id)
 
-				if has_alife_info("western_goods_act_1_task_1_ready_finished") then
+				if western_goods_utils.has_info("western_goods_act_1_task_1_ready_finished") then
 					dbg_printf("[WG] Tasks Act 1 | Task 1 - Task no longer ready to be completed...")
-					disable_info("western_goods_act_1_task_1_ready_finished")
+					western_goods_utils.rem_info("western_goods_act_1_task_1_ready_finished")
 				end
 
 				tsk.stage = 2
@@ -353,8 +353,8 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_2_init(actor,npc)
 	-- Process info portions
-	give_info("western_goods_act_1_task_2_active")
-	give_info("western_goods_act_1_task_2_init")
+	western_goods_utils.give_info("western_goods_act_1_task_2_active")
+	western_goods_utils.give_info("western_goods_act_1_task_2_init")
 end
 
 --- Function called when the task is successfully completed.
@@ -363,9 +363,9 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_2_complete(actor,npc)
 	-- Process info portions
-	disable_info("western_goods_act_1_task_2_active")
-	disable_info("western_goods_act_1_task_2_init")
-	give_info("western_goods_act_1_task_2_finished")
+	western_goods_utils.rem_info("western_goods_act_1_task_2_active")
+	western_goods_utils.rem_info("western_goods_act_1_task_2_init")
+	western_goods_utils.give_info("western_goods_act_1_task_2_finished")
 
 	-- Process quest items
 	xr_effects.remove_item(actor, npc, {"wg_act_1_task_2_quest_item_1"})
@@ -382,9 +382,9 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_2_fail(actor,npc)
 	-- Process info portions
-	disable_info("western_goods_act_1_task_2_active")
-	disable_info("western_goods_act_1_task_2_init")
-	disable_info("western_goods_jupiter_informant_first_meet_over")
+	western_goods_utils.rem_info("western_goods_act_1_task_2_active")
+	western_goods_utils.rem_info("western_goods_act_1_task_2_init")
+	western_goods_utils.rem_info("western_goods_jupiter_informant_first_meet_over")
 
 	-- Process penalty
 	xr_effects.fail_task_dec_goodwill(actor,npc,{"50","killer"})
@@ -398,7 +398,7 @@ end
 --- @return string
 function task_functor.act_1_task_2_title_f(task_id,field,p,tsk)
 	if true then -- Cond to force my IDE to fold this fucking function correctly
-		return game.translate_string("st_wg_act_1_task_2_title")
+		return western_goods_utils.get_translation("st_wg_act_1_task_2_title")
 	end
 end
 
@@ -411,7 +411,7 @@ end
 --- @return string
 function task_functor.act_1_task_2_descr_f(task_id,field,p,tsk)
 	if true then -- Cond to force my IDE to fold this fucking function correctly
-		return game.translate_string("st_wg_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+		return western_goods_utils.get_translation("st_wg_act_1_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
 	end
 end
 
@@ -422,7 +422,7 @@ end
 --- @param tsk CGameTask
 --- @return number
 function task_functor.act_1_task_2_target_f(task_id,field,p,tsk)
-	if has_alife_info("western_goods_act_1_task_2_init") then
+	if western_goods_utils.has_info("western_goods_act_1_task_2_init") then
 		if tsk.stage == 0 then
 			if western_goods_mcm.get_config("guided_tasks") then
 				local informant_se = western_goods_utils.se_object_by_sid("stalker_jupiter_informant_squad")
@@ -465,7 +465,7 @@ end
 --- @param task_id number
 --- @return string
 function task_status_functor.act_1_task_2_status_f(tsk,task_id)
-	if has_alife_info("western_goods_act_1_task_2_init") then
+	if western_goods_utils.has_info("western_goods_act_1_task_2_init") then
 		-- First stage : Find and question the informant at Yanov Station
 		if tsk.stage == 0 then
 			-- Retrieve the server object (they may not always exist - if they aren't spawned yet or unavailable)
@@ -492,7 +492,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			end
 
 			-- When the player is done talking with the informant
-			if not has_alife_info("western_goods_jupiter_informant_first_meet_over") then return end
+			if not western_goods_utils.has_info("western_goods_jupiter_informant_first_meet_over") then return end
 
 			-- Send a dialog between the task giver and the player
 			if not TASK_2_CACHE.stage_0_dialog_sent then
@@ -506,10 +506,10 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_2")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_3")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_0_message_4")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_0_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_0_message_2")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_0_message_3")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_0_message_4")}
 				})
 
 				TASK_2_CACHE.stage_0_dialog_sent = true
@@ -590,7 +590,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 				local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 				send_dialog({
-					{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_1")}
+					{sender=dialog_sender.name, icon=dialog_sender.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_1_message_1")}
 				})
 
 				TASK_2_CACHE.stage_1_helicopter_sent = true
@@ -613,7 +613,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 					local dialog_sender = { name= nearest_npc:character_name(), icon= nearest_npc:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_3")}
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_1_message_3")}
 					},true)
 				end
 
@@ -638,7 +638,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 					local dialog_sender = { name= nearest_npc:character_name(), icon= nearest_npc:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_4")}
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_1_message_4")}
 					},true)
 				end
 
@@ -672,7 +672,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 						local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 						send_dialog({
-							{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_2_message_1")}
+							{sender=dialog_sender.name, icon=dialog_sender.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_2_message_1")}
 						})
 
 						return
@@ -691,7 +691,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 					local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_1_message_2")}
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_1_message_2")}
 					})
 
 					tsk.stage = 3
@@ -726,7 +726,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 					local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 					send_dialog({
-						{sender=dialog_sender.name, icon=dialog_sender.icon, message=game.translate_string("st_wg_trader_act_1_task_2_stage_2_message_2")}
+						{sender=dialog_sender.name, icon=dialog_sender.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_2_stage_2_message_2")}
 					})
 				end
 
@@ -772,18 +772,18 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 			local quest_item_1 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_1")
 			local quest_item_2 = western_goods_utils.se_object_by_sid("wg_act_1_task_2_quest_item_2")
 
-			if not has_alife_info("western_goods_act_1_task_2_ready_finished") then
+			if not western_goods_utils.has_info("western_goods_act_1_task_2_ready_finished") then
 				dbg_printf("[WG] Tasks Act 1 | Task 2 - Task ready to be completed...")
-				give_info("western_goods_act_1_task_2_ready_finished")
+				western_goods_utils.give_info("western_goods_act_1_task_2_ready_finished")
 			end
 
 			-- If the player dropped one of the quest items, rollback to stage 3
 			if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID)	then
 				dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 4 - Player dropped the items - %s - %s", quest_item_1.id, quest_item_2.id)
 
-				if has_alife_info("western_goods_act_1_task_2_ready_finished") then
+				if western_goods_utils.has_info("western_goods_act_1_task_2_ready_finished") then
 					dbg_printf("[WG] Tasks Act 1 | Task 2 - Task no longer ready to be completed...")
-					disable_info("western_goods_act_1_task_2_ready_finished")
+					western_goods_utils.rem_info("western_goods_act_1_task_2_ready_finished")
 				end
 
 				tsk.stage = 3
@@ -821,8 +821,8 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_3_init(actor,npc)
 	-- Process info portions
-	give_info("western_goods_act_1_task_3_active")
-	give_info("western_goods_act_1_task_3_init")
+	western_goods_utils.give_info("western_goods_act_1_task_3_active")
+	western_goods_utils.give_info("western_goods_act_1_task_3_init")
 end
 
 --- Function called when the task is successfully completed.
@@ -831,10 +831,10 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_3_complete(actor,npc)
 	-- Process info portions
-	disable_info("western_goods_act_1_task_3_active")
-	disable_info("western_goods_act_1_task_3_init")
-	give_info("western_goods_act_1_task_3_finished")
-	give_info("western_goods_act_1_finished")
+	western_goods_utils.rem_info("western_goods_act_1_task_3_active")
+	western_goods_utils.rem_info("western_goods_act_1_task_3_init")
+	western_goods_utils.give_info("western_goods_act_1_task_3_finished")
+	western_goods_utils.give_info("western_goods_act_1_finished")
 
 	-- Process reward
 	xr_effects.reward_random_money(actor,npc,{"10000","15000"})
@@ -847,9 +847,9 @@ end
 --- @return nil
 function xr_effects.western_goods_act_1_task_3_fail(actor,npc)
 	-- Process info portions
-	disable_info("western_goods_act_1_task_3_active")
-	disable_info("western_goods_act_1_task_3_init")
-	disable_info("stalker_crew_member_rescue_over")
+	western_goods_utils.rem_info("western_goods_act_1_task_3_active")
+	western_goods_utils.rem_info("western_goods_act_1_task_3_init")
+	western_goods_utils.rem_info("western_goods_crew_member_rescue_over")
 
 	-- Process penalty
 	xr_effects.fail_task_dec_goodwill(actor,npc,{"35","killer"})
@@ -863,7 +863,7 @@ end
 --- @return string
 function task_functor.act_1_task_3_title_f(task_id,field,p,tsk)
 	if true then -- Cond to force my IDE to fold this fucking function correctly
-		return game.translate_string("st_wg_act_1_task_3_title")
+		return western_goods_utils.get_translation("st_wg_act_1_task_3_title")
 	end
 end
 
@@ -876,7 +876,7 @@ end
 --- @return string
 function task_functor.act_1_task_3_descr_f(task_id,field,p,tsk)
 	if true then -- Cond to force my IDE to fold this fucking function correctly
-		return game.translate_string("st_wg_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
+		return western_goods_utils.get_translation("st_wg_act_1_task_3_stage_" .. tostring(tsk.stage) .. "_descr")
 	end
 end
 
@@ -887,7 +887,7 @@ end
 --- @param tsk CGameTask
 --- @return number
 function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
-	if has_alife_info("western_goods_act_1_task_3_init") then
+	if western_goods_utils.has_info("western_goods_act_1_task_3_init") then
 		if tsk.stage == 0 then
 			local crew_member_se = western_goods_utils.se_object_by_sid("stalker_crew_member")
 			return crew_member_se and crew_member_se.id
@@ -925,7 +925,7 @@ end
 --- @param task_id number
 --- @return string
 function task_status_functor.act_1_task_3_status_f(tsk,task_id)
-	if has_alife_info("western_goods_act_1_task_3_init") then
+	if western_goods_utils.has_info("western_goods_act_1_task_3_init") then
 		-- First stage : Find and rescue the crew member
 		if tsk.stage == 0 then
 			-- Retrieve the server and game objects (they may not always exist - if they aren't spawned yet or unavailable)
@@ -958,7 +958,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			end
 
 			-- When the player has rescued the crew member, progress further
-			if not has_alife_info("stalker_crew_member_rescue_over") then return end
+			if not western_goods_utils.has_info("western_goods_crew_member_rescue_over") then return end
 
 			if not crew_member_obj then return end
 
@@ -977,11 +977,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_2")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_3")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_4")},
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_0_message_5")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_0_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_0_message_2")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_0_message_3")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_0_message_4")},
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_0_message_5")}
 				})
 
 				TASK_3_CACHE.stage_0_dialog_sent = true
@@ -1046,8 +1046,8 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_1")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_2")}
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_1")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_2")}
 					})
 
 					TASK_3_CACHE.stage_1_dialog_1_sent = true
@@ -1063,10 +1063,10 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_3")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_4")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_5")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_6")}
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_3")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_4")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_5")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_6")}
 					})
 
 					TASK_3_CACHE.stage_1_dialog_2_sent = true
@@ -1082,10 +1082,10 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 					local dialog_sender_2 = { name=sender_2:character_name(), icon=sender_2:character_icon()}
 
 					send_dialog({
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_7")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_8")},
-						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_9")},
-						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_1_message_10")}
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_7")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_8")},
+						{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_9")},
+						{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_1_message_10")}
 					})
 
 					TASK_3_CACHE.stage_1_dialog_3_sent = true
@@ -1184,7 +1184,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 			end
 
 			-- If the crew member hasn't extracted, and isn't alive, respawn him
-			if not crew_member_squad_se and not has_alife_info("wg_act_1_task_3_crew_member_extracted") then
+			if not crew_member_squad_se and not western_goods_utils.has_info("western_goods_act_1_task_3_crew_member_extracted") then
 				crew_member_squad_se = spawn_story_squad("stalker_crew_member_squad", vector():set(35.3,1,42.9), SIMBOARD.smarts_by_names["lim_smart_terrain_6"])
 
 				return
@@ -1198,8 +1198,8 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				local dialog_sender_2 = { name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}
 
 				send_dialog({
-					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_3_message_1")},
-					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=game.translate_string("st_wg_trader_act_1_task_3_stage_3_message_2")}
+					{sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_3_message_1")},
+					{sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_3_message_2")}
 				})
 
 				TASK_3_CACHE.stage_3_dialog_sent = true
@@ -1236,7 +1236,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 				alife_release(crew_member_se)
 
 				-- Give the info that the crew member was successfully extracted
-				give_info("wg_act_1_task_3_crew_member_extracted")
+				western_goods_utils.give_info("western_goods_act_1_task_3_crew_member_extracted")
 
 				dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Crew member extracted...")
 
@@ -1260,9 +1260,9 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 		if tsk.stage == 4 then
 			local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
 
-			if not has_alife_info("western_goods_act_1_task_3_ready_finished") then
+			if not western_goods_utils.has_info("western_goods_act_1_task_3_ready_finished") then
 				dbg_printf("[WG] Tasks Act 1 | Task 3 - Task ready to be completed...")
-				give_info("western_goods_act_1_task_3_ready_finished")
+				western_goods_utils.give_info("western_goods_act_1_task_3_ready_finished")
 			end
 
 			-- Spawn the rescued crew member in the book store

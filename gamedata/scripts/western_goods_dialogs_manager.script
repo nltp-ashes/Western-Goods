@@ -14,8 +14,8 @@ local CONST_DISPLAY_TIME = 15
 local CONST_DELAY_MSG = 7000
 local CONST_DELAY_QUICK_MSG = 1000
 local CONST_DELAY_LOAD = 15000
-local CONST_MSG_HEADER = game.translate_string("st_western_goods_dm_message_header")
-local CONST_DEFAULT_NAME = game.translate_string("st_western_goods_dm_default_name")
+local CONST_MSG_HEADER = western_goods_utils.get_translation("st_wg_dm_message_header")
+local CONST_DEFAULT_NAME = western_goods_utils.get_translation("st_wg_dm_default_name")
 local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
 
 -- Dialog variables
@@ -112,48 +112,46 @@ end
 --- Function called to determine the start dialog's text of the crew member.
 --- @return string
 function crew_member_start_dialog()
-	if not (has_alife_info("western_goods_act_1_task_3_active") or has_alife_info("western_goods_act_1_task_3_finished")) then
-		return game.translate_string("stalker_crew_member_start_0")
+	if not (western_goods_utils.has_info("western_goods_act_1_task_3_active") or western_goods_utils.has_info("western_goods_act_1_task_3_finished")) then
+		return western_goods_utils.get_translation("st_stalker_crew_member_start_0")
 
-	elseif not has_alife_info("stalker_crew_member_rescue_over") then
-		return game.translate_string("stalker_crew_member_start_1")
+	elseif not western_goods_utils.has_info("western_goods_crew_member_rescue_over") then
+		return western_goods_utils.get_translation("st_stalker_crew_member_start_1")
 
-	elseif not has_alife_info("wg_act_1_task_3_stage_1_dialog_1_sent") then
-		return game.translate_string("stalker_crew_member_start_2")
+	elseif not western_goods_tasks_act_1.TASK_3_CACHE.stage_1_dialog_1_sent then
+		return western_goods_utils.get_translation("st_stalker_crew_member_start_2")
 
-	elseif not has_alife_info("wg_act_1_task_3_stage_1_dialog_2_sent") then
-		return game.translate_string("stalker_crew_member_start_3")
+	elseif not western_goods_tasks_act_1.TASK_3_CACHE.stage_1_dialog_2_sent then
+		return western_goods_utils.get_translation("st_stalker_crew_member_start_3")
 
-	elseif not has_alife_info("wg_act_1_task_3_crew_member_extracted") then
-		return game.translate_string("stalker_crew_member_start_4")
+	elseif not western_goods_utils.has_info("western_goods_act_1_task_3_crew_member_extracted") then
+		return western_goods_utils.get_translation("st_stalker_crew_member_start_4")
 
-	elseif not has_alife_info("western_goods_act_1_task_3_finished") then
-		return game.translate_string("stalker_crew_member_start_5")
+	elseif not western_goods_utils.has_info("western_goods_act_1_task_3_finished") then
+		return western_goods_utils.get_translation("st_stalker_crew_member_start_5")
 
-	else return game.translate_string("stalker_crew_member_start_6")
-	end
+	else return western_goods_utils.get_translation("st_stalker_crew_member_start_6")	end
 end
 
 --- Function called to determine the start dialog's text of yellow crewmate.
 --- @return string
 function yellow_ecolog_start_dialog()
-	if has_alife_info("western_goods_act_2_task_2_controller_spawned") and not has_alife_info("western_goods_act_2_task_2_controller_killed") then
-		return game.translate_string("western_goods_yellow_ecolog_start_0")
-	else
-		return game.translate_string("western_goods_yellow_ecolog_start_1")
-	end
+	if western_goods_utils.has_info("western_goods_act_2_task_2_controller_spawned") and not western_goods_utils.has_info("western_goods_act_2_task_2_controller_killed") then
+		return western_goods_utils.get_translation("st_wg_yellow_ecolog_start_0")
+
+	else return western_goods_utils.get_translation("st_wg_yellow_ecolog_start_1") end
 end
 
 --- Function called to determine the start dialog's text of Dunn Lynn.
 --- @return string
 function dunn_lynn_start_dialog()
-	if has_alife_info("western_goods_act_2_task_2_active") and not has_alife_info("western_goods_act_2_task_2_finished") then
-		return game.translate_string("western_goods_dunn_lynn_first_start")
+	if western_goods_utils.has_info("western_goods_act_2_task_2_active") and not western_goods_utils.has_info("western_goods_act_2_task_2_finished") then
+		return western_goods_utils.get_translation("st_wg_dunn_lynn_first_start")
+
 	elseif math.random() < 0.0001 then
-		return game.translate_string("western_goods_dunn_lynn_start_x")
-	else
-		return game.translate_string("western_goods_dunn_lynn_start_" .. math.random(0,5))
-	end
+		return western_goods_utils.get_translation("st_wg_dunn_lynn_start_x")
+
+	else return western_goods_utils.get_translation("st_wg_dunn_lynn_start_" .. math.random(0,5))	end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
