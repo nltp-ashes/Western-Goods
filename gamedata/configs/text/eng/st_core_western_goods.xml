@@ -81,6 +81,23 @@
 		<text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
 	</string>
 
+	<!-- Missing LUA unlocalizer -->
+	<string id="st_err_missing_unlocalizer_title">
+		<text>Prerequisite missing - LUA unlocalizer.</text>
+	</string>
+
+	<string id="st_err_missing_unlocalizer_what">
+		<text>LUA unlocalizer is missing. Please install or update your modded exes before using Western Goods.</text>
+	</string>
+
+	<string id="st_err_missing_unlocalizer_why">
+		<text>Western Goods requires LUA unlocalizer to increase compatibility with other addons and to avoid overwriting vanilla files.</text>
+	</string>
+
+	<string id="st_err_missing_unlocalizer_where">
+		<text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+	</string>
+
 	<!-- ============================================================================================================-->
 	<!--	Core Strings																					  		 -->
 	<!-- ============================================================================================================-->

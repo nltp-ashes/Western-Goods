@@ -103,64 +103,57 @@ function print_addon_version()
     printf("[WG] Western Goods version %s",VERSION)
 end
 
---- Function used to check the version of the trader_autoinject script.
+--- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
 --- @return nil
-function check_trader_auto_inject()
-    UnregisterScriptCallback("on_game_load", check_trader_auto_inject)
+function check_prerequisites()
+    UnregisterScriptCallback("on_game_load", check_prerequisites)
 
-    local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_title"),
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_what"),
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_why"),
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_where")
-    )
+    local error_message = "Unknown error"
 
-    assert(trader_autoinject.get_real_community ~= nil, error_message)
-end
-
---- Function used to check the version of the game.
---- @return nil
-function check_game_version()
-    UnregisterScriptCallback("on_game_load", check_game_version)
-
-    local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+    -- Out-of-date game
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
             western_goods_utils.get_translation("st_err_outdated_game_title"),
             western_goods_utils.get_translation("st_err_outdated_game_what"),
             western_goods_utils.get_translation("st_err_outdated_game_why"),
             western_goods_utils.get_translation("st_err_outdated_game_where")
     )
-
     assert(string.find(GAME_VERSION,"1.5.2"), error_message)
-end
 
---- Function used to check if the Barter UI Framework is installed.
---- @return nil
-function check_barter_ui_installed()
-    UnregisterScriptCallback("on_game_load", check_barter_ui_installed)
+    -- Out-of-date trader auto_inject.script
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_title"),
+            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_what"),
+            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_why"),
+            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_where")
+    )
+    assert(trader_autoinject.get_real_community ~= nil, error_message)
 
-    local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+    -- Missing Barter UI Framework
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
             western_goods_utils.get_translation("st_err_missing_barter_ui_title"),
             western_goods_utils.get_translation("st_err_missing_barter_ui_what"),
             western_goods_utils.get_translation("st_err_missing_barter_ui_why"),
             western_goods_utils.get_translation("st_err_missing_barter_ui_where")
     )
+    assert(barter_core ~= nil, error_message)
 
-    assert(barter_ui ~= nil, error_message)
-end
-
---- Function used to check if DXML is installed.
---- @return nil
-function check_dxml_installed()
-    UnregisterScriptCallback("on_game_load", check_dxml_installed)
-
-    local error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+    -- Missing DXML
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
             western_goods_utils.get_translation("st_err_missing_dxml_title"),
             western_goods_utils.get_translation("st_err_missing_dxml_what"),
             western_goods_utils.get_translation("st_err_missing_dxml_why"),
             western_goods_utils.get_translation("st_err_missing_dxml_where")
     )
-
     assert(dxml_core ~= nil, error_message)
+
+    -- Missing LUA unlocalizer
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+    )
+    assert(pda.primary_objects_tbl ~= nil, error_message)
 end
 
 --- Function used to delete every item added by the addon from the save file.
@@ -249,10 +242,7 @@ end
 --- @return nil
 function on_game_start()
     RegisterScriptCallback("on_game_load", print_addon_version)
-    RegisterScriptCallback("on_game_load", check_game_version)
-    RegisterScriptCallback("on_game_load", check_barter_ui_installed)
-    RegisterScriptCallback("on_game_load", check_dxml_installed)
-    RegisterScriptCallback("on_game_load", check_trader_auto_inject)
+    RegisterScriptCallback("on_game_load", check_prerequisites)
     RegisterScriptCallback("on_option_change", check_addon_removal)
 end
 
