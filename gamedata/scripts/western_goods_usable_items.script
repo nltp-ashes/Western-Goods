@@ -223,7 +223,7 @@ function ui_item.build_desc_header(obj, sec, str)
     str = str or gc(ini_sys:r_string_ex(sec, "description"))
     if (not str) then return "" end
 
-    if obj:section() == "wg_lighter_bic" then
+    if ini_sys:r_bool_ex(obj:section(), "use_fill") then
         local con = math.ceil(obj:condition() * 100)
         local clr = utils_xml.get_color_con(con)
         local clr_2  = utils_xml.get_color("ui_gray_1")
