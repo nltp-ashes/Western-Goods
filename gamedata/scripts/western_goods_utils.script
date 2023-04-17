@@ -9,6 +9,9 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+local ini_loc = ini_file_ex([[localization.ltx]])
+local ini_keys = ini_file_ex([[plugins\western_goods\western_goods_key_localization.ltx]])
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -141,10 +144,27 @@ end
 --- Function used to know if there exists a translation for a given game string.
 --- @param str string
 --- @return boolean
-function get_translation(str)
+function get_translation(str,...)
     if not validate_params({str,"get_translation"}) then return end
 
-    return has_translation(str) and game.translate_string(str) or "No translation"
+    if not has_translation(str) then return "No translation" end
+
+    local string = game.translate_string(str)
+
+    if (select('#',...) >= 1) then
+        local i = 0
+        local p = {...}
+        local function sr(a)
+            i = i + 1
+            if (type(p[i]) == "userdata") then
+                return "userdata"
+            end
+            return tostring(p[i])
+        end
+        string = string.gsub(string,"%%s",sr)
+    end
+
+    return string
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -444,6 +464,23 @@ end
 -- Other Utils Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to check if all necessary parameters were correctly passed to a function.
+--- Last element of the table has to be the name of the function calling validate_params.
+--- Use like this : 'if not validate_params({param_1,param_1,"my_function"}) then return end'
+--- @param params table
+--- @return boolean
+function validate_params(params)
+    local index = 1
+    for i,_ in pairs(params) do
+        if i ~= index then
+            printf("![WG] ERROR | Utils | Missing argument no %s for '%s()'!",index,params[#params])
+            return false
+        end
+        index = index + 1
+    end
+    return true
+end
+
 --- Function used to find an NPC by its section name in the player squad.
 --- @author mr_demonized
 --- @param func function
@@ -465,19 +502,12 @@ function is_player_fighting()
     return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
---- Function used to check if all necessary parameters were correctly passed to a function.
---- Last element of the table has to be the name of the function calling validate_params.
---- Use like this : 'if not validate_params({param_1,param_1,"my_function"}) then return end'
---- @param params table
---- @return boolean
-function validate_params(params)
-    local index = 1
-    for i,_ in pairs(params) do
-        if i ~= index then
-            printf("![WG] ERROR | Utils | Missing argument no %s for '%s()'!",index,params[#params])
-            return false
-        end
-        index = index + 1
-    end
-    return true
+--- Function used to print the a textual version of a DIK key.
+--- @author RavenAscendant
+--- @param dik DIK_keys
+--- @return string
+function print_key(dik)
+    local loc = ini_loc:r_value("string_table","language")
+    loc = ini_keys:section_exist(loc) and loc or "eng"
+    return ini_keys:r_value(loc, dik,0,"<!!!>")
 end

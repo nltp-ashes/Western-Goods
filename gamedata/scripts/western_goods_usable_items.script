@@ -28,21 +28,21 @@ local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePe
 --- @param obj game_object
 --- @return string
 function menu_use(obj)
-    return get_translation("st_wg_use")
+    return western_goods_utils.get_translation("st_wg_use")
 end
 
 --- Function used to return the text written when right clicking on a magazine.
 --- @param obj game_object
 --- @return string
 function menu_view(obj)
-    return get_translation("st_wg_view")
+    return western_goods_utils.get_translation("st_wg_view")
 end
 
 --- Function used to return the text written when right clicking on an MRE.
 --- @param obj game_object
 --- @return string
 function menu_unpack(obj)
-    return get_translation("st_wg_unpack")
+    return western_goods_utils.get_translation("st_wg_unpack")
 end
 
 --- Function called by callback when any object in the game is used. This redirects to the proper functions if the item used is one from Western Goods.
@@ -176,37 +176,37 @@ function build_on_screen_message(closest_smart_name, closest_smart_distance, clo
 	
 	-- If we're missing (like properly missing) one of the info, we say we don't know where we are
 	if not (closest_smart_name and closest_smart_distance and closest_smart_level) then
-		message = get_translation("st_wg_gps_use_2")
+		message = western_goods_utils.get_translation("st_wg_gps_use_2")
 	
 	-- If we have all the info, but the distance is infinite (happens when there are no smarts on your current level), we just print the level name
 	elseif string.find(closest_smart_distance,"inf") then
-		message = get_translation("st_wg_gps_use_3")
+		message = western_goods_utils.get_translation("st_wg_gps_use_3")
 	
 	else
 		-- If the smart terrain's name can be translated, we use the translation. Otherwise, we don't show that information
 		if has_translation(closest_smart_name) then
-			message = get_translation(closest_smart_name) .. " - " .. round_number(closest_smart_distance) .. "m "
+			message = western_goods_utils.get_translation(closest_smart_name) .. " - " .. round_number(closest_smart_distance) .. "m "
 		else
 			-- If we can't find a translation with the smart name, maybe the PDA hint has a translation
 			for k,v in pairs(pda.primary_objects_tbl) do
 				if v.target == closest_smart_name and has_translation(v.hint) then
-					message = get_translation(v.hint) .. " - " .. round_number(closest_smart_distance) .. "m "
+					message = western_goods_utils.get_translation(v.hint) .. " - " .. round_number(closest_smart_distance) .. "m "
 				end
 			end
 		end
 		
 		-- If the level name can be translation, we use the translation. Otherwise, we don't show that information
 		if has_translation(closest_smart_level) then
-			message = (message or "") .. "(" .. get_translation(closest_smart_level) .. ")"
+			message = (message or "") .. "(" .. western_goods_utils.get_translation(closest_smart_level) .. ")"
 		end
 
 		-- If at this point we still don't have a string (because things don't have translations), we say we don't know where we are
 		if not(message) then
-			message = get_translation("st_wg_gps_use_4")
+			message = western_goods_utils.get_translation("st_wg_gps_use_4")
 		end
 	end
 	
-	return get_translation("st_wg_gps_use_1") .. " " .. message
+	return western_goods_utils.get_translation("st_wg_gps_use_1") .. " " .. message
 end
 
 

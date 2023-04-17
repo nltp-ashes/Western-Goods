@@ -612,7 +612,7 @@
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_1">
-		<text>We're in route to your location. Heades said you might need some covering fire. Just designate the targets, and we'll take care of the rest.</text>
+		<text>We're in route to your location. Heades said you might need some covering fire. Just designate the targets (press: %c[d_orange]%s%c[ui_white]), and we'll take care of the rest.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_2">

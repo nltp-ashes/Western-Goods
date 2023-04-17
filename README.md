@@ -51,7 +51,7 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-> **v2.0.0 - 15/04/2023 - Major Update**
+> **v2.0.0 - 17/04/2023 - Major Update**
 > ```
 > • New storylines :
 >    - Added a first act (3 tasks) centered around a mysterious event regarding a helicopter used by mercs to smuggle goods into the Zone;

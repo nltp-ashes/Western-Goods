@@ -340,7 +340,7 @@ function order_helicopter(dik)
                     dbg_printf("[WG] Helicopter | Give order - Terminate enemy - heli:%s - target:%s(%s)", id, target:section(), target:id())
 
                     local sender = "Mercenary helicopter"
-                    local message = get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
+                    local message = western_goods_utils.get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
 
                     dynamic_news_helper.send_tip(message,sender,nil,15,"ui_inGame2_PD_DownToEarth",nil,"npc")
                 else
