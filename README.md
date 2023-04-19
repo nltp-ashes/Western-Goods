@@ -80,6 +80,7 @@ To **uninstall** the addon :
 > • Safety checks for proper addon installation :
 >    - Added a CTD when using a different game version than Anomaly 1.5.2;
 >    - Added a CTD when DXML is missing;
+>    - Added a CTD when LUA unlocalizer is missing;
 >    - Added a CTD when the Barter UI framework is missing;
 >    - Added a CTD when trader_autoinject.script is outdated;
 > • Bug fixes :

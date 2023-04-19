@@ -189,6 +189,9 @@ function heli_update(heli_obj,mode,target_pos)
 
     -- Set the helicopter to idle on its current position
     if not mode or mode == "idle" then
+        -- Prevent the heli from spinning
+        heli_obj:get_helicopter():SetDestPosition(heli_obj:position())
+
         dbg_printf("[WG] Helicopter | Target updated - idling - heli:%s", heli_obj:id())
     end
 

@@ -230,7 +230,7 @@ end
 function get_distance(position_1, position_2)
     if not validate_params({position_1,position_2,"get_distance"}) then return end
 
-    return position_1:distance_to(position_2)
+    return position_1:distance_to(position_2) or 100000
 end
 
 --- Function used to get the distance between two points in on the X and Z axis.
@@ -240,7 +240,7 @@ end
 function get_distance_sqr(position_1, position_2)
     if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
 
-    return position_1:distance_to_sqr(position_2)
+    return position_1:distance_to_sqr(position_2) or 10000000000
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
