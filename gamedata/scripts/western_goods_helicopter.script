@@ -6,21 +6,49 @@
 --- This script represents an API to make handling of helicopters easier.
 ---
 --- While all the functions are accessible outside of the script, only two are really designed to be used externally :
---- - heli_spawn(...) : is a function you can use to create an helicopter at a location (default mode is idle);
---- - heli_register(...) is a function you can use to give an order to the helicopter.
+---
+--- - heli_spawn(...) :
+---   A function you can use to create an helicopter at a location (default mode is idle);
+---
+--- - heli_register(...) :
+---   A function you can use to give an order to the helicopter.
+---
 ---
 --- Helicopters using this API have "modes", or sort of objectives, and they go as follows :
---- - "idle" : helicopter will wait at its current position until it is put in anther mode;
---- - "protect_actor" : the helicopter will fly over the player, and react to attack orders;
---- - "move_to_point" : the helicopter will fly in a straight line to a given point in space;
---- - "land_at_point" : the helicopter will fly high until it gets close to the landing spot, then it'll descend to land,
----   and automatically switch to "idle" mode;
---- - "leave_at_point" : the helicopter will fly high until it gets close to its leaving spot, then it'll descend, and
----   upon reaching the spot, it'll automatically get released and it'll be removed from the system.
+---
+--- - HELICOPTERS_MODES.IDLE :
+---   The helicopter will wait at its current position until it is put in anther mode;
+---
+--- - HELICOPTERS_MODES.PROTECT_ACTOR :
+---   The helicopter will fly over the player, and react to attack orders;
+---
+--- - HELICOPTERS_MODES.MOVE_TO_POINT :
+---   The helicopter will fly in a straight line to a given point in space;
+---
+--- - HELICOPTERS_MODES.LAND_AT_POINT :
+---   The helicopter will fly high until it gets close to the landing spot, then it'll descend to land, and
+---   automatically switch to "idle" mode;
+---
+--- - HELICOPTERS_MODES.LEAVE_AT_POINT :
+---   The helicopter will fly high until it gets close to its leaving spot, then it'll descend, and upon reaching
+---   the spot, it'll automatically get released and it'll be removed from the system.
+---
+--- - HELICOPTERS_MODES.RELEASE :
+---   The helicopter will immediately get released. This isn't really meant to be used, and is more so here as a
+---   last resort in case it would be needed. Normally, you'd use HELICOPTERS_MODES.LEAVE_AT_POINT.
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
+
+HELICOPTERS_MODES = {
+    IDLE = 1,
+    PROTECT_ACTOR = 2,
+    MOVE_TO_POINT = 3,
+    LAND_AT_POINT = 4,
+    LEAVE_AT_POINT = 5,
+    RELEASE = 6
+}
 
 -- Helicopter constants
 local CONST_HELICOPTER_UPDATE_FREQ = 5000
@@ -66,7 +94,7 @@ function heli_spawn(sec,pos,lvid,gvid)
 
         se_heli.force_online = true
 
-        heli_register(se_heli.id,"idle",nil)
+        heli_register(se_heli.id,HELICOPTERS_MODES.IDLE,nil)
 
         -- Execute at the next frame, once the heli has spawned in the world
         CreateTimeEvent("western_goods_heli_take_control", se_heli.id, 0, take_control, se_heli.id)
@@ -81,9 +109,9 @@ function heli_spawn(sec,pos,lvid,gvid)
 end
 
 --- Function used to give an order to the helicopter.
---- Valid modes : "idle", "protect_actor", "move_to_point", "land_at_point", "leave_at_point".
+--- Valid modes : See HELICOPTERS_MODES table.
 --- @param heli_id number
---- @param mode string
+--- @param mode nulber
 --- @param target_pos vector
 --- @return nil
 function heli_register(heli_id,mode,target_pos)
@@ -93,8 +121,8 @@ function heli_register(heli_id,mode,target_pos)
     local heli_data = HELICOPTERS_TABLE[heli_id] or {}
 
     -- Set the new data
-    heli_data.mode = mode or "idle"
-    heli_data.last_mode = heli_data.last_mode or "idle"
+    heli_data.mode = mode or HELICOPTERS_MODES.IDLE
+    heli_data.last_mode = heli_data.last_mode or HELICOPTERS_MODES.IDLE
     heli_data.target_pos = target_pos or heli_data.target_pos
     heli_data.update_timer = heli_data.update_timer or time_global()
     heli_data.spot = heli_data.spot or false
@@ -106,8 +134,10 @@ function heli_register(heli_id,mode,target_pos)
     local heli_obj = find_object_by_id(heli_id)
 
     if heli_obj then
-        heli_update(heli_obj,heli_data.mode,heli_data.target_pos)
+        heli_update(heli_obj,heli_data.mode,heli_data.last_mode,heli_data.target_pos)
     end
+
+    dbg_printf("[WG] Helicopter | Registered order - %s - heli:%s", mode, heli_id)
 end
 
 --- Function used to remove an helicopter from the update table (use when the helicopter has been released from the level).
@@ -143,126 +173,165 @@ function refresh_helicopters()
         if (not heli_se) or heli_se:section_name() ~= "western_goods_helicopter" then
             HELICOPTERS_TABLE[id] = nil
 
-            if level.map_has_object_spot(id, CONST_HELICOPTER_SPOT) then
+            if level.map_has_object_spot(id, CONST_HELICOPTER_SPOT) ~= 0 then
                 level.map_remove_object_spot(id, CONST_HELICOPTER_SPOT)
             end
-            -- Update heli only if level object is available
-        elseif heli_obj then
-            local mode = HELICOPTERS_TABLE[id].mode or "idle"
-            local last_mode = HELICOPTERS_TABLE[id].last_mode or "idle"
-            local target_pos = HELICOPTERS_TABLE[id].target_pos
-            local update_timer = HELICOPTERS_TABLE[id].update_timer or time_global()
-
-            -- Continue only if the mode has changed, or the timer has ticked
-            if mode == last_mode and update_timer > time_global() then return end
-
-            -- If the heli is in combat, let it fight, and stop updating for now
-            if (db.storage[heli_se.id] and db.storage[heli_se.id].combat and db.storage[heli_se.id].combat:update()) then
-                return
-            end
-
-            -- Update the helicopter
-            heli_update(heli_obj,mode,target_pos)
-
-            -- Save the new state if the heli still exists (it could have been deleted during the update)
-            if HELICOPTERS_TABLE[id] then
-                HELICOPTERS_TABLE[id].last_mode = mode
-                HELICOPTERS_TABLE[id].update_timer = time_global() + CONST_HELICOPTER_UPDATE_FREQ
-
-                -- Refresh the helicopter's marker on the PDA
-                if not (HELICOPTERS_TABLE[id].spot) then
-                    level.map_add_object_spot(heli_se.id, CONST_HELICOPTER_SPOT, "Helicopter")
-                    HELICOPTERS_TABLE[id].spot = true
-                end
-            end
+            break
         end
+
+        -- Update heli only if level object is available
+        local mode = HELICOPTERS_TABLE[id].mode or HELICOPTERS_MODES.IDLE
+        local last_mode = HELICOPTERS_TABLE[id].last_mode or HELICOPTERS_MODES.IDLE
+        local target_pos = HELICOPTERS_TABLE[id].target_pos
+        local update_timer = HELICOPTERS_TABLE[id].update_timer or time_global() + CONST_HELICOPTER_UPDATE_FREQ
+
+        -- Continue only if the mode has changed, or the timer has ticked
+        if mode == last_mode and update_timer > time_global() then return end
+
+        -- If the heli is in combat, let it fight, and stop updating for now
+        if (db.storage[heli_se.id] and db.storage[heli_se.id].combat and db.storage[heli_se.id].combat:update()) then
+            return
+        end
+
+        -- Update the helicopter
+        heli_update(heli_obj,mode,last_mode,target_pos)
     end
 end
 
 --- Function used to refresh an helicopter, this function is called by refresh_helicopters().
 --- @param heli_obj game_object
---- @param mode string
+--- @param mode number
 --- @param target_pos vector
 --- @return nil
-function heli_update(heli_obj,mode,target_pos)
+function heli_update(heli_obj,mode,last_mode,target_pos)
     if not heli_obj then return end
 
+    local updated = false
+
     -- Set the helicopter to idle on its current position
-    if not mode or mode == "idle" then
+    if not mode or mode == HELICOPTERS_MODES.IDLE then
         -- Prevent the heli from spinning
         heli_obj:get_helicopter():SetDestPosition(heli_obj:position())
-
         dbg_printf("[WG] Helicopter | Target updated - idling - heli:%s", heli_obj:id())
+
+        updated = true
     end
 
+    -- Transition when taking off
+    -- TODO find a way to fix heli going downwards when taking off sometimes
+    --[[if not updated and last_mode == HELICOPTERS_MODES.IDLE and mode ~= HELICOPTERS_MODES.IDLE then
+        -- Give the heli time to take off
+        local intermediate_target = vector():set(heli_obj:position().x, heli_obj:position().y + 30, heli_obj:position().z)
+
+        heli_obj:get_helicopter():SetDestPosition(intermediate_target)
+        dbg_printf("[WG] Helicopter | Target updated - take_off - heli:%s", heli_obj:id())
+
+        updated = true
+    end--]]
+
     -- Set the helicopter to protect the player
-    if mode == "protect_actor" then
+    if not updated and mode == HELICOPTERS_MODES.PROTECT_ACTOR then
         target_pos = db.actor:position()
 
         -- Go 50 meters above the player, somewhere in a 20m radius around him
-        local intermediate_target = vector():set(target_pos.x+math.random(-10,10), target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z+math.random(-10,10))
+        local inter_x = target_pos.x + math.random(-10,10)
+        local inter_y = target_pos.y + CONST_HELICOPTER_FLIGHT_ALT
+        local inter_z = target_pos.z + math.random(-10,10)
+        local intermediate_target = vector():set(inter_x, inter_y, inter_z)
 
         -- Set the helicopter's destination
         heli_set_target(heli_obj,intermediate_target)
-        dbg_printf("[WG] Helicopter | Target updated - protect actor - heli:%s x:%s y:%s z:%s", heli_obj:id(), intermediate_target.x, intermediate_target.y, intermediate_target.z)
+        dbg_printf("[WG] Helicopter | Target updated - protect actor - heli:%s target:%s", heli_obj:id(), intermediate_target)
+
+        updated = true
     end
 
     -- Set the helicopter to move to a certain point
-    if mode == "move_to_point" then
+    if not updated and mode == HELICOPTERS_MODES.MOVE_TO_POINT then
         if not target_pos then return end
 
         -- Set the helicopter to go 50 meters above the target
-        local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
+        local intermediate_target = vector():set(target_pos.x, target_pos.y + CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
 
         -- Set the helicopter's destination
         heli_set_target(heli_obj,intermediate_target)
-        dbg_printf("[WG] Helicopter | Target updated - move to point - heli:%s x:%s y:%s z:%s", heli_obj:id(), intermediate_target.x, intermediate_target.y, intermediate_target.z)
+        dbg_printf("[WG] Helicopter | Target updated - move to point - heli:%s target:%s", heli_obj:id(), intermediate_target)
+
+        updated = true
     end
 
     -- Set the helicopter to land at a certain point
-    if mode == "land_at_point" then
+    if not updated and mode == HELICOPTERS_MODES.LAND_AT_POINT then
         if not target_pos then return end
 
         local distance = western_goods_utils.get_distance_sqr(heli_obj:position(), target_pos)
+        local approach_dist = CONST_HELICOPTER_FLIGHT_ALT_SQR + (CONST_HELICOPTER_FLIGHT_ALT_SQR/2)
 
-        if (not distance) or distance > CONST_HELICOPTER_FLIGHT_ALT_SQR + (CONST_HELICOPTER_FLIGHT_ALT_SQR/2) then
+        if distance > approach_dist then
             -- While the heli is 100m away from its destination, fly high
             local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
 
             heli_set_target(heli_obj,intermediate_target)
-            dbg_printf("[WG] Helicopter | Target updated - land at point - heli:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
+            dbg_printf("[WG] Helicopter | Target updated - land at point - heli:%s dist(sqr):%s target:%s", heli_obj:id(), distance, intermediate_target)
         elseif distance > 100 then
             -- Start lowering the altitude when we're closer than 10m
             heli_set_target(heli_obj,target_pos)
-            dbg_printf("[WG] Helicopter | Target updated - land at point - heli:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
+            dbg_printf("[WG] Helicopter | Target updated - land at point - heli:%s dist(sqr):%s target:%s", heli_obj:id(), distance, target_pos)
         else
             -- Make the helicopter idle if it's closer than 10m
-            heli_register(heli_obj:id(),"idle")
+            heli_register(heli_obj:id(),HELICOPTERS_MODES.IDLE)
             dbg_printf("[WG] Helicopter | Target updated - idling - heli:%s", heli_obj:id())
         end
+
+        updated = true
     end
 
     -- Set the helicopter to land a a certain point and get released
-    if mode == "leave_at_point" then
+    if not updated and mode == HELICOPTERS_MODES.LEAVE_AT_POINT then
         if not target_pos then return end
 
         local distance = western_goods_utils.get_distance_sqr(heli_obj:position(), target_pos)
+        local approach_dist = CONST_HELICOPTER_FLIGHT_ALT_SQR + (CONST_HELICOPTER_FLIGHT_ALT_SQR/2)
 
-        if (not distance) or distance > CONST_HELICOPTER_FLIGHT_ALT_SQR + (CONST_HELICOPTER_FLIGHT_ALT_SQR/2) then
+        if distance > approach_dist then
             -- While the heli is 100m away from its destination, fly high
             local intermediate_target = vector():set(target_pos.x, target_pos.y+ CONST_HELICOPTER_FLIGHT_ALT, target_pos.z)
 
             heli_set_target(heli_obj,intermediate_target)
-            dbg_printf("[WG] Helicopter | Target updated - leave at point - heli:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, intermediate_target.x, intermediate_target.y, intermediate_target.z)
+            dbg_printf("[WG] Helicopter | Target updated - leave at point - heli:%s dist(sqr):%s target:%s", heli_obj:id(), distance, intermediate_target)
         elseif distance > 100 then
             -- Start lowering the altitude when we're closer than 10m
             heli_set_target(heli_obj,target_pos)
-            dbg_printf("[WG] Helicopter | Target updated - leave at point - heli:%s dist(sqr):%s x:%s y:%s z:%s", heli_obj:id(), distance, target_pos.x, target_pos.y, target_pos.z)
+            dbg_printf("[WG] Helicopter | Target updated - leave at point - heli:%s dist(sqr):%s target:%s", heli_obj:id(), distance, target_pos)
         else
             -- Make the helicopter idle if it's closer than 10m
             heli_unregister(heli_obj:id())
             dbg_printf("[WG] Helicopter | Target updated - unregister - heli:%s", heli_obj:id())
         end
+
+        updated = true
+    end
+
+    -- Set the helicopter to get deleted immediately
+    if not updated and mode == HELICOPTERS_MODES.RELEASE then
+        -- Forcefully release the helicopter
+        heli_unregister(heli_obj:id())
+        dbg_printf("[WG] Helicopter | Target updated - release - heli:%s", heli_obj:id())
+
+        updated = true
+    end
+
+    -- Save the new state if the heli still exists (it could have been deleted during the update)
+    if updated and HELICOPTERS_TABLE[heli_obj:id()] then
+        HELICOPTERS_TABLE[heli_obj:id()].last_mode = mode
+        HELICOPTERS_TABLE[heli_obj:id()].update_timer = time_global() + CONST_HELICOPTER_UPDATE_FREQ
+
+        -- Refresh the helicopter's marker on the PDA
+        if level.map_has_object_spot(heli_obj:id(), CONST_HELICOPTER_SPOT) == 0 then
+            level.map_add_object_spot(heli_obj:id(), CONST_HELICOPTER_SPOT, "Helicopter")
+        end
+    else
+        dbg_printf("![WG] ERROR | Helicopter | Failed to update helicopter %s", heli_obj:id())
     end
 end
 
@@ -332,7 +401,7 @@ function order_helicopter(dik)
     local target = level.get_target_obj()
     if target then
         for id,_ in pairs(HELICOPTERS_TABLE) do
-            if HELICOPTERS_TABLE[id].mode == "protect_actor" then
+            if HELICOPTERS_TABLE[id].mode == HELICOPTERS_MODES.PROTECT_ACTOR then
 
                 local combat = db.storage[id] and db.storage[id].combat
 

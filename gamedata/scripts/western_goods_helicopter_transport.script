@@ -15,6 +15,7 @@ local dbg_printf = western_goods_utils.dbg_printf
 local heli_spawn = western_goods_helicopter.heli_spawn
 local heli_register = western_goods_helicopter.heli_register
 local find_object_by_id = western_goods_utils.find_object_by_id
+local HELICOPTERS_MODES = western_goods_helicopter.HELICOPTERS_MODES
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -53,7 +54,7 @@ function spawn_guide_helicopter()
 
         CreateTimeEvent("delay_order_heli",helicopter_se.id,0,function()
             if find_object_by_id(helicopter_se.id) then
-                heli_register(helicopter_se.id,"leave_at_point",level.get_bounding_volume().max)
+                heli_register(helicopter_se.id,HELICOPTERS_MODES.LEAVE_AT_POINT,level.get_bounding_volume().max)
                 return true
             end
         end)

@@ -454,8 +454,16 @@
 		<text>Thank you, contact me if you discover anything.</text>
 	</string>
 
-	<string id="st_wg_act_1_task_2_finish_work">
+	<string id="st_wg_act_1_task_2_finish_work_0">
 		<text>I went to Jupiter, to investigate the rumors.</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_finish_work_1">
+		<text>Good, did you find anything?</text>
+	</string>
+
+	<string id="st_wg_act_1_task_2_finish_work_2">
+		<text>There was a group of Bandits at the Container Warehouse. They had this rifle and I also found this note.</text>
 	</string>
 
 	<!-- Act 1, Task 3 -->

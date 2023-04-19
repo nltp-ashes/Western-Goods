@@ -20,7 +20,20 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- Imported functions
+local dbg_printf = western_goods_utils.dbg_printf
+local find_object_by_id = western_goods_utils.find_object_by_id
+local heli_spawn = western_goods_helicopter.heli_spawn
+local heli_register = western_goods_helicopter.heli_register
+local spawn_squad = western_goods_utils.spawn_squad
+local spawn_dead_squad = western_goods_utils.spawn_dead_squad
+local spawn_story_squad = western_goods_utils.spawn_story_squad
+local send_dialog = western_goods_dialogs_manager.send_dialog
+local HELICOPTERS_MODES = western_goods_helicopter.HELICOPTERS_MODES
+
 -- Constants
+local CONST_TASK_2_HARD_DELAY = 1800000						-- milliseconds
+local CONST_TASK_3_HARD_DELAY = 1800000						-- milliseconds
 local CONST_TASK_1_HELI_DIST = 625							-- meters squared
 local CONST_TASK_1_SUPPLIES_DIST = 25						-- meters squared
 local CONST_TASK_2_HELI_DELAY = 50000						-- milliseconds
@@ -30,18 +43,8 @@ local CONST_TASK_3_SHOW_TARGETS_DELAY = 300000				-- milliseconds
 local CONST_TASK_3_DIALOG_DIST = 625						-- meters squared
 local CONST_TASK_3_DIALOG_EX_DIST = 2500					-- meters squared
 local CONST_TASK_3_BRIDGE_DIST = 10000						-- meters squared
-local CONST_TASK_3_HELI_DIST = 100						-- meters squared
-local CONST_TASK_3_NPC_DIST = 25						-- meters squared
-
--- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
-local find_object_by_id = western_goods_utils.find_object_by_id
-local heli_spawn = western_goods_helicopter.heli_spawn
-local heli_register = western_goods_helicopter.heli_register
-local spawn_story_squad = western_goods_utils.spawn_story_squad
-local spawn_squad = western_goods_utils.spawn_squad
-local spawn_dead_squad = western_goods_utils.spawn_dead_squad
-local send_dialog = western_goods_dialogs_manager.send_dialog
+local CONST_TASK_3_HELI_DIST = 100						    -- meters squared
+local CONST_TASK_3_NPC_DIST = 25						    -- meters squared
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -93,6 +96,9 @@ function xr_effects.act_1_task_1_complete(actor,npc)
 
     -- Process quest items
     xr_effects.remove_item(actor, npc, {"wg_act_1_task_1_quest_item"})
+
+    -- Set up task 2
+    TASK_2_CACHE.available_time = time_global() + CONST_TASK_2_HARD_DELAY
 
     -- Process reward
     xr_effects.reward_random_money(actor,npc,{"5000","10000"})
@@ -207,14 +213,17 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
                     {sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_6")}
                 })
 
+                TASK_1_CACHE.progress_timer = time_global() + 43000
                 TASK_1_CACHE.stage_0_dialog_sent = true
             end
 
             dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 0 - Player arrived at helicopter...")
 
             -- Progress the task
-            tsk.stage = 1
-            return
+            if TASK_1_CACHE.progress_timer < time_global() then
+                tsk.stage = 1
+                return
+            end
         end
 
         -- Second stage : Get to the crew at the sawmill and recover the supplies
@@ -380,6 +389,9 @@ function xr_effects.act_1_task_2_complete(actor,npc)
     -- Process quest items
     xr_effects.remove_item(actor, npc, {"wg_act_1_task_2_quest_item_1"})
     xr_effects.remove_item(actor, npc, {"wg_act_1_task_2_quest_item_2"})
+
+    -- Set up task 3
+    TASK_3_CACHE.available_time = time_global() + CONST_TASK_3_HARD_DELAY
 
     -- Process reward
     xr_effects.reward_random_money(actor,npc,{"10000","20000"})
@@ -594,7 +606,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
             if not TASK_2_CACHE.stage_1_helicopter_sent then
                 dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 1 - Helicopter moving to player...")
 
-                heli_register(TASK_2_CACHE.stage_1_helicopter_id,"protect_actor",nil)
+                heli_register(TASK_2_CACHE.stage_1_helicopter_id,HELICOPTERS_MODES.PROTECT_ACTOR,nil)
 
                 local attack_key_str = western_goods_utils.print_key(western_goods_mcm.get_config("heli_attack"))
 
@@ -694,7 +706,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
                     return
                 else
                     -- Return the helicopter to the processing station
-                    heli_register(TASK_2_CACHE.stage_1_helicopter_id,"leave_at_point",vector():set(346.7,7,984.4))
+                    heli_register(TASK_2_CACHE.stage_1_helicopter_id,HELICOPTERS_MODES.LEAVE_AT_POINT,vector():set(346.7,7,984.4))
 
                     -- Spawn a new one at the Water Processing Station
                     create_story_helicopter("wps")
@@ -730,7 +742,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
                 if helicopter_obj then
                     -- Return the helicopter to the processing station
-                    heli_register(helicopter_obj:id(),"leave_at_point",vector():set(346.7,7,984.4))
+                    heli_register(helicopter_obj:id(),HELICOPTERS_MODES.LEAVE_AT_POINT,vector():set(346.7,7,984.4))
 
                     dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 2 - Helicopter moving out to WPS...")
 
@@ -1185,7 +1197,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
                 helicopter_se = heli_spawn("western_goods_helicopter",heli_spawn_pos,8256,2792)
                 dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter spawned %s", helicopter_se.id)
 
-                heli_register(helicopter_se.id,"land_at_point", heli_landing_pos)
+                heli_register(helicopter_se.id,HELICOPTERS_MODES.LAND_AT_POINT, heli_landing_pos)
                 dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Helicopter moving to player...")
 
                 TASK_3_CACHE.stage_3_helicopter_id = helicopter_se.id
@@ -1258,7 +1270,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
                 dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 3 - Crew member extracted...")
 
                 -- Make the heli leave the level
-                heli_register(helicopter_se.id,"leave_at_point",heli_spawn_pos)
+                heli_register(helicopter_se.id,HELICOPTERS_MODES.LEAVE_AT_POINT,heli_spawn_pos)
 
                 -- Spawn a new one at the Water Processing Station
                 create_story_helicopter("wps")
@@ -1302,6 +1314,8 @@ end
 function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
+    RegisterScriptCallback("actor_on_first_update", task_2_setup)
+    RegisterScriptCallback("actor_on_first_update", task_3_setup)
 end
 
 
@@ -1324,6 +1338,9 @@ function save_state(m_data)
     copy_table(TASK_3_SAVE, TASK_3_CACHE)
 
     -- Pre-process tables
+    TASK_1_SAVE.progress_timer = (TASK_1_SAVE.progress_timer or 0) - time_global()
+    TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) - time_global()
+    TASK_3_SAVE.available_time = (TASK_3_SAVE.available_time or 0) - time_global()
     TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) - time_global()
     TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) - time_global()
     TASK_3_SAVE.stage_2_show_targets_timer = (TASK_3_SAVE.stage_2_show_targets_timer or 0) - time_global()
@@ -1349,6 +1366,9 @@ function load_state(m_data)
     local TASK_3_SAVE = m_data.wg_act_1_task_3_cache or {}
 
     -- Post-process tables
+    TASK_1_SAVE.progress_timer = (TASK_1_SAVE.progress_timer or 0) + time_global()
+    TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) + time_global()
+    TASK_3_SAVE.available_time = (TASK_3_SAVE.available_time or 0) + time_global()
     TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) + time_global()
     TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) + time_global()
     TASK_3_SAVE.stage_2_show_targets_timer = (TASK_3_SAVE.stage_2_show_targets_timer or 0) + time_global()
@@ -1367,6 +1387,46 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 --	General functions
 -- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to setup the automatic start of Act 2, Task 2.
+--- @return nil
+function task_2_setup()
+    -- Conditions
+    local task_1_done = western_goods_utils.has_info("western_goods_act_1_task_1_finished")
+    local task_2_started = western_goods_utils.has_info("western_goods_act_1_task_2_active")
+    local task_2_done = western_goods_utils.has_info("western_goods_act_1_task_2_finished")
+    local timeout_ready = time_global() > (TASK_2_CACHE.available_time or 0)
+
+    -- If the task is available
+    if not task_1_done or task_2_started or task_2_done then return end
+
+    -- If the task should be set up
+    if timeout_ready then
+        dbg_printf("[WG] Tasks Act 1 | Task 2 - Task set up...")
+        western_goods_utils.give_info("western_goods_act_1_task_2_available")
+    else
+        dbg_printf("[WG] Tasks Act 1 | Task 2 - What's missing? timeout_ready:%s (%s/%s)", timeout_ready, time_global(), TASK_2_CACHE.available_time)
+    end
+end
+
+function task_3_setup()
+    -- Conditions
+    local task_2_done = western_goods_utils.has_info("western_goods_act_1_task_2_finished")
+    local task_3_started = western_goods_utils.has_info("western_goods_act_1_task_3_active")
+    local task_3_done = western_goods_utils.has_info("western_goods_act_1_task_3_finished")
+    local timeout_ready = time_global() > (TASK_3_CACHE.available_time or 0)
+
+    -- If the task is available
+    if not task_2_done or task_3_started or task_3_done then return end
+
+    -- If the task should be set up
+    if timeout_ready then
+        dbg_printf("[WG] Tasks Act 1 | Task 3 - Task set up...")
+        western_goods_utils.give_info("western_goods_act_1_task_3_available")
+    else
+        dbg_printf("[WG] Tasks Act 1 | Task 3 - What's missing? timeout_ready:%s (%s/%s)", timeout_ready, time_global(), TASK_3_CACHE.available_time)
+    end
+end
 
 --- Function used to give the player a reward for finishing act 1.
 --- Warning : This function should be called while a dialog is running.
