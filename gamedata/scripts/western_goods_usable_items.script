@@ -272,7 +272,7 @@ if TEMP_LIGHTER_ENABLED then
 
         local obj_tool
         if requires_tool or required_tool_legacy then
-            db.actor:iterate_inventory(function(owner, obj)
+            western_goods_utils.inventory_iter(db.actor,function(owner, obj)
                 local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_weak")
                 local is_legacy_tool = obj:section() == required_tool_legacy
                 if can_light or is_legacy_tool then
@@ -432,7 +432,7 @@ if TEMP_LIGHTER_ENABLED then
                         bind_campfire.campfire_go_off(binder.campfire)
                     else
                         local obj_tool
-                        db.actor:iterate_inventory(function(owner, obj)
+                        western_goods_utils.inventory_iter(db.actor,function(owner, obj)
                             local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
                             if can_light then
                                 obj_tool = obj

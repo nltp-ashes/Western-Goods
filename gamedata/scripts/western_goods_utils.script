@@ -262,7 +262,7 @@ function server_objects_iter(func,...)
     local args = {...}
     for id=0, 65534 do
         local se_obj = alife_object(id)
-        if se_obj and func(se_obj, args) then
+        if se_obj and func(se_obj, unpack(args)) then
             return
         end
     end
@@ -464,6 +464,25 @@ end
 -- Other Utils Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to iterate through the inventory of a game object.
+--- The function passed in arguments will be called once per game object inside of the inventory.
+--- Extra arguments passed to 'inventory_iter' function are passed on to 'func' function.
+--- If 'func' function returns true, then the iteration stops.
+--- @param who game_object
+--- @param func function
+--- @param ... table
+--- @return nil
+function inventory_iter(who,func,...)
+    if not validate_params({who,func,"inventory_iter"}) then return end
+
+    dbg_printf("[WG] Utils | Iterating inventory of '%s'",who:section())
+
+    local args = {...}
+    who:iterate_inventory(function(owner, obj)
+        return func(owner, obj, unpack(args))
+    end,who)
+end
+
 --- Function used to check if all necessary parameters were correctly passed to a function.
 --- Last element of the table has to be the name of the function calling validate_params.
 --- Use like this : 'if not validate_params({param_1,param_1,"my_function"}) then return end'
@@ -496,6 +515,50 @@ function next_tick(func,...)
     end)
 end
 
+--- Function used to sperate an artefact from its container.
+--- This function is a copy of itms_manager.use_arty_container(), where the anim is optional.
+--- @author Alundaio,Tronex
+--- @param obj game_object
+--- @param play_anim boolean
+--- @return nil
+function open_container(obj,play_anim)
+    if not validate_params({obj,"open_container"}) then return end
+
+    local break_con
+    local break_arty
+    local sec = obj:section()
+
+    if (string.find(sec, "(lead.-_box)",3)) then
+        break_con = "lead_box"
+        break_arty = sec:gsub("_lead_box", "")
+    elseif (string.find(sec, "(af.-_iam)",3)) then
+        break_con = "af_iam"
+        break_arty = sec:gsub("_af_iam", "")
+    elseif (string.find(sec, "(af.-_aac)",3)) then
+        break_con = "af_aac"
+        break_arty = sec:gsub("_af_aac", "")
+    elseif (string.find(sec, "(af.-_aam)",3)) then
+        break_con = "af_aam"
+        break_arty = sec:gsub("_af_aam", "")
+    end
+
+    if break_con and break_arty and ini_sys:section_exist(break_con) and ini_sys:section_exist(break_arty) then
+        local cond = obj:condition()
+
+        -- Hack to prevent Artefacts Containers exploit
+        -- (gaining rank by receiving artefacts)
+        _G.ARTY_FROM_CONT = true
+
+        if play_anim == nil or play_anim == true then
+            actor_effects.play_item_fx(break_con .. "_dummy")
+        end
+
+        alife_create_item(break_con, db.actor)
+        alife_create_item(break_arty, db.actor, { cond = cond } )
+        alife_release(obj)
+    end
+end
+
 --- Function used to check if there are NPCs currently in a fight with the player.
 --- @return boolean
 function is_player_fighting()
@@ -507,6 +570,8 @@ end
 --- @param dik DIK_keys
 --- @return string
 function print_key(dik)
+    if not validate_params({dik,"print_key"}) then return end
+
     local loc = ini_loc:r_value("string_table","language")
     loc = ini_keys:section_exist(loc) and loc or "eng"
     return ini_keys:r_value(loc, dik,0,"<!!!>")

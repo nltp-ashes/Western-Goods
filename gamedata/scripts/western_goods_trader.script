@@ -182,7 +182,7 @@ function make_exchange(self, npc)
 
     CreateTimeEvent("delete_traded_items",npc:id(),0.01,function()
         dbg_printf("[WG] Western Goods Trader | Cleaning traded items :")
-        npc:iterate_inventory(function(owner, obj)
+        western_goods_utils.inventory_iter(npc,function(owner, obj)
             if western_goods_utils.table_contains(tradable_items, obj:section()) then
                 dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
                 alife_release(alife_object(obj:id()))

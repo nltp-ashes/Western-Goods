@@ -330,7 +330,7 @@ function heli_update(heli_obj,mode,last_mode,target_pos)
         if level.map_has_object_spot(heli_obj:id(), CONST_HELICOPTER_SPOT) == 0 then
             level.map_add_object_spot(heli_obj:id(), CONST_HELICOPTER_SPOT, "Helicopter")
         end
-    else
+    elseif not updated then
         dbg_printf("![WG] ERROR | Helicopter | Failed to update helicopter %s", heli_obj:id())
     end
 end

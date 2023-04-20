@@ -27,18 +27,18 @@ local find_object_by_id = western_goods_utils.find_object_by_id
 
 -- Constants
 local CONST_SPAWN_THROTTLE = 5000									-- milliseconds
-local CONST_TASK_2_HARD_DELAY = 10000--1800000								-- milliseconds
+local CONST_TASK_2_HARD_DELAY = 1800000								-- milliseconds
 local CONST_TASK_2_SOFT_DELAY_MIN = 600								-- seconds
 local CONST_TASK_2_SOFT_DELAY_MAX = 1800							-- seconds
 local CONST_TASK_2_ECOLOG_TELEPORT_DELAY = 50000					-- milliseconds
 local CONST_TASK_2_STAGE_6_PROGRESS_DELAY = 30000					-- milliseconds
 local CONST_TASK_2_STAGE_8_PROGRESS_DELAY = 60000					-- milliseconds
-local CONST_TASK_2_STAGE_9_PROGRESS_DELAY = 20000					-- milliseconds
+local CONST_TASK_2_STAGE_9_PROGRESS_DELAY = 40000					-- milliseconds
 local CONST_TASK_2_BANDIT_AUTOKILL_DELAY = 40000					-- milliseconds
 local CONST_TASK_2_CLEAR_SMART_DIST = 2500							-- meters squared
 local CONST_TASK_2_ZOMBIE_1_DIST = 15625							-- meters squared
-local CONST_TASK_2_SCHOOL_CLOSE = 625								-- meters squared
-local CONST_TASK_2_SCHOOL_FAR = 5625								-- meters squared
+local CONST_TASK_2_SCHOOL_CLOSE = 400								-- meters squared
+local CONST_TASK_2_SCHOOL_FAR = 4900								-- meters squared
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -70,12 +70,12 @@ function act_2_task_1_end()
     local secondary_items_found = {}
 
     -- Iterate player inventory to find if he has kolobok, and gather fallback items in the process
-    db.actor:iterate_inventory(function(owner, obj)
+    western_goods_utils.inventory_iter(db.actor,function(owner, obj)
         local is_main_item = obj:section() == TASK_1_CACHE.main_item
         local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
         if is_main_item then
             kolobok_found = true
-            return
+            return true
         elseif is_secondary_item then
             table.insert(secondary_items_found, obj)
         end
@@ -84,7 +84,7 @@ function act_2_task_1_end()
     -- If the player doesn't have a Kolobok, use one of the fallback items
     if not kolobok_found then
         for _,obj in pairs(secondary_items_found) do
-            itms_manager.use_arty_container(obj)
+            western_goods_utils.open_container(obj,false)
             break
         end
     end
@@ -219,13 +219,13 @@ function task_status_functor.act_2_task_1_status_f(tsk,task_id)
     if western_goods_utils.has_info("western_goods_act_2_task_1_init") then
         -- First stage : Find the artefact
         if tsk.stage == 0 then
-            db.actor:iterate_inventory(function(owner, obj)
+            western_goods_utils.inventory_iter(db.actor,function(owner, obj)
                 local is_main_item = obj:section() == TASK_1_CACHE.main_item
                 local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
                 if is_main_item or is_secondary_item then
                     dbg_printf("[WG] Tasks Act 2 | Task 1 - Stage 0 - Player found primary (%s) or secondary item (%s)",is_main_item,is_secondary_item)
                     tsk.stage = 1
-                    return
+                    return true
                 end
             end)
         end
@@ -234,12 +234,12 @@ function task_status_functor.act_2_task_1_status_f(tsk,task_id)
         if tsk.stage == 1 then
             local has_item = false
 
-            db.actor:iterate_inventory(function(owner, obj)
+            western_goods_utils.inventory_iter(db.actor,function(owner, obj)
                 local is_main_item = obj:section() == TASK_1_CACHE.main_item
                 local is_secondary_item = western_goods_utils.table_contains(TASK_1_CACHE.secondary_items, obj:section())
                 if is_main_item or is_secondary_item then
                     has_item = true
-                    return
+                    return true
                 end
             end)
 
