@@ -58,7 +58,13 @@ local CONST_HELICOPTER_SPOT = "secondary_task_location"
 
 -- Helicopter variables
 local HELICOPTERS_TABLE = {}
-local HELICOPTERS_TARGETS = {}
+
+local helicopters_targets = {}
+local helicopters_sounds = {
+    sound_object([[western_goods_misc\helicopter\heli_attack_1]]),
+    sound_object([[western_goods_misc\helicopter\heli_attack_2]]),
+    sound_object([[western_goods_misc\helicopter\heli_attack_3]])
+}
 
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
@@ -375,7 +381,7 @@ end
 function is_enemy(self_combat,obj)
     if not obj then return end
 
-    return valid_target(obj) and HELICOPTERS_TARGETS[obj:id()]
+    return valid_target(obj) and helicopters_targets[obj:id()]
 end
 
 --- Function used to take over the helicopter's combat IA (to force the helicopter to target certain objects).
@@ -407,14 +413,17 @@ function order_helicopter(dik)
 
                 if combat and valid_target(target) then
                     combat:set_enemy(target)
-                    HELICOPTERS_TARGETS[target:id()] = true
+                    helicopters_targets[target:id()] = true
 
                     dbg_printf("[WG] Helicopter | Give order - Terminate enemy - heli:%s - target:%s(%s)", id, target:section(), target:id())
 
-                    local sender = "Mercenary helicopter"
+                    -- Send message in news feed
                     local message = western_goods_utils.get_translation("st_wg_trader_act_1_task_2_heli_attack_" .. math.random(1,5))
+                    western_goods_dialogs_manager.send_message(message, "Mercenary helicopter", "ui_inGame2_PD_DownToEarth", 0)
 
-                    dynamic_news_helper.send_tip(message,sender,nil,15,"ui_inGame2_PD_DownToEarth",nil,"npc")
+                    -- Play sound effect
+                    local rnd_sound = math.random(1,size_table(helicopters_sounds))
+                    play_sound_effect(helicopters_sounds[rnd_sound],helicopters_sounds)
                 else
                     dbg_printf("[WG] Helicopter | Give order - Invalid target - heli:%s - target:%s(%s)", id, target:section(), target:id())
                 end
@@ -423,6 +432,20 @@ function order_helicopter(dik)
     else
         dbg_printf("[WG] Helicopter | Give order - No target")
     end
+end
+
+--- Function used to play a sound effect in the player's ears.
+--- If a sound within 'sound_table' is already playing, the function will not play additional sounds.
+--- @param sound_obj sound_object
+--- @param sound_table table
+--- @return nil
+function play_sound_effect(sound_obj,sound_table)
+    for _,sound in pairs(sound_table) do
+        if sound and sound:playing() then
+            return
+        end
+    end
+    sound_obj:play(db.actor, 0, sound_object.s2d)
 end
 
 

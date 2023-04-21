@@ -149,7 +149,7 @@ function find_info_from_pda()
         local smart_obj = smart_id and find_object_by_id(smart_id)
 		if smart_obj then
 			local smart_name = v.target
-            local smart_distance = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
+            local smart_distance = western_goods_utils.get_distance(db.actor:position(),smart_obj:position())
 			local smart_level = level.name()
 
 			if (smart_distance <= (closest_smart_distance or smart_distance)) then

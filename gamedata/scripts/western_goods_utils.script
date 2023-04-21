@@ -306,7 +306,7 @@ end
 --- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
 function spawn_story_squad(sec, pos, smart)
-    if not validate_params({sec,pos,smart,"spawn_story_squad"}) then return end
+    if not validate_params({sec,smart,"spawn_story_squad"}) then return end
 
     -- Make sure the squad isn't already spawned in
     local se_squad = this.se_object_by_sid(sec)
@@ -314,6 +314,8 @@ function spawn_story_squad(sec, pos, smart)
         printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
         return se_squad
     end
+
+    pos = pos or smart.position
 
     -- Spawn squad on the appropriate smart terrain
     se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id, smart)

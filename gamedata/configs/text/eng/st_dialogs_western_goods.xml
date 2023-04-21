@@ -742,7 +742,7 @@
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_message_left_position">
-		<text>You left your position? You were spotted, mission aborted.</text>
+		<text>You left your position? We cannot take chances, mission aborted.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_2_message_1">

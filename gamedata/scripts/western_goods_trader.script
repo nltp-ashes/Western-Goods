@@ -25,6 +25,25 @@ tradable_items = {}
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Spawning function
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to spawn the trader on the map.
+--- @return nil
+function spawn_western_goods_trader()
+    -- Make sure the trader isn't already spawned in
+    for id,_ in pairs(SIMBOARD.squads) do
+        if tostring(alife_object(id):section_name()) == CONST_TRADER_SQUAD then
+            return
+        end
+    end
+
+    -- Spawn the trader if it doesn't exist
+    local squad = western_goods_utils.spawn_story_squad(CONST_TRADER_SQUAD, nil, SIMBOARD.smarts_by_names["pri_a18_smart_terrain"])
+    dbg_printf("[WG] Western Goods Trader | Created '%s' (%s)", CONST_TRADER_SQUAD, squad.id)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Trading actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
 

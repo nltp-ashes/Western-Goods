@@ -133,6 +133,7 @@
 
         <supplies>
             [spawn] \n
+            wpn_m82 = 1 \n
             wg_porn_mag_1 = 1 \n
         </supplies>
 
