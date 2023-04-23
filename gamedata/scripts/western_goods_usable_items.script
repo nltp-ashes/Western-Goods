@@ -31,6 +31,13 @@ function menu_use(obj)
     return western_goods_utils.get_translation("st_wg_use")
 end
 
+--- Function used to return the text written when right clicking on a suitcase.
+--- @param obj game_object
+--- @return string
+function menu_open(obj)
+    return western_goods_utils.get_translation("st_wg_open")
+end
+
 --- Function used to return the text written when right clicking on a magazine.
 --- @param obj game_object
 --- @return string
@@ -68,6 +75,13 @@ function use_item(obj,_,cf)
     if (obj:section() == "wg_toblerone") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
         use_toblerone(obj)
+        return
+    end
+
+    -- Suitcase
+    if (obj:section() == "wg_money_suitcase") then
+        dbg_printf("[WG] Usable Items | Used %s",obj:section())
+        use_suitcase(obj)
         return
     end
 
@@ -482,6 +496,21 @@ function use_french_mre(obj)
         end
     end
 
+    alife_release(alife_object(obj:id()))
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Suitcase
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called when the RCIR item is used by the player.
+--- @param obj game_object
+--- @return nil
+function use_suitcase(obj)
+    for i=1,200 do
+        alife_create_item("wg_euros_50", db.actor)
+    end
     alife_release(alife_object(obj:id()))
 end
 

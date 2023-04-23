@@ -68,7 +68,7 @@ end
 --- @param npc_comm string
 --- @return nil
 function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
-    local items_to_spawn = table_corpse_ready(western_goods_items, npc_comm)
+    local items_to_spawn = table_corpse_ready(western_goods_items, npc_rank, npc_comm)
 
     dbg_printf("[WG] Core | NPC loot (%s)\n%s",npc_comm,utils_data.print_table(items_to_spawn, false, true))
 
@@ -293,7 +293,7 @@ end
 --- Function used to transform western_goods_items into a table ready for trader_autoinject.
 --- This function takes parameters to filter items to be kept in the final table.
 --- @return table
-function table_corpse_ready(tab, npc_comm)
+function table_corpse_ready(tab, npc_rank, npc_comm)
     local res = {}
 
     -- For a user-defined number of tries
@@ -319,6 +319,16 @@ function table_corpse_ready(tab, npc_comm)
             end
         else
             dbg_printf("[WG] Core | NPC loot (%s of %s) no dice '%s' - comm: %s", i, western_goods_mcm.get_config("max_item_per_corpse"), section, npc_comm)
+        end
+    end
+
+    if western_goods_mcm.get_config("max_item_per_corpse") > 1 and npc_comm == "killer" and npc_rank == "legend" then
+        local dice = math.random()
+        if dice < 0.001 then
+            dbg_printf("[WG] Core | NPC loot (special) diced 'wg_money_suitcase' [%s<0.001]", dice)
+            res["wg_money_suitcase"] = 1
+        else
+            dbg_printf("[WG] Core | NPC loot (special) missed 'wg_money_suitcase' [%s>0.001]", dice)
         end
     end
 
@@ -1282,6 +1292,7 @@ western_goods_items = {
 -- ---------------------------------------------------------------------------------------------------------------------
 
 western_goods_special_items = {
+    "wg_money_suitcase",
     "wg_act_1_task_1_quest_item",
     "wg_act_1_task_2_quest_item_1",
     "wg_act_1_task_2_quest_item_2",

@@ -146,4 +146,9 @@
 		<text>A tool is required!</text>
 	</string>
 
+	<!-- Suitcase use strings -->
+	<string id="st_wg_open">
+		<text>Open</text>
+	</string>
+
 </string_table>

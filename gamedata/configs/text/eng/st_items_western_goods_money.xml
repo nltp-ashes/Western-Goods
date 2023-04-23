@@ -121,4 +121,21 @@
 			%c[d_cyan] • %c[ui_gray_2] valuable\n
 		</text>
 	</string>
+
+	<string id="st_wg_money_suitcase">
+		<text>Suitcase</text>
+	</string>
+
+	<string id="st_wg_money_suitcase_s">
+		<text>Suitcase</text>
+	</string>
+
+	<string id="st_wg_money_suitcase_descr">
+		<text>
+			An old suitcase. Its content is unknown, but shaking it reveals that it is definitely holding something...\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_cyan] • %c[ui_gray_2] highly valuable\n
+		</text>
+	</string>
 </string_table>
