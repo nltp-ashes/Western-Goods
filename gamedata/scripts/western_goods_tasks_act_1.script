@@ -36,9 +36,11 @@ local CONST_TASK_2_HARD_DELAY = 1800000						-- milliseconds
 local CONST_TASK_3_HARD_DELAY = 1800000						-- milliseconds
 local CONST_TASK_1_HELI_DIST = 625							-- meters squared
 local CONST_TASK_1_SUPPLIES_DIST = 25						-- meters squared
+local CONST_TASK_1_PROGRESS_DELAY = 43000					-- milliseconds
 local CONST_TASK_2_HELI_DELAY = 50000						-- milliseconds
 local CONST_TASK_2_SHOW_TARGETS_DELAY = 300000				-- milliseconds
 local CONST_TASK_2_REP_THEFT = -100							-- reputation points
+local CONST_TASK_3_PROGRESS_DELAY = 38000					-- milliseconds
 local CONST_TASK_3_SHOW_TARGETS_DELAY = 300000				-- milliseconds
 local CONST_TASK_3_DIALOG_DIST = 625						-- meters squared
 local CONST_TASK_3_DIALOG_EX_DIST = 2500					-- meters squared
@@ -188,8 +190,6 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
             -- If the heli hasn't been created, then create it
             if not helicopter_se then
                 create_story_helicopter("zaton")
-
-                -- Return so the game can spawn the objects in the world before running the rest of the code
                 return
             end
 
@@ -213,7 +213,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
                     {sender=dialog_sender_2.name, icon=dialog_sender_2.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_1_stage_0_message_6")}
                 })
 
-                TASK_1_CACHE.progress_timer = time_global() + 43000
+                TASK_1_CACHE.progress_timer = time_global() + CONST_TASK_1_PROGRESS_DELAY
                 TASK_1_CACHE.stage_0_dialog_sent = true
             end
 
@@ -255,8 +255,6 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
                 -- Spawn the supplies, objective the player has to retrieve
                 supplies_se = alife_create("wg_act_1_task_1_quest_item", vector():set(-317.4,9.8,425.5), 327181, 4137)
                 dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 1 - Quest item spawned %s", supplies_se.id)
-
-                -- Return so the game has time to spawn the supplies in the game world
                 return
             end
 
@@ -298,8 +296,6 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
                 -- Spawn the supplies, objective the player has to retrieve
                 supplies_se = alife_create("wg_act_1_task_1_quest_item", vector():set(-317.4,9.8,425.5), 327181, 4137)
                 dbg_printf("[WG] Tasks Act 1 | Task 1 - Stage 2 - Quest item respawned %s", supplies_se.id)
-
-                -- Return so the game has time to spawn the supplies in the game world
                 return
             end
 
@@ -508,8 +504,6 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
             -- Spawn the informant if it doesn't exist
             if not informant_squad_se then
                 informant_squad_se = spawn_story_squad("stalker_jupiter_informant_squad", vector():set(-55,3.8,211), SIMBOARD.smarts_by_names["jup_a6"])
-
-                -- Return so the game can spawn the objects in the world before running the rest of the code
                 return
             end
 
@@ -928,8 +922,7 @@ function task_functor.act_1_task_3_target_f(task_id,field,p,tsk)
             if timer and timer <= time_global() then
                 local squad_1_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_1_squad")
                 local squad_2_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_2_squad")
-                local squad_3_se = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_3_squad")
-                return (squad_1_se and squad_1_se.id) or (squad_2_se and squad_2_se.id) or (squad_3_se and squad_3_se.id)
+                return (squad_1_se and squad_1_se.id) or (squad_2_se and squad_2_se.id)
             end
         end
 
@@ -962,8 +955,6 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
             -- Spawn the crew member squad
             if not crew_member_squad_se then
                 crew_member_squad_se = spawn_story_squad("stalker_crew_member_squad", vector():set(35.3,1,42.9), SIMBOARD.smarts_by_names["lim_smart_terrain_6"])
-
-                -- Return so the game can spawn the objects in the world before running the rest of the code
                 return
             end
 
@@ -976,20 +967,20 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
                 se_squad_2.scripted_target = "lim_smart_terrain_6"
 
                 TASK_3_CACHE.stage_0_mono_guard_spawned = true
-
-                -- Return so the game can spawn the objects in the world before running the rest of the code
                 return
             end
 
             -- When the player has rescued the crew member, progress further
             if not western_goods_utils.has_info("western_goods_crew_member_rescue_over") then return end
 
-            if not crew_member_obj then return end
+            if crew_member_obj and not TASK_3_CACHE.stage_0_crew_member_companion then
+                dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 0 - Player rescued crew member...")
 
-            dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 0 - Player rescued crew member...")
+                -- Add the crew member to the player squad
+                dialogs_axr_companion.become_actor_companion(db.actor,crew_member_obj)
 
-            -- Add the crew member to the player squad
-            dialogs_axr_companion.become_actor_companion(db.actor,crew_member_obj)
+                TASK_3_CACHE.stage_0_crew_member_companion = true
+            end
 
             -- Send a dialog between the player and the task giver
             if not TASK_3_CACHE.stage_0_dialog_sent then
@@ -1008,12 +999,15 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
                     {sender=dialog_sender_1.name, icon=dialog_sender_1.icon, message=western_goods_utils.get_translation("st_wg_trader_act_1_task_3_stage_0_message_5")}
                 })
 
+                TASK_3_CACHE.progress_timer = time_global() + CONST_TASK_3_PROGRESS_DELAY
                 TASK_3_CACHE.stage_0_dialog_sent = true
             end
 
             -- Progress the task
-            tsk.stage = 1
-            return
+            if TASK_3_CACHE.progress_timer < time_global() then
+                tsk.stage = 1
+                return
+            end
         end
 
         -- Second stage : Get to the bridge in the Red Forest
@@ -1024,8 +1018,6 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
             -- Respawn the crew member squad
             if not crew_member_squad_se then
                 crew_member_squad_se = spawn_story_squad("stalker_crew_member_squad", vector():set(35.3,1,42.9), SIMBOARD.smarts_by_names["lim_smart_terrain_6"])
-
-                -- Return so the game can spawn the objects in the world before running the rest of the code
                 return
             end
 
@@ -1039,7 +1031,6 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
                 monolith_se_squad_2.scripted_target = "red_smart_terrain_bridge"
 
                 TASK_3_CACHE.stage_1_mono_bridge_spawned = true
-
                 return
             end
 
@@ -1143,7 +1134,6 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
             -- Retrieve the server objects (they may not always exist - if they aren't spawned yet or unavailable)
             local monolith_se_squad_1 = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_1_squad")
             local monolith_se_squad_2 = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_2_squad")
-            local monolith_se_squad_3 = western_goods_utils.se_object_by_sid("western_goods_act_1_task_3_mono_bridge_3_squad")
 
             -- Retrieve the server objects
             local crew_member_squad_se = western_goods_utils.se_object_by_sid("stalker_crew_member_squad")
@@ -1151,13 +1141,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
             -- Respawn the crew member squad
             if not crew_member_squad_se then
                 crew_member_squad_se = spawn_story_squad("stalker_crew_member_squad", vector():set(35.3,1,42.9), SIMBOARD.smarts_by_names["lim_smart_terrain_6"])
-
-                -- Return so the game can spawn the objects in the world before running the rest of the code
                 return
             end
 
             -- Progress only when all enemy squads are dead
-            if monolith_se_squad_1 or monolith_se_squad_2 or monolith_se_squad_3 then return end
+            if monolith_se_squad_1 or monolith_se_squad_2 then return end
 
             dbg_printf("[WG] Tasks Act 1 | Task 3 - Stage 2 - All Monolith squads dead...")
 
@@ -1338,6 +1326,7 @@ function save_state(m_data)
     TASK_1_SAVE.progress_timer = (TASK_1_SAVE.progress_timer or 0) - time_global()
     TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) - time_global()
     TASK_3_SAVE.available_time = (TASK_3_SAVE.available_time or 0) - time_global()
+    TASK_3_SAVE.progress_timer = (TASK_3_SAVE.progress_timer or 0) - time_global()
     TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) - time_global()
     TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) - time_global()
     TASK_3_SAVE.stage_2_show_targets_timer = (TASK_3_SAVE.stage_2_show_targets_timer or 0) - time_global()
@@ -1366,6 +1355,7 @@ function load_state(m_data)
     TASK_1_SAVE.progress_timer = (TASK_1_SAVE.progress_timer or 0) + time_global()
     TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) + time_global()
     TASK_3_SAVE.available_time = (TASK_3_SAVE.available_time or 0) + time_global()
+    TASK_3_SAVE.progress_timer = (TASK_3_SAVE.progress_timer or 0) + time_global()
     TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) + time_global()
     TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) + time_global()
     TASK_3_SAVE.stage_2_show_targets_timer = (TASK_3_SAVE.stage_2_show_targets_timer or 0) + time_global()

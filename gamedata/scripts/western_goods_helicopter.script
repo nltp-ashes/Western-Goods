@@ -389,6 +389,14 @@ end
 --- @param heli_id number
 --- @return boolean
 function take_control(heli_id)
+    if not find_object_by_id(heli_id) then
+        local se_obj = alife_object(heli_id)
+        if not se_obj or se_obj:section_name() ~= "" then
+            dbg_printf("[WG] Helicopter | Cannot control missing or replaced (%s)", heli_id)
+        end
+        return false
+    end
+
     local combat = db.storage[heli_id] and db.storage[heli_id].combat
     if combat then
         -- Take over is_enemy to control helicopter combat

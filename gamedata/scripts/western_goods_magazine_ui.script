@@ -16,7 +16,7 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local CONST_PATH_TO_TEXTURES = "ui\\magazines\\"
+local CONST_PATH_TO_TEXTURES = [[ui\magazines\]]
 local CONST_MAGAZINE_PSI_REGEN = 0.0080
 
 local dbg_printf = western_goods_utils.dbg_printf
@@ -58,10 +58,17 @@ function display(sec)
         return
     end
 
+    -- Hide inventory
+    if (get_hud()) then
+        hide_hud_inventory()
+    end
+
+    -- Create instance if needed
     if (not GUI) then
         GUI = UIMagazine(sec)
     end
 
+    -- Show magazine
     if (GUI) and (not GUI:IsShown()) then
         GUI:Reset(sec)
         GUI:ShowDialog(true)
@@ -131,10 +138,22 @@ function UIMagazine:InitControls()
     self:Register(self.btn_previous,"btn_previous")
 end
 
+function UIMagazine:Reset(sec)
+    self.section = sec
+    self.page_current = 1
+    self.page_count = self:GetNumberOfPages()
+
+    self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+
+    dbg_printf("[WG] Magazine UI | Reset GUI - %s (%s/%s)",self.section,self.page_current,self.page_count)
+
+    self:RefreshNavigationButtons()
+end
+
 function UIMagazine:OnNext()
     if (self.page_current >= self.page_count) then return end
 
-    utils_obj.play_sound("interface\\inv_page")
+    utils_obj.play_sound([[interface\inv_page]])
     self.page_current = self.page_current+1
     self.page:InitTexture(self:GetPageTexturePath(self.page_current))
 
@@ -146,7 +165,7 @@ end
 function UIMagazine:OnPrevious()
     if (self.page_current <= 1) then return end
 
-    utils_obj.play_sound("interface\\inv_page")
+    utils_obj.play_sound([[interface\inv_page]])
     self.page_current = self.page_current-1
     self.page:InitTexture(self:GetPageTexturePath(self.page_current))
 
@@ -189,20 +208,8 @@ function UIMagazine:InitCallBacks()
     self:AddCallback("btn_previous", ui_events.BUTTON_CLICKED, self.OnPrevious, self)
 end
 
-function UIMagazine:Reset(sec)
-    self.section = sec
-    self.page_current = 1
-    self.page_count = self:GetNumberOfPages()
-
-    self.page:InitTexture(self:GetPageTexturePath(self.page_current))
-
-    dbg_printf("[WG] Magazine UI | Reset for section %s", self.section)
-
-    self:RefreshNavigationButtons()
-end
-
 function UIMagazine:Close()
-    utils_obj.play_sound("interface\\inv_close")
+    utils_obj.play_sound([[interface\inv_close]])
     self:HideDialog()
 
     Unregister_UI("UIMagazine")
