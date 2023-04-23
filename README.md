@@ -51,7 +51,7 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-> **v2.0.0 - 17/04/2023 - Major Update**
+> **v2.0.0 - 23/04/2023 - Major Update**
 > ```
 > • New storylines :
 >    - Added a first act (3 tasks) centered around a mysterious event regarding a helicopter used by mercs to smuggle goods into the Zone;
@@ -191,8 +191,7 @@ To **uninstall** the addon :
 
 ### FUTURE WORKS
 
-- Add more items (consumables, magazines, tech items);
-- Add more storylines/tasks! Feel free to suggest ideas;
+- The development of the addon will be on hold for the next few weeks/months;
 
 ---
 
@@ -240,11 +239,15 @@ Special thanks to these people for their help in the making of this addon :
 
 |                  Name                   |                                           Motive                                            |
 |:---------------------------------------:|:-------------------------------------------------------------------------------------------:|
+|  **NLTP_JODYE, Niko, NLTP_DEV, Sark**   |                      For play-testing pre-release builds of the addon                       |
 |           **SvetkaDystopia**            |             For taking the time to make models for this addon, enormous thanks              |
 |      **xcvb**, **RavenAscendant**       |         Help for so many things it'd be too long to list. Huge thanks to these two          |
 | **Starcry\_**, **Rascal**, **lauta_ro** |                   Helped to mitigate a compatibility issue with DirectX 8                   |
 |                **arti**                 |                             For making his Barter UI Framework                              |
 |                **arti**                 | For having updated the barters config files to work with the newer version of his framework |
 
-If you are able to help in the following domains, please reach out :
-- Models and animations (To expand the variety of models, and add the missing use animations).
+If you would like to help development for future updates, you can :
+1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  
+   https://github.com/nltp-ashes/Western-Goods
+2. Help by play-testing updates by getting Release Candidates builds on the addon's GitHub repository :  
+   https://github.com/nltp-ashes/Western-Goods/releases/tag/test
