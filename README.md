@@ -46,10 +46,15 @@ To **uninstall** the addon :
 3. Load your save-game. Once loaded, save again;
 4. Close your game, and remove the files added by the addon.
 
-
 ---
 
 ### CHANGELOG
+
+> **v2.0.1 - 25/04/2023 - Hotfix**
+> ```
+> • Bug fixes :
+>    - Fixed a CTD when navigating the debug menu (Thanks Colombo2022);
+> ```
 
 > **v2.0.0 - 23/04/2023 - Major Update**
 > ```
@@ -88,103 +93,122 @@ To **uninstall** the addon :
 >    - Fixed an issue due to which some items were missing from traders/corpses;
 >    - Fixed incorrect calories for the Yoo-hoo chocolate drink (Thanks Servalion);
 > ```
-
-**Note 1:** v2.0.0 is not compatible with S.T.A.L.K.E.R. Anomaly 1.5.1 anymore.  
-**Note 2:** v2.0.0 has a new requirement. Make sure to read **REQUIREMENTS** again.
+> 
+> **Note 1:** v2.0.0 is not compatible with S.T.A.L.K.E.R. Anomaly 1.5.1 anymore.  
+> **Note 2:** v2.0.0 has a new requirement. Make sure to read **REQUIREMENTS** again.
 
 > **v1.4.4 - 28/12/2022 - Minor Update**
 > ```
-> • Fixed a CTD when skinning mutants (Thanks Blasterian);
-> • Fixed an issue due to which logs could get spammed with lua errors;
-> • Fixed an issue due to which reading a magazines would display the wrong page for 1 frame.
+> • Bug fixes :
+>    - Fixed a CTD when skinning mutants (Thanks Blasterian);
+>    - Fixed an issue due to which logs could get spammed with lua errors;
+>    - Fixed an issue due to which reading a magazines would display the wrong page for 1 frame.
 > ```
 
 > **v1.4.3 - 27/12/2022 - Hotfix**
 > ```
-> • Fixed a CTD when opening the inventory. I tried to make the previous fix too quickly and forgot a nil check.
+> • Bug fixes :
+>    - Fixed a CTD when opening the inventory. I tried to make the previous fix too quickly and forgot a nil check.
 > ```
 
 > **v1.4.2 - 27/12/2022 - Hotfix**
 > ```
-> • Fixed an issue due to which all items appeared locked in every trader (Thanks Warad).
+> • Bug fixes :
+>    - Fixed an issue due to which all items appeared locked in every trader (Thanks Warad).
 > ```
 
 > **v1.4.1 - 27/12/2022 - Hotfix**
 > ```
-> • Added a compatibility patch for 1.5.1 users (Thanks Oktopus).
+> • Others :
+>    - Added a compatibility patch for 1.5.1 users (Thanks Oktopus).
 > ```
 
 > **v1.4.0 - 27/12/2022 - Major Update**
 > ```
-> • Added a new unique NPC : Williams "Ashes" Heades. He will be your main source of western goods, and is located in the Book Store (Pripyat Outskirts);
-> • Greatly decreased availability of western goods on other traders : Only Mercs and Freedomers have decent supplies, Bandits and Renegades smuggle a few things;
-> • Added new currencies : Dollars and Euros. You can find them mainly on Mercs and Freedomers;
-> • The new unique NPC will trade Dollars and Euros against goods;
-> • The new unique NPC will exchange different values of bank notes for others (e.g. 1x 100$ for 2x 50$);
-> • The new unique NPC will also exchange different Dollars and Euros for Roubles, if you want to cash out. He won't, however, trade Roubles for Dollars/Euros;
-> • Almost completely rewrote the script that spawns items in traders/corpses, to allow for better expandability and finer tuning.
+> • Additions :
+>    - Added new currencies : Dollars and Euros. You can find them mainly on Mercs and Freedomers;
+>    - Added a new unique NPC : Williams "Ashes" Heades. He will be your main source of western goods, and is located in the Book Store (Pripyat Outskirts);
+>    - The new unique NPC will trade Dollars and Euros against goods;
+>    - The new unique NPC will exchange different values of bank notes for others (e.g. 1x 100$ for 2x 50$);
+>    - The new unique NPC will also exchange different Dollars and Euros for Roubles, if you want to cash out. He won't, however, trade Roubles for Dollars/Euros;
+> • Changes :
+>    - Greatly decreased availability of western goods on other traders : Only Mercs and Freedomers have decent supplies, Bandits and Renegades smuggle a few things;
+>    - Almost completely rewrote the script that spawns items in traders/corpses, to allow for better expandability and finer tuning.
 > ```
 
 > **v1.3.0 - 20/12/2022 - Major Update**
 > ```
-> • Added 3 *men* magazines : PLAYBOY magazines with Chloe Khan, Nicole Whitehead and Carrie Stevens;
-> • Added 2 video game magazines : Xbox : The Official Magazine March 2002 and December 2004 editions;
-> • Added the ability to read magazines. So far, all 5 new magazines are readable;
-> • Corrected some missing sections in the addon removal script;
-> • Various small fixes & tweaks.
+> • New items :
+>    - Added 3 *men* magazines : PLAYBOY magazines with Chloe Khan, Nicole Whitehead and Carrie Stevens;
+>    - Added 2 video game magazines : Xbox : The Official Magazine March 2002 and December 2004 editions;
+> • Other additions :
+>    - Added the ability to read magazines. So far, all 5 new magazines are readable;
+> • Bug fixes :
+>    - Fixed addon removal script not deleting some items;
+>    - Various small fixes & tweaks.
 > ```
 
 > **v1.2.1 - 09/12/2022 - Hotfix**
 > ```
-> • Fixed a CTD when talking to a trader from the "Trader" faction (Thanks ihatemylife4234).
+> • Bug fixes :
+>    - Fixed a CTD when talking to a trader from the "Trader" faction (Thanks ihatemylife4234).
 > ```
 
 > **v1.2.0 - 15/12/2022 - Major Update**
 > ```
-> • Added a new device : The GPS locator - a device you can use to locate the closest camp to your location, as well as your current map. Use it the same way you would use a watch;
-> • Added 3 bottles : Grand Vin de Chateau Latour, Nestea ice tea, Yoo-hoo Chocolate Drink bottles;
-> • Added 4 cans : Bavaria 86, 7UP can, Dr. Bob, Lipton Ice Tea cans;
-> • Added 5 sweet snacks : Bounty, Kinder Maxi, Kinder Bueno, Kit-Kat, Milka chocolates;
-> • Added 3 salted snacks : Lay's, Doritos, Pringles mini chips;
-> • Added 2 tech items : ASUS Laptop, Military radio;
-> • Removed "TRADE_HELPER.txt", as it took to much time to maintain.
+> • New items :
+>    - Added a new device : The GPS locator - a device you can use to locate the closest camp to your location, as well as your current map. Use it the same way you would use a watch;
+>    - Added 3 bottles : Grand Vin de Chateau Latour, Nestea ice tea, Yoo-hoo Chocolate Drink bottles;
+>    - Added 4 cans : Bavaria 86, 7UP can, Dr. Bob, Lipton Ice Tea cans;
+>    - Added 5 sweet snacks : Bounty, Kinder Maxi, Kinder Bueno, Kit-Kat, Milka chocolates;
+>    - Added 3 salted snacks : Lay's, Doritos, Pringles mini chips;
+>    - Added 2 tech items : ASUS Laptop, Military radio;
+> • Others :
+>    - Removed "TRADE_HELPER.txt", as it took to much time to maintain.
 > ```
 
 > **v1.1.2 - 09/12/2022 - Hotfix**
 > ```
-> • Fixed incorrect item descriptions (Thanks Blasterian).
+> • Bug fixes :
+>    - Fixed incorrect item descriptions (Thanks Blasterian).
 > ```
 
 > **v1.1.1 - 05/12/2022 - Hotfix**
 > ```
-> • Fixed a compatibility issue with DirectX 8 (Thanks SEPTEMBERKID).
+> • Bug fixes :
+>    - Fixed a compatibility issue with DirectX 8 (Thanks SEPTEMBERKID).
 > ```
 
 > **v1.1.0 - 05/12/2022 - Major Update**
 > ```
-> • Added 6 cans : Pepsi, Fanta, Perrier, Mountain Dew, Rockstar Energy, Monster Energy cans; 
-> • Added 2 bottles : Vodka Gorbatschow, Mountain Dew bottles;
-> • Added 2 snacks : M&Ms chocolate box and Mentos Fruits candies;
-> • Added 1 food : Charal Cheese Hamburger;
-> • Adjusted the trader offers (for Freedom especially);
-> • Various small fixes & tweaks.
+> • New items :
+>    - Added 6 cans : Pepsi, Fanta, Perrier, Mountain Dew, Rockstar Energy, Monster Energy cans; 
+>    - Added 2 bottles : Vodka Gorbatschow, Mountain Dew bottles;
+>    - Added 2 snacks : M&Ms chocolate box and Mentos Fruits candies;
+>    - Added 1 food : Charal Cheese Hamburger;
+> • Changes :
+>    - Adjusted the trader offers (for Freedom especially);
+> • Bug fixes :
+>    - Various small fixes & tweaks.
 > ```
 
 > **v1.0.1 - 03/12/2022 - Hotfix**
 > ```
-> • Fixed a compatibility issue with food from Denro 1.0 (Thanks gobravo);
-> • Rearranged some of the files to avoid further conflicts (Thanks lsandoval0000);
-> • Renamed all of the items to avoid further conflicts.
+> • Bug fixes :
+>    - Fixed a compatibility issue with food from Denro 1.0 (Thanks gobravo);
+>    - Rearranged some of the files to avoid further conflicts (Thanks lsandoval0000);
+>    - Renamed all of the items to avoid further conflicts.
 > ```
-
-**Note:** v1.0.1 is not compatible with previous versions. Use the addon removal before updating to the new version.
+> 
+> **Note:** v1.0.1 is not compatible with previous versions. Use the addon removal before updating to the new version.
 
 > **v1.0.0 - 03/12/2022 - Initial Release**
 > ```
-> • Added 4 drinks and 4 snacks;
-> • Each item has unique inventory icons;
-> • Each item has unique world models;
-> • Each of the 4 drinks have FDDA-ready animations.
+> • New items :
+>    - Added 4 drinks and 4 snacks;
+>    - Each item has unique inventory icons;
+>    - Each item has unique world models;
+>    - Each of the 4 drinks have FDDA-ready animations.
 > ```
 
 ---
