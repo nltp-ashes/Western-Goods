@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.0.1-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.0.2-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -50,6 +50,13 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
+> **v2.0.2 - 03/05/2023 - Hotfix**
+> ```
+> • Bug fixes :
+>    - Fixed a CTD when using GPS Locator on debug map (Thanks |Сэмюел);
+>    - Fixed GPS locator having two 'Use' options in context menu (Thanks |Сэмюел).
+> ```
+
 > **v2.0.1 - 25/04/2023 - Hotfix**
 > ```
 > • Bug fixes :
@@ -60,21 +67,21 @@ To **uninstall** the addon :
 > ```
 > • New storylines :
 >    - Added a first act (3 tasks) centered around a mysterious event regarding a helicopter used by mercs to smuggle goods into the Zone;
->    - Added a second act (2 tasks), where, after prooving yourself, one of dushman's clients tasks you with a very special mission;
+>    - Added a second act (2 tasks), where, after prooving yourself, one of dushman's clients tasks you with a very special mission.
 > • MCM integration :
 >    - Added loot factor settings : one for coprse loot and one for trader loot;
 >    - Added an option to have more guided tasks;
 >    - Added a debug mode that prints information in the console/log to make troubleshooting easier;
 >    - Added a compatibility section, where you can enable patches when WG is unable to autonomously detect the other conflicting addon;
->    - Moved addon removal into a check box in MCM;
+>    - Moved addon removal into a check box in MCM.
 > • New items :
 >    - Added a new tech item : a BIC lighter, usable to light cigarettes and campfires;
 >    - Added three new magazine : European Car magazine, EVO magazine and Gameland magazine;
->    - Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich;
+>    - Added six new food items : Oreo, Mon Cheri, Ferrero Rocher, Toblerone, French MRE and a sandwich.
 > • Other additions :
 >    - Added psy-health regen when reading magazines (configurable in MCM);
 >    - Added the ability for the western goods trader to transport via helicopoter the player to certain locations after finishing act 1;
->    - Added encyclopedia entries for some items/characters in the PDA's guide;
+>    - Added encyclopedia entries for some items/characters in the PDA's guide.
 > • Other changes :
 >    - Changed most of the icons for items to newer, high quality ones;
 >    - Changed the corpse loot generation logic : you can now get multiple items per corpse (upto five by default, configurable in MCM);
@@ -87,11 +94,11 @@ To **uninstall** the addon :
 >    - Added a CTD when DXML is missing;
 >    - Added a CTD when LUA unlocalizer is missing;
 >    - Added a CTD when the Barter UI framework is missing;
->    - Added a CTD when trader_autoinject.script is outdated;
+>    - Added a CTD when trader_autoinject.script is outdated.
 > • Bug fixes :
 >    - Fixed an issue due to which the Next button would appear when reading a magazine with only 1 page;
 >    - Fixed an issue due to which some items were missing from traders/corpses;
->    - Fixed incorrect calories for the Yoo-hoo chocolate drink (Thanks Servalion);
+>    - Fixed incorrect calories for the Yoo-hoo chocolate drink (Thanks Servalion).
 > ```
 > 
 > **Note 1:** v2.0.0 is not compatible with S.T.A.L.K.E.R. Anomaly 1.5.1 anymore.  
