@@ -131,10 +131,12 @@ function use_gps(obj)
     local closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_game_world()
 
 	-- If the smart terrain doesn't have a translation, we retry using the PDA instead
-	if closest_smart_name and not has_translation(closest_smart_name) then
-		dbg_printf("[WG] Usable Items | GPS Locator - Smart terrain found but no translation. Fallback to PDA info")
-		closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_pda()
-	end
+    if closest_smart_name and not has_translation(closest_smart_name) then
+        dbg_printf("[WG] Usable Items | GPS Locator - Smart terrain found but no translation. Fallback to PDA info")
+        closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_pda()
+    else
+        dbg_printf("[WG] Usable Items | GPS Locator - No smart on level (%s)", level.name())
+    end
 
 	actor_menu.set_msg(1, build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level), 7)
 end
@@ -144,15 +146,18 @@ end
 --- @return string
 --- @return string
 function find_info_from_game_world()
-	local smart = alife_object(smart_terrain.nearest_to_actor_smart.id)
-	
-	local closest_smart_name = smart:name()
-	local closest_smart_distance = smart.dist_to_actor
-	local closest_smart_level = alife():level_name(smart.level_id)
+    local closest_smart_id = smart_terrain.nearest_to_actor_smart.id
+    local smart = closest_smart_id and alife_object(closest_smart_id)
+
+    if not smart then return end
+
+    local closest_smart_name = smart:name()
+    local closest_smart_distance = smart.dist_to_actor
+    local closest_smart_level = alife():level_name(smart.level_id)
 
     dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
-	
-	return closest_smart_name, closest_smart_distance, closest_smart_level
+
+    return closest_smart_name, closest_smart_distance, closest_smart_level
 end
 
 --- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the pda map.
