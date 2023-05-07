@@ -98,21 +98,11 @@ function use_item(obj,_,cf)
         end
     end
 
-    -- Act 1, Task 2 quest item
-    if (obj:section() == "wg_act_1_task_2_quest_item_2") then
+    -- Readable items (magazines, paper notes)
+    if ini_sys:r_bool_ex(obj:section(), "readable") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
         western_goods_magazine_ui.display(obj:section())
         return
-    end
-
-    -- Magazines
-    local magazines = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "magazine")
-    for item_id,_ in pairs(magazines) do
-        if western_goods_core.table_item_field_by_key(magazines, item_id, "section") == obj:section() then
-            dbg_printf("[WG] Usable Items | Used %s",obj:section())
-            western_goods_magazine_ui.display(obj:section())
-            return
-        end
     end
 end
 
