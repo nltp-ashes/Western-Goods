@@ -533,6 +533,30 @@ end
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Pinup Collector addon
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to return the text written when right clicking on an porn magazine (Pinup Collect addon).
+--- @param obj game_object
+--- @return string
+function menu_tear_page(obj)
+    if item_pinup_collect then
+        return western_goods_utils.get_translation("st_wg_tear_page")
+    end
+    return nil
+end
+
+--- Function called by item use functors when a page is torn off a porn magazine.
+--- @param obj game_object
+--- @return nil
+function tear_page(obj)
+    if item_pinup_collect then
+        item_pinup_collect.func_pinup(obj)
+    end
+    return nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
 
