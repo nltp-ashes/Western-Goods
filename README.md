@@ -12,14 +12,15 @@ This addon was originally a minor addon that added a few drinks and snack from p
 
 ### REQUIREMENTS
 
-This addon **requires** the following :
-1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152)
-2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes)
-3. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest)
+These addons are **absolutely required** in order for Western Goods to work :
+1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152);
+2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes);
+3. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest).
 
-This addon **does not require** the following :
-1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (items just won't have animations if you don't have it)
-2. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (edit defaults manually in western_goods_mcm.script if you don't have it)
+These addons can be used to enrich the experience, but **aren't required** :
+1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
+2. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
+3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet).
 
 ---
 
@@ -29,16 +30,16 @@ To **install** the addon :
 1. Download and install the requirements;
 2. Download this addon;
 3. Merge the contents of the gamedata folder with your game's folder of the same name;
-   1. Either with a mod manager JSGME/MO2 (highly recommended);
-   2. Or manually (highly unrecommended).
+   - Either with a mod manager JSGME/MO2 (highly recommended);
+   - Or manually (highly unrecommended).
 
 To **update** the addon :
 1. Delete the files from the previous version;
-   1. By disabling the addon in your mod manager, and then deleting the files;
-   2. Or by deleting the files one by one if you added them manually;
+   - By disabling the addon in your mod manager, and then deleting the files;
+   - Or by deleting the files one by one if you added them manually;
 2. Add in the new files from the new version
-    1. Either with a mod manager JSGME/MO2 (highly recommended);
-    2. Or manually (highly unrecommended).
+   - Either with a mod manager JSGME/MO2 (highly recommended);
+   - Or manually (highly unrecommended).
 
 To **uninstall** the addon :
 1. Start your game and open the MCM settings;
@@ -228,8 +229,6 @@ To **uninstall** the addon :
 
 ### KNOWN ISSUES
 
-- It isn't very obvious that you can order the helicopter to attack enemies during act 1, task 2;
-- The second to last stage of act 1, task 3 might be unnecessarily challenging;
 - Stutters may occur when the game spawns in new NPCs.
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
@@ -239,10 +238,10 @@ To **uninstall** the addon :
 ### SUPPORT & SUGGESTIONS
 
 If you need help with anything, or if you have any suggestions of new items, you can :
-- Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
 - Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) (recommended);
 - Message me on Discord : NLTP_ASHES#0117 (recommended);
 - Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended).
+- Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
 
 ---
 
@@ -271,6 +270,7 @@ Special thanks to these people for their help in the making of this addon :
 |                  Name                   |                                           Motive                                            |
 |:---------------------------------------:|:-------------------------------------------------------------------------------------------:|
 |  **NLTP_JODYE, Niko, NLTP_DEV, Sark**   |                      For play-testing pre-release builds of the addon                       |
+|           **RavenAscendant**            |              For providing help with adding native Pinup Collector integration              |
 |           **SvetkaDystopia**            |             For taking the time to make models for this addon, enormous thanks              |
 |      **xcvb**, **RavenAscendant**       |         Help for so many things it'd be too long to list. Huge thanks to these two          |
 | **Starcry\_**, **Rascal**, **lauta_ro** |                   Helped to mitigate a compatibility issue with DirectX 8                   |
