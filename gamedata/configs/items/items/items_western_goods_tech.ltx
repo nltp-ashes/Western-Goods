@@ -2,170 +2,154 @@
 ;;--================| Tech |========================================================================================--;;
 ;;--================================================================================================================--;;
 
-[wg_laptop]:tch_junk
-$spawn                                   = "misc\wg_laptop"
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_laptop.ogf
-kind			                         = i_misc
-
-inv_name			                     = st_wg_laptop
-inv_name_short			                 = st_wg_laptop_s
-description			                     = st_wg_laptop_descr
-inv_weight			                     = 1.2
-cost				                     = 17495
-
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 2
-inv_grid_height			                 = 2
-inv_grid_x			                     = 3
-inv_grid_y			                     = 0
-
-tier 									 = 3
+[wg_tech_base]:tch_junk
+$spawn                                           = "devices\pda"
+cform                                            = skeleton
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_computer]:tch_junk
-$spawn                                   = "misc\wg_computer"
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_computer.ogf
-kind			                         = i_misc
+[wg_gps]:wg_tech_base,booster
+visual                                           = dynamics\western_goods_tech\wg_gps.ogf
+kind                                             = i_device
 
-inv_name			                     = st_wg_computer
-inv_name_short			                 = st_wg_computer_s
-description			                     = st_wg_computer_descr
-inv_weight			                     = 13.5
-cost				                     = 1500
+inv_name                                         = st_wg_gps
+inv_name_short                                   = st_wg_gps_s
+description                                      = st_wg_gps_descr
+inv_weight                                       = 0.9
+cost                                             = 7500
 
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 3
-inv_grid_height			                 = 3
-inv_grid_x			                     = 0
-inv_grid_y			                     = 0
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 0
 
-tier  									 = 1
+can_trade                                        = true
+remove_after_use                                 = false
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_keyboard]:tch_junk
-$spawn                                   = "misc\wg_keyboard"
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_keyboard.ogf
-kind			                         = i_misc
-
-inv_name			                     = st_wg_keyboard
-inv_name_short			                 = st_wg_keyboard_s
-description			                     = st_wg_keyboard_descr
-inv_weight			                     = 0.8
-cost				                     = 1000
-
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 3
-inv_grid_height			                 = 1
-inv_grid_x			                     = 5
-inv_grid_y			                     = 0
-
-tier  									 = 1
+tier                                             = 3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_gps]:tch_junk,booster
-GroupControlSection                      = spawn_group
-$spawn                                   = "misc\wg_gps"
-$prefetch                                = 32
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_gps.ogf
-kind			                         = i_device
+[wg_lighter_bic]:wg_tech_base,booster
+visual                                           = dynamics\western_goods_tech\wg_lighter_bic.ogf
+kind                                             = i_tool
 
-inv_name			                     = st_wg_gps
-inv_name_short			                 = st_wg_gps_s
-description			                     = st_wg_gps_descr
-inv_weight			                     = 0.9
-cost				                     = 7500
+inv_name                                         = st_wg_lighter_bic
+inv_name_short                                   = st_wg_lighter_bic_s
+description                                      = st_wg_lighter_bic_descr
+inv_weight                                       = 0.025
+cost                                             = 1950
 
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 1
-inv_grid_height			                 = 1
-inv_grid_x			                     = 8
-inv_grid_y			                     = 0
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 1
 
-can_trade                                = true
-remove_after_use                         = false
-
-tier  									 = 3
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_military_decoder]:tch_junk
-$spawn                                   = "misc\wg_military_decoder"
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_military_decoder.ogf
-kind			                         = i_misc
-
-inv_name			                     = st_wg_military_decoder
-inv_name_short			                 = st_wg_military_decoder_s
-description			                     = st_wg_military_decoder_descr
-inv_weight			                     = 4.2
-cost				                     = 7600
-
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 3
-inv_grid_height			                 = 2
-inv_grid_x			                     = 5
-inv_grid_y			                     = 1
-
-tier 									 = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_military_radio]:tch_junk
-$spawn                                   = "misc\wg_military_radio"
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_military_radio.ogf
-kind			                         = i_misc
-
-inv_name			                     = st_wg_military_radio
-inv_name_short			                 = st_wg_military_radio_s
-description			                     = st_wg_military_radio_descr
-inv_weight			                     = 3.1
-cost				                     = 6800
-
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 2
-inv_grid_height			                 = 1
-inv_grid_x			                     = 3
-inv_grid_y			                     = 2
-
-tier 									 = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_lighter_bic]:tch_junk,booster
-$spawn                                   = "misc\wg_lighter_bic"
-cform                                    = skeleton
-visual                                   = dynamics\western_goods_tech\wg_lighter_bic.ogf
-kind			                         = i_tool
-
-inv_name			                     = st_wg_lighter_bic
-inv_name_short			                 = st_wg_lighter_bic_s
-description			                     = st_wg_lighter_bic_descr
-inv_weight			                     = 0.025
-cost				                     = 1950
-
-icons_texture				             = ui\icons\ui_icon_western_goods_tech
-inv_grid_width			                 = 1
-inv_grid_height			                 = 1
-inv_grid_x			                     = 8
-inv_grid_y			                     = 1
-
-use_condition                            = true
-condition_bar                            = condition_progess_bar
-allow_repair                             = false
-remove_after_use                         = false
+use_condition                                    = true
+condition_bar                                    = condition_progess_bar
+allow_repair                                     = false
+remove_after_use                                 = false
 
 ; custom properties
-use_fill                                 = true     ; used to display 'Fill:100%' in description
-can_light_weak                           = true     ; used to know if it can light a cig
-can_light_strong                         = true     ; used to know if it can light a campfire
-degradation_factor                       = 0.05     ; how many % will be consumed when used
+use_fill                                         = true     ; used to display 'Fill:100%' in description
+can_light_weak                                   = true     ; used to know if it can light a cig
+can_light_strong                                 = true     ; used to know if it can light a campfire
+degradation_factor                               = 0.05     ; how many % will be consumed when used
 
-tier 									 = 2
+tier                                             = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_laptop]:wg_tech_base
+visual                                           = dynamics\western_goods_tech\wg_laptop.ogf
+kind                                             = i_misc
+
+inv_name                                         = st_wg_laptop
+inv_name_short                                   = st_wg_laptop_s
+description                                      = st_wg_laptop_descr
+inv_weight                                       = 1.2
+cost                                             = 17495
+
+inv_grid_width                                   = 2
+inv_grid_height                                  = 2
+inv_grid_x                                       = 3
+inv_grid_y                                       = 0
+
+tier                                             = 3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_computer]:wg_tech_base
+visual                                           = dynamics\western_goods_tech\wg_computer.ogf
+kind                                             = i_misc
+
+inv_name                                         = st_wg_computer
+inv_name_short                                   = st_wg_computer_s
+description                                      = st_wg_computer_descr
+inv_weight                                       = 13.5
+cost                                             = 1500
+
+inv_grid_width                                   = 3
+inv_grid_height                                  = 3
+inv_grid_x                                       = 0
+inv_grid_y                                       = 0
+
+tier                                             = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_keyboard]:wg_tech_base
+visual                                           = dynamics\western_goods_tech\wg_keyboard.ogf
+kind                                             = i_misc
+
+inv_name                                         = st_wg_keyboard
+inv_name_short                                   = st_wg_keyboard_s
+description                                      = st_wg_keyboard_descr
+inv_weight                                       = 0.8
+cost                                             = 1000
+
+inv_grid_width                                   = 3
+inv_grid_height                                  = 1
+inv_grid_x                                       = 5
+inv_grid_y                                       = 0
+
+tier                                             = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_military_decoder]:wg_tech_base
+visual                                           = dynamics\western_goods_tech\wg_military_decoder.ogf
+kind                                             = i_misc
+
+inv_name                                         = st_wg_military_decoder
+inv_name_short                                   = st_wg_military_decoder_s
+description                                      = st_wg_military_decoder_descr
+inv_weight                                       = 4.2
+cost                                             = 7600
+
+inv_grid_width                                   = 3
+inv_grid_height                                  = 2
+inv_grid_x                                       = 5
+inv_grid_y                                       = 1
+
+tier                                             = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_military_radio]:wg_tech_base
+visual                                           = dynamics\western_goods_tech\wg_military_radio.ogf
+kind                                             = i_misc
+
+inv_name                                         = st_wg_military_radio
+inv_name_short                                   = st_wg_military_radio_s
+description                                      = st_wg_military_radio_descr
+inv_weight                                       = 3.1
+cost                                             = 6800
+
+inv_grid_width                                   = 2
+inv_grid_height                                  = 1
+inv_grid_x                                       = 3
+inv_grid_y                                       = 2
+
+tier                                             = 2

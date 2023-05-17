@@ -67,6 +67,7 @@
 
     <dialog id="western_goods_trader_barter">
         <has_info>western_goods_trader_first_meet_over</has_info>
+        <precondition>western_goods_core.is_barter_ui_installed</precondition>
         <phrase_list>
             <phrase id="0"> <!-- actor -->
                 <text>western_goods_trader_dialog_init</text>

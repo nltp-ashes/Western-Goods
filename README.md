@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.0.2-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.0.2-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.1.0%20RC3-yellow) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -14,13 +14,13 @@ This addon was originally a minor addon that added a few drinks and snack from p
 
 These addons are **absolutely required** in order for Western Goods to work :
 1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152);
-2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes);
-3. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest).
+2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes).
 
 These addons can be used to enrich the experience, but **aren't required** :
 1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
-2. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
-3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet).
+2. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest) (allows you to make EUR/USD/RUB currency exchanges);
+3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
+4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon).
 
 ---
 
@@ -50,6 +50,16 @@ To **uninstall** the addon :
 ---
 
 ### CHANGELOG
+
+> **v2.1.0 - xx/xx/2023 - Work In Progress**
+> ```
+> • Additions :
+>    - Added native integration with the Pinup Collector addon;
+> • Changes :
+>    - Made the Barter UI Framework optional (a soft requirement);
+>    - Removed the need to have trader_autoinject.script up-to-date;
+>    - Other minor/back-end changes.
+> ```
 
 > **v2.0.2 - 03/05/2023 - Hotfix**
 > ```
@@ -249,33 +259,36 @@ If you need help with anything, or if you have any suggestions of new items, you
 
 Credit goes to these people for their work contained in this addon :
 
-|           Name            |                              Motive                              |         License          |
-|:-------------------------:|:----------------------------------------------------------------:|:------------------------:|
-|       **GhenTuong**       |                  Reused his xr_logic_ex script                   |           N/A            |
-|         **arti**          |               Reused his trader_autoinject script                |           N/A            |
-|    **RavenAscendant**     |                 Reused his rax_icon_tint script                  | CC BY-NC-SA 3.0 Unported |
-|    **SvetkaDystopia**     |               Produced four models for consumables               |           N/A            |
-|      **Feel_Fried**       |   Reused some files from his Food, drug and drinks animations    |          PD 1.0          |
-|    **RavenAscendant**     |   Wrote the code that takes control of helicopters' combat AI    |           N/A            |
-|       **lauta_ro**        |               Reused part of his More Guides addon               |           N/A            |
-|        **Aoldri**         |          Reused icons from his Hideout Furniture addon           |           N/A            |
-|     **A.R.E.A. mod**      |                Ported some models from their mod                 |           N/A            |
-|     **segaretro.org**     |        For providing the textures for the xbox magazines         |        CC BY 4.0         |
-|      **archive.org**      |         For providing the textures for the men magazines         |     CC BY-NC-ND 4.0      |
-| **commons.wikimedia.org** |    For providing various logos and resources used in textures    |          PD 1.0          |
-|      **freepik.com**      |    For providing various logos and resources used in textures    |           N/A            |
+|                                   Name                                    |                           Motive                            |                                License                                |
+|:-------------------------------------------------------------------------:|:-----------------------------------------------------------:|:---------------------------------------------------------------------:|
+|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                Reused his xr_logic_ex script                |                                  N/A                                  |
+|             **[arti](https://www.moddb.com/members/artifax)**             |             Reused his trader_autoinject script             |                                  N/A                                  |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |               Reused his rax_icon_tint script               |                       CC BY-NC-SA 3.0 Unported                        |
+|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |            Produced four models for consumables             |                                  N/A                                  |
+|        **[Feel_Fried](https://www.moddb.com/members/feel-fried)**         | Reused some files from his Food, drug and drinks animations |                                PD 1.0                                 |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     | Wrote the code that takes control of helicopters' combat AI |                                  N/A                                  |
+|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |            Reused part of his More Guides addon             |                                  N/A                                  |
+|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |             Reused one of his script functions              |                                  N/A                                  |
+|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |           Reused multiple of his script functions           |                                  N/A                                  |
+|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |        Reused icons from his Hideout Furniture addon        |                                  N/A                                  |
+|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |          Adapted his fan film into an in-game task          |                                  N/A                                  |
+|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |              Ported some models from their mod              |                                  N/A                                  |
+|                **[segaretro.org](https://segaretro.org/)**                |      For providing the textures for the xbox magazines      |                               CC BY 4.0                               |
+|                  **[archive.org](https://archive.org/)**                  |      For providing the textures for the men magazines       |                            CC BY-NC-ND 4.0                            |
+| **[commons.wikimedia.org](https://commons.wikimedia.org/wiki/Main_Page)** | For providing various logos and resources used in textures  |                                PD 1.0                                 |
+|                **[freepik.com](https://www.freepik.com/)**                | For providing various logos and resources used in textures  | [License](https://www.freepikcompany.com/legal#nav-freepik-agreement) |
 
 Special thanks to these people for their help in the making of this addon :
 
-|                  Name                   |                                           Motive                                            |
-|:---------------------------------------:|:-------------------------------------------------------------------------------------------:|
-|  **NLTP_JODYE, Niko, NLTP_DEV, Sark**   |                      For play-testing pre-release builds of the addon                       |
-|           **RavenAscendant**            |              For providing help with adding native Pinup Collector integration              |
-|           **SvetkaDystopia**            |             For taking the time to make models for this addon, enormous thanks              |
-|      **xcvb**, **RavenAscendant**       |         Help for so many things it'd be too long to list. Huge thanks to these two          |
-| **Starcry\_**, **Rascal**, **lauta_ro** |                   Helped to mitigate a compatibility issue with DirectX 8                   |
-|                **arti**                 |                             For making his Barter UI Framework                              |
-|                **arti**                 | For having updated the barters config files to work with the newer version of his framework |
+|                                                                                  Name                                                                                  |                                           Motive                                            |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
+| **[NLTP_JODYE](https://www.moddb.com/members/nltp-jodye), [Niko](https://www.moddb.com/members/polishcow1), [NLTP_DEV](https://www.moddb.com/members/nltp-dev), Sark** |                      For play-testing pre-release builds of the addon                       |
+|                                                   **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**                                                   |              For providing help with adding native Pinup Collector integration              |
+|                                                   **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**                                                   |             For taking the time to make models for this addon, enormous thanks              |
+|                           **[xcvb](https://www.moddb.com/members/bvcx)**, **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**                           |         Help for so many things it'd be too long to list. Huge thanks to these two          |
+|                 **[Starcry_](https://www.moddb.com/members/starcry666)**, **Rascal**, **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**                  |                   Helped to mitigate a compatibility issue with DirectX 8                   |
+|                                                           **[arti](https://www.moddb.com/members/artifax)**                                                            |                             For making his Barter UI Framework                              |
+|                                                           **[arti](https://www.moddb.com/members/artifax)**                                                            | For having updated the barters config files to work with the newer version of his framework |
 
 If you would like to help development for future updates, you can :
 1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  

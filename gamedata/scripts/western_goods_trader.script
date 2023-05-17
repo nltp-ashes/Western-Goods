@@ -216,27 +216,29 @@ end
 -- Barter actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to initiate the Barter UI.
---- @return nil
-function npc_barter()
-    utils_obj.play_sound("interface\\inv_open")
-    barter_ui.start()
-end
+if western_goods_core.is_barter_ui_installed() then
+    --- Function used to initiate the Barter UI.
+    --- @return nil
+    function npc_barter()
+        utils_obj.play_sound("interface\\inv_open")
+        barter_ui.start()
+    end
 
-GUI_on_showBase = barter_ui.GUI_on_show
---- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
---- @param name string
---- @param path string
---- @return nil
-function barter_ui.GUI_on_show(name, path)
-    local ui_instance = ui_inventory.GUI
-    if name ~= "UIInventory" or (not ui_instance) then return end
+    GUI_on_showBase = barter_ui.GUI_on_show
+    --- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
+    --- @param name string
+    --- @param path string
+    --- @return nil
+    function barter_ui.GUI_on_show(name, path)
+        local ui_instance = ui_inventory.GUI
+        if name ~= "UIInventory" or (not ui_instance) then return end
 
-    local partner = ui_instance:GetPartner()
+        local partner = ui_instance:GetPartner()
 
-    if partner and partner:section() == CONST_TRADER_SECTION then return end
+        if partner and partner:section() == CONST_TRADER_SECTION then return end
 
-    GUI_on_showBase(name, path)
+        GUI_on_showBase(name, path)
+    end
 end
 
 

@@ -578,3 +578,35 @@ function print_key(dik)
     loc = ini_keys:section_exist(loc) and loc or "eng"
     return ini_keys:r_value(loc, dik,0,"<!!!>")
 end
+
+--- Function used to get the real community of the NPC by checking spawn id
+--- @author HarukaSai
+--- @param npc game_object
+--- @param default string
+--- @return string
+function get_real_community(npc, default)
+
+    local furniture = {
+        ["esc_m_trader"] = true,
+        ["red_m_lesnik"] = true
+    }
+
+    local blacklisted_comms = {
+        ["trader"] = true,
+        ["monster"] = true
+    }
+
+    if furniture[npc:name()] then
+        return "stalker"
+    end
+    local community = character_community(npc)
+    if not blacklisted_comms[community] then
+        return community
+    end
+    local squad_community = get_object_squad(npc):get_squad_community()
+    if not blacklisted_comms[squad_community] then
+        return squad_community
+    else
+        return default
+    end
+end

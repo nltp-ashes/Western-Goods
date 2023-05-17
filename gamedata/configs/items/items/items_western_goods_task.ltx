@@ -3,100 +3,100 @@
 ;;--================================================================================================================--;;
 
 [wg_quest_item_base]:identity_immunities
-GroupControlSection						= spawn_group 
-$spawn									= "quest\wg_quest_item"
-cform									= skeleton 
-class									= WP_SCOPE
-
-;sprint_allowed                         = true
-;quest_item                             = true
-
-cost									= 0
-
-icons_texture				            = ui\icons\ui_icon_western_goods_task
-
-can_trade								= false
+$spawn                                           = "quest_items\special_delivery_case"
+GroupControlSection                              = spawn_group
+cform                                            = skeleton
+class                                            = WP_SCOPE
+cost                                             = 0
+icons_texture                                    = ui\icons\ui_icon_western_goods_task
+can_trade                                        = false
+;sprint_allowed                                  = true
+;quest_item                                      = true
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_1_task_1_quest_item]:wg_quest_item_base
-visual                                  = dynamics\western_goods_task\wg_act_1_task_1_quest_item.ogf
-kind			                        = i_quest
+visual                                           = dynamics\western_goods_task\wg_act_1_task_1_quest_item.ogf
+kind                                             = i_quest
 
-story_id                                = wg_act_1_task_1_quest_item
+story_id                                         = wg_act_1_task_1_quest_item
 
-inv_name			                    = st_wg_act_1_task_1_quest_item
-inv_name_short			                = st_wg_act_1_task_1_quest_item_s
-description			                    = st_wg_act_1_task_1_quest_item_descr
-inv_weight			                    = 13.0
+inv_name                                         = st_wg_act_1_task_1_quest_item
+inv_name_short                                   = st_wg_act_1_task_1_quest_item_s
+description                                      = st_wg_act_1_task_1_quest_item_descr
+inv_weight                                       = 13.0
 
-inv_grid_width			                = 3
-inv_grid_height			                = 1
-inv_grid_x			                    = 0
-inv_grid_y			                    = 0
+inv_grid_width                                   = 3
+inv_grid_height                                  = 1
+inv_grid_x                                       = 0
+inv_grid_y                                       = 0
 
-tier 									= 3
+tier                                             = 3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_1_task_2_quest_item_1]:wg_quest_item_base
-visual                                  = dynamics\western_goods_task\wg_act_1_task_2_quest_item_1.ogf
-kind			                        = i_quest
+visual                                           = dynamics\western_goods_task\wg_act_1_task_2_quest_item_1.ogf
+kind                                             = i_quest
 
-story_id                                = wg_act_1_task_2_quest_item_1
+story_id                                         = wg_act_1_task_2_quest_item_1
 
-inv_name			                    = st_wg_act_1_task_2_quest_item_1
-inv_name_short			                = st_wg_act_1_task_2_quest_item_1_s
-description			                    = st_wg_act_1_task_2_quest_item_1_descr
-inv_weight			                    = 12.768
+inv_name                                         = st_wg_act_1_task_2_quest_item_1
+inv_name_short                                   = st_wg_act_1_task_2_quest_item_1_s
+description                                      = st_wg_act_1_task_2_quest_item_1_descr
+inv_weight                                       = 12.768
 
-inv_grid_width			                = 5
-inv_grid_height			                = 1
-inv_grid_x			                    = 4
-inv_grid_y			                    = 0
+inv_grid_width                                   = 5
+inv_grid_height                                  = 1
+inv_grid_x                                       = 4
+inv_grid_y                                       = 0
 
-tier 									= 3
+tier                                             = 3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_1_task_2_quest_item_2]:wg_quest_item_base
-visual                                  = dynamics\western_goods_task\wg_act_1_task_2_quest_item_2.ogf
-kind			                        = i_quest
+visual                                           = dynamics\western_goods_task\wg_act_1_task_2_quest_item_2.ogf
+kind                                             = i_quest
 
-story_id                                = wg_act_1_task_2_quest_item_2
+story_id                                         = wg_act_1_task_2_quest_item_2
 
-use1_functor         					= western_goods_usable_items.menu_view
-use1_action_functor  					= western_goods_usable_items.use_item
-use1_allow_db         					= true
+use1_functor                                     = western_goods_usable_items.menu_view
+use1_action_functor                              = western_goods_usable_items.use_item
+use1_allow_db                                    = true
 
-inv_name			                    = st_wg_act_1_task_2_quest_item_2
-inv_name_short			                = st_wg_act_1_task_2_quest_item_2_s
-description			                    = st_wg_act_1_task_2_quest_item_2_descr
-inv_weight			                    = 0.1
+inv_name                                         = st_wg_act_1_task_2_quest_item_2
+inv_name_short                                   = st_wg_act_1_task_2_quest_item_2_s
+description                                      = st_wg_act_1_task_2_quest_item_2_descr
+inv_weight                                       = 0.1
 
-inv_grid_width			                = 1
-inv_grid_height			                = 1
-inv_grid_x			                    = 4
-inv_grid_y			                    = 1
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 4
+inv_grid_y                                       = 1
 
-use_sound                            	= paper
-snd_on_take								= paper
-readable                                = true
+use_sound                                        = paper
+snd_on_take                                      = paper
+readable                                         = true
 
-tier 									= 3
+tier                                             = 3
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_2_task_2_quest_item]:wg_quest_item_base
-visual                                  = dynamics\western_goods_task\wg_act_2_task_2_quest_item.ogf
-kind			                        = i_quest
+visual                                           = dynamics\western_goods_task\wg_act_2_task_2_quest_item.ogf
+kind                                             = i_quest
 
-story_id                                = wg_act_2_task_2_quest_item
+story_id                                         = wg_act_2_task_2_quest_item
 
-inv_name			                    = st_wg_act_2_task_2_quest_item
-inv_name_short			                = st_wg_act_2_task_2_quest_item_s
-description			                    = st_wg_act_2_task_2_quest_item_descr
-inv_weight			                    = 3.5
+inv_name                                         = st_wg_act_2_task_2_quest_item
+inv_name_short                                   = st_wg_act_2_task_2_quest_item_s
+description                                      = st_wg_act_2_task_2_quest_item_descr
+inv_weight                                       = 3.5
 
-inv_grid_width			                = 2
-inv_grid_height			                = 1
-inv_grid_x			                    = 0
-inv_grid_y			                    = 1
+inv_grid_width                                   = 2
+inv_grid_height                                  = 1
+inv_grid_x                                       = 0
+inv_grid_y                                       = 1
 
-tier 									= 3
+tier                                             = 3

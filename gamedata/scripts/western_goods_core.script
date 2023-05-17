@@ -36,7 +36,7 @@ function spawn_western_goods_in_trader(npc)
     local is_barman = trader_autoinject.get_trader_type(npc) == trader_autoinject.BARMAN
     local is_mechanic = trader_autoinject.get_trader_type(npc) == trader_autoinject.MECHANIC
 
-    local community = trader_autoinject.get_real_community(npc, "stalker")
+    local community = western_goods_utils.get_real_community(npc, "stalker")
     local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
 
     local sell_list = is_barman and CONST_BARMAN_TYPE_BUY_LIST or is_supplier and CONST_SUPPLIER_TYPE_BUY_LIST or is_mechanic and CONST_MECHANIC_TYPE_BUY_LIST
@@ -101,59 +101,6 @@ end
 function print_addon_version()
     UnregisterScriptCallback("on_game_load", print_addon_version)
     printf("[WG] Western Goods version %s",VERSION)
-end
-
---- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
---- @return nil
-function check_prerequisites()
-    UnregisterScriptCallback("on_game_load", check_prerequisites)
-
-    local error_message = "Unknown error"
-
-    -- Out-of-date game
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_outdated_game_title"),
-            western_goods_utils.get_translation("st_err_outdated_game_what"),
-            western_goods_utils.get_translation("st_err_outdated_game_why"),
-            western_goods_utils.get_translation("st_err_outdated_game_where")
-    )
-    assert(string.find(GAME_VERSION,"1.5.2"), error_message)
-
-    -- Out-of-date trader auto_inject.script
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_title"),
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_what"),
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_why"),
-            western_goods_utils.get_translation("st_err_outdated_trader_autoinject_script_where")
-    )
-    assert(trader_autoinject.get_real_community ~= nil, error_message)
-
-    -- Missing Barter UI Framework
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_barter_ui_title"),
-            western_goods_utils.get_translation("st_err_missing_barter_ui_what"),
-            western_goods_utils.get_translation("st_err_missing_barter_ui_why"),
-            western_goods_utils.get_translation("st_err_missing_barter_ui_where")
-    )
-    assert(barter_core ~= nil, error_message)
-
-    -- Missing DXML
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_dxml_title"),
-            western_goods_utils.get_translation("st_err_missing_dxml_what"),
-            western_goods_utils.get_translation("st_err_missing_dxml_why"),
-            western_goods_utils.get_translation("st_err_missing_dxml_where")
-    )
-    assert(dxml_core ~= nil, error_message)
-
-    -- Missing LUA unlocalizer
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
-    )
-    assert(pda.primary_objects_tbl ~= nil, error_message)
 end
 
 --- Function used to delete every item added by the addon from the save file.
@@ -231,6 +178,65 @@ function check_addon_removal(status)
     dbg_printf("[WG] Core | Addon removal finished : %s", released_objects)
 
     western_goods_mcm.set_config("addon_removal", false)
+end
+
+--- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
+--- @return nil
+function check_prerequisites()
+    UnregisterScriptCallback("on_game_load", check_prerequisites)
+
+    local error_message = "Unknown error"
+
+    -- Out-of-date game
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+            western_goods_utils.get_translation("st_err_outdated_game_title"),
+            western_goods_utils.get_translation("st_err_outdated_game_what"),
+            western_goods_utils.get_translation("st_err_outdated_game_why"),
+            western_goods_utils.get_translation("st_err_outdated_game_where")
+    )
+    assert(is_version_1_5_2(), error_message)
+
+    -- Missing DXML
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+            western_goods_utils.get_translation("st_err_missing_dxml_title"),
+            western_goods_utils.get_translation("st_err_missing_dxml_what"),
+            western_goods_utils.get_translation("st_err_missing_dxml_why"),
+            western_goods_utils.get_translation("st_err_missing_dxml_where")
+    )
+    assert(is_dxml_installed(), error_message)
+
+    -- Missing LUA unlocalizer
+    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+            western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+    )
+    assert(is_lua_unlocalizer_installed() , error_message)
+end
+
+--- Function used to check if the Barter UI is installed.
+--- @return boolean
+function is_barter_ui_installed()
+    return barter_core ~= nil
+end
+
+--- Function used to check if game version number is 1.5.2.
+--- @return boolean
+function is_version_1_5_2()
+    return string.find(GAME_VERSION,"1.5.2")
+end
+
+--- Function used to check if DXML is installed.
+--- @return boolean
+function is_dxml_installed()
+    return dxml_core ~= nil
+end
+
+--- Function used to check if LUA Unlocalizer is installed.
+--- @return boolean
+function is_lua_unlocalizer_installed()
+    return pda.primary_objects_tbl ~= nil
 end
 
 

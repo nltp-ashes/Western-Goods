@@ -6,19 +6,21 @@
 --- Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml
 
 function on_xml_read()
-	RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-		if xml_file_name == [[ui\ui_barter.xml]] then
-			local query_1_res = xml_obj:query("background[] > texture")
-			if query_1_res[1] then
-				el = query_1_res[1]
-				xml_obj:setText(el, "ui\\barter\\ui_barter_background.dds")
+	if western_goods_core.is_barter_ui_installed() then
+		RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
+			if xml_file_name == [[ui\ui_barter.xml]] then
+				local query_1_res = xml_obj:query("background[] > texture")
+				if query_1_res[1] then
+					el = query_1_res[1]
+					xml_obj:setText(el, "ui\\barter\\ui_barter_background.dds")
+				end
+
+				local query_2_res = xml_obj:query("barter > background")
+				if query_2_res[1] then
+					el = query_2_res[1]
+					xml_obj:setElementAttr(el, {x=-228, y=-47, width=1024, height=768})
+				end
 			end
-			
-			local query_2_res = xml_obj:query("barter > background")
-            if query_2_res[1] then
-                el = query_2_res[1]
-                xml_obj:setElementAttr(el, {x=-228, y=-47, width=1024, height=768})
-            end
-		end
-	end)
+		end)
+	end
 end
