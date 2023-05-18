@@ -1,14 +1,15 @@
+<?xml version='1.0' encoding="UTF-8"?>
 <!--=================================================================================================================-->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2022																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	DXML injection file used to add npc profiles to the game. 				            					     -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 18/05/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    NPC profiles listing valid characters descriptions for a given class.                                        -->
 <!-- ================================================================================================================-->
-<DXML>
+<xml>
     <!-- ============================================================================================================-->
-    <!--	Williams Heades																		        	  		 -->
+    <!--    Williams Heades                                                                                          -->
     <!-- ============================================================================================================-->
 
     <character id="stalker_western_goods_trader">
@@ -17,7 +18,7 @@
     </character>
 
     <!-- ============================================================================================================-->
-    <!--	Jupiter Informant																			  		     -->
+    <!--    Jupiter Informant                                                                                        -->
     <!-- ============================================================================================================-->
 
     <character id="stalker_jupiter_informant">
@@ -26,7 +27,7 @@
     </character>
 
     <!-- ============================================================================================================-->
-    <!--	Helicopter Crew Member																			  		 -->
+    <!--    Helicopter Crew Member                                                                                   -->
     <!-- ============================================================================================================-->
 
     <character id="stalker_crew_member">
@@ -35,7 +36,7 @@
     </character>
 
     <!-- ============================================================================================================-->
-    <!--	Lt Dunn Lynn																			  		         -->
+    <!--    Lt Dunn Lynn                                                                                             -->
     <!-- ============================================================================================================-->
 
     <character id="stalker_dunn_lynn">
@@ -44,7 +45,7 @@
     </character>
 
     <!-- ============================================================================================================-->
-    <!--	Golubev Nikolaj																			  		         -->
+    <!--    Golubev Nikolaj                                                                                          -->
     <!-- ============================================================================================================-->
 
     <character id="stalker_ecolog_convoy_yellow">
@@ -53,11 +54,11 @@
     </character>
 
     <!-- ============================================================================================================-->
-    <!--	Other Science NPC																		  		         -->
+    <!--    Other Science NPC                                                                                        -->
     <!-- ============================================================================================================-->
 
     <character id="stalker_ecolog_convoy_orange">
         <class>stalker_ecolog_convoy_orange</class>
         <specific_character>stalker_ecolog_convoy_orange</specific_character>
     </character>
-</DXML>
+</xml>

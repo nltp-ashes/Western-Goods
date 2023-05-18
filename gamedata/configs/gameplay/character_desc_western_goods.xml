@@ -1,14 +1,15 @@
+<?xml version='1.0' encoding="windows-1251"?>
 <!--=================================================================================================================-->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2022																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	DXML injection file used to add character descriptions to the game. 									     -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 18/05/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Character description file used to describe NPCs used in the addon.                                          -->
 <!-- ================================================================================================================-->
-<DXML>
+<xml>
     <!-- ============================================================================================================-->
-    <!--	Williams Heades								        											  		 -->
+    <!--    Williams Heades                                                                                          -->
     <!-- ============================================================================================================-->
 
     <specific_character id="stalker_western_goods_trader" team_default="1">
@@ -50,7 +51,7 @@
     </specific_character>
 
     <!-- ============================================================================================================-->
-    <!--	Jupiter Informant																			  		     -->
+    <!--    Jupiter Informant                                                                                        -->
     <!-- ============================================================================================================-->
 
     <specific_character id="stalker_jupiter_informant" team_default="1">
@@ -80,7 +81,7 @@
     </specific_character>
 
     <!-- ============================================================================================================-->
-    <!--	Helicopter Crew Member																			  		 -->
+    <!--    Helicopter Crew Member                                                                                   -->
     <!-- ============================================================================================================-->
 
     <specific_character id="stalker_crew_member" team_default="1">
@@ -112,7 +113,7 @@
     </specific_character>
 
     <!-- ============================================================================================================-->
-    <!--	Lt Dunn Lynn																			  		         -->
+    <!--    Lt. Dunn Lynn                                                                                            -->
     <!-- ============================================================================================================-->
 
     <specific_character id="stalker_dunn_lynn" team_default="1">
@@ -144,7 +145,7 @@
     </specific_character>
 
     <!-- ============================================================================================================-->
-    <!--	Golubev Nikolaj																			  		         -->
+    <!--    Golubev Nikolaj                                                                                          -->
     <!-- ============================================================================================================-->
 
     <specific_character id="stalker_ecolog_convoy_yellow" team_default="1">
@@ -173,7 +174,7 @@
     </specific_character>
 
     <!-- ============================================================================================================-->
-    <!--	Other Science NPC																		  		         -->
+    <!--    Other Science NPC                                                                                        -->
     <!-- ============================================================================================================-->
 
     <specific_character id="stalker_ecolog_convoy_orange" team_default="1">
@@ -198,4 +199,4 @@
 
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
-</DXML>
+</xml>
