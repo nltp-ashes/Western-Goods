@@ -14,12 +14,19 @@ local dbg_printf = western_goods_utils.dbg_printf
 
 -- Constants
 local ini_sections = ini_file([[plugins\western_goods\flea_market\importer.ltx]])
+local offers_per_npc = 5
+local offers_exp_freq = 3600000
+local min_item_count = 2
+local max_item_count = 10
+local min_discount = 5
+local max_discount = 50
 
 -- Variables
 local offers = {}
+local current_offer = 1
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Functions
+-- Core Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 function generate_offers(count)
@@ -30,11 +37,12 @@ function generate_offers(count)
     dbg_printf("[WG] Flea Market | Generating %s offers...", count)
 
     for i = 1, count do
-        local amount = math.random(1,10)
         local section = viable_sections[math.random(1,size_table(viable_sections))]
-        local discount = math.random(5,50)
+        local amount = math.random(min_item_count,max_item_count)
+        local discount = math.random(min_discount,max_discount)
+        local price = math.ceil((ini_sys:r_float_ex(section,"cost") * amount) * ((100 - discount) / 100))
 
-        table.insert(new_offers,{ sec=section, qte=amount, sale=discount })
+        table.insert(new_offers,{ sec=section, qte=amount, sale=discount, cost=price })
     end
 
     dbg_printf("[WG] Flea Market | Generated %s offers :\n%s", count, utils_data.print_table(new_offers, false, true))
@@ -42,21 +50,114 @@ function generate_offers(count)
     return new_offers
 end
 
-function get_viable_sections()
-    local viable_sections = {}
-
-    ini_sections:section_for_each(function(section)
-        dbg_printf("[WG] Flea Market | Collecting viable sections from '%s'...", section)
-        local sec_names = utils_data.collect_section(ini_sections, section, true)
-        for sec_name,_ in pairs(sec_names) do
-            table.insert(viable_sections,sec_name)
-        end
-    end)
-
-    dbg_printf("[WG] Flea Market | Collected %s viable sections", size_table(viable_sections))
-
-    return viable_sections
+function purchase_offer(offer, npc)
+    itms_manager.relocate_item_to_actor(db.actor, npc, offer.sec, offer.qte)
+    dialogs.relocate_money(npc, offer.cost, "out")
+    table.remove(offers[npc:id()].set,current_offer)
 end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Dialog Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function init_offers(actor, npc)
+    if not offers[npc:id()] then
+        offers[npc:id()] = {}
+        offers[npc:id()].set = this.generate_offers(offers_per_npc)
+        offers[npc:id()].exp = time_global() + offers_exp_freq
+    end
+
+    if offers[npc:id()].exp <= time_global() then
+        offers[npc:id()].set = this.generate_offers(offers_per_npc)
+        offers[npc:id()].exp = time_global() + offers_exp_freq
+    end
+end
+
+function init_purchase(actor, npc)
+    current_offer = 1
+end
+
+function exists_current_offer(actor, npc)
+    return offers[npc:id()].set[current_offer] ~= nil
+end
+
+function can_afford_offer(actor, npc)
+    local offer = offers[npc:id()].set[current_offer]
+    if offer then
+        return db.actor:money() >= offer.cost
+    end
+    return false
+end
+
+function list_offers(actor, npc)
+    for _,offer in ipairs(offers[npc:id()].set) do
+        local name = ui_item.get_sec_name(offer.sec)
+        local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", offer.cost)
+        local text = western_goods_utils.get_translation("st_wg_flea_offer_text", name, offer.qte, offer.sale)
+        db.actor:give_talk_message2(caption, text, "ui_inGame2_Osobiy_zakaz", "iconed_answer_item")
+    end
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Show Current Item Dialog Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function st_show_current_item(npc, dialog_id)
+    local offer = offers[npc:id()].set[current_offer]
+    if offer then
+        return western_goods_utils.get_translation("st_wg_flea_offer", ui_item.get_sec_name(offer.sec), offer.qte, offer.sale)
+    else
+        return western_goods_utils.get_translation("st_wg_flea_no_offer")
+    end
+end
+
+function show_current_offer(npc, actor)
+    local offer = offers[npc:id()].set[current_offer]
+    if offer then
+        local expiration = offers[npc:id()] and offers[npc:id()].exp
+        local time_left = expiration and math.floor((expiration - time_global()) / 60000) or "unknown"
+        local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", this.get_expiration_color(time_left), time_left)
+        local text = western_goods_utils.get_translation("st_wg_flea_offer_text", ui_item.get_sec_name(offer.sec), offer.qte, this.get_discount_color(offer.sale), offer.sale,offer.cost)
+        db.actor:give_talk_message2(caption, text, "ui_inGame2_Osobiy_zakaz", "iconed_answer_item")
+    end
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Buy Current Item Dialog Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function st_buy_current_item(npc, dialog_id)
+    local offer = offers[npc:id()].set[current_offer]
+    if offer then
+        return western_goods_utils.get_translation("st_wg_flea_offer_buy", offer.qte, ui_item.get_sec_short_name(offer.sec), offer.cost)
+    end
+end
+
+function buy_current_item(actor, npc)
+    this.purchase_offer(offers[npc:id()].set[current_offer], npc)
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Next Item Dialog Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function st_next_item(npc, dialog_id)
+    local offer = offers[npc:id()].set[current_offer]
+    if offer and db.actor:money() >= offer.cost then
+        return western_goods_utils.get_translation("st_wg_flea_next_offer")
+    else
+        return western_goods_utils.get_translation("st_wg_flea_poor_next_offer")
+    end
+end
+
+function next_item(actor, npc)
+    current_offer = current_offer + 1
+end
+
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
@@ -67,9 +168,6 @@ end
 function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
-
-    -- TODO : Test code - to be removed
-    RegisterScriptCallback("on_key_press",test_func)
 end
 
 
@@ -81,23 +179,83 @@ end
 --- @param m_data table
 --- @return nil
 function save_state(m_data)
-    m_data.wg_flea_offers = offers
+    -- Prepare save table
+    local offers_save = {}
+
+    -- Make copy of offers table
+    copy_table(offers_save, offers)
+
+    -- Pre-process offers table
+    for npc_id,data in pairs(offers_save) do
+        data.exp = data.exp - time_global()
+    end
+
+    -- Save offers table
+    m_data.wg_flea_offers = offers_save
+
+    -- Debug prints
+    dbg_printf("[WG] Flea Market | Saved offers...\n%s",utils_data.print_table(offers_save, false, true))
 end
 
 --- Function used to load information stored in the save file.
 --- @param m_data table
 --- @return nil
 function load_state(m_data)
-    offers = m_data.wg_flea_offers or {}
+    -- Retrieve save table
+    local offers_save = m_data.wg_flea_offers or {}
+
+    -- Post-process offers table
+    for npc_id,data in pairs(offers_save) do
+        data.exp = data.exp + time_global()
+    end
+
+    -- Restore offers table
+    copy_table(offers, offers_save)
+
+    -- Debug prints
+    dbg_printf("[WG] Flea Market | Loaded offers...\n%s",utils_data.print_table(offers, false, true))
 end
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Test functions		TODO : Remove this section
+-- Service Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-function test_func(dik)
-    if dik ~= DIK_keys.DIK_P then return end
+function get_viable_sections()
+    local viable_sections = {}
 
-    this.generate_offers(5)
+    ini_sections:section_for_each(function(section)
+
+        local sec_names = utils_data.collect_section(ini_sections, section, true)
+
+        dbg_printf("[WG] Flea Market | Collecting %s viable sections from '%s'...", size_table(sec_names), section)
+
+        for sec_name,_ in pairs(sec_names) do
+            table.insert(viable_sections,sec_name)
+        end
+    end)
+
+    dbg_printf("[WG] Flea Market | Collected total of %s viable sections", size_table(viable_sections))
+
+    return viable_sections
+end
+
+function get_discount_color(percentage)
+    if percentage >= 35 then
+        return "%c[green]"
+    elseif percentage > 15 then
+        return "%c[yellow]"
+    else
+        return "%c[red]"
+    end
+end
+
+function get_expiration_color(time_left)
+    if time_left >= 10 then
+        return "%c[default]"
+    elseif time_left > 5 then
+        return "%c[yellow]"
+    else
+        return "%c[red]"
+    end
 end

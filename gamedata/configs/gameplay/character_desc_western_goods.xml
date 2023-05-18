@@ -40,6 +40,9 @@
         <actor_dialog>western_goods_trader_trade</actor_dialog>
         <actor_dialog>western_goods_trader_barter</actor_dialog>
         <actor_dialog>western_goods_trader_guide</actor_dialog>
+
+        <actor_dialog>western_goods_flea_offer</actor_dialog>
+
         <actor_dialog>western_goods_act_1_task_1_start</actor_dialog>
         <actor_dialog>western_goods_act_1_task_1_end</actor_dialog>
         <actor_dialog>western_goods_act_1_task_2_start</actor_dialog>

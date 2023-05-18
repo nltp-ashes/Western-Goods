@@ -325,7 +325,7 @@
     </dialog>
 
     <!-- ============================================================================================================-->
-    <!--    Task dialogs                                                                                             -->
+    <!--    Task Dialogs                                                                                             -->
     <!-- ============================================================================================================-->
 
     <dialog id="western_goods_act_1_task_1_start">
@@ -609,4 +609,42 @@
             </phrase>
         </phrase_list>
     </dialog>
+
+    <!-- ============================================================================================================-->
+    <!--    Flea Market Dialogs                                                                                             -->
+    <!-- ============================================================================================================-->
+
+    <dialog id="western_goods_flea_offer">
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_flea_ask_offer</text>
+                <action>western_goods_flea.init_offers</action>
+                <action>western_goods_flea.init_purchase</action>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <script_text>western_goods_flea.st_show_current_item</script_text>
+                <action>western_goods_flea.show_current_offer</action>
+                <next>2</next>
+                <next>3</next>
+                <next>4</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <precondition>western_goods_flea.exists_current_offer</precondition>
+                <precondition>western_goods_flea.can_afford_offer</precondition>
+                <script_text>western_goods_flea.st_buy_current_item</script_text>
+                <action>western_goods_flea.buy_current_item</action>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <precondition>western_goods_flea.exists_current_offer</precondition>
+                <script_text>western_goods_flea.st_next_item</script_text>
+                <action>western_goods_flea.next_item</action>
+                <next>1</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_flea_cancel</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
 </game_dialogs>
