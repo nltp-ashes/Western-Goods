@@ -90,6 +90,30 @@ inv_grid_y                                       = 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+[wg_stash_map_quest_item]:wg_quest_item_base
+story_id                                         = wg_stash_map_quest_item
+visual                                           = dynamics\western_goods_task\wg_stash_map_quest_item.ogf
+
+use1_functor                                     = western_goods_usable_items.menu_view
+use1_action_functor                              = western_goods_usable_items.use_item
+use1_allow_db                                    = true
+
+inv_name                                         = st_wg_stash_map_quest_item
+inv_name_short                                   = st_wg_stash_map_quest_item_s
+description                                      = st_wg_stash_map_quest_item_descr
+inv_weight                                       = 0.1
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 3
+inv_grid_y                                       = 1
+
+use_sound                                        = paper
+snd_on_take                                      = paper
+readable                                         = true
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 [wg_danylo_pendrive_quest_item]:wg_quest_item_base
 story_id                                         = wg_danylo_pendrive_quest_item
 visual                                           = dynamics\western_goods_task\wg_danylo_pendrive_quest_item.ogf

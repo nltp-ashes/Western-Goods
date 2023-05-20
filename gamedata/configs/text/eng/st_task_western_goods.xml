@@ -209,4 +209,30 @@
 		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
 	</string>
 
+	<!-- ============================================================================================================-->
+	<!--    ACT 3 - CHERNENKO BROTHERS                                                                               -->
+	<!-- ============================================================================================================-->
+	<!--    TASK 1 - OLD STASH                                                                                       -->
+	<!-- ============================================================================================================-->
+
+	<string id="st_wg_act_3_task_1_title">
+		<text>Chernenko Brothers : Old Stash</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_stage_0_descr">
+		<text>The brother of one of the traders at the Flea Market is missing. When they used to be in the Army, they kept a stash in the Agroprom Underground. Locate and investigate the stash.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_stage_1_descr">
+		<text>Get the USB drive you found in the Chernenko brothers' stash.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_stage_2_descr">
+		<text>You found the Chernenko brothers' stash. It contained a USB pendrive. Find a way to access its content.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_stage_3_descr">
+		<text>The USB pendrive contained, among other things, a map with handwritten drawings. Find the location shown on that map.</text>
+	</string>
+
 </string_table>

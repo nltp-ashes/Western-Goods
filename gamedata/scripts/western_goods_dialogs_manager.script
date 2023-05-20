@@ -157,6 +157,8 @@ function dunn_lynn_start_dialog()
     else return western_goods_utils.get_translation("st_wg_dunn_lynn_start_" .. math.random(0,5))	end
 end
 
+--- Function called to determine the second phrase of Oleksandr Chernenko start dialog.
+--- @return string
 function st_oleksandr_chernenko_meet_1()
     if get_actor_true_community() == "army" then
         return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_1_army")
@@ -165,6 +167,8 @@ function st_oleksandr_chernenko_meet_1()
     end
 end
 
+--- Function called to determine the third phrase of Oleksandr Chernenko start dialog.
+--- @return string
 function st_oleksandr_chernenko_meet_2()
     if get_actor_true_community() == "army" then
         return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_2_army")
@@ -173,11 +177,23 @@ function st_oleksandr_chernenko_meet_2()
     end
 end
 
+--- Function called to determine the fourth phrase of Oleksandr Chernenko start dialog.
+--- @return string
 function st_oleksandr_chernenko_meet_3()
     if get_actor_true_community() == "army" then
         return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_3_army")
     else
         return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_3")
+    end
+end
+
+--- Function called to determine the start dialog's text of Danylo Chernenko.
+--- @return string
+function st_danylo_chernenko_start_dialog()
+    if not western_goods_utils.has_info("western_goods_danylo_chernenko_meet_over") then
+        return western_goods_utils.get_translation("st_wg_danylo_chernenko_first_start")
+    else
+        return western_goods_utils.get_translation("st_wg_danylo_chernenko_start_" .. math.random(0,5))
     end
 end
 

@@ -371,6 +371,18 @@
     </dialog>
 
     <!-- ============================================================================================================-->
+    <!--    Danylo Chernenko Dialogs                                                                              -->
+    <!-- ============================================================================================================-->
+
+    <dialog id="western_goods_danylo_chernenko_start">
+        <phrase_list>
+            <phrase id="0">
+                <script_text>western_goods_dialogs_manager.st_danylo_chernenko_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!-- ============================================================================================================-->
     <!--    Task Dialogs                                                                                             -->
     <!-- ============================================================================================================-->
 
@@ -656,11 +668,65 @@
         </phrase_list>
     </dialog>
 
+    <dialog id="western_goods_act_3_task_1_start">
+        <has_info>western_goods_oleksandr_chernenko_meet_over</has_info>
+        <dont_has_info>western_goods_act_3_task_1_active</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_1_ask_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_1_ask_work_1</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_1_accept_work</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_3_task_1_refuse_work</text>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_1_work_details</text>
+                <action>western_goods_tasks_act_3.act_3_task_1_start</action>
+                <action>western_goods_tasks_act_3.task_1_give_item</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_1_end">
+        <has_info>western_goods_act_3_task_1_active</has_info>
+        <has_info>western_goods_act_3_task_1_ready_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>western_goods_danylo_chernenko_meet_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>western_goods_danylo_chernenko_meet_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>western_goods_danylo_chernenko_meet_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>western_goods_danylo_chernenko_meet_3</text>
+                <action>western_goods_tasks_act_3.act_3_task_1_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
     <!-- ============================================================================================================-->
     <!--    Flea Market Dialog                                                                                       -->
     <!-- ============================================================================================================-->
 
     <dialog id="western_goods_flea_offers">
+        <precondition>western_goods_flea.cond_offers_dialog</precondition>
         <phrase_list>
             <phrase id="0"> <!-- actor -->
                 <text>st_wg_flea_ask_offer</text>

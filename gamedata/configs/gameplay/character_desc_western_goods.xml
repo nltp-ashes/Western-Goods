@@ -216,7 +216,7 @@
         <community>killer</community>
         <terrain_sect>stalker_terrain</terrain_sect>
 
-        <rank>3200</rank>
+        <rank>27800</rank>
         <money min="0" max="0" infinitive="0"/>
         <reputation>220</reputation>
 
@@ -231,6 +231,7 @@
 
         <actor_dialog>western_goods_oleksandr_chernenko_meet</actor_dialog>
         <actor_dialog>western_goods_flea_offers</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_1_start</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
 
@@ -250,7 +251,7 @@
         <community>killer</community>
         <terrain_sect>stalker_terrain</terrain_sect>
 
-        <rank>3200</rank>
+        <rank>23500</rank>
         <money min="0" max="0" infinitive="0"/>
         <reputation>220</reputation>
 
@@ -262,6 +263,9 @@
             army_patch = 1 \n
         </supplies>
 
+        <start_dialog>western_goods_danylo_chernenko_start</start_dialog>
+
+        <actor_dialog>western_goods_act_3_task_1_end</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
 </xml>

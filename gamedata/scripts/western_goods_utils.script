@@ -567,6 +567,9 @@ function is_player_fighting()
     return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
+--- Function used to check if an object is a type of PDA device.
+--- @param obj game_object
+--- @return boolean
 function is_pda(obj)
     if not validate_params({obj,"is_pda"}) then return end
 

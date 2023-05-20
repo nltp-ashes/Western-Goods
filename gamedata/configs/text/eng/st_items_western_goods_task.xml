@@ -80,6 +80,25 @@
 	</string>
 
 	<!-- Danylo Pendrive -->
+	<string id="st_wg_stash_map_quest_item">
+		<text>Map to stash</text>
+	</string>
+
+	<string id="st_wg_stash_map_quest_item_s">
+		<text>Map</text>
+	</string>
+
+	<string id="st_wg_stash_map_quest_item_descr">
+		<text>
+			A hand drawn map, given by Oleksandr. With it, it should be possible to locate he and his brother's old stash in the Agroprom Underground.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_green] • %c[ui_gray_2] informative\n
+			%c[d_blue] • %c[ui_gray_2] personal belongings\n
+		</text>
+	</string>
+
+	<!-- Danylo Pendrive -->
 	<string id="st_wg_danylo_pendrive_quest_item">
 		<text>Danylo's pendrive</text>
 	</string>
@@ -93,6 +112,7 @@
 			A pendrive that was stashed when Danylo was still part of the Army. Perhaps the information it contains can give a hit as to his current whereabouts. Unfortunately, humans don't yet read through plastic and semiconductors, so a device or a technician is needed to read its content.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_green] • %c[ui_gray_2] informative\n
 			%c[d_blue] • %c[ui_gray_2] technological item\n
 		</text>
 	</string>

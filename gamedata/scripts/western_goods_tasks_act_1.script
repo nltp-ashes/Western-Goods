@@ -1415,7 +1415,7 @@ function task_3_setup()
     end
 end
 
---- Function used to give the player a reward for finishing act 1.
+--- Function used to give the player an item at the start of Act 1, Task 1.
 --- Warning : This function should be called while a dialog is running.
 --- @param first_speaker cse_alife_object
 --- @param second_speaker cse_alife_object

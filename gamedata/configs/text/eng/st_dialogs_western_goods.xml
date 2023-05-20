@@ -418,11 +418,11 @@
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_3">
-		<text>I'm not a soldier anymore. Screw the army! We're just cannon fodder to their eyes...</text>
+		<text>I'm not a soldier anymore. Screw the army! We're just cannon fodder to their eyes... My brother and I should have never enrolled for this mess.</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_3_army">
-		<text>I'm not a soldier anymore. I deserted. Yes, I know what you're thinking, but here me out. The army doesn't care about us. One day or another, they'll send you on a suicide mission too, just like they did with me...</text>
+		<text>I'm not a soldier anymore. I deserted. Yes, I know what you're thinking, but here me out. The army doesn't care about us. One day or another, they'll send you on a suicide mission too, just like they did with me and my brother...</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_4">
@@ -444,6 +444,57 @@
 	<string id="western_goods_oleksandr_chernenko_meet_8">
 		<text>I see.</text>
 	</string>
+
+	<!-- ============================================================================================================-->
+	<!--    Danylo Chernenko                                                                                      -->
+	<!-- ============================================================================================================-->
+
+	<!-- Start dialog strings -->
+	<string id="st_wg_danylo_chernenko_first_start">
+		<text>Who are you?!</text>
+	</string>
+
+	<string id="st_wg_danylo_chernenko_start_0">
+		<text>Hello.</text>
+	</string>
+
+	<string id="st_wg_danylo_chernenko_start_1">
+		<text>Hi.</text>
+	</string>
+
+	<string id="st_wg_danylo_chernenko_start_2">
+		<text>What do you want, Stalker.</text>
+	</string>
+
+	<string id="st_wg_danylo_chernenko_start_3">
+		<text>What is it?</text>
+	</string>
+
+	<string id="st_wg_danylo_chernenko_start_4">
+		<text>Yes?</text>
+	</string>
+
+	<string id="st_wg_danylo_chernenko_start_5">
+		<text>What do you want?</text>
+	</string>
+
+	<!-- Dialogs strings -->
+	<string id="western_goods_danylo_chernenko_meet_0">
+		<text>I could ask you the same question. Are you Danylo Chernenko, Oleksandr's brother?</text>
+	</string>
+
+	<string id="western_goods_danylo_chernenko_meet_1">
+		<text>H-How do you know that?</text>
+	</string>
+
+	<string id="western_goods_danylo_chernenko_meet_2">
+		<text>Your brother asked me to find out what happened to you. He said you've been missing for days.</text>
+	</string>
+
+	<string id="western_goods_danylo_chernenko_meet_3">
+		<text>Thank god... I thought you were here to kill me. Listen, I'm trying to stay away from my brother for the moment. There are people after me, I don't want him to get dragged into this mess.\n \nTODO</text>
+	</string>
+
 
 	<!-- ============================================================================================================-->
 	<!--	Flea Market Dialogs                                                                                      -->
@@ -486,7 +537,7 @@
 	</string>
 
 	<string id="st_wg_flea_offer_text">
-		<text>%c[default]Items:%c[250,255,232,208] %s\n %c[default]Count:%c[250,255,232,208] x%s\n %c[default]Discount:%c[250,255,232,208] %s-%s%\n %c[default]Price:%c[250,255,232,208] %c[d_orange]%s RUB</text>
+		<text>%c[default]Items:%c[250,255,232,208] %s\n %c[default]Item count:%c[250,255,232,208] %s\n %c[default]Discount:%c[250,255,232,208] %s-%s%\n %c[default]Price:%c[250,255,232,208] %c[d_orange]%s RUB</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy">
@@ -936,6 +987,27 @@
 
 	<string id="st_wg_trader_act_2_task_2_stage_11_message_2">
 		<text>Good. Meet us in the Darkscape. We'll be waiting for you at the camp, under the cliff.</text>
+	</string>
+
+	<!-- Act 3, Task 1 -->
+	<string id="st_wg_act_3_task_1_ask_work_0">
+		<text>You said you were in the Army with your brother? Where is he now?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_ask_work_1">
+		<text>I don't know, actually. He went to meet a new supplier a few days ago, and he didn't come back. I'm worried something might have happened to him.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_accept_work">
+		<text>Is there something I can do to help?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_refuse_work">
+		<text>I see. Sorry to hear about it.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_work_details">
+		<text>Well. I could use some help. I'm stuck here managing the Flea Market. Dushman won't appreciate if I leave, even for my brother.\n \nThing is, I don't know where the meeting with the supplier was. My brother is good at his work, I don't usually question what he does.\n \nListen, if something bad really happened, and if he survived it, he must have found a place to hide. Back when we were in the Army, we kept a stash in the Agroprom Underground. I doubt he'll be hiding there, but it could give us a lead. Here, take this, it'll help you find out stash.</text>
 	</string>
 
 </string_table>
