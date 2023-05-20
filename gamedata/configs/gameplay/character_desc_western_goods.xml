@@ -15,7 +15,7 @@
     <specific_character id="stalker_western_goods_trader" team_default="1">
         <name>western_goods_trader_name</name>
         <bio>western_goods_trader_bio</bio>
-        <icon>ui_npc_u_stalker_ki_nauchniy</icon>
+        <icon>ui_npc_small_williams_heades</icon>
         <visual>actors\stalker_merc\stalker_mercenary3</visual>
         <snd_config>characters_voice\human\killer_3\</snd_config>
 
@@ -40,9 +40,6 @@
         <actor_dialog>western_goods_trader_trade</actor_dialog>
         <actor_dialog>western_goods_trader_barter</actor_dialog>
         <actor_dialog>western_goods_trader_guide</actor_dialog>
-
-        <actor_dialog>western_goods_flea_offer</actor_dialog>
-
         <actor_dialog>western_goods_act_1_task_1_start</actor_dialog>
         <actor_dialog>western_goods_act_1_task_1_end</actor_dialog>
         <actor_dialog>western_goods_act_1_task_2_start</actor_dialog>
@@ -198,6 +195,71 @@
 
         <supplies>
             [spawn] \n
+        </supplies>
+
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!-- ============================================================================================================-->
+    <!--    Oleksandr Chernenko                                                                                        -->
+    <!-- ============================================================================================================-->
+
+    <specific_character id="stalker_oleksandr_chernenko" team_default="1">
+        <name>western_goods_oleksandr_chernenko_name</name>
+        <bio>western_goods_oleksandr_chernenko_bio</bio>
+        <icon>ui_npc_small_oleksandr_chernenko</icon>
+        <visual>actors\stalker_soldier\light_voen</visual>
+        <snd_config>characters_voice\human\military_1\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_oleksandr_chernenko</class>
+        <community>killer</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>3200</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>220</reputation>
+
+        <supplies>
+            [spawn] \n
+            wpn_pkp = 1 \n
+            wpn_mp412 = 1 \n
+            wpn_knife4 = 1 \n
+            wg_money_suitcase = 1 \n
+            army_patch = 1 \n
+        </supplies>
+
+        <actor_dialog>western_goods_oleksandr_chernenko_meet</actor_dialog>
+        <actor_dialog>western_goods_flea_offers</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!-- ============================================================================================================-->
+    <!--    Danylo Chernenko                                                                                        -->
+    <!-- ============================================================================================================-->
+
+    <specific_character id="stalker_danylo_chernenko" team_default="1">
+        <name>western_goods_danylo_chernenko_name</name>
+        <bio>western_goods_danylo_chernenko_bio</bio>
+        <icon>ui_npc_small_danylo_chernenko</icon>
+        <visual>actors\stalker_soldier\0_voen_v_krap_berete_2_4</visual>
+        <snd_config>characters_voice\human\military_3\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_danylo_chernenko</class>
+        <community>killer</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>3200</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>220</reputation>
+
+        <supplies>
+            [spawn] \n
+            wpn_ash12 = 1 \n
+            wpn_aps = 1 \n
+            wpn_knife4 = 1 \n
+            army_patch = 1 \n
         </supplies>
 
         <actor_dialog>actor_break_dialog</actor_dialog>

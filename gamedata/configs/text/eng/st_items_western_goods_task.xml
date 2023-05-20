@@ -79,4 +79,22 @@
 		</text>
 	</string>
 
+	<!-- Danylo Pendrive -->
+	<string id="st_wg_danylo_pendrive_quest_item">
+		<text>Danylo's pendrive</text>
+	</string>
+
+	<string id="st_wg_danylo_pendrive_quest_item_s">
+		<text>Pendrive</text>
+	</string>
+
+	<string id="st_wg_danylo_pendrive_quest_item_descr">
+		<text>
+			A pendrive that was stashed when Danylo was still part of the Army. Perhaps the information it contains can give a hit as to his current whereabouts. Unfortunately, humans don't yet read through plastic and semiconductors, so a device or a technician is needed to read its content.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+		</text>
+	</string>
+
 </string_table>

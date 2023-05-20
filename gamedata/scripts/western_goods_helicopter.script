@@ -192,11 +192,11 @@ function refresh_helicopters()
         local update_timer = HELICOPTERS_TABLE[id].update_timer or time_global() + CONST_HELICOPTER_UPDATE_FREQ
 
         -- Continue only if the mode has changed, or the timer has ticked
-        if mode == last_mode and update_timer > time_global() then return end
+        if mode == last_mode and update_timer > time_global() then break end
 
         -- If the heli is in combat, let it fight, and stop updating for now
         if (db.storage[heli_se.id] and db.storage[heli_se.id].combat and db.storage[heli_se.id].combat:update()) then
-            return
+            break
         end
 
         -- Update the helicopter
@@ -391,7 +391,7 @@ end
 function take_control(heli_id)
     if not find_object_by_id(heli_id) then
         local se_obj = alife_object(heli_id)
-        if not se_obj or se_obj:section_name() ~= "" then
+        if not se_obj or se_obj:section_name() ~= "western_goods_helicopter" then
             dbg_printf("[WG] Helicopter | Cannot control missing or replaced (%s)", heli_id)
         end
         return false

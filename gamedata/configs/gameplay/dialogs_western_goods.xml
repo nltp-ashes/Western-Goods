@@ -325,6 +325,52 @@
     </dialog>
 
     <!-- ============================================================================================================-->
+    <!--    Oleksandr Chernenko Dialogs                                                                              -->
+    <!-- ============================================================================================================-->
+
+    <dialog id="western_goods_oleksandr_chernenko_meet">
+        <dont_has_info>western_goods_oleksandr_chernenko_meet_over</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>western_goods_oleksandr_chernenko_meet_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <script_text>western_goods_dialogs_manager.st_oleksandr_chernenko_meet_1</script_text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <script_text>western_goods_dialogs_manager.st_oleksandr_chernenko_meet_2</script_text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <script_text>western_goods_dialogs_manager.st_oleksandr_chernenko_meet_3</script_text>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>western_goods_oleksandr_chernenko_meet_4</text>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- npc -->
+                <text>western_goods_oleksandr_chernenko_meet_5</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="6"> <!-- actor -->
+                <text>western_goods_oleksandr_chernenko_meet_6</text>
+                <next>7</next>
+            </phrase>
+            <phrase id="7"> <!-- npc -->
+                <text>western_goods_oleksandr_chernenko_meet_7</text>
+                <next>8</next>
+            </phrase>
+            <phrase id="8"> <!-- actor -->
+                <text>western_goods_oleksandr_chernenko_meet_8</text>
+                <give_info>western_goods_oleksandr_chernenko_meet_over</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!-- ============================================================================================================-->
     <!--    Task Dialogs                                                                                             -->
     <!-- ============================================================================================================-->
 
@@ -611,10 +657,10 @@
     </dialog>
 
     <!-- ============================================================================================================-->
-    <!--    Flea Market Dialogs                                                                                             -->
+    <!--    Flea Market Dialog                                                                                       -->
     <!-- ============================================================================================================-->
 
-    <dialog id="western_goods_flea_offer">
+    <dialog id="western_goods_flea_offers">
         <phrase_list>
             <phrase id="0"> <!-- actor -->
                 <text>st_wg_flea_ask_offer</text>

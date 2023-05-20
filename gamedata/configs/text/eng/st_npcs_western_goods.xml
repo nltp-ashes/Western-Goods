@@ -76,4 +76,28 @@
 	<string id="stalker_ecolog_convoy_orange_bio">
 		<text>Member of mobile science camp. Detailed information is missing.</text>
 	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Oleksandr Chernenko																			  		     -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_oleksandr_chernenko_name">
+		<text>Captain Oleksandr Chernenko</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_bio">
+		<text>Rogue Ukrainian army soldier, turned mercenary. Manages Dushman's interest at the Flea Market, Garbage.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Danylo Chernenko																			  		     -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_danylo_chernenko_name">
+		<text>Sergeant Danylo Chernenko</text>
+	</string>
+
+	<string id="western_goods_danylo_chernenko_bio">
+		<text>Oleksandr Chernenko's younger brother. Detailed information is missing.</text>
+	</string>
 </string_table>

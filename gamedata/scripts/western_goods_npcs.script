@@ -1,0 +1,75 @@
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 19/05/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).
+---
+--- To add a new NPC to the system, add a new line in the squads_to_spawn table, as follows :
+---
+--- { sec="<squad_section>", sid="<story_id>", smart="<spawn_smart_name>" },
+---
+--- Where :
+--- - <squad_section> : section of the squad that needs to be spawned in;
+--- - <story_id> : story id of the squad that needs to be spawned in;
+--- - <spawn_smart_name> : name of the smart where the squad should be spawned at;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf = western_goods_utils.dbg_printf
+
+-- Constants
+local squads_to_spawn = {
+    { sec="stalker_western_goods_trader_squad", sid="stalker_western_goods_trader_squad", smart="pri_a18_smart_terrain", invis=true },
+    { sec="stalker_oleksandr_chernenko_squad", sid="stalker_oleksandr_chernenko_squad", smart="gar_smart_terrain_6_3", invis=true },
+    --{ sec="stalker_danylo_chernenko_squad", sid="stalker_danylo_chernenko_squad", smart="gar_smart_terrain_6_3", invis=true },
+}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to spawn the permanent NPCs on the map.
+--- @return nil
+function spawn_squads()
+    for _,data in pairs(squads_to_spawn) do
+        local squad_se = western_goods_utils.se_object_by_sid(data.sid)
+        if not squad_se then
+            squad_se = western_goods_utils.spawn_story_squad(data.sec, nil, SIMBOARD.smarts_by_names[data.smart])
+            dbg_printf("[WG] Permanent NPCs | Created %s(%s) at %s", data.sec, squad_se.id, data.smart)
+        else
+            dbg_printf("[WG] Permanent NPCs | Squad %s(%s) already exists", squad_se:section_name(), squad_se.id)
+        end
+    end
+end
+
+--- Function used to prevent other NPCs from targeting squads defined in 'squads_to_spawn' table, if 'invis' is true.
+--- This function is fired by 'on_enemy_eval' callback.
+--- @param obj game_object
+--- @param enemy game_object
+--- @param flags table
+--- @return nil
+function eval_ignore_npcs(obj,enemy,flags)
+    for _,data in pairs(squads_to_spawn) do
+        local squad = get_object_squad(enemy)
+        if squad and squad:section_name() == data.sec and data.invis then
+            flags.override = true
+            flags.result = false
+            return
+        end
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("actor_on_first_update", spawn_squads)
+    RegisterScriptCallback("on_enemy_eval", eval_ignore_npcs)
+end

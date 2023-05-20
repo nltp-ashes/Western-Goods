@@ -52,7 +52,8 @@ function menu_unpack(obj)
     return western_goods_utils.get_translation("st_wg_unpack")
 end
 
---- Function called by callback when any object in the game is used. This redirects to the proper functions if the item used is one from Western Goods.
+--- Function called by callback when any object in the game is used.
+--- This redirects to the proper functions if the item used is one from Western Goods.
 --- @param obj game_object
 --- @return nil
 function use_item(obj,_,cf)
@@ -60,28 +61,28 @@ function use_item(obj,_,cf)
     -- GPS Locator
     if (obj:section() == "wg_gps") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        use_gps(obj)
+        this.use_gps(obj)
         return
     end
 
     -- French MRE
     if (obj:section() == "wg_french_mre") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        use_french_mre(obj)
+        this.use_french_mre(obj)
         return
     end
 
     -- Toblerone
     if (obj:section() == "wg_toblerone") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        use_toblerone(obj)
+        this.use_toblerone(obj)
         return
     end
 
     -- Suitcase
     if (obj:section() == "wg_money_suitcase") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        use_suitcase(obj)
+        this.use_suitcase(obj)
         return
     end
 
@@ -106,6 +107,19 @@ function use_item(obj,_,cf)
     end
 end
 
+--- Function called by callback when an object is drag and dropped over another one.
+--- This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
+function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
+
+    -- Danylo's pendrive
+    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.is_pda(dropped_on_item) then
+        if slot_from == EDDListType.iActorBag and slot_to == EDDListType.iActorSlot then
+            this.use_danylo_pendrive(dragged_item)
+        end
+    end
+end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- GPS Locator
@@ -533,6 +547,18 @@ end
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Danylo's pendrive
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called when the player uses Danylo's pendrive.
+--- @param obj game_object
+--- @return nil
+function use_danylo_pendrive(obj)
+    ui_pda_encyclopedia_tab.unlock_note("encyclopedia__notes_western_goods_hand_drawn_map")
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Pinup Collector addon
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -564,4 +590,5 @@ end
 --- @return nil
 function on_game_start()
     RegisterScriptCallback("actor_on_item_use", use_item)
+    RegisterScriptCallback("ActorMenu_on_item_drag_drop", use_item_drag_drop)
 end

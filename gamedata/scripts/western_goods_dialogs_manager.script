@@ -109,7 +109,7 @@ function send_message(message, sender, icon, timer, sound)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Start Dialogs
+-- Scripted Text Dialogs
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function called to determine the start dialog's text of the crew member.
@@ -155,6 +155,30 @@ function dunn_lynn_start_dialog()
         return western_goods_utils.get_translation("st_wg_dunn_lynn_start_x")
 
     else return western_goods_utils.get_translation("st_wg_dunn_lynn_start_" .. math.random(0,5))	end
+end
+
+function st_oleksandr_chernenko_meet_1()
+    if get_actor_true_community() == "army" then
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_1_army")
+    else
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_1")
+    end
+end
+
+function st_oleksandr_chernenko_meet_2()
+    if get_actor_true_community() == "army" then
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_2_army")
+    else
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_2")
+    end
+end
+
+function st_oleksandr_chernenko_meet_3()
+    if get_actor_true_community() == "army" then
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_3_army")
+    else
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_3")
+    end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

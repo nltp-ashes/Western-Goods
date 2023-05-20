@@ -25,25 +25,6 @@ tradable_items = {}
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Spawning function
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to spawn the trader on the map.
---- @return nil
-function spawn_western_goods_trader()
-    -- Make sure the trader isn't already spawned in
-    for id,_ in pairs(SIMBOARD.squads) do
-        if tostring(alife_object(id):section_name()) == CONST_TRADER_SQUAD then
-            return
-        end
-    end
-
-    -- Spawn the trader if it doesn't exist
-    local squad = western_goods_utils.spawn_story_squad(CONST_TRADER_SQUAD, nil, SIMBOARD.smarts_by_names["pri_a18_smart_terrain"])
-    dbg_printf("[WG] Western Goods Trader | Created '%s' (%s)", CONST_TRADER_SQUAD, squad.id)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Trading actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -249,7 +230,6 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    RegisterScriptCallback("actor_on_first_update", spawn_western_goods_trader)
     RegisterScriptCallback("actor_on_first_update", retrieve_tradable_items)
     RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
     rax_icon_tint.register("wg_tint_functor", tint_functor)
@@ -273,7 +253,6 @@ function retrieve_tradable_items()
     for key,_ in pairs(money_table) do
         local section = western_goods_core.table_item_field_by_key(money_table, key, "section")
         table.insert(tradable_items, section)
-        dbg_printf("[WG] Western Goods Trader | Item %s marked as tradable", section)
     end
 
     dbg_printf("[WG] Western Goods Trader | Trade table :\n%s", utils_data.print_table(tradable_items, false, true))

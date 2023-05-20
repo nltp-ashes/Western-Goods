@@ -54,11 +54,20 @@ To **uninstall** the addon :
 > **v2.1.0 - xx/xx/2023 - Work In Progress**
 > ```
 > • Additions :
+>    - Added two new NPCs : The Cherchenko brothers.
+>    - Added a new storyline : help Okleksandr Cherchenko find out what happened to his brother;
+>    - Added a new system : Flea Market. Purchase limited offers containing a fixed set of items, but at a discount;
 >    - Added native integration with the Pinup Collector addon;
+>    - Added new PDA entries for the new NPCs, and the Flea Market system.
 > • Changes :
 >    - Made the Barter UI Framework optional (a soft requirement);
 >    - Removed the need to have trader_autoinject.script up-to-date;
+>    - Removed the CTD when the Barter UI is missing;
+>    - Removed the CTD when trader_autoinject.script is outdated;
 >    - Other minor/back-end changes.
+> • Bug fixes :
+>    - Fixed a small coding error in the Helicopters API;
+>    - Fixed a forgotten placeholder in Williams Heades's encyclopedia entry;
 > ```
 
 > **v2.0.2 - 03/05/2023 - Hotfix**
@@ -280,15 +289,16 @@ Credit goes to these people for their work contained in this addon :
 
 Special thanks to these people for their help in the making of this addon :
 
-|                                                                                  Name                                                                                  |                                           Motive                                            |
-|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
-| **[NLTP_JODYE](https://www.moddb.com/members/nltp-jodye), [Niko](https://www.moddb.com/members/polishcow1), [NLTP_DEV](https://www.moddb.com/members/nltp-dev), Sark** |                      For play-testing pre-release builds of the addon                       |
-|                                                   **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**                                                   |              For providing help with adding native Pinup Collector integration              |
-|                                                   **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**                                                   |             For taking the time to make models for this addon, enormous thanks              |
-|                           **[xcvb](https://www.moddb.com/members/bvcx)**, **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**                           |         Help for so many things it'd be too long to list. Huge thanks to these two          |
-|                 **[Starcry_](https://www.moddb.com/members/starcry666)**, **Rascal**, **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**                  |                   Helped to mitigate a compatibility issue with DirectX 8                   |
-|                                                           **[arti](https://www.moddb.com/members/artifax)**                                                            |                             For making his Barter UI Framework                              |
-|                                                           **[arti](https://www.moddb.com/members/artifax)**                                                            | For having updated the barters config files to work with the newer version of his framework |
+|                                                                                                               Name                                                                                                                |                                           Motive                                            |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
+|                                                                                                             **__R3D**                                                                                                             |        For submitting such a well-presented idea that lead to the Flea Market system        |
+| **[NLTP_JODYE](https://www.moddb.com/members/nltp-jodye), [Niko](https://www.moddb.com/members/polishcow1), [NLTP_DEV](https://www.moddb.com/members/nltp-dev), Sark, [ItsErisContent](https://www.youtube.com/@ItsErisContent)** |                      For play-testing pre-release builds of the addon                       |
+|                                                                                **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**                                                                                 |              For providing help with adding native Pinup Collector integration              |
+|                                                                                **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**                                                                                 |             For taking the time to make models for this addon, enormous thanks              |
+|                                                        **[xcvb](https://www.moddb.com/members/bvcx)**, **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**                                                         |         Help for so many things it'd be too long to list. Huge thanks to these two          |
+|                                               **[Starcry_](https://www.moddb.com/members/starcry666)**, **Rascal**, **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**                                               |                   Helped to mitigate a compatibility issue with DirectX 8                   |
+|                                                                                         **[arti](https://www.moddb.com/members/artifax)**                                                                                         |                             For making his Barter UI Framework                              |
+|                                                                                         **[arti](https://www.moddb.com/members/artifax)**                                                                                         | For having updated the barters config files to work with the newer version of his framework |
 
 If you would like to help development for future updates, you can :
 1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  

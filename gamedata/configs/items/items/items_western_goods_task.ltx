@@ -7,9 +7,11 @@ $spawn                                           = "quest_items\special_delivery
 GroupControlSection                              = spawn_group
 cform                                            = skeleton
 class                                            = WP_SCOPE
+kind                                             = i_quest
 cost                                             = 0
 icons_texture                                    = ui\icons\ui_icon_western_goods_task
 can_trade                                        = false
+tier                                             = 3
 ;sprint_allowed                                  = true
 ;quest_item                                      = true
 
@@ -17,7 +19,6 @@ can_trade                                        = false
 
 [wg_act_1_task_1_quest_item]:wg_quest_item_base
 visual                                           = dynamics\western_goods_task\wg_act_1_task_1_quest_item.ogf
-kind                                             = i_quest
 
 story_id                                         = wg_act_1_task_1_quest_item
 
@@ -31,15 +32,11 @@ inv_grid_height                                  = 1
 inv_grid_x                                       = 0
 inv_grid_y                                       = 0
 
-tier                                             = 3
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_1_task_2_quest_item_1]:wg_quest_item_base
-visual                                           = dynamics\western_goods_task\wg_act_1_task_2_quest_item_1.ogf
-kind                                             = i_quest
-
 story_id                                         = wg_act_1_task_2_quest_item_1
+visual                                           = dynamics\western_goods_task\wg_act_1_task_2_quest_item_1.ogf
 
 inv_name                                         = st_wg_act_1_task_2_quest_item_1
 inv_name_short                                   = st_wg_act_1_task_2_quest_item_1_s
@@ -51,15 +48,11 @@ inv_grid_height                                  = 1
 inv_grid_x                                       = 4
 inv_grid_y                                       = 0
 
-tier                                             = 3
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_1_task_2_quest_item_2]:wg_quest_item_base
-visual                                           = dynamics\western_goods_task\wg_act_1_task_2_quest_item_2.ogf
-kind                                             = i_quest
-
 story_id                                         = wg_act_1_task_2_quest_item_2
+visual                                           = dynamics\western_goods_task\wg_act_1_task_2_quest_item_2.ogf
 
 use1_functor                                     = western_goods_usable_items.menu_view
 use1_action_functor                              = western_goods_usable_items.use_item
@@ -79,15 +72,11 @@ use_sound                                        = paper
 snd_on_take                                      = paper
 readable                                         = true
 
-tier                                             = 3
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_act_2_task_2_quest_item]:wg_quest_item_base
-visual                                           = dynamics\western_goods_task\wg_act_2_task_2_quest_item.ogf
-kind                                             = i_quest
-
 story_id                                         = wg_act_2_task_2_quest_item
+visual                                           = dynamics\western_goods_task\wg_act_2_task_2_quest_item.ogf
 
 inv_name                                         = st_wg_act_2_task_2_quest_item
 inv_name_short                                   = st_wg_act_2_task_2_quest_item_s
@@ -99,4 +88,18 @@ inv_grid_height                                  = 1
 inv_grid_x                                       = 0
 inv_grid_y                                       = 1
 
-tier                                             = 3
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_danylo_pendrive_quest_item]:wg_quest_item_base
+story_id                                         = wg_danylo_pendrive_quest_item
+visual                                           = dynamics\western_goods_task\wg_danylo_pendrive_quest_item.ogf
+
+inv_name                                         = st_wg_danylo_pendrive_quest_item
+inv_name_short                                   = st_wg_danylo_pendrive_quest_item_s
+description                                      = st_wg_danylo_pendrive_quest_item_descr
+inv_weight                                       = 0.05
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 3
+inv_grid_y                                       = 0

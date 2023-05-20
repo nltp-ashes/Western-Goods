@@ -393,6 +393,59 @@
 	</string>
 
 	<!-- ============================================================================================================-->
+	<!--    Oleksandr Chernenko                                                                                      -->
+	<!-- ============================================================================================================-->
+
+	<!-- Dialogs strings -->
+	<string id="western_goods_oleksandr_chernenko_meet_0">
+		<text>Who are you?</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_1">
+		<text>I'm Oleksandr. Thank you for not shooting me on sight. People are crazy these days...</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_1_army">
+		<text>Please, don't kill me. We're all just trying to survive in this mess, alright? I'm Oleksandr.</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_2">
+		<text>What is a soldier doing down there?</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_2_army">
+		<text>What are you doing down there? Kuznetsov didn't inform us of any deployment here.</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_3">
+		<text>I'm not a soldier anymore. Screw the army! We're just cannon fodder to their eyes...</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_3_army">
+		<text>I'm not a soldier anymore. I deserted. Yes, I know what you're thinking, but here me out. The army doesn't care about us. One day or another, they'll send you on a suicide mission too, just like they did with me...</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_4">
+		<text>So what are you doing here then?</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_5">
+		<text>I'm here to represent Dushman's interests at the Flea Market. I'm trying to keep a low profile, that's why I'm staying in this basement. People don't really like Mercs over here. Although I've never had too much troubles so far.</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_6">
+		<text>Interesting. So what can you offer?</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_7">
+		<text>I basically sell packages of stuff we have too much of. I'll offer you a discount, but offers don't last forever. Grab it while you still can! Haha, just kidding. But in all seriousness, offers are limited, it helps people make their choice, so they don't bother me all day.</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_meet_8">
+		<text>I see.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
 	<!--	Flea Market Dialogs                                                                                      -->
 	<!-- ============================================================================================================-->
 

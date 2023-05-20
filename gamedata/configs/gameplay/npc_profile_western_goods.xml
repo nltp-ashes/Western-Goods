@@ -61,4 +61,22 @@
         <class>stalker_ecolog_convoy_orange</class>
         <specific_character>stalker_ecolog_convoy_orange</specific_character>
     </character>
+
+    <!-- ============================================================================================================-->
+    <!--    Oleksandr Chernenko                                                                                      -->
+    <!-- ============================================================================================================-->
+
+    <character id="stalker_oleksandr_chernenko">
+        <class>stalker_oleksandr_chernenko</class>
+        <specific_character>stalker_oleksandr_chernenko</specific_character>
+    </character>
+
+    <!-- ============================================================================================================-->
+    <!--    Danylo Chernenko                                                                                         -->
+    <!-- ============================================================================================================-->
+
+    <character id="stalker_danylo_chernenko">
+        <class>stalker_danylo_chernenko</class>
+        <specific_character>stalker_danylo_chernenko</specific_character>
+    </character>
 </xml>

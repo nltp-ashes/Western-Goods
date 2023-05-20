@@ -567,6 +567,18 @@ function is_player_fighting()
     return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
+function is_pda(obj)
+    if not validate_params({obj,"is_pda"}) then return end
+
+    local pda_sections = {
+        ["device_pda_1"] = true,
+        ["device_pda_2"] = true,
+        ["device_pda_3"] = true,
+    }
+
+    return pda_sections[obj:section()]
+end
+
 --- Function used to print the a textual version of a DIK key.
 --- @author RavenAscendant
 --- @param dik DIK_keys
