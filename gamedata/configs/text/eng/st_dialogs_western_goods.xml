@@ -453,40 +453,84 @@
 		<text>Do you have any offers?</text>
 	</string>
 
-	<string id="st_wg_flea_show_offer">
-		<text>I have this.</text>
+	<string id="st_wg_flea_offer">
+		<text>I have this set of items at -%s% off.</text>
+	</string>
+
+	<string id="st_wg_flea_offer_end_0">
+		<text>What do you say?</text>
+	</string>
+
+	<string id="st_wg_flea_offer_end_1">
+		<text>Are you taking?</text>
+	</string>
+
+	<string id="st_wg_flea_offer_end_2">
+		<text>Interested?</text>
+	</string>
+
+	<string id="st_wg_flea_offer_end_3">
+		<text>Deal?</text>
+	</string>
+
+	<string id="st_wg_flea_offer_end_4">
+		<text>Are we making a deal?</text>
 	</string>
 
 	<string id="st_wg_flea_no_offer">
 		<text>I have nothing else for the moment.</text>
 	</string>
 
-	<string id="st_wg_flea_next_offer">
-		<text>Do you have anything else?</text>
-	</string>
-
-	<string id="st_wg_flea_poor_next_offer">
-		<text>I don't have enough money, do you have anything else?</text>
-	</string>
-
-	<string id="st_wg_flea_cancel">
-		<text>Never-mind.</text>
-	</string>
-
 	<string id="st_wg_flea_offer_caption">
 		<text>Special Offer - %s%sm%c[default] remaining</text>
 	</string>
 
-	<string id="st_wg_flea_offer">
-		<text>I have %s (x%s) at -%s% off.</text>
-	</string>
-
 	<string id="st_wg_flea_offer_text">
-		<text>%c[default]Item:%c[250,255,232,208] %s\n %c[default]Quantity:%c[250,255,232,208] x%s\n %c[default]Discount:%c[250,255,232,208] %s-%s%\n %c[default]Price:%c[250,255,232,208] %c[d_orange]%s RUB</text>
+		<text>%c[default]Items:%c[250,255,232,208] %s\n %c[default]Count:%c[250,255,232,208] x%s\n %c[default]Discount:%c[250,255,232,208] %s-%s%\n %c[default]Price:%c[250,255,232,208] %c[d_orange]%s RUB</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy">
-		<text>I will take the %s %s for %c[d_orange]%s RUB%c[default].</text>
+		<text>%c[d_orange]%s RUB%c[default]?</text>
+	</string>
+
+	<string id="st_wg_flea_offer_buy_end_0">
+		<text>I'll take it.</text>
+	</string>
+
+	<string id="st_wg_flea_offer_buy_end_1">
+		<text>Deal.</text>
+	</string>
+
+	<string id="st_wg_flea_offer_buy_end_2">
+		<text>Alright, I'm buying.</text>
+	</string>
+
+	<string id="st_wg_flea_offer_buy_end_3">
+		<text>Here.</text>
+	</string>
+
+	<string id="st_wg_flea_offer_buy_end_4">
+		<text>Sold.</text>
+	</string>
+
+	<string id="st_wg_flea_next_offer">
+		<text>Do you have anything else?</text>
+	</string>
+
+	<string id="st_wg_flea_poor_next_offer_0">
+		<text>I don't have enough money, do you have anything else?</text>
+	</string>
+
+	<string id="st_wg_flea_poor_next_offer_1">
+		<text>Sorry, I don't have that money. Do you have anything else?</text>
+	</string>
+
+	<string id="st_wg_flea_poor_next_offer_2">
+		<text>I can't afford this, do you have anything else?</text>
+	</string>
+
+	<string id="st_wg_flea_cancel">
+		<text>Never-mind.</text>
 	</string>
 
 	<!-- ============================================================================================================-->

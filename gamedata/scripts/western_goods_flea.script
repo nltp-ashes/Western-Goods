@@ -37,12 +37,19 @@ function generate_offers(count)
     dbg_printf("[WG] Flea Market | Generating %s offers...", count)
 
     for i = 1, count do
-        local section = viable_sections[math.random(1,size_table(viable_sections))]
-        local amount = math.random(min_item_count,max_item_count)
-        local discount = math.random(min_discount,max_discount)
-        local price = math.ceil((ini_sys:r_float_ex(section,"cost") * amount) * ((100 - discount) / 100))
+        local price = 0
+        local sections = {}
 
-        table.insert(new_offers,{ sec=section, qte=amount, sale=discount, cost=price })
+        for i = 1, math.random(min_item_count,max_item_count) do
+            local section = viable_sections[math.random(1,size_table(viable_sections))]
+            price = price + ini_sys:r_float_ex(section,"cost", 0)
+            table.insert(sections,section)
+        end
+
+        local sale = math.random(min_discount,max_discount)
+        local cost = math.ceil(price * ((100 - sale) / 100))
+
+        table.insert(new_offers,{ sections=sections, sale=sale, cost=cost })
     end
 
     dbg_printf("[WG] Flea Market | Generated %s offers :\n%s", count, utils_data.print_table(new_offers, false, true))
@@ -51,10 +58,12 @@ function generate_offers(count)
 end
 
 function purchase_offer(offer, npc)
-    itms_manager.relocate_item_to_actor(db.actor, npc, offer.sec, offer.qte)
+    for _,sec in pairs(offer.sections) do
+        itms_manager.relocate_item_to_actor(db.actor, npc, sec, 1)
+    end
     dialogs.relocate_money(npc, offer.cost, "out")
 
-    dbg_printf("[WG] Flea Market | Purchased offer (sec:%s)(qte:%s)(sale:%s)(price:%s)", offer.sec, offer.qte, offer.sale, offer.cost)
+    dbg_printf("[WG] Flea Market | Purchased offer (qte:%s)(price:%s)(sale:%s)", size_table(offer.sections), offer.cost, offer.sale)
 
     table.remove(offers[npc:id()].set,current_offer)
 end
@@ -98,9 +107,11 @@ end
 
 function list_offers(actor, npc)
     for _,offer in ipairs(offers[npc:id()].set) do
-        local name = ui_item.get_sec_name(offer.sec)
-        local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", offer.cost)
-        local text = western_goods_utils.get_translation("st_wg_flea_offer_text", name, offer.qte, offer.sale)
+        local expiration = offers[npc:id()] and offers[npc:id()].exp
+        local time_left = expiration and math.floor((expiration - time_global()) / 60000) or "unknown"
+        local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", this.get_expiration_color(time_left), time_left)
+        local text = western_goods_utils.get_translation("st_wg_flea_offer_text", this.get_items_text(offer.sections), size_table(offer.sections), this.get_discount_color(offer.sale), offer.sale, offer.cost)
+
         db.actor:give_talk_message2(caption, text, "ui_inGame2_Osobiy_zakaz", "iconed_answer_item")
     end
 end
@@ -113,7 +124,7 @@ end
 function st_show_current_item(npc, dialog_id)
     local offer = offers[npc:id()].set[current_offer]
     if offer then
-        return western_goods_utils.get_translation("st_wg_flea_offer", ui_item.get_sec_name(offer.sec), offer.qte, offer.sale)
+        return western_goods_utils.get_translation("st_wg_flea_offer", offer.sale) .. " " .. western_goods_utils.get_translation("st_wg_flea_offer_end_"..tostring(math.random(0,4)))
     else
         return western_goods_utils.get_translation("st_wg_flea_no_offer")
     end
@@ -125,9 +136,9 @@ function show_current_offer(npc, actor)
         local expiration = offers[npc:id()] and offers[npc:id()].exp
         local time_left = expiration and math.floor((expiration - time_global()) / 60000) or "unknown"
         local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", this.get_expiration_color(time_left), time_left)
-        local text = western_goods_utils.get_translation("st_wg_flea_offer_text", ui_item.get_sec_name(offer.sec), offer.qte, this.get_discount_color(offer.sale), offer.sale,offer.cost)
+        local text = western_goods_utils.get_translation("st_wg_flea_offer_text", this.get_items_text(offer.sections), size_table(offer.sections), this.get_discount_color(offer.sale), offer.sale, offer.cost)
 
-        dbg_printf("[WG] Flea Market | Showing offer (sec:%s)(qte:%s)(sale:%s)(price:%s)", offer.sec, offer.qte, offer.sale, offer.cost)
+        dbg_printf("[WG] Flea Market | Showing offer (qte:%s)(sale:%s)(price:%s)", size_table(offer.sections), offer.sale, offer.cost)
 
         db.actor:give_talk_message2(caption, text, "ui_inGame2_Osobiy_zakaz", "iconed_answer_item")
     end
@@ -141,7 +152,7 @@ end
 function st_buy_current_item(npc, dialog_id)
     local offer = offers[npc:id()].set[current_offer]
     if offer then
-        return western_goods_utils.get_translation("st_wg_flea_offer_buy", offer.qte, ui_item.get_sec_short_name(offer.sec), offer.cost)
+        return western_goods_utils.get_translation("st_wg_flea_offer_buy", offer.cost) .. " " .. western_goods_utils.get_translation("st_wg_flea_offer_buy_end_"..tostring(math.random(0,4)))
     end
 end
 
@@ -159,7 +170,7 @@ function st_next_item(npc, dialog_id)
     if offer and db.actor:money() >= offer.cost then
         return western_goods_utils.get_translation("st_wg_flea_next_offer")
     else
-        return western_goods_utils.get_translation("st_wg_flea_poor_next_offer")
+        return western_goods_utils.get_translation("st_wg_flea_poor_next_offer_"..tostring(math.random(0,2)))
     end
 end
 
@@ -268,4 +279,12 @@ function get_expiration_color(time_left)
     else
         return "%c[red]"
     end
+end
+
+function get_items_text(sections)
+    local items_text = [[\n]]
+    for _,sec in pairs(sections) do
+        items_text = items_text .. [[ - ]] .. ui_item.get_sec_name(sec) .. [[\n]]
+    end
+    return items_text
 end
