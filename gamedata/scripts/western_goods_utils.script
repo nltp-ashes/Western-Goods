@@ -11,6 +11,7 @@
 
 local ini_loc = ini_file_ex([[localization.ltx]])
 local ini_keys = ini_file_ex([[plugins\western_goods\misc\western_goods_key_localization.ltx]])
+local ini_trade = ini_file("items\\trade\\trade_generic.ltx")
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
@@ -621,6 +622,34 @@ function get_real_community(npc, default)
     local squad_community = get_object_squad(npc):get_squad_community()
     if not blacklisted_comms[squad_community] then
         return squad_community
+    else
+        return default
+    end
+end
+
+--- Function used to get the price of a item (or multiple) according to progression difficulty.
+--- The price is the estimated price when the player buys an item from a trader.
+--- Original author is RavenAscendant. Function was edited by NLTP_ASHES.
+--- @author RavenAscendant
+--- @param section string
+--- @param count number
+--- @param default number
+--- @return number
+function get_section_price(section,count,default)
+    if not validate_params({section,"get_section_price"}) then return end
+
+    count = count or 1
+    default = default or 0
+
+    local condlist = ini_trade and ini_trade:r_string_to_condlist("trader","discounts")
+    local sect = condlist and xr_logic.pick_section_from_condlist(db.actor, nil, condlist)
+
+    if not (sect == nil or sect == "") then
+        local cost = SYS_GetParam(2, section, "cost", 0)
+        local factor = ini_trade:r_float_ex(sect,"sell") or 1
+        local eco_factor = game_difficulties.get_eco_factor("sell") or 1
+        local discount = factor * eco_factor
+        return (cost * discount) * count
     else
         return default
     end
