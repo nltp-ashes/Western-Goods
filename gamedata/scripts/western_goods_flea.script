@@ -131,6 +131,10 @@ function exists_current_offer(actor, npc)
     return offers[npc:id()].set[current_offer] ~= nil
 end
 
+function not_expired_current_offer(actor, npc)
+    return offers[npc:id()].exp > time_global()
+end
+
 --- Function called by dialogs, used to determine if the player has enough money for the current offer.
 --- @param actor game_object
 --- @param npc game_object
@@ -169,7 +173,10 @@ end
 --- @return string
 function st_show_current_item(npc, dialog_id)
     local offer = offers[npc:id()].set[current_offer]
-    if offer then
+    local exp = offers[npc:id()].exp
+    if time_global() >= exp then
+        return western_goods_utils.get_translation("st_wg_flea_expired")
+    elseif offer then
         return western_goods_utils.get_translation("st_wg_flea_offer", offer.sale) .. " " .. western_goods_utils.get_translation("st_wg_flea_offer_end_"..tostring(math.random(0,4)))
     else
         return western_goods_utils.get_translation("st_wg_flea_no_offer")
@@ -182,10 +189,13 @@ end
 --- @return nil
 function show_current_offer(npc, actor)
     local offer = offers[npc:id()].set[current_offer]
-    if offer then
+    local exp = offers[npc:id()].exp
+    if offer and time_global() < exp then
         local expiration = offers[npc:id()] and offers[npc:id()].exp
-        local time_left = expiration and math.floor((expiration - time_global()) / 60000) or "unknown"
-        local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", this.get_expiration_color(time_left), time_left)
+        local time_left = expiration and math.floor((expiration - time_global()) / 60000 * level.get_time_factor())
+        local hours_left = time_left and math.floor(time_left / 60)
+        local mins_left = time_left and math.ceil(time_left % 60)
+        local caption = western_goods_utils.get_translation("st_wg_flea_offer_caption", this.get_expiration_color(time_left), hours_left, mins_left)
         local text = western_goods_utils.get_translation("st_wg_flea_offer_text", this.get_items_text(offer.sections), size_table(offer.sections), this.get_discount_color(offer.sale), offer.sale, offer.cost)
 
         dbg_printf("[WG] Flea Market | Showing offer (qte:%s)(sale:%s)(price:%s)", size_table(offer.sections), offer.sale, offer.cost)
@@ -205,7 +215,8 @@ end
 --- @return string
 function st_buy_current_item(npc, dialog_id)
     local offer = offers[npc:id()].set[current_offer]
-    if offer then
+    local exp = offers[npc:id()].exp
+    if offer and time_global() < exp then
         return western_goods_utils.get_translation("st_wg_flea_offer_buy", offer.cost) .. " " .. western_goods_utils.get_translation("st_wg_flea_offer_buy_end_"..tostring(math.random(0,4)))
     end
 end
@@ -348,9 +359,9 @@ end
 --- @param time_left number
 --- @return string
 function get_expiration_color(time_left)
-    if time_left >= 10 then
+    if time_left >= 60 then
         return "%c[default]"
-    elseif time_left >= 5 then
+    elseif time_left >= 10 then
         return "%c[yellow]"
     else
         return "%c[red]"

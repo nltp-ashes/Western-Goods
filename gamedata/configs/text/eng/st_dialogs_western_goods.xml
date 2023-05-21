@@ -532,8 +532,12 @@
 		<text>I have nothing else for the moment.</text>
 	</string>
 
+	<string id="st_wg_flea_expired">
+		<text>Sorry, those offers expired.</text>
+	</string>
+
 	<string id="st_wg_flea_offer_caption">
-		<text>Special Offer - %s%sm%c[default] remaining</text>
+		<text>Special Offer - %s%sh %sm%c[default] remaining</text>
 	</string>
 
 	<string id="st_wg_flea_offer_text">

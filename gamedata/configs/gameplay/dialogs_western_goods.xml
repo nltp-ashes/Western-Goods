@@ -743,12 +743,14 @@
             </phrase>
             <phrase id="2"> <!-- actor -->
                 <precondition>western_goods_flea.exists_current_offer</precondition>
+                <precondition>western_goods_flea.not_expired_current_offer</precondition>
                 <precondition>western_goods_flea.can_afford_offer</precondition>
                 <script_text>western_goods_flea.st_buy_current_item</script_text>
                 <action>western_goods_flea.buy_current_item</action>
             </phrase>
             <phrase id="3"> <!-- actor -->
                 <precondition>western_goods_flea.exists_current_offer</precondition>
+                <precondition>western_goods_flea.not_expired_current_offer</precondition>
                 <script_text>western_goods_flea.st_next_item</script_text>
                 <action>western_goods_flea.next_item</action>
                 <next>1</next>
