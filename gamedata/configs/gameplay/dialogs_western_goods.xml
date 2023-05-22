@@ -697,6 +697,35 @@
         </phrase_list>
     </dialog>
 
+    <dialog id="western_goods_act_3_task_1_usb_unlock">
+        <has_info>western_goods_act_3_task_1_active</has_info>
+        <precondition>western_goods_tasks_act_3.task_1_usb_unlock_dialog_cond</precondition>
+        <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_1_usb_unlock_ask</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_1_usb_unlock_quote</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <precondition>western_goods_tasks_act_3.task_1_usb_unlock_money_cond</precondition>
+                <text>st_wg_act_3_task_1_usb_unlock_accept</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_3_task_1_usb_unlock_refuse</text>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_1_usb_unlock_unlocked</text>
+                <action>western_goods_tasks_act_3.task_1_usb_unlock</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
     <dialog id="western_goods_act_3_task_1_end">
         <has_info>western_goods_act_3_task_1_active</has_info>
         <has_info>western_goods_act_3_task_1_ready_finished</has_info>

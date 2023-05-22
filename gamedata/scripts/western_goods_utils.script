@@ -261,10 +261,17 @@ function server_objects_iter(func,...)
     dbg_printf("[WG] Utils | Iterating through all possible IDs...")
 
     local args = {...}
-    for id=0, 65534 do
-        local se_obj = alife_object(id)
-        if se_obj and func(se_obj, unpack(args)) then
-            return
+
+    if alife().iterate_object ~= nil then
+        alife():iterate_object(function(se_obj)
+            return func(se_obj, unpack(args))
+        end)
+    else
+        for id=0, 65534 do
+            local se_obj = alife_object(id)
+            if se_obj and func(se_obj, unpack(args)) then
+                return
+            end
         end
     end
 end

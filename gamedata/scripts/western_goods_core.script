@@ -412,7 +412,7 @@ end
 -- This way, you can do "Western Goods rebalance" addons or something, without needing to redistribute this script.
 -- For this, create a script and inset something like this :
 --
--- == my_western_goods_edit.script =====================================================================================
+-- == my_western_goods_edit_<some_unique_name>.script ==================================================================
 -- function on_game_start()
 --    RegisterScriptCallback("on_game_load", function()
 --       western_goods_core.western_goods_items["wg_twix"].trader_params["stalker"] = { qte=1, sl=1, prob=0.2 }

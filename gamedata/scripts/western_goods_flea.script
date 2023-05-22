@@ -1,13 +1,41 @@
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
---- Date : 17/04/2023
+--- Date : 22/05/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the Mercenary flea market system.
+---
+--- You can add new sections to the item pool using a file :
+---
+--- == gamedata/configs/plugins/western_goods/flea_market/flea_<some_unique_name_of_your_choice>.ltx ===================
+--- [some_unique_name_of_your_choice]
+--- some_item_section
+--- some_other_item_section
+--- ====================================================================================================================
+---
+--- Or you can use the callback to add new items :
+---
+--- == gamedata/scripts/my_addon_s_script.script =======================================================================
+--- function on_game_start()
+---    RegisterScriptCallback("western_goods_flea_on_collect_sections", function(flags)
+---        local items_to_add = {
+---            "some_item_section",
+---            "some_other_item_section",
+---        }
+---        for k,v in pairs(items_to_add) do
+---            table.insert(flags.result,v)
+---        end
+---    end)
+--- end
+--- ====================================================================================================================
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions
+-- Constants, global variables, imported functions and new callbacks
 -- ---------------------------------------------------------------------------------------------------------------------
+
+-- New callbacks
+AddScriptCallback("western_goods_flea_on_dialog")
+AddScriptCallback("western_goods_flea_on_collect_sections")
 
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
@@ -23,10 +51,7 @@ local max_discount = 50
 
 -- Variables
 local current_offer = 1
-offers = {}
-dialog_condition = {
-    ["stalker_oleksandr_chernenko"] = function() return western_goods_utils.has_info("western_goods_oleksandr_chernenko_meet_over") end
-}
+local offers = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Core Functions
@@ -88,11 +113,9 @@ end
 --- Used mainly to have per NPC conditions, while all sharing the same line of dialog.
 --- @return nil
 function cond_offers_dialog(actor, npc, dialog_id)
-    if dialog_condition[npc:section()] ~= nil then
-        return dialog_condition[npc:section()]()
-    else
-        return true
-    end
+    local flags = { result = true }
+    SendScriptCallback("western_goods_flea_on_dialog",actor,npc,flags)
+    return flags.result
 end
 
 --- Function called by dialogs, used to initialize offers for an NPC.
@@ -100,18 +123,20 @@ end
 --- @param npc game_object
 --- @return nil
 function init_offers(actor, npc)
-
-    dbg_printf("[WG] Flea Market | Initializing for %s(%s)...", npc:id(), npc:section())
+    dbg_printf("[WG] Flea Market | Initializing for %s(%s)...", npc:section(), npc:id())
 
     if not offers[npc:id()] then
-        offers[npc:id()] = {}
-        offers[npc:id()].set = this.generate_offers(offers_per_npc)
-        offers[npc:id()].exp = time_global() + offers_exp_freq
+        offers[npc:id()] = {
+            set = this.generate_offers(offers_per_npc),
+            exp = time_global() + offers_exp_freq,
+        }
     end
 
-    if offers[npc:id()].exp <= time_global() then
-        offers[npc:id()].set = this.generate_offers(offers_per_npc)
-        offers[npc:id()].exp = time_global() + offers_exp_freq
+    if not offers[npc:id()].exp or offers[npc:id()].exp <= time_global() then
+        offers[npc:id()] = {
+            set = this.generate_offers(offers_per_npc),
+            exp = time_global() + offers_exp_freq,
+        }
     end
 end
 
@@ -131,6 +156,10 @@ function exists_current_offer(actor, npc)
     return offers[npc:id()].set[current_offer] ~= nil
 end
 
+--- Function called by dialogs, used to determine if the current offer has expired or not.
+--- @param actor game_object
+--- @param npc game_object
+--- @return boolean
 function not_expired_current_offer(actor, npc)
     return offers[npc:id()].exp > time_global()
 end
@@ -284,8 +313,8 @@ function save_state(m_data)
     copy_table(offers_save, offers)
 
     -- Pre-process offers table
-    for npc_id,data in pairs(offers_save) do
-        data.exp = data.exp - time_global()
+    for _,npc_offers in pairs(offers_save) do
+        npc_offers.exp = npc_offers.exp - time_global()
     end
 
     -- Save offers table
@@ -319,23 +348,55 @@ end
 -- Service Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to a copy of the offers table from another script.
+--- You better not use the LUA Unlocalizer to sneak into my pipes !
+--- @param npc_id number
+--- @return table
+function get_all_offers(npc_id)
+    local result = {}
+    if npc_id ~= nil then
+        copy_table(result, offers)
+    else
+        copy_table(result, offers[npc_id])
+    end
+    return result
+end
+
 --- Function used to get a table listing all possible sections that can spawn in the Flea Market system.
 --- @return table
 function get_viable_sections()
     local viable_sections = {}
 
+    local file_count, script_count = 0, 0
+
+    -- Collect viable sections via files
     ini_sections:section_for_each(function(section)
-
         local sec_names = utils_data.collect_section(ini_sections, section, true)
-
-        dbg_printf("[WG] Flea Market | Collecting %s viable sections from '%s'...", size_table(sec_names), section)
-
         for sec_name,_ in pairs(sec_names) do
-            table.insert(viable_sections,sec_name)
+            file_count = file_count + 1
+            if ini_sys:section_exist(sec_name) then
+                table.insert(viable_sections,sec_name)
+            else
+                printf("![WG] ERROR | Flea Market | Section %s (module : %s) cannot be collected, as it does not exist!", sec_name, section)
+            end
         end
     end)
 
-    dbg_printf("[WG] Flea Market | Collected total of %s viable sections", size_table(viable_sections))
+    -- Collect viable sections via script
+    local flags = { result = { } }
+    SendScriptCallback("western_goods_flea_on_collect_sections",flags)
+    for _,sec_name in pairs(flags.result) do
+        script_count = script_count + 1
+        if ini_sys:section_exist(sec_name) then
+            table.insert(viable_sections,sec_name)
+        else
+            printf("![WG] ERROR | Flea Market | Section %s (from script) cannot be collected, as it does not exist!", sec_name)
+        end
+    end
+
+    dbg_printf("[WG] Flea Market | Collected %s viable sections from files", file_count)
+    dbg_printf("[WG] Flea Market | Collected %s viable sections from scripts", script_count)
+    dbg_printf("[WG] Flea Market | Collected total of %s viable sections", file_count+script_count)
 
     return viable_sections
 end

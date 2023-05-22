@@ -28,6 +28,7 @@ local squads_to_spawn = {
     --{ sec="stalker_danylo_chernenko_squad", sid="stalker_danylo_chernenko_squad", smart="gar_smart_terrain_6_3", invis=true },
 }
 
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -63,6 +64,17 @@ function eval_ignore_npcs(obj,enemy,flags)
     end
 end
 
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Oleksandr Chernenko functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function oleksandr_can_show_flea(actor,npc,flags)
+    if npc:section() == "stalker_oleksandr_chernenko" then
+        flags.result = western_goods_utils.has_info("western_goods_oleksandr_chernenko_meet_over")
+    end
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -70,6 +82,7 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    RegisterScriptCallback("actor_on_first_update", spawn_squads)
     RegisterScriptCallback("on_enemy_eval", eval_ignore_npcs)
+    RegisterScriptCallback("actor_on_first_update", spawn_squads)
+    RegisterScriptCallback("western_goods_flea_on_dialog", oleksandr_can_show_flea)
 end

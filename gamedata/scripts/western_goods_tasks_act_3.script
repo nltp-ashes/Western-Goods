@@ -26,6 +26,8 @@ local send_dialog = western_goods_dialogs_manager.send_dialog
 local find_object_by_id = western_goods_utils.find_object_by_id
 
 -- Constants
+local CONST_TASK_1_USB_UNLOCK_DIALOG_ID = "western_goods_act_3_task_1_usb_unlock"
+local CONST_TASK_1_USB_UNLOCK_COST = 5000
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -240,6 +242,7 @@ end
 function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
+    RegisterScriptCallback("on_specific_character_dialog_list", task_1_usb_unlock_dialog)
 end
 
 
@@ -304,9 +307,47 @@ function task_1_get_spawn_stash()
 
         if obj_lname == "l03u_agr_underground" and se_obj:name() == "level_prefix_inventory_box_0001" then
             stash_se = se_obj
+            dbg_printf("[WG] Tasks Act 3 | Task 1 - Found Agroprom's stash %s", stash_se.id)
             return true
         end
     end)
 
     return stash_se
+end
+
+--- Function used to add a task dialog to all technicians.
+--- @param character_id string
+--- @param dialog_list table
+--- @return nil
+function task_1_usb_unlock_dialog(character_id, dialog_list)
+    if dialog_list:has("dm_init_mechanic") then
+        local res = dialog_list:add(CONST_TASK_1_USB_UNLOCK_DIALOG_ID)
+        if res then
+            dbg_printf("[WG] Tasks Act 3 | Task 1 - Added dialog %s for %s, pos %s", CONST_TASK_1_USB_UNLOCK_DIALOG_ID, character_id, res)
+        end
+    end
+end
+
+--- Function used to determine if the task dialog should be shown or not.
+--- @return boolean
+function task_1_usb_unlock_dialog_cond()
+    local cond_stage = xr_conditions.check_task_stage(nil,nil,{"western_goods_act_3_task_1","2"})
+    local cond_note = not ui_pda_encyclopedia_tab.is_unlocked_note(TASK_1_CACHE.danylo_note)
+    local cond_obj = db.actor:object("wg_danylo_pendrive_quest_item")
+    return cond_stage and cond_obj and cond_note
+end
+
+--- Function used to determine if the player has enough money to use the task dialog line.
+--- @return boolean
+function task_1_usb_unlock_money_cond()
+    return db.actor:money() >= CONST_TASK_1_USB_UNLOCK_COST
+end
+
+--- Function used to unlock the pda encyclopedia entry via a technician.
+--- @param actor game_object
+--- @param npc game_object
+--- @return nil
+function task_1_usb_unlock(npc, actor)
+    western_goods_usable_items.use_danylo_pendrive()
+    dialogs.relocate_money(npc, CONST_TASK_1_USB_UNLOCK_COST, "out")
 end

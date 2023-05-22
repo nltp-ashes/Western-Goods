@@ -1014,4 +1014,24 @@
 		<text>Well. I could use some help. I'm stuck here managing the Flea Market. Dushman won't appreciate if I leave, even for my brother.\n \nThing is, I don't know where the meeting with the supplier was. My brother is good at his work, I don't usually question what he does.\n \nListen, if something bad really happened, and if he survived it, he must have found a place to hide. Back when we were in the Army, we kept a stash in the Agroprom Underground. I doubt he'll be hiding there, but it could give us a lead. Here, take this, it'll help you find out stash.</text>
 	</string>
 
+	<string id="st_wg_act_3_task_1_usb_unlock_ask">
+		<text>I need to access data on a USB pendrive. Can you help me with it?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_quote">
+		<text>Sure, but I'll need %c[d_orange]5000 RUB%c[default] for this.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_accept">
+		<text>Ok, here.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_refuse">
+		<text>Let me think about it...</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_unlocked">
+		<text>Alright... There is a lot of encrypted stuff... There's a map, could this be what you need? I'll upload it to your PDA.</text>
+	</string>
+
 </string_table>
