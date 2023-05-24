@@ -53,9 +53,10 @@ To **uninstall** the addon :
 
 > **v2.1.0 - xx/xx/2023 - Work In Progress**
 > ```
+> • New storylines :
 > • Additions :
+>    - Added a new storyline (4 tasks), help Okleksandr Cherchenko find out what happened to his brother;
 >    - Added two new NPCs : The Cherchenko brothers.
->    - Added a new storyline : help Okleksandr Cherchenko find out what happened to his brother;
 >    - Added a new system : Flea Market. Purchase limited offers containing a fixed set of items, but at a discount;
 >    - Added native integration with the Pinup Collector addon;
 >    - Added new PDA entries for the new NPCs, and the Flea Market system.
@@ -68,6 +69,8 @@ To **uninstall** the addon :
 > • Bug fixes :
 >    - Fixed a small coding error in the Helicopters API;
 >    - Fixed a forgotten placeholder in Williams Heades's encyclopedia entry;
+>    - Fixed Golubev Nikolaj missing his start dialog;
+>    - Other minor bug fixes.
 > ```
 
 > **v2.0.2 - 03/05/2023 - Hotfix**

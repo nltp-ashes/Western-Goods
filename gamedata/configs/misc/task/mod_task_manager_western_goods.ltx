@@ -134,7 +134,21 @@ on_fail                 = %=act_3_task_1_fail()%
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;[western_goods_act_3_task_2]
+[western_goods_act_3_task_2]
+
+title_functor           = act_3_task_2_title_f
+descr_functor           = act_3_task_2_descr_f
+target_functor          = act_3_task_2_target_f
+status_functor          = act_3_task_2_status_f
+
+icon                    = ui_inGame2_Put_v_pripyat
+storyline               = true
+
+stage_complete          = 4
+
+on_init                 = %=act_3_task_2_init()%
+on_complete             = %=act_3_task_2_complete()%
+on_fail                 = %=act_3_task_2_fail()%
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

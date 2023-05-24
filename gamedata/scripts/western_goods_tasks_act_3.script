@@ -31,12 +31,15 @@ local CONST_TASK_1_USB_UNLOCK_COST = 5000
 
 -- Task variables
 TASK_1_CACHE = {}
+TASK_2_CACHE = {}
+TASK_3_CACHE = {}
+TASK_4_CACHE = {}
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- ACT 3 - CONTRACT WORK
+-- ACT 3 - CHERNENKO BROTHERS
 -- ---------------------------------------------------------------------------------------------------------------------
--- TASK 1 - KOLOBOK
+-- TASK 1 - OLD STASH
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to start Act 3, Task 1.
@@ -61,15 +64,6 @@ end
 --- @param npc cse_alife_object
 --- @return nil
 function xr_effects.act_3_task_1_init(actor,npc)
-    -- Prepare task cache table
-    TASK_1_CACHE = {
-        main_item = { sec="wg_danylo_pendrive_quest_item" },
-        danylo_note = "encyclopedia__notes_western_goods_hand_drawn_map",
-        squads = {
-            danylo_spawn_data = { sec="stalker_danylo_chernenko_squad", smart="jup_a6" },
-        },
-    }
-
     -- Process info portions
     western_goods_utils.give_info("western_goods_act_3_task_1_active")
     western_goods_utils.give_info("western_goods_act_3_task_1_init")
@@ -112,7 +106,7 @@ function task_functor.act_3_task_1_title_f(task_id,field,p,tsk)
 end
 
 --- Function used to retrieve the description of the mission (displayed in the PDA).
---- Warning : naming contract on the translation string : st_wg_trader_act_2_task_1_stage_<stage>_descr.
+--- Warning : naming contract on the translation string : st_wg_trader_act_3_task_1_stage_<stage>_descr.
 --- @param task_id number
 --- @param field string
 --- @param p any
@@ -133,11 +127,13 @@ end
 function task_functor.act_3_task_1_target_f(task_id,field,p,tsk)
     if western_goods_utils.has_info("western_goods_act_3_task_1_init") then
         if tsk.stage == 0 then
-            local usb_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.main_item.sec)
-            return usb_se and usb_se.id
+            if western_goods_mcm.get_config("guided_tasks") then
+                local usb_se = western_goods_utils.se_object_by_sid("wg_danylo_pendrive_quest_item")
+                return usb_se and usb_se.id
+            end
         end
         if tsk.stage == 1 then
-            local usb_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.main_item.sec)
+            local usb_se = western_goods_utils.se_object_by_sid("wg_danylo_pendrive_quest_item")
             return usb_se and usb_se.id
         end
         if tsk.stage == 2 then
@@ -145,7 +141,7 @@ function task_functor.act_3_task_1_target_f(task_id,field,p,tsk)
         end
         if tsk.stage == 3 then
             if western_goods_mcm.get_config("guided_tasks") then
-                local squad_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.squads.danylo_spawn_data.sec)
+                local squad_se = western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad")
                 return squad_se and squad_se.id
             end
         end
@@ -160,29 +156,29 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
     if western_goods_utils.has_info("western_goods_act_3_task_1_init") then
         -- First stage : Find the USB drive
         if tsk.stage == 0 then
-            local usb_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.main_item.sec)
+            local usb_se = western_goods_utils.se_object_by_sid("wg_danylo_pendrive_quest_item")
 
             -- Spawn/respawn quest item if it doesn't exist
             if not usb_se then
-                usb_se = alife_create_item(TASK_1_CACHE.main_item.sec, task_1_get_spawn_stash())
+                usb_se = alife_create_item("wg_danylo_pendrive_quest_item", task_1_get_spawn_stash())
                 dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 0 - Primary item spawned %s", usb_se.id)
                 return
             end
 
             -- If the player picked up the supplies, progress to stage 3
             if usb_se and usb_se.parent_id == AC_ID then
-                dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 0 - Player picked up the primary item %s", usb_se.id)
 
-                local danylo_squad_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.squads.danylo_spawn_data.sec)
-
-                if not danylo_squad_se and not TASK_1_CACHE.danylo_squad_spawned then
-                    local sec = TASK_1_CACHE.squads.danylo_spawn_data.sec
-                    local smart = TASK_1_CACHE.squads.danylo_spawn_data.smart
-                    danylo_squad_se = western_goods_utils.spawn_squad_smart(sec, smart)
-
-                    TASK_1_CACHE.danylo_squad_spawned = true
+                -- Spawn Danylo
+                if not western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad") then
+                    western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", "jup_a6")
                 end
 
+                -- Spawn SSU prisoner
+                if not western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad") then
+                    western_goods_utils.spawn_squad_smart("western_goods_ssu_prisoner_squad", "jup_a6")
+                end
+
+                dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 0 - Player picked up the primary item %s", usb_se.id)
                 tsk.stage = 2
                 return
             end
@@ -190,18 +186,27 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
 
         -- Second stage : Get the USB drive
         if tsk.stage == 1 then
-            local usb_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.main_item.sec)
+            local usb_se = western_goods_utils.se_object_by_sid("wg_danylo_pendrive_quest_item")
+
+            -- Respawn Danylo if he disappeared
+            if not western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad") then
+                western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", "jup_a6")
+            end
+
+            -- Respawn SSU prisoner if he disappeared
+            if not western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad") then
+                western_goods_utils.spawn_squad_smart("western_goods_ssu_prisoner_squad", "jup_a6")
+            end
 
             -- Respawn quest item if it doesn't exist
             if not usb_se then
-                usb_se = alife_create_item(TASK_1_CACHE.main_item.sec, task_1_get_spawn_stash())
+                usb_se = alife_create_item("wg_danylo_pendrive_quest_item", task_1_get_spawn_stash())
                 dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 1 - Primary item respawned  %s", usb_se.id)
                 return
             end
 
             if usb_se and usb_se.parent_id == AC_ID then
                 dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 1 - Player picked up the primary item %s", usb_se.id)
-
                 tsk.stage = 2
                 return
             end
@@ -209,7 +214,17 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
 
         -- Second stage : Access information
         if tsk.stage == 2 then
-            local usb_se = western_goods_utils.se_object_by_sid(TASK_1_CACHE.main_item.sec)
+            local usb_se = western_goods_utils.se_object_by_sid("wg_danylo_pendrive_quest_item")
+
+            -- Respawn Danylo if he disappeared
+            if not western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad") then
+                western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", "jup_a6")
+            end
+
+            -- Respawn SSU prisoner if he disappeared
+            if not western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad") then
+                western_goods_utils.spawn_squad_smart("western_goods_ssu_prisoner_squad", "jup_a6")
+            end
 
             if usb_se and usb_se.parent_id ~= AC_ID then
                 dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 2 - Player dropped the primary item %s", usb_se.id)
@@ -219,7 +234,7 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
 
             western_goods_utils.give_info("western_goods_act_3_task_1_ready_finished")
 
-            if ui_pda_encyclopedia_tab.is_unlocked_note(TASK_1_CACHE.danylo_note) then
+            if ui_pda_encyclopedia_tab.is_unlocked_note("encyclopedia__notes_western_goods_hand_drawn_map") then
                 dbg_printf("[WG] Tasks Act 3 | Task 1 - Stage 2 - Player unlocked Danylo's note...")
                 tsk.stage = 3
                 return
@@ -228,6 +243,260 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
 
         -- Second stage : Meet with Danylo
         if tsk.stage == 3 then
+            -- Respawn Danylo if he disappeared
+            if not western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad") then
+                western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", "jup_a6")
+            end
+
+            -- Respawn SSU prisoner if he disappeared
+            if not western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad") then
+                western_goods_utils.spawn_squad_smart("western_goods_ssu_prisoner_squad", "jup_a6")
+            end
+        end
+    end
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- TASK 2 - PURSUERS
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to start Act 3, Task 2.
+--- @param first_speaker cse_alife_object
+--- @param second_speaker cse_alife_object
+--- @return nil
+function act_3_task_2_start(first_speaker, second_speaker)
+    local npc = dialogs.who_is_npc(first_speaker, second_speaker)
+    task_manager.get_task_manager():give_task("western_goods_act_3_task_2", npc:id())
+    dbg_printf("[WG] Tasks Act 3 | Task 2 - Task started...")
+end
+
+--- Function used to end Act 3, Task 2.
+--- @return nil
+function act_3_task_2_end()
+    task_manager.get_task_manager():set_task_completed("western_goods_act_3_task_2")
+    dbg_printf("[WG] Tasks Act 3 | Task 2 - Task completed...")
+end
+
+--- Function called when the task is initiated.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.act_3_task_2_init(actor,npc)
+    -- Process info portions
+    western_goods_utils.give_info("western_goods_act_3_task_2_active")
+    western_goods_utils.give_info("western_goods_act_3_task_2_init")
+end
+
+--- Function called when the task is successfully completed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.act_3_task_2_complete(actor,npc)
+    -- Process info portions
+    western_goods_utils.rem_info("western_goods_act_3_task_2_active")
+    western_goods_utils.rem_info("western_goods_act_3_task_2_init")
+    western_goods_utils.give_info("western_goods_act_3_task_2_finished")
+
+    -- Process quest items
+    xr_effects.remove_item(actor, npc, {"wg_deployment_notice_quest_item"})
+end
+
+--- Function called when the task is failed.
+--- @param actor cse_alife_object
+--- @param npc cse_alife_object
+--- @return nil
+function xr_effects.act_3_task_2_fail(actor,npc)
+    -- Process info portions
+    western_goods_utils.rem_info("western_goods_act_3_task_2_active")
+    western_goods_utils.rem_info("western_goods_act_3_task_2_init")
+
+    -- Process penalty
+    xr_effects.fail_task_dec_goodwill(actor,npc,{"50","killer"})
+end
+
+--- Function used to retrieve the title of the mission (displayed in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
+function task_functor.act_3_task_2_title_f(task_id,field,p,tsk)
+    if true then -- Cond to force my IDE to fold this fucking function correctly
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_title")
+    end
+end
+
+--- Function used to retrieve the description of the mission (displayed in the PDA).
+--- Warning : naming contract on the translation string : st_wg_trader_act_3_task_2_stage_<stage>_descr.
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return string
+function task_functor.act_3_task_2_descr_f(task_id,field,p,tsk)
+    if true then -- Cond to force my IDE to fold this fucking function correctly
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_stage_" .. tostring(tsk.stage) .. "_descr")
+    end
+end
+
+--- Function used to retrieve the target of the mission (marker displayed (or not) in the PDA).
+--- @param task_id number
+--- @param field string
+--- @param p any
+--- @param tsk CGameTask
+--- @return number
+function task_functor.act_3_task_2_target_f(task_id,field,p,tsk)
+    if western_goods_utils.has_info("western_goods_act_3_task_2_init") then
+        if tsk.stage == 0 then
+            local squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad")
+            return squad_se and squad_se.id
+        end
+        if tsk.stage == 1 then
+            local squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_bounty_squad")
+            return squad_se and squad_se.id
+        end
+        if tsk.stage == 2 then
+            if western_goods_mcm.get_config("guided_tasks") then
+                local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+                return document_se and document_se.parent_id
+            end
+        end
+        if tsk.stage == 3 then
+            local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+            return document_se and document_se.id
+        end
+        if tsk.stage == 4 then
+            local squad_se = western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad")
+            return squad_se and squad_se.id
+        end
+    end
+end
+
+--- Function used to manage the mission logic as a whole.
+--- @param tsk CGameTask
+--- @param task_id number
+--- @return string
+function task_status_functor.act_3_task_2_status_f(tsk,task_id)
+    if western_goods_utils.has_info("western_goods_act_3_task_2_init") then
+        -- First stage : Interrogate the SSU prisoner
+        if tsk.stage == 0 then
+            -- Respawn SSU prisoner if he disappeared
+            if not western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad") then
+                western_goods_utils.spawn_squad_smart("western_goods_ssu_prisoner_squad", "jup_a6")
+            end
+
+            -- Wait for interrogation to be done (failsafe, task_2_interrogation_over should run before this)
+            if not western_goods_utils.has_info("western_goods_ssu_prisoner_interrogated") then return end
+
+            -- Spawn quest item (and squad)
+            if not western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item") then
+                local squad_se = task_2_spawn_bounty_squad()
+                local document_se = task_2_spawn_quest_item(squad_se)
+            end
+
+            dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 0 - Player finished interrogation (failsafe)...")
+
+            tsk.stage = 1
+        end
+
+        -- First stage : Find and kill the bounty squad
+        if tsk.stage == 1 then
+            local squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_bounty_squad")
+            local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+
+            -- Spawn quest item in squad (and respawn squad if they died and quest item disappeared)
+            if not document_se then
+                squad_se = squad_se or task_2_spawn_bounty_squad()
+                document_se = task_2_spawn_quest_item(squad_se)
+                return
+            end
+
+            if not squad_se then
+                dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 1 - SSU bounty squad is dead...")
+                tsk.stage = 2
+            end
+        end
+
+        -- First stage : Investigate the bodies
+        if tsk.stage == 2 then
+            local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+
+            -- Respawn quest item in respawn and respawn squad
+            if not document_se then
+                local squad_se = task_2_spawn_bounty_squad()
+                document_se = task_2_spawn_quest_item(squad_se)
+                return
+            end
+
+            if document_se and document_se.parent_id == AC_ID then
+                local prisoner_squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_prisoner_squad")
+
+                -- Remove SSU prisoner
+                if prisoner_squad_se then
+                    SIMBOARD:remove_squad(prisoner_squad_se)
+                    dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 2 - Removed SSU prisoner squad...")
+                end
+
+                -- Teleport Danylo to new place
+                if not TASK_2_CACHE.danylo_message_sent then
+                    local sender_1 = alife():actor()
+                    local sender_2 = western_goods_utils.se_object_by_sid("stalker_danylo_chernenko")
+
+                    send_dialog({
+                        {sender=sender_2:character_name(), icon=sender_2:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_2_stage_2_message_1",sender_1:character_name())},
+                        {sender=sender_1:character_name(), icon=sender_1:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_2_stage_2_message_2")},
+                    })
+
+                    western_goods_utils.give_info("western_goods_danylo_red_forest")
+
+                    dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 2 - Teleported Danylo squad...")
+                    TASK_2_CACHE.danylo_message_sent = true
+                end
+
+                dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 2 - Player picked up the primary item %s", document_se.id)
+                tsk.stage = 4
+            end
+        end
+
+        -- First stage : Get the deployment notice
+        if tsk.stage == 3 then
+            local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+
+            -- Respawn quest item in respawn and respawn squad
+            if not document_se then
+                local squad_se = task_2_spawn_bounty_squad()
+                document_se = task_2_spawn_quest_item(squad_se)
+                return
+            end
+
+            -- Respawn Danylo if he disappeared
+            if not western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad") then
+                western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", "red_smart_terrain_monsters_2")
+            end
+
+            if document_se and document_se.parent_id == AC_ID then
+                dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 3 - Player picked up the primary item %s", document_se.id)
+                tsk.stage = 4
+            end
+        end
+
+        -- First stage : Return the deployment notice
+        if tsk.stage == 4 then
+            local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+
+            -- Respawn Danylo if he disappeared
+            if not western_goods_utils.se_object_by_sid("stalker_danylo_chernenko_squad") then
+                western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", "red_smart_terrain_monsters_2")
+            end
+
+            western_goods_utils.give_info("western_goods_act_3_task_2_ready_finished")
+
+            if document_se and document_se.parent_id ~= AC_ID then
+                dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 4 - Player dropped up the primary item %s", document_se.id)
+                western_goods_utils.rem_info("western_goods_act_3_task_2_ready_finished")
+                tsk.stage = 3
+            end
         end
     end
 end
@@ -256,17 +525,29 @@ end
 function save_state(m_data)
     -- Prepare save tables
     local TASK_1_SAVE = {}
+    local TASK_2_SAVE = {}
+    local TASK_3_SAVE = {}
+    local TASK_4_SAVE = {}
 
     -- Make copies of task caches
     copy_table(TASK_1_SAVE, TASK_1_CACHE)
+    copy_table(TASK_2_SAVE, TASK_2_CACHE)
+    copy_table(TASK_3_SAVE, TASK_3_CACHE)
+    copy_table(TASK_4_SAVE, TASK_4_CACHE)
 
     -- Pre-process tables
 
     -- Save tables
     m_data.wg_act_3_task_1_cache = TASK_1_SAVE
+    m_data.wg_act_3_task_2_cache = TASK_2_SAVE
+    m_data.wg_act_3_task_3_cache = TASK_3_SAVE
+    m_data.wg_act_3_task_4_cache = TASK_4_SAVE
 
     -- Debug prints
     dbg_printf("[WG] Tasks Act 3 | Task 1 - Saved variables...\n%s",utils_data.print_table(TASK_1_SAVE, false, true))
+    dbg_printf("[WG] Tasks Act 3 | Task 2 - Saved variables...\n%s",utils_data.print_table(TASK_2_SAVE, false, true))
+    dbg_printf("[WG] Tasks Act 3 | Task 3 - Saved variables...\n%s",utils_data.print_table(TASK_3_SAVE, false, true))
+    dbg_printf("[WG] Tasks Act 3 | Task 4 - Saved variables...\n%s",utils_data.print_table(TASK_4_SAVE, false, true))
 end
 
 --- Function used to load information stored in the save file.
@@ -275,14 +556,23 @@ end
 function load_state(m_data)
     -- Retrieve save tables
     local TASK_1_SAVE = m_data.wg_act_3_task_1_cache or {}
+    local TASK_2_SAVE = m_data.wg_act_3_task_2_cache or {}
+    local TASK_3_SAVE = m_data.wg_act_3_task_3_cache or {}
+    local TASK_4_SAVE = m_data.wg_act_3_task_4_cache or {}
 
     -- Post-process tables
 
     -- Restore task caches
     copy_table(TASK_1_CACHE, TASK_1_SAVE)
+    copy_table(TASK_2_CACHE, TASK_2_SAVE)
+    copy_table(TASK_3_CACHE, TASK_3_SAVE)
+    copy_table(TASK_4_CACHE, TASK_4_SAVE)
 
     -- Debug prints
     dbg_printf("[WG] Tasks Act 3 | Task 1 - Loaded variables...\n%s",utils_data.print_table(TASK_1_CACHE, false, true))
+    dbg_printf("[WG] Tasks Act 3 | Task 2 - Loaded variables...\n%s",utils_data.print_table(TASK_2_CACHE, false, true))
+    dbg_printf("[WG] Tasks Act 3 | Task 3 - Loaded variables...\n%s",utils_data.print_table(TASK_3_CACHE, false, true))
+    dbg_printf("[WG] Tasks Act 3 | Task 4 - Loaded variables...\n%s",utils_data.print_table(TASK_4_CACHE, false, true))
 end
 
 
@@ -332,7 +622,7 @@ end
 --- @return boolean
 function task_1_usb_unlock_dialog_cond()
     local cond_stage = xr_conditions.check_task_stage(nil,nil,{"western_goods_act_3_task_1","2"})
-    local cond_note = not ui_pda_encyclopedia_tab.is_unlocked_note(TASK_1_CACHE.danylo_note)
+    local cond_note = not ui_pda_encyclopedia_tab.is_unlocked_note("encyclopedia__notes_western_goods_hand_drawn_map")
     local cond_obj = db.actor:object("wg_danylo_pendrive_quest_item")
     return cond_stage and cond_obj and cond_note
 end
@@ -350,4 +640,62 @@ end
 function task_1_usb_unlock(npc, actor)
     western_goods_usable_items.use_danylo_pendrive()
     dialogs.relocate_money(npc, CONST_TASK_1_USB_UNLOCK_COST, "out")
+end
+
+--- Function used to progress the task once the player has finished the interrogation.
+--- @return nil
+function task_2_interrogation_over()
+    local tsk = task_manager.get_task_manager().task_info["western_goods_act_3_task_2"]
+    if (tsk and tsk.stage and tsk.stage == 0) then
+        -- Spawn quest item (and squad)
+        if not western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item") then
+            local squad_se = task_2_spawn_bounty_squad()
+            local document_se = task_2_spawn_quest_item(squad_se)
+        end
+        dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 0 - Player finished interrogation...")
+        tsk.stage = 1
+    end
+end
+
+--- Function used to spawn the bounty squad for Act 3, Task 2.
+--- @return cse_alife_online_offline_group
+function task_2_spawn_bounty_squad()
+    local squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_bounty_squad")
+    if not squad_se then
+        squad_se = western_goods_utils.spawn_squad_smart("western_goods_ssu_bounty_squad", "zat_b14_smart_terrain")
+        squad_se.scripted_target = "zat_b14_smart_terrain"
+        dbg_printf("[WG] Tasks Act 3 | Task 2 - Spawned SSU bounty squad with id %s", squad_se.id)
+    end
+    return squad_se
+end
+
+--- Function used to spawn the bounty squad for Act 3, Task 2.
+--- @param squad_se cse_alife_online_offline_group
+--- @return cse_alife_object
+function task_2_spawn_quest_item(squad_se)
+    local document_se = western_goods_utils.se_object_by_sid("wg_deployment_notice_quest_item")
+    if not document_se then
+        local member_se = western_goods_utils.get_member_from_squad(squad_se)
+        document_se = alife_create_item("wg_deployment_notice_quest_item", member_se)
+        dbg_printf("[WG] Tasks Act 3 | Task 2 - Spawned document id %s inside member id %s of squad id %s", document_se.id, member_se.id, squad_se.id)
+    end
+    return document_se
+end
+
+--- Function called from dialog, used to reset the interrogation points counter.
+--- @return nil
+function task_2_init_interrogation()
+    TASK_2_CACHE.interrogation_points = 0
+end
+
+--- Function called from dialog, used to increment the interrogation points counter.
+--- @return nil
+function task_2_incr_interrogation()
+    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points + 1
+end
+
+--- Function called from dialog, used to decrement the interrogation points counter.
+--- @return nil
+function task_2_decr_interrogation()
+    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points - 1
 end

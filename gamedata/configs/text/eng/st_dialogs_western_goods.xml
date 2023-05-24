@@ -446,7 +446,7 @@
 	</string>
 
 	<!-- ============================================================================================================-->
-	<!--    Danylo Chernenko                                                                                      -->
+	<!--    Danylo Chernenko                                                                                         -->
 	<!-- ============================================================================================================-->
 
 	<!-- Start dialog strings -->
@@ -478,23 +478,23 @@
 		<text>What do you want?</text>
 	</string>
 
+	<!-- ============================================================================================================-->
+	<!--    SSU Prisoner                                                                                             -->
+	<!-- ============================================================================================================-->
+
+	<!-- Start dialog strings -->
+	<string id="western_goods_ssu_prisoner_start">
+		<text>...</text>
+	</string>
+
 	<!-- Dialogs strings -->
-	<string id="western_goods_danylo_chernenko_meet_0">
-		<text>I could ask you the same question. Are you Danylo Chernenko, Oleksandr's brother?</text>
+	<string id="western_goods_act_3_task_2_interrogation_0">
+		<text>Talk.</text>
 	</string>
 
-	<string id="western_goods_danylo_chernenko_meet_1">
-		<text>H-How do you know that?</text>
+	<string id="western_goods_act_3_task_2_interrogation_1">
+		<text>Ok, I'll tell you everything I know. I uploaded the coordinates of my commander to your PDA.</text>
 	</string>
-
-	<string id="western_goods_danylo_chernenko_meet_2">
-		<text>Your brother asked me to find out what happened to you. He said you've been missing for days.</text>
-	</string>
-
-	<string id="western_goods_danylo_chernenko_meet_3">
-		<text>Thank god... I thought you were here to kill me. Listen, I'm trying to stay away from my brother for the moment. There are people after me, I don't want him to get dragged into this mess.\n \nTODO</text>
-	</string>
-
 
 	<!-- ============================================================================================================-->
 	<!--	Flea Market Dialogs                                                                                      -->
@@ -757,6 +757,88 @@
 		<text>Alright.</text>
 	</string>
 
+	<!-- Act 3, Task 1 -->
+	<string id="st_wg_act_3_task_1_ask_work_0">
+		<text>You said you were in the Army with your brother? Where is he now?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_ask_work_1">
+		<text>I don't know, actually. He went to meet a new supplier a few days ago, and he didn't come back. I'm worried something might have happened to him.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_accept_work">
+		<text>Is there something I can do to help?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_refuse_work">
+		<text>I see. Sorry to hear about it.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_work_details">
+		<text>Well. I could use some help. I'm stuck here managing the Flea Market. Dushman won't appreciate if I leave, even for my brother.\n \nThing is, I don't know where the meeting with the supplier was. My brother is good at his work, I don't usually question what he does.\n \nListen, if something bad really happened, and if he survived it, he must have found a place to hide. Back when we were in the Army, we kept a stash in the Agroprom Underground. I doubt he'll be hiding there, but it could give us a lead. Here, take this, it'll help you find out stash.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_ask">
+		<text>I need to access data on a USB pendrive. Can you help me with it?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_quote">
+		<text>Sure, but I'll need %c[d_orange]5000 RUB%c[default] for this.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_accept">
+		<text>Ok, here.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_refuse">
+		<text>Let me think about it...</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_usb_unlock_unlocked">
+		<text>Alright... There is a lot of encrypted stuff... There's a map, could this be what you need? I'll upload it to your PDA.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_end_work_0">
+		<text>I could ask you the same question. Are you Danylo Chernenko, Oleksandr's brother?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_end_work_1">
+		<text>H-How do you know that?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_end_work_2">
+		<text>Your brother asked me to find out what happened to you. He said you've been missing for days.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_1_end_work_3">
+		<text>Thank god... I thought you were here to kill me. Listen, I'm trying to stay away from my brother for the moment. There are people after me, I don't want him to get dragged into this mess.\n \nSee this guy? He's from the Security Service of Ukraine. He and his squad ambushed me when I was out to meet a new supplier for my brother's business. These bastards didn't even try to talk, they went straight for a shoot out. He's the only one that survived this bloodbath... And me, of course. I've been trying to get him to talk for days, but he won't spill the beans on who sent him and for what reason.\n \nListen, I'll need to get moving soon, it's only a matter of time before they find out I'm hiding here. Try to get him to talk, would you?</text>
+	</string>
+
+	<!-- Act 3, Task 2 -->
+	<string id="st_wg_act_3_task_2_end_work_0">
+		<text>I killed the SSU squad in Zaton, here's a document one of them had.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_end_work_1">
+		<text>Let me see. Interesting, this is a deployment notice. The order was given from... This bastard. I knew it!</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_end_work_2">
+		<text>What is it?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_end_work_3">
+		<text>When I was in the Army, one of our supervisors was corrupt to the core. One day, I managed to catch evidence of a shady deal he sealed with bandits, selling outfits we had just received from command.\n \nI guess me deserting gave him the perfect opportunity to have the army itself help him silence me. Listen, I know this guy, who won't do the dirty work himself. Last time I heard about him, he was deployed in the Great Swamps, at the Machine yard. This will never end if he's still around, so... Get rid of him, would you?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_end_work_4">
+		<text>I'll let you know when it's done.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Task Messages																			  		     	 -->
+	<!-- ============================================================================================================-->
+
 	<!-- Act 1, Task 1 Messages -->
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_1">
 		<text>You made it to the helicopter?</text>
@@ -993,45 +1075,13 @@
 		<text>Good. Meet us in the Darkscape. We'll be waiting for you at the camp, under the cliff.</text>
 	</string>
 
-	<!-- Act 3, Task 1 -->
-	<string id="st_wg_act_3_task_1_ask_work_0">
-		<text>You said you were in the Army with your brother? Where is he now?</text>
+	<!-- Act 3, Task 2 Messages -->
+	<string id="st_wg_act_3_task_2_stage_2_message_1">
+		<text>%s, I have to move. My current location isn't safe anymore. Meet me in the Red Forest, at the old mine.</text>
 	</string>
 
-	<string id="st_wg_act_3_task_1_ask_work_1">
-		<text>I don't know, actually. He went to meet a new supplier a few days ago, and he didn't come back. I'm worried something might have happened to him.</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_accept_work">
-		<text>Is there something I can do to help?</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_refuse_work">
-		<text>I see. Sorry to hear about it.</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_work_details">
-		<text>Well. I could use some help. I'm stuck here managing the Flea Market. Dushman won't appreciate if I leave, even for my brother.\n \nThing is, I don't know where the meeting with the supplier was. My brother is good at his work, I don't usually question what he does.\n \nListen, if something bad really happened, and if he survived it, he must have found a place to hide. Back when we were in the Army, we kept a stash in the Agroprom Underground. I doubt he'll be hiding there, but it could give us a lead. Here, take this, it'll help you find out stash.</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_usb_unlock_ask">
-		<text>I need to access data on a USB pendrive. Can you help me with it?</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_usb_unlock_quote">
-		<text>Sure, but I'll need %c[d_orange]5000 RUB%c[default] for this.</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_usb_unlock_accept">
-		<text>Ok, here.</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_usb_unlock_refuse">
-		<text>Let me think about it...</text>
-	</string>
-
-	<string id="st_wg_act_3_task_1_usb_unlock_unlocked">
-		<text>Alright... There is a lot of encrypted stuff... There's a map, could this be what you need? I'll upload it to your PDA.</text>
+	<string id="st_wg_act_3_task_2_stage_2_message_2">
+		<text>Alright, I'll meet you there.</text>
 	</string>
 
 </string_table>

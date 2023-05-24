@@ -79,4 +79,13 @@
         <class>stalker_danylo_chernenko</class>
         <specific_character>stalker_danylo_chernenko</specific_character>
     </character>
+
+    <!-- ============================================================================================================-->
+    <!--    SSU Prisoner                                                                                             -->
+    <!-- ============================================================================================================-->
+
+    <character id="stalker_ssu_prisoner">
+        <class>stalker_ssu_prisoner</class>
+        <specific_character>stalker_ssu_prisoner</specific_character>
+    </character>
 </xml>

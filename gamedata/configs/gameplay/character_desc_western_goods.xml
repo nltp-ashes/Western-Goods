@@ -168,6 +168,8 @@
             [spawn] \n
         </supplies>
 
+        <start_dialog>stalker_ecolog_convoy_yellow_start</start_dialog>
+
         <actor_dialog>stalker_ecolog_convoy_yellow_meet</actor_dialog>
         <actor_dialog>stalker_ecolog_convoy_yellow_second_meet</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
@@ -244,7 +246,7 @@
         <bio>western_goods_danylo_chernenko_bio</bio>
         <icon>ui_npc_small_danylo_chernenko</icon>
         <visual>actors\stalker_soldier\0_voen_v_krap_berete_2_4</visual>
-        <snd_config>characters_voice\human\military_3\</snd_config>
+        <snd_config>characters_voice\human\military_1\</snd_config>
 
         <map_icon x="1" y="0"></map_icon>
         <class>stalker_danylo_chernenko</class>
@@ -266,6 +268,38 @@
         <start_dialog>western_goods_danylo_chernenko_start</start_dialog>
 
         <actor_dialog>western_goods_act_3_task_1_end</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_2_end</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
+
+    <!-- ============================================================================================================-->
+    <!--    SSU Prisoner                                                                                             -->
+    <!-- ============================================================================================================-->
+
+    <specific_character id="stalker_ssu_prisoner" team_default="1">
+        <name>GENERATE_NAME_senior_sergeant</name>
+        <bio>western_goods_ssu_prisoner_bio</bio>
+        <icon>ui_npc_small_danylo_chernenko</icon>
+        <visual>actors\stalker_soldier\stalker_soldier_2</visual>
+        <snd_config>characters_voice\human\military_3\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_ssu_prisoner</class>
+        <community>army_npc</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>11500</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>220</reputation>
+
+        <supplies>
+            [spawn] \n
+        </supplies>
+
+        <start_dialog>western_goods_ssu_prisoner_start</start_dialog>
+
+        <actor_dialog>western_goods_act_3_task_2_interrogation</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
 </xml>

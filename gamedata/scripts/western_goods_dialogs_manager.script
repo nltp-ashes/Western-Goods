@@ -114,7 +114,7 @@ end
 
 --- Function called to determine the start dialog's text of the crew member.
 --- @return string
-function crew_member_start_dialog()
+function st_crew_member_start_dialog()
     if not (western_goods_utils.has_info("western_goods_act_1_task_3_active") or western_goods_utils.has_info("western_goods_act_1_task_3_finished")) then
         return western_goods_utils.get_translation("st_stalker_crew_member_start_0")
 
@@ -138,7 +138,7 @@ end
 
 --- Function called to determine the start dialog's text of yellow crewmate.
 --- @return string
-function yellow_ecolog_start_dialog()
+function st_yellow_ecolog_start_dialog()
     if western_goods_utils.has_info("western_goods_act_2_task_2_controller_spawned") and not western_goods_utils.has_info("western_goods_act_2_task_2_controller_killed") then
         return western_goods_utils.get_translation("st_wg_yellow_ecolog_start_0")
 
@@ -147,7 +147,7 @@ end
 
 --- Function called to determine the start dialog's text of Dunn Lynn.
 --- @return string
-function dunn_lynn_start_dialog()
+function st_dunn_lynn_start_dialog()
     if western_goods_utils.has_info("western_goods_act_2_task_2_active") and not western_goods_utils.has_info("western_goods_act_2_task_2_finished") then
         return western_goods_utils.get_translation("st_wg_dunn_lynn_first_start")
 

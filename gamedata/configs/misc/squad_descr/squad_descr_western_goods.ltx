@@ -256,3 +256,21 @@ target_smart            = ds2_lager_st
 faction                 = isg
 relationship            = neutral
 logic                   = scripts\western_goods_a2_t2_s13_isg.ltx
+
+;;--================| Act 3, Task 2 |===========================================--;;
+
+[western_goods_ssu_prisoner_squad]:online_offline_group
+story_id                = western_goods_ssu_prisoner_squad
+npc                     = stalker_ssu_prisoner
+target_smart            = jup_a6
+faction                 = army_npc
+relationship            = enemy
+logic                   = scripts\western_goods_a3_t1_s0_ssu_prisoner.ltx
+
+[western_goods_ssu_bounty_squad]:online_offline_group
+story_id                = western_goods_ssu_bounty_squad
+npc_random              = sim_default_military_3, sim_default_military_4
+npc_in_squad            = 3, 4
+target_smart            = zat_b14_smart_terrain
+faction                 = army
+relationship            = enemy

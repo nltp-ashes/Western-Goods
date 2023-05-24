@@ -196,7 +196,7 @@
     <dialog id="stalker_crew_member_start">
         <phrase_list>
             <phrase id="0">
-                <script_text>western_goods_dialogs_manager.crew_member_start_dialog</script_text>
+                <script_text>western_goods_dialogs_manager.st_crew_member_start_dialog</script_text>
             </phrase>
         </phrase_list>
     </dialog>
@@ -263,7 +263,7 @@
     <dialog id="western_goods_dunn_lynn_start">
         <phrase_list>
             <phrase id="0">
-                <script_text>western_goods_dialogs_manager.dunn_lynn_start_dialog</script_text>
+                <script_text>western_goods_dialogs_manager.st_dunn_lynn_start_dialog</script_text>
             </phrase>
         </phrase_list>
     </dialog>
@@ -271,6 +271,14 @@
     <!-- ============================================================================================================-->
     <!--    Golubev Nikolaj                                                                                          -->
     <!-- ============================================================================================================-->
+
+    <dialog id="stalker_ecolog_convoy_yellow_start">
+        <phrase_list>
+            <phrase id="0">
+                <script_text>western_goods_dialogs_manager.st_yellow_ecolog_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
 
     <dialog id="stalker_ecolog_convoy_yellow_meet">
         <has_info>western_goods_act_2_task_2_active</has_info>
@@ -371,13 +379,25 @@
     </dialog>
 
     <!-- ============================================================================================================-->
-    <!--    Danylo Chernenko Dialogs                                                                              -->
+    <!--    Danylo Chernenko Dialogs                                                                                 -->
     <!-- ============================================================================================================-->
 
     <dialog id="western_goods_danylo_chernenko_start">
         <phrase_list>
             <phrase id="0">
                 <script_text>western_goods_dialogs_manager.st_danylo_chernenko_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!-- ============================================================================================================-->
+    <!--    SSU Prisoner Dialogs                                                                                     -->
+    <!-- ============================================================================================================-->
+
+    <dialog id="western_goods_ssu_prisoner_start">
+        <phrase_list>
+            <phrase id="0">
+                <text>western_goods_ssu_prisoner_start</text>
             </phrase>
         </phrase_list>
     </dialog>
@@ -732,20 +752,286 @@
         <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
         <phrase_list>
             <phrase id="0"> <!-- actor -->
-                <text>western_goods_danylo_chernenko_meet_0</text>
+                <text>st_wg_act_3_task_1_end_work_0</text>
                 <next>1</next>
             </phrase>
             <phrase id="1"> <!-- npc -->
-                <text>western_goods_danylo_chernenko_meet_1</text>
+                <text>st_wg_act_3_task_1_end_work_1</text>
                 <next>2</next>
             </phrase>
             <phrase id="2"> <!-- actor -->
-                <text>western_goods_danylo_chernenko_meet_2</text>
+                <text>st_wg_act_3_task_1_end_work_2</text>
                 <next>3</next>
             </phrase>
             <phrase id="3"> <!-- npc -->
-                <text>western_goods_danylo_chernenko_meet_3</text>
+                <text>st_wg_act_3_task_1_end_work_3</text>
                 <action>western_goods_tasks_act_3.act_3_task_1_end</action>
+                <action>western_goods_tasks_act_3.act_3_task_2_start</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_2_interrogation">
+        <has_info>western_goods_act_3_task_2_active</has_info>
+        <dont_has_info>western_goods_ssu_prisoner_interrogated</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_2_finished</dont_has_info>
+        <phrase_list>
+
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_start</text>
+                <action>western_goods_tasks_act_3.task_2_init_interrogation</action>
+                <next>1</next>
+            </phrase>
+
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_start_answer</text>
+                <next>2</next>
+                <next>3</next>
+                <next>4</next>
+            </phrase>
+
+            <!-- intro (0) -->
+
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_0_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>5</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_0_normal</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_0_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>7</next>
+            </phrase>
+
+            <phrase id="5"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_0_nice_answer</text>
+                <next>8</next>
+                <next>9</next>
+                <next>10</next>
+            </phrase>
+            <phrase id="6"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_0_normal_answer</text>
+                <next>11</next>
+                <next>12</next>
+                <next>13</next>
+            </phrase>
+            <phrase id="7"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_0_mean_answer</text>
+                <next>14</next>
+                <next>15</next>
+                <next>16</next>
+            </phrase>
+
+            <!-- who (1) -->
+
+            <phrase id="8"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>17</next>
+            </phrase>
+            <phrase id="9"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_normal</text>
+                <next>18</next>
+            </phrase>
+            <phrase id="10"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>19</next>
+            </phrase>
+            <phrase id="11"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>17</next>
+            </phrase>
+            <phrase id="12"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_normal</text>
+                <next>18</next>
+            </phrase>
+            <phrase id="13"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>19</next>
+            </phrase>
+            <phrase id="14"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>17</next>
+            </phrase>
+            <phrase id="15"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_normal</text>
+                <next>18</next>
+            </phrase>
+            <phrase id="16"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>19</next>
+            </phrase>
+
+            <phrase id="17"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_answer</text>
+                <next>20</next>
+                <next>21</next>
+                <next>22</next>
+            </phrase>
+            <phrase id="18"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_answer</text>
+                <next>23</next>
+                <next>24</next>
+                <next>25</next>
+            </phrase>
+            <phrase id="19"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_answer</text>
+                <next>26</next>
+                <next>27</next>
+                <next>28</next>
+            </phrase>
+
+            <!-- why (2) -->
+
+            <phrase id="20"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>29</next>
+            </phrase>
+            <phrase id="21"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_normal</text>
+                <next>30</next>
+            </phrase>
+            <phrase id="22"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>31</next>
+            </phrase>
+            <phrase id="23"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>29</next>
+            </phrase>
+            <phrase id="24"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_normal</text>
+                <next>30</next>
+            </phrase>
+            <phrase id="25"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>31</next>
+            </phrase>
+            <phrase id="26"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>29</next>
+            </phrase>
+            <phrase id="27"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_normal</text>
+                <next>30</next>
+            </phrase>
+            <phrase id="28"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>31</next>
+            </phrase>
+
+            <phrase id="29"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_answer</text>
+                <next>32</next>
+                <next>33</next>
+                <next>34</next>
+            </phrase>
+            <phrase id="30"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_answer</text>
+                <next>35</next>
+                <next>36</next>
+                <next>37</next>
+            </phrase>
+            <phrase id="31"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_answer</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>38</next>
+                <next>39</next>
+                <next>40</next>
+            </phrase>
+
+            <!-- where (3) -->
+
+            <phrase id="32"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_nice_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="33"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_nice_normal</text>
+                <next>41</next>
+            </phrase>
+            <phrase id="34"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_nice_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="35"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_normal_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="36"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_normal_normal</text>
+                <next>41</next>
+            </phrase>
+            <phrase id="37"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_normal_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="38"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_mean_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="39"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_mean_normal</text>
+                <next>41</next>
+            </phrase>
+            <phrase id="40"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_mean_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>41</next>
+            </phrase>
+
+            <phrase id="41"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_end</text>
+                <action>western_goods_tasks_act_3.task_2_interrogation_over</action>
+                <give_info>western_goods_ssu_prisoner_interrogated</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_2_end">
+        <has_info>western_goods_act_3_task_2_active</has_info>
+        <has_info>western_goods_act_3_task_2_ready_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_2_end_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_2_end_work_1</text>
+                <action>western_goods_tasks_act_3.act_3_task_2_end</action>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_2_end_work_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_3_task_2_end_work_3</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_2_end_work_4</text>
             </phrase>
         </phrase_list>
     </dialog>

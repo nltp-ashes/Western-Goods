@@ -235,4 +235,32 @@
 		<text>The USB pendrive contained, among other things, a map with handwritten drawings. Find the location shown on that map.</text>
 	</string>
 
+	<!-- ============================================================================================================-->
+	<!--    TASK 1 - OLD STASH                                                                                       -->
+	<!-- ============================================================================================================-->
+
+	<string id="st_wg_act_3_task_2_title">
+		<text>Chernenko Brothers : Pursuers</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_stage_0_descr">
+		<text>You found Oleksandr's brother. It seems some people are looking for him. Interrogate the SSU soldier he captured and try to obtain information.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_stage_1_descr">
+		<text>After interrogating the SSU soldier, he revealed the location of another SSU squad. Head to their location, and eliminate them.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_stage_2_descr">
+		<text>You eliminated the SSU squad, investigate the bodies for useful information.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_stage_3_descr">
+		<text>One of the soldiers of the SSU squad you eliminated was in possession of a deployment notice. Get it and return it to Danylo.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_stage_4_descr">
+		<text>Return the deployment notice you found to Danylo.</text>
+	</string>
+
 </string_table>

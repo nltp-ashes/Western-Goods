@@ -117,4 +117,22 @@
 		</text>
 	</string>
 
+	<!-- SSU Deployment Notice -->
+	<string id="st_wg_deployment_notice_quest_item">
+		<text>SSU deployment notice</text>
+	</string>
+
+	<string id="st_wg_deployment_notice_quest_item_s">
+		<text>Deployment notice</text>
+	</string>
+
+	<string id="st_wg_deployment_notice_quest_item_descr">
+		<text>
+			A military document, ordering an SSU squad to locate and eliminate "Sergeant Danylo Chernenko". The document mentions that the order follows the Sergeant's desertion, but the rest of the motive is redacted.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_green] • %c[ui_gray_2] informative\n
+		</text>
+	</string>
+
 </string_table>

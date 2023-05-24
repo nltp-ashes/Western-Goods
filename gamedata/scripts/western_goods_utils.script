@@ -435,7 +435,7 @@ function get_member_from_squad(squad)
     if not validate_params({squad,"get_member_from_squad"}) then return end
 
     for member in squad:squad_members() do
-        return member
+        return alife_object(member.id)
     end
 end
 
