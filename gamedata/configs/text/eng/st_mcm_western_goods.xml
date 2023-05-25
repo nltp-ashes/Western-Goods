@@ -110,7 +110,7 @@
 	</string>
 
 	<string id="ui_mcm_western_goods_lighter_item_desc">
-		<text>Enables part of the functionality of the lighter item. Enabling this option will allow you to use the lighter to light cigarettes and campfires, but may expose you to conflicts with other addons. After enabling, requires save reload to take effect.</text>
+		<text>Enables part of the functionality of the lighter item. Enabling this option will allow you to use the lighter to light cigarettes and campfires, but may expose you to conflicts with other addons.\n \n/!\ After enabling, requires save reload to take effect.</text>
 	</string>
 
 	<!-- Compatibility with 'No drug limit' -->
@@ -119,7 +119,7 @@
 	</string>
 
 	<string id="ui_mcm_western_goods_compat_no_drug_limit_desc">
-		<text>Enables compatibility with No Drug Limit. If enabled, the 'You already have a similar effect with greater efficiency' thing will be disabled, and it'll let you use whatever items you want. Requires 'Lighter item' to be enabled.</text>
+		<text>Enables compatibility with No Drug Limit. If enabled, the 'You already have a similar effect with greater efficiency' thing will be disabled, and it'll let you use whatever items you want.\n \n/!\ Requires 'Lighter item' to be enabled.</text>
 	</string>
 
 	<!-- ============================================================================================================-->

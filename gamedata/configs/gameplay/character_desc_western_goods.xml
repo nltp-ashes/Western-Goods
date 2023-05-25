@@ -220,7 +220,7 @@
 
         <rank>27800</rank>
         <money min="0" max="0" infinitive="0"/>
-        <reputation>220</reputation>
+        <reputation>1200</reputation>
 
         <supplies>
             [spawn] \n
@@ -234,6 +234,7 @@
         <actor_dialog>western_goods_oleksandr_chernenko_meet</actor_dialog>
         <actor_dialog>western_goods_flea_offers</actor_dialog>
         <actor_dialog>western_goods_act_3_task_1_start</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_4_end</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
 
@@ -255,7 +256,7 @@
 
         <rank>23500</rank>
         <money min="0" max="0" infinitive="0"/>
-        <reputation>220</reputation>
+        <reputation>700</reputation>
 
         <supplies>
             [spawn] \n
@@ -268,7 +269,11 @@
         <start_dialog>western_goods_danylo_chernenko_start</start_dialog>
 
         <actor_dialog>western_goods_act_3_task_1_end</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_2_start</actor_dialog>
         <actor_dialog>western_goods_act_3_task_2_end</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_3_start</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_3_end</actor_dialog>
+        <actor_dialog>western_goods_act_3_task_4_start</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
 
@@ -299,6 +304,33 @@
         <start_dialog>western_goods_ssu_prisoner_start</start_dialog>
 
         <actor_dialog>western_goods_act_3_task_2_interrogation</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!-- ============================================================================================================-->
+    <!--    SSU Supervisor                                                                                           -->
+    <!-- ============================================================================================================-->
+
+    <specific_character id="stalker_ssu_supervisor" team_default="1">
+        <name>GENERATE_NAME_lieutenant</name>
+        <bio>western_goods_ssu_supervisor_bio</bio>
+        <icon>ui_inGame2_nosorog</icon>
+        <visual>actors\stalker_soldier\stalker_soldier4nosorog</visual>
+        <snd_config>characters_voice\human\military_3\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_ssu_supervisor</class>
+        <community>army_npc</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>24500</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>-2205</reputation>
+
+        <supplies>
+            [spawn] \n
+        </supplies>
+
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
 

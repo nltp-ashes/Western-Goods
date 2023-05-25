@@ -88,4 +88,13 @@
         <class>stalker_ssu_prisoner</class>
         <specific_character>stalker_ssu_prisoner</specific_character>
     </character>
+
+    <!-- ============================================================================================================-->
+    <!--    SSU Supervisor                                                                                           -->
+    <!-- ============================================================================================================-->
+
+    <character id="stalker_ssu_supervisor">
+        <class>stalker_ssu_supervisor</class>
+        <specific_character>stalker_ssu_supervisor</specific_character>
+    </character>
 </xml>

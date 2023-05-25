@@ -811,10 +811,26 @@
 	</string>
 
 	<string id="st_wg_act_3_task_1_end_work_3">
-		<text>Thank god... I thought you were here to kill me. Listen, I'm trying to stay away from my brother for the moment. There are people after me, I don't want him to get dragged into this mess.\n \nSee this guy? He's from the Security Service of Ukraine. He and his squad ambushed me when I was out to meet a new supplier for my brother's business. These bastards didn't even try to talk, they went straight for a shoot out. He's the only one that survived this bloodbath... And me, of course. I've been trying to get him to talk for days, but he won't spill the beans on who sent him and for what reason.\n \nListen, I'll need to get moving soon, it's only a matter of time before they find out I'm hiding here. Try to get him to talk, would you?</text>
+		<text>Thank god... I thought you were here to kill me. Listen, I'm trying to stay away from my brother for the moment. There are people after me, I don't want him to get dragged into this mess.</text>
 	</string>
 
 	<!-- Act 3, Task 2 -->
+	<string id="st_wg_act_3_task_2_start_work">
+		<text>Who is your prisoner?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_start_work_details">
+		<text>This guy? He's from the Security Service of Ukraine. He and his squad ambushed me when I was out to meet a new supplier for my brother's business. These bastards didn't even try to talk, they went straight for a shoot out. He's the only one that survived this bloodbath... And me, of course. I've been trying to get him to talk for days, but he won't spill the beans on who sent him and for what reason.\n \nListen, I'll need to get moving soon, it's only a matter of time before they find out I'm hiding here. Try to get him to talk, would you?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_start_work_accept">
+		<text>I'm on it.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_start_work_refuse">
+		<text>I need time to prepare.</text>
+	</string>
+
 	<string id="st_wg_act_3_task_2_end_work_0">
 		<text>I killed the SSU squad in Zaton, here's a document one of them had.</text>
 	</string>
@@ -823,16 +839,58 @@
 		<text>Let me see. Interesting, this is a deployment notice. The order was given from... This bastard. I knew it!</text>
 	</string>
 
-	<string id="st_wg_act_3_task_2_end_work_2">
-		<text>What is it?</text>
+	<!-- Act 3, Task 3 -->
+	<string id="st_wg_act_3_task_3_start_work">
+		<text>Can I help?</text>
 	</string>
 
-	<string id="st_wg_act_3_task_2_end_work_3">
-		<text>When I was in the Army, one of our supervisors was corrupt to the core. One day, I managed to catch evidence of a shady deal he sealed with bandits, selling outfits we had just received from command.\n \nI guess me deserting gave him the perfect opportunity to have the army itself help him silence me. Listen, I know this guy, who won't do the dirty work himself. Last time I heard about him, he was deployed in the Great Swamps, at the Machine yard. This will never end if he's still around, so... Get rid of him, would you?</text>
+	<string id="st_wg_act_3_task_3_start_work_details">
+		<text>When I was in the Army, one of our supervisors was corrupt to the core. One day, I managed to catch evidence of a shady deal he sealed with bandits, selling outfits we had just received from command. I showed it to my brother, and that and the fact my brother outranked him gave us decent protection against his bullshit.\n \nI guess us deserting gave him the perfect opportunity to have the army itself help him silence us. Listen, I know this guy, who won't do the dirty work himself. Last time I heard about him, he was deployed in the Great Swamps, at the Machine yard. This will never end if he's still around, so... Get rid of him, would you?</text>
 	</string>
 
-	<string id="st_wg_act_3_task_2_end_work_4">
+	<string id="st_wg_act_3_task_3_start_work_accept">
 		<text>I'll let you know when it's done.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_start_work_refuse">
+		<text>I can't help you with this yet.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_end_work_0">
+		<text>Your old supervisor won't cause you troubles anymore.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_end_work_1">
+		<text>Right... I knew this guy was rotten, but I didn't think he'd actually use the Army to cover his ass.</text>
+	</string>
+
+	<!-- Act 3, Task 4 -->
+	<string id="st_wg_act_3_task_4_start_work">
+		<text>Anyway, you said you needed help with something?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_start_work_details">
+		<text>Oh, yeah... About that... See, I'd like to go back to my brother, in the Garbage... But the way there isn't exactly welcoming, especially for a Merc. Can you just, help me get there?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_start_work_accept_0">
+		<text>Sure, let's go.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_start_work_refuse">
+		<text>Actually, I need time to prepare before we go.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_start_work_accept_1">
+		<text>Thanks, I'll let you lead the way.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_end_work_0">
+		<text>I have return, and I didn't come alone.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_end_work_1">
+		<text>Thank you so much Stalker. I was growing worried. Good to know you're someone reliable. Hey, take this, for your trouble, and for getting my brother back in one piece.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -1082,6 +1140,15 @@
 
 	<string id="st_wg_act_3_task_2_stage_2_message_2">
 		<text>Alright, I'll meet you there.</text>
+	</string>
+
+	<!-- Act 3, Task 3 Messages -->
+	<string id="st_wg_act_3_task_3_stage_0_message_1">
+		<text>The supervisor won't cause you troubles anymore. The Zone got the best of him.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_stage_0_message_2">
+		<text>Thank god. This is finally over. Listen, can you help me with one last thing? I'll be waiting for you in the Army Warehouses.</text>
 	</string>
 
 </string_table>

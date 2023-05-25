@@ -236,7 +236,7 @@
 	</string>
 
 	<!-- ============================================================================================================-->
-	<!--    TASK 1 - OLD STASH                                                                                       -->
+	<!--    TASK 2 - PURSUERS                                                                                        -->
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_3_task_2_title">
@@ -261,6 +261,38 @@
 
 	<string id="st_wg_act_3_task_2_stage_4_descr">
 		<text>Return the deployment notice you found to Danylo.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--    TASK 3 - HEAD OF OPERATIONS                                                                              -->
+	<!-- ============================================================================================================-->
+
+	<string id="st_wg_act_3_task_3_title">
+		<text>Chernenko Brothers : Head of Operations</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_stage_0_descr">
+		<text>Find and eliminate the corrupt SSU supervisor. His last known whereabouts is the Machine Yard, in the Great Swamps.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_stage_1_descr">
+		<text>The SSU supervisor is eliminated. Return to Danylo.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--    TASK 4 - REUNION                                                                                         -->
+	<!-- ============================================================================================================-->
+
+	<string id="st_wg_act_3_task_4_title">
+		<text>Chernenko Brothers : Reunion</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_stage_0_descr">
+		<text>With the Army taken care of, Danylo wants to reunite with his brother. Meet with Danylo.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_4_stage_1_descr">
+		<text>With the Army taken care of, Danylo wants to reunite with his brother. Escort him to the Flea Market, in the Garbage.</text>
 	</string>
 
 </string_table>

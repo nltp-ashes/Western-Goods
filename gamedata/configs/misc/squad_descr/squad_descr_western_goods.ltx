@@ -269,8 +269,17 @@ logic                   = scripts\western_goods_a3_t1_s0_ssu_prisoner.ltx
 
 [western_goods_ssu_bounty_squad]:online_offline_group
 story_id                = western_goods_ssu_bounty_squad
-npc_random              = sim_default_military_3, sim_default_military_4
+npc_random              = sim_default_anpc_1, sim_default_anpc_2
 npc_in_squad            = 3, 4
 target_smart            = zat_b14_smart_terrain
-faction                 = army
+faction                 = army_npc
+relationship            = enemy
+
+;;--================| Act 3, Task 3 |===========================================--;;
+
+[western_goods_ssu_supervisor_squad]:online_offline_group
+story_id                = western_goods_ssu_supervisor_squad
+npc                     = stalker_ssu_supervisor
+target_smart            = mar_smart_terrain_10_5
+faction                 = army_npc
 relationship            = enemy
