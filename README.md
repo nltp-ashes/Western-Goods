@@ -59,8 +59,8 @@ To **uninstall** the addon :
 > **v2.1.0 - xx/xx/2023 - Work In Progress**
 > ```
 > • New storylines :
-> • Additions :
 >    - Added a new storyline (4 tasks), help Okleksandr Cherchenko find out what happened to his brother;
+> • Additions :
 >    - Added two new NPCs : The Cherchenko brothers.
 >    - Added a new system : Flea Market. Purchase limited offers containing a fixed set of items, but at a discount;
 >    - Added native integration with the Pinup Collector addon;
