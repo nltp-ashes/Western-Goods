@@ -1,0 +1,304 @@
+--- Original Author(s) : <unknown>
+--- Edited : NLTP_ASHES
+--- Date : 26/05/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local CONST_UPDATE_FREQ      = 555 -- in milliseconds
+local CONST_UPDATE_WORK_FREQ = 1000 -- in milliseconds
+
+-- Imported functions
+local dbg_printf             = western_goods_utils.dbg_printf
+
+-- Variables
+GUI					         = nil -- instance, don't touch
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function get_ui()
+    if (not GUI) then
+        GUI = UIGPSLocator()
+    end
+
+    return GUI
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "UIGPSLocator" (CUIScriptWnd)
+function UIGPSLocator:__init() super()
+    self:Show					(true)
+    self:Enable					(true)
+
+    local xml					= CScriptXmlInit()
+    self.xml = xml
+    xml:ParseFile				("ui_western_goods_gps_locator.xml")
+    xml:InitWindow				("gps_locator", 0, self)
+
+    -- Build UI
+    self.m_work_area			= xml:InitStatic("gps_locator:work_area", self)
+
+    self.m_level				= xml:InitStatic("gps_locator:level", self)
+
+    self.m_conn			    	= xml:InitStatic("gps_locator:conn", self)
+
+    self.m_dist1				= xml:InitStatic("gps_locator:dist1", self)
+    self.m_dist2				= xml:InitStatic("gps_locator:dist2", self)
+    self.m_dist3				= xml:InitStatic("gps_locator:dist3", self)
+    self.m_dist4				= xml:InitStatic("gps_locator:dist4", self)
+
+    self.m_time1				= xml:InitStatic("gps_locator:time1", self)
+    self.m_time2				= xml:InitStatic("gps_locator:time2", self)
+    self.m_time3				= xml:InitStatic("gps_locator:time3", self)
+    self.m_time4				= xml:InitStatic("gps_locator:time4", self)
+
+    self.m_date1				= xml:InitStatic("gps_locator:date1", self)
+    self.m_date2				= xml:InitStatic("gps_locator:date2", self)
+    self.m_date3				= xml:InitStatic("gps_locator:date3", self)
+    self.m_date4				= xml:InitStatic("gps_locator:date4", self)
+    self.m_date5				= xml:InitStatic("gps_locator:date5", self)
+    self.m_date6				= xml:InitStatic("gps_locator:date6", self)
+
+    self.m_work_indicator		= xml:InitStatic("gps_locator:work", self)
+
+    -- Build variables
+    self.update_timer           = 0
+    self.update_timer_work      = 0
+    self.connectivity           = 5
+end
+
+function UIGPSLocator:__finalize()
+    GUI = nil
+end
+
+function UIGPSLocator:Update()
+
+    CUIScriptWnd.Update(self)
+
+    local tg = time_global()
+
+    if (tg > self.update_timer_work + CONST_UPDATE_WORK_FREQ) then
+        self.update_timer_work = tg
+        self.m_work_indicator:Show(not self.m_work_indicator:IsShown())
+    end
+
+    if (tg < self.update_timer) then
+        return
+    else
+        self.update_timer = tg + CONST_UPDATE_FREQ
+    end
+
+    -- Connectivity
+    local conn = self:GetConnectivityTexture()
+
+    -- Dist to smart terrain
+    local dist1, dist2, dist3, dist4, level_name = self:GetDistAndLevelTextures()
+
+    -- Time of day
+    local time1, time2, time3, time4 = self:GetTimeOfDayTextures()
+
+    -- Date
+    local date1, date2, date3, date4, date5, date6 = self:GetDateTextures()
+
+    self.m_level:InitTextureEx(level_name, "hud\\p3d")
+
+    self.m_conn:InitTextureEx(conn, "hud\\p3d")
+
+    self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
+    self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
+    self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
+    self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
+
+    self.m_time1:InitTextureEx(time1, "hud\\p3d")
+    self.m_time2:InitTextureEx(time2, "hud\\p3d")
+    self.m_time3:InitTextureEx(time3, "hud\\p3d")
+    self.m_time4:InitTextureEx(time4, "hud\\p3d")
+
+    self.m_date1:InitTextureEx(date1, "hud\\p3d")
+    self.m_date2:InitTextureEx(date2, "hud\\p3d")
+    self.m_date3:InitTextureEx(date3, "hud\\p3d")
+    self.m_date4:InitTextureEx(date4, "hud\\p3d")
+    self.m_date5:InitTextureEx(date5, "hud\\p3d")
+    self.m_date6:InitTextureEx(date6, "hud\\p3d")
+end
+
+function UIGPSLocator:GetConnectivityTexture()
+    if GetEvent("underground") or GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
+        if self.connectivity > 0 then
+            self.connectivity = self.connectivity - 1
+        end
+    else
+        if self.connectivity < 4 then
+            self.connectivity = self.connectivity + 1
+        else
+            self.connectivity = math.random(4, 5)
+        end
+    end
+
+    return "gps_conn_" .. tostring(self.connectivity)
+end
+
+function UIGPSLocator:GetTimeOfDayTextures()
+    local ctt = utils_data.CTime_to_table(game.get_game_time())
+    local s_hrs = western_goods_utils.as_string(ctt.h, 2)
+    local s_mins = western_goods_utils.as_string(ctt.m, 2)
+
+    -- Hours format
+    local time1 = strformat("gps_num_%s", s_hrs:sub(1, 1))
+    local time2 = strformat("gps_num_%s", s_hrs:sub(2, 2))
+
+    -- Mins format
+    local time3 = strformat("gps_num_%s", s_mins:sub(1, 1))
+    local time4 = strformat("gps_num_%s", s_mins:sub(2, 2))
+
+    return time1, time2, time3, time4
+end
+
+function UIGPSLocator:GetDateTextures()
+    local ctt = utils_data.CTime_to_table(game.get_game_time())
+    local s_day = western_goods_utils.as_string(ctt.D, 2)
+    local s_month = western_goods_utils.as_string(ctt.M, 2)
+    local s_year = western_goods_utils.as_string(ctt.Y, 4)
+
+    -- Day format
+    local date1 = strformat("gps_num_%s", s_day:sub(1, 1))
+    local date2 = strformat("gps_num_%s", s_day:sub(2, 2))
+
+    -- Month format
+    local date3 = strformat("gps_num_%s", s_month:sub(1, 1))
+    local date4 = strformat("gps_num_%s", s_month:sub(2, 2))
+
+    -- Year format
+    local date5 = strformat("gps_num_%s", s_year:sub(3, 3))
+    local date6 = strformat("gps_num_%s", s_year:sub(4, 4))
+
+    return date1, date2, date3, date4, date5, date6
+end
+
+function UIGPSLocator:GetDistAndLevelTextures()
+    local dist, level_name = self:FindDistAndLevelWorld()
+
+    if not dist then
+        dist, level_name = self:FindDistAndLevelPDA()
+    end
+
+    if not dist then
+        dist, level_name = 9999, self:GetLevelTexture("default")
+    else
+        dist, level_name = math.floor(dist * self:GetDistEventOffset()), self:GetLevelTexture(level_name)
+    end
+
+    local s_dist = western_goods_utils.as_string(dist, 4)
+
+    -- Distance format
+    local dist1 = strformat("gps_num_%s", s_dist:sub(1, 1))
+    local dist2 = strformat("gps_num_%s", s_dist:sub(2, 2))
+    local dist3 = strformat("gps_num_%s", s_dist:sub(3, 3))
+    local dist4 = strformat("gps_num_%s", s_dist:sub(4, 4))
+
+    return dist1, dist2, dist3, dist4, level_name
+end
+
+function UIGPSLocator:FindDistAndLevelWorld()
+    local smart_id = smart_terrain.nearest_to_actor_smart.id
+    local smart = smart_id and alife_object(smart_id)
+
+    if smart then
+        return smart.dist_to_actor, alife():level_name(smart.level_id)
+    end
+end
+
+function UIGPSLocator:FindDistAndLevelPDA()
+    local closest_smart_dist
+
+    for _,v in pairs(pda.primary_objects_tbl) do
+        local smart_se = western_goods_utils.se_object_by_sid(v.target)
+        local smart_obj = smart_se and western_goods_utils.find_object_by_id(smart_se.id)
+        if smart_obj then
+            local smart_dist = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
+
+            if (smart_dist <= (closest_smart_dist or smart_dist)) then
+                closest_smart_dist = smart_dist
+            end
+        end
+    end
+
+    if closest_smart_dist then
+        return math.sqrt(closest_smart_dist), level.name()
+    end
+end
+
+function UIGPSLocator:GetDistEventOffset()
+    -- Emissions: the closer the wave, the higher the psi influences
+    if GetEvent("surge", "state") then
+        local surge_time = GetEvent("surge", "time") or 0
+        local glitch_pow = (surge_time > 168) and normalize(surge_time, 220, 168) or normalize(surge_time, 20, 168)
+        return (1 + 0.5 * glitch_pow) * random_float(0.9, 1.1)
+    end
+
+    -- Psi-storms: huge spike when a vortex hits the ground
+    if GetEvent("psi_storm", "state") then
+        if GetEvent("psi_storm", "vortex") then
+            return random_float(0.5, 2)
+        else
+            return random_float(0.9, 1.1)
+        end
+    end
+
+    return 1
+end
+
+function UIGPSLocator:GetLevelTexture(level_name)
+    local level_textures         = {
+        ["default"]				    = "gps_no_sig",
+        ["jupiter"]					= "gps_jup",
+        ["jupiter_underground"]		= "gps_no_sig",
+        ["k00_marsh"]				= "gps_mar",
+        ["k01_darkscape"]			= "gps_darkscape",
+        ["k02_trucks_cemetery"]		= "gps_truck",
+        ["l01_escape"]				= "gps_esc",
+        ["l02_garbage"]				= "gps_gar",
+        ["l03_agroprom"]			= "gps_agroprom",
+        ["l03u_agr_underground"]	= "gps_no_sig",
+        ["l04_darkvalley"]			= "gps_darkvalley",
+        ["l04u_labx18"]				= "gps_no_sig",
+        ["l05_bar"]					= "gps_bar",
+        ["l06_rostok"]				= "gps_wild",
+        ["l07_military"]			= "gps_mil",
+        ["l08_yantar"]				= "gps_yantar",
+        ["l08u_brainlab"]			= "gps_no_sig",
+        ["l09_deadcity"]			= "gps_dead",
+        ["l10_limansk"]				= "gps_lim",
+        ["l10_radar"]				= "gps_rad",
+        ["l10_red_forest"]			= "gps_red",
+        ["l10u_bunker"]				= "gps_no_sig",
+        ["l11_hospital"]			= "gps_hospital",
+        ["l11_pripyat"]				= "gps_pri_soc",
+        ["l12_stancia"]				= "gps_cnpp",
+        ["l12_stancia_2"]			= "gps_cnpp",
+        ["l12u_control_monolith"]	= "gps_no_sig",
+        ["l12u_sarcofag"]			= "gps_no_sig",
+        ["l13_generators"]			= "gps_gen",
+        ["l13u_warlab"]				= "gps_no_sig",
+        ["labx8"]					= "gps_no_sig",
+        ["pripyat"]					= "gps_pri",
+        ["zaton"]					= "gps_zat",
+        ["y04_pole"]				= "gps_pole",
+    }
+
+    if self.connectivity > 0 then
+        return level_textures[level_name] or "gps_no_sig"
+    else
+        return "gps_no_sig"
+    end
+end

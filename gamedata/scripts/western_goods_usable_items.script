@@ -102,7 +102,7 @@ function use_item(obj,_,cf)
     -- Readable items (magazines, paper notes)
     if ini_sys:r_bool_ex(obj:section(), "readable") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        western_goods_magazine_ui.display(obj:section())
+        western_goods_ui_magazine.display(obj:section())
         return
     end
 end
@@ -159,7 +159,7 @@ function find_info_from_game_world()
     local closest_smart_distance = smart.dist_to_actor
     local closest_smart_level = alife():level_name(smart.level_id)
 
-    dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
+    --dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
 
     return closest_smart_name, closest_smart_distance, closest_smart_level
 end
@@ -187,7 +187,7 @@ function find_info_from_pda()
 		end
 	end
 	
-	dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (PDA) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
+	--dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (PDA) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
 	
 	return closest_smart_name, closest_smart_distance, closest_smart_level
 end

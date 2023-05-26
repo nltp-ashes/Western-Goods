@@ -82,13 +82,22 @@ function as_number(var)
 end
 
 --- Function used to get a given variable as a string. Returns nil if the variable cannot be casted.
+--- The parameter length can be used to specify the length of the return value, when working with numbers.
+--- The function will add 0s before the number to match the desired length.
 --- @param var any
+--- @param length number
 --- @return string
-function as_string(var)
+function as_string(var, length)
     if not validate_params({var,"as_string"}) then return end
 
     if type(var) == "number" then
-        return tostring(var)
+        local ret = tostring(var)
+        if length then
+            while #ret < length do
+                ret = "0" .. ret
+            end
+        end
+        return ret
     end
     if type(var) == "boolean" then
         return tostring(var)

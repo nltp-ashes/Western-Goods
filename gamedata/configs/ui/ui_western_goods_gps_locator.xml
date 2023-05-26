@@ -1,0 +1,35 @@
+<w>
+    <gps_locator>
+        <work_area/>
+        <!-- distance to smart terrain -->
+        <dist1 x="0.007"     y="0.0235"  width="0.009"     height="0.021"    stretch="1"/>
+        <dist2 x="0.016"     y="0.0235"  width="0.009"     height="0.021"    stretch="1"/>
+        <dist3 x="0.025"     y="0.0235"  width="0.009"     height="0.021"    stretch="1"/>
+        <dist4 x="0.034"     y="0.0235"  width="0.009"     height="0.021"    stretch="1"/>
+
+        <!-- level name -->
+        <level x="0.000"     y="0.070"   width="0.050"     height="0.020"    stretch="1"/>
+
+        <!-- time of day -->
+        <time1 x="0.0070"    y="0.1045"  width="0.0045"    height="0.010"    stretch="1"/>
+        <time2 x="0.0115"    y="0.1045"  width="0.0045"    height="0.010"    stretch="1"/>
+        <time3 x="0.0182"    y="0.1045"  width="0.0045"    height="0.010"    stretch="1"/>
+        <time4 x="0.0227"    y="0.1045"  width="0.0045"    height="0.010"    stretch="1"/>
+
+        <!-- date -->
+        <date1 x="0.0070"    y="0.1145"  width="0.0045"    height="0.010"    stretch="1"/>
+        <date2 x="0.0115"    y="0.1145"  width="0.0045"    height="0.010"    stretch="1"/>
+        <date3 x="0.0182"    y="0.1145"  width="0.0045"    height="0.010"    stretch="1"/>
+        <date4 x="0.0227"    y="0.1145"  width="0.0045"    height="0.010"    stretch="1"/>
+        <date5 x="0.0294"    y="0.1145"  width="0.0045"    height="0.010"    stretch="1"/>
+        <date6 x="0.0339"    y="0.1145"  width="0.0045"    height="0.010"    stretch="1"/>
+
+        <!-- connectivity -->
+        <conn x="0.0317"    y="0.1045"  width="0.0125"     height="0.005"    stretch="1"/>
+
+        <!-- work indicator -->
+        <work x="-0.0024"   y="0.0113"  width="0.008"      height="0.008"    stretch="1">
+            <texture shader="hud\p3d" color="red">red_diod</texture>
+        </work>
+    </gps_locator>
+</w>

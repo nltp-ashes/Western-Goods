@@ -1,0 +1,51 @@
+<w>
+    <!-- GPS Locator -->
+    <file name="ui\items\ui_gps_locator">
+
+        <!-- Numbers -->
+        <texture id="gps_num_1"       x="750"    y="150"    width="40"     height="120" />
+        <texture id="gps_num_2"       x="790"    y="150"    width="40"     height="120" />
+        <texture id="gps_num_3"       x="750"    y="270"    width="40"     height="120" />
+        <texture id="gps_num_4"       x="790"    y="270"    width="40"     height="120" />
+        <texture id="gps_num_5"       x="750"    y="390"    width="40"     height="120" />
+        <texture id="gps_num_6"       x="790"    y="390"    width="40"     height="120" />
+        <texture id="gps_num_7"       x="750"    y="510"    width="40"     height="120" />
+        <texture id="gps_num_8"       x="790"    y="510"    width="40"     height="120" />
+        <texture id="gps_num_9"       x="750"    y="630"    width="40"     height="120" />
+        <texture id="gps_num_0"       x="790"    y="630"    width="40"     height="120" />
+
+        <!-- Connectivity icons -->
+        <texture id="gps_conn_5"      x="750"    y="0"      width="100"    height="50" />
+        <texture id="gps_conn_4"      x="850"    y="0"      width="100"    height="50" />
+        <texture id="gps_conn_3"      x="750"    y="50"     width="100"    height="50" />
+        <texture id="gps_conn_2"      x="850"    y="50"     width="100"    height="50" />
+        <texture id="gps_conn_1"      x="750"    y="100"    width="100"    height="50" />
+        <texture id="gps_conn_0"      x="850"    y="100"    width="100"    height="50" />
+
+        <!-- Level names -->
+        <texture id="gps_no_sig"      x="0"      y="0"      width="250"    height="100" />
+        <texture id="gps_mar"         x="0"      y="100"    width="250"    height="100" />
+        <texture id="gps_darkscape"   x="0"      y="200"    width="250"    height="100" />
+        <texture id="gps_wild"        x="0"      y="300"    width="250"    height="100" />
+        <texture id="gps_pole"        x="0"      y="400"    width="250"    height="100" />
+        <texture id="gps_yantar"      x="0"      y="500"    width="250"    height="100" />
+        <texture id="gps_dead"        x="0"      y="600"    width="250"    height="100" />
+        <texture id="gps_rad"         x="0"      y="700"    width="250"    height="100" />
+        <texture id="gps_lim"         x="0"      y="800"    width="250"    height="100" />
+        <texture id="gps_zat"         x="0"      y="900"    width="250"    height="100" />
+        <texture id="gps_esc"         x="250"    y="0"      width="250"    height="100" />
+        <texture id="gps_gar"         x="250"    y="100"    width="250"    height="100" />
+        <texture id="gps_darkvalley"  x="250"    y="200"    width="250"    height="100" />
+        <texture id="gps_bar"         x="250"    y="300"    width="250"    height="100" />
+        <texture id="gps_agroprom"    x="250"    y="400"    width="250"    height="100" />
+        <texture id="gps_truck"       x="250"    y="500"    width="250"    height="100" />
+        <texture id="gps_mil"         x="250"    y="600"    width="250"    height="100" />
+        <texture id="gps_red"         x="250"    y="700"    width="250"    height="100" />
+        <texture id="gps_jup"         x="250"    y="800"    width="250"    height="100" />
+        <texture id="gps_cnpp"        x="250"    y="900"    width="250"    height="100" />
+        <texture id="gps_pri_soc"     x="500"    y="0"      width="250"    height="100" />
+        <texture id="gps_pri"         x="500"    y="100"    width="250"    height="100" />
+        <texture id="gps_gen"         x="500"    y="200"    width="250"    height="100" />
+        <texture id="gps_hospital"    x="500"    y="300"    width="250"    height="100" />
+    </file>
+</w>
