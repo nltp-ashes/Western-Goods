@@ -26,9 +26,10 @@
         <dist3  x="0.0248"     y="0.0500"  width="0.008"     height="0.024"    stretch="1"/>
         <dist4  x="0.0328"     y="0.0500"  width="0.008"     height="0.024"    stretch="1"/>
         <distu  x="0.0408"     y="0.0500"  width="0.008"     height="0.024"    stretch="1"/>
+        <distl  x="0.0069"     y="0.0675"   width="0.045"     height="0.009"    stretch="1"/>
 
         <!-- level name -->
-        <level  x="0.0069"     y="0.0750"   width="0.045"     height="0.018"    stretch="1"/>
+        <level  x="0.0069"     y="0.0835"   width="0.045"     height="0.018"    stretch="1"/>
 
     </gps_locator>
 </w>

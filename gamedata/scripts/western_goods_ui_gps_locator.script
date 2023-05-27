@@ -54,6 +54,7 @@ function UIGPSLocator:__init() super()
     self.m_dist3				= xml:InitStatic("gps_locator:dist3", self)
     self.m_dist4				= xml:InitStatic("gps_locator:dist4", self)
     self.m_distu				= xml:InitStatic("gps_locator:distu", self)
+    self.m_distl				= xml:InitStatic("gps_locator:distl", self)
 
     self.m_time1				= xml:InitStatic("gps_locator:time1", self)
     self.m_time2				= xml:InitStatic("gps_locator:time2", self)
@@ -112,6 +113,7 @@ function UIGPSLocator:Update()
     self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
     self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
     self.m_distu:InitTextureEx("gps_meters", "hud\\p3d")
+    self.m_distl:InitTextureEx("gps_dist", "hud\\p3d")
 
     self.m_time1:InitTextureEx(time1, "hud\\p3d")
     self.m_time2:InitTextureEx(time2, "hud\\p3d")
@@ -190,7 +192,7 @@ function UIGPSLocator:GetDistAndLevelTextures()
     end
 
     if not dist then
-        dist, level_name = 9999, self:GetLevelTexture("default")
+        dist, level_name = 0, self:GetLevelTexture("default")
     else
         dist, level_name = math.floor(dist * self:GetDistEventOffset()), self:GetLevelTexture(level_name)
     end
@@ -236,6 +238,11 @@ function UIGPSLocator:FindDistAndLevelPDA()
 end
 
 function UIGPSLocator:GetDistEventOffset()
+    -- Undergrounds: distance is floored to 0m
+    if GetEvent("underground") then
+        return 0
+    end
+
     -- Emissions: the closer the wave, the higher the psi influences
     if GetEvent("surge", "state") then
         local surge_time = GetEvent("surge", "time") or 0
