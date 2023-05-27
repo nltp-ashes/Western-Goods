@@ -2,6 +2,8 @@
     <!-- GPS Locator -->
     <file name="ui\items\ui_gps_locator">
 
+        <texture id="gps_test_corner" x="1000"    y="0"    width="5"     height="5" />
+
         <!-- Numbers -->
         <texture id="gps_num_1"       x="750"    y="150"    width="40"     height="120" />
         <texture id="gps_num_2"       x="790"    y="150"    width="40"     height="120" />
@@ -13,6 +15,11 @@
         <texture id="gps_num_8"       x="790"    y="510"    width="40"     height="120" />
         <texture id="gps_num_9"       x="750"    y="630"    width="40"     height="120" />
         <texture id="gps_num_0"       x="790"    y="630"    width="40"     height="120" />
+
+        <!-- Labels -->
+        <texture id="gps_meters"      x="830"    y="150"    width="40"     height="120" />
+        <texture id="gps_slash"       x="830"    y="270"    width="40"     height="120" />
+        <texture id="gps_dots"       x="830"    y="390"    width="40"     height="120" />
 
         <!-- Connectivity icons -->
         <texture id="gps_conn_5"      x="750"    y="0"      width="100"    height="50" />
