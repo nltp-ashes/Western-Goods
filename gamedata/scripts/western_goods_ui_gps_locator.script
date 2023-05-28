@@ -192,9 +192,11 @@ function UIGPSLocator:GetDistAndLevelTextures()
     end
 
     if not dist then
-        dist, level_name = 0, self:GetLevelTexture("default")
+        dist = 0
+        level_name = self:GetLevelTexture("default")
     else
-        dist, level_name = math.floor(dist * self:GetDistEventOffset()), self:GetLevelTexture(level_name)
+        dist = math.floor(dist * self:GetDistEventOffset())
+        level_name = self:GetLevelTexture(level_name)
     end
 
     local s_dist = western_goods_utils.as_string(dist, 4)

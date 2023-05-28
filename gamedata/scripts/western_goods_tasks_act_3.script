@@ -256,7 +256,7 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- TASK 2 - PURSUERS
+-- TASK 2 - SECURITY SERVICE OF UKRAINE
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to start Act 3, Task 2.
@@ -351,8 +351,9 @@ function task_functor.act_3_task_2_target_f(task_id,field,p,tsk)
             return squad_se and squad_se.id
         end
         if tsk.stage == 1 then
+            local score = TASK_2_CACHE.interrogation_points or 0
             local squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_bounty_squad")
-            return squad_se and squad_se.id
+            return score >= 0 and squad_se and squad_se.id or nil
         end
         if tsk.stage == 2 then
             if western_goods_mcm.get_config("guided_tasks") then
@@ -976,13 +977,19 @@ end
 --- Function called from dialog, used to increment the interrogation points counter.
 --- @return nil
 function task_2_incr_interrogation()
-    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points + 1
+    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points + 10
+end
+
+--- Function called from dialog, used to decrement the interrogation points counter.
+--- @return nil
+function task_2_normal_interrogation()
+    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points + 5
 end
 
 --- Function called from dialog, used to decrement the interrogation points counter.
 --- @return nil
 function task_2_decr_interrogation()
-    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points - 1
+    TASK_2_CACHE.interrogation_points = TASK_2_CACHE.interrogation_points - 15
 end
 
 --- Function used to spawn the supervisor the player has to kill during Act 3, Task 2.

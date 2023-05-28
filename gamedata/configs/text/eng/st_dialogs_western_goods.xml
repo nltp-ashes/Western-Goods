@@ -488,12 +488,180 @@
 	</string>
 
 	<!-- Dialogs strings -->
-	<string id="western_goods_act_3_task_2_interrogation_0">
-		<text>Talk.</text>
+	<string id="st_wg_act_3_task_2_interrogation_start">
+		<text>Alright, let's talk.</text>
 	</string>
 
-	<string id="western_goods_act_3_task_2_interrogation_1">
-		<text>Ok, I'll tell you everything I know. I uploaded the coordinates of my commander to your PDA.</text>
+	<string id="st_wg_act_3_task_2_interrogation_start_answer">
+		<text>You want to talk? Sure. Your little friend has been at it for days. You're wasting your time. I'm not telling you anything.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_0_nice">
+		<text>All I want is information. You'll be fine if you cooperate, you have my word for it.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_0_normal">
+		<text>Just tell me what I need to know, alright?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_0_mean">
+		<text>Listen, you tell me what I want to know, you live. I'll let you guess what happens if you don't.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_0_nice_answer">
+		<text>What do you want to know anyway?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_0_normal_answer">
+		<text>And what do would you *need* to know anyway?.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_0_mean_answer">
+		<text>Get fucked.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_nice_nice">
+		<text>For starters. Who's after Danylo?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_nice_normal">
+		<text>What I need to know is who sent you after Danylo.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_nice_mean">
+		<text>Who do you work for? You have 10 seconds to answer. 10, 9, 8, 7, 6...</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_normal_nice">
+		<text>For starters. Who's after Danylo?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_normal_normal">
+		<text>What I need to know is who sent you after Danylo.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_normal_mean">
+		<text>Who do you work for? You have 10 seconds to answer. 10, 9, 8, 7, 6...</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_mean_nice">
+		<text>For starters. Who's after Danylo?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_mean_normal">
+		<text>What I need to know is who sent you after Danylo.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_mean_mean">
+		<text>Who do you work for? You have 10 seconds to answer. 10, 9, 8, 7, 6...</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_nice_answer">
+		<text>Look, I don't know who the order came from. But if the SSU is involved, your friend must have enemies in really high places.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_normal_answer">
+		<text>Who sent me... What do you think am I, a Merc? I follow orders, that's it.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_1_mean_answer">
+		<text>Fuck man, who do you think I work for?! Are you this blind you can't read my uniform?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_nice_nice">
+		<text>The SSU? Why would they care so much Danylo to send a squad after him?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_nice_normal">
+		<text>So you're a soldier? Why is the Army after him?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_nice_mean">
+		<text>And what uniform is that, the Army? No, better. The SSU. Why does the SSU want from Danylo?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_normal_nice">
+		<text>The SSU? Why would they care so much Danylo to send a squad after him?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_normal_normal">
+		<text>So you're a soldier? Why is the Army after him?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_normal_mean">
+		<text>And what uniform is that, the Army? No, better. The SSU. Why does the SSU want from Danylo?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_mean_nice">
+		<text>The SSU? Why would they care so much Danylo to send a squad after him?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_mean_normal">
+		<text>So you're a soldier? Why is the Army after him?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_mean_mean">
+		<text>And what uniform is that, the Army? No, better. The SSU. Why does the SSU want from Danylo?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_nice_answer">
+		<text>Look, I don't know why our squads got orders. I promise I don't know. Half of the order we got was already redacted before we got it. It's a miracle we even found your friend.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_normal_answer">
+		<text>What do you think? I don't know why these orders were sent. All I know is our squads got orders to find him.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_2_mean_answer">
+		<text>Mind your fucking business. Hell, I couldn't even tell you if I wanted to. The orders our squads got were covered in black ink anyway.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_nice_nice">
+		<text>Squads? There are more people out there looking for him? Look, tell me where I can find them, and you'll be free. Deal?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_nice_normal">
+		<text>Squads? You're not the only one looking for him? Where can I find them?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_nice_mean">
+		<text>Squads? Now that's interesting. Enough playing, tell me where I can find the other squad, or I put a bullet in your pretty face.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_normal_nice">
+		<text>Squads? There are more people out there looking for him? Look, tell me where I can find them, and you'll be free. Deal?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_normal_normal">
+		<text>Squads? You're not the only one looking for him? Where can I find them?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_normal_mean">
+		<text>Squads? Now that's interesting. Enough playing, tell me where I can find the other squad, or I put a bullet in your pretty face.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_mean_nice">
+		<text>Squads? There are more people out there looking for him? Look, tell me where I can find them, and you'll be free. Deal?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_mean_normal">
+		<text>Squads? You're not the only one looking for him? Where can I find them?</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_3_mean_mean">
+		<text>Squads? Now that's interesting. Enough playing, tell me where I can find the other squad, or I put a bullet in your pretty face.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_end_nice">
+		<text>Ok... Look, you'll find them in Zaton, by the old barge. They should be... Three or four maybe, if The Zone was nice to them.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_end_normal">
+		<text>Ok... I'll tell you. Just... Don't kill me, please. You'll find them in the north-east of Zaton.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_2_interrogation_end_mean">
+		<text>Fine. Jesus... You'll find them in the east of Zaton, that's all I know.</text>
 	</string>
 
 	<!-- ============================================================================================================-->

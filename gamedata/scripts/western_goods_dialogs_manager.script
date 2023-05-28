@@ -197,6 +197,22 @@ function st_danylo_chernenko_start_dialog()
     end
 end
 
+--- Function called to determine the final line of dialog for the interrogation with the SSU prisoner.
+--- @return string
+function st_interrogation_end()
+    local score = western_goods_tasks_act_3.TASK_2_CACHE.interrogation_points
+
+    dbg_printf("[WG] Tasks Act 3 | Task 2 - Interrogation finished with score %s", score)
+
+    if score >= 35 then
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_interrogation_end_nice")
+    elseif score >= 0 then
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_interrogation_end_normal")
+    else
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_interrogation_end_mean")
+    end
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
