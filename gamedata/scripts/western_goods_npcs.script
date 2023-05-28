@@ -61,14 +61,22 @@ end
 --- @param flags table
 --- @return nil
 function eval_ignore_npcs(obj,enemy,flags)
+    -- Skip mutants
+    if IsMonster(obj) or IsMonster(enemy) then return end
+
+    -- Get squad
+    -- Calling get_object_squad() or actor object grounds the game !
     local squad_obj = obj:id() ~= AC_ID and get_object_squad(obj)
     local squad_enemy = enemy:id() ~= AC_ID and get_object_squad(enemy)
 
+    -- Get squad relation (if any)
     local relation_obj = squad_obj and squads_relations[squad_obj:section_name()]
     local relation_enemy = squad_enemy and squads_relations[squad_enemy:section_name()]
 
+    -- Skip unaffected squads
     if not relation_obj and not relation_enemy then return end
 
+    -- Override eval
     if relation_obj == "neutral" or relation_enemy == "neutral" then
         flags.override = true
         flags.result = false

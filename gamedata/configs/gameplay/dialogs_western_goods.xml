@@ -403,6 +403,44 @@
     </dialog>
 
     <!-- ============================================================================================================-->
+    <!--    SSU Supervisor Dialogs                                                                                     -->
+    <!-- ============================================================================================================-->
+
+    <dialog id="western_goods_ssu_supervisor_bribe">
+        <has_info>western_goods_act_3_task_3_active</has_info>
+        <dont_has_info>western_goods_act_3_task_3_finished</dont_has_info>
+        <dont_has_info>western_goods_ssu_supervisor_bribed</dont_has_info>
+        <precondition>western_goods_tasks_act_3.task_3_bribe_dialog_cond</precondition>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>western_goods_ssu_supervisor_bribe_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>western_goods_ssu_supervisor_bribe_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <script_text>western_goods_tasks_act_3.task_3_st_bribe_dialog</script_text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>western_goods_ssu_supervisor_bribe_3</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>western_goods_ssu_supervisor_bribe_4</text>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- npc -->
+                <text>western_goods_ssu_supervisor_bribe_5</text>
+                <action>western_goods_tasks_act_3.task_3_bribe</action>
+                <give_info>western_goods_ssu_supervisor_bribed</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!-- ============================================================================================================-->
     <!--    Task Dialogs                                                                                             -->
     <!-- ============================================================================================================-->
 

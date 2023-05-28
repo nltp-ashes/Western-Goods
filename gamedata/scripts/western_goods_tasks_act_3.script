@@ -28,6 +28,7 @@ local find_object_by_id = western_goods_utils.find_object_by_id
 -- Constants
 local CONST_TASK_1_USB_UNLOCK_DIALOG_ID = "western_goods_act_3_task_1_usb_unlock"
 local CONST_TASK_1_USB_UNLOCK_COST = 5000
+local CONST_TASK_3_BRIBE_COST = 20000
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -256,7 +257,7 @@ function task_status_functor.act_3_task_1_status_f(tsk,task_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- TASK 2 - SECURITY SERVICE OF UKRAINE
+-- TASK 2 - PURSUERS
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to start Act 3, Task 2.
@@ -605,7 +606,7 @@ end
 --- @return string
 function task_status_functor.act_3_task_3_status_f(tsk,task_id)
     if western_goods_utils.has_info("western_goods_act_3_task_3_init") then
-        -- First stage : Find and kill supervisor
+        -- First stage : Find and kill/bribe supervisor
         if tsk.stage == 0 then
             local squad_se = western_goods_utils.se_object_by_sid("western_goods_ssu_supervisor_squad")
 
@@ -615,26 +616,33 @@ function task_status_functor.act_3_task_3_status_f(tsk,task_id)
                 return
             end
 
-            if not squad_se then
-                dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - SSU supervisor is dead...")
+            if squad_se or not western_goods_utils.has_info("western_goods_ssu_supervisor_bribed") then return end
 
-                if not TASK_3_CACHE.danylo_message_sent then
-                    local sender_1 = alife():actor()
-                    local sender_2 = western_goods_utils.se_object_by_sid("stalker_danylo_chernenko")
+            if not TASK_3_CACHE.danylo_message_sent then
+                local sender_1 = alife():actor()
+                local sender_2 = western_goods_utils.se_object_by_sid("stalker_danylo_chernenko")
 
+                if not squad_se then
+                    dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - SSU supervisor is dead...")
                     send_dialog({
                         {sender=sender_1:character_name(), icon=sender_1:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_3_stage_0_message_1")},
                         {sender=sender_2:character_name(), icon=sender_2:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_3_stage_0_message_2")},
                     })
-
-                    western_goods_utils.give_info("western_goods_danylo_army_warehouses")
-
-                    dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - Teleported Danylo squad...")
-                    TASK_3_CACHE.danylo_message_sent = true
+                elseif western_goods_utils.has_info("western_goods_ssu_supervisor_bribed") then
+                    dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - SSU supervisor was bribed...")
+                    send_dialog({
+                        {sender=sender_1:character_name(), icon=sender_1:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_3_stage_0_message_3")},
+                        {sender=sender_2:character_name(), icon=sender_2:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_3_stage_0_message_4")},
+                    })
                 end
 
-                tsk.stage = 1
+                western_goods_utils.give_info("western_goods_danylo_army_warehouses")
+
+                dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - Teleported Danylo squad...")
+                TASK_3_CACHE.danylo_message_sent = true
             end
+
+            tsk.stage = 1
         end
 
         -- First stage : Return to Danylo
@@ -693,6 +701,7 @@ function xr_effects.act_3_task_4_complete(actor,npc)
 
     -- Process reward
     xr_effects.reward_random_money(actor,npc,{"50000","75000"})
+    xr_effects.reward_stash(actor,npc,{"true"})
     xr_effects.complete_task_inc_goodwill(actor,npc,{"200","killer"})
 end
 
@@ -1012,6 +1021,47 @@ function task_3_spawn_supervisor_squad()
         dbg_printf("[WG] Tasks Act 3 | Task 3 - Spawned SSU supervisor squad with id %s", squad_supervisor_se.id)
     end
     return squad_supervisor_se
+end
+
+--- Function used to get the scripted text for one of the bribe lines of dialog with the SSU supervisor.
+--- @return string
+function task_3_st_bribe_dialog()
+    return western_goods_utils.get_translation("western_goods_ssu_supervisor_bribe_2", CONST_TASK_3_BRIBE_COST)
+end
+
+--- Function used to bribe the SSU supervisor and progress the task.
+--- @param actor game_object
+--- @param npc game_object
+--- @return nil
+function task_3_bribe(npc, actor)
+    dialogs.relocate_money(npc, CONST_TASK_3_BRIBE_COST, "out")
+    local tsk = task_manager.get_task_manager().task_info["western_goods_act_3_task_3"]
+    if (tsk and tsk.stage and tsk.stage == 0) then
+        dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - SSU supervisor was bribed...")
+
+        if not TASK_3_CACHE.danylo_message_sent then
+            local sender_1 = alife():actor()
+            local sender_2 = western_goods_utils.se_object_by_sid("stalker_danylo_chernenko")
+
+            send_dialog({
+                {sender=sender_1:character_name(), icon=sender_1:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_3_stage_0_message_3")},
+                {sender=sender_2:character_name(), icon=sender_2:character_icon(), message=western_goods_utils.get_translation("st_wg_act_3_task_3_stage_0_message_4")},
+            })
+
+            western_goods_utils.give_info("western_goods_danylo_army_warehouses")
+
+            dbg_printf("[WG] Tasks Act 3 | Task 3 - Stage 0 - Teleported Danylo squad...")
+            TASK_3_CACHE.danylo_message_sent = true
+        end
+
+        tsk.stage = 1
+    end
+end
+
+--- Function used to determine if the player has enough money to access the bribe dialog with the SSU supervisor.
+--- @return boolean
+function task_3_bribe_dialog_cond()
+    return db.actor:money() >= CONST_TASK_3_BRIBE_COST
 end
 
 --- Function used to add Danylo as a companion.

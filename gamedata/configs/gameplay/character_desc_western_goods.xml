@@ -331,6 +331,7 @@
             [spawn] \n
         </supplies>
 
+        <actor_dialog>western_goods_ssu_supervisor_bribe</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>
     </specific_character>
 

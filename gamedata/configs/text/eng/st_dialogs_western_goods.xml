@@ -665,6 +665,35 @@
 	</string>
 
 	<!-- ============================================================================================================-->
+	<!--    SSU Supervisor                                                                                           -->
+	<!-- ============================================================================================================-->
+
+	<!-- Dialogs strings -->
+	<string id="western_goods_ssu_supervisor_bribe_0">
+		<text>Does the name 'Danylo' ring a bell?</text>
+	</string>
+
+	<string id="western_goods_ssu_supervisor_bribe_1">
+		<text>Why are you asking?</text>
+	</string>
+
+	<string id="western_goods_ssu_supervisor_bribe_2">
+		<text>So it does ring a bell. How about I slide %s RUB your way, and you just, forget about him?</text>
+	</string>
+
+	<string id="western_goods_ssu_supervisor_bribe_3">
+		<text>Why would I do that?</text>
+	</string>
+
+	<string id="western_goods_ssu_supervisor_bribe_4">
+		<text>Let's just say he's looking to move on from his past. You forget about him, he forgets about you.</text>
+	</string>
+
+	<string id="western_goods_ssu_supervisor_bribe_5">
+		<text>Yeah? Alright, but he better forget about everything, or else I'll send the entire Ukrainian army after him.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
 	<!--	Flea Market Dialogs                                                                                      -->
 	<!-- ============================================================================================================-->
 
@@ -988,7 +1017,7 @@
 	</string>
 
 	<string id="st_wg_act_3_task_2_start_work_details">
-		<text>This guy? He's from the Security Service of Ukraine. He and his squad ambushed me when I was out to meet a new supplier for my brother's business. These bastards didn't even try to talk, they went straight for a shoot out. He's the only one that survived this bloodbath... And me, of course. I've been trying to get him to talk for days, but he won't spill the beans on who sent him and for what reason.\n \nListen, I'll need to get moving soon, it's only a matter of time before they find out I'm hiding here. Try to get him to talk, would you?</text>
+		<text>This guy? I don't know. He and his squad ambushed me when I was out to meet a new supplier for my brother's business. These bastards didn't even try to talk, they went straight for a shoot out. He's the only one that survived this bloodbath... And me, of course. I've been trying to get him to talk for days, but he won't spill the beans on who sent him and for what reason.\n \nListen, I'll need to get moving soon, it's only a matter of time before they find out I'm hiding here. Try to get him to talk, would you?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_start_work_accept">
@@ -1317,6 +1346,14 @@
 
 	<string id="st_wg_act_3_task_3_stage_0_message_2">
 		<text>Thank god. This is finally over. Listen, can you help me with one last thing? I'll be waiting for you in the Army Warehouses.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_stage_0_message_3">
+		<text>The supervisor shouldn't cause you troubles anymore. I slide some cash in his pockets.</text>
+	</string>
+
+	<string id="st_wg_act_3_task_3_stage_0_message_4">
+		<text>That's not what I wanted, but hopefully that'll do the trick. Listen, can you help me with one last thing? I'll be waiting for you in the Army Warehouses.</text>
 	</string>
 
 </string_table>
