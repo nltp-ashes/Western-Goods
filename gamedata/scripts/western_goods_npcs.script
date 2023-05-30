@@ -35,7 +35,6 @@ local squads_relations = {
     ["western_goods_act_2_task_2_bandit_2_squad"] = "enemy",
 }
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -44,7 +43,7 @@ local squads_relations = {
 --- @return nil
 function spawn_squads()
     for section,data in pairs(squads_to_spawn) do
-        local squad_se = western_goods_utils.se_object_by_sid(data.sid)
+        local squad_se = western_goods_utils.server_object_by_sid(data.sid)
         if not squad_se then
             squad_se = western_goods_utils.spawn_story_squad(section, nil, SIMBOARD.smarts_by_names[data.smart])
             dbg_printf("[WG] Permanent NPCs | Created %s(%s) at %s", section, squad_se.id, data.smart)
@@ -87,7 +86,6 @@ function eval_ignore_npcs(obj,enemy,flags)
         return
     end
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Oleksandr Chernenko functions

@@ -18,11 +18,10 @@ local CONST_TRADER_SECTION = "stalker_western_goods_trader"
 local CONST_TRADER_SQUAD = "stalker_western_goods_trader_squad"
 
 local dbg_printf = western_goods_utils.dbg_printf
-local find_object_by_id = western_goods_utils.find_object_by_id
+local level_object_by_id = western_goods_utils.level_object_by_id
 
 bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
 tradable_items = {}
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Trading actions/restrictions
@@ -51,7 +50,7 @@ end
 function check_move_item(flags, npc_id, obj, mode, bag)
     if mode ~= "trade" then return flags.ret_value end
 
-    local npc = npc_id and find_object_by_id(npc_id)
+    local npc = npc_id and level_object_by_id(npc_id)
     local is_western_goods_trader = npc:section() == CONST_TRADER_SECTION
 
     -- If you are talking to the western goods trader and the item is not tradable, prevent the item from moving
@@ -163,7 +162,7 @@ function make_exchange(self, npc)
     dbg_printf("[WG] Western Goods Trader | Traded :")
     for id,_ in pairs(cc_sell.indx_id) do
         if cc_sell:GetCell_ID(id) then
-            local obj = find_object_by_id(id)
+            local obj = level_object_by_id(id)
             dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
             self:On_Item_Exchange(db.actor, npc, obj)
         end
@@ -171,7 +170,7 @@ function make_exchange(self, npc)
     dbg_printf("[WG] Western Goods Trader | In exchange for :")
     for id,_ in pairs(cc_buy.indx_id) do
         if cc_buy:GetCell_ID(id) then
-            local obj = find_object_by_id(id)
+            local obj = level_object_by_id(id)
             dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
             self:On_Item_Exchange(npc, db.actor, obj)
         end
@@ -191,7 +190,6 @@ function make_exchange(self, npc)
         return true
     end)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Barter actions/restrictions
@@ -222,7 +220,6 @@ if western_goods_core.is_barter_ui_installed() then
     end
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -234,7 +231,6 @@ function on_game_start()
     RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
     rax_icon_tint.register("wg_tint_functor", tint_functor)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Utility functions

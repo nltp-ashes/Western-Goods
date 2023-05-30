@@ -16,13 +16,12 @@ local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- 
 local dbg_printf = western_goods_utils.dbg_printf
 local round_number = western_goods_utils.round_number
 local has_translation = western_goods_utils.has_translation
-local find_object_by_id = western_goods_utils.find_object_by_id
+local level_object_by_id = western_goods_utils.level_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Usable Items
 -- ---------------------------------------------------------------------------------------------------------------------
-
 
 --- Function used to return the text written when right clicking on a lighter.
 --- @param obj game_object
@@ -52,18 +51,21 @@ function menu_unpack(obj)
     return western_goods_utils.get_translation("st_wg_unpack")
 end
 
+--- Function used to return the text written when right clicking on an porn magazine (Pinup Collect addon).
+--- @param obj game_object
+--- @return string
+function menu_tear_page(obj)
+    if item_pinup_collect then
+        return western_goods_utils.get_translation("st_wg_tear_page")
+    end
+    return nil
+end
+
 --- Function called by callback when any object in the game is used.
 --- This redirects to the proper functions if the item used is one from Western Goods.
 --- @param obj game_object
 --- @return nil
 function use_item(obj,_,cf)
-
-    -- GPS Locator
-    if (obj:section() == "wg_gps") then
-        dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        this.use_gps(obj)
-        return
-    end
 
     -- French MRE
     if (obj:section() == "wg_french_mre") then
@@ -120,122 +122,6 @@ function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
         end
     end
 end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- GPS Locator
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called when the gps locator is used by the player.
---- @param obj game_object
---- @return nil
-function use_gps(obj)
-	utils_xml.hide_menu()
-
-	-- Get the name and distance to the closest smart terrain, as well as the level's name
-    local closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_game_world()
-
-	-- If the smart terrain doesn't have a translation, we retry using the PDA instead
-    if closest_smart_name and not has_translation(closest_smart_name) then
-        dbg_printf("[WG] Usable Items | GPS Locator - Smart terrain found but no translation. Fallback to PDA info")
-        closest_smart_name, closest_smart_distance, closest_smart_level = find_info_from_pda()
-    else
-        dbg_printf("[WG] Usable Items | GPS Locator - No smart on level (%s)", level.name())
-    end
-
-	actor_menu.set_msg(1, build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level), 7)
-end
-
---- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the game world.
---- @return string
---- @return string
---- @return string
-function find_info_from_game_world()
-    local closest_smart_id = smart_terrain.nearest_to_actor_smart.id
-    local smart = closest_smart_id and alife_object(closest_smart_id)
-
-    if not smart then return end
-
-    local closest_smart_name = smart:name()
-    local closest_smart_distance = smart.dist_to_actor
-    local closest_smart_level = alife():level_name(smart.level_id)
-
-    --dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (game world) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
-
-    return closest_smart_name, closest_smart_distance, closest_smart_level
-end
-
---- Function used to get the name, distance to the closest smart terrain (as well as level name) using info from the pda map.
---- @return string
---- @return string
---- @return string
-function find_info_from_pda()
-	local closest_smart_name, closest_smart_distance, closest_smart_level
-
-	for _,v in pairs(pda.primary_objects_tbl) do
-		local smart_id = get_story_object_id(v.target)
-        local smart_obj = smart_id and find_object_by_id(smart_id)
-		if smart_obj then
-			local smart_name = v.target
-            local smart_distance = western_goods_utils.get_distance(db.actor:position(),smart_obj:position())
-			local smart_level = level.name()
-
-			if (smart_distance <= (closest_smart_distance or smart_distance)) then
-				closest_smart_name = smart_name
-                closest_smart_distance = smart_distance
-                closest_smart_level = smart_level
-			end
-		end
-	end
-	
-	--dbg_printf("[WG] Usable Items | GPS Locator - Closest smart (PDA) %s - %s (%s)", closest_smart_name, closest_smart_distance, closest_smart_level)
-	
-	return closest_smart_name, closest_smart_distance, closest_smart_level
-end
-
---- Function used to build the message the message displayed on screen when using the GPS device.
---- @param closest_smart_name string
---- @param closest_smart_distance string
---- @param closest_smart_level string
---- @return string
-function build_on_screen_message(closest_smart_name, closest_smart_distance, closest_smart_level)
-	-- Build the message to print on-screen
-	local message
-	
-	-- If we're missing (like properly missing) one of the info, we say we don't know where we are
-	if not (closest_smart_name and closest_smart_distance and closest_smart_level) then
-		message = western_goods_utils.get_translation("st_wg_gps_use_2")
-	
-	-- If we have all the info, but the distance is infinite (happens when there are no smarts on your current level), we just print the level name
-	elseif string.find(closest_smart_distance,"inf") then
-		message = western_goods_utils.get_translation("st_wg_gps_use_3")
-	
-	else
-		-- If the smart terrain's name can be translated, we use the translation. Otherwise, we don't show that information
-		if has_translation(closest_smart_name) then
-			message = western_goods_utils.get_translation(closest_smart_name) .. " - " .. round_number(closest_smart_distance) .. "m "
-		else
-			-- If we can't find a translation with the smart name, maybe the PDA hint has a translation
-			for k,v in pairs(pda.primary_objects_tbl) do
-				if v.target == closest_smart_name and has_translation(v.hint) then
-					message = western_goods_utils.get_translation(v.hint) .. " - " .. round_number(closest_smart_distance) .. "m "
-				end
-			end
-		end
-		
-		-- If the level name can be translation, we use the translation. Otherwise, we don't show that information
-		if has_translation(closest_smart_level) then
-			message = (message or "") .. "(" .. western_goods_utils.get_translation(closest_smart_level) .. ")"
-		end
-
-		-- If at this point we still don't have a string (because things don't have translations), we say we don't know where we are
-		if not(message) then
-			message = western_goods_utils.get_translation("st_wg_gps_use_4")
-		end
-	end
-	
-	return western_goods_utils.get_translation("st_wg_gps_use_1") .. " " .. message
-end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Lighter
@@ -479,7 +365,6 @@ if TEMP_LIGHTER_ENABLED then
     end
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- French MRE
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -507,7 +392,6 @@ function use_french_mre(obj)
 
     alife_release(alife_object(obj:id()))
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Suitcase
@@ -545,7 +429,6 @@ function use_toblerone(obj)
     end)
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Danylo's pendrive
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -557,20 +440,9 @@ function use_danylo_pendrive(obj)
     ui_pda_encyclopedia_tab.unlock_note("encyclopedia__notes_western_goods_hand_drawn_map")
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Pinup Collector addon
 -- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to return the text written when right clicking on an porn magazine (Pinup Collect addon).
---- @param obj game_object
---- @return string
-function menu_tear_page(obj)
-    if item_pinup_collect then
-        return western_goods_utils.get_translation("st_wg_tear_page")
-    end
-    return nil
-end
 
 --- Function called by item use functors when a page is torn off a porn magazine.
 --- @param obj game_object

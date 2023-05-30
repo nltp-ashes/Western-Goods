@@ -14,9 +14,8 @@
 local dbg_printf = western_goods_utils.dbg_printf
 local heli_spawn = western_goods_helicopter.heli_spawn
 local heli_register = western_goods_helicopter.heli_register
-local find_object_by_id = western_goods_utils.find_object_by_id
+local level_object_by_id = western_goods_utils.level_object_by_id
 local HELICOPTERS_MODES = western_goods_helicopter.HELICOPTERS_MODES
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Helicopter transport order
@@ -53,14 +52,13 @@ function spawn_guide_helicopter()
         dbg_printf("[WG] Helicopter Transport | Spawned transport helicopter in %s [lvid:%s | gvid:%s | pos:%s,%s,%s]",level.name(), lvid, gvid, pos.x, pos.y, pos.z)
 
         CreateTimeEvent("delay_order_heli",helicopter_se.id,0,function()
-            if find_object_by_id(helicopter_se.id) then
+            if level_object_by_id(helicopter_se.id) then
                 heli_register(helicopter_se.id,HELICOPTERS_MODES.LEAVE_AT_POINT,level.get_bounding_volume().max)
                 return true
             end
         end)
     end
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
@@ -71,7 +69,6 @@ end
 function on_game_start()
     RegisterScriptCallback("actor_on_first_update", spawn_guide_helicopter)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Guide table
@@ -89,38 +86,38 @@ western_goods_trade_guide_table = {
     deserted_hospital		= { x=-78.4292, 	y=32.6084, 		z=847.4611, 	look=3.5, 		lvid=6384, 	    gvid=2887	},
 }
 
-function dialogs_mlr.wg_trader_guide_to_limansk(actor,npc,p)
+function guide_to_limansk(actor,npc,p)
     go_to_level("limansk")
 end
 
-function dialogs_mlr.wg_trader_guide_to_swamps(actor,npc,p)
+function guide_to_swamps(actor,npc,p)
     go_to_level("swamps")
 end
 
-function dialogs_mlr.wg_trader_guide_to_cordon(actor,npc,p)
+function guide_to_cordon(actor,npc,p)
     go_to_level("cordon")
 end
 
-function dialogs_mlr.wg_trader_guide_to_darkscape(actor,npc,p)
+function guide_to_darkscape(actor,npc,p)
     go_to_level("darkscape")
 end
 
-function dialogs_mlr.wg_trader_guide_to_deadcity(actor,npc,p)
+function guide_to_deadcity(actor,npc,p)
     go_to_level("deadcity")
 end
 
-function dialogs_mlr.wg_trader_guide_to_red_forest(actor,npc,p)
+function guide_to_red_forest(actor,npc,p)
     go_to_level("red_forest")
 end
 
-function dialogs_mlr.wg_trader_guide_to_jupiter(actor,npc,p)
+function guide_to_jupiter(actor,npc,p)
     go_to_level("jupiter")
 end
 
-function dialogs_mlr.wg_trader_guide_to_zaton(actor,npc,p)
+function guide_to_zaton(actor,npc,p)
     go_to_level("zaton")
 end
 
-function dialogs_mlr.wg_trader_guide_to_deserted_hospital(actor,npc,p)
+function guide_to_deserted_hospital(actor,npc,p)
     go_to_level("deserted_hospital")
 end

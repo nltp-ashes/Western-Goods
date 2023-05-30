@@ -29,7 +29,7 @@
         <distl  x="0.0069"     y="0.0675"   width="0.045"     height="0.009"    stretch="1"/>
 
         <!-- level name -->
-        <level  x="0.0069"     y="0.0835"   width="0.045"     height="0.018"    stretch="1"/>
+        <lname  x="0.0069"     y="0.0835"   width="0.045"     height="0.018"    stretch="1"/>
 
     </gps_locator>
 </w>

@@ -29,7 +29,6 @@ local last_sender = nil
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Dialog Manager
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -190,7 +189,7 @@ end
 --- Function called to determine the start dialog's text of Danylo Chernenko.
 --- @return string
 function st_danylo_chernenko_start_dialog()
-    if not western_goods_utils.has_info("western_goods_danylo_chernenko_meet_over") then
+    if not western_goods_utils.has_info("western_goods_act_3_task_1_finished") then
         return western_goods_utils.get_translation("st_wg_danylo_chernenko_first_start")
     else
         return western_goods_utils.get_translation("st_wg_danylo_chernenko_start_" .. math.random(0,5))
@@ -224,7 +223,6 @@ function on_game_start()
     RegisterScriptCallback("load_state", load_state)
     RegisterScriptCallback("actor_on_update", update_dialogs)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Data persistence

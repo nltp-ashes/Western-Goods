@@ -10,6 +10,7 @@
 
 -- If you don't use MCM, change your defaults from here.
 local defaults = {
+    ["guided_surge"] = false,
     ["guided_tasks"] = false,
     ["heli_attack"] = DIK_keys.DIK_K,
     ["magazine_psi_regen"] = 1.0,
@@ -44,6 +45,7 @@ function on_mcm_load()
     op = { id="western_goods", sh=true, gr={
         { id="title", 					type="slide", 		link="ui_options_slider_disguise", 	text="ui_mcm_western_goods_title", size={512,50}, spacing=20 	},
         {								type="title", 											text="ui_mcm_western_goods_general_settings_title"				},
+        { id="guided_surge", 			type="check", 		val=1, 														def=false 								},
         { id="guided_tasks", 			type="check", 		val=1, 														def=false 								},
         { id="heli_attack", 			type="key_bind",	val=2, 														def=DIK_keys.DIK_K 						},
         { id="magazine_psi_regen", 		type="track", 		val=2, min=0.25, 	max=2.0, 		step=0.25, 				def=1.0 								},

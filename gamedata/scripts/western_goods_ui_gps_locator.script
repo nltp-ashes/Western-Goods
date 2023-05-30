@@ -22,6 +22,8 @@ GUI					         = nil -- instance, don't touch
 -- General Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to get the UI singleton for the UIGPSLocator class.
+--- @return UIGPSLocator
 function get_ui()
     if (not GUI) then
         GUI = UIGPSLocator()
@@ -30,11 +32,22 @@ function get_ui()
     return GUI
 end
 
+GetTaskTargetBase = surge_manager.get_task_target
+--- Function used to hide/show the task marker during emissions/psi-storms, according to user preference.
+--- @return number|nil
+function surge_manager.get_task_target()
+    if western_goods_mcm.get_config("guided_surge") then
+        return GetTaskTargetBase()
+    end
+    return nil
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- UI Class
 -- ---------------------------------------------------------------------------------------------------------------------
 
 class "UIGPSLocator" (CUIScriptWnd)
+
 function UIGPSLocator:__init() super()
     self:Show					(true)
     self:Enable					(true)
@@ -45,7 +58,7 @@ function UIGPSLocator:__init() super()
     xml:InitWindow				("gps_locator", 0, self)
 
     -- Build UI
-    self.m_level				= xml:InitStatic("gps_locator:level", self)
+    self.m_lname				= xml:InitStatic("gps_locator:lname", self)
 
     self.m_conn			    	= xml:InitStatic("gps_locator:conn", self)
 
@@ -96,7 +109,7 @@ function UIGPSLocator:Update()
     local conn = self:GetConnectivityTexture()
 
     -- Dist to smart terrain
-    local dist1, dist2, dist3, dist4, level_name = self:GetDistAndLevelTextures()
+    local dist1, dist2, dist3, dist4, distl = self:GetDistTextures()
 
     -- Time of day
     local time1, time2, time3, time4 = self:GetTimeOfDayTextures()
@@ -104,7 +117,10 @@ function UIGPSLocator:Update()
     -- Date
     local date1, date2, date3, date4, date5, date6 = self:GetDateTextures()
 
-    self.m_level:InitTextureEx(level_name, "hud\\p3d")
+    -- Level name
+    local lname = self:GetLevelTexture(level.name())
+
+    self.m_lname:InitTextureEx(lname, "hud\\p3d")
 
     self.m_conn:InitTextureEx(conn, "hud\\p3d")
 
@@ -113,7 +129,7 @@ function UIGPSLocator:Update()
     self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
     self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
     self.m_distu:InitTextureEx("gps_meters", "hud\\p3d")
-    self.m_distl:InitTextureEx("gps_dist", "hud\\p3d")
+    self.m_distl:InitTextureEx(distl, "hud\\p3d")
 
     self.m_time1:InitTextureEx(time1, "hud\\p3d")
     self.m_time2:InitTextureEx(time2, "hud\\p3d")
@@ -184,21 +200,29 @@ function UIGPSLocator:GetDateTextures()
     return date1, date2, date3, date4, date5, date6
 end
 
-function UIGPSLocator:GetDistAndLevelTextures()
-    local dist, level_name = self:FindDistAndLevelWorld()
+function UIGPSLocator:GetDistTextures()
+    local dist = nil
+    local distl = nil
 
-    if not dist then
-        dist, level_name = self:FindDistAndLevelPDA()
-    end
+    if GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
+        distl = "gps_dist_safe"
 
-    if not dist then
-        dist = 0
-        level_name = self:GetLevelTexture("default")
+        -- Find dist to safe zone
+        dist = self:FindDistSafeZone()
     else
-        dist = math.floor(dist * self:GetDistEventOffset())
-        level_name = self:GetLevelTexture(level_name)
+        distl = "gps_dist"
+
+        -- Find dist via world info
+        dist = self:FindDistWorld()
+
+        -- Failsafe via PDA info
+        dist = dist or self:FindDistPDA()
     end
 
+    -- Apply event multiplier
+    dist = math.floor(dist * self:GetDistOffset())
+
+    -- Get dist as a 4 char string (5 -> 0005)
     local s_dist = western_goods_utils.as_string(dist, 4)
 
     -- Distance format
@@ -207,24 +231,29 @@ function UIGPSLocator:GetDistAndLevelTextures()
     local dist3 = strformat("gps_num_%s", s_dist:sub(3, 3))
     local dist4 = strformat("gps_num_%s", s_dist:sub(4, 4))
 
-    return dist1, dist2, dist3, dist4, level_name
+    return dist1, dist2, dist3, dist4, distl
 end
 
-function UIGPSLocator:FindDistAndLevelWorld()
+function UIGPSLocator:FindDistSafeZone()
+    local rest_id = GetEvent("nearest_safe_cover")
+    local rest = rest_id and western_goods_utils.level_object_by_id(rest_id)
+
+    return rest and western_goods_utils.get_distance(rest:position(), db.actor:position()) or 0
+end
+
+function UIGPSLocator:FindDistWorld()
     local smart_id = smart_terrain.nearest_to_actor_smart.id
     local smart = smart_id and alife_object(smart_id)
 
-    if smart then
-        return smart.dist_to_actor, alife():level_name(smart.level_id)
-    end
+    return smart and smart.dist_to_actor
 end
 
-function UIGPSLocator:FindDistAndLevelPDA()
+function UIGPSLocator:FindDistPDA()
     local closest_smart_dist
 
     for _,v in pairs(pda.primary_objects_tbl) do
-        local smart_se = western_goods_utils.se_object_by_sid(v.target)
-        local smart_obj = smart_se and western_goods_utils.find_object_by_id(smart_se.id)
+        local smart_se = western_goods_utils.server_object_by_sid(v.target)
+        local smart_obj = smart_se and western_goods_utils.level_object_by_id(smart_se.id)
         if smart_obj then
             local smart_dist = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
 
@@ -234,12 +263,10 @@ function UIGPSLocator:FindDistAndLevelPDA()
         end
     end
 
-    if closest_smart_dist then
-        return math.sqrt(closest_smart_dist), level.name()
-    end
+    return closest_smart_dist and math.sqrt(closest_smart_dist) or 0
 end
 
-function UIGPSLocator:GetDistEventOffset()
+function UIGPSLocator:GetDistOffset()
     -- Undergrounds: distance is floored to 0m
     if GetEvent("underground") then
         return 0
@@ -266,7 +293,6 @@ end
 
 function UIGPSLocator:GetLevelTexture(level_name)
     local level_textures         = {
-        ["default"]				    = "gps_no_sig",
         ["jupiter"]					= "gps_jup",
         ["jupiter_underground"]		= "gps_no_sig",
         ["k00_marsh"]				= "gps_mar",

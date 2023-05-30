@@ -68,8 +68,7 @@ local helicopters_sounds = {
 
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
-local find_object_by_id = western_goods_utils.find_object_by_id
-
+local level_object_by_id = western_goods_utils.level_object_by_id
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Functions
@@ -137,7 +136,7 @@ function heli_register(heli_id,mode,target_pos)
     HELICOPTERS_TABLE[heli_id] = heli_data
 
     -- Force the first update
-    local heli_obj = find_object_by_id(heli_id)
+    local heli_obj = level_object_by_id(heli_id)
 
     if heli_obj then
         heli_update(heli_obj,heli_data.mode,heli_data.last_mode,heli_data.target_pos)
@@ -173,7 +172,7 @@ function refresh_helicopters()
     for id,_ in pairs(HELICOPTERS_TABLE) do
 
         local heli_se = alife_object(id)
-        local heli_obj = heli_se and find_object_by_id(heli_se.id)
+        local heli_obj = heli_se and level_object_by_id(heli_se.id)
 
         -- If heli is gone or has been replaced by another object
         if (not heli_se) or heli_se:section_name() ~= "western_goods_helicopter" then
@@ -389,7 +388,7 @@ end
 --- @param heli_id number
 --- @return boolean
 function take_control(heli_id)
-    if not find_object_by_id(heli_id) then
+    if not level_object_by_id(heli_id) then
         local se_obj = alife_object(heli_id)
         if not se_obj or se_obj:section_name() ~= "western_goods_helicopter" then
             dbg_printf("[WG] Helicopter | Cannot control missing or replaced (%s)", heli_id)
@@ -456,7 +455,6 @@ function play_sound_effect(sound_obj,sound_table)
     sound_obj:play(db.actor, 0, sound_object.s2d)
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -469,7 +467,6 @@ function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Data persistence

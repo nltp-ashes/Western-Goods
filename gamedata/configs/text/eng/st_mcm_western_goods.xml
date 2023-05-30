@@ -32,6 +32,15 @@
 		<text>GENERAL SETTINGS</text>
 	</string>
 
+	<!-- Guided Surges -->
+	<string id="ui_mcm_western_goods_guided_surge">
+		<text>Guided emissions/psi-storms</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_guided_surge_desc">
+		<text>If enabled, when an emission/psi-storm occur, you will get a task in your PDA, and this task will point to the nearest cover. If disabled, you will still have the task, but it won't indicate the nearest cover. The GPS Locator can be used to locate the nearest cover.</text>
+	</string>
+
 	<!-- Guided Tasks -->
 	<string id="ui_mcm_western_goods_guided_tasks">
 		<text>Guided tasks</text>

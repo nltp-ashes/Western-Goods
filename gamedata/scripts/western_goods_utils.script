@@ -288,8 +288,8 @@ end
 --- Function used to retrieve a server object by its story ID.
 --- @param story_id string
 --- @return cse_alife_object|nil
-function se_object_by_sid(story_id)
-    if not validate_params({story_id,"se_object_by_sid"}) then return end
+function server_object_by_sid(story_id)
+    if not validate_params({story_id,"server_object_by_sid"}) then return end
 
     return get_story_se_object(story_id)
 end
@@ -300,15 +300,15 @@ end
 function level_object_by_sid(story_id)
     if not validate_params({story_id,"level_object_by_sid"}) then return end
 
-    local se_obj = se_object_by_sid(story_id)
-    return se_obj and find_object_by_id(se_obj.id)
+    local se_obj = server_object_by_sid(story_id)
+    return se_obj and level_object_by_id(se_obj.id)
 end
 
 --- Function used to get game object by its ID if it exists on the current level.
 --- @param id number
 --- @return game_object
-function find_object_by_id(id)
-    if not validate_params({id,"find_object_by_id"}) then return end
+function level_object_by_id(id)
+    if not validate_params({id,"level_object_by_id"}) then return end
 
     return db.storage[id] and db.storage[id].object or level.object_by_id(id)
 end
@@ -326,7 +326,7 @@ function spawn_story_squad(sec, pos, smart)
     if not validate_params({sec,smart,"spawn_story_squad"}) then return end
 
     -- Make sure the squad isn't already spawned in
-    local se_squad = this.se_object_by_sid(sec)
+    local se_squad = this.server_object_by_sid(sec)
     if se_squad then
         printf("![WG] ERROR | Utils | Squad already exists - '%s'", se_squad:section_name())
         return se_squad

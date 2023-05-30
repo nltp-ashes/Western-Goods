@@ -64,10 +64,11 @@ To **uninstall** the addon :
 >    - Added two new NPCs : The Cherchenko brothers.
 >    - Added a new system : Flea Market. Purchase limited offers containing a fixed set of items, but at a discount;
 >    - Added native integration with the Pinup Collector addon;
->    - Added new PDA entries for the new NPCs, and the Flea Market system.
+>    - Added new PDA entries for the new NPCs, and the Flea Market system;
+>    - Added MCM option to show/hide task target during emissions/psi-storms, to go with the new capabilities of the GPS.
 > • Changes :
 >    - The GPS Locator is now a full fledged 3D device (Thanks Barry Bogs);
->    - Made the Barter UI Framework optional (a soft requirement);
+>    - Removed the need tp have the Barter UI Framework installed (now a soft requirement);
 >    - Removed the need to have trader_autoinject.script up-to-date;
 >    - Removed the CTD when the Barter UI is missing;
 >    - Removed the CTD when trader_autoinject.script is outdated;
@@ -254,6 +255,12 @@ To **uninstall** the addon :
 
 - The development of the addon will be on hold for the next few weeks/months;
 
+If you would like to help development for future updates, you can :
+1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  
+   https://github.com/nltp-ashes/Western-Goods
+2. Help by play-testing updates by getting Release Candidates builds on the addon's GitHub repository :  
+   https://github.com/nltp-ashes/Western-Goods/releases/tag/test
+
 ---
 
 ### KNOWN ISSUES
@@ -280,19 +287,19 @@ Credit goes to these people for their work contained in this addon :
 
 |                                   Name                                    |                           Motive                            |                                License                                |
 |:-------------------------------------------------------------------------:|:-----------------------------------------------------------:|:---------------------------------------------------------------------:|
-|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |    Adapted the GPS locator model on Dosimeter animations    |                                  N/A                                  |
-|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                Reused his xr_logic_ex script                |                                  N/A                                  |
-|             **[arti](https://www.moddb.com/members/artifax)**             |             Reused his trader_autoinject script             |                                  N/A                                  |
+|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |    Adapted the GPS locator model on Dosimeter animations    |                              Proprietary                              |
+|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                Reused his xr_logic_ex script                |                              Proprietary                              |
+|             **[arti](https://www.moddb.com/members/artifax)**             |             Reused his trader_autoinject script             |                              Proprietary                              |
 |    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |               Reused his rax_icon_tint script               |                       CC BY-NC-SA 3.0 Unported                        |
-|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |            Produced four models for consumables             |                                  N/A                                  |
+|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |            Produced four models for consumables             |                              Proprietary                              |
 |        **[Feel_Fried](https://www.moddb.com/members/feel-fried)**         | Reused some files from his Food, drug and drinks animations |                                PD 1.0                                 |
-|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     | Wrote the code that takes control of helicopters' combat AI |                                  N/A                                  |
-|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |            Reused part of his More Guides addon             |                                  N/A                                  |
-|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |             Reused one of his script functions              |                                  N/A                                  |
-|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |           Reused multiple of his script functions           |                                  N/A                                  |
-|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |        Reused icons from his Hideout Furniture addon        |                                  N/A                                  |
-|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |          Adapted his fan film into an in-game task          |                                  N/A                                  |
-|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |              Ported some models from their mod              |                                  N/A                                  |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     | Wrote the code that takes control of helicopters' combat AI |                              Proprietary                              |
+|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |            Reused part of his More Guides addon             |                              Proprietary                              |
+|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |             Reused one of his script functions              |                              Proprietary                              |
+|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |           Reused multiple of his script functions           |                              Proprietary                              |
+|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |        Reused icons from his Hideout Furniture addon        |                              Proprietary                              |
+|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |          Adapted his fan film into an in-game task          |                              Proprietary                              |
+|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |              Ported some models from their mod              |                              Proprietary                              |
 |                **[segaretro.org](https://segaretro.org/)**                |      For providing the textures for the xbox magazines      |                               CC BY 4.0                               |
 |                  **[archive.org](https://archive.org/)**                  |      For providing the textures for the men magazines       |                            CC BY-NC-ND 4.0                            |
 | **[commons.wikimedia.org](https://commons.wikimedia.org/wiki/Main_Page)** | For providing various logos and resources used in textures  |                                PD 1.0                                 |
@@ -312,8 +319,15 @@ Special thanks to these people for their help in the making of this addon :
 |                                                                                         **[arti](https://www.moddb.com/members/artifax)**                                                                                         |                                   For making his Barter UI Framework                                    |
 |                                                                                         **[arti](https://www.moddb.com/members/artifax)**                                                                                         |       For having updated the barters config files to work with the newer version of his framework       |
 
-If you would like to help development for future updates, you can :
-1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  
-   https://github.com/nltp-ashes/Western-Goods
-2. Help by play-testing updates by getting Release Candidates builds on the addon's GitHub repository :  
-   https://github.com/nltp-ashes/Western-Goods/releases/tag/test
+---
+
+### LICENSE
+
+Everything contained in Western Goods and made by me, NLTP_ASHES, is licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+This means you're allowed to redistribute and/or adapt the work, as long as you respect the following criteria :
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- **NonCommercial** — You may not use the material for commercial purposes (this includes donations).
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+
+For the work that wasn't made by me, unless a licence is specified in the [Credits](#special-thanks--credits) or in the files themselves, consider these works proprietary. If you want to reuse those, please get in touch with their original authors.
