@@ -84,7 +84,7 @@ function check_move_item(flags, npc_id, obj, mode, bag)
     if utils_item.in_npc_inv(npc, obj) then return end
 
     -- If you are talking to a EUR/USD trader and the item isn't tradable, prevent the item from moving
-    if this.is_eur_usd_trader(npc:section()) and not this.is_tradable(obj) then
+    if this.is_eur_usd_trader(npc:section()) and not this.is_tradable(obj:section()) then
         flags.ret_value = false
     end
 end
@@ -98,17 +98,89 @@ function tint_functor(cell)
     if not ui_instance then return end
 
     local partner = ui_instance:GetPartner()
+    local obj = cell.container:GetObj(cell.indx)
 
-    if (ui_instance.mode ~= "trade")
+    if (not ui_instance.mode == "trade")
     or (not bags_to_tint[cell.container.ID])
+    or (not obj)
     or (not partner)
     or (not this.is_eur_usd_trader(partner:section()))
-    or (utils_item.in_npc_inv(partner, cell.container:GetObj(cell.indx)))
-    or (this.is_tradable(cell.container:GetObj(cell.indx)))
+    or (utils_item.in_npc_inv(partner, obj))
+    or (this.is_tradable(obj:section()))
     then return end
 
     -- If you're in the trade mode with a EUR/USD trader, and the item isn't tradable, tint it in red
     return GetARGB(240, 250, 0, 0)
+end
+
+UpdateCharacterBase = ui_inventory.UIInventory.UpdateCharacter
+function ui_inventory.UIInventory.UpdateCharacter(self)
+
+    UpdateCharacterBase(self)
+
+    local partner = self:GetPartner()
+
+    if (not self.mode == "trade")
+    or (not partner)
+    or (not this.is_eur_usd_trader(partner:section()))
+    then return end
+
+    local eur_money = 0
+    local usd_money = 0
+
+    western_goods_utils.inventory_iter(db.actor,function(owner, obj)
+        if this.is_tradable(obj:section()) then
+            local currency,value = this.get_money_value(obj:section())
+            if currency == "usd" then
+                usd_money = usd_money + value
+            end
+            if currency == "eur" then
+                eur_money = eur_money + value
+            end
+        end
+    end)
+
+    self.player_money:SetText(tostring(eur_money) .. " EUR | " .. tostring(usd_money) .. " USD")
+
+    -- NPC
+    self.npc_money:SetText("... EUR | ... USD")
+end
+
+TMode_UpdatePriceBase = ui_inventory.UIInventory.TMode_UpdatePrice
+function ui_inventory.UIInventory.TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
+
+    TMode_UpdatePriceBase(self, ele_txt, ele_btn, bag)
+
+    local partner = self:GetPartner()
+
+    if (not self.mode == "trade")
+    or (not partner)
+    or (not this.is_eur_usd_trader(partner:section()))
+    then return end
+
+    local cc = self.CC[bag]
+    if (not cc) then
+        return
+    end
+
+    local tot_cost = 0
+
+    for obj_id,idx in pairs(cc.indx_id) do
+        local obj = level_object_by_id(obj_id)
+        local currency,value = this.get_money_value(obj:section())
+        if currency == "eur" then
+            tot_cost = tot_cost + value * 68
+        end
+        if currency == "usd" then
+            tot_cost = tot_cost + value * 70
+        end
+        if currency == "unknown" then
+            tot_cost = tot_cost + cc:GetCellCost(cc.cell[idx])
+        end
+    end
+
+    ele_txt:SetText(math.ceil(tot_cost/68) .. " EUR | " .. math.ceil(tot_cost/70) .. " USD")
+    ele_btn:Enable(math.ceil(tot_cost) > 0)
 end
 
 TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
@@ -173,16 +245,38 @@ function make_exchange(self, npc)
 
     -- Calculate full sell price
     local tot_sell_cost = 0
-    for _,ci in pairs(cc_sell.cell) do
-        tot_sell_cost = tot_sell_cost + cc_sell:GetCellCost(ci)
+    for obj_id,idx in pairs(cc_sell.indx_id) do
+        local obj = level_object_by_id(obj_id)
+        local currency,value = this.get_money_value(obj:section())
+        if currency == "eur" then
+            tot_sell_cost = tot_sell_cost + value * 68
+        end
+        if currency == "usd" then
+            tot_sell_cost = tot_sell_cost + value * 70
+        end
+        if currency == "unknown" then
+            tot_sell_cost = tot_sell_cost + cc_sell:GetCellCost(cc_sell.cell[idx])
+        end
     end
-    tot_sell_cost = math.ceil(tot_sell_cost)
 
     -- Calculate full buy price
     local tot_buy_cost = 0
-    for _,ci in pairs(cc_buy.cell) do
-        tot_buy_cost = tot_buy_cost + cc_buy:GetCellCost(ci)
+    for obj_id,idx in pairs(cc_buy.indx_id) do
+        local obj = level_object_by_id(obj_id)
+        local currency,value = this.get_money_value(obj:section())
+        if currency == "eur" then
+            tot_buy_cost = tot_buy_cost + value * 68
+        end
+        if currency == "usd" then
+            tot_buy_cost = tot_buy_cost + value * 70
+        end
+        if currency == "unknown" then
+            tot_buy_cost = tot_buy_cost + cc_buy:GetCellCost(cc_buy.cell[idx])
+        end
     end
+
+    -- Round values up
+    tot_sell_cost = math.ceil(tot_sell_cost)
     tot_buy_cost = math.ceil(tot_buy_cost)
 
     -- Don't processed the sell price < buy price
@@ -214,7 +308,7 @@ function make_exchange(self, npc)
     CreateTimeEvent("delete_traded_items",npc:id(),0.01,function()
         dbg_printf("[WG] Western Goods Trader | Cleaning traded items :")
         western_goods_utils.inventory_iter(npc,function(owner, obj)
-            if this.is_tradable(obj) then
+            if this.is_tradable(obj:section()) then
                 dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
                 alife_release_id(obj:id())
             end
@@ -271,19 +365,31 @@ end
 --- Function used to know if an object is tradable with the western goods trader.
 --- @param obj game_object
 --- @return boolean
-function is_tradable(obj)
+function is_tradable(sec)
     for i,_ in pairs(western_goods_core.western_goods_items) do
         local section = western_goods_core.table_item_field_by_key(western_goods_core.western_goods_items, i, "section")
         local type = western_goods_core.table_item_field_by_key(western_goods_core.western_goods_items, i, "type")
 
         -- Is tradable if item is in actor inventory, and is of type money
-        if obj:section() == section and type == "money" then
+        if sec == section and type == "money" then
             return true
         end
     end
 
     -- All other items are forbidden for trade
     return false
+end
+
+function get_money_value(sec)
+    if string.find(sec, "wg_euros_") then
+        local value = string.sub(sec,10,#sec) or "0"
+        return "eur", tonumber(value)
+    end
+    if string.find(sec, "wg_dollars_") then
+        local value = string.sub(sec,12,#sec) or "0"
+        return "usd", tonumber(value)
+    end
+    return "unknown", 0
 end
 
 --- Function used to parse through all character description files.
