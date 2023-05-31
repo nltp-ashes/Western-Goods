@@ -1,46 +1,66 @@
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
---- Date : 17/04/2023
+--- Date : 22/05/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
---- Script used to manage specific aspects of the western goods trader.
+--- Script used to manage the trade system, but with Euros/Dollars instead of Roubles.
 ---
---- Notably, that is :
---- - Preventing trader_autoinject.script from injecting items in his inventory;
---- - Having a custom trade setup where only Euros/Dollars can be traded;
---- - Managing the Barter UI dialog line.
+--- Known issues :
+--- - The trader's inventory will refresh every time the player enters trading mode.
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions
+-- Constants, global variables, imported functions and new callbacks
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local CONST_TRADER_SECTION = "stalker_western_goods_trader"
-local CONST_TRADER_SQUAD = "stalker_western_goods_trader_squad"
+-- New callbacks
+AddScriptCallback("western_goods_trade_eur_usd_on_dialog")
 
+-- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
 local level_object_by_id = western_goods_utils.level_object_by_id
 
-bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
-tradable_items = {}
+-- Constants
+local bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
+
+-- Variables
+local traders_list = {}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Dialog Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+TraderUpdate = trade_manager.update
+--- Function called when the player uses the trade line of dialog.
+--- @param npc game_object
+--- @param actor game_object
+--- @return nil
+function start_trade(npc, actor)
+    trader_autoinject.TraderUpdate(npc, true)
+    CreateTimeEvent("delay_open_trade", npc:id(), 0, function()
+        if hide_hud_inventory() then
+            traders_list[npc:section()] = true
+            npc:start_trade(actor)
+            return true
+        end
+    end)
+end
+
+--- Function called to determine if the trade line of dialog should be shown.
+--- @param npc game_object
+--- @param actor game_object
+--- @param dialog_id string
+--- @return table
+function cond_trade_dialog(actor, npc, dialog_id)
+    local flags = { result = true }
+    SendScriptCallback("western_goods_trade_eur_usd_on_dialog",actor,npc,flags)
+    return flags.result
+end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Trading actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-TraderUpdate = trade_manager.update
---- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader. Got it? Me neither. In the end, it works.
---- @param npc cse_alife_object
---- @param force_refresh boolean
---- @return nil
-function trade_manager.update(npc, force_refresh)
-    if npc:section() ~= "stalker_western_goods_trader" then
-        TraderUpdate(npc, force_refresh)
-    else
-        trader_autoinject.TraderUpdate(npc, force_refresh)
-    end
-end
-
---- Function used to allow/disallow the player from moving items from one container to another when trading with the western goods trader.
+--- Function used to allow/disallow the player from moving items from one container to another when trading with a EUR/USD trader.
 --- @param flags table
 --- @param npc_id number
 --- @param obj game_object
@@ -51,10 +71,14 @@ function check_move_item(flags, npc_id, obj, mode, bag)
     if mode ~= "trade" then return flags.ret_value end
 
     local npc = npc_id and level_object_by_id(npc_id)
-    local is_western_goods_trader = npc:section() == CONST_TRADER_SECTION
 
-    -- If you are talking to the western goods trader and the item is not tradable, prevent the item from moving
-    flags.ret_value = flags.ret_value and not is_western_goods_trader or is_tradable(npc, obj)
+    -- Always allow items in NPC inventory to be moved
+    if utils_item.in_npc_inv(npc, obj) then return end
+
+    -- If you are talking to a EUR/USD trader and the item isn't tradable, prevent the item from moving
+    if this.is_eur_usd_trader(npc:section()) and not this.is_tradable(obj) then
+        flags.ret_value = false
+    end
 end
 
 --- Function used to color the untradable items in the player inventory.
@@ -63,17 +87,19 @@ end
 function tint_functor(cell)
     local ui_instance = ui_inventory.GUI
 
-    if (not ui_instance)
-            or (ui_instance.mode ~= "trade")
-            or (not bags_to_tint[cell.container.ID])
-            or (western_goods_utils.table_contains(tradable_items, cell.section))
-    then return end
+    if not ui_instance then return end
 
     local partner = ui_instance:GetPartner()
 
-    if partner and partner:section() ~= CONST_TRADER_SECTION then return end
+    if (ui_instance.mode ~= "trade")
+    or (not bags_to_tint[cell.container.ID])
+    or (not partner)
+    or (not this.is_eur_usd_trader(partner:section()))
+    or (utils_item.in_npc_inv(partner, cell.container:GetObj(cell.indx)))
+    or (this.is_tradable(cell.container:GetObj(cell.indx)))
+    then return end
 
-    -- If you're in the trade mode with the western goods trader, and the item isn't tradable, tint it in red
+    -- If you're in the trade mode with a EUR/USD trader, and the item isn't tradable, tint it in red
     return GetARGB(240, 250, 0, 0)
 end
 
@@ -82,9 +108,9 @@ TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
 --- @param self UIInventory
 --- @return nil
 function ui_inventory.UIInventory.TMode_Sell(self)
-    -- If we aren't talking to the western goods trader, process normally
+    -- If we aren't talking to a EUR/USD trader, process normally
     local npc = self:GetPartner()
-    if not npc or npc:section() ~= CONST_TRADER_SECTION then
+    if not npc or not this.is_eur_usd_trader(npc:section()) then
         TMode_SellBase(self)
         return
     end
@@ -97,9 +123,9 @@ TMode_BuyBase = ui_inventory.UIInventory.TMode_Buy
 --- @param self UIInventory
 --- @return nil
 function ui_inventory.UIInventory.TMode_Buy(self)
-    -- If we aren't talking to the western goods trader, process normally
+    -- If we aren't talking to a EUR/USD trader, process normally
     local npc = self:GetPartner()
-    if not npc or npc:section() ~= CONST_TRADER_SECTION then
+    if not npc or not this.is_eur_usd_trader(npc:section()) then
         TMode_BuyBase(self)
         return
     end
@@ -107,7 +133,8 @@ function ui_inventory.UIInventory.TMode_Buy(self)
     make_exchange(self, npc)
 end
 
---- Function called when the player clicks Sell/Buy in the trade UI. This function makes a few checks, and then proceeds to exchange the money for the items selected.
+--- Function called when the player clicks Sell/Buy in the trade UI.
+--- This function makes a few checks, and then proceeds to exchange the money for the items selected.
 --- @param self UIInventory
 --- @param npc game_object
 --- @return nil
@@ -119,7 +146,7 @@ function make_exchange(self, npc)
     end
     if size_table(cc_sell.indx_id) <= 0 then
         self.message_box:InitMessageBox("message_box_ok")
-        self.message_box:SetText( western_goods_utils.get_translation("st_wg_trader_empty_sell") )
+        self.message_box:SetText(western_goods_utils.get_translation("st_wg_trader_empty_sell"))
         self.message_box:ShowDialog(true)
         return
     end
@@ -131,7 +158,7 @@ function make_exchange(self, npc)
     end
     if size_table(cc_buy.indx_id) <= 0 then
         self.message_box:InitMessageBox("message_box_ok")
-        self.message_box:SetText( western_goods_utils.get_translation("st_wg_trader_empty_buy") )
+        self.message_box:SetText(western_goods_utils.get_translation("st_wg_trader_empty_buy"))
         self.message_box:ShowDialog(true)
         return
     end
@@ -141,19 +168,19 @@ function make_exchange(self, npc)
     for _,ci in pairs(cc_sell.cell) do
         tot_sell_cost = tot_sell_cost + cc_sell:GetCellCost(ci)
     end
-    tot_sell_cost = math.floor(tot_sell_cost)
+    tot_sell_cost = math.ceil(tot_sell_cost)
 
     -- Calculate full buy price
     local tot_buy_cost = 0
     for _,ci in pairs(cc_buy.cell) do
         tot_buy_cost = tot_buy_cost + cc_buy:GetCellCost(ci)
     end
-    tot_buy_cost = math.floor(tot_buy_cost)
+    tot_buy_cost = math.ceil(tot_buy_cost)
 
     -- Don't processed the sell price < buy price
     if tot_sell_cost < tot_buy_cost then
         self.message_box:InitMessageBox("message_box_ok")
-        self.message_box:SetText( western_goods_utils.get_translation("st_wg_trader_uneven_value") )
+        self.message_box:SetText(western_goods_utils.get_translation("st_wg_trader_uneven_value"))
         self.message_box:ShowDialog(true)
         return
     end
@@ -161,30 +188,27 @@ function make_exchange(self, npc)
     -- Make the trade
     dbg_printf("[WG] Western Goods Trader | Traded :")
     for id,_ in pairs(cc_sell.indx_id) do
-        if cc_sell:GetCell_ID(id) then
-            local obj = level_object_by_id(id)
-            dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
-            self:On_Item_Exchange(db.actor, npc, obj)
-        end
+        local obj = level_object_by_id(id)
+        dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+        self:On_Item_Exchange(db.actor, npc, obj)
     end
     dbg_printf("[WG] Western Goods Trader | In exchange for :")
     for id,_ in pairs(cc_buy.indx_id) do
-        if cc_buy:GetCell_ID(id) then
-            local obj = level_object_by_id(id)
-            dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
-            self:On_Item_Exchange(npc, db.actor, obj)
-        end
+        local obj = level_object_by_id(id)
+        dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+        self:On_Item_Exchange(npc, db.actor, obj)
     end
 
     -- Update UI
     self:UpdateInfo(true)
 
+    -- Clean trader inventory
     CreateTimeEvent("delete_traded_items",npc:id(),0.01,function()
         dbg_printf("[WG] Western Goods Trader | Cleaning traded items :")
         western_goods_utils.inventory_iter(npc,function(owner, obj)
-            if western_goods_utils.table_contains(tradable_items, obj:section()) then
+            if this.is_tradable(obj) then
                 dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
-                alife_release(alife_object(obj:id()))
+                alife_release_id(obj:id())
             end
         end)
         return true
@@ -196,15 +220,8 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 
 if western_goods_core.is_barter_ui_installed() then
-    --- Function used to initiate the Barter UI.
-    --- @return nil
-    function npc_barter()
-        utils_obj.play_sound("interface\\inv_open")
-        barter_ui.start()
-    end
-
     GUI_on_showBase = barter_ui.GUI_on_show
-    --- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is the western goods trader.
+    --- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is a EUR/USD trader.
     --- @param name string
     --- @param path string
     --- @return nil
@@ -214,7 +231,11 @@ if western_goods_core.is_barter_ui_installed() then
 
         local partner = ui_instance:GetPartner()
 
-        if partner and partner:section() == CONST_TRADER_SECTION then return end
+        printf("[TEST] partner %s",partner)
+        printf("[TEST] partner ID %s",partner and partner:id())
+        printf("[TEST] is_eur_usd_trader ID %s",partner and this.is_eur_usd_trader(partner:section()))
+
+        if partner and this.is_eur_usd_trader(partner:section()) then return end
 
         GUI_on_showBase(name, path)
     end
@@ -227,42 +248,35 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    RegisterScriptCallback("actor_on_first_update", retrieve_tradable_items)
-    RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
     rax_icon_tint.register("wg_tint_functor", tint_functor)
+    RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Utility functions
+-- Service Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to retrieve the list of tradable items (items of type "money") with the western goods trader.
---- @return nil
-function retrieve_tradable_items()
-    -- Clear the cached list of tradable items
-    tradable_items = {}
-
-    -- Get the table of all items of the addon from western_goods_core
-    local money_table = western_goods_core.table_items_by_type(western_goods_core.western_goods_items, "money")
-
-    -- Go through the list of items in the addon, and keep only the items of type "money"
-    for key,_ in pairs(money_table) do
-        local section = western_goods_core.table_item_field_by_key(money_table, key, "section")
-        table.insert(tradable_items, section)
-    end
-
-    dbg_printf("[WG] Western Goods Trader | Trade table :\n%s", utils_data.print_table(tradable_items, false, true))
+--- Function used to know if an NPC is a EUR/USD trader or not.
+--- @param section string
+--- @return boolean
+function is_eur_usd_trader(section)
+    return traders_list[section] or false
 end
 
 --- Function used to know if an object is tradable with the western goods trader.
---- @param npc cse_alife_object
 --- @param obj game_object
 --- @return boolean
-function is_tradable(npc, obj)
-    local is_in_npc_inv = utils_item.in_npc_inv(npc, obj)
-    local is_in_actor_inv = utils_item.in_actor_inv(obj)
-    local is_tradable_item = western_goods_utils.table_contains(tradable_items, obj:section())
+function is_tradable(obj)
+    for i,_ in pairs(western_goods_core.western_goods_items) do
+        local section = western_goods_core.table_item_field_by_key(western_goods_core.western_goods_items, i, "section")
+        local type = western_goods_core.table_item_field_by_key(western_goods_core.western_goods_items, i, "type")
 
-    -- An item isn't tradable if it is in the player's and isn't present in the tradable_items table
-    return is_in_npc_inv or (is_tradable_item and is_in_actor_inv)
+        -- Is tradable if item is in actor inventory, and is of type money
+        if obj:section() == section and type == "money" then
+            return true
+        end
+    end
+
+    -- All other items are forbidden for trade
+    return false
 end

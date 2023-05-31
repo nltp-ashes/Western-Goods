@@ -786,6 +786,26 @@
 	</string>
 
 	<!-- ============================================================================================================-->
+	<!--	Trade EUR/USD Dialogs                                                                                    -->
+	<!-- ============================================================================================================-->
+
+	<string id="st_wg_trade_eur_usd_ask">
+		<text>I want to purchase a few things. %c[d_orange][Trade]</text>
+	</string>
+
+	<string id="st_wg_trade_eur_usd_ask_reply_1">
+		<text>Sure thing.</text>
+	</string>
+
+	<string id="st_wg_trade_eur_usd_ask_reply_2">
+		<text>Take a look.</text>
+	</string>
+
+	<string id="st_wg_trade_eur_usd_ask_reply_3">
+		<text>Here's what I've got.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
 	<!--	Task Dialogs																			  		     	 -->
 	<!-- ============================================================================================================-->
 

@@ -28,7 +28,6 @@ function bind_anomaly_field.anomaly_field_binder:update(delta)
     anom_binder_update_base(self, delta)
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -42,7 +41,6 @@ function on_game_start()
     -- TODO : Test code - to be removed
     -- RegisterScriptCallback("on_key_press",test_func)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Data persistence
@@ -61,7 +59,6 @@ end
 function load_state(m_data)
     fob_enabled = m_data.fob_enabled
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Test functions		TODO : Remove this section

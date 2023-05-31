@@ -46,26 +46,6 @@
         </phrase_list>
     </dialog>
 
-    <dialog id="western_goods_trader_trade">
-        <has_info>western_goods_trader_first_meet_over</has_info>
-        <phrase_list>
-            <phrase id="0"> <!-- actor -->
-                <text>st_trader_dialog_init</text>
-                <next>1</next>
-                <next>2</next>
-            </phrase>
-            <phrase id="1"> <!-- npc -->
-                <precondition>dialogs_mlr.check_no_debt</precondition>
-                <script_text>dialogs.st_trader_dialog_reply</script_text>
-                <action>dialogs.npc_is_trader</action>
-            </phrase>
-            <phrase id="2"> <!-- npc -->
-                <precondition>dialogs_mlr.check_debt</precondition>
-                <script_text>dialogs_mlr.st_debt_no_trade</script_text>
-            </phrase>
-        </phrase_list>
-    </dialog>
-
     <dialog id="western_goods_trader_barter">
         <has_info>western_goods_trader_first_meet_over</has_info>
         <precondition>western_goods_core.is_barter_ui_installed</precondition>
@@ -78,7 +58,7 @@
             <phrase id="1"> <!-- npc -->
                 <precondition>dialogs_mlr.check_no_debt</precondition>
                 <script_text>dialogs.st_trader_dialog_reply</script_text>
-                <action>western_goods_trader.npc_barter</action>
+                <action>western_goods_npcs.ashes_barter</action>
             </phrase>
             <phrase id="2"> <!-- npc -->
                 <precondition>dialogs_mlr.check_debt</precondition>
@@ -403,7 +383,7 @@
     </dialog>
 
     <!-- ============================================================================================================-->
-    <!--    SSU Supervisor Dialogs                                                                                     -->
+    <!--    SSU Supervisor Dialogs                                                                                   -->
     <!-- ============================================================================================================-->
 
     <dialog id="western_goods_ssu_supervisor_bribe">
@@ -1213,6 +1193,24 @@
             </phrase>
             <phrase id="4"> <!-- actor -->
                 <text>st_wg_flea_cancel</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!-- ============================================================================================================-->
+    <!--    EUR/USD Trade Dialog                                                                                     -->
+    <!-- ============================================================================================================-->
+
+    <dialog id="western_goods_trade_eur_usd">
+        <precondition>western_goods_trade_eur_usd.cond_trade_dialog</precondition>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_trade_eur_usd_ask</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <rand_text>st_wg_trade_eur_usd_ask_reply_</rand_text>
+                <action>western_goods_trade_eur_usd.start_trade</action>
             </phrase>
         </phrase_list>
     </dialog>

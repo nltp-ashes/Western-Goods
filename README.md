@@ -66,8 +66,10 @@ To **uninstall** the addon :
 >    - Added native integration with the Pinup Collector addon;
 >    - Added new PDA entries for the new NPCs, and the Flea Market system;
 >    - Added MCM option to show/hide task target during emissions/psi-storms, to go with the new capabilities of the GPS.
+>    - Other back-end additions.
 > • Changes :
 >    - The GPS Locator is now a full fledged 3D device (Thanks Barry Bogs);
+>    - Generalized the EUR/USD trade system so it can be used by multiple NPCs;
 >    - Removed the need tp have the Barter UI Framework installed (now a soft requirement);
 >    - Removed the need to have trader_autoinject.script up-to-date;
 >    - Removed the CTD when the Barter UI is missing;
@@ -265,7 +267,8 @@ If you would like to help development for future updates, you can :
 
 ### KNOWN ISSUES
 
-- Stutters may occur when the game spawns in new NPCs.
+- Stutters may occur when the game spawns in new NPCs;
+- The EUR/USD trader's inventory will refresh every time the player enters trading mode.
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
