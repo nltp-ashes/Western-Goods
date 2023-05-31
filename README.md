@@ -268,7 +268,7 @@ If you would like to help development for future updates, you can :
 ### KNOWN ISSUES
 
 - Stutters may occur when the game spawns in new NPCs;
-- The EUR/USD trader's inventory will refresh every time the player enters trading mode.
+- Traders with EUR/USD trade system must have section names matching their character ID in order to be recognized as a trader.
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
@@ -288,25 +288,26 @@ If you need help with anything, or if you have any suggestions of new items, you
 
 Credit goes to these people for their work contained in this addon :
 
-|                                   Name                                    |                           Motive                            |                                License                                |
-|:-------------------------------------------------------------------------:|:-----------------------------------------------------------:|:---------------------------------------------------------------------:|
-|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |    Adapted the GPS locator model on Dosimeter animations    |                              Proprietary                              |
-|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                Reused his xr_logic_ex script                |                              Proprietary                              |
-|             **[arti](https://www.moddb.com/members/artifax)**             |             Reused his trader_autoinject script             |                              Proprietary                              |
-|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |               Reused his rax_icon_tint script               |                       CC BY-NC-SA 3.0 Unported                        |
-|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |            Produced four models for consumables             |                              Proprietary                              |
-|        **[Feel_Fried](https://www.moddb.com/members/feel-fried)**         | Reused some files from his Food, drug and drinks animations |                                PD 1.0                                 |
-|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     | Wrote the code that takes control of helicopters' combat AI |                              Proprietary                              |
-|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |            Reused part of his More Guides addon             |                              Proprietary                              |
-|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |             Reused one of his script functions              |                              Proprietary                              |
-|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |           Reused multiple of his script functions           |                              Proprietary                              |
-|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |        Reused icons from his Hideout Furniture addon        |                              Proprietary                              |
-|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |          Adapted his fan film into an in-game task          |                              Proprietary                              |
-|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |              Ported some models from their mod              |                              Proprietary                              |
-|                **[segaretro.org](https://segaretro.org/)**                |      For providing the textures for the xbox magazines      |                               CC BY 4.0                               |
-|                  **[archive.org](https://archive.org/)**                  |      For providing the textures for the men magazines       |                            CC BY-NC-ND 4.0                            |
-| **[commons.wikimedia.org](https://commons.wikimedia.org/wiki/Main_Page)** | For providing various logos and resources used in textures  |                                PD 1.0                                 |
-|                **[freepik.com](https://www.freepik.com/)**                | For providing various logos and resources used in textures  | [License](https://www.freepikcompany.com/legal#nav-freepik-agreement) |
+|                                   Name                                    |                                     Motive                                      |                                License                                |
+|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
+|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |              Adapted the GPS locator model on Dosimeter animations              |                              Proprietary                              |
+|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                          Reused his xr_logic_ex script                          |                              Proprietary                              |
+|             **[arti](https://www.moddb.com/members/artifax)**             |                       Reused his trader_autoinject script                       |                              Proprietary                              |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |                         Reused his rax_icon_tint script                         |                       CC BY-NC-SA 3.0 Unported                        |
+|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |                      Produced four models for consumables                       |                              Proprietary                              |
+|        **[Feel_Fried](https://www.moddb.com/members/feel-fried)**         |           Reused some files from his Food, drug and drinks animations           |                                PD 1.0                                 |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |           Wrote the code that takes control of helicopters' combat AI           |                              Proprietary                              |
+|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |                      Reused part of his More Guides addon                       |                              Proprietary                              |
+|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |                       Reused one of his script functions                        |                              Proprietary                              |
+|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |                     Reused multiple of his script functions                     |                              Proprietary                              |
+|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |                  Reused icons from his Hideout Furniture addon                  |                              Proprietary                              |
+|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |                    Adapted his fan film into an in-game task                    |                              Proprietary                              |
+|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |                        Ported some models from their mod                        |                              Proprietary                              |
+|       **[Anomaly mod](https://www.moddb.com/mods/stalker-anomaly)**       | For providing such a good modding base, and for their assets used in this addon |                              Proprietary                              |
+|                **[segaretro.org](https://segaretro.org/)**                |                For providing the textures for the xbox magazines                |                               CC BY 4.0                               |
+|                  **[archive.org](https://archive.org/)**                  |                For providing the textures for the men magazines                 |                            CC BY-NC-ND 4.0                            |
+| **[commons.wikimedia.org](https://commons.wikimedia.org/wiki/Main_Page)** |           For providing various logos and resources used in textures            |                                PD 1.0                                 |
+|                **[freepik.com](https://www.freepik.com/)**                |           For providing various logos and resources used in textures            | [License](https://www.freepikcompany.com/legal#nav-freepik-agreement) |
 
 Special thanks to these people for their help in the making of this addon :
 

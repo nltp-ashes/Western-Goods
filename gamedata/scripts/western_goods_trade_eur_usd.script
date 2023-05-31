@@ -6,7 +6,7 @@
 --- Script used to manage the trade system, but with Euros/Dollars instead of Roubles.
 ---
 --- Known issues :
---- - The trader's inventory will refresh every time the player enters trading mode.
+--- - The NPC's section has to match the NPC's character ID in order to be recognized as a EUR/USD trader.
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables, imported functions and new callbacks
@@ -29,20 +29,14 @@ local traders_list = {}
 -- General Dialog Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-TraderUpdate = trade_manager.update
 --- Function called when the player uses the trade line of dialog.
 --- @param npc game_object
 --- @param actor game_object
 --- @return nil
 function start_trade(npc, actor)
-    trader_autoinject.TraderUpdate(npc, true)
-    CreateTimeEvent("delay_open_trade", npc:id(), 0, function()
-        if hide_hud_inventory() then
-            traders_list[npc:section()] = true
-            npc:start_trade(actor)
-            return true
-        end
-    end)
+    if hide_hud_inventory() then
+        npc:start_trade(actor)
+    end
 end
 
 --- Function called to determine if the trade line of dialog should be shown.
@@ -59,6 +53,20 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Trading actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
+
+TraderUpdate = trade_manager.update
+--- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader.
+--- Got it? Me neither. In the end, it works.
+--- @param npc game_object
+--- @param force_refresh boolean
+--- @return nil
+function trade_manager.update(npc, force_refresh)
+    if is_eur_usd_trader(npc:section()) then
+        trader_autoinject.TraderUpdate(npc, force_refresh)
+    else
+        TraderUpdate(npc, force_refresh)
+    end
+end
 
 --- Function used to allow/disallow the player from moving items from one container to another when trading with a EUR/USD trader.
 --- @param flags table
@@ -231,10 +239,6 @@ if western_goods_core.is_barter_ui_installed() then
 
         local partner = ui_instance:GetPartner()
 
-        printf("[TEST] partner %s",partner)
-        printf("[TEST] partner ID %s",partner and partner:id())
-        printf("[TEST] is_eur_usd_trader ID %s",partner and this.is_eur_usd_trader(partner:section()))
-
         if partner and this.is_eur_usd_trader(partner:section()) then return end
 
         GUI_on_showBase(name, path)
@@ -250,6 +254,7 @@ end
 function on_game_start()
     rax_icon_tint.register("wg_tint_functor", tint_functor)
     RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
+    RegisterScriptCallback("on_game_load", collect_traders_list)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -279,4 +284,44 @@ function is_tradable(obj)
 
     -- All other items are forbidden for trade
     return false
+end
+
+--- Function used to parse through all character description files.
+--- This function will find and save (in 'traders_list' table) all character IDs that have the EUR/USD trade dialog.
+--- @return nil
+function collect_traders_list()
+    dbg_printf("[WG] Trade EUR/USD | Started trader collection...")
+
+    local profiler = profile_timer()
+
+    profiler:start()
+
+    local file_list = str_explode(ini_sys:r_string("profiles", "specific_characters_files"),",")
+
+    for _,file_name in pairs(file_list) do
+        local xml = CScriptXmlInit()
+        xml:ParseDirFile([[gameplay]],file_name..".xml")
+
+        local char_count = xml:GetNodesNum("", 0, "specific_character")
+        for i=0, char_count-1 do
+
+            local char_id = xml:ReadAttribute("specific_character", i, "id")
+            xml:NavigateToNode("specific_character", i)
+
+            local diag_count = xml:GetNodesNum("specific_character", i, "actor_dialog")
+            for y=0, diag_count-1 do
+
+                if xml:ReadValue("actor_dialog", y) == "western_goods_trade_eur_usd" then
+                    traders_list[char_id] = true
+                    dbg_printf("[WG] Trade EUR/USD | Found EUR/USD dialog for '%s'", char_id)
+                end
+            end
+            xml:NavigateToRoot()
+        end
+        xml = nil
+    end
+
+    profiler:stop()
+
+    dbg_printf("[WG] Trade EUR/USD | Finished trader collection in %sµs :\n%s", profiler:time(), utils_data.print_table(traders_list, false, true))
 end
