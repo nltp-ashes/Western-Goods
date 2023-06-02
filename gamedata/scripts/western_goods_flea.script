@@ -1,6 +1,6 @@
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
---- Date : 22/05/2023
+--- Date : 02/06/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the Mercenary flea market system.
@@ -24,6 +24,20 @@
 ---        }
 ---        for k,v in pairs(items_to_add) do
 ---            table.insert(flags.result,v)
+---        end
+---    end)
+--- end
+--- ====================================================================================================================
+---
+--- By default, if the npc has "western_goods_flea_offers" line of dialog, the dialog will be available to the player.
+--- If you want to have more control over this dialog, you can use the "western_goods_flea_on_dialog" callback.
+---
+--- == gamedata/scripts/my_addon_s_script.script =======================================================================
+--- function on_game_start()
+---    RegisterScriptCallback("western_goods_flea_on_dialog", function(actor,npc,flags)
+---        if npc:section() == "my_npc_section" and some_condition() then
+---            -- The line of dialog will now be hidden
+---            flags.result = false
 ---        end
 ---    end)
 --- end

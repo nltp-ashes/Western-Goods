@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.0.2-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.1.0%20RC11-yellow) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.0.2-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-2.1.0%20RC12-yellow) ![Licence](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -74,6 +74,7 @@ To **uninstall** the addon :
 >    - Removed the need to have trader_autoinject.script up-to-date;
 >    - Removed the CTD when the Barter UI is missing;
 >    - Removed the CTD when trader_autoinject.script is outdated;
+>    - Updated trader_autoinject.script;
 >    - Other minor/back-end changes.
 > • Bug fixes :
 >    - Fixed issue from vanilla Anomaly 1.5.2 where detectors had transparent displays (Thanks RavenAscendant & Lucy)

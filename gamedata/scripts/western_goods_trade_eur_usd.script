@@ -1,9 +1,37 @@
 --- Original Author(s) : NLTP_ASHES
 --- Edited : N/A
---- Date : 22/05/2023
+--- Date : 02/06/2023
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Script used to manage the trade system, but with Euros/Dollars instead of Roubles.
+---
+--- By default, if the npc has "western_goods_trade_eur_usd" line of dialog, the dialog will be available to the player.
+--- If you want to have more control over this dialog, you can use the "western_goods_trade_eur_usd_on_dialog" callback.
+---
+--- == gamedata/scripts/my_addon_s_script.script =======================================================================
+--- function on_game_start()
+---    RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", function(actor,npc,flags)
+---        if npc:section() == "my_npc_section" and some_condition() then
+---            -- The line of dialog will now be hidden
+---            flags.result = false
+---        end
+---    end)
+--- end
+--- ====================================================================================================================
+---
+--- By default, NPCs using the EUR/USD trade system are shielded (aka unaffected) from trader_autoinject.script.
+--- If you want change that, you can use the "western_goods_trade_eur_usd_on_trader_autoinject" callback.
+---
+--- == gamedata/scripts/my_addon_s_script.script =======================================================================
+--- function on_game_start()
+---    RegisterScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject", function(npc,flags)
+---        if npc:section() == "my_npc_section" and some_condition() then
+---            -- The NPC will now receive items from trader_autoinject.script
+---            flags.result = true
+---        end
+---    end)
+--- end
+--- ====================================================================================================================
 ---
 --- Known issues :
 --- - The NPC's section has to match the NPC's character ID in order to be recognized as a EUR/USD trader.
@@ -14,6 +42,7 @@
 
 -- New callbacks
 AddScriptCallback("western_goods_trade_eur_usd_on_dialog")
+AddScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject")
 
 -- Imported functions
 local dbg_printf = western_goods_utils.dbg_printf
@@ -34,6 +63,7 @@ local traders_list = {}
 --- @param actor game_object
 --- @return nil
 function start_trade(npc, actor)
+    if not this.is_eur_usd_trader(npc:section()) then return end
     if hide_hud_inventory() then
         npc:start_trade(actor)
     end
@@ -61,7 +91,9 @@ TraderUpdate = trade_manager.update
 --- @param force_refresh boolean
 --- @return nil
 function trade_manager.update(npc, force_refresh)
-    if is_eur_usd_trader(npc:section()) then
+    local flags = { result = false }
+    SendScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject",npc,flags)
+    if is_eur_usd_trader(npc:section()) and not flags.result then
         trader_autoinject.TraderUpdate(npc, force_refresh)
     else
         TraderUpdate(npc, force_refresh)
@@ -95,10 +127,10 @@ end
 function tint_functor(cell)
     local ui_instance = ui_inventory.GUI
 
-    if not ui_instance then return end
+    if not ui_instance or not cell then return end
 
     local partner = ui_instance:GetPartner()
-    local obj = cell.container:GetObj(cell.indx)
+    local obj = cell.ID and level_object_by_id(cell.ID)
 
     if (not ui_instance.mode == "trade")
     or (not bags_to_tint[cell.container.ID])
@@ -179,7 +211,7 @@ function ui_inventory.UIInventory.TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
         end
     end
 
-    ele_txt:SetText(math.ceil(tot_cost/68) .. " EUR | " .. math.ceil(tot_cost/70) .. " USD")
+    ele_txt:SetText(math.ceil(tot_cost/68) .. " EUR or " .. math.ceil(tot_cost/70) .. " USD")
     ele_btn:Enable(math.ceil(tot_cost) > 0)
 end
 
@@ -380,6 +412,9 @@ function is_tradable(sec)
     return false
 end
 
+--- Function used to get the monetary value of a section, if this section is a WG money bill.
+--- @param sec string
+--- @return string,number
 function get_money_value(sec)
     if string.find(sec, "wg_euros_") then
         local value = string.sub(sec,10,#sec) or "0"
