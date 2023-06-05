@@ -601,7 +601,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 
                 heli_register(TASK_2_CACHE.stage_1_helicopter_id,HELICOPTERS_MODES.PROTECT_ACTOR,nil)
 
-                local attack_key_str = western_goods_utils.print_key(western_goods_mcm.get_config("heli_attack"))
+                local attack_key_str = western_goods_utils.get_key_translation(western_goods_mcm.get_config("heli_attack"))
 
                 -- Send a dialog to the player to inform him the helicopter is coming
                 local dialog_sender = {name="Mercenary helicopter", icon="ui_inGame2_PD_DownToEarth"}

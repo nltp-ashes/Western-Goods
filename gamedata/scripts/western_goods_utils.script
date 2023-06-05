@@ -177,6 +177,18 @@ function get_translation(str,...)
     return string
 end
 
+--- Function used to print the a textual version of a DIK key.
+--- @author RavenAscendant
+--- @param dik DIK_keys
+--- @return string
+function get_key_translation(dik)
+    if not validate_params({dik,"get_key_translation"}) then return end
+
+    local loc = ini_loc:r_value("string_table","language")
+    loc = ini_keys:section_exist(loc) and loc or "eng"
+    return ini_keys:r_value(loc, dik,0,"<!!!>")
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Info Portions Functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -254,7 +266,7 @@ function get_distance_sqr(position_1, position_2)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Objects Functions
+-- Objects Getter Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to iterate through each existing server object.
@@ -311,6 +323,77 @@ function level_object_by_id(id)
     if not validate_params({id,"level_object_by_id"}) then return end
 
     return db.storage[id] and db.storage[id].object or level.object_by_id(id)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Objects Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the character ID of an NPC.
+--- @param se_obj cse_alife_object|game_object
+--- @return string
+function get_character_id(se_obj)
+    if not validate_params({se_obj,"get_character_id"}) then return end
+
+    -- Get cse_alife_object if game_object is passed
+    if type(se_obj.id) == "function" then
+        se_obj = alife_object(se_obj:id())
+    end
+
+    if not IsStalker(se_obj) then return end
+
+    local net_data = utils_stpk.get_stalker_data(se_obj)
+    if net_data then
+        dbg_printf("[WG] Utils | NPC %s(%s) has character ID '%s'", se_obj:section_name(), se_obj.id, net_data.specific_character)
+        return net_data.specific_character
+    end
+end
+
+--- Function used to get the list of dialogs of a given character.
+--- @param character_id string
+--- @return table
+function get_dialog_list(character_id)
+    if not validate_params({character_id,"get_dialog_list"}) then return end
+
+    dbg_printf("[WG] Utils | Getting dialog list for '%s'...", character_id)
+
+    local profiler = profile_timer()
+
+    profiler:start()
+
+    local dialog_list = {}
+
+    local file_list = str_explode(ini_sys:r_string("profiles", "specific_characters_files"),",")
+
+    for _,file_name in pairs(file_list) do
+        local xml = CScriptXmlInit()
+        xml:ParseDirFile([[gameplay]],file_name..".xml")
+
+        local char_count = xml:GetNodesNum("", 0, "specific_character")
+        for i=0, char_count-1 do
+
+            local char_id = xml:ReadAttribute("specific_character", i, "id")
+            if char_id == character_id then
+
+                xml:NavigateToNode("specific_character", i)
+
+                local diag_count = xml:GetNodesNum("specific_character", i, "actor_dialog")
+                for y=0, diag_count-1 do
+                    table.insert(dialog_list, xml:ReadValue("actor_dialog", y))
+                end
+
+                profiler:stop()
+
+                dbg_printf("[WG] Utils | Dialog list of '%s' retrieved in %sms :\n%s", character_id, profiler:time()/1000, utils_data.print_table(dialog_list, false, true))
+
+                return dialog_list
+            end
+        end
+    end
+
+    profiler:stop()
+
+    printf("![WG] ERROR | Utils | Impossible to get dialog list, character '%s' not found !", character_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -597,18 +680,6 @@ function is_pda(obj)
     }
 
     return pda_sections[obj:section()]
-end
-
---- Function used to print the a textual version of a DIK key.
---- @author RavenAscendant
---- @param dik DIK_keys
---- @return string
-function print_key(dik)
-    if not validate_params({dik,"print_key"}) then return end
-
-    local loc = ini_loc:r_value("string_table","language")
-    loc = ini_keys:section_exist(loc) and loc or "eng"
-    return ini_keys:r_value(loc, dik,0,"<!!!>")
 end
 
 --- Function used to get the real community of the NPC by checking spawn id
