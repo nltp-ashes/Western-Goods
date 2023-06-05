@@ -256,7 +256,14 @@ To **uninstall** the addon :
 
 ### FUTURE WORKS
 
-- The development of the addon will be on hold for the next few weeks/months;
+- Implement lore around the smuggling of goods through Cordon/Darkscape/Darkvalley/Garbage;
+- Rewrite the MagazineUI to allow for high resolution magazines and more straight forward process to add new magazines;
+- Add a range finder as a hand-held device (Animator needed!);
+- Add a watch as a hand-held device (Animator needed!);
+- Add a compass as a hand-held device (Animator needed!);
+- Add other brands of cigarettes;
+
+**Note :** The development of the addon will be on hold for the next few weeks/months;
 
 If you would like to help development for future updates, you can :
 1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  
@@ -269,7 +276,6 @@ If you would like to help development for future updates, you can :
 ### KNOWN ISSUES
 
 - Stutters may occur when the game spawns in new NPCs;
-- Traders with EUR/USD trade system must have section names matching their character ID in order to be recognized as a trader.
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
