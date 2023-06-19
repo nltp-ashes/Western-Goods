@@ -222,7 +222,7 @@ function UIGPSLocator:GetDistTextures()
     -- Apply event multiplier
     dist = math.floor(dist * self:GetDistOffset())
 
-    -- Get dist as a 4 char string (5 -> 0005)
+    -- Get dist number as a 4 char string (5 -> "0005")
     local s_dist = western_goods_utils.as_string(dist, 4)
 
     -- Distance format

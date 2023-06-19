@@ -1,0 +1,126 @@
+--- Original Author(s) : <unknown>
+--- Edited : NLTP_ASHES
+--- Date : 19/06/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the Rangefinder.
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local CONST_UPDATE_FREQ      = 222 -- in milliseconds
+
+-- Imported functions
+local dbg_printf             = western_goods_utils.dbg_printf
+
+-- Variables
+GUI					         = nil -- instance, don't touch
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the UI singleton for the UIRangefinder class.
+--- @return UIRangefinder
+function get_ui()
+    if (not GUI) then
+        GUI = UIRangefinder()
+    end
+
+    return GUI
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "UIRangefinder" (CUIScriptWnd)
+
+function UIRangefinder:__init() super()
+    self:Show					(true)
+    self:Enable					(true)
+
+    local xml					= CScriptXmlInit()
+    self.xml = xml
+    xml:ParseFile				("ui_western_goods_rangefinder.xml")
+    xml:InitWindow				("rangefinder", 0, self)
+
+    -- Build UI
+    self.m_dist1				= xml:InitStatic("rangefinder:dist1", self)
+    self.m_dist2				= xml:InitStatic("rangefinder:dist2", self)
+    self.m_dist3				= xml:InitStatic("rangefinder:dist3", self)
+
+    self.m_alt1				    = xml:InitStatic("rangefinder:alt1", self)
+    self.m_alt2				    = xml:InitStatic("rangefinder:alt2", self)
+    self.m_alt3				    = xml:InitStatic("rangefinder:alt3", self)
+
+    -- Build variables
+    self.update_timer           = 0
+end
+
+function UIRangefinder:__finalize()
+    GUI = nil
+end
+
+function UIRangefinder:Update()
+
+    CUIScriptWnd.Update(self)
+
+    local tg = time_global()
+
+    if (tg < self.update_timer) then
+        return
+    else
+        self.update_timer = tg + CONST_UPDATE_FREQ
+    end
+
+    -- Dist to smart terrain
+    local dist1, dist2, dist3 = self:GetDistTextures()
+
+    -- Player altitude
+    local alt1, alt2, alt3 = self:GetAltitudeTextures()
+
+    self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
+    self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
+    self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
+
+    self.m_alt1:InitTextureEx(alt1, "hud\\p3d")
+    self.m_alt2:InitTextureEx(alt2, "hud\\p3d")
+    self.m_alt3:InitTextureEx(alt3, "hud\\p3d")
+end
+
+function UIRangefinder:GetAltitudeTextures()
+    local alt = math.floor(db.actor:position().y)
+
+    -- Get dist number as a 4 char string (5 -> "005")
+    local s_alt = western_goods_utils.as_string(alt, 3)
+
+    -- Distance format
+    if alt < 999 then
+        local alt1 = strformat("gps_num_r_%s", s_alt:sub(1, 1))
+        local alt2 = strformat("gps_num_r_%s", s_alt:sub(2, 2))
+        local alt3 = strformat("gps_num_r_%s", s_alt:sub(3, 3))
+        return alt1, alt2, alt3
+    end
+
+    return "gps_r_dash", "gps_r_dash", "gps_r_dash"
+end
+
+function UIRangefinder:GetDistTextures()
+    local dist = math.floor(level.get_target_dist())
+
+    -- Get dist number as a 3 char string (5 -> "005")
+    local s_dist = western_goods_utils.as_string(dist, 3)
+
+    -- Distance format
+    if dist < 999 then
+        local dist1 = strformat("gps_num_b_%s", s_dist:sub(1, 1))
+        local dist2 = strformat("gps_num_b_%s", s_dist:sub(2, 2))
+        local dist3 = strformat("gps_num_b_%s", s_dist:sub(3, 3))
+        return dist1, dist2, dist3
+    end
+
+    return "gps_b_dash", "gps_b_dash", "gps_b_dash"
+end

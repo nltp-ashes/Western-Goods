@@ -149,4 +149,25 @@
 			%c[d_orange] • %c[ui_gray_2] usable\n
 		</text>
 	</string>
+
+	<string id="st_wg_rangefinder">
+		<text>Leupold RX-2800 TBR Laser Rangefinder</text>
+	</string>
+
+	<string id="st_wg_rangefinder_s">
+		<text>Leupold Rangefinder</text>
+	</string>
+
+	<string id="st_wg_rangefinder_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
+		</text>
+	</string>
 </string_table>

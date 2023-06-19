@@ -42,7 +42,7 @@ To **update** the addon :
 1. Delete the files from the previous version;
    - By disabling the addon in your mod manager, and then deleting the files;
    - Or by deleting the files one by one if you added them manually;
-2. Add in the new files from the new version
+2. Add in the new files from the new version;
    - Either with a mod manager JSGME/MO2 (highly recommended);
    - Or manually (highly unrecommended).
 
@@ -55,6 +55,12 @@ To **uninstall** the addon :
 ---
 
 ### CHANGELOG
+
+> **v2.2.0 - 19/06/2023 - Release Candidate**
+> ```
+> • Additions :
+>    - Added a new device : a rangefinder;
+> ```
 
 > **v2.1.0 - 03/06/2023 - Major Update**
 > ```

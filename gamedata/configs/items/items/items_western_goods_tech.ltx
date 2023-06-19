@@ -49,20 +49,21 @@ upgr_icon_y                                      = 100
 upgr_icon_width                                  = 150
 upgr_icon_height                                 = 100
 
-attach_angle_offset                              = -1.303,-1.493,-1.202
 attach_position_offset                           = 0.110,-0.019,0.000
+attach_angle_offset                              = -1.303,-1.493,-1.202
 attach_bone_name                                 = bip01_l_hand
 
 
 [wg_gps_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
 
+item_position                                    = -0.075, 0.036188, -0.015934
+item_orientation                                 = 325.589233,-190.420761,-185.323669
+
 hands_orientation                                = 2, 38, 0
 hands_orientation_16x9                           = 2, 38, 0
 hands_position                                   = 0.079682, -0.488929, -0.097779
 hands_position_16x9                              = 0.079682, -0.488929, -0.097779
-item_position                                    = -0.075, 0.036188, -0.015934
-item_orientation                                 = 325.589233,-190.420761,-185.323669
 
 attach_place_idx                                 = 1
 
@@ -85,25 +86,80 @@ anm_throw_end                                    = d1_throw_end, idle
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;[wg_gps]:wg_tech_base,booster
-;visual                                           = dynamics\western_goods_tech\wg_gps.ogf
-;kind                                             = i_device
+[wg_rangefinder]:tch_detector
+GroupControlSection                              = spawn_group
+$prefetch                                        = 32
+class                                            = D_CUSTOM
+visual                                           = dynamics\western_goods_tech\wg_gps.ogf
+hud                                              = wg_rangefinder_hud
+kind                                             = i_device
 
-;inv_name                                         = st_wg_gps
-;inv_name_short                                   = st_wg_gps_s
-;description                                      = st_wg_gps_descr
-;inv_weight                                       = 0.9
-;cost                                             = 7500
+animation_slot                                   = 7
+default_to_ruck                                  = true
 
-;inv_grid_width                                   = 1
-;inv_grid_height                                  = 1
-;inv_grid_x                                       = 8
-;inv_grid_y                                       = 0
+inv_name                                         = st_wg_rangefinder
+inv_name_short                                   = st_wg_rangefinder_s
+description                                      = st_wg_rangefinder_descr
+inv_weight                                       = 1.0
+cost                                             = 6850
 
-;can_trade                                        = true
-;remove_after_use                                 = false
+slot                                             = 8
+ef_detector_type                                 = 1
 
-;tier                                             = 3
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 2
+
+snd_draw                                         = weapons\detector\detector_8_draw
+snd_holster                                      = weapons\detector\detector_8_holster
+
+custom_ui_pos                                    = -0.0281,-0.0130,0.0375
+custom_ui_rot                                    = 0,63,0
+custom_ui_func                                   = western_goods_ui_rangefinder.get_ui
+custom_ui_bone                                   = cover
+
+upgr_icon_path                                   = ui\actor_items\ui_actor_items_1
+upgr_icon_x                                      = 150
+upgr_icon_y                                      = 100
+upgr_icon_width                                  = 150
+upgr_icon_height                                 = 100
+
+attach_position_offset                           = 0.110,-0.019,0.000
+attach_angle_offset                              = -1.303,-1.493,-1.202
+attach_bone_name                                 = bip01_l_hand
+
+
+[wg_rangefinder_hud]:detector_base_hud
+item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
+
+item_position                                    = -0.075, 0.036188, -0.015934
+item_orientation                                 = 325.589233,-190.420761,-185.323669
+
+hands_orientation                                = 2, 38, 0
+hands_orientation_16x9                           = 2, 38, 0
+hands_position                                   = 0.079682, -0.488929, -0.097779
+hands_position_16x9                              = 0.079682, -0.488929, -0.097779
+
+attach_place_idx                                 = 1
+
+anm_show                                         = d1_draw, draw_dos
+anm_show_fast                                    = d1_draw, draw_dos, 1.5
+anm_hide                                         = d1_holster, holster_dos
+anm_hide_fast                                    = d1_holster, holster_dos, 1.5
+anm_idle                                         = d1_idle, idle
+anm_idle_moving                                  = d1_move, move
+anm_idle_moving_crouch                           = d1_crouch, move, 0.8
+anm_idle_sprint                                  = d1_sprint, sprint
+anm_idle_zoom                                    = d1_zoom, idle
+anm_zoom                                         = d1_zoom_in, idle
+anm_zoom_show                                    = d1_zoom_draw, idle, 1.5
+anm_zoom_hide                                    = d1_zoom_holster, idle, 1.5
+anm_zoom_hide_fast                               = d1_zoom_holster, idle, 2
+anm_throw_start                                  = d1_throw_start, idle
+anm_throw                                        = d1_throw_idle, idle
+anm_throw_end                                    = d1_throw_end, idle
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
