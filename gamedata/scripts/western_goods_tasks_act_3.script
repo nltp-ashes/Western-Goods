@@ -616,7 +616,7 @@ function task_status_functor.act_3_task_3_status_f(tsk,task_id)
                 return
             end
 
-            if squad_se or not western_goods_utils.has_info("western_goods_ssu_supervisor_bribed") then return end
+            if squad_se and not western_goods_utils.has_info("western_goods_ssu_supervisor_bribed") then return end
 
             if not TASK_3_CACHE.danylo_message_sent then
                 local sender_1 = alife():actor()
