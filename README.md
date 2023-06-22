@@ -62,6 +62,12 @@ To **uninstall** the addon :
 >    - Added a new device : a rangefinder;
 > ```
 
+> **v2.1.1 - 22/06/2023 - Hotfix**
+> ```
+> • Bug fixes :
+>    - Fixed an issue that caused Act 3, Task 3 to soft-lock (Thanks tundereczka);
+> ```
+
 > **v2.1.0 - 03/06/2023 - Major Update**
 > ```
 > • New storylines :

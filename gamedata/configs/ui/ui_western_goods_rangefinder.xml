@@ -1,12 +1,13 @@
 <w>
     <rangefinder>
-        <!-- distance to smart terrain -->
-        <dist1  x="0.0168"     y="0.0300"  width="0.008"     height="0.024"    stretch="1"/>
-        <dist2  x="0.0248"     y="0.0300"  width="0.008"     height="0.024"    stretch="1"/>
-        <dist3  x="0.0328"     y="0.0300"  width="0.008"     height="0.024"    stretch="1"/>
+        <!-- Line Of Sight (LOS) -->
+        <dist1  x="0.0148"     y="0.0300"  width="0.004"     height="0.012"    stretch="1"/>
+        <dist2  x="0.0188"     y="0.0300"  width="0.004"     height="0.012"    stretch="1"/>
+        <dist3  x="0.0228"     y="0.0300"  width="0.004"     height="0.012"    stretch="1"/>
 
-        <alt1   x="0.0168"     y="0.0700"  width="0.008"     height="0.024"    stretch="1"/>
-        <alt2   x="0.0248"     y="0.0700"  width="0.008"     height="0.024"    stretch="1"/>
-        <alt3   x="0.0328"     y="0.0700"  width="0.008"     height="0.024"    stretch="1"/>
+        <!-- Horizontal Compensation Distance (HCD) -->
+        <alt1   x="0.0308"     y="0.0300"  width="0.004"     height="0.012"    stretch="1"/>
+        <alt2   x="0.0348"     y="0.0300"  width="0.004"     height="0.012"    stretch="1"/>
+        <alt3   x="0.0388"     y="0.0300"  width="0.004"     height="0.012"    stretch="1"/>
     </rangefinder>
 </w>
