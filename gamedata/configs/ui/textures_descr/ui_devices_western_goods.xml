@@ -57,30 +57,33 @@
 
     <!-- Rangefinder -->
     <file name="ui\items\ui_rangefinder">
+        <!-- Reticule -->
+        <texture id="rf_reticule"     x="0"      y="0"      width="700"    height="700" />
+
         <!-- Blue Numbers -->
-        <texture id="gps_num_b_1"     x="750"    y="150"    width="40"     height="120" />
-        <texture id="gps_num_b_2"     x="790"    y="150"    width="40"     height="120" />
-        <texture id="gps_num_b_3"     x="750"    y="270"    width="40"     height="120" />
-        <texture id="gps_num_b_4"     x="790"    y="270"    width="40"     height="120" />
-        <texture id="gps_num_b_5"     x="750"    y="390"    width="40"     height="120" />
-        <texture id="gps_num_b_6"     x="790"    y="390"    width="40"     height="120" />
-        <texture id="gps_num_b_7"     x="750"    y="510"    width="40"     height="120" />
-        <texture id="gps_num_b_8"     x="790"    y="510"    width="40"     height="120" />
-        <texture id="gps_num_b_9"     x="750"    y="630"    width="40"     height="120" />
-        <texture id="gps_num_b_0"     x="790"    y="630"    width="40"     height="120" />
-        <texture id="gps_b_dash"     x="750"    y="750"    width="40"     height="120" />
+        <texture id="rf_num_b_1"     x="750"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_b_2"     x="790"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_b_3"     x="750"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_b_4"     x="790"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_b_5"     x="750"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_b_6"     x="790"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_b_7"     x="750"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_b_8"     x="790"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_b_9"     x="750"    y="630"    width="40"     height="120" />
+        <texture id="rf_num_b_0"     x="790"    y="630"    width="40"     height="120" />
+        <texture id="rf_b_dash"      x="750"    y="750"    width="40"     height="120" />
 
         <!-- Red Numbers -->
-        <texture id="gps_num_r_1"     x="830"    y="150"    width="40"     height="120" />
-        <texture id="gps_num_r_2"     x="870"    y="150"    width="40"     height="120" />
-        <texture id="gps_num_r_3"     x="830"    y="270"    width="40"     height="120" />
-        <texture id="gps_num_r_4"     x="870"    y="270"    width="40"     height="120" />
-        <texture id="gps_num_r_5"     x="830"    y="390"    width="40"     height="120" />
-        <texture id="gps_num_r_6"     x="870"    y="390"    width="40"     height="120" />
-        <texture id="gps_num_r_7"     x="830"    y="510"    width="40"     height="120" />
-        <texture id="gps_num_r_8"     x="870"    y="510"    width="40"     height="120" />
-        <texture id="gps_num_r_9"     x="830"    y="630"    width="40"     height="120" />
-        <texture id="gps_num_r_0"     x="870"    y="630"    width="40"     height="120" />
-        <texture id="gps_r_dash"     x="830"    y="750"    width="40"     height="120" />
+        <texture id="rf_num_r_1"     x="830"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_r_2"     x="870"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_r_3"     x="830"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_r_4"     x="870"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_r_5"     x="830"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_r_6"     x="870"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_r_7"     x="830"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_r_8"     x="870"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_r_9"     x="830"    y="630"    width="40"     height="120" />
+        <texture id="rf_num_r_0"     x="870"    y="630"    width="40"     height="120" />
+        <texture id="rf_r_dash"      x="830"    y="750"    width="40"     height="120" />
     </file>
 </w>

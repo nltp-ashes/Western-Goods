@@ -10,7 +10,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local CONST_UPDATE_FREQ      = 222 -- in milliseconds
+local CONST_UPDATE_FREQ      = 1000 -- in milliseconds
 
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
@@ -39,25 +39,27 @@ end
 class "UIRangefinder" (CUIScriptWnd)
 
 function UIRangefinder:__init() super()
-    self:Show					(true)
-    self:Enable					(true)
+    self:Show(true)
+    self:Enable(true)
 
-    local xml					= CScriptXmlInit()
+    local xml = CScriptXmlInit()
     self.xml = xml
-    xml:ParseFile				("ui_western_goods_rangefinder.xml")
-    xml:InitWindow				("rangefinder", 0, self)
-
-    -- Build UI
-    self.m_dist1				= xml:InitStatic("rangefinder:dist1", self)
-    self.m_dist2				= xml:InitStatic("rangefinder:dist2", self)
-    self.m_dist3				= xml:InitStatic("rangefinder:dist3", self)
-
-    self.m_alt1				    = xml:InitStatic("rangefinder:alt1", self)
-    self.m_alt2				    = xml:InitStatic("rangefinder:alt2", self)
-    self.m_alt3				    = xml:InitStatic("rangefinder:alt3", self)
+    xml:ParseFile("ui_western_goods_rangefinder.xml")
+    xml:InitWindow("rangefinder", 0, self)
 
     -- Build variables
-    self.update_timer           = 0
+    self.update_timer = 0
+
+    -- Build UI
+    self.m_los1 = xml:InitStatic("rangefinder:los1", self)
+    self.m_los2 = xml:InitStatic("rangefinder:los2", self)
+    self.m_los3 = xml:InitStatic("rangefinder:los3", self)
+
+    self.m_hcd1 = xml:InitStatic("rangefinder:hcd1", self)
+    self.m_hcd2 = xml:InitStatic("rangefinder:hcd2", self)
+    self.m_hcd3 = xml:InitStatic("rangefinder:hcd3", self)
+
+    self.m_reticule = xml:InitStatic("rangefinder:reticule", self)
 end
 
 function UIRangefinder:__finalize()
@@ -76,51 +78,56 @@ function UIRangefinder:Update()
         self.update_timer = tg + CONST_UPDATE_FREQ
     end
 
-    -- Dist to smart terrain
-    local dist1, dist2, dist3 = self:GetDistTextures()
+    -- Line Of Sight Distance
+    local los1, los2, los3 = self:GetLOSTextures()
 
-    -- Player altitude
-    local alt1, alt2, alt3 = self:GetAltitudeTextures()
+    -- Horizontal Compensation Distance Distance
+    local hcd1, hcd2, hcd3 = self:GetHCDTextures()
 
-    self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
-    self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
-    self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
+    self.m_los1:InitTextureEx(los1, "hud\\p3d")
+    self.m_los2:InitTextureEx(los2, "hud\\p3d")
+    self.m_los3:InitTextureEx(los3, "hud\\p3d")
 
-    self.m_alt1:InitTextureEx(alt1, "hud\\p3d")
-    self.m_alt2:InitTextureEx(alt2, "hud\\p3d")
-    self.m_alt3:InitTextureEx(alt3, "hud\\p3d")
+    self.m_hcd1:InitTextureEx(hcd1, "hud\\p3d")
+    self.m_hcd2:InitTextureEx(hcd2, "hud\\p3d")
+    self.m_hcd3:InitTextureEx(hcd3, "hud\\p3d")
+
+    self.m_reticule:InitTextureEx("rf_reticule", "hud\\p3d")
 end
 
-function UIRangefinder:GetAltitudeTextures()
-    local alt = math.floor(db.actor:position().y)
+function UIRangefinder:GetLOSTextures()
+    local los = math.floor(level.get_target_dist())
 
-    -- Get dist number as a 4 char string (5 -> "005")
-    local s_alt = western_goods_utils.as_string(alt, 3)
+    -- Get LOS number as a 3 char string (5 -> "005")
+    local s_los = western_goods_utils.as_string(los, 3)
 
-    -- Distance format
-    if alt < 999 then
-        local alt1 = strformat("gps_num_r_%s", s_alt:sub(1, 1))
-        local alt2 = strformat("gps_num_r_%s", s_alt:sub(2, 2))
-        local alt3 = strformat("gps_num_r_%s", s_alt:sub(3, 3))
-        return alt1, alt2, alt3
+    -- Line Of Sight format
+    if los < 999 then
+        local los1 = strformat("rf_num_b_%s", s_los:sub(1, 1))
+        local los2 = strformat("rf_num_b_%s", s_los:sub(2, 2))
+        local los3 = strformat("rf_num_b_%s", s_los:sub(3, 3))
+        return los1, los2, los3
     end
 
-    return "gps_r_dash", "gps_r_dash", "gps_r_dash"
+    return "rf_b_dash", "rf_b_dash", "rf_b_dash"
 end
 
-function UIRangefinder:GetDistTextures()
-    local dist = math.floor(level.get_target_dist())
+function UIRangefinder:GetHCDTextures()
+    local pos = vector():mad(device().cam_pos, device().cam_dir, level.get_target_dist())
+    pos.y = db.actor:position().y
 
-    -- Get dist number as a 3 char string (5 -> "005")
-    local s_dist = western_goods_utils.as_string(dist, 3)
+    local hcd = math.floor(western_goods_utils.get_distance(db.actor:position(), pos))
 
-    -- Distance format
-    if dist < 999 then
-        local dist1 = strformat("gps_num_b_%s", s_dist:sub(1, 1))
-        local dist2 = strformat("gps_num_b_%s", s_dist:sub(2, 2))
-        local dist3 = strformat("gps_num_b_%s", s_dist:sub(3, 3))
-        return dist1, dist2, dist3
+    -- Get HCD number as a 3 char string (5 -> "005")
+    local s_hcd = western_goods_utils.as_string(hcd, 3)
+
+    -- Horizontal Compensation Distance format
+    if hcd < 999 then
+        local hcd1 = strformat("rf_num_r_%s", s_hcd:sub(1, 1))
+        local hcd2 = strformat("rf_num_r_%s", s_hcd:sub(2, 2))
+        local hcd3 = strformat("rf_num_r_%s", s_hcd:sub(3, 3))
+        return hcd1, hcd2, hcd3
     end
 
-    return "gps_b_dash", "gps_b_dash", "gps_b_dash"
+    return "rf_r_dash", "rf_r_dash", "rf_r_dash"
 end
