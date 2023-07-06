@@ -14,9 +14,6 @@
 local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
 
 local dbg_printf = western_goods_utils.dbg_printf
-local round_number = western_goods_utils.round_number
-local has_translation = western_goods_utils.has_translation
-local level_object_by_id = western_goods_utils.level_object_by_id
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -104,7 +101,7 @@ function use_item(obj,_,cf)
     -- Readable items (magazines, paper notes)
     if ini_sys:r_bool_ex(obj:section(), "readable") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        western_goods_ui_magazine.display(obj:section())
+        western_goods_ui_readable.display(obj:section())
         return
     end
 end
@@ -185,11 +182,11 @@ if TEMP_LIGHTER_ENABLED then
 
         local obj_tool
         if requires_tool or required_tool_legacy then
-            western_goods_utils.inventory_iter(db.actor,function(owner, obj)
-                local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_weak")
-                local is_legacy_tool = obj:section() == required_tool_legacy
+            western_goods_utils.inventory_iter(db.actor,function(owner, object)
+                local can_light = ini_sys:r_bool_ex(object:section(), "can_light_weak")
+                local is_legacy_tool = object:section() == required_tool_legacy
                 if can_light or is_legacy_tool then
-                    obj_tool = obj
+                    obj_tool = object
                     return true
                 end
             end)
@@ -297,7 +294,7 @@ if TEMP_LIGHTER_ENABLED then
     --- @param obj game_object
     --- @param cf campfire_binder
     function bind_campfire.campfire_go_on(obj, cf)
-        local cf = cf or bind_campfire.get_nearby_campfire(bind_campfire.dist_cf,true)
+        cf = cf or bind_campfire.get_nearby_campfire(bind_campfire.dist_cf,true)
         if (not cf) then
             return
         end

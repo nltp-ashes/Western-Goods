@@ -34,7 +34,7 @@ end
 --- @return boolean
 function table_contains(tab, val)
     if not validate_params({tab,val,"table_contains"}) then return end
-    for key,value in pairs(tab) do
+    for _,value in pairs(tab) do
         if val == value then
             return true
         end
@@ -164,7 +164,7 @@ function get_translation(str,...)
     if (select('#',...) >= 1) then
         local i = 0
         local p = {...}
-        local function sr(a)
+        local function sr()
             i = i + 1
             if (type(p[i]) == "userdata") then
                 return "userdata"
@@ -394,6 +394,85 @@ function get_dialog_list(character_id)
     profiler:stop()
 
     printf("![WG] ERROR | Utils | Impossible to get dialog list, character '%s' not found !", character_id)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- File Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function list_files(path)
+    local fileList = getFS():file_list_open("$game_config$", path, bit_or(FS.FS_ListFiles, FS.FS_RootOnly))
+    local count = fileList and fileList:Size() or 0
+    local tbl = {}
+    if count > 0 then
+        for i = 1, count do
+            local file_name = fileList:GetAt(i - 1)
+            if file_name then
+                tbl[#tbl + 1] = file_name
+            end
+        end
+    end
+    return tbl
+end
+
+function collect_texture_descriptions(pattern)
+    this.dbg_printf("[WG] Utils | Getting matching texture descriptions for '%s'...", pattern)
+
+    local profiler = profile_timer()
+
+    profiler:start()
+
+    local matches = {}
+
+    local file_list = this.list_files("ui\\textures_descr\\")
+
+    for _,file_name in pairs(file_list) do
+        local xml = CScriptXmlInit()
+        xml:ParseDirFile("ui\\textures_descr", file_name)
+        xml:NavigateToNode("w", 0)
+
+        local file_count = xml:GetNodesNum("", 0, "file")
+        for i=0, file_count-1 do
+
+            xml:NavigateToNode("file", i)
+
+            local texture_count = xml:GetNodesNum("file", i, "texture")
+            for y=0, texture_count-1 do
+
+                local texture_descr_id = xml:ReadAttribute("texture", y, "id")
+                if string.find(texture_descr_id, pattern) then
+
+                    table.insert(matches, texture_descr_id)
+                end
+            end
+            xml:NavigateToRoot()
+            xml:NavigateToNode("w", 0)
+        end
+    end
+
+    profiler:stop()
+
+    this.dbg_printf("[WG] Utils | Found %s matching texture descriptions for %s in %sms :\n%s", size_table(matches), pattern, profiler:time()/1000, utils_data.print_table(matches, false, true))
+
+    return matches
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Objects Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the current renderer used by the game.
+--- @return "dx8"|"dx9"|"dx10"|"dx11"|
+function get_renderer()
+    local renderers = {
+        ["renderer_r4"]   = "dx11",
+        ["renderer_r3"]   = "dx10",
+        ["renderer_r2a"]  = "dx9",
+        ["renderer_r2.5"] = "dx9",
+        ["renderer_r1"]   = "dx8",
+    }
+
+    return renderers[get_console_cmd(0,"renderer")]
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

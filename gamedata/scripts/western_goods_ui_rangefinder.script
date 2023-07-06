@@ -10,7 +10,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local CONST_UPDATE_FREQ      = 1000 -- in milliseconds
+local CONST_UPDATE_FREQ      = 222 -- in milliseconds
 
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
@@ -84,15 +84,15 @@ function UIRangefinder:Update()
     -- Horizontal Compensation Distance Distance
     local hcd1, hcd2, hcd3 = self:GetHCDTextures()
 
-    self.m_los1:InitTextureEx(los1, "hud\\p3d")
-    self.m_los2:InitTextureEx(los2, "hud\\p3d")
-    self.m_los3:InitTextureEx(los3, "hud\\p3d")
+    self.m_los1:InitTextureEx(los1, [[hud\p3d]])
+    self.m_los2:InitTextureEx(los2, [[hud\p3d]])
+    self.m_los3:InitTextureEx(los3, [[hud\p3d]])
 
-    self.m_hcd1:InitTextureEx(hcd1, "hud\\p3d")
-    self.m_hcd2:InitTextureEx(hcd2, "hud\\p3d")
-    self.m_hcd3:InitTextureEx(hcd3, "hud\\p3d")
+    self.m_hcd1:InitTextureEx(hcd1, [[hud\p3d]])
+    self.m_hcd2:InitTextureEx(hcd2, [[hud\p3d]])
+    self.m_hcd3:InitTextureEx(hcd3, [[hud\p3d]])
 
-    self.m_reticule:InitTextureEx("rf_reticule", "hud\\p3d")
+    self.m_reticule:InitTextureEx("rf_reticule", [[hud\p3d]])
 end
 
 function UIRangefinder:GetLOSTextures()
@@ -113,10 +113,9 @@ function UIRangefinder:GetLOSTextures()
 end
 
 function UIRangefinder:GetHCDTextures()
-    local pos = vector():mad(device().cam_pos, device().cam_dir, level.get_target_dist())
-    pos.y = db.actor:position().y
-
-    local hcd = math.floor(western_goods_utils.get_distance(db.actor:position(), pos))
+    local los_pos = vector():mad(device().cam_pos, device().cam_dir, level.get_target_dist())
+    local hcd_pos = vector():set(los_pos.x, db.actor:position().y , los_pos.z)
+    local hcd = math.floor(western_goods_utils.get_distance(device().cam_pos, hcd_pos))
 
     -- Get HCD number as a 3 char string (5 -> "005")
     local s_hcd = western_goods_utils.as_string(hcd, 3)

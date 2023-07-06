@@ -15,7 +15,7 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-VERSION = "2.0.0"
+VERSION = "2.1.1"
 
 local CONST_BARMAN_TYPE_BUY_LIST = {"food","drink"}
 local CONST_SUPPLIER_TYPE_BUY_LIST = {"magazine"}

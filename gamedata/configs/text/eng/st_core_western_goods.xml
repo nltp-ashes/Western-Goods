@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
 <!--=================================================================================================================-->
+<!--                                                                                                                 -->
 <!--	Original Author(s) : NLTP_ASHES																			     -->
 <!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2022																						     -->
+<!--	Date : 17/03/2023																						     -->
 <!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
 <!--	Translation file for Western Goods' general purpose strings.											     -->
+<!--                                                                                                                 -->
 <!-- ================================================================================================================-->
 <string_table>
 
@@ -115,6 +117,11 @@
 	<!-- Suitcase use strings -->
 	<string id="st_wg_open">
 		<text>Open</text>
+	</string>
+
+	<!-- Readable UI strings -->
+	<string id="ui_wg_dx8_retard_notice">
+		<text>It seems you're using DirectX 8 renderer, you may experience texture stretching. Use a more modern renderer to avoid issues.</text>
 	</string>
 
 </string_table>

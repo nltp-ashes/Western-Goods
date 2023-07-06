@@ -1,4 +1,4 @@
-# WESTERN GOODS ![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.1.0-brightgreen) ![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow) ![License](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)
+# WESTERN GOODS [![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.1.1-brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test) [![License](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -56,10 +56,15 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
+[![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
+
 > **v2.2.0 - 19/06/2023 - Release Candidate**
 > ```
 > • Additions :
 >    - Added a new device : a rangefinder;
+> • Bug fixes :
+>    - Fixed a quest item being marked as readable, or it wasn't;
+>    - Fixed wrong addon version in core script;
 > ```
 
 > **v2.1.1 - 22/06/2023 - Hotfix**
@@ -307,31 +312,34 @@ If you need help with anything, or if you have any suggestions of new items, you
 
 Credit goes to these people for their work contained in this addon :
 
-|                                   Name                                    |                                     Motive                                      |                                License                                |
-|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
-|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |              Adapted the GPS locator model on Dosimeter animations              |                              Proprietary                              |
-|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                          Reused his xr_logic_ex script                          |                              Proprietary                              |
-|             **[arti](https://www.moddb.com/members/artifax)**             |                       Reused his trader_autoinject script                       |                              Proprietary                              |
-|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |                         Reused his rax_icon_tint script                         |                       CC BY-NC-SA 3.0 Unported                        |
-|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |                      Produced four models for consumables                       |                              Proprietary                              |
-|        **[Feel_Fried](https://www.moddb.com/members/feel-fried)**         |           Reused some files from his Food, drug and drinks animations           |                                PD 1.0                                 |
-|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |           Wrote the code that takes control of helicopters' combat AI           |                              Proprietary                              |
-|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |                      Reused part of his More Guides addon                       |                              Proprietary                              |
-|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |                       Reused one of his script functions                        |                              Proprietary                              |
-|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |                     Reused multiple of his script functions                     |                              Proprietary                              |
-|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |                  Reused icons from his Hideout Furniture addon                  |                              Proprietary                              |
-|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |                    Adapted his fan film into an in-game task                    |                              Proprietary                              |
-|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |                        Ported some models from their mod                        |                              Proprietary                              |
-|       **[Anomaly mod](https://www.moddb.com/mods/stalker-anomaly)**       | For providing such a good modding base, and for their assets used in this addon |                              Proprietary                              |
-|                **[segaretro.org](https://segaretro.org/)**                |                For providing the textures for the xbox magazines                |                               CC BY 4.0                               |
-|                  **[archive.org](https://archive.org/)**                  |                For providing the textures for the men magazines                 |                            CC BY-NC-ND 4.0                            |
-| **[commons.wikimedia.org](https://commons.wikimedia.org/wiki/Main_Page)** |           For providing various logos and resources used in textures            |                                PD 1.0                                 |
-|                **[freepik.com](https://www.freepik.com/)**                |           For providing various logos and resources used in textures            | [License](https://www.freepikcompany.com/legal#nav-freepik-agreement) |
+|                                   Name                                    |                                     Motive                                      |                                    License                                     |
+|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+|       **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**        |               Ported and prepared the Rangefinder model for X-Ray               |                                  Proprietary                                   |
+|        **[valterjherson1](https://sketchfab.com/valterjherson1)**         |              Reused his 3D model of a SIG SAUER KILO5K Rangefinder              |           [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)            |
+|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |              Adapted the GPS locator model on Dosimeter animations              |                                  Proprietary                                   |
+|         **[GhenTuong](https://www.moddb.com/members/ghentuong)**          |                          Reused his xr_logic_ex script                          |                                  Proprietary                                   |
+|             **[arti](https://www.moddb.com/members/artifax)**             |                       Reused his trader_autoinject script                       |                                  Proprietary                                   |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |                         Reused his rax_icon_tint script                         | [CC BY-NC-SA 3.0 Unported](https://creativecommons.org/licenses/by-nc-sa/3.0/) |
+|    **[SvetkaDystopia](https://www.moddb.com/members/svetkadystopia)**     |                      Produced four models for consumables                       |                                  Proprietary                                   |
+|        **[Feel_Fried](https://www.moddb.com/members/feel-fried)**         |           Reused some files from his Food, drug and drinks animations           |          [PD 1.0](https://creativecommons.org/publicdomain/mark/1.0/)          |
+|    **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**     |           Wrote the code that takes control of helicopters' combat AI           |                                  Proprietary                                   |
+|      **[lauta_ro](https://www.moddb.com/members/lautaro1624971758)**      |                      Reused part of his More Guides addon                       |                                  Proprietary                                   |
+|         **[HarukaSai](https://www.moddb.com/members/funkypunk)**          |                       Reused one of his script functions                        |                                  Proprietary                                   |
+|      **[MrDemonized](https://www.moddb.com/members/themrdemonized)**      |                     Reused multiple of his script functions                     |                                  Proprietary                                   |
+|            **[Aoldri](https://www.moddb.com/members/aoldri)**             |                  Reused icons from his Hideout Furniture addon                  |                                  Proprietary                                   |
+|                **[SODAZ](https://www.youtube.com/@SODAZ)**                |                    Adapted his fan film into an in-game task                    |                                  Proprietary                                   |
+|            **[A.R.E.A. mod](https://www.moddb.com/mods/area)**            |                        Ported some models from their mod                        |                                  Proprietary                                   |
+|       **[Anomaly mod](https://www.moddb.com/mods/stalker-anomaly)**       | For providing such a good modding base, and for their assets used in this addon |                                  Proprietary                                   |
+|                **[segaretro.org](https://segaretro.org/)**                |                For providing the textures for the xbox magazines                |           [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)            |
+|                  **[archive.org](https://archive.org/)**                  |                For providing the textures for the men magazines                 |     [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)      |
+| **[commons.wikimedia.org](https://commons.wikimedia.org/wiki/Main_Page)** |           For providing various logos and resources used in textures            |          [PD 1.0](https://creativecommons.org/publicdomain/mark/1.0/)          |
+|                **[freepik.com](https://www.freepik.com/)**                |           For providing various logos and resources used in textures            |     [License](https://www.freepikcompany.com/legal#nav-freepik-agreement)      |
 
 Special thanks to these people for their help in the making of this addon :
 
 |                                                                                                               Name                                                                                                                |                                                 Motive                                                  |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
+|                                                      **[Barry Bogs](https://www.moddb.com/members/barrybogs)**, **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**                                                      |              For dedicating some of their free time to helping me with modeling/animation               |
 |                                                        **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**, **[Lucy](https://www.moddb.com/members/r3zy)**                                                         | Helped to mitigate an issue from vanilla Anomaly 1.5.2 that caused detectors displays to be transparent |
 |                                                                                                             **__R3D**                                                                                                             |              For submitting such a well-presented idea that lead to the Flea Market system              |
 | **[NLTP_JODYE](https://www.moddb.com/members/nltp-jodye), [Niko](https://www.moddb.com/members/polishcow1), [NLTP_DEV](https://www.moddb.com/members/nltp-dev), Sark, [ItsErisContent](https://www.youtube.com/@ItsErisContent)** |                            For play-testing pre-release builds of the addon                             |

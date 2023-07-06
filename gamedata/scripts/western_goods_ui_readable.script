@@ -1,0 +1,292 @@
+--- Original Author(s) : Tronex
+--- Edited : NLTP_ASHES
+--- Date : 17/04/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon.
+---
+--- Naming for some files/folders is based on the following contract :
+--- - texture descriptions must be named like : "ui_<name_of_the_section>_page_<page_number>"
+---
+--- When the Readable UI  is displayed, the player will start healing psi-health.
+--- The value of that healing is driven by CONST_MAGAZINE_PSI_REGEN and the factor defined in MCM.
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local CONST_MAGAZINE_PSI_REGEN      = 0.0080
+local CONST_SFX_SWITCH_PAGE         = [[interface\inv_page]]
+local CONST_SFX_CLOSE_MAG           = [[interface\inv_close]]
+
+-- Imported functions
+local dbg_printf                    = western_goods_utils.dbg_printf
+
+-- Variables
+local magazine_textures             = {}
+
+-- Global variables
+GUI                                 = nil -- instance, don't touch
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+get_psy_health_regenerationBase = arszi_psy.get_psy_health_regeneration
+--- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
+--- @return number
+function arszi_psy.get_psy_health_regeneration()
+    local base_psy_heal = get_psy_health_regenerationBase()
+    local bonus_psy_heal_magazine = get_telepatic_regen_magazine()
+
+    return base_psy_heal + bonus_psy_heal_magazine
+end
+
+--- Function used to get the bonus for reading a magazine.
+--- @return number
+function get_telepatic_regen_magazine()
+    if GUI and GUI:IsShown() then
+        local psi_regen_factor = western_goods_mcm.get_config("magazine_psi_regen") or 1
+        return CONST_MAGAZINE_PSI_REGEN * psi_regen_factor
+    else
+        return 0.0
+    end
+end
+
+--- Function used to start displaying the Readable UI onto the screen.
+--- @param sec string
+--- @return nil
+function display(sec)
+    if (not sec) then
+        printf("![WG] ERROR | UI Readable | No section passed!")
+        return
+    end
+
+    -- Hide inventory
+    if (get_hud()) then
+        hide_hud_inventory()
+    end
+
+    -- Create instance if needed
+    if (not GUI) then
+        GUI = UIReadable(sec)
+    end
+
+    -- Show magazine
+    if (GUI) and (not GUI:IsShown()) then
+        GUI:Restart(sec)
+        GUI:ShowDialog(true)
+        Register_UI("UIReadable","western_goods_ui_readable")
+    end
+end
+
+--- Function used to collect the name of the texture descriptions for all the readables.
+--- @return nil
+function collect_textures()
+    local file_count, tex_count = 0, 0
+
+    ini_sys:section_for_each(function(section)
+        local is_readable = ini_sys:r_bool_ex(section,"readable", false)
+        local is_base = string.find(section, "_base")
+
+        if is_readable and not is_base then
+            dbg_printf("[WG] UI Readable | Found a readable item '%s'", section)
+
+            magazine_textures[section] = western_goods_utils.collect_texture_descriptions("ui_" .. section .. "_page_")
+
+            file_count = file_count + 1
+            tex_count = tex_count + size_table(magazine_textures[section])
+        end
+    end)
+
+    dbg_printf("[WG] UI Readable | Collected a total of %s texture descriptions for %s magazines", tex_count, file_count)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_game_load", collect_textures)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "UIReadable" (CUIScriptWnd)
+
+function UIReadable:__init(sec) super()
+    dbg_printf("[WG] UI Readable | Constructing GUI...")
+
+    self:Reset(sec)
+    self:InitControls()
+    self:InitCallBacks()
+end
+
+function UIReadable:__finalize()
+    GUI = nil
+end
+
+function UIReadable:Reset(sec)
+    self.section = sec
+    self.page_current = 1
+    self.page_count = magazine_textures[self.section] and size_table(magazine_textures[self.section]) or 0
+end
+
+function UIReadable:Restart(sec)
+    self:Reset(sec)
+
+    self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+
+    dbg_printf("[WG] UI Readable | Reset GUI - '%s' (%s/%s)",self.section,self.page_current,self.page_count)
+
+    self:RefreshNavigationButtons()
+end
+
+function UIReadable:InitControls()
+    self:SetWndRect(Frect():set(0,0,1920,1080))
+    self:SetAutoDelete(true)
+
+    self.xml = CScriptXmlInit()
+    self.xml:ParseFile("ui_western_goods_readable.xml")
+
+    self.dialog = self.xml:InitStatic("magazine", self)
+    self.dialog:SetStretchTexture(true)
+
+    -- Page Setup
+    self.page = self.xml:InitStatic("magazine:page",self.dialog)
+    self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+    self.page:SetWndSize(vector2():set(self.page:GetWidth() * utils_xml.screen_ratio(), self.page:GetHeight()))
+    self.page:SetWndPos(vector2():set((1024 - self.page:GetWidth()) / 2, (768 - self.page:GetHeight()) / 2))
+    self.page:SetStretchTexture(true)
+
+    -- Button Ok
+    self.btn_ok_pic = self.xml:InitStatic("magazine:btn_ok_pic", self.dialog)
+    self.btn_ok_pic:InitTexture("ui_button_ordinary_h")
+    self.btn_ok_pic:SetStretchTexture(true)
+
+    self.btn_ok = self.xml:Init3tButton("magazine:btn_ok", self.dialog)
+    self:Register(self.btn_ok,"btn_ok")
+
+    -- Button Next
+    self.btn_next_pic = self.xml:InitStatic("magazine:btn_next_pic", self.dialog)
+    self.btn_next_pic:InitTexture("ui_button_ordinary_h")
+    self.btn_next_pic:SetStretchTexture(true)
+
+    self.btn_next = self.xml:Init3tButton("magazine:btn_next", self.dialog)
+    self:Register(self.btn_next,"btn_next")
+
+    -- Button Previous
+    self.btn_previous_pic = self.xml:InitStatic("magazine:btn_previous_pic", self.dialog)
+    self.btn_previous_pic:InitTexture("ui_button_ordinary_h")
+    self.btn_previous_pic:SetStretchTexture(true)
+
+    self.btn_previous = self.xml:Init3tButton("magazine:btn_previous", self.dialog)
+    self:Register(self.btn_previous,"btn_previous")
+
+    -- DX8 Retard Notice
+    local renderer = western_goods_utils.get_renderer()
+    if renderer == "dx8" then
+        printf("~[WG] UI Readable | DirectX8 detected - %s - You may experience stretched textures. Use a more modern renderer to fix the issue!", renderer)
+        self.retard_notice = self.xml:InitStatic("magazine:retard_notice", self.dialog)
+    else
+        dbg_printf("[WG] UI Readable | DirectX8 not detected - %s", renderer)
+    end
+
+    dbg_printf("[WG] UI Readable | Controls initialized...")
+end
+
+function UIReadable:InitCallBacks()
+    self:AddCallback("btn_ok", ui_events.BUTTON_CLICKED, self.OnClose, self)
+    self:AddCallback("btn_next", ui_events.BUTTON_CLICKED, self.OnNext, self)
+    self:AddCallback("btn_previous", ui_events.BUTTON_CLICKED, self.OnPrevious, self)
+
+    dbg_printf("[WG] UI Readable | CallBacks initialized...")
+end
+
+function UIReadable:OnNext()
+    if (self.page_current >= self.page_count) then return end
+
+    utils_obj.play_sound(CONST_SFX_SWITCH_PAGE)
+    self.page_current = self.page_current+1
+    self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+
+    dbg_printf("[WG] UI Readable | To next page - '%s' (%s/%s)",self.section,self.page_current,self.page_count)
+
+    self:RefreshNavigationButtons()
+end
+
+function UIReadable:OnPrevious()
+    if (self.page_current <= 1) then return end
+
+    utils_obj.play_sound(CONST_SFX_SWITCH_PAGE)
+    self.page_current = self.page_current-1
+    self.page:InitTexture(self:GetPageTexturePath(self.page_current))
+
+    dbg_printf("[WG] UI Readable | To previous page - '%s' (%s/%s)",self.section,self.page_current,self.page_count)
+
+    self:RefreshNavigationButtons()
+end
+
+function UIReadable:OnClose()
+    utils_obj.play_sound(CONST_SFX_CLOSE_MAG)
+    self:HideDialog()
+
+    dbg_printf("[WG] UI Readable | Closed...")
+
+    Unregister_UI("UIReadable")
+end
+
+function UIReadable:OnKeyboard(dik, keyboard_action)
+    local res = CUIScriptWnd.OnKeyboard(self,dik,keyboard_action)
+    if (res == false) then
+        if keyboard_action == ui_events.WINDOW_KEY_PRESSED then
+            if dik == DIK_keys.DIK_ESCAPE then
+                self:OnClose()
+            elseif dik == DIK_keys.DIK_RIGHT then
+                self:OnNext()
+            elseif dik == DIK_keys.DIK_LEFT then
+                self:OnPrevious()
+            end
+        end
+    end
+    return res
+end
+
+function UIReadable:RefreshNavigationButtons()
+    -- Reset all buttons
+    self.btn_previous_pic:Show(true)
+    self.btn_previous:Show(true)
+    self.btn_next_pic:Show(true)
+    self.btn_next:Show(true)
+
+    -- Hide previous button if we're on fist page
+    if (self.page_current <= 1) then
+        self.btn_previous_pic:Show(false)
+        self.btn_previous:Show(false)
+    end
+
+    -- Hide next button if we're on last page
+    if (self.page_current >= self.page_count) then
+        self.btn_next_pic:Show(false)
+        self.btn_next:Show(false)
+    end
+end
+
+function UIReadable:GetPageTexturePath(page_number)
+    local expected = "ui_" .. self.section .. "_page_" .. tostring(page_number)
+
+    for _,texture_id in pairs(magazine_textures[self.section]) do
+        if texture_id == expected then
+            return expected
+        end
+    end
+
+    printf("![WG] ERROR | UI Readable | Missing texture for '%s'. Expected texture '%s' !", self.section, expected)
+
+    return "ui_readable_missing_texture"
+end
