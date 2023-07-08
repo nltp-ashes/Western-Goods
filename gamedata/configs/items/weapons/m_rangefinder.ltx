@@ -48,7 +48,7 @@ direction                                        = 0, 0, 1
 fire_point                                       = 0.0, 0.133, 0.161
 ph_mass                                          = 3
 
-custom_ui_pos                                    = -0.075, 0.025, -0.070
+custom_ui_pos                                    = 0, 0.02, -0.005
 custom_ui_rot                                    = 180,0,180
 custom_ui_func                                   = western_goods_ui_rangefinder.get_ui
 custom_ui_bone                                   = link
@@ -58,8 +58,8 @@ attach_position_offset                           = 0.080000, 0.021273, 0.100000
 attach_angle_offset                              = 3.080506, -1.493053, -1.202040
 auto_attach                                      = false
 
-holder_fov_modifier                              = 0.7
-holder_range_modifier                            = 2.0
+holder_fov_modifier                              = 1.0
+holder_range_modifier                            = 1.0
 
 vis_frame_color                                  = 0.0, 0.0, 0.0, 0.0
 vis_frame_speed                                  = 0
@@ -90,9 +90,10 @@ ammo_limit                                       = 0
 ammo_mag_size                                    = 0
 
 scope_status                                     = 0
-;scope_texture                                    = wpn_crosshair_bino
-;scope_zoom_factor                                = 20
-;scope_dynamic_zoom                               = true
+scope_hud_fov                                    = 0.2
+scope_zoom_factor                                = 0
+scope_dynamic_zoom                               = false
+;scope_texture                                   = wpn_crosshair_bino
 
 silencer_status                                  = 0
 
@@ -150,23 +151,22 @@ found_snd                                        = none
 can_be_lowered                                   = false
 
 [wg_rangefinder_hud]:hud_base
-item_visual                                      = dynamics\devices\dev_binoculars\dev_gauss_sight_binoculars_hud
+item_visual                                      = dynamics\western_goods_tech\wg_rangefinder_green_hud.ogf
 attach_place_idx                                 = 0
 zoom_hide_crosshair                              = true
 
-item_position                                    = 0.007, 0.01, -0.03
-item_orientation                                 = 0, 0, 0
+item_position                                    = 0.012078, 0.000768, -0.03
+item_orientation                                 = 0.836261, -0.600134, -42.448766
 
-hands_position                                   = 0.021813, 0.049806, 0.046443
-hands_position_16x9                              = 0.021813, 0.049806, 0.046443
+hands_position                                   = 0.020589, 0.053214, 0.046443
+hands_position_16x9                              = 0.020589, 0.053214, 0.046443
 hands_orientation                                = 0, 0, 0
 hands_orientation_16x9                           = 0, 0, 0
 
-
-aim_hud_offset_pos                               = -0.019672, -0.07668, -0.1
-aim_hud_offset_pos_16x9                          = -0.019672, -0.07668, -0.1
-aim_hud_offset_rot                               = -0.041178, -0.01547, 0.2
-aim_hud_offset_rot_16x9                          = -0.041178, -0.01547, 0.2
+aim_hud_offset_pos                               = -0.089263, 0.006597, -0.069
+aim_hud_offset_pos_16x9                          = -0.089263, 0.006597, -0.069
+aim_hud_offset_rot                               = -0.015975, -0.089002, -0.513073
+aim_hud_offset_rot_16x9                          = -0.015975, -0.089002, -0.513073
 
 gl_hud_offset_pos                                = 0, 0, 0
 gl_hud_offset_rot                                = 0, 0, 0
@@ -174,12 +174,12 @@ gl_hud_offset_rot                                = 0, 0, 0
 lean_hud_offset_pos                              = 0, 0, 0
 lean_hud_offset_rot                              = 0, 0, 0
 
-anm_hide                                         = acog_bino_holster, holster_acog
-anm_idle                                         = acog_bino_idle, idle_acog
-anm_idle_aim                                     = acog_bino_aim, aim_acog
-anm_idle_moving                                  = acog_bino_walk, walk_acog
-anm_idle_moving_crouch                           = acog_bino_walk, walk_acog, 0.75
-anm_idle_sprint                                  = acog_bino_sprint, sprint_acog, 1.2
-anm_show                                         = acog_bino_draw, draw_acog
+anm_hide                                         = wg_fangefinder_holster, idle
+anm_idle                                         = wg_fangefinder_idle, idle
+anm_idle_aim                                     = wg_fangefinder_aim, idle
+anm_idle_moving                                  = wg_fangefinder_walk, idle
+anm_idle_moving_crouch                           = wg_fangefinder_walk, idle, 0.75
+anm_idle_sprint                                  = wg_fangefinder_sprint, idle, 1.2
+anm_show                                         = wg_fangefinder_draw, idle
 
 freelook_z_offset_mul                            = 0.75

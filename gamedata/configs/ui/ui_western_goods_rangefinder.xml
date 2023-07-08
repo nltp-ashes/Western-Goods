@@ -13,16 +13,16 @@
 <w>
     <rangefinder>
         <!-- Reticule -->
-        <reticule x="-0.025"     y="-0.025"  width="0.05"      height="0.05"     stretch="1"/>
+        <reticule    x="-0.00625"    y="-0.00625"    width="0.0125"     height="0.0125"     stretch="1"/>
 
         <!-- Line Of Sight (LOS) -->
-        <los1    x="-0.0126"     y="0.0048"  width="0.0029"     height="0.0086"    stretch="1"/>
-        <los2    x="-0.0098"     y="0.0048"  width="0.0029"     height="0.0086"    stretch="1"/>
-        <los3    x="-0.0069"     y="0.0048"  width="0.0029"     height="0.0086"    stretch="1"/>
+        <los1        x="-0.0031"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
+        <los2        x="-0.0024"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
+        <los3        x="-0.0017"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
 
         <!-- Horizontal Compensation Distance (HCD) -->
-        <hcd1     x="0.0041"     y="0.0048"  width="0.0029"     height="0.0086"    stretch="1"/>
-        <hcd2     x="0.0069"     y="0.0048"  width="0.0029"     height="0.0086"    stretch="1"/>
-        <hcd3     x="0.0098"     y="0.0048"  width="0.0029"     height="0.0086"    stretch="1"/>
+        <hcd1        x="0.0010"     y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
+        <hcd2        x="0.0017"     y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
+        <hcd3        x="0.0024"     y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
     </rangefinder>
 </w>

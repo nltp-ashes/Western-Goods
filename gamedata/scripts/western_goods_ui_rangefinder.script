@@ -11,12 +11,16 @@
 
 -- Constants
 local CONST_UPDATE_FREQ      = 222 -- in milliseconds
+local CONST_ITEM_SEC         = "wg_rangefinder"
 
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
 
--- Variables
+-- Singleton
 GUI					         = nil -- instance, don't touch
+
+-- Variables
+local hud_fov
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
@@ -30,6 +34,34 @@ function get_ui()
     end
 
     return GUI
+end
+
+--- Function used to decrease the hud_fov when the player aims down sights with the rangefinder.
+--- @return nil
+function actor_on_weapon_zoom_in(wpn)
+    if wpn:section() ~= CONST_ITEM_SEC then return end
+
+    hud_fov = ui_options.get("video/basic/hud_fov")
+    exec_console_cmd("hud_fov ".. ini_sys:r_float_ex(wpn:section(),"scope_hud_fov"))
+end
+
+--- Function used to restore user defined hud_fov when the player exits ADS with the rangefinder.
+--- @return nil
+function actor_on_weapon_zoom_out(wpn)
+    if wpn:section() ~= CONST_ITEM_SEC then return end
+
+    exec_console_cmd("hud_fov " .. hud_fov)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("actor_on_weapon_zoom_in", actor_on_weapon_zoom_in)
+    RegisterScriptCallback("actor_on_weapon_zoom_out", actor_on_weapon_zoom_out)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
