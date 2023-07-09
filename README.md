@@ -64,7 +64,7 @@ To **uninstall** the addon :
 >    - Added a new device : a rangefinder (Thanks Kyne's Peace and Barry Bogs);
 > • Changes :
 >    - Redesigned how the Magazine UI works, to allow for smaller textures;
->    - Compressed the textures used for readables;
+>    - Compressed the textures used for readables/magazines;
 > • Bug fixes :
 >    - Fixed a quest item being marked as readable, or it wasn't;
 >    - Fixed wrong addon version in core script;
@@ -295,6 +295,7 @@ If you would like to help development for future updates, you can :
 
 ### KNOWN ISSUES
 
+- Hands mesh might collide with rangefinder when aiming in;
 - Stutters may occur when the game spawns in new NPCs;
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
@@ -303,9 +304,9 @@ If you would like to help development for future updates, you can :
 
 ### SUPPORT & SUGGESTIONS
 
-If you need help with anything, or if you have any suggestions of new items, you can :
+If you need help with anything, or if you have any suggestions, you can :
 - Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) (recommended);
-- Message me on Discord : NLTP_ASHES#0117 (recommended);
+- Message me on Discord : @nltp_ashes (formerly NLTP_ASHES#0117) (recommended);
 - Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended).
 - Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
 
@@ -342,6 +343,7 @@ Special thanks to these people for their help in the making of this addon :
 
 |                                                                                                               Name                                                                                                                |                                                 Motive                                                  |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
+|                                                          **[Lucy](https://www.moddb.com/members/r3zy)**, **[MrDemonized](https://www.moddb.com/members/themrdemonized)**                                                          |      For fixing the issue that caused 3D UIs to be transparent when not backed by another texture       |
 |                                                      **[Barry Bogs](https://www.moddb.com/members/barrybogs)**, **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**                                                      |              For dedicating some of their free time to helping me with modeling/animation               |
 |                                                        **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**, **[Lucy](https://www.moddb.com/members/r3zy)**                                                         | Helped to mitigate an issue from vanilla Anomaly 1.5.2 that caused detectors displays to be transparent |
 |                                                                                                             **__R3D**                                                                                                             |              For submitting such a well-presented idea that lead to the Flea Market system              |

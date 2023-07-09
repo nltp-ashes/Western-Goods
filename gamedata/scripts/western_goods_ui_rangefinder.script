@@ -10,17 +10,17 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local CONST_UPDATE_FREQ      = 222 -- in milliseconds
-local CONST_ITEM_SEC         = "wg_rangefinder"
+local CONST_UPDATE_FREQ      = 222                              -- in milliseconds
+local CONST_ITEM_SEC         = "wg_rangefinder"                 -- name of the range finder section
 
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI					         = nil -- instance, don't touch
+GUI					         = nil                              -- instance, don't touch
 
 -- Variables
-local hud_fov
+local hud_fov                                                   -- cache for user defined hud_fov
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
@@ -41,8 +41,13 @@ end
 function actor_on_weapon_zoom_in(wpn)
     if wpn:section() ~= CONST_ITEM_SEC then return end
 
-    hud_fov = ui_options.get("video/basic/hud_fov")
-    exec_console_cmd("hud_fov ".. ini_sys:r_float_ex(wpn:section(),"scope_hud_fov"))
+    local old_hud_fov = ui_options.get("video/basic/hud_fov")
+    local new_hud_fov = ini_sys:r_float_ex(wpn:section(),"scope_hud_fov")
+
+    exec_console_cmd("hud_fov ".. new_hud_fov)
+    hud_fov = old_hud_fov
+
+    dbg_printf("[WG] UI Rangefinder | Changed 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
 end
 
 --- Function used to restore user defined hud_fov when the player exits ADS with the rangefinder.
@@ -50,7 +55,13 @@ end
 function actor_on_weapon_zoom_out(wpn)
     if wpn:section() ~= CONST_ITEM_SEC then return end
 
-    exec_console_cmd("hud_fov " .. hud_fov)
+    local old_hud_fov = ui_options.get("video/basic/hud_fov")
+    local new_hud_fov = hud_fov
+
+    exec_console_cmd("hud_fov " .. new_hud_fov)
+    hud_fov = nil
+
+    dbg_printf("[WG] UI Rangefinder | Restored 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -71,6 +82,8 @@ end
 class "UIRangefinder" (CUIScriptWnd)
 
 function UIRangefinder:__init() super()
+    dbg_printf("[WG] UI Rangefinder | Constructing GUI...")
+
     self:Show(true)
     self:Enable(true)
 

@@ -153,16 +153,16 @@
 	</string>
 
 	<string id="st_wg_rangefinder">
-		<text>Leupold RX-2800 TBR Laser Rangefinder</text>
+		<text>SigSauer KILO5K Laser Rangefinder</text>
 	</string>
 
 	<string id="st_wg_rangefinder_s">
-		<text>Leupold Rangefinder</text>
+		<text>KILO5K Rangefinder</text>
 	</string>
 
 	<string id="st_wg_rangefinder_descr">
 		<text>
-			TODO\n
+			Sig Sauer’s KILO5K 7x25mm laser rangefinder delivers precise ranging capabilities in a compact package. This rangefinder features a binocular style eye cup and diopter adjustment. The maximum range on a reflective target is 5,000 yards, and the maximum range on a deer is 2,000 yards.\n
 			\n
 			%c[ui_gray_1]PROPERTIES:\n
 			%c[d_blue] • %c[ui_gray_2] technological item\n

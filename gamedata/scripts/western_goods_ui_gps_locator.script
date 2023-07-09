@@ -49,6 +49,8 @@ end
 class "UIGPSLocator" (CUIScriptWnd)
 
 function UIGPSLocator:__init() super()
+    dbg_printf("[WG] UI GPS Locator | Constructing GUI...")
+
     self:Show					(true)
     self:Enable					(true)
 
@@ -201,8 +203,7 @@ function UIGPSLocator:GetDateTextures()
 end
 
 function UIGPSLocator:GetDistTextures()
-    local dist = nil
-    local distl = nil
+    local dist, distl = nil, nil
 
     if GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
         distl = "gps_dist_safe"
