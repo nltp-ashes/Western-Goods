@@ -47,6 +47,8 @@ function actor_on_weapon_zoom_in(wpn)
     exec_console_cmd("hud_fov ".. new_hud_fov)
     hud_fov = old_hud_fov
 
+    RegisterScriptCallback("on_key_press", on_key_press)
+
     dbg_printf("[WG] UI Rangefinder | Changed 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
 end
 
@@ -61,7 +63,20 @@ function actor_on_weapon_zoom_out(wpn)
     exec_console_cmd("hud_fov " .. new_hud_fov)
     hud_fov = nil
 
+    UnregisterScriptCallback("on_key_press", on_key_press)
+
     dbg_printf("[WG] UI Rangefinder | Restored 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
+end
+
+--- Function used to toggle the range finder's night-vision mode.
+--- @param dik DIK_keys
+--- @return nil
+function on_key_press(dik)
+    if dik ~= western_goods_mcm.get_config("rangefinder_nv") then return end
+    if db.actor:active_item() and db.actor:active_item():section() ~= CONST_ITEM_SEC then return end
+
+    GUI.night_vision = not GUI.night_vision
+    GUI.btn_sfx:play(db.actor, 0, sound_object.s2d)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -92,8 +107,12 @@ function UIRangefinder:__init() super()
     xml:ParseFile("ui_western_goods_rangefinder.xml")
     xml:InitWindow("rangefinder", 0, self)
 
+    -- Sound effects
+    self.btn_sfx = sound_object([[western_goods_tech\rangefinder_btn]])
+
     -- Build variables
     self.update_timer = 0
+    self.night_vision = false
 
     -- Build UI
     self.m_los1 = xml:InitStatic("rangefinder:los1", self)
@@ -129,6 +148,9 @@ function UIRangefinder:Update()
     -- Horizontal Compensation Distance Distance
     local hcd1, hcd2, hcd3 = self:GetHCDTextures()
 
+    -- Reticule
+    local ret = self:GetReticuleTexture()
+
     self.m_los1:InitTextureEx(los1, [[hud\p3d]])
     self.m_los2:InitTextureEx(los2, [[hud\p3d]])
     self.m_los3:InitTextureEx(los3, [[hud\p3d]])
@@ -137,7 +159,15 @@ function UIRangefinder:Update()
     self.m_hcd2:InitTextureEx(hcd2, [[hud\p3d]])
     self.m_hcd3:InitTextureEx(hcd3, [[hud\p3d]])
 
-    self.m_reticule:InitTextureEx("rf_reticule", [[hud\p3d]])
+    self.m_reticule:InitTextureEx(ret, [[hud\p3d]])
+end
+
+function UIRangefinder:GetReticuleTexture()
+    if self.night_vision then
+        return "rf_reticule_w"
+    else
+        return "rf_reticule_b"
+    end
 end
 
 function UIRangefinder:GetLOSTextures()

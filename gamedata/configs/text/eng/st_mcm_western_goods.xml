@@ -52,6 +52,24 @@
 		<text>Part of some tasks are intentionally un-guided, to encourage exploration and thinking. You can change this setting in real-time to have a marker on your PDA for your objective.</text>
 	</string>
 
+	<!-- Magazines Psy-Regen -->
+	<string id="ui_mcm_western_goods_magazine_psi_regen">
+		<text>Psi-health regen factor for reading magazines</text>
+	</string>
+
+	<string id="ui_mcm_western_goods_magazine_psi_regen_desc">
+		<text>Defines the factor by which to multiply your psi-health (mental health) regeneration when you're reading a magazine.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	KEY-BINDINGS																			     		     -->
+	<!-- ============================================================================================================-->
+
+	<!-- Section Title -->
+	<string id="ui_mcm_western_goods_keybindings_title">
+		<text>KEY-BINDINGS</text>
+	</string>
+
 	<!-- Helicopter Attack Order -->
 	<string id="ui_mcm_western_goods_heli_attack">
 		<text>Order helicopter to attack</text>
@@ -61,13 +79,13 @@
 		<text>Key-bind used to send an attack order to a helicopter. Aim at a target and use the key-bind to send the order.</text>
 	</string>
 
-	<!-- Magazines Psy-Regen -->
-	<string id="ui_mcm_western_goods_magazine_psi_regen">
-		<text>Psi-health regen factor for reading magazines</text>
+	<!-- Rangefinder Night Vision -->
+	<string id="ui_mcm_western_goods_rangefinder_nv">
+		<text>Rangefinder night-vision</text>
 	</string>
 
-	<string id="ui_mcm_western_goods_magazine_psi_regen_desc">
-		<text>Defines the factor by which to multiply your psi-health (mental health) regeneration when you're reading a magazine.</text>
+	<string id="ui_mcm_western_goods_rangefinder_nv_desc">
+		<text>Key-bind used to enable/disable night-vision for the SigSauer KILO5K Rangefinder.</text>
 	</string>
 
 	<!-- ============================================================================================================-->

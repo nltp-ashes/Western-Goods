@@ -68,7 +68,8 @@
     <!-- Rangefinder -->
     <file name="ui\items\ui_rangefinder">
         <!-- Reticule -->
-        <texture id="rf_reticule"     x="0"      y="0"      width="700"    height="700" />
+        <texture id="rf_reticule_b"    x="0"    y="0"      width="570"    height="200" />
+        <texture id="rf_reticule_w"    x="0"    y="200"    width="570"    height="200" />
 
         <!-- Blue Numbers -->
         <texture id="rf_num_b_1"     x="750"    y="150"    width="40"     height="120" />

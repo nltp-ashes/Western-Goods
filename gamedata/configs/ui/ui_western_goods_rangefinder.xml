@@ -13,7 +13,7 @@
 <w>
     <rangefinder>
         <!-- Reticule -->
-        <reticule    x="-0.00625"    y="-0.00625"    width="0.0125"     height="0.0125"     stretch="1"/>
+        <reticule    x="-0.0050"    y="-0.0003"    width="0.0100"     height="0.0035"     stretch="1"/>
 
         <!-- Line Of Sight (LOS) -->
         <los1        x="-0.0031"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1"/>
