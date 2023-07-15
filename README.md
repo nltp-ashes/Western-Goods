@@ -8,10 +8,11 @@ The Zone is host to people from various horizons. Overtime, the demand for goods
 
 This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding new mechanics, consumables, readable magazines, trade items, new unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
 
-|                                                                                                                        |                                                     Illustrations                                                     |                                                                                                                                            |
-|:----------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
-| ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_ | ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_ | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
-| ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_ |    ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_    |      ![Showcase Tech](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_3.2.png) _New technological items_      |
+|                                                                                                                                  |                                                          Illustrations                                                           |                                                                                                                                            |
+|:--------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+|      ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_      |      ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_       | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
+| ![Showcase GPS](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png) _New device : GPS Locator_ | ![Showcase Tech](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_3.3.png) _New technological items_ |   ![Showcase Rangefinder](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png) _New device : Rangefinder_   |
+|      ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_      |         ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_          |     ![Showcase Mechanics](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png) _New gameplay mechanics_     |
 
 ---
 
@@ -276,14 +277,7 @@ To **uninstall** the addon :
 
 ### FUTURE WORKS
 
-- Implement lore around the smuggling of goods through Cordon/Darkscape/Darkvalley/Garbage;
-- Rewrite the MagazineUI to allow for high resolution magazines and more straight forward process to add new magazines;
-- Add a range finder as a hand-held device (Animator needed!);
-- Add a watch as a hand-held device (Animator needed!);
-- Add a compass as a hand-held device (Animator needed!);
-- Add other brands of cigarettes;
-
-**Note :** The development of the addon will be on hold for the next few weeks/months;
+You can find a Trello board about the development of the addon by following this [link](https://trello.com/b/HBWc6R8g/development-board).
 
 If you would like to help development for future updates, you can :
 1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  
@@ -318,6 +312,7 @@ Credit goes to these people for their work contained in this addon :
 
 |                                   Name                                    |                                     Motive                                      |                                    License                                     |
 |:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+|         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |            Adapted the Rangefinder model on their set of animations             |                                  Proprietary                                   |
 |       **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**        |               Ported and prepared the Rangefinder model for X-Ray               |                                  Proprietary                                   |
 |        **[valterjherson1](https://sketchfab.com/valterjherson1)**         |              Reused his 3D model of a SIG SAUER KILO5K Rangefinder              |           [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)            |
 |         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |              Adapted the GPS locator model on Dosimeter animations              |                                  Proprietary                                   |
