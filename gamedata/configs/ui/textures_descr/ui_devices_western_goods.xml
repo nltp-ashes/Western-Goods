@@ -68,33 +68,35 @@
     <!-- Rangefinder -->
     <file name="ui\items\ui_rangefinder">
         <!-- Reticule -->
-        <texture id="rf_reticule_b"    x="0"    y="0"      width="570"    height="200" />
-        <texture id="rf_reticule_w"    x="0"    y="200"    width="570"    height="200" />
+        <texture id="rf_reticule_r"    x="0"    y="0"      width="570"    height="200" />
+        <texture id="rf_reticule_g"    x="0"    y="200"    width="570"    height="200" />
 
-        <!-- Blue Numbers -->
-        <texture id="rf_num_b_1"     x="750"    y="150"    width="40"     height="120" />
-        <texture id="rf_num_b_2"     x="790"    y="150"    width="40"     height="120" />
-        <texture id="rf_num_b_3"     x="750"    y="270"    width="40"     height="120" />
-        <texture id="rf_num_b_4"     x="790"    y="270"    width="40"     height="120" />
-        <texture id="rf_num_b_5"     x="750"    y="390"    width="40"     height="120" />
-        <texture id="rf_num_b_6"     x="790"    y="390"    width="40"     height="120" />
-        <texture id="rf_num_b_7"     x="750"    y="510"    width="40"     height="120" />
-        <texture id="rf_num_b_8"     x="790"    y="510"    width="40"     height="120" />
-        <texture id="rf_num_b_9"     x="750"    y="630"    width="40"     height="120" />
-        <texture id="rf_num_b_0"     x="790"    y="630"    width="40"     height="120" />
-        <texture id="rf_b_dash"      x="750"    y="750"    width="40"     height="120" />
+        <!-- Dash -->
+        <texture id="rf_dash_r"      x="830"    y="750"    width="40"     height="120" />
+        <texture id="rf_dash_g"      x="750"    y="750"    width="40"     height="120" />
+
+        <!-- Green Numbers -->
+        <texture id="rf_num_1_g"     x="750"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_2_g"     x="790"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_3_g"     x="750"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_4_g"     x="790"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_5_g"     x="750"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_6_g"     x="790"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_7_g"     x="750"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_8_g"     x="790"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_9_g"     x="750"    y="630"    width="40"     height="120" />
+        <texture id="rf_num_0_g"     x="790"    y="630"    width="40"     height="120" />
 
         <!-- Red Numbers -->
-        <texture id="rf_num_r_1"     x="830"    y="150"    width="40"     height="120" />
-        <texture id="rf_num_r_2"     x="870"    y="150"    width="40"     height="120" />
-        <texture id="rf_num_r_3"     x="830"    y="270"    width="40"     height="120" />
-        <texture id="rf_num_r_4"     x="870"    y="270"    width="40"     height="120" />
-        <texture id="rf_num_r_5"     x="830"    y="390"    width="40"     height="120" />
-        <texture id="rf_num_r_6"     x="870"    y="390"    width="40"     height="120" />
-        <texture id="rf_num_r_7"     x="830"    y="510"    width="40"     height="120" />
-        <texture id="rf_num_r_8"     x="870"    y="510"    width="40"     height="120" />
-        <texture id="rf_num_r_9"     x="830"    y="630"    width="40"     height="120" />
-        <texture id="rf_num_r_0"     x="870"    y="630"    width="40"     height="120" />
-        <texture id="rf_r_dash"      x="830"    y="750"    width="40"     height="120" />
+        <texture id="rf_num_1_r"     x="830"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_2_r"     x="870"    y="150"    width="40"     height="120" />
+        <texture id="rf_num_3_r"     x="830"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_4_r"     x="870"    y="270"    width="40"     height="120" />
+        <texture id="rf_num_5_r"     x="830"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_6_r"     x="870"    y="390"    width="40"     height="120" />
+        <texture id="rf_num_7_r"     x="830"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_8_r"     x="870"    y="510"    width="40"     height="120" />
+        <texture id="rf_num_9_r"     x="830"    y="630"    width="40"     height="120" />
+        <texture id="rf_num_0_r"     x="870"    y="630"    width="40"     height="120" />
     </file>
 </w>

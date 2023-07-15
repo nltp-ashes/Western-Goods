@@ -149,24 +149,27 @@ function UIRangefinder:Update()
     local hcd1, hcd2, hcd3 = self:GetHCDTextures()
 
     -- Reticule
-    local ret = self:GetReticuleTexture()
+    local ret = "rf_reticule"
 
-    self.m_los1:InitTextureEx(los1, [[hud\p3d]])
-    self.m_los2:InitTextureEx(los2, [[hud\p3d]])
-    self.m_los3:InitTextureEx(los3, [[hud\p3d]])
+    -- Night Vision
+    local nv = self:GetNightVisionSuffix()
 
-    self.m_hcd1:InitTextureEx(hcd1, [[hud\p3d]])
-    self.m_hcd2:InitTextureEx(hcd2, [[hud\p3d]])
-    self.m_hcd3:InitTextureEx(hcd3, [[hud\p3d]])
+    self.m_los1:InitTextureEx(los1..nv, [[hud\p3d]])
+    self.m_los2:InitTextureEx(los2..nv, [[hud\p3d]])
+    self.m_los3:InitTextureEx(los3..nv, [[hud\p3d]])
 
-    self.m_reticule:InitTextureEx(ret, [[hud\p3d]])
+    self.m_hcd1:InitTextureEx(hcd1..nv, [[hud\p3d]])
+    self.m_hcd2:InitTextureEx(hcd2..nv, [[hud\p3d]])
+    self.m_hcd3:InitTextureEx(hcd3..nv, [[hud\p3d]])
+
+    self.m_reticule:InitTextureEx(ret..nv, [[hud\p3d]])
 end
 
-function UIRangefinder:GetReticuleTexture()
+function UIRangefinder:GetNightVisionSuffix()
     if self.night_vision then
-        return "rf_reticule_w"
+        return "_g"
     else
-        return "rf_reticule_b"
+        return "_r"
     end
 end
 
@@ -178,13 +181,13 @@ function UIRangefinder:GetLOSTextures()
 
     -- Line Of Sight format
     if los < 999 then
-        local los1 = strformat("rf_num_b_%s", s_los:sub(1, 1))
-        local los2 = strformat("rf_num_b_%s", s_los:sub(2, 2))
-        local los3 = strformat("rf_num_b_%s", s_los:sub(3, 3))
+        local los1 = strformat("rf_num_%s", s_los:sub(1, 1))
+        local los2 = strformat("rf_num_%s", s_los:sub(2, 2))
+        local los3 = strformat("rf_num_%s", s_los:sub(3, 3))
         return los1, los2, los3
     end
 
-    return "rf_b_dash", "rf_b_dash", "rf_b_dash"
+    return "rf_dash", "rf_dash", "rf_dash"
 end
 
 function UIRangefinder:GetHCDTextures()
@@ -197,11 +200,11 @@ function UIRangefinder:GetHCDTextures()
 
     -- Horizontal Compensation Distance format
     if hcd < 999 then
-        local hcd1 = strformat("rf_num_r_%s", s_hcd:sub(1, 1))
-        local hcd2 = strformat("rf_num_r_%s", s_hcd:sub(2, 2))
-        local hcd3 = strformat("rf_num_r_%s", s_hcd:sub(3, 3))
+        local hcd1 = strformat("rf_num_%s", s_hcd:sub(1, 1))
+        local hcd2 = strformat("rf_num_%s", s_hcd:sub(2, 2))
+        local hcd3 = strformat("rf_num_%s", s_hcd:sub(3, 3))
         return hcd1, hcd2, hcd3
     end
 
-    return "rf_r_dash", "rf_r_dash", "rf_r_dash"
+    return "rf_dash", "rf_dash", "rf_dash"
 end
