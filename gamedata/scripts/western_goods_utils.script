@@ -400,6 +400,9 @@ end
 -- File Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to list all the files in a given folder (excluding the sub-folders).
+--- @param path string
+--- @return table
 function list_files(path)
     local fileList = getFS():file_list_open("$game_config$", path, bit_or(FS.FS_ListFiles, FS.FS_RootOnly))
     local count = fileList and fileList:Size() or 0
@@ -415,6 +418,11 @@ function list_files(path)
     return tbl
 end
 
+--- Function used to list all the texture descriptions matching a given pattern.
+--- Texture descriptions have to be in gamedata/configs/ui/textures_descr/.
+--- This function takes on average 300ms, prioritize using it in on_game_load to avoid stutters.
+--- @param pattern string
+--- @return table
 function collect_texture_descriptions(pattern)
     this.dbg_printf("[WG] Utils | Getting matching texture descriptions for '%s'...", pattern)
 
@@ -761,12 +769,13 @@ function is_pda(obj)
     return pda_sections[obj:section()]
 end
 
---- Function used to get the real community of the NPC by checking spawn id
+--- Function used to get the real community of the NPC by checking spawn id.
 --- @author HarukaSai
 --- @param npc game_object
 --- @param default string
 --- @return string
 function get_real_community(npc, default)
+    if not validate_params({npc,"get_real_community"}) then return end
 
     local furniture = {
         ["esc_m_trader"] = true,
@@ -819,4 +828,16 @@ function get_section_price(section,count,default)
     else
         return default
     end
+end
+
+--- Function used to get the position of a bone by its name.
+--- @author Thial
+--- @param obj game_object
+--- @param bone string
+--- @return vector
+function get_bone_position(obj,bone)
+    if not validate_params({obj, bone,"get_bone_position"}) then return end
+
+    local bone_id = obj:get_bone_id(bone)
+    return obj:bone_position(bone_id == 65535 and "" or bone)
 end

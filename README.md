@@ -280,10 +280,8 @@ To **uninstall** the addon :
 You can find a Trello board about the development of the addon by following this [link](https://trello.com/b/HBWc6R8g/development-board).
 
 If you would like to help development for future updates, you can :
-1. Contribute to the addon, either by getting in touch with me or creating a pull-request on the addon's GitHub repository :  
-   https://github.com/nltp-ashes/Western-Goods
-2. Help by play-testing updates by getting Release Candidates builds on the addon's GitHub repository :  
-   https://github.com/nltp-ashes/Western-Goods/releases/tag/test
+1. Contribute to the addon, either by [getting in touch with me](https://github.com/nltp-ashes/Western-Goods#support--suggestions) or [creating a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the addon and [creating a pull-request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) on the addon's [GitHub repository](https://github.com/nltp-ashes/Western-Goods);
+2. Help by play-testing updates by [getting Release Candidates builds](https://github.com/nltp-ashes/Western-Goods/releases/tag/test) on the addon's GitHub repository.
 
 ---
 
@@ -299,10 +297,10 @@ If you would like to help development for future updates, you can :
 ### SUPPORT & SUGGESTIONS
 
 If you need help with anything, or if you have any suggestions, you can :
-- Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) (recommended);
-- Message me on Discord : @nltp_ashes (formerly NLTP_ASHES#0117) (recommended);
-- Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended).
-- Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
+- ✅ Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) (recommended);
+- ✅ Message me on Discord : @nltp_ashes (formerly NLTP_ASHES#0117) (recommended);
+- ✅ Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended).
+- ⚠️ Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
 
 ---
 
