@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
 <!--	Translation file for Western Goods' general purpose strings.											     -->
-<!--                                                                                                                 -->
+<!--	Файл локализации для строк общего назначения Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
 <!-- ================================================================================================================-->
 <string_table>
 
 	<!-- ============================================================================================================-->
-	<!--	Fatal Errors																					  		 -->
+	<!--	Фатальные ошибки																					  		 -->
 	<!-- ============================================================================================================-->
 
-	<!-- Out-of-date game -->
+	<!-- Устаревшая версия игры  -->
 	<string id="st_err_outdated_game_title">
-		<text>Game version invalid or out-of-date.</text>
+		<text>Версия игры не поддерживается или устарела.</text>
 	</string>
 
 	<string id="st_err_outdated_game_what">
-		<text>Your game has an invalid version or is out-of-date. Please install version S.T.A.L.K.E.R. Anomaly 1.5.2.</text>
+		<text>Версия вашей игры не поддерживается модификацией. Пожалуйста, установите версию игры S.T.A.L.K.E.R. Anomaly 1.5.2.</text>
 	</string>
 
 	<string id="st_err_outdated_game_why">
-		<text>Western Goods requires some functionalities added only in 1.5.2, and/or uses prerequisites that themselves require version 1.5.2.</text>
+		<text>Western Goods требует функций игры, добавленных только в 1.5.2, и/или использует для работы модификации требующие версии игры 1.5.2.</text>
 	</string>
 
 	<string id="st_err_outdated_game_where">
-		<text>You can download S.T.A.L.K.E.R. Anomaly 1.5.2 from ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+		<text>Вы можете скачать S.T.A.L.K.E.R. Anomaly 1.5.2 с ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
 	</string>
 
-	<!-- Missing DXML -->
+	<!-- Не найден DXML -->
 	<string id="st_err_missing_dxml_title">
-		<text>Prerequisite missing - DXML.</text>
+		<text>Не найдена требуемая модификация - DXML.</text>
 	</string>
 
 	<string id="st_err_missing_dxml_what">
-		<text>DXML is missing. Please install or update your modded exes before using Western Goods.</text>
+		<text>DXML не найден. Пожалуйста, установите или обновите ваши Modded Exes перед использованием Western Goods.</text>
 	</string>
 
 	<string id="st_err_missing_dxml_why">
-		<text>Western Goods requires DXML to increase compatibility with other addons and to avoid overwriting vanilla files.</text>
+		<text>Western Goods требует DXML для увеличения совместимости с другими аддонами и избежания перезаписи файлов игры.</text>
 	</string>
 
 	<string id="st_err_missing_dxml_where">
-		<text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+		<text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
 	</string>
 
-	<!-- Missing LUA unlocalizer -->
+	<!-- Не найден LUA unlocalizer -->
 	<string id="st_err_missing_unlocalizer_title">
-		<text>Prerequisite missing - LUA unlocalizer.</text>
+		<text>Не найдена требуемая модификация - LUA unlocalizer.</text>
 	</string>
 
 	<string id="st_err_missing_unlocalizer_what">
-		<text>LUA unlocalizer is missing. Please install or update your modded exes before using Western Goods.</text>
+		<text>LUA unlocalizer не найден. Пожалуйста, установите или обновите ваши Modded Exes перед использованием Western Goods.</text>
 	</string>
 
 	<string id="st_err_missing_unlocalizer_why">
-		<text>Western Goods requires LUA unlocalizer to increase compatibility with other addons and to avoid overwriting vanilla files.</text>
+		<text>Western Goods требует Lua unlocalizer для увеличения совместимости с другими аддонами и избежания перезаписи файлов игры.</text>
 	</string>
 
 	<string id="st_err_missing_unlocalizer_where">
-		<text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+		<text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
 	</string>
 
 	<!-- ============================================================================================================-->
