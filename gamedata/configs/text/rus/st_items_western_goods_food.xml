@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2023																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' food items.															     -->
+<!--                                                                                                                 -->
+<!-- ================================================================================================================-->
+<string_table>
+
+	<string id="st_wg_hamborgir">
+		<text>Charal Hamburger (Cheese)</text>
+	</string>
+	
+	<string id="st_wg_hamborgir_s">
+		<text>Charal Hamburger</text>
+	</string>
+	
+	<string id="st_wg_hamborgir_descr">
+		<text>
+			Charal is a popular brand in France, that specializes in frozen preparations of minced beef. Some traders around the Zone manage to import some of their products from time to time. This box needs to be prepared for 1 min 50 seconds in a microwave, although it seems this one was recently prepared, so even if it's cold, it's ready to eat.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_snickers">
+		<text>Snickers chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_snickers_s">
+		<text>Snickers bar</text>
+	</string>
+	
+	<string id="st_wg_snickers_descr">
+		<text>
+			Snickers is a chocolate bar consisting of nougat topped with caramel and peanuts that is encased in milk chocolate. Most stalkers in the Zone cannot afford them, as they are imported from foreign countries. That being said, those that can afford it often use it as a quick way to eat on busy days.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+	
+	<string id="st_wg_twix">
+		<text>Twix chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_twix_s">
+		<text>Twix bar</text>
+	</string>
+	
+	<string id="st_wg_twix_descr">
+		<text>
+			Twix is a caramel shortbread chocolate bar made by Mars, Inc., consisting of a biscuit applied with other confectionery toppings and coatings (most frequently caramel and milk chocolate). Twix are packaged with two bars in a wrapper.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+	
+	<string id="st_wg_mars">
+		<text>Mars chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_mars_s">
+		<text>Mars bar</text>
+	</string>
+	
+	<string id="st_wg_mars_descr">
+		<text>
+			Mars, commonly known as Mars bar, is the name of two varieties of chocolate bar produced by Mars, Incorporated. The bar consists of caramel and nougat coated with milk chocolate.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+	
+	<string id="st_wg_milkyway">
+		<text>MilkyWay chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_milkyway_s">
+		<text>MilkyWay bar</text>
+	</string>
+	
+	<string id="st_wg_milkyway_descr">
+		<text>
+			MilkyWay is a brand of chocolate-covered confectionery bar manufactured and marketed by Mars, Incorporated. This bar is one of the two kinds sold by the brand. Available outside the US, this bar somehow made it into the Zone.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_bounty">
+		<text>Bounty chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_bounty_s">
+		<text>Bounty bar</text>
+	</string>
+	
+	<string id="st_wg_bounty_descr">
+		<text>
+			Bounty is a coconut-filled, chocolate-enrobed candy bar manufactured by Mars, Incorporated. The Bounty bar offers you a strong coconut flavor that is imparted by the soft and fluffy center filling of the candy bar. There is a layer of sweet chocolate that is layered over the top and which gives the bar its shape.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_kinder_maxi">
+		<text>Kinder Maxi chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_kinder_maxi_s">
+		<text>Kinder Maxi bar</text>
+	</string>
+	
+	<string id="st_wg_kinder_maxi_descr">
+		<text>
+			Kinder Maxi is a cocoa butter chocolate bar from the Kinder brand, from the Ferrero group. The bar contains mainly milk chocolate, with a soft milk filling.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_kinder_bueno">
+		<text>Kinder Bueno chocolate bar</text>
+	</string>
+	
+	<string id="st_wg_kinder_bueno_s">
+		<text>Kinder Bueno bar</text>
+	</string>
+	
+	<string id="st_wg_kinder_bueno_descr">
+		<text>
+			Kinder Buenos are crispy, chocolate-covered wafer bars with a rich, hazelnut cream filling. They come wrapped in two individually sealed plastic sleeves, so you can eat one and save the other for later.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_kitkat">
+		<text>Kit-Kat chocolate</text>
+	</string>
+	
+	<string id="st_wg_kitkat_s">
+		<text>Kit-Kat chocolate</text>
+	</string>
+	
+	<string id="st_wg_kitkat_descr">
+		<text>
+			Kit Kats are a type of chocolate that is made up of three layers of wafers. The wafers are covered with a layer of chocolate inside and out. Each whole piece is considered a “finger.” Each package of Kit Kats usually has four fingers connected together.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_milka">
+		<text>Milka Alpine Milk chocolate</text>
+	</string>
+	
+	<string id="st_wg_milka_s">
+		<text>Milka chocolate</text>
+	</string>
+	
+	<string id="st_wg_milka_descr">
+		<text>
+			Chocolate bar made by Milka. It is widespread in western europe, where people enjoy it for its soft tasting chocolate. It contains 30% cacao.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_mnms">
+		<text>M&amp;Ms chocolate candies</text>
+	</string>
+	
+	<string id="st_wg_mnms_s">
+		<text>M&amp;Ms</text>
+	</string>
+	
+	<string id="st_wg_mnms_descr">
+		<text>
+			M&amp;M's are multicolored button-shaped chocolates, consisting of a candy shell surrounding a filling which varies depending upon the variety of M&amp;M's.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] high quality\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_mentos">
+		<text>Mentos Fruit candies</text>
+	</string>
+	
+	<string id="st_wg_mentos_s">
+		<text>Mentos Fruit</text>
+	</string>
+	
+	<string id="st_wg_mentos_descr">
+		<text>
+			Mentos Fruit are small chewing candies in different flavours. Mentos Fruit has a mix of strawberry, orange and lemon. This is a must-have for any afternoon snack or a snack anytime of the day!\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_lays">
+		<text>Lay's chips (Nature)</text>
+	</string>
+	
+	<string id="st_wg_lays_s">
+		<text>Lay's chips</text>
+	</string>
+	
+	<string id="st_wg_lays_descr">
+		<text>
+			Lays are fried potato chips. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_doritos">
+		<text>Doritos chips (Cheese Natchos)</text>
+	</string>
+	
+	<string id="st_wg_doritos_s">
+		<text>Doritos chips</text>
+	</string>
+	
+	<string id="st_wg_doritos_descr">
+		<text>
+			Doritos are fried potato chips. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_pringles">
+		<text>Pringles mini can (Nature)</text>
+	</string>
+	
+	<string id="st_wg_pringles_s">
+		<text>Pringles mini</text>
+	</string>
+	
+	<string id="st_wg_pringles_descr">
+		<text>
+			Pringles are fried chips. Contrary to popular belief, they are not made from potato, but instead from a mix of corn, rice powder, wheat, maize and potato shavings. This mix is later ground and laid into a sheet, curved, then fried for a few seconds. The fried chips are then blasted with flavored, salt powder. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_oreo">
+		<text>Oreo Original</text>
+	</string>
+
+	<string id="st_wg_oreo_s">
+		<text>Oreo</text>
+	</string>
+
+	<string id="st_wg_oreo_descr">
+		<text>
+			Oreo is a brand of sandwich cookie consisting of two biscuits or cookie pieces with a sweet creme filling. Kids usually put a point to respect the proper way to eat them : Separate the two biscuits, eat the filling by licking it, put the two biscuits back together, dip them in milk, and eat it!\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_ferrero_rocher">
+		<text>Ferrero Rocher box</text>
+	</string>
+
+	<string id="st_wg_ferrero_rocher_s">
+		<text>Ferrero Rocher</text>
+	</string>
+
+	<string id="st_wg_ferrero_rocher_descr">
+		<text>
+			Ferrero Rocher is a chocolate a consisting of a whole crunchy hazelnut in the heart, a delicious creamy hazelnut filling, a crisp wafer shell covered with chocolate and gently roasted pieces. They come in a prestigious golden wrapper. They are quite popular in Western Europe, where they are usually sold during celebrations.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_mon_cheri">
+		<text>Mon Cheri box</text>
+	</string>
+
+	<string id="st_wg_mon_cheri_s">
+		<text>Mon Cheri</text>
+	</string>
+
+	<string id="st_wg_mon_cheri_descr">
+		<text>
+			The Mon Cheri is a single-wrapped chocolate consisting of a "heart" of cherry and liquor, contained in a dark chocolate housing. The liquor is quite concentrated, so it is recommended to not eat too many of them at once. They come in boxes of 30 pieces.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_toblerone">
+		<text>Toblerone</text>
+	</string>
+
+	<string id="st_wg_toblerone_s">
+		<text>Toblerone</text>
+	</string>
+
+	<string id="st_wg_toblerone_descr">
+		<text>
+			Toblerone is a Swiss chocolate bar made with honey and almond nougat. Toblerone is very easily recognizable thanks to its unique looking packaging. People in the Zone often make jokes about how "if you eat it, the Zone will force you to finish it in one go!". But those are just jokes, a wise stalker would not eat it in one go, as to not have a liver attack.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_french_mre">
+		<text>Ration de Combat Individuelle Rechauffable</text>
+	</string>
+
+	<string id="st_wg_french_mre_s">
+		<text>RCIR MRE</text>
+	</string>
+
+	<string id="st_wg_french_mre_descr">
+		<text>
+			Ration de Combat Individuelle Rechauffable (translated to Individual Reheatable Combat Ration) is the MRE used in the French military. Over the years, there has been several iteration of it. One in 1995, another one in 1999, and it was revised a final time in 2004. Luckily, this one is the latest iteration, so the contents are at least no older than 14 years old...\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+	<string id="st_wg_sandwich">
+		<text>Sandwich</text>
+	</string>
+
+	<string id="st_wg_sandwich_s">
+		<text>Sandwich</text>
+	</string>
+
+	<string id="st_wg_sandwich_descr">
+		<text>
+			A hand-made sandwich. Rather simple: bread, butter, cheese and slices of meat. Holding a Geiger counter against it doesn't seem to pick up radiation, so the ingredients were probably imported. Won't last you long, but it's always better than mutant meat.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] food\n
+			%c[d_blue] • %c[ui_gray_2] hand-made\n
+			%c[d_green] • %c[ui_gray_2] clean nutrition source\n
+		</text>
+	</string>
+
+</string_table>

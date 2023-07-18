@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2023																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' npcs.																     -->
+<!--                                                                                                                 -->
+<!-- ================================================================================================================-->
+<string_table>
+
+	<!-- ============================================================================================================-->
+	<!--	Williams Heades								        											  		 -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_trader_name">
+		<text>Williams "Ashes" Heades</text>
+	</string>
+
+	<string id="western_goods_trader_bio">
+		<text>Williams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece. He was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Jupiter Informant 																			     		 -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_jupiter_informant_name">
+		<text>Sergei Karlovskiy</text>
+	</string>
+
+	<string id="western_goods_jupiter_informant_bio">
+		<text>No information.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Helicopter Crew Member																			  		 -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_crew_member_name">
+		<text>Patrick "Odysseus" Dunbar</text>
+	</string>
+
+	<string id="western_goods_crew_member_bio">
+		<text>One of the members of the helicopter.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Lt Dunn Lynn																			  		         -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_dunn_lynn_name">
+		<text>Lt. Dunn "Jodye" Lynn</text>
+	</string>
+
+	<string id="western_goods_dunn_lynn_bio">
+		<text>UNISG agent. Detailed information is missing.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Golubev Nikolaj																			  		         -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_ecolog_convoy_yellow_name">
+		<text>Golubev Nikolaj</text>
+	</string>
+
+	<string id="western_goods_ecolog_convoy_yellow_bio">
+		<text>Member of mobile science camp. Detailed information is missing.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Other Science NPC																		  		         -->
+	<!-- ============================================================================================================-->
+
+	<string id="stalker_ecolog_convoy_orange_bio">
+		<text>Member of mobile science camp. Detailed information is missing.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Oleksandr Chernenko																			  		     -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_oleksandr_chernenko_name">
+		<text>Captain Oleksandr Chernenko</text>
+	</string>
+
+	<string id="western_goods_oleksandr_chernenko_bio">
+		<text>Rogue Ukrainian army soldier, turned mercenary. Manages Dushman's interest at the Flea Market, Garbage.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	Danylo Chernenko																			  		     -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_danylo_chernenko_name">
+		<text>Sergeant Danylo Chernenko</text>
+	</string>
+
+	<string id="western_goods_danylo_chernenko_bio">
+		<text>Oleksandr Chernenko's younger brother. Detailed information is missing.</text>
+	</string>
+
+	<!-- ============================================================================================================-->
+	<!--	SSU Prisoner                                                                                             -->
+	<!-- ============================================================================================================-->
+
+	<string id="western_goods_ssu_prisoner_bio">
+		<text>Soldier affiliated with the Security Service of Ukraine. Detailed information is missing.</text>
+	</string>
+
+</string_table>

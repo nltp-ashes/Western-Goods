@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--	Original Author(s) : NLTP_ASHES																			     -->
+<!--	Edited : N/A																							     -->
+<!--	Date : 17/03/2023																						     -->
+<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' tech items.															     -->
+<!--                                                                                                                 -->
+<!-- ================================================================================================================-->
+<string_table>
+	<string id="st_wg_laptop">
+		<text>ASUS Laptop</text>
+	</string>
+	
+	<string id="st_wg_laptop_s">
+		<text>Laptop</text>
+	</string>
+	
+	<string id="st_wg_laptop_descr">
+		<text>
+			The ZenBook 13 is a laptop of the ultra-portable family. Produced by ASUS, it was surely brought into the zone by mercenaries. It seems to have been slightly damaged, making it unusable. Though its components are worth a fortune, and a trader could put a pretty price on it.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+	
+	<string id="st_wg_computer">
+		<text>Computer case</text>
+	</string>
+	
+	<string id="st_wg_computer_s">
+		<text>Computer</text>
+	</string>
+	
+	<string id="st_wg_computer_descr">
+		<text>
+			Black computer case with what seems to be recent parts. It's definitely not an old soviet computer left behind after the 2006' "Second Disaster". Getting access to electricity in the Zone isn't given to anyone, so it'll be hard to get it working. It could always be sold to traders, modern computer parts are a rare sight these days.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+
+	<string id="st_wg_keyboard">
+		<text>Logitech keyboard</text>
+	</string>
+	
+	<string id="st_wg_keyboard_s">
+		<text>Keyboard</text>
+	</string>
+	
+	<string id="st_wg_keyboard_descr">
+		<text>
+			Damaged Logitech keyboard. It's none of those fancy keyboards for video games, but just a simple keyboard. It seems too damaged to be used, although it's still a good source of electronic components.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_red] • %c[ui_gray_2] broken beyond repair\n
+			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+
+	<string id="st_wg_gps">
+		<text>GPS locator</text>
+	</string>
+	
+	<string id="st_wg_gps_s">
+		<text>GPS</text>
+	</string>
+	
+	<string id="st_wg_gps_descr">
+		<text>
+			A really rare piece of equipment in the Zone. It seems to be a military grade GPS locator, usually used by NATO countries. It probably found its way into the Zone when the ISG was still around. It indicates the name and the distance to the nearest area. It also shows the name of the region of the Zone the user is located in. That being said, its database seems outdated. Some areas well known by stalkers are missing.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
+		</text>
+	</string>
+
+	<string id="st_wg_military_decoder">
+		<text>Military decoder</text>
+	</string>
+	
+	<string id="st_wg_military_decoder_s">
+		<text>Military decoder</text>
+	</string>
+	
+	<string id="st_wg_military_decoder_descr">
+		<text>
+			This seems to be an advanced military decoder. It has english inscriptions all-around, so it probably comes from outside the Zone. It's not really of any use for the everyday stalker, but traders often look for these rare devices.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+
+	<string id="st_wg_military_radio">
+		<text>Military radio</text>
+	</string>
+	
+	<string id="st_wg_military_radio_s">
+		<text>Military radio</text>
+	</string>
+	
+	<string id="st_wg_military_radio_descr">
+		<text>
+			A military radio with a long range antenna. It's very visibly not from the Zone. It seems to be in good condition. With the right equipment, someone could get it working. Traders often look for those long range radios to communicate with each others.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_red] • %c[ui_gray_2] unusable\n
+		</text>
+	</string>
+
+	<string id="st_wg_lighter_bic">
+		<text>BIC lighter</text>
+	</string>
+
+	<string id="st_wg_lighter_bic_s">
+		<text>BIC lighter</text>
+	</string>
+
+	<string id="st_wg_lighter_bic_descr">
+		<text>
+			A standard BIC lighter. Not commonly found in the Zone, this lighter is readily available in western European countries. A full lighter can usually light up 20 cigarettes.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] everyday item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
+		</text>
+	</string>
+
+	<string id="st_wg_rangefinder">
+		<text>SigSauer KILO5K Laser Rangefinder</text>
+	</string>
+
+	<string id="st_wg_rangefinder_s">
+		<text>KILO5K Rangefinder</text>
+	</string>
+
+	<string id="st_wg_rangefinder_descr">
+		<text>
+			Sig Sauer’s KILO5K 7x25mm laser rangefinder delivers precise ranging capabilities in a compact package. This rangefinder features a binocular style eye cup and diopter adjustment. The maximum range on a reflective target is 5,000 yards, and the maximum range on a deer is 2,000 yards.\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_cyan] • %c[ui_gray_2] valuable\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
+		</text>
+	</string>
+</string_table>
