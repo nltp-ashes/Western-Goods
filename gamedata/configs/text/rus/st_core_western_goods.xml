@@ -68,43 +68,43 @@
 	</string>
 
 	<!-- ============================================================================================================-->
-	<!--	Core Strings																					  		 -->
+	<!--	Общие строки																					  		 -->
 	<!-- ============================================================================================================-->
 
-	<!-- Unpacking inventory string -->
+	<!-- Строка для распаковки предметов в инвентаре -->
 	<string id="st_wg_unpack">
-		<text>Unpack</text>
+		<text>Распаковать</text>
 	</string>
 
-	<!-- Reading inventory string -->
+	<!-- Строка для чтения предметов в инвентаре -->
 	<string id="st_wg_view">
 		<text>View</text>
 	</string>
 
-	<!-- GPS Locator use strings -->
+	<!-- Строки для GPS локатора -->
 	<string id="st_wg_gps_use_1">
-		<text>Location :</text>
+		<text>Местоположение :</text>
 	</string>
 
 	<string id="st_wg_gps_use_2">
-		<text>unknown</text>
+		<text>неизвестно</text>
 	</string>
 
 	<string id="st_wg_gps_use_3">
-		<text>outside of satellite range</text>
+		<text>вне радиуса действия спутника</text>
 	</string>
 
 	<string id="st_wg_gps_use_4">
-		<text>unknown in database</text>
+		<text>не найдено в базе данных</text>
 	</string>
 
-	<!-- Lighter use strings -->
+	<!-- Строки для зажигалки -->
 	<string id="st_wg_use">
-		<text>Use</text>
+		<text>Использовать</text>
 	</string>
 
 	<string id="st_wg_fill">
-		<text>Fill</text>
+		<text>Наполнить</text>
 	</string>
 
 	<string id="st_wg_bullet_point">
@@ -112,17 +112,17 @@
 	</string>
 
 	<string id="st_wg_missing_requirements_ext">
-		<text>A tool is required!</text>
+		<text>Требуется инструмент!</text>
 	</string>
 
-	<!-- Suitcase use strings -->
+	<!-- Строки для чемодана -->
 	<string id="st_wg_open">
-		<text>Open</text>
+		<text>Открыть</text>
 	</string>
 
-	<!-- Readable UI strings -->
+	<!-- Читаемые строки UI -->
 	<string id="ui_wg_dx8_retard_notice">
-		<text>It seems you're using DirectX 8 renderer, you may experience texture stretching. Use a more modern renderer to avoid issues.</text>
+		<text>Похожи, что вы используете рендерер DirectX 8, вы можете наблюдать растяжение текстур. Используйте более современный рендерер для избежания данных ошибок.</text>
 	</string>
 
 </string_table>
