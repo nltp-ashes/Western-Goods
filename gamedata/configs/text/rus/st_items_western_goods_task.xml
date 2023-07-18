@@ -1,139 +1,141 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
-<!--	Translation file for Western Goods' quest items.														     -->
-<!--                                                                                                                 -->
+<!--	Translation file for Western Goods' general purpose strings.											     -->
+<!--	Файл локализации для строк общего назначения Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
-	<!-- Supply case -->
+	<!-- Кейс с припасами -->
 	<string id="st_wg_act_1_task_1_quest_item">
-		<text>Supply case</text>
+		<text>Кейс с припасами</text>
 	</string>
 
 	<string id="st_wg_act_1_task_1_quest_item_s">
-		<text>Supplies</text>
+		<text>Припасы</text>
 	</string>
 
 	<string id="st_wg_act_1_task_1_quest_item_descr">
 		<text>
-			A sealed case found near the corpses of the helicopter crew. The exact contents of the case are unknown, but since it was to be delivered to Williams Heades, it must contain western goods.\n
+			Закрытый кейс, найденный рядом с трупами экипажа вертолёта. Точное содержание кейса неизвестно, но если он должен был быть доставлен Уильяму Хедесу, он скорее всего содержит западные товары.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_cyan] � %c[ui_gray_2] highly valuable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] высокая ценность\n
 		</text>
 	</string>
 
-	<!-- Unidentified weapon -->
+	<!-- Неидентифицированное оружие -->
 	<string id="st_wg_act_1_task_2_quest_item_1">
-		<text>Unidentified weapon</text>
+		<text>Неидентифицированное оружие</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_quest_item_1_s">
-		<text>Unidentified weapon</text>
+		<text>Неидентифицированное оружие</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_quest_item_1_descr">
 		<text>
-			An unknown weapon, the firing mechanism of which has not been established. The weapon appears to be out of ammunition - squeezing the trigger doesn't do anything. It's very heavy and definitely high-tech. Of note is that it appears not to fire bullets based on ignition. Most probably, the rounds are propelled by electro-magnetic forces. One can only suspect what kind of destructive potential it possesses.\n
+			Неизвестное оружие, механизм стрельбы которого не установлен. В оружии, похоже, нет боеприпасов - нажатие на спусковой крючок ни к чему не приводит. Оно очень тяжелое и определенно высокотехнологичное. Следует отметить, что оружие не стреляет пулями, основанными на воспламенении. Скорее всего, они запускаются электро-магнитными силами. Можно только гадать о разрушительном потенциале этого оружия.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_red] � %c[ui_gray_2] unusable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_red] • %c[ui_gray_2] неиспользуемо\n
 		</text>
 	</string>
 
-	<!-- Bandit's note -->
+	<!-- Записка бандита -->
 	<string id="st_wg_act_1_task_2_quest_item_2">
-		<text>Bandit's note</text>
+		<text>Записка бандита</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_quest_item_2_s">
-		<text>Bandit's note</text>
+		<text>Записка бандита</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_quest_item_2_descr">
 		<text>
-			A paper note found at the container warehouse. Judging by the writing, it was definitely written by one of the bandits...
+			Бумажная записка, найденная на складе контейнеров. Судя по надписям, она определённо была написана кем-то из бандитов...
 		</text>
 	</string>
 
-	<!-- Research case -->
+	<!-- Кейс с исследованиями -->
 	<string id="st_wg_act_2_task_2_quest_item">
-		<text>Documents case</text>
+		<text>Кейс с документами</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_quest_item_s">
-		<text>Documents</text>
+		<text>Документы</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_quest_item_descr">
 		<text>
-			A sealed case supposedly containing research documents. It was being carried by a convoy of scientists to an unknown location. Dushman's client wants this, but it's unknown who they are and why they are interested in this.\n
+			Закрытый кейс, скорее всего хранящий исследовательские документы. Его перевозил в неизвестное место конвой учёных. Клиент Душмана хочет заполучить кейс, но неизвестно, кто он и почему он в этом заинтересован.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_cyan] � %c[ui_gray_2] highly valuable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_cyan] • %c[ui_gray_2] высокая ценность\n
 		</text>
 	</string>
 
-	<!-- Danylo Pendrive -->
+	<!-- Флешка Данилы -->
 	<string id="st_wg_stash_map_quest_item">
-		<text>Map to stash</text>
+		<text>Карта с тайником</text>
 	</string>
 
 	<string id="st_wg_stash_map_quest_item_s">
-		<text>Map</text>
+		<text>Карта</text>
 	</string>
 
 	<string id="st_wg_stash_map_quest_item_descr">
 		<text>
-			A hand drawn map, given by Oleksandr. With it, it should be possible to locate he and his brother's old stash in the Agroprom Underground.\n
+			Рукописная карта, данная Александром. С ней должно быть возможно найти старый тайник его и его брата в Подземельях Агропрома.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_green] � %c[ui_gray_2] informative\n
-			%c[d_blue] � %c[ui_gray_2] personal belongings\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_green] • %c[ui_gray_2] информация\n
+			%c[d_blue] • %c[ui_gray_2] личная вещь\n
 		</text>
 	</string>
 
-	<!-- Danylo Pendrive -->
+	<!-- Флешка Данилы -->
 	<string id="st_wg_danylo_pendrive_quest_item">
-		<text>Danylo's pendrive</text>
+		<text>Флешка Данилы</text>
 	</string>
 
 	<string id="st_wg_danylo_pendrive_quest_item_s">
-		<text>Pendrive</text>
+		<text>Флешка</text>
 	</string>
 
 	<string id="st_wg_danylo_pendrive_quest_item_descr">
 		<text>
-			A pendrive that was stashed when Danylo was still part of the Army. Perhaps the information it contains can give a hit as to his current whereabouts. Unfortunately, humans don't yet read through plastic and semiconductors, so a device or a technician is needed to read its content.\n
+			Флешка, спрятанная ещё тогда, когда Данила служил в Армии. Возможно информация даст наводку на его настоящее местонахождение. К сожалению, люди ещё не умеют читать сквозь пластик и полупроводники, поэтому для чтения содержимого необходимо устройство или техник.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_green] � %c[ui_gray_2] informative\n
-			%c[d_blue] � %c[ui_gray_2] technological item\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_green] • %c[ui_gray_2] информация\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
 		</text>
 	</string>
 
-	<!-- SSU Deployment Notice -->
+	<!-- Уведомление отряду ВСУ -->
 	<string id="st_wg_deployment_notice_quest_item">
-		<text>SSU deployment notice</text>
+		<text>Уведомление отряду ВСУ</text>
 	</string>
 
 	<string id="st_wg_deployment_notice_quest_item_s">
-		<text>Deployment notice</text>
+		<text>Уведомление отряду</text>
 	</string>
 
 	<string id="st_wg_deployment_notice_quest_item_descr">
 		<text>
-			A military document, ordering an SSU squad to locate and eliminate "Sergeant Danylo Chernenko". The document mentions that the order follows the Sergeant's desertion, but the rest of the motive is redacted.\n
+			Военный документ, приказывающий отряду ВСУ найти и ликвидировать "Сержанта Данилу Черненко". Документ упоминает, что данный приказ отдан из-за дезертирования Сержанта, но остальные причины скрыты.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_green] � %c[ui_gray_2] informative\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_green] • %c[ui_gray_2] информация\n
 		</text>
 	</string>
 
