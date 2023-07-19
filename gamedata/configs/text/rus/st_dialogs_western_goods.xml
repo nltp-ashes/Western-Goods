@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
-<!--	Translation file for Western Goods' dialogs.															     -->
-<!--                                                                                                                 -->
+<!--	Translation file for Western Goods' general purpose strings.											     -->
+<!--	Файл локализации для строк общего назначения Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
 	<!-- ============================================================================================================-->
-	<!--	Dialog Manager Strings																					 -->
+	<!--	Строки для менеджера диалогов																					 -->
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_dm_message_header">
-		<text>Message:</text>
+		<text>Сообщение:</text>
 	</string>
 
 	<string id="st_wg_dm_default_name">
-		<text>Anonymous</text>
+		<text>Анонимно</text>
 	</string>
 
 	<!-- ============================================================================================================-->
-	<!--	Western Goods Trader (in Book Store)																	 -->
+	<!--	Торговец западными товарами (в магазине "Книги")																	 -->
 	<!-- ============================================================================================================-->
 
-	<!-- Exchange line of dialog-->
+	<!-- Размен денег -->
 	<string id="western_goods_trader_dialog_init">
-		<text>I'd like to exchange some currency. %c[d_orange][Exchange]</text>
+		<text>Я бы хотел разменять некоторую валюту. %c[d_orange][Размен]</text>
 	</string>
 
-	<!-- Meet dialog -->
+	<!-- Встреча -->
 	<string id="western_goods_trader_meet_0">
-		<text>Who are you?</text>
+		<text>Кто ты?</text>
 	</string>
 
 	<string id="western_goods_trader_meet_1">
-		<text>Do you just go around and ask random people who they are? Alright, if that's so, I'm Williams Heades, people call me "Ashes". I oversee imports from western countries for Mercenaries. I've been in the Zone for a while now, and business has never been this good.</text>
+		<text>Ты просто ходишь и спрашиваешь случайных людей, кто они? Хорошо, если так, Я Уильям Хедес, people call me "Ashes". I oversee imports from western countries for Mercenaries. I've been in the Zone for a while now, and business has never been this good.</text>
 	</string>
 
 	<string id="western_goods_trader_meet_2">
