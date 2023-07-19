@@ -40,103 +40,103 @@
 	</string>
 
 	<string id="western_goods_trader_meet_1">
-		<text>Ты просто ходишь и спрашиваешь случайных людей, кто они? Хорошо, если так, Я Уильям Хедес, people call me "Ashes". I oversee imports from western countries for Mercenaries. I've been in the Zone for a while now, and business has never been this good.</text>
+		<text>Ты просто ходишь и спрашиваешь случайных людей, кто они? Хорошо, если так, Я Уильям Хедес, люди ещё зовут меня "Ashes". Я отвечаю за импорт вещей из западных стран для Наёмников. Я был в Зоне очень долго, и бизнес никогда не был настолько выгодным.</text>
 	</string>
 
 	<string id="western_goods_trader_meet_2">
-		<text>So you're the one who imports all those goods into the Zone? I've seen other traders in the Zone with imported goods, do they also import them?</text>
+		<text>Значит, ты - тот кто импортирует все эти западные товары в Зону? Я видел импортные товары и у других торговцев, они тоже их провозят?</text>
 	</string>
 
 	<string id="western_goods_trader_meet_3">
-		<text>No, most of them get it through me. It's a real pain to get this many goods into the Zone, but as Mercenaries, we have the necessary resources to get it done.</text>
+		<text>Нет, большинство получает товары через меня. Очень сложно провезти столько припасов в Зону, но так как мы Наёмники, мы имеем необходимые ресурсы для этого.</text>
 	</string>
 
 	<string id="western_goods_trader_meet_4">
-		<text>I see. So you do business with anyone?</text>
+		<text>Я вижу. То есть вы ведёте бизнес с кем угодно?</text>
 	</string>
 
 	<string id="western_goods_trader_meet_5">
-		<text>Well you know how we are. If you pay good money, we can always find an agreement. I don't believe in most of the Zone's bullshit anyway. I take no part in these wars faction wage to each others. So long as you're not a total dumbass, we can make business together.</text>
+		<text>Ну ты знаешь как мы работаем. Если ты заплатишь хорошие деньги, мы всегда сможем договориться. В любом случае, я не верю во все эти сказки про Зону. Я не участвую в войне группировок. Если ты не полный идиот, мы можем иметь дело.</text>
 	</string>
 
 	<string id="western_goods_trader_meet_6">
-		<text>Alright.</text>
+		<text>Понятно.</text>
 	</string>
 
-	<!-- Guide dialog -->
+	<!-- Проводник -->
 	<string id="western_goods_trader_guide_ask">
-		<text>Could one of your helicopters drop me somewhere?</text>
+		<text>Может ли один из твоих вертолётов подбросить меня куда-нибудь?</text>
 	</string>
 
 	<string id="western_goods_trader_guide_dest">
-		<text>Sure, that's the least I can do for you! Where would you like to go?</text>
+		<text>Конечно, это меньшее, что я могу для тебя сделать! Куда ты хочешь отправиться?</text>
 	</string>
 
 	<string id="western_goods_trader_guide_back">
-		<text>Actually, never-mind.</text>
+		<text>Знаешь, забудь.</text>
 	</string>
 
 	<string id="western_goods_trader_guide_limansk">
-		<text>Limansk, south of the construction site. %c[d_orange][Free]</text>
+		<text>Лиманск, южнее стройплощадки. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_swamps">
-		<text>Great Swamps, at the observation outpost. %c[d_orange][Free]</text>
+		<text>Болота, на смотровую вышку. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_cordon">
-		<text>Cordon, south-east of the railway bridge. %c[d_orange][Free]</text>
+		<text>Кордон, юго-восточнее ж/д моста. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_darkscape">
-		<text>Darkscape, on the plateau. %c[d_orange][Free]</text>
+		<text>Тёмная Лощина, на плато. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_deadcity">
-		<text>Deadcity, at the mercenary base. %c[d_orange][Free]</text>
+		<text>Мёртвый город, на базу Наёмников. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_red_forest">
-		<text>Red Forest, next to the Forester's cabin. %c[d_orange][Free]</text>
+		<text>Рыжий Лес, рядом с постом Лесника. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_jupiter">
-		<text>Jupiter, at the cooling tower. %c[d_orange][Free]</text>
+		<text>Юпитер, на градирню. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_zaton">
-		<text>Zaton, near the old barge. %c[d_orange][Free]</text>
+		<text>Затон, рядом со старой баржей. %c[d_orange][Бесплатно]</text>
 	</string>
 
 	<string id="western_goods_trader_guide_deserted_hospital">
-		<text>Deserted Hospital, by the collapsed entrance. %c[d_orange][Free]</text>
+		<text>Заброшенный госпиталь, у обрушенного входа. %c[d_orange][Бесплатно]</text>
 	</string>
 
-	<!-- Western Goods Trader Trade strings -->
+	<!-- Обмен -->
 	<string id="st_wg_trader_empty_sell">
-		<text>You need to pay for the selected items (with Euros or Dollars).</text>
+		<text>Вам нужно заплатить зя выбранные вещи (Евро или Долларами).</text>
 	</string>
 
 	<string id="st_wg_trader_empty_buy">
-		<text>You haven't selected anything to buy.</text>
+		<text>Вы не выбрали, что вы хотите купить.</text>
 	</string>
 
 	<string id="st_wg_trader_uneven_value">
-		<text>You need to give, in cash, an equal or great value to what you're buying.</text>
+		<text>Вам нужно заплатить наличными равную или большую цену за то, что ты покупаешь.</text>
 	</string>
 
-	<!-- No more money barters available -->
+	<!-- Нет доступных обменов -->
 	<string id="st_wg_barter_money_desc_done">
-		<text>The trader want to keep some change for other clients, come back later.</text>
+		<text>Торговец хочет орставить сдачу для других клиентов, приходите позже.</text>
 	</string>
 
-	<!-- Dollars to Dollars barters -->
+	<!-- Размен долларов -->
 	<string id="st_wg_barter_dollars_10_to_50_desc">
-		<text>Exchange five %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]50 dollars%c[ui_gray_2] bill.</text>
+		<text>Разменяй пять банкнот по %c[d_orange]10 долларов%c[ui_gray_2]  на  одну в %c[d_orange]50 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_10_desc">
-		<text>Exchange a %c[d_orange]50 dollars%c[ui_gray_2] bill for five %c[d_orange]10 dollars%c[ui_gray_2] bills.</text>
+		<text>Разменяю одну банкноту в %c[d_orange]50 долларов%c[ui_gray_2] на пять по %c[d_orange]10 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_100_desc">
