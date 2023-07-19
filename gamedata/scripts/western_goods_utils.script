@@ -42,12 +42,26 @@ function table_contains(tab, val)
     return false
 end
 
---- Function used to get a random id (as an int) from a given table. Returns a random number between 1 and the size of the table.
+--- Function used to get a random id (as an int) from a given table.
+--- Returns a random number between 1 and the size of the table.
 --- @param tab table
 --- @return number
 function table_random_id(tab)
     if not validate_params({tab,"table_random_id"}) then return end
     return math.random(1,#tab)
+end
+
+--- Function used to get a random key from a key-value table.
+--- @param tab table
+--- @return any
+function table_random_key(tab)
+    if not validate_params({tab,"table_random_key"}) then return end
+
+    local n = {}
+    for k,v in pairs(tab) do
+        n[#n+1] = k
+    end
+    return #n > 0 and n[math.random(#n)] or nil
 end
 
 --- Function used to know if an element of a table has a next.

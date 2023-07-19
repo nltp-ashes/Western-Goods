@@ -396,12 +396,9 @@ end
 --- @param obj game_object
 --- @return boolean
 function is_tradable(sec)
-    for i,_ in pairs(western_goods_core.western_goods_items) do
-        local section = western_goods_core.table_item_field_by_key(western_goods_core.western_goods_items, i, "section")
-        local type = western_goods_core.table_item_field_by_key(western_goods_core.western_goods_items, i, "type")
-
+    for section,data in pairs(western_goods_core.western_goods_items) do
         -- Is tradable if item is in actor inventory, and is of type money
-        if sec == section and type == "money" then
+        if sec == section and data.type == "money" then
             return true
         end
     end

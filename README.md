@@ -59,13 +59,14 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.2.0 - 17/07/2023 - Major Update**
+> **v2.2.0 - 19/07/2023 - Major Update**
 > ```
 > • Additions :
 >    - Added a new device : a rangefinder (Thanks Kyne's Peace and Barry Bogs);
 > • Changes :
 >    - Redesigned how the Magazine UI works, to allow for smaller textures;
 >    - Compressed the textures used for readables/magazines;
+>    - Cleaned-up code to generate loot in corpses/traders;
 > • Bug fixes :
 >    - Fixed a quest item being marked as readable, or it wasn't;
 >    - Fixed wrong addon version in core script;
