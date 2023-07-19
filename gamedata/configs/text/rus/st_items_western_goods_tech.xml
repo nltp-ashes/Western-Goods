@@ -13,50 +13,50 @@
 <!-- ================================================================================================================-->
 <string_table>
 	<string id="st_wg_laptop">
-		<text>ASUS Laptop</text>
+		<text>Ноутбук ASUS</text>
 	</string>
 	
 	<string id="st_wg_laptop_s">
-		<text>Laptop</text>
+		<text>Ноутбук</text>
 	</string>
 	
 	<string id="st_wg_laptop_descr">
 		<text>
-			The ZenBook 13 is a laptop of the ultra-portable family. Produced by ASUS, it was surely brought into the zone by mercenaries. It seems to have been slightly damaged, making it unusable. Though its components are worth a fortune, and a trader could put a pretty price on it.\n
+			ZenBook 13 - ноутбук из разряда сверх-портативных. Произведённый компанией ASUS, он точно был привезён в зону наёмниками. Похоже он был слегка повреждён, к сожалению, из-за этого он не работает. Хотя его компоненты всё ещё могут быть проданы, и притом за хорошую цену.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_cyan] • %c[ui_gray_2] valuable\n
-			%c[d_red] • %c[ui_gray_2] unusable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+			%c[d_red] • %c[ui_gray_2] сломано, не подлежит ремонту\n
 		</text>
 	</string>
 	
 	<string id="st_wg_computer">
-		<text>Computer case</text>
+		<text>Системный блок ПК</text>
 	</string>
 	
 	<string id="st_wg_computer_s">
-		<text>Computer</text>
+		<text>ПК</text>
 	</string>
 	
 	<string id="st_wg_computer_descr">
 		<text>
-			Black computer case with what seems to be recent parts. It's definitely not an old soviet computer left behind after the 2006' "Second Disaster". Getting access to electricity in the Zone isn't given to anyone, so it'll be hard to get it working. It could always be sold to traders, modern computer parts are a rare sight these days.\n
+			Чёрный системный блок с некоторыми деталями внутри. Это определённо не старый советский компьюер, оставленный здесь до Второго Взрыва 2006. Не каждому дан постоянный доступ к электричеству в Зоне, поэтому сложно будет заставить это работать. Впрочем, его всегда можно продать торговцам, современные детали компьютеров довольно редки в наши дни.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_red] • %c[ui_gray_2] unusable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_red] • %c[ui_gray_2] невозможно использовать\n
 		</text>
 	</string>
 
 	<string id="st_wg_keyboard">
-		<text>Logitech keyboard</text>
+		<text>Клавиатура Logitech</text>
 	</string>
 	
 	<string id="st_wg_keyboard_s">
-		<text>Keyboard</text>
+		<text>Клавиатура</text>
 	</string>
 	
 	<string id="st_wg_keyboard_descr">
@@ -72,7 +72,7 @@
 	</string>
 
 	<string id="st_wg_gps">
-		<text>GPS locator</text>
+		<text>GPS локатор</text>
 	</string>
 	
 	<string id="st_wg_gps_s">
