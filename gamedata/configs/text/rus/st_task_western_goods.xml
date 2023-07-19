@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
-<!--	Translation file for Western Goods' tasks.																     -->
-<!--                                                                                                                 -->
+<!--	Translation file for Western Goods' tasks.											     -->
+<!--	Файл локализации для заданий Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
@@ -18,31 +20,31 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_1_task_1_title">
-		<text>Helicopter Delivery : Road Bumps</text>
+		<text>Вертолётная доставка : неровная дорога</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_1_stage_0_descr">
-		<text>Williams Heades was awaiting a resupply by helicopter, but the crew stop responding. Follow their GPS signal and see if everything is all right.</text>
+		<text>Уильямс Хедес ожидал пополнение запасов вертолётом, но экипаж перестал отвечать. Идите на сигнал их GPS передатчика и посмотрите, всё ли в порядке.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_1_stage_1_descr">
-		<text>The helicopter is empty. The crew isn't here. Their GPS signal is active at a sawmill not far. Head over there.</text>
+		<text>Вертолёт пуст. Экипажа здесь нет. Их GPS сигнал исходит от лесопилки неподалёку. Направляйтесь туда.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_1_stage_2_descr">
-		<text>Some of the supplies are missing, but there are a few of them left. Take them and return them.</text>
+		<text>Большей части припасов нет, но немного осталось. Заберите и отдайте их получателю.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_1_stage_3_descr">
-		<text>The crew is dead. Bring back what remains of the shipment to Williams Heades.</text>
+		<text>Экипаж погиб. Принесите остатки посылки Уильямсу Хедесу.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_1_job_descr">
-		<text>You want to help me? I'm awaiting a delivery. The shipment is being conveyed with a helicopter towards Zaton.\n \nProblem is, I've sent multiple messages to the crew of the helicopter, and they won't answer me. These guys are real pros, so I'm not too worried. I'd go out there and check myself, but I need to meet someone important here soon.\n \nCan you go to the delivery point, and see if everything is all right? Tell the crew I sent you. And tell them to answer the god-damn messages, while you're at it.</text>
+		<text>Ты хочешь мне помочь? Я ожидаю доставки. Товар перевозится вертолётом на Затон.\n \n Проблема в том, что я уже несколько раз отправлял сообщения экипажу, и они не отвечают. Эти ребята - реальные профессионалы, поэтому сильно я не беспокоюсь. Я бы пошёл туда и проверил сам, но у меня здесь скоро встреча с важным человеком.\n \nТы не мог бы сходить на точку доставки и посмотреть, всё ли в порядке. Скажи экипажу, что тебя послал я, и чтобы они ответили на чёртовы сообщения.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_1_task_complete_descr">
-		<text>You made it! Thank god... This whole delivery is such a mess. So, the crew was dead? Damn it. These guys were tough, whatever got them must be serious business. At least you were able to recover some of it. I wonder where the rest went. Hell, I wonder why they even left the helicopter behind.\n \nI'll ask the guys at the Waste Processing Station in Zaton to go investigate. I cannot have that happen again. It's hard enough getting these supplies in the Zone, I don't need stuff like this to happen everytime.\n \nAnyway, thanks for your help Stalker. Good to know I can count on you.</text>
+		<text>Ты сделал это! Слава Богу... Вся эта доставка - большая проблема. Значит, экипаж был мёртв? Чёрт. Ребята были что надо, чтобы их ни убило, оно должно быть серьёзной проблемой. Ты хотя бы спас часть посылки. Интересно, куда делось остальное. Блин, Я не понимаю, почему они даже оставили свой вертолёт.\n \nЯ попрошу парней со Станции переработки отходов проверить. Я не могу позволить этому случиться ещё раз. И без того сложно провозить товар в Зону, мне не хватало ещё и этого.\n \nВ любом случае, спасибо за помощь, Сталкер.  Хорошо, что я могу на тебя рассчитывать.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -50,35 +52,35 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_1_task_2_title">
-		<text>Helicopter Delivery : Conspiracy</text>
+		<text>Вертолётная доставка : Конспирация</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_stage_0_descr">
-		<text>The Mercs at the Waste Processing Station secured the helicopter. Some of its electronics were fried. Some Stalkers over at Yanov station talk about strange lights. Continue the investigation from here.</text>
+		<text>Наёмники со Станции переработки отходов осмотрели вертолёт. Часть его электроники сгорела. Сталкеры на Янове говорят о странном свете. Продолжайте расследование отсюда.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_stage_1_descr">
-		<text>The stalker you found at Yanov station talked about strange lights coming from the Container Warehouse. Keep investigating.</text>
+		<text>Сталкер, найденный вами на станции Янов говорил о странном свете, исходящем со Склада контейнеров. Продолжайте расследование.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_stage_2_descr">
-		<text>The helicopter has spotted bandit reinforcements ! Defend your position.</text>
+		<text>Вертолёт обнаружил отряды бандитов ! Защищайте вашу позицию.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_stage_3_descr">
-		<text>Find clues that could explain what happened to the helicopter.</text>
+		<text>Найдите зацепки, объясняющие произошедшей с вертолётом.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_stage_4_descr">
-		<text>Bring back the clues you found to Williams Heades.</text>
+		<text>Отнесите найденные зацепки Уильямсу Хедесу.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_job_descr">
-		<text>You remember the helicopter delivery you help me with? Well, I sent a few squads to secure and retrieve the helicopter. They spent hours getting its electronics back in shape. Half of it was fried. Anyway, thankfully they were able to get it flying again, helicopters aren't exactly cheap.\n \nI really don't like what's happening. I've heard rumors a group of bandits settled at the Container Warehouse in Jupiter. Some Stalkers over at Yanov station keep saying they see bright flashes at night coming from that place. The helicopter flew over that place, so I worried the two might be connected.\n \nCould you go there and clarify just what is going on?</text>
+		<text>Ты помнишь вертолётную доставку, с которой ты мне помог? Хорошо, Я отправил пару отрядов, чтобы они осмотрели и вернули вертолёт. Они потратили часы, ремонтирую его электронику. Её половина была сожжена. В любом случае, к счастью, им удалось заставить машину летать, вертолёты не то чтобы дешёвые.\n \nМне не нравится то, что происходит. Я слышал о том, что группа бандитов обосновалась на Складе контейнеров на Юпитере. Некоторые сталкеры на станции Янов говорят, что они ночью видят яркие вспышки, исходящие оттуда. Вертолёт пролетал здесь, поэтому я подозреваю, что факты могут быть как-то связаны.\n \nНе мог бы ты сходить туда и выяснить, что происходит?</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_2_task_complete_descr">
-		<text>Let's see... Hm, so it was just Bandits? You see, this is exactly what I told you. I don't care about conflicts in the Zone, I take people for what they are. Except for Bandits. I don't know why Dushman wants to keep good relations with them. We should just eradicate them all. Vermin.\n \nAnyway - sorry, I got carried away - Thank you for helping me to figure this whole thing out. At least it wasn't a targeted attack, so business shouldn't be impacted too much.</text>
+		<text>Посмотрим... Хм, это были просто бандиты? Видишь, о чём я тебе и говорил. Меня не волнуют конфликты в Зоне, я принимаю людей такими, какие они есть. Кроме бандитов. Не знаю, почему Душман хочет сохранить с ними хорошие отношения. Мы должны просто стереть их. Паразиты.\n \nВ любом случае - прости, меня немного унесло - Спасибо за помощь в этом расследовании. Это хотя бы не было направленной атакой, так что это не должно сильно повлиять на бизнес.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -86,35 +88,35 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_1_task_3_title">
-		<text>Helicopter Delivery : The Rescue</text>
+		<text>Вертолётная доставка : Спасение</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_stage_0_descr">
-		<text>A mercenary scouting team spotted what seems to be one of their own, captured by Monolith forces. Rescue him.</text>
+		<text>Разведотряд наёмников обнаружил одного из них, захваченного силами Монолита. Спасите его.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_stage_1_descr">
-		<text>The rescued Merc isn't in good shape. Escort him safely to the bridge, in the Red Forest, where he will be evacuated.</text>
+		<text>Спасённый Наёмник не в лучшей форме. Сопроводите его в безопасности до моста в Рыжем лесу, где его эвакуируют.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_stage_2_descr">
-		<text>Enemies across the bridge will prevent the helicopter from landing. Clear the area.</text>
+		<text>Враги по другую сторону моста не дадут вертолёту сесть. Зачистите территорию.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_stage_3_descr">
-		<text>Wait for the helicopter to pick up the rescued Merc.</text>
+		<text>Дождитесь вертолёта для эвакуации раненого.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_stage_4_descr">
-		<text>The Merc was successfully rescued and extracted. Come back to Williams Heades.</text>
+		<text>Наёмник был успешно спасён и эвакуирован. Возвращайтесь к Уильямсу Хедесу.</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_job_descr">
-		<text>I'm glad you ask. There is a situation you can help me with. We often send squads deep into the Zone to keep track of enemy movements, and define safe corridors for the helicopters to go through.\n \nA few hours ago, one of our squads came back and said the spotted a stalker taken hostage by a Monolith group. They said it could have been one of our own, but they couldn't get close enough to make sure. And considering how many Monolithians they spotted, no-one wants to go there and find out.\n \nI know it's a tall ask, but could you head there and make sure we're not leaving someone behind?</text>
+		<text>Я рад, что ты спросил. Здесь есть ситуация, в которой ты можешь мне помочь. Мы часто посылаем отряды вглубь Зоны для отслеживания передвижений противника, и определения безопасных коридоров для вертолётов.\n \nПару часов назад, один из наших отрядов вернулся на базу и сообщил об обнаружении сталкера-заложника у отряда "Монолита". Они сказали, что он может быть одним из наших, но они не смогли подойти достаточно близко для уверенности. И, учитывая количество обнаруженных монолитовцев, никто не хочет идти туда и узнать.\n \nЯ знаю, что прошу многого, но не мог бы ты сходить туда и удостовериться, что мы никого не бросаем?</text>
 	</string>
 	
 	<string id="st_wg_act_1_task_3_task_complete_descr">
-		<text>Yeah, the helicopter dropped him off here about an hour ago. Thanks for rescuing him!\n \nI don't know if he was able to tell you when you escorted him back to the Red Forest, but he was actually the co-pilot from the first crew of the helicopter, the one you found dead in the Sawmill at Zaton.\n \nAnyway, I gave him some meds to try and tame his confusion.\n \nOh, before I forget, he said he wanted to see you.</text>
+		<text>Ага, вертолёт привёз его сюда примерно час назад. Спасибо за его спасение!\n \nЯ не знаю, мог ли он тебе сказать во время спасения, но он - второй пилот из первого экипажа вертолёта, найденного тобой на Лесопилке на Затоне.\n \nВ любом случае, Я дал ему медикоментов, чтобы он поправился от последних потрясений.\n \nО, пока я не забыл, он сказал, что хотел бы тебя видеть.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -124,23 +126,23 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_2_task_1_title">
-		<text>Contract Work : Kolobok</text>
+		<text>Работа по контракту : Колобок</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_stage_0_descr">
-		<text>Dushman has an important client asking for a Kolobok. Find one and deliver it in Deadcity.</text>
+		<text>У Душмана есть важный клиент, ищущий артефакт "Колобок". Найдите и принесите один в Мётвый город.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_stage_1_descr">
-		<text>You found the Kolobok. Return it to Dushman, so he can get it to his client.</text>
+		<text>Вы нашли Колобок. Отдайте его Душману, чтобы он отдал его клиенту.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_job_descr">
-		<text>Special work? Big clients don't tend to trust anyone. Look, if you want, one of my clients asked us to find them a Kolobok. This is a quite rare and valuable artefact. So if you can resit selling it for money and bring one to me, it'll be a start to prove you're trustworthy.\n \nIf you handle that, I'll let in a word telling them you're looking for more work, deal?</text>
+		<text>Специальная работа? Влиятельные клиенты на доверяют, кому попало. Смотри, если ты хочешь, один из моих клиентов попросил найти ему Колобок. Это довольно редкий и ценный артефакт. Так что, если ты сможешь не продать и принести мне один, это будет хорошим стартом для того, чтобы доказать мне свою надёжность.\n \nЕсли ты справишься с этим, я скажу ему, что тебе не помешала бы ещё работа, договорились?</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_task_complete_descr">
-		<text>Alright, so you are indeed a man of your word.\n \nYou held your end of the deal, and I'll hold mine. Do you still want me to tell my client you're looking for more work?</text>
+		<text>Отлично, ты действительно человек слова.\n \nТы выполнил свою часть сделки, и я выполню свою. Ты ещё заинтересован в работе на важного клиента?</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -148,67 +150,67 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_2_task_2_title">
-		<text>Contract Work : Retrieval Mission</text>
+		<text>Работа по контракту : поисковая миссия</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_0_descr">
-		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
+		<text>Найдите документы, перевозимые конвоем учёных. Локация - Окраины Припяти.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_1_descr">
-		<text>Zombies lie in your way, clear them out before advancing.</text>
+		<text>Зомби преграждают вам путь, зачистите их перед дальнейшими действиями.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_2_descr">
-		<text>A deployment of soldiers is clearing a group of zombies. Wait for them to move on or clear the path yourself.</text>
+		<text>Отряд солдат расчищает группу зомби. Дождитесь, когда они закончат или расчистите путь сами.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_3_descr">
-		<text>Get to the school, but kill or escape any pursuer before you get there.</text>
+		<text>Доберитесь до школы, но убейте или скройтесь от преследователей, до того как вы придёте.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_4_descr">
-		<text>Get to the school, and avoid being noticed while getting there.</text>
+		<text>Доберитесь до школы, но оставайтесь незамеченным в пути.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_5_descr">
-		<text>Get to the basement of the school and hide there while the convoy arrives.</text>
+		<text>Доберитесь до подвала школы и спрячьтесь здесь до того, как конвой прибудет.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_6_descr">
-		<text>Get to the basement of the school and hide there while the convoy arrives.</text>
+		<text>Доберитесь до подвала школы и спрячьтесь здесь, пока конвой прибывает.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_7_descr">
-		<text>The convoy is about to arrive, get to the third floor of the school.</text>
+		<text>Конвой сейчас будет здесь, заберитесь на третий этаж школы.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_8_descr">
-		<text>The convoy is about to arrive, find a position at one of the windows to ambush the convoy. Wait for confirmation from your contact before opening fire.</text>
+		<text>Конвой сейчас будет здесь, найдите позицию у одного из окон для засады. Дождитесь подтверждения от контакта до открытия огня.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_9_descr">
-		<text>The convoy has been attacked by bandits. Wait for confirmation from your contact before opening fire.</text>
+		<text>Конвой атакован бандитами. Дождитесь подтверждения от контакта до открытия огня.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_10_descr">
-		<text>An emission is about to hit, take cover in the basement now !</text>
+		<text>Выброс скоро начнётся, спрячьтесь подвале сейчас же !</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_11_descr">
-		<text>The scientists fled during the emission. Get to their last known GPS location.</text>
+		<text>Учёные скрылись во время выброса. Доберитесь до их последнего известного местоположения.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_12_descr">
-		<text>Get the package from the Ecologist, in the KBO.</text>
+		<text>Заберите посылку у Эколога, в КБО.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_stage_13_descr">
-		<text>You have found the package. Retrieve it to your contact.</text>
+		<text>Вы нашли посылку. Отнесите её контакту.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_job_descr">
-		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
+		<text>Найдите документы, перевозимые конвоем учёных. Локация - Окраины Припяти.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -218,23 +220,23 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_3_task_1_title">
-		<text>Chernenko Brothers : Old Stash</text>
+		<text>Братья Черненко : Старый тайник</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_stage_0_descr">
-		<text>The brother of one of the traders at the Flea Market is missing. When they used to be in the Army, they kept a stash in the Agroprom Underground. Locate and investigate the stash.</text>
+		<text>Брат одного из торговцев на Барахолке пропал. Когда они служили в Армии, они содержали тайник в подземельях Агропрома. Найдите и осмотрите тайник.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_stage_1_descr">
-		<text>Get the USB drive you found in the Chernenko brothers' stash.</text>
+		<text>Заберите найденную в тайнике Черненко USB флешку.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_stage_2_descr">
-		<text>You found the Chernenko brothers' stash. It contained a USB pendrive. Find a way to access its content.</text>
+		<text>Вы нашли тайник братьев Черненко. Он содержал USB флешку. Найдите способ узнать её содержимое.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_stage_3_descr">
-		<text>The USB pendrive contained, among other things, a map with handwritten drawings. Find the location shown on that map.</text>
+		<text>USB флешка содержала, кроме прочего, карту с рукописными рисунками. Найдите место, показанное на карте.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -242,27 +244,27 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_3_task_2_title">
-		<text>Chernenko Brothers : Pursuers</text>
+		<text>Братья Черненко : Преследователи</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_stage_0_descr">
-		<text>You found Oleksandr's brother. It seems some people are looking for him. Interrogate the SSU soldier he captured and try to obtain information.</text>
+		<text>Вы нашли брата Александра. Похоже, что его ищут некоторые лица. Добросите пойманного им солдата ВСУ и попытайтесь получить из него информацию.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_stage_1_descr">
-		<text>After interrogating the SSU soldier, he revealed the location of another SSU squad. Head to their location, and eliminate them.</text>
+		<text>После допроса солдата, он раскрыл местоположение другого отряда ВСУ. Отправляйтесь туда и уничтожьте его.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_stage_2_descr">
-		<text>You eliminated the SSU squad, investigate the bodies for useful information.</text>
+		<text>Вы уничтожили отряд ВСУ, обыщите тела для получения полезной информации.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_stage_3_descr">
-		<text>One of the soldiers of the SSU squad you eliminated was in possession of a deployment notice. Get it and return it to Danylo.</text>
+		<text>Один из солдат уничтоженного вами отряда имел при себе Приказ о развертывании. Заберите его и отнесите Даниле.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_stage_4_descr">
-		<text>Return the deployment notice you found to Danylo.</text>
+		<text>Отнесите Приказ о развертывании Даниле.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -270,15 +272,15 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_3_task_3_title">
-		<text>Chernenko Brothers : Head of Operations</text>
+		<text>Братья Черненко : Глава операций</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_stage_0_descr">
-		<text>Find and eliminate the corrupt SSU supervisor. His last known whereabouts is the Machine Yard, in the Great Swamps.</text>
+		<text>Найдите и уничтожьте коррумпированного командира ВСУ. Его последнее местоположение - Механизаторский двор, на Болотах.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_stage_1_descr">
-		<text>The SSU supervisor is eliminated. Return to Danylo.</text>
+		<text>Командир ВСУ ликвидирован. Вернитесь к Даниле.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -286,15 +288,15 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_act_3_task_4_title">
-		<text>Chernenko Brothers : Reunion</text>
+		<text>Братья Черненко : Воссоединение</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_stage_0_descr">
-		<text>With the Army taken care of, Danylo wants to reunite with his brother. Meet with Danylo.</text>
+		<text>После того, как с армией покончено, Данила хочет воссоединиться с братом. Встретьтесь с Данилой.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_stage_1_descr">
-		<text>With the Army taken care of, Danylo wants to reunite with his brother. Escort him to the Flea Market, in the Garbage.</text>
+		<text>После того, как с армией покончено, Данила хочет воссоединиться с братом. Проводите его до Барахолки на Свалке.</text>
 	</string>
 
 </string_table>
