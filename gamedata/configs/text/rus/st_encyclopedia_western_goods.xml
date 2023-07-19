@@ -22,66 +22,66 @@
         <text>
 		%c[pda_white]Уильямс "Ashes" Хедес%c[ui_gray_1] - торговец. Он находится в магазине "Книги" в Окраинах Припяти.\n
 		\n%c[pda_green]Информация%c[ui_gray_1]\n
-		\nWilliams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece.\n
-		\nHe was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.\n
-		\n%c[pda_yellow]Trivia%c[ui_gray_1]\n
-		\n• This trader is the main importer for western goods in the Zone.
+		\nУильямс "Ashes" Хедес - наёмник. Бывший солдат ООН, он бывал на многих театрах военных действий в составе спецназа миротворческих сил ООН. Он воевал во время восстания 2010 года в Алтисе, в Греции.\n
+		\nПозже он был отправлен в Чернобыльскую зону отчуждения в составе отряда ИИГ. Не известно, какую задачу перед ним поставли, всё что знают люди - это то, что он решил не уходить вместе с остальными членами отряда, а остаться в Зоне.\n
+		\n%c[pda_yellow]Факты%c[ui_gray_1]\n
+		\n• Этот торговец - главный импортер западных товаров в Зоне.
         </text>
     </string>
 
     <!-- GPS locator encyclopedia entry -->
     <string id="encyclopedia_items_western_goods_gps">
-        <text>GPS Locator</text>
+        <text>GPS Локатор</text>
     </string>
 
     <string id="encyclopedia_items_western_goods_gps_text">
         <text>
-		%c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
-		\n%c[pda_green]Information%c[ui_gray_1]\n
+		%c[pda_white]GPS локатор%c[ui_gray_1] - устройство, предназначенное для определения дистанции и названия ближайшей известной территории.\n
+		\n%c[pda_green]Информация%c[ui_gray_1]\n
         \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
         \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
-		\n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
+		\n• %c[pda_white]Очень низкое потребление энергии%c[ui_gray_1]. Требует зарядки примерно раз в год.
         </text>
     </string>
 
     <!-- Flea Market encyclopedia entry -->
     <string id="encyclopedia_features_western_goods_flea">
-        <text>Flea Market</text>
+        <text>Барахолка</text>
     </string>
 
     <string id="encyclopedia_features_western_goods_flea_text">
         <text>
-            The %c[pda_white]Flea Market%c[ui_gray_1] allows the player to purchase temporary offers, where items come in multiple units, but at a discount.\n
-            \n%c[pda_green]Information%c[ui_gray_1]\n
+            %c[pda_white]Барахолка%c[ui_gray_1] посволяет игроку покупать временные предложения, где вещи продаются в нескольких экземплярах, но со скидкой.\n
+            \n%c[pda_green]Информация%c[ui_gray_1]\n
             \nBy talking to a trader at the Flea Market, the player has the option to purchase special offers. These offers are limited in time, and will eventually expire and get replaced with newer offers.\n
-            \nOffers consist of the following:\n
-            \n• %c[pda_white]Item%c[ui_gray_1]. The item contained in the offer;
-            \n• %c[pda_white]Quantity%c[ui_gray_1]. The quantity of the item contained in the offer. Randomized between 2 and 10 items;
-            \n• %c[pda_white]Discount%c[ui_gray_1]. The discount applied compared to the regular price. Randomized between 5% and 50%;
-            \n• %c[pda_white]Price%c[ui_gray_1]. The money required to accept the offer.
+            \nПредложение описывается так:\n
+            \n• %c[pda_white]Предмет%c[ui_gray_1]. Предлагаемая вещь;
+            \n• %c[pda_white]Кол-во%c[ui_gray_1]. Количество предметов в предложении. Колеблется между 2 и 10 предметами;
+            \n• %c[pda_white]Скидка%c[ui_gray_1]. Скидка по сравнению с базовой ценой. Колеблется между  5% и 50%;
+            \n• %c[pda_white]Цена%c[ui_gray_1]. Необходимое для покупки количество денег.
         </text>
     </string>
 
     <!-- Oleksandr Chernenko encyclopedia entry -->
     <string id="encyclopedia_characters_western_goods_oleksandr">
-        <text>Captain Oleksandr Chernenko</text>
+        <text>Капитан Александр Черненко</text>
     </string>
 
     <string id="encyclopedia_characters_western_goods_oleksandr_text">
         <text>
-            %c[pda_white]Captain Oleksandr Chernenko%c[ui_gray_1] is a trader. He can be found at the Flea Market (Garbage).\n
-            \n%c[pda_green]Information%c[ui_gray_1]\n
-            \nCaptain Oleksandr Chernenko is a former Army soldier, turned Mercenary. He said he deserted when the army tasked him with a suicide mission, although little details are know about what this mission was, as he seems to not enjoy talking about it.\n
-            \nThese days, he can be found in the basement of the Flea Market, at the Garbage. He offers packages of items, at a discount. The sale of these packages is usually limited in time.\n
-            \n%c[pda_yellow]Trivia%c[ui_gray_1]\n
-            \n• This trader manages the Mercenary's flea market offerings;
-            \n• This trader can sometimes sell packages containing western goods.
+            %c[pda_white]Капитан Александр Черненко%c[ui_gray_1] - торговец. Его можно найти на Барахолке, на Свалке.\n
+            \n%c[pda_green]Информация%c[ui_gray_1]\n
+            \nКапитан Александр Черненко - бывший военный, ставший наёмником. Он говорит что он дезертировал, когда командование отпрвило его на самоубийственную миссию, очень малое известно о той миссии, так как он не хочет об этом говорить.\n
+            \nСейчас его можно найти в подвале Барахолки, на Свалке. Он предлагает наборы предметов по скидке. Продажа таких наборов обычно ограничена во времени.\n
+            \n%c[pda_yellow]Факты%c[ui_gray_1]\n
+            \n• Этот торговец продает специальные предложения;
+            \n• Иногда продаёт посылки с импортными припасами.
         </text>
     </string>
 
     <!-- Hand drawn map encyclopedia entry -->
     <string id="encyclopedia__notes_western_goods_hand_drawn_map">
-        <text>Hand drawn map</text>
+        <text>Рукописная карта</text>
     </string>
 
     <string id="encyclopedia__notes_western_goods_hand_drawn_map_text">
