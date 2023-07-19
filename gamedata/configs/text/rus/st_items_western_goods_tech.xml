@@ -28,7 +28,7 @@
 			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
 			%c[d_blue] • %c[ui_gray_2] импортный\n
 			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
-			%c[d_red] • %c[ui_gray_2] сломано, не подлежит ремонту\n
+			%c[d_red] • %c[ui_gray_2] невозможно использовать\n
 		</text>
 	</string>
 	
@@ -61,13 +61,13 @@
 	
 	<string id="st_wg_keyboard_descr">
 		<text>
-			Damaged Logitech keyboard. It's none of those fancy keyboards for video games, but just a simple keyboard. It seems too damaged to be used, although it's still a good source of electronic components.\n
+			Повреждённая клавиатура марки Logitech. Это не одна из модных игровых клавиатур, а просто клавиатура. Слишком повреждённая, чтобы работать, всё ещё служит источником электронных компонентов.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_red] • %c[ui_gray_2] broken beyond repair\n
-			%c[d_red] • %c[ui_gray_2] unusable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_red] • %c[ui_gray_2] сломано, не подлежит ремонту\n
+			%c[d_red] • %c[ui_gray_2] невозможно использовать\n
 		</text>
 	</string>
 
@@ -81,97 +81,97 @@
 	
 	<string id="st_wg_gps_descr">
 		<text>
-			A really rare piece of equipment in the Zone. It seems to be a military grade GPS locator, usually used by NATO countries. It probably found its way into the Zone when the ISG was still around. It indicates the name and the distance to the nearest area. It also shows the name of the region of the Zone the user is located in. That being said, its database seems outdated. Some areas well known by stalkers are missing.\n
+			Действительно редкое снаряжение в Зоне. Выглядит, как военный GPS локатор, использующийся, в основном, войсками NATO. Скорее всего, попал в Зону во время пребывания здесь ИИГ. Устройство показывает название и дистанцию до ближайшей территории. Также показывает и регион Зоны, в котором находится пользователь. Похоже, что база данных устарела. Некоторых, хорошо известных сталкерам территорий здесь нет.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] military item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_cyan] • %c[ui_gray_2] valuable\n
-			%c[d_orange] • %c[ui_gray_2] usable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] военная вещь\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+			%c[d_orange] • %c[ui_gray_2] возможно использовать\n
 		</text>
 	</string>
 
 	<string id="st_wg_military_decoder">
-		<text>Military decoder</text>
+		<text>Военный декодер</text>
 	</string>
 	
 	<string id="st_wg_military_decoder_s">
-		<text>Military decoder</text>
+		<text>Военный декодер</text>
 	</string>
 	
 	<string id="st_wg_military_decoder_descr">
 		<text>
-			This seems to be an advanced military decoder. It has english inscriptions all-around, so it probably comes from outside the Zone. It's not really of any use for the everyday stalker, but traders often look for these rare devices.\n
+			Это высокотехнологичный военный декодер. Повсюду имеет английские надписи, поэтому, скорее всего он прибыл из-за пределов Зоны. Не то чтобы каждый день сталкеру нужен декодер, но торговцы часто ищут подобные редкие устройства.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] military item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_cyan] • %c[ui_gray_2] valuable\n
-			%c[d_red] • %c[ui_gray_2] unusable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] военная вещь\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+			%c[d_red] • %c[ui_gray_2] невозможно использовать\n
 		</text>
 	</string>
 
 	<string id="st_wg_military_radio">
-		<text>Military radio</text>
+		<text>Военная рация</text>
 	</string>
 	
 	<string id="st_wg_military_radio_s">
-		<text>Military radio</text>
+		<text>Военная рация</text>
 	</string>
 	
 	<string id="st_wg_military_radio_descr">
 		<text>
-			A military radio with a long range antenna. It's very visibly not from the Zone. It seems to be in good condition. With the right equipment, someone could get it working. Traders often look for those long range radios to communicate with each others.\n
+			Военная рация с антенной дальнего радиуса. Видно, что устройство не из Зоны. Похоже, компоненты ещё в хорошем состоянии. С нужным оборудованием, кто-то мог бы починить её. Торговцы часто интересуются такими рациями для связи друг с другом.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] military item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_cyan] • %c[ui_gray_2] valuable\n
-			%c[d_red] • %c[ui_gray_2] unusable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] военная вещь\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+			%c[d_red] • %c[ui_gray_2] невозможно использовать\n
 		</text>
 	</string>
 
 	<string id="st_wg_lighter_bic">
-		<text>BIC lighter</text>
+		<text>Зажигалка BIC</text>
 	</string>
 
 	<string id="st_wg_lighter_bic_s">
-		<text>BIC lighter</text>
+		<text>Зажигалка BIC</text>
 	</string>
 
 	<string id="st_wg_lighter_bic_descr">
 		<text>
-			A standard BIC lighter. Not commonly found in the Zone, this lighter is readily available in western European countries. A full lighter can usually light up 20 cigarettes.\n
+			Обычная одноразовая зажигалка BIC. Её редко можно найти в Зоне, но в странах западной Европы она довольно распространена. Полная зажигалка обычно может зажечь около 20 сигарет.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] everyday item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_orange] • %c[ui_gray_2] usable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] повсевместное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_orange] • %c[ui_gray_2] можно использовать\n
 		</text>
 	</string>
 
 	<string id="st_wg_rangefinder">
-		<text>SigSauer KILO5K Laser Rangefinder</text>
+		<text>Лазерный дальномер SigSauer KILO5K</text>
 	</string>
 
 	<string id="st_wg_rangefinder_s">
-		<text>KILO5K Rangefinder</text>
+		<text>Дальномер KILO5K</text>
 	</string>
 
 	<string id="st_wg_rangefinder_descr">
 		<text>
-			Sig Sauer’s KILO5K 7x25mm laser rangefinder delivers precise ranging capabilities in a compact package. This rangefinder features a binocular style eye cup and diopter adjustment. The maximum range on a reflective target is 5,000 yards, and the maximum range on a deer is 2,000 yards.\n
+			7х25мм лазерный дальномер Sig Sauer’s KILO5K даёт точное измерение расстояния при небольшом размере. Дальномер имеет подобный бинокулярному наглазник и диоптрический регулятор. Максимальное расстояние измерения составляет 5000 ярдов для отражающей поверхности и 2000 для, например, оленя.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] • %c[ui_gray_2] technological item\n
-			%c[d_blue] • %c[ui_gray_2] military item\n
-			%c[d_blue] • %c[ui_gray_2] imported\n
-			%c[d_cyan] • %c[ui_gray_2] valuable\n
-			%c[d_orange] • %c[ui_gray_2] usable\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+			%c[d_blue] • %c[ui_gray_2] военная вещь\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+			%c[d_red] • %c[ui_gray_2] возможно использовать\n
 		</text>
 	</string>
 </string_table>
