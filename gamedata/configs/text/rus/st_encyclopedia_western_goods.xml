@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
-<!--	Translation file for Western Goods' entries in the PDA Guide.											     -->
-<!--                                                                                                                 -->
+<!--	Translation file for Western Goods' general purpose strings.											     -->
+<!--	Файл локализации для строк общего назначения Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
     <!-- Western goods trader encyclopedia entry -->
     <string id="encyclopedia_characters_western_goods_ashes">
-        <text>Williams "Ashes" Heades</text>
+        <text>Уильямс "Ashes" Хедес</text>
     </string>
 
     <string id="encyclopedia_characters_western_goods_ashes_text">
         <text>
-		%c[pda_white]Williams "Ashes" Heades%c[ui_gray_1] is a trader. He hangs around at the Book Store (Pripyat Outskirts).\n
-		\n%c[pda_green]Information%c[ui_gray_1]\n
+		%c[pda_white]Уильямс "Ashes" Хедес%c[ui_gray_1] - торговец. Он находится в магазине "Книги" в Окраинах Припяти.\n
+		\n%c[pda_green]Информация%c[ui_gray_1]\n
 		\nWilliams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece.\n
 		\nHe was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.\n
 		\n%c[pda_yellow]Trivia%c[ui_gray_1]\n
-		\n� This trader is the main importer for western goods in the Zone.
+		\n• This trader is the main importer for western goods in the Zone.
         </text>
     </string>
 
@@ -38,7 +40,7 @@
 		\n%c[pda_green]Information%c[ui_gray_1]\n
         \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
         \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
-		\n� %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
+		\n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
         </text>
     </string>
 
@@ -53,10 +55,10 @@
             \n%c[pda_green]Information%c[ui_gray_1]\n
             \nBy talking to a trader at the Flea Market, the player has the option to purchase special offers. These offers are limited in time, and will eventually expire and get replaced with newer offers.\n
             \nOffers consist of the following:\n
-            \n� %c[pda_white]Item%c[ui_gray_1]. The item contained in the offer;
-            \n� %c[pda_white]Quantity%c[ui_gray_1]. The quantity of the item contained in the offer. Randomized between 2 and 10 items;
-            \n� %c[pda_white]Discount%c[ui_gray_1]. The discount applied compared to the regular price. Randomized between 5% and 50%;
-            \n� %c[pda_white]Price%c[ui_gray_1]. The money required to accept the offer.
+            \n• %c[pda_white]Item%c[ui_gray_1]. The item contained in the offer;
+            \n• %c[pda_white]Quantity%c[ui_gray_1]. The quantity of the item contained in the offer. Randomized between 2 and 10 items;
+            \n• %c[pda_white]Discount%c[ui_gray_1]. The discount applied compared to the regular price. Randomized between 5% and 50%;
+            \n• %c[pda_white]Price%c[ui_gray_1]. The money required to accept the offer.
         </text>
     </string>
 
@@ -72,8 +74,8 @@
             \nCaptain Oleksandr Chernenko is a former Army soldier, turned Mercenary. He said he deserted when the army tasked him with a suicide mission, although little details are know about what this mission was, as he seems to not enjoy talking about it.\n
             \nThese days, he can be found in the basement of the Flea Market, at the Garbage. He offers packages of items, at a discount. The sale of these packages is usually limited in time.\n
             \n%c[pda_yellow]Trivia%c[ui_gray_1]\n
-            \n� This trader manages the Mercenary's flea market offerings;
-            \n� This trader can sometimes sell packages containing western goods.
+            \n• This trader manages the Mercenary's flea market offerings;
+            \n• This trader can sometimes sell packages containing western goods.
         </text>
     </string>
 
