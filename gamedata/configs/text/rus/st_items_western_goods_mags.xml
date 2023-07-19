@@ -1,157 +1,159 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
-<!--	Translation file for Western Goods' magazines items.													     -->
-<!--                                                                                                                 -->
+<!--	Translation file for Western Goods' general purpose strings.											     -->
+<!--	Файл локализации для строк общего назначения Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
 	<string id="st_wg_porn_mag_1">
-		<text>PLAYBOY magazine (Chloe Khan)</text>
+		<text>PLAYBOY журнал (Хлоя Хан)</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_1_s">
-		<text>PLAYBOY (Chloe Khan)</text>
+		<text>PLAYBOY (Хлоя Хан)</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_1_descr">
 		<text>
-			One of the last of these magazines to be printed before their switch to a digital version. Unlike soviet magazines of the same kind that are often found in the Zone, it does not look like it has been through hell and back. Besides a few missing pages, it is almost complete. It probably found its way in the Zone from mercs, they've been known to import western goods lately.\n
+			Один из последних журналов, распечатанных до перехода на цифровую версию. В отличий от советских журналов того же вида в Зоне, он не выглядит, как прошедший сквозь ад. Не считая пары вырванных страниц, он почти целый. Скорее всего, он попал в зону через наёмников, они известны своими импортными вещами.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_2">
-		<text>PLAYBOY magazine (Nicole Whitehead)</text>
+		<text>PLAYBOY журнал (Николь Уайтхед)</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_2_s">
-		<text>PLAYBOY (Nicole Whitehead)</text>
+		<text>PLAYBOY (Николь Уайтхед)</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_2_descr">
 		<text>
-			One of the last of these magazines to be printed before their switch to a digital version. Unlike soviet magazines of the same kind that are often found in the Zone, it does not look like it has been through hell and back. Besides a few missing pages, it is almost complete. It probably found its way in the Zone from mercs, they've been known to import western goods lately.\n
+			Один из последних журналов, распечатанных до перехода на цифровую версию. В отличий от советских журналов того же вида в Зоне, он не выглядит, как прошедший сквозь ад. Не считая пары вырванных страниц, он почти целый. Скорее всего, он попал в зону через наёмников, они известны своими импортными вещами.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_3">
-		<text>PLAYBOY magazine (Carrie Stevens)</text>
+		<text>PLAYBOY журнал (Кэрри Стивенс)</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_3_s">
-		<text>PLAYBOY (Carrie Stevens)</text>
+		<text>PLAYBOY (Кэрри Стивенс)</text>
 	</string>
 	
 	<string id="st_wg_porn_mag_3_descr">
 		<text>
-			One of the last of these magazines to be printed before their switch to a digital version. Unlike soviet magazines of the same kind that are often found in the Zone, it does not look like it has been through hell and back. Besides a few missing pages, it is almost complete. It probably found its way in the Zone from mercs, they've been known to import western goods lately.\n
+			Один из последних журналов, распечатанных до перехода на цифровую версию. В отличий от советских журналов того же вида в Зоне, он не выглядит, как прошедший сквозь ад. Не считая пары вырванных страниц, он почти целый. Скорее всего, он попал в зону через наёмников, они известны своими импортными вещами.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 	
 	<string id="st_wg_xbox_mag_1">
-		<text>Xbox : The Official Magazine (March 2002)</text>
+		<text>Xbox : Оффициальный журнал (Март 2002)</text>
 	</string>
 	
 	<string id="st_wg_xbox_mag_1_s">
-		<text>Xbox magazine</text>
+		<text>Журнал Xbox</text>
 	</string>
 	
 	<string id="st_wg_xbox_mag_1_descr">
 		<text>
-			An old Xbox magazine, dating back from 2002. It's the first issue released in the UK. Some sections of the magazine are missing, but at least one review remained complete.\n
+			Старый журнал Xbox, выпущенный в 2002. Это первый выпуск журнала в Великобритании. Некоторых разделов не хватает, но как минимум один обзор остался целым.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 	
 	<string id="st_wg_xbox_mag_2">
-		<text>Xbox : The Official Magazine (December 2004)</text>
+		<text>Xbox : Оффициальный журнал (Декабрь 2004)</text>
 	</string>
 	
 	<string id="st_wg_xbox_mag_2_s">
-		<text>Xbox magazine</text>
+		<text>Журнал Xbox</text>
 	</string>
 	
 	<string id="st_wg_xbox_mag_2_descr">
 		<text>
-			An old Xbox magazine, dating back from 2004. It's the 36th issue released in the UK. Some sections of the magazine are missing, but at least one review remained complete.\n
+			Старый журнал Xbox, выпущенный в 2004. Это 36-й выпуск журнала в Великобритании. Некоторых разделов не хватает, но как минимум один обзор остался целым.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 
 	<string id="st_wg_strana_igr_mag_1">
-		<text>Gameland magazine (November 1999)</text>
+		<text>Журнал "Страна игр" (Ноябрь 1999)</text>
 	</string>
 
 	<string id="st_wg_strana_igr_mag_1_s">
-		<text>Gameland magazine</text>
+		<text>Журнал "Страна игр"</text>
 	</string>
 
 	<string id="st_wg_strana_igr_mag_1_descr">
 		<text>
-			Strana Igr (Russian: ������ ���, Gameland) was a Russian magazine focused on video games. It was published by Gameland between January 1996 and November 2013 when the magazine was suspended due to financial problems. It's a bit odd that such a magazine found its way into the Zone. Perhaps after western goods became more and more present in the Zone, Russian speakers grew an interest for western culture?\n
+			"Страна игр" был Российским журналом о видеоиграх. Он публиковался компанией Gameland между Январём 1996 и Ноябрём 2013, когда журнал закрыли из-за финансовых проблем. Странно, что этот журнал попал в Зону. Возможно, после того как западные товары стали популярны в Зоне, русскоговорящие заинтересовались данной культурой?\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 
 	<string id="st_wg_car_mag_1">
-		<text>European Car magazine (August 2015)</text>
+		<text>Журнал European Car (Август 2015)</text>
 	</string>
 
 	<string id="st_wg_car_mag_1_s">
-		<text>European Car magazine</text>
+		<text>Журнал European Car</text>
 	</string>
 
 	<string id="st_wg_car_mag_1_descr">
 		<text>
-			European Car was an American automotive enthusiast magazine published by the Motor Trend Group. The magazine was in circulation between 1978 and 2018. Many mercs came into the Zone with these magazines, to give them distraction on the hard days.\n
+			European Car был американским автомобильным журналом энтузиастов, выпускавшимся Motor Trend Group. Журнал был в обороте между 1978 и 2018. Многие наёмники пришли в Зону с этими журналами, чтобы отвлечься в трудные дни.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 
 	<string id="st_wg_car_mag_2">
-		<text>EVO magazine (December 2015)</text>
+		<text>Журнал EVO (Декабрь 2015)</text>
 	</string>
 
 	<string id="st_wg_car_mag_2_s">
-		<text>EVO magazine</text>
+		<text>Журнал EVO</text>
 	</string>
 
 	<string id="st_wg_car_mag_2_descr">
 		<text>
-			Evo is a British automobile magazine dedicated to performance cars. These magazines are more and more commonly found in the Zone, most likely because it gives a taste of the outside world to those stuck here.\n
+			Evo - британский автомобильный журнал, посвящённый выставочным автомобилям. Эти журналы всё чаще и чаще попадают в Зону, скорее всего потому что напоминают о внешнем мире тем, кто застрял здесь.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] everyday item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] повседневное применение\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
 		</text>
 	</string>
 
