@@ -136,74 +136,74 @@
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_10_desc">
-		<text>Разменяю одну банкноту в %c[d_orange]50 долларов%c[ui_gray_2] на пять по %c[d_orange]10 долларов%c[ui_gray_2].</text>
+		<text>Разменяй банкноту в %c[d_orange]50 долларов%c[ui_gray_2] на пять по %c[d_orange]10 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_100_desc">
-		<text>Exchange two %c[d_orange]50 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
+		<text>Разменяй две банкноты по %c[d_orange]50 долларов%c[ui_gray_2] на одну в %c[d_orange]100 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_100_to_50_desc">
-		<text>Exchange a %c[d_orange]100 dollars%c[ui_gray_2] bill for two %c[d_orange]50 dollars%c[ui_gray_2] bills.</text>
+		<text>Разменяй одну банкноту в %c[d_orange]100 долларов%c[ui_gray_2] на две по %c[d_orange]50 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_100_to_10_desc">
-		<text>Exchange a %c[d_orange]100 dollars%c[ui_gray_2] bill for ten %c[d_orange]10 dollars%c[ui_gray_2] bills.</text>
+		<text>Разменяй банкноту в %c[d_orange]100 долларов%c[ui_gray_2] на десять по %c[d_orange]10 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_10_to_100_desc">
-		<text>Exchange ten %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
+		<text>Разменяй десять банкнот по %c[d_orange]10 долларов%c[ui_gray_2] на одну в %c[d_orange]100 долларов%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Euros to Euros barters -->
 	<string id="st_wg_barter_euros_10_to_50_desc">
-		<text>Exchange five %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]50 euros%c[ui_gray_2] bill.</text>
+		<text>Разменяй пять банкнот по %c[d_orange]10 евро%c[ui_gray_2] на одну в %c[d_orange]50 евро%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_50_to_10_desc">
-		<text>Exchange a %c[d_orange]50 euros%c[ui_gray_2] bill for five %c[d_orange]10 euros%c[ui_gray_2] bills.</text>
+		<text>Разменяй банкноту в %c[d_orange]50 евро%c[ui_gray_2] на пять по %c[d_orange]10 евро%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_50_to_100_desc">
-		<text>Exchange two %c[d_orange]50 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
+		<text>Разменяй две банкноты по %c[d_orange]50 евро%c[ui_gray_2] на одну в %c[d_orange]100 евро%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_100_to_50_desc">
-		<text>Exchange a %c[d_orange]100 euros%c[ui_gray_2] bill for two %c[d_orange]50 euros%c[ui_gray_2] bills.</text>
+		<text>Разменяй банкноту в %c[d_orange]100 евро%c[ui_gray_2] на две по %c[d_orange]50 евро%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_100_to_10_desc">
-		<text>Exchange a %c[d_orange]100 euros%c[ui_gray_2] bill for ten %c[d_orange]10 euros%c[ui_gray_2] bills.</text>
+		<text>Разменяй банкноту в %c[d_orange]100 евро%c[ui_gray_2] на десять по %c[d_orange]10 евро%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_10_to_100_desc">
-		<text>Exchange ten %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
+		<text>Разменяй десять банкнот по %c[d_orange]10 евро%c[ui_gray_2] на одну в %c[d_orange]100 евро%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Dollars to Roubles barters -->
 	<string id="st_wg_barter_dollars_rouble_10_to_700_desc">
-		<text>Exchange %c[d_orange]10 dollars%c[ui_gray_2] for %c[d_orange]700 roubles%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]10 долларов%c[ui_gray_2] на %c[d_orange]700 рублей%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_rouble_50_to_3500_desc">
-		<text>Exchange %c[d_orange]50 dollars%c[ui_gray_2] for %c[d_orange]3500 roubles%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]50 долларов%c[ui_gray_2] на %c[d_orange]3500 рублей%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_rouble_100_to_7000_desc">
-		<text>Exchange %c[d_orange]100 dollars%c[ui_gray_2] for %c[d_orange]7000 roubles%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]100 долларов%c[ui_gray_2] на %c[d_orange]7000 рублей%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Euros to Roubles barters -->
 	<string id="st_wg_barter_euros_rouble_10_to_680_desc">
-		<text>Exchange %c[d_orange]10 euros%c[ui_gray_2] for %c[d_orange]680 roubles%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]10 евро%c[ui_gray_2] на %c[d_orange]680 рублей%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_rouble_50_to_3400_desc">
-		<text>Exchange %c[d_orange]50 euros%c[ui_gray_2] for %c[d_orange]3400 roubles%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]50 евро%c[ui_gray_2] на %c[d_orange]3400 рублей%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_rouble_100_to_6800_desc">
-		<text>Exchange %c[d_orange]100 euros%c[ui_gray_2] for %c[d_orange]6800 roubles%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]100 евро%c[ui_gray_2] на %c[d_orange]6800 рублей%c[ui_gray_2].</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -212,31 +212,31 @@
 
 	<!-- Dialogs strings -->
 	<string id="western_goods_jupiter_informant_meet_0">
-		<text>Hi. I'm looking for information.</text>
+		<text>Здравствуй. Я хочу кое-что узнать.</text>
 	</string>
 
 	<string id="western_goods_jupiter_informant_meet_1">
-		<text>Yeah? What kind exactly?</text>
+		<text>Да? Что именно?</text>
 	</string>
 
 	<string id="western_goods_jupiter_informant_meet_2">
-		<text>I've heard some rumors are going around the place about "strange lights"? Do you know anything about that?</text>
+		<text>Я слышал здесь странные слухи о "странных вспышках"? Ты знаешь что-нибудь об этом?</text>
 	</string>
 
 	<string id="western_goods_jupiter_informant_meet_3">
-		<text>Oh yeah, everyone here does. You know the Container Warehouse, south of here? I don't know what's going on there but a few nights ago it was a real firework.</text>
+		<text>О да, все здесь об этом знают. Слышал про Склад контейнеров, к югу отсюда? Не знаю, что там происходит, но пару ночей назад там был прямо фейрверк.</text>
 	</string>
 
 	<string id="western_goods_jupiter_informant_meet_4">
-		<text>Do you know what these lights could be? Perhaps an anomaly?</text>
+		<text>Ты знаешь, из-за чего такие вспышки могли появляться? Может, аномалия?</text>
 	</string>
 
 	<string id="western_goods_jupiter_informant_meet_5">
-		<text>I'm not sure. And to be honest, I'm not sure if I want to know either.</text>
+		<text>Не уверен. Честно говоря, Я даже не уверен, хочу ли я знать .</text>
 	</string>
 
 	<string id="western_goods_jupiter_informant_meet_6">
-		<text>Alright. Thanks.</text>
+		<text>Понятно. Спасибо.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -245,72 +245,72 @@
 
 	<!-- Start dialog strings -->
 	<string id="st_stalker_crew_member_start_0">
-		<text>How come you are even talking to me yet?! We're supposed to meet in act 1, task 3. I'll send you to Brazil be careful !</text>
+		<text>Как ты вообще со мной разговариваешь?! Мы должны встретиться только в Акте 1, задании 3!</text>
 	</string>
 
 	<string id="st_stalker_crew_member_start_1">
-		<text>Uhh... Wh-wh...</text>
+		<text>Ааа... Чт-чт...</text>
 	</string>
 
 	<string id="st_stalker_crew_member_start_2">
-		<text>Wha-what's... going on?</text>
+		<text>Чт-Чтоо ... происходит?</text>
 	</string>
 
 	<string id="st_stalker_crew_member_start_3">
-		<text>Where are you... taking me?</text>
+		<text>Куда ты... меня ведёшь?</text>
 	</string>
 
 	<string id="st_stalker_crew_member_start_4">
-		<text>We should get moving, I don't like staying here...</text>
+		<text>Мы должны идти, не хочется здесь оставаться...</text>
 	</string>
 
 	<string id="st_stalker_crew_member_start_5">
-		<text>Good to see you again.</text>
+		<text>Рад тебя видеть снова.</text>
 	</string>
 
 	<string id="st_stalker_crew_member_start_6">
-		<text>Hey friend, I'm happy to see you!</text>
+		<text>Здравствуй друг, Я счастлив тебя видеть!</text>
 	</string>
 
 	<!-- Dialogs strings -->
 	<string id="stalker_crew_member_rescue_0">
-		<text>Hey, you're still with us? Get hold of yourself, and come with me, fast!</text>
+		<text>Эй, ты ещё с нами? Давай, бери себя в руки и идём со мной, быстро!</text>
 	</string>
 
 	<string id="stalker_crew_member_rescue_1">
-		<text>Hmm. Wh-who are you?</text>
+		<text>Хмм. Кт-Ктo ты?</text>
 	</string>
 
 	<string id="stalker_crew_member_rescue_2">
-		<text>A scout team spotted you some time ago, I'm getting you out of here.</text>
+		<text>Разведгруппа заметила тебя недавно, я здесь, чтобы вытащить тебя отсюда.</text>
 	</string>
 
 	<string id="stalker_crew_member_rescue_3">
-		<text>My head...</text>
+		<text>Моя голова...</text>
 	</string>
 
 	<string id="stalker_crew_member_rescue_4">
-		<text>Come on! We don't have a lot of time before the Monolith squads nearby will call for reinforcements. Come!</text>
+		<text>Ну же! У нас мало времени до того как отряд Монолита неподалёку вызовет подкрепление. Пошли!</text>
 	</string>
 
 	<string id="stalker_crew_member_reward_0">
-		<text>Hey, Heades said you wanted to see me?</text>
+		<text>Привет, Хедес сказал, ты хотел меня видеть?</text>
 	</string>
 
 	<string id="stalker_crew_member_reward_1">
-		<text>Yes. I wanted to personally thank you for coming to my rescue. You know, these days it's hard to find people that don't take the opportunity to screw over others when they can.</text>
+		<text>Да. Я хотел тебя лично поблагодарить за спасение. Знаешь, в наши дни сложно найти людей, которые готовы влезть в неприятности ради других.</text>
 	</string>
 
 	<string id="stalker_crew_member_reward_2">
-		<text>I'm just not that kind of person. I'm glad I made it in time before the Monolith could brainwash you.</text>
+		<text>Знаешь, я просто не такой человек. Я рад, что успел до того как Монолит промыл тебе мозги.</text>
 	</string>
 
 	<string id="stalker_crew_member_reward_3">
-		<text>Yeah, tell me about it! Anyway, I wanted to give you a little something, to make my thank just a little more than a word.\n \nHere, take this. It's an artefact my friends and I found when we last went hunting. I can't believe they are all dead... An artefact isn't exactly the same as saving a life, but I heard it's quite valuable.</text>
+		<text>Ага, рассказывай мне! Ладно, Я хотел бы тебе дать кое-что, чтобы поблагодарить тебя больше, чем просто словом.\n \nВот, возьми. Это артефакт, который я с друзьями нашёл на последней вылазке за артефактами. Не могу поверить, что они все погибли... Артефакт, конечно, не такой ценный, как жизнь человека, но я слышал, он весьма дорогой.</text>
 	</string>
 
 	<string id="stalker_crew_member_reward_4">
-		<text>Thank you.</text>
+		<text>Спасибо.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -319,35 +319,35 @@
 
 	<!-- Start dialog strings -->
 	<string id="st_wg_dunn_lynn_first_start">
-		<text>At least we meet.</text>
+		<text>Ну наконец-то мы встретились.</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_x">
-		<text>Hello young Padawan.</text>
+		<text>Здравствуй юный Падаван.</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_0">
-		<text>Hello.</text>
+		<text>Здравствуй.</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_1">
-		<text>Hi.</text>
+		<text>Привет.</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_2">
-		<text>What do you want, Stalker.</text>
+		<text>Чего тебе, Сталкер.</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_3">
-		<text>What is it?</text>
+		<text>Что?</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_4">
-		<text>Yes?</text>
+		<text>Да?</text>
 	</string>
 
 	<string id="st_wg_dunn_lynn_start_5">
-		<text>What do you want?</text>
+		<text>Чем интересуешься?</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -356,7 +356,7 @@
 
 	<!-- Start dialog strings -->
 	<string id="st_wg_yellow_ecolog_start_0">
-		<text>My head... my head!</text>
+		<text>Голова... моя голова!</text>
 	</string>
 
 	<string id="st_wg_yellow_ecolog_start_1">
@@ -365,31 +365,31 @@
 
 	<!-- Dialogs strings -->
 	<string id="stalker_ecolog_convoy_yellow_meet_0">
-		<text>Identify yourself!</text>
+		<text>Назовись!</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_meet_1">
-		<text>Shhh! It's... It's here...</text>
+		<text>Тссс! Оно... Оно здесь...</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_meet_2">
-		<text>What is here?</text>
+		<text>Что здесь?</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_second_meet_0">
-		<text>You're transporting something I need.</text>
+		<text>Ты несёшь кое-что, нужное мне.</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_second_meet_1">
-		<text>This case? Why do you want it?</text>
+		<text>Этот кейс? Зачем он тебе?</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_second_meet_2">
-		<text>I'm just a contractor. Hand it to me, slowly.</text>
+		<text>Это просто контракт. Отдай его мне, спокойно.</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_second_meet_3">
-		<text>You know, I value my life more than this research...</text>
+		<text>Знаешь, Я ценю свою жизнь больше этого исследования...</text>
 	</string>
 
 	<string id="stalker_ecolog_convoy_yellow_second_meet_4">
@@ -402,51 +402,51 @@
 
 	<!-- Dialogs strings -->
 	<string id="western_goods_oleksandr_chernenko_meet_0">
-		<text>Who are you?</text>
+		<text>Кто ты?</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_1">
-		<text>I'm Oleksandr. Thank you for not shooting me on sight. People are crazy these days...</text>
+		<text>Я Александр. Спасибо, что не пристрелил меня сразу же. Люди в эти дни совсем сдурели...</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_1_army">
-		<text>Please, don't kill me. We're all just trying to survive in this mess, alright? I'm Oleksandr.</text>
+		<text>Не стреляйте, пожалуйста. Мы все просто пытаемся выжить в этой дряни, хорошо? Я Александр.</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_2">
-		<text>What is a soldier doing down there?</text>
+		<text>Что военный делает в этом подвале?</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_2_army">
-		<text>What are you doing down there? Kuznetsov didn't inform us of any deployment here.</text>
+		<text>Что ты здесь делаешь? Кузнецов не сообщил нас о каком либо отряде здесь.</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_3">
-		<text>I'm not a soldier anymore. Screw the army! We're just cannon fodder to their eyes... My brother and I should have never enrolled for this mess.</text>
+		<text>Я больше не солдат. К чёрту армию! Мы для них просто пушечное мясо... Мой брат и я никогда не должны были подписываться на это.</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_3_army">
-		<text>I'm not a soldier anymore. I deserted. Yes, I know what you're thinking, but here me out. The army doesn't care about us. One day or another, they'll send you on a suicide mission too, just like they did with me and my brother...</text>
+		<text>Я больше не солдат. Я дезертировал. Да, я знаю, что ты думаешь, но послушай меня. Армию не волнуют наши судьбы. Однажды, и тебя пошлют самоубийство так же, как и меня с братом...</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_4">
-		<text>So what are you doing here then?</text>
+		<text>Так что ты здесь делаешь?</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_5">
-		<text>I'm here to represent Dushman's interests at the Flea Market. I'm trying to keep a low profile, that's why I'm staying in this basement. People don't really like Mercs over here. Although I've never had too much troubles so far.</text>
+		<text>Я здесь для представления интересов Душмана на Барахолке. Я не хочу светиться, поэтому я остаюсь в этом подвале. Здесь люди не очень любят наёмников. Хотя у меня пока не было быльших проблем.</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_6">
-		<text>Interesting. So what can you offer?</text>
+		<text>Интересно. Что ты можешь предложить?</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_7">
-		<text>I basically sell packages of stuff we have too much of. I'll offer you a discount, but offers don't last forever. Grab it while you still can! Haha, just kidding. But in all seriousness, offers are limited, it helps people make their choice, so they don't bother me all day.</text>
+		<text>Обычно я продаю наборы вещей, которые у нас никому не нужны. Я предложу тебе скидку, но предложения длятся недолго. Возьми, пока ещё можешь! Хаха, шучу. Но серьёзно, предложения ограничены, это помогает людям сделать выбор быстро, чтобы они не доставали меня весь день.</text>
 	</string>
 
 	<string id="western_goods_oleksandr_chernenko_meet_8">
-		<text>I see.</text>
+		<text>Я вижу.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -455,31 +455,31 @@
 
 	<!-- Start dialog strings -->
 	<string id="st_wg_danylo_chernenko_first_start">
-		<text>Who are you?!</text>
+		<text>Кто ты?!</text>
 	</string>
 
 	<string id="st_wg_danylo_chernenko_start_0">
-		<text>Hello.</text>
+		<text>Здравствуй.</text>
 	</string>
 
 	<string id="st_wg_danylo_chernenko_start_1">
-		<text>Hi.</text>
+		<text>Привет.</text>
 	</string>
 
 	<string id="st_wg_danylo_chernenko_start_2">
-		<text>What do you want, Stalker.</text>
+		<text>Чего тебе, Сталкер.</text>
 	</string>
 
 	<string id="st_wg_danylo_chernenko_start_3">
-		<text>What is it?</text>
+		<text>Что?</text>
 	</string>
 
 	<string id="st_wg_danylo_chernenko_start_4">
-		<text>Yes?</text>
+		<text>Да?</text>
 	</string>
 
 	<string id="st_wg_danylo_chernenko_start_5">
-		<text>What do you want?</text>
+		<text>Чем интересуешься?</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -493,179 +493,179 @@
 
 	<!-- Dialogs strings -->
 	<string id="st_wg_act_3_task_2_interrogation_start">
-		<text>Alright, let's talk.</text>
+		<text>Ладно, давай поговорим.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_start_answer">
-		<text>You want to talk? Sure. Your little friend has been at it for days. You're wasting your time. I'm not telling you anything.</text>
+		<text>Ты хочешь говорить? Конечно. Твой мелкий друг потратил на это несколько дней. Ты тратишь своё время. Я ничего тебе не скажу.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_0_nice">
-		<text>All I want is information. You'll be fine if you cooperate, you have my word for it.</text>
+		<text>Всё что мне нужно - информация. Ты будешь в порядке, если поможешь мне, даю слово.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_0_normal">
-		<text>Just tell me what I need to know, alright?</text>
+		<text>Просто скажи мне, что я должен знать, хорошо?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_0_mean">
-		<text>Listen, you tell me what I want to know, you live. I'll let you guess what happens if you don't.</text>
+		<text>Слушай, ты говоришь мне, что я хочу знать - ты живёшь. Догадайся, что будет, если ты не скажешь.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_0_nice_answer">
-		<text>What do you want to know anyway?</text>
+		<text>И что ты хочешь знать?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_0_normal_answer">
-		<text>And what do would you *need* to know anyway?.</text>
+		<text>И что тебе *нужно* знать?.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_0_mean_answer">
-		<text>Get fucked.</text>
+		<text>Иди к чёрту.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_nice_nice">
-		<text>For starters. Who's after Danylo?</text>
+		<text>Для начала. Кто охотится на Данилу?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_nice_normal">
-		<text>What I need to know is who sent you after Danylo.</text>
+		<text>Я хочу знать, кто послал тебя за Данилой.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_nice_mean">
-		<text>Who do you work for? You have 10 seconds to answer. 10, 9, 8, 7, 6...</text>
+		<text>На кого ты работаешь? У тебя есть 10 секунд чтобы ответить. 10, 9, 8, 7, 6...</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_normal_nice">
-		<text>For starters. Who's after Danylo?</text>
+		<text>Для начала. Кто охотится на Данилу?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_normal_normal">
-		<text>What I need to know is who sent you after Danylo.</text>
+		<text>Всё что я хочу знать - кто послал тебя за Данилой.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_normal_mean">
-		<text>Who do you work for? You have 10 seconds to answer. 10, 9, 8, 7, 6...</text>
+		<text>На кого ты работаешь? У тебя есть 10 секунд чтобы ответить. 10, 9, 8, 7, 6...</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_mean_nice">
-		<text>For starters. Who's after Danylo?</text>
+		<text>Для начала. Кто охотится на Данилу?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_mean_normal">
-		<text>What I need to know is who sent you after Danylo.</text>
+		<text>Я хочу знать, кто послал тебя за Данилой.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_mean_mean">
-		<text>Who do you work for? You have 10 seconds to answer. 10, 9, 8, 7, 6...</text>
+		<text>На кого ты работаешь? У тебя есть 10 секунд чтобы ответить. 10, 9, 8, 7, 6...</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_nice_answer">
-		<text>Look, I don't know who the order came from. But if the SSU is involved, your friend must have enemies in really high places.</text>
+		<text>Смотри, я не знаю от кого поступил приказ. Но если СБУ замешаны, у твоего друга должны быть враги на высоких постах.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_normal_answer">
-		<text>Who sent me... What do you think am I, a Merc? I follow orders, that's it.</text>
+		<text>Кто послал меня... Ты думаешь, я наёмник? Я выполняю приказ, вот и всё.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_1_mean_answer">
-		<text>Fuck man, who do you think I work for?! Are you this blind you can't read my uniform?</text>
+		<text>Блин мужик, на кого ты думаешь я работаю?! Ты настолько слепой, что не понимаешь этого по моей форме?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_nice_nice">
-		<text>The SSU? Why would they care so much Danylo to send a squad after him?</text>
+		<text>СБУ? С чего бы им так хотеть его смерти, что они отправили за ним отряд?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_nice_normal">
-		<text>So you're a soldier? Why is the Army after him?</text>
+		<text>Значит, ты солдат? Почему армия за ним охотится?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_nice_mean">
-		<text>And what uniform is that, the Army? No, better. The SSU. Why does the SSU want from Danylo?</text>
+		<text>И что это за униформа, армейская? Нет, лучше. СБУ. Чего СБУ хочет от Данилы?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_normal_nice">
-		<text>The SSU? Why would they care so much Danylo to send a squad after him?</text>
+		<text>СБУ? С чего бы им так хотеть его смерти, что они отправили за ним отряд?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_normal_normal">
-		<text>So you're a soldier? Why is the Army after him?</text>
+		<text>Значит, ты солдат? Почему армия за ним охотится?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_normal_mean">
-		<text>And what uniform is that, the Army? No, better. The SSU. Why does the SSU want from Danylo?</text>
+		<text>И что это за униформа, армейская? Нет, лучше. СБУ. Чего СБУ хочет от Данилы?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_mean_nice">
-		<text>The SSU? Why would they care so much Danylo to send a squad after him?</text>
+		<text>СБУ? С чего бы им так хотеть его смерти, что они отправили за ним отряд?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_mean_normal">
-		<text>So you're a soldier? Why is the Army after him?</text>
+		<text>Значит, ты солдат? Почему армия за ним охотится?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_mean_mean">
-		<text>And what uniform is that, the Army? No, better. The SSU. Why does the SSU want from Danylo?</text>
+		<text>И что это за униформа, армейская? Нет, лучше. СБУ. Чего СБУ хочет от Данилы?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_nice_answer">
-		<text>Look, I don't know why our squads got orders. I promise I don't know. Half of the order we got was already redacted before we got it. It's a miracle we even found your friend.</text>
+		<text>Послушай, Я не знаю почему наши отряды получили такие приказы. Я клянусь, я не знаю. Половина приказа была уже отредактирована до того как мы его получили. Чудом, мы как-то нашли твоего друга.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_normal_answer">
-		<text>What do you think? I don't know why these orders were sent. All I know is our squads got orders to find him.</text>
+		<text>Ты что думаешь? Я не знаю почему нашим отрядам отдали такой приказ. Всё, что я знаю, что нам поручили его найти.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_2_mean_answer">
-		<text>Mind your fucking business. Hell, I couldn't even tell you if I wanted to. The orders our squads got were covered in black ink anyway.</text>
+		<text>Имей уважение, чёрт возьми. Блин, я даже не смог бы это тебе сказать, если бы хотел. В любом случае, приказы, которые наши отряды были частично замазаны.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_nice_nice">
-		<text>Squads? There are more people out there looking for him? Look, tell me where I can find them, and you'll be free. Deal?</text>
+		<text>Отряды? Здесь есть и другие, кто ищут его? Послушай, скажи, где я могу их найти, и будешь свободен. Хорошо?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_nice_normal">
-		<text>Squads? You're not the only one looking for him? Where can I find them?</text>
+		<text>Отряды? Ты не единственный, кто его ищет? Где я могу их найти?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_nice_mean">
-		<text>Squads? Now that's interesting. Enough playing, tell me where I can find the other squad, or I put a bullet in your pretty face.</text>
+		<text>Отряды? Теперь это интересно. Хватит игр, скажи мне где я могу найти другой отряд, или я пущу пулю в твоё красивое лицо.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_normal_nice">
-		<text>Squads? There are more people out there looking for him? Look, tell me where I can find them, and you'll be free. Deal?</text>
+		<text>Отряды? Здесь есть и другие, кто ищут его? Послушай, скажи, где я могу их найти, и будешь свободен. Хорошо?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_normal_normal">
-		<text>Squads? You're not the only one looking for him? Where can I find them?</text>
+		<text>Отряды? Ты не единственный, кто его ищет? Где я могу их найти?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_normal_mean">
-		<text>Squads? Now that's interesting. Enough playing, tell me where I can find the other squad, or I put a bullet in your pretty face.</text>
+		<text>Отряды? Теперь это интересно. Хватит игр, скажи мне где я могу найти другой отряд, или я пущу пулю в твоё красивое лицо.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_mean_nice">
-		<text>Squads? There are more people out there looking for him? Look, tell me where I can find them, and you'll be free. Deal?</text>
+		<text>Отряды? Здесь есть и другие, кто ищут его? Послушай, скажи, где я могу их найти, и будешь свободен. Хорошо?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_mean_normal">
-		<text>Squads? You're not the only one looking for him? Where can I find them?</text>
+		<text>Отряды? Ты не единственный, кто его ищет? Где я могу их найти?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_3_mean_mean">
-		<text>Squads? Now that's interesting. Enough playing, tell me where I can find the other squad, or I put a bullet in your pretty face.</text>
+		<text>Отряды? Теперь это интересно. Хватит игр, скажи мне где я могу найти другой отряд, или я пущу пулю в твоё красивое лицо.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_end_nice">
-		<text>Ok... Look, you'll find them in Zaton, by the old barge. They should be... Three or four maybe, if The Zone was nice to them.</text>
+		<text>Хорошо... Смотри, ты найдёшь их на Затоне, около старой баржи. Их должно быть... трое или четверо наверно, если Зона их пощадила.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_end_normal">
-		<text>Ok... I'll tell you. Just... Don't kill me, please. You'll find them in the north-east of Zaton.</text>
+		<text>Ладно... Я скажу тебе. Только... Не убивай меня, пожалуйста. Ты найдёшь их на северо-востоке Затона.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_interrogation_end_mean">
-		<text>Fine. Jesus... You'll find them in the east of Zaton, that's all I know.</text>
+		<text>Ладно. Боже... Ты найдёшь их на востоке Затона, это всё что я знаю.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -674,27 +674,27 @@
 
 	<!-- Dialogs strings -->
 	<string id="western_goods_ssu_supervisor_bribe_0">
-		<text>Does the name 'Danylo' ring a bell?</text>
+		<text>Имя 'Данило' звонит в колокол?</text>
 	</string>
 
 	<string id="western_goods_ssu_supervisor_bribe_1">
-		<text>Why are you asking?</text>
+		<text>Почему ты спрашиваешь?</text>
 	</string>
 
 	<string id="western_goods_ssu_supervisor_bribe_2">
-		<text>So it does ring a bell. How about I slide %s RUB your way, and you just, forget about him?</text>
+		<text>Значит, звонит. Что если я опущу %s RUB в твой карман, и ты просто, забудешь о нём?</text>
 	</string>
 
 	<string id="western_goods_ssu_supervisor_bribe_3">
-		<text>Why would I do that?</text>
+		<text>С чего бы мне это делать?</text>
 	</string>
 
 	<string id="western_goods_ssu_supervisor_bribe_4">
-		<text>Let's just say he's looking to move on from his past. You forget about him, he forgets about you.</text>
+		<text>Давай просто скажем, что он хочет уйти от своегго прошлого. Ты забудешь о нём, он забудет о тебе.</text>
 	</string>
 
 	<string id="western_goods_ssu_supervisor_bribe_5">
-		<text>Yeah? Alright, but he better forget about everything, or else I'll send the entire Ukrainian army after him.</text>
+		<text>Да? Хорошо, но ему лучше забыть обо всём, иначе я пошлю всю украинскую армию за ним.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -702,47 +702,47 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_flea_ask_offer">
-		<text>Do you have any offers?</text>
+		<text>У тебя в силе какие-нибудь предложения?</text>
 	</string>
 
 	<string id="st_wg_flea_offer">
-		<text>I have this set of items at -%s% off.</text>
+		<text>Я продаю этот набор по скидке -%s%.</text>
 	</string>
 
 	<string id="st_wg_flea_offer_end_0">
-		<text>What do you say?</text>
+		<text>Что скажешь?</text>
 	</string>
 
 	<string id="st_wg_flea_offer_end_1">
-		<text>Are you taking?</text>
+		<text>Берёшь?</text>
 	</string>
 
 	<string id="st_wg_flea_offer_end_2">
-		<text>Interested?</text>
+		<text>Заинтересован?</text>
 	</string>
 
 	<string id="st_wg_flea_offer_end_3">
-		<text>Deal?</text>
+		<text>Договорились?</text>
 	</string>
 
 	<string id="st_wg_flea_offer_end_4">
-		<text>Are we making a deal?</text>
+		<text>Мы совершаем сделку?</text>
 	</string>
 
 	<string id="st_wg_flea_no_offer">
-		<text>I have nothing else for the moment.</text>
+		<text>У меня пока ничего другого нет.</text>
 	</string>
 
 	<string id="st_wg_flea_expired">
-		<text>Sorry, those offers expired.</text>
+		<text>Извини, те предложения закончились.</text>
 	</string>
 
 	<string id="st_wg_flea_offer_caption">
-		<text>Special Offer - %s%sh %sm%c[default] remaining</text>
+		<text>Специальное предложение - %s%sh %sm%c[default] осталось</text>
 	</string>
 
 	<string id="st_wg_flea_offer_text">
-		<text>%c[default]Items:%c[250,255,232,208] %s\n %c[default]Item count:%c[250,255,232,208] %s\n %c[default]Discount:%c[250,255,232,208] %s-%s%\n %c[default]Price:%c[250,255,232,208] %c[d_orange]%s RUB</text>
+		<text>%c[default]Вещи:%c[250,255,232,208] %s\n %c[default]Количество:%c[250,255,232,208] %s\n %c[default]Скидка:%c[250,255,232,208] %s-%s%\n %c[default]Цена:%c[250,255,232,208] %c[d_orange]%s RUB</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy">
@@ -750,43 +750,43 @@
 	</string>
 
 	<string id="st_wg_flea_offer_buy_end_0">
-		<text>I'll take it.</text>
+		<text>Я беру.</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy_end_1">
-		<text>Deal.</text>
+		<text>Договорились.</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy_end_2">
-		<text>Alright, I'm buying.</text>
+		<text>Хорошо, я покупаю.</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy_end_3">
-		<text>Here.</text>
+		<text>Возьми.</text>
 	</string>
 
 	<string id="st_wg_flea_offer_buy_end_4">
-		<text>Sold.</text>
+		<text>Продано.</text>
 	</string>
 
 	<string id="st_wg_flea_next_offer">
-		<text>Do you have anything else?</text>
+		<text>У тебя есть ещё что-нибудь?</text>
 	</string>
 
 	<string id="st_wg_flea_poor_next_offer_0">
-		<text>I don't have enough money, do you have anything else?</text>
+		<text>У меня нет денег, у тебя есть что-то другое?</text>
 	</string>
 
 	<string id="st_wg_flea_poor_next_offer_1">
-		<text>Sorry, I don't have that money. Do you have anything else?</text>
+		<text>Извини, у меня нет столько денег. У тебя есть что-то другое?</text>
 	</string>
 
 	<string id="st_wg_flea_poor_next_offer_2">
-		<text>I can't afford this, do you have anything else?</text>
+		<text>Не могу себе этого позволить, у тебя есть что-то другое?</text>
 	</string>
 
 	<string id="st_wg_flea_cancel">
-		<text>Never-mind.</text>
+		<text>Забудь.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -794,19 +794,19 @@
 	<!-- ============================================================================================================-->
 
 	<string id="st_wg_trade_eur_usd_ask">
-		<text>I want to purchase a few things. %c[d_orange][Trade]</text>
+		<text>Я бы хотел кое-что купить. %c[d_orange][Торговля]</text>
 	</string>
 
 	<string id="st_wg_trade_eur_usd_ask_reply_1">
-		<text>Sure thing.</text>
+		<text>Конечно.</text>
 	</string>
 
 	<string id="st_wg_trade_eur_usd_ask_reply_2">
-		<text>Take a look.</text>
+		<text>Посмотри.</text>
 	</string>
 
 	<string id="st_wg_trade_eur_usd_ask_reply_3">
-		<text>Here's what I've got.</text>
+		<text>Вот что у меня есть.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -815,303 +815,303 @@
 
 	<!-- Act 1, Task 1 -->
 	<string id="st_wg_act_1_task_1_ask_work">
-		<text>Is there anything I can help you with?</text>
+		<text>Чем могу помочь?</text>
 	</string>
 
 	<string id="st_wg_act_1_task_1_accept_work">
-		<text>I can do that.</text>
+		<text>Я могу это сделать.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_1_refuse_work">
-		<text>Actually, let me think about it.</text>
+		<text>Сейчас, дай мне подумать.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_answer_0">
-		<text>Don't wander around for too long, they should be there soon.</text>
+		<text>Не броди вокруг слишком долго, они должны скоро прилететь.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_answer_1">
-		<text>Alright, I'll go now.</text>
+		<text>Хорошо, я пойду.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_answer_2">
-		<text>Oh and before I forget, take this. It'll help you find the LZ.</text>
+		<text>Пока я не забыл, возьми. Это поможет тебе найти место посадки.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_answer_3">
-		<text>Thanks.</text>
+		<text>Спасибо.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_1_finish_work">
-		<text>I'm back, and I have the supplies.</text>
+		<text>Я вернулся, и у меня есть посылка.</text>
 	</string>
 
 	<!-- Act 1, Task 2 -->
 	<string id="st_wg_act_1_task_2_ask_work_0">
-		<text>How are things?</text>
+		<text>Как дела продвигаются?</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_ask_work_1">
-		<text>Could be better...</text>
+		<text>Могло быть лучше...</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_ask_work_2">
-		<text>How's that?</text>
+		<text>Как так?</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_accept_work">
-		<text>Consider it done.</text>
+		<text>Считай, уже сделано.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_refuse_work">
-		<text>Sorry, I'm busy with other things at the moment.</text>
+		<text>Извини, сейчас я занят.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_answer">
-		<text>Thank you, contact me if you discover anything.</text>
+		<text>Спасибо, свяжись со мной, если что-нибудь найдёшь.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_finish_work_0">
-		<text>I went to Jupiter, to investigate the rumors.</text>
+		<text>Я сходил на Юпитер, для проверки слухов.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_finish_work_1">
-		<text>Good, did you find anything?</text>
+		<text>Хорошо, что-нибудь нашёл?</text>
 	</string>
 
 	<string id="st_wg_act_1_task_2_finish_work_2">
-		<text>There was a group of Bandits at the Container Warehouse. They had this rifle and I also found this note.</text>
+		<text>Там была группа бандитов на Складе контейнеров. У них была эта винтовка и я нашёл вот эту записку.</text>
 	</string>
 
 	<!-- Act 1, Task 3 -->
 	<string id="st_wg_act_1_task_3_ask_work">
-		<text>Is there any work you'd want done?</text>
+		<text>Есть работа для меня?</text>
 	</string>
 
 	<string id="st_wg_act_1_task_3_accept_work">
-		<text>Monolithians again... I'm on it.</text>
+		<text>Опять Монолитовцы... Я в деле.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_3_refuse_work">
-		<text>I can't help you with that for the moment, sorry.</text>
+		<text>Не могу тебе помочь в данный момент, извини.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_3_answer">
-		<text>Thank you, and please, keep me posted.</text>
+		<text>Спасибо, и пожалуйста, держись на связи.</text>
 	</string>
 
 	<string id="st_wg_act_1_task_3_finish_work">
-		<text>I'm back, your copilot should have been dropped-off here by now?</text>
+		<text>Я вернулся, твоего пилота должны были сбросить здесь недавно?</text>
 	</string>
 
 	<!-- Act 2, Task 1 -->
 	<string id="st_wg_act_2_task_1_ask_work">
-		<text>Do you have any special jobs up for the taking?</text>
+		<text>У тебя есть какая-нибудь специальная работа для выполнения?</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_accept_work">
-		<text>Deal.</text>
+		<text>Договорились.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_refuse_work">
-		<text>I'll think about it.</text>
+		<text>Я подумаю над этим.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_answer">
-		<text>Alright, get back to me when you have the artefact.</text>
+		<text>Хорошо, возвращайся ко мне, когда найдёшь артефакт.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_1_finish_work">
-		<text>I found the artefact your client wants.</text>
+		<text>Я нашёл артефакт, который хотел твой клиент.</text>
 	</string>
 
 	<!-- Act 2, Task 2 -->
 	<string id="st_wg_act_2_task_2_opt_in">
-		<text>For sure.</text>
+		<text>Конечно.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_opt_out">
-		<text>You know, never-mind.</text>
+		<text>Знаешь, забудь.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_opted_in">
-		<text>Good, they'll contact you soon.</text>
+		<text>Хорошо, они с тобой скоро свяжутся.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_opted_out">
-		<text>Why did you not sell the artefact for money then? I thought you wanted to prove yourself...</text>
+		<text>Почему ты тогда не продал артефакт? Я думал ты хотел доказать свою надёжность...</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_differed_opt_in">
-		<text>I've changed my mind, can you tell your client I'm looking for more work?</text>
+		<text>Я передумал, можешь сказать клиенту, что я ищу ещё работу?</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_differed_opted_in">
-		<text>What are you, bipolar? I'll be nice with you this time, and relay your message. Make sense of yourself next time.</text>
+		<text>У тебя что, биполярка? Тебе повезло, я повторю твоё сообщение. Подумай в следующий раз.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_0">
-		<text>So you're the "anonymous" contact I've been talking with?</text>
+		<text>Так ты тот "анонимный" контакт, с которым я говорил?</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_1">
-		<text>Yes. We're trying to keep a low profile. We don't want to telegraph our presence.</text>
+		<text>Да. Мы пытаемся хранить свои действия в тайне. Мы не хотим заявлять всем о своём присутствии.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_2">
-		<text>I see. Well, I have what you asked for.</text>
+		<text>Понял. Вот, у меня есть то, о чём ты просил.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_3">
-		<text>Good. Goes to show working with local stalkers can prove... Useful. I understand you don't work for free, so here, take this.</text>
+		<text>Хорошо. Ты показал, что работа с местными сталкерами может быть... Полезной. Я понимаю, что ты не работаешь бесплатно, поэтому возьми это.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_4">
-		<text>Thanks.</text>
+		<text>Спасибо.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_5">
-		<text>As I understand you're quite reputable around here?\n \nListen to this then. We're setting up an operation here. I cannot give you details yet, but, I'll contact you in a few days when we have made progress with our preparations.\n \nIf you're looking for more work, come and meet us. I'll tell you where to look for us then, we won't be staying here for much longer.</text>
+		<text>Как я понял, у тебя здесь хорошая репутация?\n \nТогда слушай. Мы готовимся к операции здесь. Я пока не могу посвятить тебя в детали, но, я свяжусь с тобой через пару дней когда мы подготовимся.\n \nЕсли ты ищешь ещё работу, приди и найди нас. Я скажу, где нас искать, а пока мы покинем это место.</text>
 	</string>
 
 	<string id="st_wg_act_2_task_2_finish_work_6">
-		<text>Alright.</text>
+		<text>Хорошо.</text>
 	</string>
 
 	<!-- Act 3, Task 1 -->
 	<string id="st_wg_act_3_task_1_ask_work_0">
-		<text>You said you were in the Army with your brother? Where is he now?</text>
+		<text>Ты сказал, ты был в армии с твоим братом? Где он теперь?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_ask_work_1">
-		<text>I don't know, actually. He went to meet a new supplier a few days ago, and he didn't come back. I'm worried something might have happened to him.</text>
+		<text>Я не знаю, действительно. Он ушёл на встречу с поставщиком и не вернулся. Я боюсь, с ним что-то случилось.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_accept_work">
-		<text>Is there something I can do to help?</text>
+		<text>Чем могу помочь?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_refuse_work">
-		<text>I see. Sorry to hear about it.</text>
+		<text>Понял. Жаль об этом слышать.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_work_details">
-		<text>Well. I could use some help. I'm stuck here managing the Flea Market. Dushman won't appreciate if I leave, even for my brother.\n \nThing is, I don't know where the meeting with the supplier was. My brother is good at his work, I don't usually question what he does.\n \nListen, if something bad really happened, and if he survived it, he must have found a place to hide. Back when we were in the Army, we kept a stash in the Agroprom Underground. I doubt he'll be hiding there, but it could give us a lead. Here, take this, it'll help you find out stash.</text>
+		<text>Ладно. Мне бы помогла некоторая помощь. Я застрял здесь, управляя продажами на Барахолке. Душман не оценит, если я уйду с поста, даже ради брата.\n \nПроблема в том, что я не знаю где была встреча с поставщиком. Мой брат знает своё дело, поэтому я его обычно не расспрашиваю.\n \nСлушай, если что-то случилось и он это пережил, он нашёл место, чтобы спрятаться. Когда мы были в армии, мы хранили вещи в тайнике в подземельях Агропрома. Я сомневаюсь, что он станет там прятаться, но это могло бы дать нам подсказку. Вот, возьми, это поможет тебе найти тайник.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_usb_unlock_ask">
-		<text>I need to access data on a USB pendrive. Can you help me with it?</text>
+		<text>Мне нужно посмотреть, что на этой USB флешке. Ты можешь мне помочь?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_usb_unlock_quote">
-		<text>Sure, but I'll need %c[d_orange]5000 RUB%c[default] for this.</text>
+		<text>Конечно, но мне понадобится %c[d_orange]5000 RUB%c[default] для этого.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_usb_unlock_accept">
-		<text>Ok, here.</text>
+		<text>Ок, вот.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_usb_unlock_refuse">
-		<text>Let me think about it...</text>
+		<text>Дай мне подумать...</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_usb_unlock_unlocked">
-		<text>Alright... There is a lot of encrypted stuff... There's a map, could this be what you need? I'll upload it to your PDA.</text>
+		<text>Хорошо... Здесь много зашифрованной информации... Здесь есть карта, она тебе нужна? Я загружу её тебе на КПК.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_end_work_0">
-		<text>I could ask you the same question. Are you Danylo Chernenko, Oleksandr's brother?</text>
+		<text>Я бы задал тебе тот же вопрос. Ты Данила Черненко, брат Александра?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_end_work_1">
-		<text>H-How do you know that?</text>
+		<text>О-Откуда ты знаешь?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_end_work_2">
-		<text>Your brother asked me to find out what happened to you. He said you've been missing for days.</text>
+		<text>Твой брат попросил меня узнать, что с тобой случилось. Он сказал, теббя не было несколько дней.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_1_end_work_3">
-		<text>Thank god... I thought you were here to kill me. Listen, I'm trying to stay away from my brother for the moment. There are people after me, I don't want him to get dragged into this mess.</text>
+		<text>Слава богу... Я думал, ты пришёл, чтобы убить меня. Слушай, я пока пытаюсь избегать своего брата. За мной охотятся, я не хочу втягивать его в эту передрягу.</text>
 	</string>
 
 	<!-- Act 3, Task 2 -->
 	<string id="st_wg_act_3_task_2_start_work">
-		<text>Who is your prisoner?</text>
+		<text>Кто твой заложник?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_start_work_details">
-		<text>This guy? I don't know. He and his squad ambushed me when I was out to meet a new supplier for my brother's business. These bastards didn't even try to talk, they went straight for a shoot out. He's the only one that survived this bloodbath... And me, of course. I've been trying to get him to talk for days, but he won't spill the beans on who sent him and for what reason.\n \nListen, I'll need to get moving soon, it's only a matter of time before they find out I'm hiding here. Try to get him to talk, would you?</text>
+		<text>Этот парень? Не знаю. Он и его отряд устроили засаду на меня, когда я шёл на встречу с новым поставщиком для бизнеса моего брата. Эти уроды даже не попытались спросить, они сразу начали палить. Он единственный, кто выжил в этой мясорубке... И я, конечно. Я пытался разговорить его несколько дней, но он не собирается сдавать его нанимателя по какой-то причине.\n \nПослушай, мне скоро нужно выдвигаться, только дело времени, когда они узнают, что я здесь прячусь. Попробуй поговорить с ним, поможешь?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_start_work_accept">
-		<text>I'm on it.</text>
+		<text>Я помогу.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_start_work_refuse">
-		<text>I need time to prepare.</text>
+		<text>Мне нужно подготовиться.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_end_work_0">
-		<text>I killed the SSU squad in Zaton, here's a document one of them had.</text>
+		<text>Я убил отряд СБУ на Затоне, у одного из них был этот документ.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_end_work_1">
-		<text>Let me see. Interesting, this is a deployment notice. The order was given from... This bastard. I knew it!</text>
+		<text>Дай посмотреть. Интересно, это приказ о развёртывании. Приказ был дан... Этим гадом. Я так и знал!</text>
 	</string>
 
 	<!-- Act 3, Task 3 -->
 	<string id="st_wg_act_3_task_3_start_work">
-		<text>Can I help?</text>
+		<text>Чем могу помочь?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_start_work_details">
-		<text>When I was in the Army, one of our supervisors was corrupt to the core. One day, I managed to catch evidence of a shady deal he sealed with bandits, selling outfits we had just received from command. I showed it to my brother, and that and the fact my brother outranked him gave us decent protection against his bullshit.\n \nI guess us deserting gave him the perfect opportunity to have the army itself help him silence us. Listen, I know this guy, who won't do the dirty work himself. Last time I heard about him, he was deployed in the Great Swamps, at the Machine yard. This will never end if he's still around, so... Get rid of him, would you?</text>
+		<text>Когда я был в армии, один из наших командиров был коррумпированным до мозга костей. Однажды, я увидел его за мутной сделкой с бандитами, пока он продавал костюмы, которые мы только получили от командования. Я показал это моему брату, и тот факт, что брат был выше по званию дал нам надёжную защиту от него.\n \nЯ думаю, наше дезертирство дало ему прекрасную возможность нас прикончить с помощью армии. Так вот, я знаю этого человека, который не станет делать грязную работу сам. Когда я в последний раз о нём слышал, он был на Болотах, на Механизаторском дворе. Это никогда не закончится, если он ещё жив, так что... Избавишься от него, хорошо?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_start_work_accept">
-		<text>I'll let you know when it's done.</text>
+		<text>Я дам тебе знать, когда всё будет сделано.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_start_work_refuse">
-		<text>I can't help you with this yet.</text>
+		<text>Я пока не могу тебе с этим помочь.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_end_work_0">
-		<text>Your old supervisor won't cause you troubles anymore.</text>
+		<text>Твой старый командир больше не доставит тебе проблем.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_end_work_1">
-		<text>Right... I knew this guy was rotten, but I didn't think he'd actually use the Army to cover his ass.</text>
+		<text>Реально... Я знал что этот мужик был гнилым, но я не думал, что он будет использовать армию для прикрытия своей задницы.</text>
 	</string>
 
 	<!-- Act 3, Task 4 -->
 	<string id="st_wg_act_3_task_4_start_work">
-		<text>Anyway, you said you needed help with something?</text>
+		<text>Ладно, ты говорил, тебе нужна помощь в чём-то?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_start_work_details">
-		<text>Oh, yeah... About that... See, I'd like to go back to my brother, in the Garbage... But the way there isn't exactly welcoming, especially for a Merc. Can you just, help me get there?</text>
+		<text>О, да... Об этом... Смотри, я бы хотел вернуться к брату, на Свалку... Но дорога туда не очень безопасная, особенно для наёмника. Не мог бы ты помочь мне туда добраться?</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_start_work_accept_0">
-		<text>Sure, let's go.</text>
+		<text>Конечно, пошли.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_start_work_refuse">
-		<text>Actually, I need time to prepare before we go.</text>
+		<text>Подожди, мне нужно подготовиться.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_start_work_accept_1">
-		<text>Thanks, I'll let you lead the way.</text>
+		<text>Спасибо, я поведу.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_end_work_0">
-		<text>I have return, and I didn't come alone.</text>
+		<text>Я вернулся, и я не один.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_4_end_work_1">
-		<text>Thank you so much Stalker. I was growing worried. Good to know you're someone reliable. Hey, take this, for your trouble, and for getting my brother back in one piece.</text>
+		<text>Большое тебе спасибо, Сталкер. Я начинал переживать. Хорошо, что ты надёжный человек. Вот, возьми, за вмешательство, и возврат моего брата целым и невредимым.</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -1120,264 +1120,264 @@
 
 	<!-- Act 1, Task 1 Messages -->
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_1">
-		<text>You made it to the helicopter?</text>
+		<text>Ты добрался до вертолёта?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_2">
-		<text>Yes, but there's no-one here. The helicopter is landed in the middle of nowhere.</text>
+		<text>Да, но здесь никого нет. Вертолёт приземлился непонятно где.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_3">
-		<text>Where's the crew?</text>
+		<text>Где экипаж?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_4">
-		<text>I don't know. Do you have any way to locate them or the supplies?</text>
+		<text>Я не знаю. У тебя есть возможность как-то найти их или товары?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_5">
-		<text>Some of the supplies have a GPS tracker, let me check.</text>
+		<text>У некоторых посылок есть GPS трекер, давай проверю.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_6">
-		<text>I have a signal active at the sawmill, not far from you. Get over there, double time!</text>
+		<text>Я вижу сигнал на лесопилке, неподалёку от тебя. Двигайся туда, ускоряйся!</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_1">
-		<text>I've located the crew... They are all dead. It seems they tried to take cover in a house... And got overwhelmed by zombies.</text>
+		<text>Я нашёл экипаж... Все мертвы. Похоже они попытались спрятаться в доме... И их убили зомби.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_2">
-		<text>They are all dead? Damn it. Can you see any of the supplies?</text>
+		<text>Все умерли? Чёрт возьми. Ты видишь какие-нибудь посылки?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_3">
-		<text>I think I see a transport case.</text>
+		<text>Я думаю, я нашёл транспортный кейс.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_4">
-		<text>Only one? There should be a lot more! Doesn't matter. Take what you can and get the hell out of here before the zombies get you too!</text>
+		<text>Только один? Здесь должно быть гораздо больше! Не важно. Возьми, что можешь и выбирайся сам, пока зомби и тебя не настигли!</text>
 	</string>
 
 	<!-- Act 1, Task 2 Messages -->
 	<string id="st_wg_trader_act_1_task_2_stage_0_message_1">
-		<text>I found someone at Yanov station. He said he saw strange lights coming from the Container Warehouse.</text>
+		<text>Я нашёл кое-кого на станции Янов. Он сказал что видел странный вспышки со стороны Склада контейнеров.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_0_message_2">
-		<text>Hm. The helicopter flew over that area when we lost contact with the crew.</text>
+		<text>Хм. Вертолет пролетал здесь, когда мы потеряли контакт с экипажем.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_0_message_3">
-		<text>I'll make my way there, see what's going on.</text>
+		<text>Я схожу туда, посмотрю, что там происходит.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_0_message_4">
-		<text>The helicopter, is operational again. I'll send it over to your location to assist you. We don't have a lot of fuel left, so make the best of it.</text>
+		<text>Вертолёт снова на ходу. Я отправлю его тебе на подмогу.У нас не так много топлива, так что используй его как можно правильней.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_1">
-		<text>We're in route to your location. Heades said you might need some covering fire. Just designate the targets (press: %c[d_orange]%s%c[ui_white]), and we'll take care of the rest.</text>
+		<text>Мы выдвигаемся к твоей локации. Хедес сказал, тебе нужно небольшое огневое прикрытие. Просто назначь цели (нажмите: %c[d_orange]%s%c[ui_white]), и мы с ними разберёмся.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_2">
-		<text>We're running now on fuel. We'll return to the Waste Processing Station. Good luck out there.</text>
+		<text>У нас кончается топливо, мы возвращаемся на Станцию переработки отходов. Удачи.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_3">
-		<text>What are you doing, stealing our stuff. Dumb ass.</text>
+		<text>Ты что делаешь, крадёшь наше. Вот гад.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_4">
-		<text>Stealing our stuff? I'll tell the boys who you really are.</text>
+		<text>Крадёшь наши вещи? Я скажу парням, кто ты на самом деле.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_2_message_1">
-		<text>Be advised, multiple Bandit squads moving in to your position.</text>
+		<text>Будь готов, несколько отрядов приближаются к твоей позиции.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_stage_2_message_2">
-		<text>We're running now on fuel. We'll return to the Waste Processing Station. Good luck out there.</text>
+		<text>>У нас кончается топливо, мы возвращаемся на Станцию переработки отходов. Удачи.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_heli_attack_1">
-		<text>Target acquired.</text>
+		<text>Цель захвачена.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_heli_attack_2">
-		<text>Roger that.</text>
+		<text>Понял.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_heli_attack_3">
-		<text>Solid copy.</text>
+		<text>Цель понял.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_heli_attack_4">
-		<text>Opening fire.</text>
+		<text>Открываю огонь.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_2_heli_attack_5">
-		<text>Stand clear.</text>
+		<text>Вас понял, атакую.</text>
 	</string>
 
 	<!-- Act 1, Task 3 Messages -->
 	<string id="st_wg_trader_act_1_task_3_stage_0_message_1">
-		<text>Heades, I found the captured merc. He's shaken, but alive.</text>
+		<text>Хедес, я нашёл захваченного наёмника. Он потрясён, но жив.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_0_message_2">
-		<text>Good. Can you escort him back to the Book Store?</text>
+		<text>Хорошо. Ты можешь его сопроводить до магазина "Книги"?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_0_message_3">
-		<text>He is really confused, I doubt he'll even be able to fire a gun. The Book Store isn't exactly close to our position...</text>
+		<text>Он сильно дезориентирован, сомневаюсь, что он может стрелять. Магазин довольно далеко...</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_0_message_4">
-		<text>Can you get to the bridge, in the Red Forest? I'll arrange the helicopter to go pick him up.</text>
+		<text>Можете добраться до моста, в Рыжем лесу? Я отправлю вертолёт, чтобы его подобрали.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_0_message_5">
-		<text>That would work. Have the helicopter stand by, I'll tell you when to send them to our location.</text>
+		<text>Это может сработать. Держите вертолёт наготове, я скажу тебе, когда его отпралять к нам.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_1">
-		<text>H-how... How d-did you find me again?</text>
+		<text>К-как... Как т-ты нашёл меня, ещё раз?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_2">
-		<text>Heades told me a scout team found you when they were looking for enemy movements and safe air corridors for his helicopters.</text>
+		<text>Хедес сказал мне, что разведгруппа нашла тебя, когда они следили за перемещениями противниками и безопасными воздушными корридорами для вертолётов.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_3">
-		<text>Are you feeling better?</text>
+		<text>Как ты, лучше?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_4">
-		<text>Yeah I'm... I'm alright. My memory is a bit fuzzy...</text>
+		<text>Да Я... Я в поряден. Воспоминания какие-то смутные...</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_5">
-		<text>You remember who you are at least? I hope these Monolithians didn't have time to start working on you.</text>
+		<text>Ты хотя бы помнишь кто ты? Надеюсь, Монолитовцы ещё не поработали над тобой.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_6">
-		<text>Yeah no don't worry. I remember. I'm copilot for one of Heades' helicopters.</text>
+		<text>Да, без проблем. Я помню. Я второй пилот одного из вертолётов Хедеса.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_7">
-		<text>Wait, you said you're a copilot? How come Heades didn't notice you were missing?</text>
+		<text>Погоди, ты сказал, ты второй пилот? Как Хедес не заметил твоей пропажи?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_8">
-		<text>I don't know... All I remember is, we were flying some cargo to the Water Processing Station in Zaton, and we had to land in emergency...</text>
+		<text>Я не знаю... Всё, что я помню - этот то, что мы везли какой-то груз на Станцию переработки отходов на Затон, и нам пришлось провести экстренную посадку...</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_9">
-		<text>You're the copilot of the helicopter I found abandoned in Zaton?! You just forgot to mention that?</text>
+		<text>Ты - второй пилот найденного мной брошенным вертолёта на Затоне?! Ты просто забыл это упомянуть?</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_1_message_10">
-		<text>Sorry I'm still a bit confused. Anyway, I'm probably still alive because those Monolithians wanted me to fly one of their own helicopters.</text>
+		<text>Извини я всё ещё немного не в себе. В любом случае, я скорее всего ещё жив, потому что Монолитовцы хотели, чтобы я управлял одной из их вертушек.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_3_message_1">
-		<text>The area is safe enough. You can send the helicopter over.</text>
+		<text>Территория достаточно безопасна. Вы можете отправить вертолёт.</text>
 	</string>
 
 	<string id="st_wg_trader_act_1_task_3_stage_3_message_2">
-		<text>Roger that, we're on our way. Hang tight.</text>
+		<text>Понял, мы в пути. Держитесь.</text>
 	</string>
 
 	<!-- Act 2, Task 2 Messages -->
 	<string id="st_wg_trader_act_2_task_2_message_school_pursuers_far">
-		<text>Be careful, you're getting close to the school. If people see you get there, we'll have to abort the mission.</text>
+		<text>Осторожно, ты подбираешься к школе. Если они тебя заметят, нам придётся отменить миссию.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_message_school_pursuers_close">
-		<text>Someone saw you get in the school. Mission aborted.</text>
+		<text>Кто-то увидел тебя на пути к школе. Отмена миссии.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_message_left_position">
-		<text>You left your position? We cannot take chances, mission aborted.</text>
+		<text>Ты покинул позицию? Мы не можем рисковать, отмена миссии.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_2_message_1">
-		<text>You made it to the Outskirts? Good. Advance to the school, instructions will follow.</text>
+		<text>Ты добрался до Окраин? Хорошо. Двигайся к школе, дальше мы всё объясним.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_5_message_1">
-		<text>I made it to the school, what now?</text>
+		<text>Я добрался до школы, что теперь?</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_5_message_2">
-		<text>Find the lobby, there will be stairs leading to the basement. Hide there, while the convoy arrives.</text>
+		<text>Найди фойе, здесь будет проход в подвал. Спрячься там, пока конвой подходит.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_1">
-		<text>The convoy will arrive soon. When it does, get to the third floor of the school.</text>
+		<text>Конвой скоро прибудет. Когда они придут, выходи на третий этаж школы.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_2">
-		<text>What do you want me to do when I'll see them?</text>
+		<text>Чего вы хотите от меня, когда я их увижу?</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_3">
-		<text>Get rid of their escort, but not before we give you the signal. We'll tell you when to open fire.</text>
+		<text>Избавься от их охраны, но не до того как мы дадим тебе сигнал. Мы скажем тебе, когда открывать огонь.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_4">
-		<text>Understood.</text>
+		<text>Понял.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_9_message">
-		<text>Be advised, a group of bandits is approaching. Don't intervene yet, we don't know if the convoy has the documents.</text>
+		<text>Осторожно, отряд бандитов приближается. Пока не вмешивайся, мы ещё не знаем, есть ли у них документы.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_10_message_1">
-		<text>... you... copy? We're trying to amplify our signal. The convoy fled. We have a GPS signal active at the old service center.</text>
+		<text>... меня... слышно? Мы пытаемся настроить сигнал. Конвой скрылся. GPS сигнал исходит от старого сервисного центра.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_10_message_2">
-		<text>If you receive this, I'm on my way there.</text>
+		<text>Если вы слышите, я в пути.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_10_message_3">
-		<text>10-4. We have confirmation the convoy is carrying the documents. You have green light to engage.</text>
+		<text>10-4. Мы получили подтверждение, что конвой перевозит документы. Ты можешь атаковать.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_11_message_1">
-		<text>I've got the documents.</text>
+		<text>Я нашёл документы.</text>
 	</string>
 
 	<string id="st_wg_trader_act_2_task_2_stage_11_message_2">
-		<text>Good. Meet us in the Darkscape. We'll be waiting for you at the camp, under the cliff.</text>
+		<text>Хорошо. Найди нас в Тёмной Лощине. Мы будем ждать тебя в лагере, у подножия утёса.</text>
 	</string>
 
 	<!-- Act 3, Task 2 Messages -->
 	<string id="st_wg_act_3_task_2_stage_2_message_1">
-		<text>%s, I have to move. My current location isn't safe anymore. Meet me in the Red Forest, at the old mine.</text>
+		<text>%s, мне нужно идти. Мой привал больше не безопасен. Найди меня в Рыжем Лесу, в старой шахте.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_2_stage_2_message_2">
-		<text>Alright, I'll meet you there.</text>
+		<text>Хорошо, я приду туда.</text>
 	</string>
 
 	<!-- Act 3, Task 3 Messages -->
 	<string id="st_wg_act_3_task_3_stage_0_message_1">
-		<text>The supervisor won't cause you troubles anymore. The Zone got the best of him.</text>
+		<text>Командир больше не доставит тебе проблем. Зона с ним разобралась.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_stage_0_message_2">
-		<text>Thank god. This is finally over. Listen, can you help me with one last thing? I'll be waiting for you in the Army Warehouses.</text>
+		<text>Спасибо большое. Это, наконец, закончилось. Слушай, можешь мне помочь в последний раз? Я буду ждать тебя на Армейских Складах.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_stage_0_message_3">
-		<text>The supervisor shouldn't cause you troubles anymore. I slide some cash in his pockets.</text>
+		<text>Командир больше не доставит тебе проблем. Я дал ему взятку.</text>
 	</string>
 
 	<string id="st_wg_act_3_task_3_stage_0_message_4">
-		<text>That's not what I wanted, but hopefully that'll do the trick. Listen, can you help me with one last thing? I'll be waiting for you in the Army Warehouses.</text>
+		<text>Не то чего я хотел, но, надеюсь, это сработает. Слушай, можешь мне помочь в последний раз? Я буду ждать тебя на Армейских Складах.</text>
 	</string>
 
 </string_table>
