@@ -1,150 +1,150 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	РђРІС‚РѕСЂ РѕСЂРёРіРёРЅР°Р»Р°(s) : NLTP_ASHES																			     -->
-<!--	РР·РјРµРЅРµРЅРѕ : N/A																							     -->
-<!--	Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ : 17/03/2023																						     -->
-<!--	Р›РёС†РµРЅР·РёСЏ : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
 <!--	Translation file for Western Goods' integration of the Pinup Collector addon.											     -->
-<!--	Р¤Р°Р№Р» Р»РѕРєР°Р»РёР·Р°С†РёРё Western Goods РґР»СЏ РёРЅС‚РµРіСЂР°С†РёРё СЃ Pinup Collector.											     -->
-<!--    РџРµСЂРµРІРѕРґС‡РёРє:VodoXleb                                                                                                             -->
+<!--	Файл локализации Western Goods для интеграции с Pinup Collector.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
 <!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
     <string id="st_wg_tear_page">
-        <text>Р’С‹СЂРІР°С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ</text>
+        <text>Вырвать страницу</text>
     </string>
 
     <!-- PLAYBOY magazine (Chloe Khan) pages -->
     <string id="st_pinup_wg_porn_mag_1_artist">
-        <text>"РҐР»РѕСЏ РҐР°РЅ (Р¤РѕС‚Рѕ)"</text>
+        <text>"Хлоя Хан (Фото)"</text>
     </string>
 
     <string id="st_pinup_wg_porn_mag_1_desc">
-        <text>"РЎС‚СЂР°РЅРёС†Р°, РІС‹СЂРІР°РЅРЅР°СЏ РёР· РІР·СЂРѕСЃР»РѕРіРѕ Р¶СѓСЂРЅР°Р»Р°, СЃ РҐР»РѕРµР№ РҐР°РЅ."</text>
+        <text>"Страница, вырванная из взрослого журнала, с Хлоей Хан."</text>
     </string>
 
     <string id="pinup_wg_porn_mag_1_1">
-        <text>PLAYBOY (РҐР»РѕСЏ РҐР°РЅ) РЎС‚СЂР°РЅРёС†Р° 52</text>
+        <text>PLAYBOY (Хлоя Хан) Страница 52</text>
     </string>
 
     <string id="pinup_wg_porn_mag_1_2">
-        <text>PLAYBOY (РҐР»РѕСЏ РҐР°РЅ) РЎС‚СЂР°РЅРёС†Р° 53</text>
+        <text>PLAYBOY (Хлоя Хан) Страница 53</text>
     </string>
 
     <string id="pinup_wg_porn_mag_1_3">
-        <text>PLAYBOY (РҐР»РѕСЏ РҐР°РЅ) РЎС‚СЂР°РЅРёС†Р° 54</text>
+        <text>PLAYBOY (Хлоя Хан) Страница 54</text>
     </string>
 
     <string id="pinup_wg_porn_mag_1_4">
-        <text>PLAYBOY (РҐР»РѕСЏ РҐР°РЅ) РЎС‚СЂР°РЅРёС†Р° 55</text>
+        <text>PLAYBOY (Хлоя Хан) Страница 55</text>
     </string>
 
     <string id="pinup_wg_porn_mag_1_5">
-        <text>PLAYBOY (РҐР»РѕСЏ РҐР°РЅ) РЎС‚СЂР°РЅРёС†Р° 56</text>
+        <text>PLAYBOY (Хлоя Хан) Страница 56</text>
     </string>
 
     <string id="pinup_wg_porn_mag_1_6">
-        <text>PLAYBOY (РҐР»РѕСЏ РҐР°РЅ) РЎС‚СЂР°РЅРёС†Р° 57</text>
+        <text>PLAYBOY (Хлоя Хан) Страница 57</text>
     </string>
 
     <!-- PLAYBOY magazine (Nicole Whitehead) pages -->
     <string id="st_pinup_wg_porn_mag_2_artist">
-        <text>"РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ (Р¤РѕС‚Рѕ)"</text>
+        <text>"Николь Уайтхед (Фото)"</text>
     </string>
 
     <string id="st_pinup_wg_porn_mag_2_desc">
-        <text>"РЎС‚СЂР°РЅРёС†Р°, РІС‹СЂРІР°РЅРЅР°СЏ РёР· РІР·СЂРѕСЃР»РѕРіРѕ Р¶СѓСЂРЅР°Р»Р°, СЃ РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ."</text>
+        <text>"Страница, вырванная из взрослого журнала, с Николь Уайтхед."</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_1">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 94</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 94</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_2">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 95</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 95</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_3">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 96</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 96</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_4">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 97</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 97</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_5">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 98</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 98</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_6">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 99</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 99</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_7">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 100</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 100</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_8">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 101</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 101</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_9">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 102</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 102</text>
     </string>
 
     <string id="pinup_wg_porn_mag_2_10">
-        <text>PLAYBOY (РќРёРєРѕР»СЊ РЈР°Р№С‚С…РµРґ) РЎС‚СЂР°РЅРёС†Р° 103</text>
+        <text>PLAYBOY (Николь Уайтхед) Страница 103</text>
     </string>
 
     <!-- PLAYBOY magazine (Carrie Stevens) pages -->
     <string id="st_pinup_wg_porn_mag_3_artist">
-        <text>"РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ (Р¤РѕС‚Рѕ)"</text>
+        <text>"Кэрри Стивенс (Фото)"</text>
     </string>
 
     <string id="st_pinup_wg_porn_mag_3_desc">
-        <text>"РЎС‚СЂР°РЅРёС†Р°, РІС‹СЂРІР°РЅРЅР°СЏ РёР· РІР·СЂРѕСЃР»РѕРіРѕ Р¶СѓСЂРЅР°Р»Р°, СЃ РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ."</text>
+        <text>"Страница, вырванная из взрослого журнала, с Кэрри Стивенс."</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_1">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 99</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 99</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_2">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 100</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 100</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_3">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 101</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 101</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_4">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 102</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 102</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_5">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 103</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 103</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_6">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 104</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 104</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_7">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 105</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 105</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_8">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 106</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 106</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_9">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 107</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 107</text>
     </string>
 
     <string id="pinup_wg_porn_mag_3_10">
-        <text>PLAYBOY (РљСЌСЂСЂРё РЎС‚РёРІРµРЅСЃ) РЎС‚СЂР°РЅРёС†Р° 108</text>
+        <text>PLAYBOY (Кэрри Стивенс) Страница 108</text>
     </string>
 </string_table>
