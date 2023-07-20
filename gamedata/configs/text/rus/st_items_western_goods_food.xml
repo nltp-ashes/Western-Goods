@@ -1,237 +1,239 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
 <!--																											     -->
-<!--	Translation file for Western Goods' food items.															     -->
-<!--                                                                                                                 -->
+<!--	Translation file for Western Goods' food items.											     -->
+<!--	Файл локализации для еды Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
 <!-- ================================================================================================================-->
 <string_table>
 
 	<string id="st_wg_hamborgir">
-		<text>Charal Hamburger (Cheese)</text>
+		<text>Бургер Charal (Сыр)</text>
 	</string>
 	
 	<string id="st_wg_hamborgir_s">
-		<text>Charal Hamburger</text>
+		<text>Бургер Charal</text>
 	</string>
 	
 	<string id="st_wg_hamborgir_descr">
 		<text>
-			Charal is a popular brand in France, that specializes in frozen preparations of minced beef. Some traders around the Zone manage to import some of their products from time to time. This box needs to be prepared for 1 min 50 seconds in a microwave, although it seems this one was recently prepared, so even if it's cold, it's ready to eat.\n
+			Charal - популярный бренд во Франции, специализирующийся на мясных полуфабрикатах. Некоторые торговцы провозят в Зону их продукты время от времени. Эта упаковка должна готовиться 1 минуту 50 секунд в микроволновке, но, кажется, её уже недавно приготовили, поэтому, несмотря на то что она холодная, её можно есть.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_snickers">
-		<text>Snickers chocolate bar</text>
+		<text>Шоколадный батончик Snickers</text>
 	</string>
 	
 	<string id="st_wg_snickers_s">
-		<text>Snickers bar</text>
+		<text>Шоколадка Snickers</text>
 	</string>
 	
 	<string id="st_wg_snickers_descr">
 		<text>
-			Snickers is a chocolate bar consisting of nougat topped with caramel and peanuts that is encased in milk chocolate. Most stalkers in the Zone cannot afford them, as they are imported from foreign countries. That being said, those that can afford it often use it as a quick way to eat on busy days.\n
+			Snickers - шоколодный батончик, состоящий из нуги, с добавкой карамели и арахиса, покрытой молочным шоколадом. Большинство сталкеров не могут их себе позволить, так как они импортированы из других стран. Те, кто могут его себе позволить, используют его, как быстрый источник пищи в загруженные дни.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 	
 	<string id="st_wg_twix">
-		<text>Twix chocolate bar</text>
+		<text>Шоколадная палочка Twix</text>
 	</string>
 	
 	<string id="st_wg_twix_s">
-		<text>Twix bar</text>
+		<text>Палочка Twix</text>
 	</string>
 	
 	<string id="st_wg_twix_descr">
 		<text>
-			Twix is a caramel shortbread chocolate bar made by Mars, Inc., consisting of a biscuit applied with other confectionery toppings and coatings (most frequently caramel and milk chocolate). Twix are packaged with two bars in a wrapper.\n
+			Twix  - карамельный шоколадный батончик с печеньем, созданный Mars, Inc., состоящий из печенья с различными сладкими топпингами ( в основном карамель и молочный шоколад. Twix пакуется по две "палочки" в упаковке.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 	
 	<string id="st_wg_mars">
-		<text>Mars chocolate bar</text>
+		<text>Батончик Mars</text>
 	</string>
 	
 	<string id="st_wg_mars_s">
-		<text>Mars bar</text>
+		<text>Батончик Mars</text>
 	</string>
 	
 	<string id="st_wg_mars_descr">
 		<text>
-			Mars, commonly known as Mars bar, is the name of two varieties of chocolate bar produced by Mars, Incorporated. The bar consists of caramel and nougat coated with milk chocolate.\n
+			Mars, известный батончик Mars, является названием двух видов шоколадных батончиков, производимых Mars, Incorporated. Батончик состоит из карамели и нуги, покрытых молочным шоколадом.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 	
 	<string id="st_wg_milkyway">
-		<text>MilkyWay chocolate bar</text>
+		<text>Батончик MilkyWay</text>
 	</string>
 	
 	<string id="st_wg_milkyway_s">
-		<text>MilkyWay bar</text>
+		<text>Шоколадка MilkyWay</text>
 	</string>
 	
 	<string id="st_wg_milkyway_descr">
 		<text>
-			MilkyWay is a brand of chocolate-covered confectionery bar manufactured and marketed by Mars, Incorporated. This bar is one of the two kinds sold by the brand. Available outside the US, this bar somehow made it into the Zone.\n
+			MilkyWay является брендом покрытых шоколадом кондитерских батончиков, производимых Mars, Incorporated. Это один из двух видов батончиков, продающихся под этим брендом. Доступный за пределами США, этот батончик как-то попал в Зону.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_bounty">
-		<text>Bounty chocolate bar</text>
+		<text>Батончик Bounty</text>
 	</string>
 	
 	<string id="st_wg_bounty_s">
-		<text>Bounty bar</text>
+		<text>Батончик Bounty</text>
 	</string>
 	
 	<string id="st_wg_bounty_descr">
 		<text>
-			Bounty is a coconut-filled, chocolate-enrobed candy bar manufactured by Mars, Incorporated. The Bounty bar offers you a strong coconut flavor that is imparted by the soft and fluffy center filling of the candy bar. There is a layer of sweet chocolate that is layered over the top and which gives the bar its shape.\n
+			Bounty - конфетно-шоколадный батончик с кокосовой начинкой, производимый Mars, Incorporated. Батончик Bounty предлагает вам сильный кокосовой вкус, дающийся мягкой и пушистой сердцевинкой конфеты. Снаружи батончик покрыт сладким шоколадом, налитым сверху, что придают батончику свою форму.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_kinder_maxi">
-		<text>Kinder Maxi chocolate bar</text>
+		<text>Шоколадный батончик Kinder Maxi</text>
 	</string>
 	
 	<string id="st_wg_kinder_maxi_s">
-		<text>Kinder Maxi bar</text>
+		<text>Шоколадка Kinder Maxi</text>
 	</string>
 	
 	<string id="st_wg_kinder_maxi_descr">
 		<text>
-			Kinder Maxi is a cocoa butter chocolate bar from the Kinder brand, from the Ferrero group. The bar contains mainly milk chocolate, with a soft milk filling.\n
+			Kinder Maxi - шоколадный батончик с какао-маслом, производимый брендом Kinder из группы Ferrero. Батончик содержит в основном молочный шоколад, с мягкой молочной начинкой.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_kinder_bueno">
-		<text>Kinder Bueno chocolate bar</text>
+		<text>Шоколадный батончик Kinder Bueno</text>
 	</string>
 	
 	<string id="st_wg_kinder_bueno_s">
-		<text>Kinder Bueno bar</text>
+		<text>Батончик Kinder Bueno</text>
 	</string>
 	
 	<string id="st_wg_kinder_bueno_descr">
 		<text>
-			Kinder Buenos are crispy, chocolate-covered wafer bars with a rich, hazelnut cream filling. They come wrapped in two individually sealed plastic sleeves, so you can eat one and save the other for later.\n
+			Kinder Buenos - это хрустящие, покрытые шоколадом пластинки-батончики с богатой начинкой из масла лесного ореха. Они поставляются в двух отдельно изолированных пластиковых упаковках, поэтому вы можете съесть один, а другой оставить на потом.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_kitkat">
-		<text>Kit-Kat chocolate</text>
+		<text>Шоколадная плитка Kit-Kat</text>
 	</string>
 	
 	<string id="st_wg_kitkat_s">
-		<text>Kit-Kat chocolate</text>
+		<text>Шоколад Kit-Kat</text>
 	</string>
 	
 	<string id="st_wg_kitkat_descr">
 		<text>
-			Kit Kats are a type of chocolate that is made up of three layers of wafers. The wafers are covered with a layer of chocolate inside and out. Each whole piece is considered a �finger.� Each package of Kit Kats usually has four fingers connected together.\n
+			Kit Kat - вид шоколада, сделанный из трёх слоёв пластинок. Пластинки покрыты шоколадом внутри и снаружи. Каждая целая частичка называется "пальчиком". Каждая упаковка Kit Kat обычно содержит четыре пальчика, соединённых вместе.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_milka">
-		<text>Milka Alpine Milk chocolate</text>
+		<text>Шоколад Milka Альпийское молоко</text>
 	</string>
 	
 	<string id="st_wg_milka_s">
-		<text>Milka chocolate</text>
+		<text>Шоколад Milka</text>
 	</string>
 	
 	<string id="st_wg_milka_descr">
 		<text>
-			Chocolate bar made by Milka. It is widespread in western europe, where people enjoy it for its soft tasting chocolate. It contains 30% cacao.\n
+			Шоколадная плитка, произведённая Milka. Она очень распростронена в западной Европе, где люди ценят её за мягкий вкус шоколада. Содержит 30% какао.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_mnms">
-		<text>M&amp;Ms chocolate candies</text>
+		<text>Шоколадные конфеты M&M's</text>
 	</string>
 	
 	<string id="st_wg_mnms_s">
-		<text>M&amp;Ms</text>
+		<text>M&M's</text>
 	</string>
 	
 	<string id="st_wg_mnms_descr">
 		<text>
-			M&amp;M's are multicolored button-shaped chocolates, consisting of a candy shell surrounding a filling which varies depending upon the variety of M&amp;M's.\n
+			M&M's - разноцветные шоколадки в форме кнопок, состоящие из конфетной оболочки, окружающей начинку, зависящую от вида M&M's.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] high quality\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] высокое качество\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_mentos">
-		<text>Mentos Fruit candies</text>
+		<text>Конфеты Mentos Fruit</text>
 	</string>
 	
 	<string id="st_wg_mentos_s">
@@ -240,55 +242,55 @@
 	
 	<string id="st_wg_mentos_descr">
 		<text>
-			Mentos Fruit are small chewing candies in different flavours. Mentos Fruit has a mix of strawberry, orange and lemon. This is a must-have for any afternoon snack or a snack anytime of the day!\n
+			Mentos Fruit - маленькие жевательные конфеты с разными вкусами. Mentos Fruit включает микс клубники, апельсина и лимона. Такие конфеты просто необходимы для любой полуденной закуски или в любое другое время!\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_lays">
-		<text>Lay's chips (Nature)</text>
+		<text>Чипсы Lay's (Nature)</text>
 	</string>
 	
 	<string id="st_wg_lays_s">
-		<text>Lay's chips</text>
+		<text>Чипсы Lay's</text>
 	</string>
 	
 	<string id="st_wg_lays_descr">
 		<text>
-			Lays are fried potato chips. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			Lays - жареные картофельные чипсы. Они содержат много соли и консервантов, поэтому они вызывают у людей жажду.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_doritos">
-		<text>Doritos chips (Cheese Natchos)</text>
+		<text>Чипсы Доритос (Сырные Начос)</text>
 	</string>
 	
 	<string id="st_wg_doritos_s">
-		<text>Doritos chips</text>
+		<text>Чипсы Доритос</text>
 	</string>
 	
 	<string id="st_wg_doritos_descr">
 		<text>
-			Doritos are fried potato chips. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			Doritos - жареные картофельные чипсы. Они содержат много соли и консервантов, поэтому они вызывают у людей жажду.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_pringles">
-		<text>Pringles mini can (Nature)</text>
+		<text>Банка  Pringles mini</text>
 	</string>
 	
 	<string id="st_wg_pringles_s">
@@ -297,12 +299,12 @@
 	
 	<string id="st_wg_pringles_descr">
 		<text>
-			Pringles are fried chips. Contrary to popular belief, they are not made from potato, but instead from a mix of corn, rice powder, wheat, maize and potato shavings. This mix is later ground and laid into a sheet, curved, then fried for a few seconds. The fried chips are then blasted with flavored, salt powder. They contain a lot of salt and preservatives, so they tend to make people feel thirsty.\n
+			Pringles - жареные чипсы. Вопреки популирному заблуждению, они сделаны не из картошки, а из смеси кукурузы, рисовой муки, пшеницы, маиса и картофельных очистков. Эта смесь затем расплющивается, ложится в формы, равняется и поджаривается в течение нескольких секунд. Затем на чипсы распыляют приправленный соляной порошок. Они содержат много соли и консервантов, поэтому они вызывают у людей жажду.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
@@ -316,17 +318,17 @@
 
 	<string id="st_wg_oreo_descr">
 		<text>
-			Oreo is a brand of sandwich cookie consisting of two biscuits or cookie pieces with a sweet creme filling. Kids usually put a point to respect the proper way to eat them : Separate the two biscuits, eat the filling by licking it, put the two biscuits back together, dip them in milk, and eat it!\n
+			Oreo - бренд подобного сэндвичам печенья состоящего из двух бисквитов или кусков печенья со сладким кремовым наполнением. Дети обычно считают правильным следующий способ употребления: разделить бисквиты, слизать весь крем, соединить бисквиты обратно, обмакнуть из в молоко и съесть!\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_ferrero_rocher">
-		<text>Ferrero Rocher box</text>
+		<text>Коробка Ferrero Rocher</text>
 	</string>
 
 	<string id="st_wg_ferrero_rocher_s">
@@ -335,17 +337,17 @@
 
 	<string id="st_wg_ferrero_rocher_descr">
 		<text>
-			Ferrero Rocher is a chocolate a consisting of a whole crunchy hazelnut in the heart, a delicious creamy hazelnut filling, a crisp wafer shell covered with chocolate and gently roasted pieces. They come in a prestigious golden wrapper. They are quite popular in Western Europe, where they are usually sold during celebrations.\n
+			Ferrero Rocher - шоколад состоящий из хрустящего лесного ореха в собственном масле между хрустящими пластинками, покрытых шоколадом. Поставляются в престижной золотой обёртке. Они довольно популярны в западной Европе, где их обычно продают по праздникам.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_mon_cheri">
-		<text>Mon Cheri box</text>
+		<text>Коробка Mon Cheri</text>
 	</string>
 
 	<string id="st_wg_mon_cheri_s">
@@ -354,32 +356,31 @@
 
 	<string id="st_wg_mon_cheri_descr">
 		<text>
-			The Mon Cheri is a single-wrapped chocolate consisting of a "heart" of cherry and liquor, contained in a dark chocolate housing. The liquor is quite concentrated, so it is recommended to not eat too many of them at once. They come in boxes of 30 pieces.\n
+			Mon Cheri - маленькая шоколадная конфета, представляющая из вишнёво-ликёрную сердцевину в тёмно-шоколадном покрытии. Ликёр концентрированный, поэтому не рекомендуется есть много за раз. Поступают в коробках по 30 штук.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_toblerone">
-		<text>Toblerone</text>
+		<text>"Тоблерон"</text>
 	</string>
 
 	<string id="st_wg_toblerone_s">
-		<text>Toblerone</text>
+		<text>"Тоблерон"</text>
 	</string>
 
 	<string id="st_wg_toblerone_descr">
 		<text>
-			Toblerone is a Swiss chocolate bar made with honey and almond nougat. Toblerone is very easily recognizable thanks to its unique looking packaging. People in the Zone often make jokes about how "if you eat it, the Zone will force you to finish it in one go!". But those are just jokes, a wise stalker would not eat it in one go, as to not have a liver attack.\n
+			Toblerone - швейцарский шоколадный батончик с мёдом и миндальной нугой. Toblerone легко узнать по его уникальной упаковке. Люди в зоне шутят о том, что "если ты начнёшь его есть, Зона заставит тебя съесть его весь за один присест!". Но это просто шутки, рассудительный сталкер не стал бы есть всё сразу, чтобы не повредить печень.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
-		</text>
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 	</string>
 
 	<string id="st_wg_french_mre">
@@ -392,33 +393,33 @@
 
 	<string id="st_wg_french_mre_descr">
 		<text>
-			Ration de Combat Individuelle Rechauffable (translated to Individual Reheatable Combat Ration) is the MRE used in the French military. Over the years, there has been several iteration of it. One in 1995, another one in 1999, and it was revised a final time in 2004. Luckily, this one is the latest iteration, so the contents are at least no older than 14 years old...\n
+			Ration de Combat Individuelle Rechauffable (что в переводе Индивидуальный Военный Рацион Питания) - ИРП, используемый во Французской армии. За годы существования, было несколько его итераций. Один - в 1995, другой - в 1999, и в последний раз - в 2004. К счастью, этот - из последней итерации, поэтому содержимое не старше 14 лет...\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] military item\n
-			%c[d_blue] � %c[ui_gray_2] imported\n
-			%c[d_cyan] � %c[ui_gray_2] valuable\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] военная вещь\n
+			%c[d_blue] • %c[ui_gray_2] импортный\n
+			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
 	<string id="st_wg_sandwich">
-		<text>Sandwich</text>
+		<text>Сэндвич</text>
 	</string>
 
 	<string id="st_wg_sandwich_s">
-		<text>Sandwich</text>
+		<text>Сэндвич</text>
 	</string>
 
 	<string id="st_wg_sandwich_descr">
 		<text>
-			A hand-made sandwich. Rather simple: bread, butter, cheese and slices of meat. Holding a Geiger counter against it doesn't seem to pick up radiation, so the ingredients were probably imported. Won't last you long, but it's always better than mutant meat.\n
+			Самодельный сэндвич. Довольно просто: хлеб, масло, сыр и срезы мяса. Проверка на радиацию счётчиком Гейгера не выявляет излучения, так что ингредиенты скорее всего были импортированы. Не хватит на долго, но это гораздо лучше мяса мутантов.\n
 			\n
-			%c[ui_gray_1]PROPERTIES:\n
-			%c[d_blue] � %c[ui_gray_2] food\n
-			%c[d_blue] � %c[ui_gray_2] hand-made\n
-			%c[d_green] � %c[ui_gray_2] clean nutrition source\n
+			%c[ui_gray_1]СВОЙСТВА:\n
+			%c[d_blue] • %c[ui_gray_2] еда\n
+			%c[d_blue] • %c[ui_gray_2] самодельный\n
+			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
 		</text>
 	</string>
 
