@@ -381,6 +381,7 @@
 			%c[d_blue] Х %c[ui_gray_2] еда\n
 			%c[d_blue] Х %c[ui_gray_2] импортный\n
 			%c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
+		</text>
 	</string>
 
 	<string id="st_wg_french_mre">
