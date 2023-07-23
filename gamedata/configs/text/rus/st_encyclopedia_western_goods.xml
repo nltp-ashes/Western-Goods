@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
+<!--	Изменено : N/A																							     -->
+<!--	Дата создания : 17/03/2023																						     -->
+<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
+<!--																											     -->
+<!--	Translation file for Western Goods' entries in the PDA Guide.											     -->
+<!--	Файл локализации для статей в КПК Western Goods.											     -->
+<!--    Переводчик:VodoXleb                                                                                                             -->
+<!--																											     -->
+<!-- ================================================================================================================-->
+<string_table>
+
+    <!-- Western goods trader encyclopedia entry -->
+    <string id="encyclopedia_characters_western_goods_ashes">
+        <text>Уильямс "Ashes" Хедес</text>
+    </string>
+
+    <string id="encyclopedia_characters_western_goods_ashes_text">
+        <text>
+		%c[pda_white]Уильямс "Ashes" Хедес%c[ui_gray_1] - торговец. Он находится в магазине "Книги" в Окраинах Припяти.\n
+		\n%c[pda_green]Информация%c[ui_gray_1]\n
+		\nУильямс "Ashes" Хедес - наёмник. Бывший солдат ООН, он бывал на многих театрах военных действий в составе спецназа миротворческих сил ООН. Он воевал во время восстания 2010 года в Алтисе, в Греции.\n
+		\nПозже он был отправлен в Чернобыльскую зону отчуждения в составе отряда ИИГ. Не известно, какую задачу перед ним поставли, всё что знают люди - это то, что он решил не уходить вместе с остальными членами отряда, а остаться в Зоне.\n
+		\n%c[pda_yellow]Факты%c[ui_gray_1]\n
+		\n• Этот торговец - главный импортер западных товаров в Зоне.
+        </text>
+    </string>
+
+    <!-- GPS locator encyclopedia entry -->
+    <string id="encyclopedia_items_western_goods_gps">
+        <text>GPS Локатор</text>
+    </string>
+
+    <string id="encyclopedia_items_western_goods_gps_text">
+        <text>
+		%c[pda_white]GPS локатор%c[ui_gray_1] - устройство, предназначенное для определения дистанции и названия ближайшей известной территории.\n
+		\n%c[pda_green]Информация%c[ui_gray_1]\n
+        \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
+        \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
+		\n• %c[pda_white]Очень низкое потребление энергии%c[ui_gray_1]. Требует зарядки примерно раз в год.
+        </text>
+    </string>
+
+    <!-- Flea Market encyclopedia entry -->
+    <string id="encyclopedia_features_western_goods_flea">
+        <text>Барахолка</text>
+    </string>
+
+    <string id="encyclopedia_features_western_goods_flea_text">
+        <text>
+            %c[pda_white]Барахолка%c[ui_gray_1] посволяет игроку покупать временные предложения, где вещи продаются в нескольких экземплярах, но со скидкой.\n
+            \n%c[pda_green]Информация%c[ui_gray_1]\n
+            \nBy talking to a trader at the Flea Market, the player has the option to purchase special offers. These offers are limited in time, and will eventually expire and get replaced with newer offers.\n
+            \nПредложение описывается так:\n
+            \n• %c[pda_white]Предмет%c[ui_gray_1]. Предлагаемая вещь;
+            \n• %c[pda_white]Кол-во%c[ui_gray_1]. Количество предметов в предложении. Колеблется между 2 и 10 предметами;
+            \n• %c[pda_white]Скидка%c[ui_gray_1]. Скидка по сравнению с базовой ценой. Колеблется между  5% и 50%;
+            \n• %c[pda_white]Цена%c[ui_gray_1]. Необходимое для покупки количество денег.
+        </text>
+    </string>
+
+    <!-- Oleksandr Chernenko encyclopedia entry -->
+    <string id="encyclopedia_characters_western_goods_oleksandr">
+        <text>Капитан Александр Черненко</text>
+    </string>
+
+    <string id="encyclopedia_characters_western_goods_oleksandr_text">
+        <text>
+            %c[pda_white]Капитан Александр Черненко%c[ui_gray_1] - торговец. Его можно найти на Барахолке, на Свалке.\n
+            \n%c[pda_green]Информация%c[ui_gray_1]\n
+            \nКапитан Александр Черненко - бывший военный, ставший наёмником. Он говорит что он дезертировал, когда командование отпрвило его на самоубийственную миссию, очень малое известно о той миссии, так как он не хочет об этом говорить.\n
+            \nСейчас его можно найти в подвале Барахолки, на Свалке. Он предлагает наборы предметов по скидке. Продажа таких наборов обычно ограничена во времени.\n
+            \n%c[pda_yellow]Факты%c[ui_gray_1]\n
+            \n• Этот торговец продает специальные предложения;
+            \n• Иногда продаёт посылки с импортными припасами.
+        </text>
+    </string>
+
+    <!-- Hand drawn map encyclopedia entry -->
+    <string id="encyclopedia__notes_western_goods_hand_drawn_map">
+        <text>Рукописная карта</text>
+    </string>
+
+    <string id="encyclopedia__notes_western_goods_hand_drawn_map_text">
+        <text>\n</text>
+    </string>
+
+</string_table>
