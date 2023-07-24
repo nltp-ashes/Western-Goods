@@ -59,14 +59,16 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.2.0 - 19/07/2023 - Major Update**
+> **v2.2.0 - 24/07/2023 - Major Update**
 > ```
 > • Additions :
 >    - Added a new device : a rangefinder (Thanks Kyne's Peace and Barry Bogs);
+>    - Added Russian translation (Thanks VodoXleb);
+>    - Added custom icons for GPS & Rangefinder upgrade tabs;
 > • Changes :
 >    - Redesigned how the Magazine UI works, to allow for smaller textures;
 >    - Compressed the textures used for readables/magazines;
->    - Cleaned-up code to generate loot in corpses/traders;
+>    - Cleaned-up code to generate loot in corpses/traders
 > • Bug fixes :
 >    - Fixed a quest item being marked as readable, or it wasn't;
 >    - Fixed wrong addon version in core script;
@@ -311,6 +313,7 @@ Credit goes to these people for their work contained in this addon :
 
 |                                   Name                                    |                                     Motive                                      |                                    License                                     |
 |:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+|          **[VodoXleb](https://www.moddb.com/members/vodoxleb)**           |                     Translated the entire addon to Russian                      |                                  Proprietary                                   |
 |         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |            Adapted the Rangefinder model on their set of animations             |                                  Proprietary                                   |
 |       **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**        |               Ported and prepared the Rangefinder model for X-Ray               |                                  Proprietary                                   |
 |        **[valterjherson1](https://sketchfab.com/valterjherson1)**         |              Reused his 3D model of a SIG SAUER KILO5K Rangefinder              |           [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)            |

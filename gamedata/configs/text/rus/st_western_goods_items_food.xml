@@ -213,16 +213,16 @@
 	</string>
 
 	<string id="st_wg_mnms">
-		<text>Шоколадные конфеты M&M's</text>
+		<text>Шоколадные конфеты M&amp;M's</text>
 	</string>
 	
 	<string id="st_wg_mnms_s">
-		<text>M&M's</text>
+		<text>M&amp;M's</text>
 	</string>
 	
 	<string id="st_wg_mnms_descr">
 		<text>
-			M&M's - разноцветные шоколадки в форме кнопок, состоящие из конфетной оболочки, окружающей начинку, зависящую от вида M&M's.\n
+			M&amp;M's - разноцветные шоколадки в форме кнопок, состоящие из конфетной оболочки, окружающей начинку, зависящую от вида M&amp;M's.\n
 			\n
 			%c[ui_gray_1]СВОЙСТВА:\n
 			%c[d_blue] • %c[ui_gray_2] еда\n

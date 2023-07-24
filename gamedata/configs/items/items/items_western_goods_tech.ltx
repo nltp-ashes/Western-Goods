@@ -15,44 +15,40 @@ $prefetch                                        = 32
 class                                            = D_CUSTOM
 visual                                           = dynamics\western_goods_tech\wg_gps.ogf
 hud                                              = wg_gps_hud
+
 kind                                             = i_device
-
-animation_slot                                   = 7
-default_to_ruck                                  = true
-
-inv_name                                         = st_wg_gps
-inv_name_short                                   = st_wg_gps_s
-description                                      = st_wg_gps_descr
-inv_weight                                       = 0.9
-cost                                             = 7500
-
-slot                                             = 8
-ef_detector_type                                 = 1
-
 icons_texture                                    = ui\icons\ui_icon_western_goods_tech
 inv_grid_width                                   = 1
 inv_grid_height                                  = 1
 inv_grid_x                                       = 8
 inv_grid_y                                       = 0
+inv_weight                                       = 0.9
+inv_name                                         = st_wg_gps
+inv_name_short                                   = st_wg_gps_s
+description                                      = st_wg_gps_descr
+cost                                             = 7500
 
-snd_draw                                         = weapons\detector\detector_8_draw
-snd_holster                                      = weapons\detector\detector_8_holster
+upgrades                                         = ; no upgrades
+installed_upgrades                               = ; no installed upgrades
+upgrade_scheme                                   = ; no upgrade scheme
+upgr_icon_x                                      = 150
+upgr_icon_y                                      = 0
+upgr_icon_width                                  = 100
+upgr_icon_height                                 = 100
+upgr_icon_path                                   = ui\misc\ui_western_goods_upgrades.dds
 
 custom_ui_pos                                    = -0.0281,-0.0130,0.0375
 custom_ui_rot                                    = 0,63,0
 custom_ui_func                                   = western_goods_ui_gps_locator.get_ui
 custom_ui_bone                                   = cover
 
-upgr_icon_path                                   = ui\actor_items\ui_actor_items_1
-upgr_icon_x                                      = 150
-upgr_icon_y                                      = 100
-upgr_icon_width                                  = 150
-upgr_icon_height                                 = 100
+slot                                             = 8
+ef_detector_type                                 = 1
+animation_slot                                   = 7
+default_to_ruck                                  = true
 
-attach_position_offset                           = 0.110,-0.019,0.000
-attach_angle_offset                              = -1.303,-1.493,-1.202
-attach_bone_name                                 = bip01_l_hand
-
+snd_draw                                         = weapons\detector\detector_8_draw
+snd_holster                                      = weapons\detector\detector_8_holster
 
 [wg_gps_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf

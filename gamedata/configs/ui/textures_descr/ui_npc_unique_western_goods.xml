@@ -10,7 +10,7 @@
 <!-- ================================================================================================================-->
 <w>
     <!-- Western Goods images for NPC icons -->
-    <file name="ui\misc\ui_npc_unique_western_goods">
+    <file name="ui\misc\ui_western_goods_npc_unique.dds">
         <texture id="ui_npc_small_williams_heades" 		  x="0"      y="0"    width="165"    height="108" />
         <texture id="ui_npc_small_oleksandr_chernenko"    x="165"    y="0"    width="165"    height="108" />
         <texture id="ui_npc_small_danylo_chernenko"       x="330"    y="0"    width="165"    height="108" />

@@ -11,6 +11,34 @@ $spawn                                           = "weapons\binocular"
 scheduled                                        = off
 cform                                            = skeleton
 class                                            = WP_BINOC
+visual                                           = dynamics\western_goods_tech\wg_rangefinder_green.ogf
+hud                                              = wg_rangefinder_hud
+
+kind                                             = i_device
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 2
+inv_weight                                       = 0.215
+inv_name                                         = st_wg_rangefinder
+inv_name_short                                   = st_wg_rangefinder_s
+description                                      = st_wg_rangefinder_descr
+cost                                             = 6850
+
+upgrades                                         = ; no upgrades
+installed_upgrades                               = ; no installed upgrades
+upgrade_scheme                                   = ; no upgrade scheme
+upgr_icon_x                                      = 0
+upgr_icon_y                                      = 0
+upgr_icon_width                                  = 150
+upgr_icon_height                                 = 100
+upgr_icon_path                                   = ui\misc\ui_western_goods_upgrades.dds
+
+custom_ui_pos                                    = 0, 0.02, -0.005
+custom_ui_rot                                    = 180,0,180
+custom_ui_func                                   = western_goods_ui_rangefinder.get_ui
+custom_ui_bone                                   = link
 
 slot                                             = 4
 animation_slot                                   = 13
@@ -27,25 +55,6 @@ show_condition                                   = false
 highlight_equipped                               = true
 repair_type                                      = lens
 
-kind                                             = i_device
-icons_texture                                    = ui\icons\ui_icon_western_goods_tech
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 8
-inv_grid_y                                       = 2
-inv_weight                                       = 0.215
-inv_name                                         = st_wg_rangefinder
-inv_name_short                                   = st_wg_rangefinder_s
-description                                      = st_wg_rangefinder_descr
-cost                                             = 6850
-
-custom_ui_pos                                    = 0, 0.02, -0.005
-custom_ui_rot                                    = 180,0,180
-custom_ui_func                                   = western_goods_ui_rangefinder.get_ui
-custom_ui_bone                                   = link
-
-hud                                              = wg_rangefinder_hud
-visual                                           = dynamics\western_goods_tech\wg_rangefinder_green.ogf
 normal                                           = 0, 1, 0
 position                                         = -0.08, 0.05, 0.05
 orientation                                      = 0, -90, 70
@@ -73,15 +82,6 @@ light_range                                      = 3.0
 light_time                                       = 0.2
 light_var_color                                  = 0.05
 light_var_range                                  = 0.5
-
-upgrades                                         = ; no upgrades
-installed_upgrades                               = ; no installed upgrades
-upgrade_scheme                                   = ; no upgrade scheme
-upgr_icon_x                                      = 300
-upgr_icon_y                                      = 1950
-upgr_icon_width                                  = 150
-upgr_icon_height                                 = 100
-upgr_icon_path                                   = ui\ui_actor_weapons
 
 ammo_class                                       = ammo_binoc
 ammo_current                                     = 0

@@ -95,14 +95,14 @@ end
 --- @param timer number
 --- @param sound string
 --- @return nil
-function send_message(message, sender, icon, timer, sound)
+function send_message(message, sender, icon, timer, sfx)
     -- Default values
     sender = sender or CONST_DEFAULT_NAME
     icon = icon or CONST_DEFAULT_ICON
     timer = timer or (CONST_DELAY_QUICK_MSG + time_global())
-    sound = sound or "beep_1"
+    sfx = sfx or "beep_1"
 
-    table.insert(DIALOGS_TABLE, { message=message, sender=sender, icon=icon, timer=timer, sound=sound })
+    table.insert(DIALOGS_TABLE, { message=message, sender=sender, icon=icon, timer=timer, sound=sfx })
 
     dbg_printf("[WG] Dialogs Manager | Registered dialog (from:%s)", sender)
 end
