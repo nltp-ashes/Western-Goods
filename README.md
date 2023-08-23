@@ -66,11 +66,13 @@ To **uninstall** the addon :
 >    - Added Russian translation (Thanks VodoXleb);
 >    - Added custom icons for GPS & Rangefinder upgrade tabs;
 > • Changes :
->    - Redesigned how the Magazine UI works, to allow for smaller textures;
+>    - Redesigned how the Magazine UI (rebranded Readable UI) works, to allow for smaller textures;
+>    - The Readable UI will now not display properly on DX8. Use a more modern renderer to avoid issues;
 >    - Compressed the textures used for readables/magazines;
 >    - Cleaned-up code to generate loot in corpses/traders;
 >    - Improved Bandit's note UI quality (Thanks Rascal);
 >    - Improved Stash's map UI quality (Thanks Rascal);
+>    - Resolved a minor indirect conflict with 'New Levels' (Thanks Rocky.Stone.Rogers);
 > • Bug fixes :
 >    - Fixed a quest item being marked as readable, or it wasn't;
 >    - Fixed wrong addon version in core script;
