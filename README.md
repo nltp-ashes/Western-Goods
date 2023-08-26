@@ -59,12 +59,13 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.2.0 - 07/08/2023 - Release Candidate**
+> **v2.2.0 - 26/08/2023 - Release Candidate**
 > ```
 > • Additions :
 >    - Added a new device : a rangefinder (Thanks Kyne's Peace and Barry Bogs);
 >    - Added Russian translation (Thanks VodoXleb);
 >    - Added custom icons for GPS & Rangefinder upgrade tabs;
+>    - Added various items to stashes loot pool (Thanks user3255);
 > • Changes :
 >    - Redesigned how the Magazine UI (rebranded Readable UI) works, to allow for smaller textures;
 >    - The Readable UI will now not display properly on DX8. Use a more modern renderer to avoid issues;
@@ -72,8 +73,8 @@ To **uninstall** the addon :
 >    - Cleaned-up code to generate loot in corpses/traders;
 >    - Improved Bandit's note UI quality (Thanks Rascal);
 >    - Improved Stash's map UI quality (Thanks Rascal);
->    - Resolved a minor indirect conflict with 'New Levels' (Thanks Rocky.Stone.Rogers);
 > • Bug fixes :
+>    - Resolved a minor indirect conflict with 'New Levels' (Thanks Rocky.Stone.Rogers);
 >    - Fixed a quest item being marked as readable, or it wasn't;
 >    - Fixed wrong addon version in core script;
 > ```
