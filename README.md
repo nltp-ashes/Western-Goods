@@ -59,7 +59,7 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.2.0 - 26/08/2023 - Release Candidate**
+> **v2.2.0 - 26/08/2023 - Major Update**
 > ```
 > • Additions :
 >    - Added a new device : a rangefinder (Thanks Kyne's Peace and Barry Bogs);
