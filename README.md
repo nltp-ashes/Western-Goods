@@ -73,6 +73,7 @@ To **uninstall** the addon :
 >    - Cleaned-up code to generate loot in corpses/traders;
 >    - Improved Bandit's note UI quality (Thanks Rascal);
 >    - Improved Stash's map UI quality (Thanks Rascal);
+>    - Removed the fixed models_selflight_det.s shader from the main addon and into an optional fix;
 > • Bug fixes :
 >    - Resolved a minor indirect conflict with 'New Levels' (Thanks Rocky.Stone.Rogers);
 >    - Fixed a quest item being marked as readable, or it wasn't;
