@@ -31,12 +31,12 @@
     </file>
 
     <!-- Ukrainian MAXIM -->
-    <file name="ui\readables\ui_porn2.dds">
+    <file name="ui\readables\porn2\ui_porn2.dds">
         <texture id="ui_porn2_page_1"                           x="0"       y="0"    width="1582"    height="1024" />
     </file>
 
     <!-- PLAYBOY magazine (Chloe Khan) -->
-    <file name="ui\readables\ui_wg_porn_mag_1.dds">
+    <file name="ui\readables\wg_porn_mag_1\ui_wg_porn_mag_1.dds">
         <texture id="ui_wg_porn_mag_1_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_porn_mag_1_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_porn_mag_1_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
@@ -44,7 +44,7 @@
     </file>
 
     <!-- PLAYBOY magazine (Nicole Whitehead) -->
-    <file name="ui\readables\ui_wg_porn_mag_2.dds">
+    <file name="ui\readables\wg_porn_mag_2\ui_wg_porn_mag_2.dds">
         <texture id="ui_wg_porn_mag_2_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_porn_mag_2_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_porn_mag_2_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
@@ -54,7 +54,7 @@
     </file>
 
     <!-- PLAYBOY magazine (Carrie Stevens) -->
-    <file name="ui\readables\ui_wg_porn_mag_3.dds">
+    <file name="ui\readables\wg_porn_mag_3\ui_wg_porn_mag_3.dds">
         <texture id="ui_wg_porn_mag_3_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_porn_mag_3_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_porn_mag_3_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
@@ -64,7 +64,7 @@
     </file>
 
     <!-- Xbox : The Official Magazine (March 2002) -->
-    <file name="ui\readables\ui_wg_xbox_mag_1.dds">
+    <file name="ui\readables\wg_xbox_mag_1\ui_wg_xbox_mag_1.dds">
         <texture id="ui_wg_xbox_mag_1_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_xbox_mag_1_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_xbox_mag_1_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
@@ -75,7 +75,7 @@
     </file>
 
     <!-- Xbox : The Official Magazine (December 2004) -->
-    <file name="ui\readables\ui_wg_xbox_mag_2.dds">
+    <file name="ui\readables\wg_xbox_mag_2\ui_wg_xbox_mag_2.dds">
         <texture id="ui_wg_xbox_mag_2_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_xbox_mag_2_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_xbox_mag_2_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
@@ -86,7 +86,7 @@
     </file>
 
     <!-- Gameland magazine (November 1999) -->
-    <file name="ui\readables\ui_wg_strana_igr_mag_1.dds">
+    <file name="ui\readables\wg_strana_igr_mag_1\ui_wg_strana_igr_mag_1.dds">
         <texture id="ui_wg_strana_igr_mag_1_page_1"             x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_strana_igr_mag_1_page_2"             x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_strana_igr_mag_1_page_3"             x="3164"    y="0"    width="1582"    height="1024" />
@@ -94,7 +94,7 @@
     </file>
 
     <!-- European Car magazine (August 2015) -->
-    <file name="ui\readables\ui_wg_car_mag_1.dds">
+    <file name="ui\readables\wg_car_mag_1\ui_wg_car_mag_1.dds">
         <texture id="ui_wg_car_mag_1_page_1"                    x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_car_mag_1_page_2"                    x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_car_mag_1_page_3"                    x="3164"    y="0"    width="1582"    height="1024" />
@@ -103,7 +103,7 @@
     </file>
 
     <!-- EVO magazine (December 2015) -->
-    <file name="ui\readables\ui_wg_car_mag_2.dds">
+    <file name="ui\readables\wg_car_mag_2\ui_wg_car_mag_2.dds">
         <texture id="ui_wg_car_mag_2_page_1"                    x="0"       y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_car_mag_2_page_2"                    x="1582"    y="0"    width="1582"    height="1024" />
         <texture id="ui_wg_car_mag_2_page_3"                    x="3164"    y="0"    width="1582"    height="1024" />
@@ -113,12 +113,12 @@
     </file>
 
     <!-- Bandit's note -->
-    <file name="ui\readables\ui_wg_act_1_task_2_quest_item_2.dds">
+    <file name="ui\readables\wg_act_1_task_2_quest_item_2\ui_wg_act_1_task_2_quest_item_2.dds">
         <texture id="ui_wg_act_1_task_2_quest_item_2_page_1"    x="0"       y="0"    width="1582"    height="1024" />
     </file>
 
     <!-- Map to stash -->
-    <file name="ui\readables\ui_wg_stash_map_quest_item.dds">
+    <file name="ui\readables\wg_stash_map_quest_item\ui_wg_stash_map_quest_item.dds">
         <texture id="ui_wg_stash_map_quest_item_page_1"         x="0"       y="0"    width="1582"    height="1024" />
     </file>
 </w>
