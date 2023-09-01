@@ -148,7 +148,7 @@ function UIReadable:Restart(sec)
 end
 
 function UIReadable:InitControls()
-    self:SetWndRect(Frect():set(0,0,1920,1080))
+    self:SetWndRect(Frect():set(0,0,1024,768))
     self:SetAutoDelete(true)
 
     self.xml = CScriptXmlInit()
@@ -160,8 +160,6 @@ function UIReadable:InitControls()
     -- Page Setup
     self.page = self.xml:InitStatic("magazine:page",self.dialog)
     self.page:InitTexture(self:GetPageTexturePath(self.page_current))
-    self.page:SetWndSize(vector2():set(self.page:GetWidth() * utils_xml.screen_ratio(), self.page:GetHeight()))
-    self.page:SetWndPos(vector2():set((1024 - self.page:GetWidth()) / 2, (768 - self.page:GetHeight()) / 2))
     self.page:SetStretchTexture(true)
 
     -- Button Ok
@@ -188,15 +186,6 @@ function UIReadable:InitControls()
     self.btn_previous = self.xml:Init3tButton("magazine:btn_previous", self.dialog)
     self:Register(self.btn_previous,"btn_previous")
 
-    -- DX8 Retard Notice
-    local renderer = western_goods_utils.get_renderer()
-    if renderer == "dx8" then
-        printf("~[WG] UI Readable | DirectX8 detected - %s - You may experience stretched textures. Use a more modern renderer to fix the issue!", renderer)
-        self.retard_notice = self.xml:InitStatic("magazine:retard_notice", self.dialog)
-    else
-        dbg_printf("[WG] UI Readable | DirectX8 not detected - %s", renderer)
-    end
-
     dbg_printf("[WG] UI Readable | Controls initialized...")
 end
 
@@ -212,7 +201,7 @@ function UIReadable:OnNext()
     if (self.page_current >= self.page_count) then return end
 
     utils_obj.play_sound(CONST_SFX_SWITCH_PAGE)
-    self.page_current = self.page_current+1
+    self.page_current = self.page_current + 1
     self.page:InitTexture(self:GetPageTexturePath(self.page_current))
 
     dbg_printf("[WG] UI Readable | To next page - '%s' (%s/%s)",self.section,self.page_current,self.page_count)
@@ -224,7 +213,7 @@ function UIReadable:OnPrevious()
     if (self.page_current <= 1) then return end
 
     utils_obj.play_sound(CONST_SFX_SWITCH_PAGE)
-    self.page_current = self.page_current-1
+    self.page_current = self.page_current - 1
     self.page:InitTexture(self:GetPageTexturePath(self.page_current))
 
     dbg_printf("[WG] UI Readable | To previous page - '%s' (%s/%s)",self.section,self.page_current,self.page_count)
@@ -289,4 +278,8 @@ function UIReadable:GetPageTexturePath(page_number)
     printf("![WG] ERROR | UI Readable | Missing texture for '%s'. Expected texture '%s' !", self.section, expected)
 
     return "ui_readable_missing_texture"
+end
+
+function screen_ratio_16()
+    return ((1920/1080) / (device().width/device().height))
 end
