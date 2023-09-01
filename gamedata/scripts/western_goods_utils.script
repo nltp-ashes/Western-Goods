@@ -663,6 +663,23 @@ function is_id_from_squad(squad,id)
     return false
 end
 
+--- Function used to iterate through and execute a function on each member of a squad.
+--- @param squad cse_alife_online_offline_group
+--- @param func function
+--- @return nil
+function squad_iterate_members(squad, func, ...)
+    if not validate_params({squad,func,"squad_iterate_members"}) then return end
+
+    local args = {...}
+
+    for member in squad:squad_members() do
+        local se_obj = alife_object(member.id)
+        if (se_obj) then
+            func(se_obj, unpack(args))
+        end
+    end
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Other Utils Functions
 -- ---------------------------------------------------------------------------------------------------------------------
