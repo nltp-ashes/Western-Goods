@@ -109,16 +109,16 @@
 
     <!-- Gameland magazine (November 1999) -->
     <file name="ui\readables\wg_strana_igr_mag_1\page_1.dds">
-        <texture id="ui_wg_strana_igr_mag_1_page_1" x="0" y="0" width="1582" height="1024"/>
+        <texture id="ui_wg_strana_igr_mag_1_page_1" x="0" y="0" width="4096" height="2048"/>
     </file>
     <file name="ui\readables\wg_strana_igr_mag_1\page_2.dds">
-        <texture id="ui_wg_strana_igr_mag_1_page_2" x="0" y="0" width="1582" height="1024"/>
+        <texture id="ui_wg_strana_igr_mag_1_page_2" x="0" y="0" width="4096" height="2048"/>
     </file>
     <file name="ui\readables\wg_strana_igr_mag_1\page_3.dds">
-        <texture id="ui_wg_strana_igr_mag_1_page_3" x="0" y="0" width="1582" height="1024"/>
+        <texture id="ui_wg_strana_igr_mag_1_page_3" x="0" y="0" width="4096" height="2048"/>
     </file>
     <file name="ui\readables\wg_strana_igr_mag_1\page_4.dds">
-        <texture id="ui_wg_strana_igr_mag_1_page_4" x="0" y="0" width="1582" height="1024"/>
+        <texture id="ui_wg_strana_igr_mag_1_page_4" x="0" y="0" width="4096" height="2048"/>
     </file>
 
     <!-- European Car magazine (August 2015) -->
