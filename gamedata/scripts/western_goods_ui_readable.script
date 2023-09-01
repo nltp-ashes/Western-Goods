@@ -279,7 +279,3 @@ function UIReadable:GetPageTexturePath(page_number)
 
     return "ui_readable_missing_texture"
 end
-
-function screen_ratio_16()
-    return ((1920/1080) / (device().width/device().height))
-end
