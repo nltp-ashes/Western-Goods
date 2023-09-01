@@ -141,12 +141,12 @@
     </file>
 
     <!-- Bandit's note -->
-    <file name="ui\readables\wg_act_1_task_2_quest_item_2\ui_wg_act_1_task_2_quest_item_2.dds">
-        <texture id="ui_wg_act_1_task_2_quest_item_2_page_1"    x="0"       y="0"    width="1582"    height="1024" />
+    <file name="ui\readables\wg_act_1_task_2_quest_item_2\page.dds">
+        <texture id="ui_wg_act_1_task_2_quest_item_2_page_1"    x="0"       y="0"    width="4096"    height="2048" />
     </file>
 
     <!-- Map to stash -->
-    <file name="ui\readables\wg_stash_map_quest_item\ui_wg_stash_map_quest_item.dds">
-        <texture id="ui_wg_stash_map_quest_item_page_1"         x="0"       y="0"    width="1582"    height="1024" />
+    <file name="ui\readables\wg_stash_map_quest_item\page.dds">
+        <texture id="ui_wg_stash_map_quest_item_page_1"         x="0"       y="0"    width="4096"    height="2048" />
     </file>
 </w>
