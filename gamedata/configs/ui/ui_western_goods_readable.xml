@@ -12,33 +12,28 @@
 	<magazine x="0" y="0" width="1024" height="768" stretch="1">
 
 		<!-- Current page -->
-		<page x="73" y="100" width="877" height="568" stretch="1"/>
+		<page x="512" y="375" width="1300" height="650" stretch="1" align="c" alignment="c" heading="1" heading_angle="0"/>
 
 		<!-- Button to previous page -->
-		<btn_previous x="381" y="692" width="54" height="32">
+		<btn_previous x="381" y="720" width="54" height="32">
 			<text r="150" g="150" b="150" font="letterica16" align="c">ui_mm_previous</text>
 			<texture>ui_button_empty</texture>
 		</btn_previous>
-		<btn_previous_pic x="381" y="692" width="54" height="32"/>
+		<btn_previous_pic x="381" y="720" width="54" height="32"/>
 
 		<!-- Button to close magazine -->
-		<btn_ok x="485" y="692" width="54" height="32">
+		<btn_ok x="485" y="720" width="54" height="32">
 			<text r="150" g="150" b="150" font="letterica16" align="c">ui_mm_ok</text>
 			<texture>ui_button_empty</texture>
 		</btn_ok>
-		<btn_ok_pic x="485" y="692" width="54" height="32"/>
+		<btn_ok_pic x="485" y="720" width="54" height="32"/>
 
 		<!-- Button to next page -->
-		<btn_next x="589" y="692" width="54" height="32">
+		<btn_next x="589" y="720" width="54" height="32">
 			<text r="150" g="150" b="150" font="letterica16" align="c">ui_mm_next</text>
 			<texture>ui_button_empty</texture>
 		</btn_next>
-		<btn_next_pic x="589" y="692" width="54" height="32"/>
+		<btn_next_pic x="589" y="720" width="54" height="32"/>
 
-		<!-- Button to close magazine -->
-		<retard_notice x="0" y="730" width="1024" height="32">
-			<text r="255" g="255" b="255" font="letterica16" align="c">ui_wg_dx8_retard_notice</text>
-		</retard_notice>
-			
 	</magazine>
 </w>
