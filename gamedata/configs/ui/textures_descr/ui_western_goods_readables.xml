@@ -27,12 +27,12 @@
 
     <!-- Missing texture -->
     <file name="ui\readables\ui_readable_missing_texture.dds">
-        <texture id="ui_readable_missing_texture"               x="0"       y="0"    width="1582"    height="1024" />
+        <texture id="ui_readable_missing_texture"               x="0"    y="0"    width="4096"    height="2048" />
     </file>
 
     <!-- Ukrainian MAXIM -->
     <file name="ui\readables\porn2\ui_porn2.dds">
-        <texture id="ui_porn2_page_1"                           x="0"       y="0"    width="4096"    height="2048"/>
+        <texture id="ui_porn2_page_1"                           x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- PLAYBOY magazine (Chloe Khan) -->
