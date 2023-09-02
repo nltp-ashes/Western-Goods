@@ -59,6 +59,18 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
+> **v2.2.1 - 02/09/2023 - Hotfix**
+> ```
+> • Changes :
+>    - Made changes to the ReadableUI again to allow for higher resolution textures;
+>    - From now on, only the first page of magazines will be available in the addon, the rest being in a separate download;
+> • Bug fixes :
+>    - Fixed issue about icons on Dx9 (Thanks Blackjeison);
+>    - Fixed energy drinks having abnormally high radiation restore (Thanks Rambito);
+>    - Fixed ReadableUI not displaying correctly on other screen ratios than 16:9;
+>    - Fixed ReadableUI not displaying correctly on Dx8.
+> ```
+
 > **v2.2.0 - 26/08/2023 - Major Update**
 > ```
 > • Additions :
