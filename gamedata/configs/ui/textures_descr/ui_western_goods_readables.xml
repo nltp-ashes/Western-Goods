@@ -50,23 +50,43 @@
     </file>
 
     <!-- PLAYBOY magazine (Nicole Whitehead) -->
-    <file name="ui\readables\wg_porn_mag_2\ui_wg_porn_mag_2.dds">
-        <texture id="ui_wg_porn_mag_2_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_2_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_2_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_2_page_4"                   x="4746"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_2_page_5"                   x="6328"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_2_page_6"                   x="7910"    y="0"    width="1582"    height="1024" />
+    <file name="ui\readables\wg_porn_mag_2\page_1.dds">
+        <texture id="ui_wg_porn_mag_2_page_1"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_2\page_2.dds">
+        <texture id="ui_wg_porn_mag_2_page_2"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_2\page_3.dds">
+        <texture id="ui_wg_porn_mag_2_page_3"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_2\page_4.dds">
+        <texture id="ui_wg_porn_mag_2_page_4"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_2\page_5.dds">
+        <texture id="ui_wg_porn_mag_2_page_5"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_2\page_6.dds">
+        <texture id="ui_wg_porn_mag_2_page_6"                   x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- PLAYBOY magazine (Carrie Stevens) -->
-    <file name="ui\readables\wg_porn_mag_3\ui_wg_porn_mag_3.dds">
-        <texture id="ui_wg_porn_mag_3_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_3_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_3_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_3_page_4"                   x="4746"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_3_page_5"                   x="6328"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_3_page_6"                   x="7910"    y="0"    width="1582"    height="1024" />
+    <file name="ui\readables\wg_porn_mag_3\page_1.dds">
+        <texture id="ui_wg_porn_mag_3_page_1"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_3\page_2.dds">
+        <texture id="ui_wg_porn_mag_3_page_2"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_3\page_3.dds">
+        <texture id="ui_wg_porn_mag_3_page_3"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_3\page_4.dds">
+        <texture id="ui_wg_porn_mag_3_page_4"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_3\page_5.dds">
+        <texture id="ui_wg_porn_mag_3_page_5"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_3\page_6.dds">
+        <texture id="ui_wg_porn_mag_3_page_6"                   x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- Xbox : The Official Magazine (March 2002) -->
