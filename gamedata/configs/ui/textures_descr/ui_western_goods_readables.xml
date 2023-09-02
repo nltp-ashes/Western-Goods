@@ -27,7 +27,7 @@
 
     <!-- Missing texture -->
     <file name="ui\readables\ui_readable_missing_texture.dds">
-        <texture id="ui_readable_missing_texture"               x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_readable_missing_texture"               x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- Ukrainian MAXIM -->
@@ -36,11 +36,17 @@
     </file>
 
     <!-- PLAYBOY magazine (Chloe Khan) -->
-    <file name="ui\readables\wg_porn_mag_1\ui_wg_porn_mag_1.dds">
-        <texture id="ui_wg_porn_mag_1_page_1"                   x="0"       y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_1_page_2"                   x="1582"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_1_page_3"                   x="3164"    y="0"    width="1582"    height="1024" />
-        <texture id="ui_wg_porn_mag_1_page_4"                   x="4746"    y="0"    width="1582"    height="1024" />
+    <file name="ui\readables\wg_porn_mag_1\page_1.dds">
+        <texture id="ui_wg_porn_mag_1_page_1"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_1\page_2.dds">
+        <texture id="ui_wg_porn_mag_1_page_2"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_1\page_3.dds">
+        <texture id="ui_wg_porn_mag_1_page_3"                   x="0"    y="0"    width="4096"    height="2048"/>
+    </file>
+    <file name="ui\readables\wg_porn_mag_1\page_4.dds">
+        <texture id="ui_wg_porn_mag_1_page_4"                   x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- PLAYBOY magazine (Nicole Whitehead) -->
@@ -125,48 +131,48 @@
 
     <!-- European Car magazine (August 2015) -->
     <file name="ui\readables\wg_car_mag_1\page_1.dds">
-        <texture id="ui_wg_car_mag_1_page_1"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_1_page_1"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_1\page_2.dds">
-        <texture id="ui_wg_car_mag_1_page_2"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_1_page_2"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_1\page_3.dds">
-        <texture id="ui_wg_car_mag_1_page_3"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_1_page_3"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_1\page_4.dds">
-        <texture id="ui_wg_car_mag_1_page_4"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_1_page_4"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_1\page_5.dds">
-        <texture id="ui_wg_car_mag_1_page_5"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_1_page_5"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- EVO magazine (December 2015) -->
     <file name="ui\readables\wg_car_mag_2\page_1.dds">
-        <texture id="ui_wg_car_mag_2_page_1"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_2_page_1"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_2\page_2.dds">
-        <texture id="ui_wg_car_mag_2_page_2"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_2_page_2"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_2\page_3.dds">
-        <texture id="ui_wg_car_mag_2_page_3"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_2_page_3"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_2\page_4.dds">
-        <texture id="ui_wg_car_mag_2_page_4"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_2_page_4"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_2\page_5.dds">
-        <texture id="ui_wg_car_mag_2_page_5"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_2_page_5"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
     <file name="ui\readables\wg_car_mag_2\page_6.dds">
-        <texture id="ui_wg_car_mag_2_page_6"                    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_car_mag_2_page_6"                    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- Bandit's note -->
     <file name="ui\readables\wg_act_1_task_2_quest_item_2\page.dds">
-        <texture id="ui_wg_act_1_task_2_quest_item_2_page_1"    x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_act_1_task_2_quest_item_2_page_1"    x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 
     <!-- Map to stash -->
     <file name="ui\readables\wg_stash_map_quest_item\page.dds">
-        <texture id="ui_wg_stash_map_quest_item_page_1"         x="0"    y="0"    width="4096"    height="2048" />
+        <texture id="ui_wg_stash_map_quest_item_page_1"         x="0"    y="0"    width="4096"    height="2048"/>
     </file>
 </w>
