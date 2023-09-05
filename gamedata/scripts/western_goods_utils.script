@@ -13,6 +13,16 @@ local ini_loc = ini_file_ex([[localization.ltx]])
 local ini_keys = ini_file_ex([[plugins\western_goods\misc\western_goods_key_localization.ltx]])
 local ini_trade = ini_file("items\\trade\\trade_generic.ltx")
 
+pda_sections = {
+    ["device_pda_1"]        = true,
+    ["device_pda_2"]        = true,
+    ["device_pda_3"]        = true,
+}
+minefield_sections = {
+    ["zone_mine_field"]     = true,
+    ["zone_mine_field_soc"] = true
+}
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -681,6 +691,28 @@ function squad_iterate_members(squad, func, ...)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Validation Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if an object is a type of PDA device.
+--- @param obj game_object
+--- @return boolean
+function is_pda(obj)
+    if not validate_params({obj,"is_pda"}) then return end
+
+    return pda_sections[obj:section()] or false
+end
+
+--- Function used to check if an object is a type of minefield.
+--- @param obj game_object
+--- @return boolean
+function is_minefield(obj)
+    if not validate_params({obj,"is_minefield"}) then return end
+
+    return minefield_sections[obj:section()] or false
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Other Utils Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -785,20 +817,6 @@ function is_player_fighting()
     return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
---- Function used to check if an object is a type of PDA device.
---- @param obj game_object
---- @return boolean
-function is_pda(obj)
-    if not validate_params({obj,"is_pda"}) then return end
-
-    local pda_sections = {
-        ["device_pda_1"] = true,
-        ["device_pda_2"] = true,
-        ["device_pda_3"] = true,
-    }
-
-    return pda_sections[obj:section()]
-end
 
 --- Function used to get the real community of the NPC by checking spawn id.
 --- @author HarukaSai

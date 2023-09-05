@@ -1,0 +1,97 @@
+--- Original Author(s) : <unknown>
+--- Edited : NLTP_ASHES
+--- Date : 19/06/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the Rangefinder.
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local CONST_UPDATE_FREQ      = 500                              -- in milliseconds
+local CONST_ITEM_SEC         = "todo"                           -- name of the range finder section
+
+-- Imported functions
+local dbg_printf             = western_goods_utils.dbg_printf
+
+-- Singleton
+GUI					         = nil                              -- instance, don't touch
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the UI singleton for the UIRangefinder class.
+--- @return UIRangefinder
+function get_ui()
+    if (not GUI) then
+        GUI = UIRangefinder()
+    end
+
+    return GUI
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "UIRangefinder" (CUIScriptWnd)
+
+function UIRangefinder:__init() super()
+    dbg_printf("[WG] UI Rangefinder | Constructing GUI...")
+
+    self:Show(true)
+    self:Enable(true)
+end
+
+function UIRangefinder:__finalize()
+    GUI = nil
+end
+
+function UIRangefinder:Update()
+
+    CUIScriptWnd.Update(self)
+
+    local tg = time_global()
+
+    if (tg < self.update_timer) then
+        return
+    else
+        self.update_timer = tg + CONST_UPDATE_FREQ
+    end
+
+    local mines_fields = self:GetMineFields()
+    local mines_obj = self:GetMineObjects()
+
+    dbg_printf("/[WG] Mine fields : %s", size_table(mines_fields))
+    dbg_printf("/[WG] Mine objects : %s", size_table(mines_obj))
+end
+
+function UIRangefinder:GetMineFields()
+    local mines = {}
+    for name,obj in pairs(db.zone_by_name) do
+        if (western_goods_utils.is_minefield(obj)) then
+            mines[obj:id()] = obj
+        end
+    end
+    return mines
+end
+
+function UIRangefinder:GetMineObjects()
+    local mines = {}
+    for id,data in pairs(txr_mines._mines) do
+        mines[id] = western_goods_utils.level_object_by_id(id)
+    end
+    return mines
+end
