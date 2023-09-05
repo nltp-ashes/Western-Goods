@@ -102,10 +102,20 @@ function UIRangefinder:__init() super()
     self:Show(true)
     self:Enable(true)
 
-    local xml = CScriptXmlInit()
-    self.xml = xml
-    xml:ParseFile("ui_western_goods_rangefinder.xml")
-    xml:InitWindow("rangefinder", 0, self)
+    -- Build UI
+    self.xml = CScriptXmlInit()
+    self.xml:ParseFile("ui_western_goods_rangefinder.xml")
+    self.xml:InitWindow("rangefinder", 0, self)
+
+    self.m_los1 = self.xml:InitStatic("rangefinder:los1", self)
+    self.m_los2 = self.xml:InitStatic("rangefinder:los2", self)
+    self.m_los3 = self.xml:InitStatic("rangefinder:los3", self)
+
+    self.m_hcd1 = self.xml:InitStatic("rangefinder:hcd1", self)
+    self.m_hcd2 = self.xml:InitStatic("rangefinder:hcd2", self)
+    self.m_hcd3 = self.xml:InitStatic("rangefinder:hcd3", self)
+
+    self.m_reticule = self.xml:InitStatic("rangefinder:reticule", self)
 
     -- Sound effects
     self.btn_sfx = sound_object([[western_goods_tech\rangefinder_btn]])
@@ -113,17 +123,6 @@ function UIRangefinder:__init() super()
     -- Build variables
     self.update_timer = 0
     self.night_vision = false
-
-    -- Build UI
-    self.m_los1 = xml:InitStatic("rangefinder:los1", self)
-    self.m_los2 = xml:InitStatic("rangefinder:los2", self)
-    self.m_los3 = xml:InitStatic("rangefinder:los3", self)
-
-    self.m_hcd1 = xml:InitStatic("rangefinder:hcd1", self)
-    self.m_hcd2 = xml:InitStatic("rangefinder:hcd2", self)
-    self.m_hcd3 = xml:InitStatic("rangefinder:hcd3", self)
-
-    self.m_reticule = xml:InitStatic("rangefinder:reticule", self)
 end
 
 function UIRangefinder:__finalize()

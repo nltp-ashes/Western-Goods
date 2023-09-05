@@ -4,14 +4,22 @@
 --- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 ---
 --- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the Rangefinder.
+---
+--- UIMineDetector:Check function was written by GhenTuong.
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local CONST_UPDATE_FREQ      = 500                              -- in milliseconds
-local CONST_ITEM_SEC         = "todo"                           -- name of the range finder section
+local CONST_UPDATE_FREQ      = 222                              -- in milliseconds
+local CONST_DETECT_FREQ_MIN  = 222                              -- in milliseconds
+local CONST_DETECT_FREQ_MID  = 444                              -- in milliseconds
+local CONST_DETECT_FREQ_MAX  = 666                             -- in milliseconds
+local CONST_DETECT_DIST_MIN  = 10000                            -- in pixels squared
+local CONST_DETECT_DIST_MID  = 40000                            -- in pixels squared
+local CONST_DETECT_DIST_MAX  = 160000                           -- in pixels squared
+local CONST_MAX_RANGE_SQR    = 100                              -- in meters squared
 
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
@@ -27,7 +35,7 @@ GUI					         = nil                              -- instance, don't touch
 --- @return UIRangefinder
 function get_ui()
     if (not GUI) then
-        GUI = UIRangefinder()
+        GUI = UIMineDetector()
     end
 
     return GUI
@@ -46,20 +54,36 @@ end
 -- UI Class
 -- ---------------------------------------------------------------------------------------------------------------------
 
-class "UIRangefinder" (CUIScriptWnd)
+class "UIMineDetector" (CUIScriptWnd)
 
-function UIRangefinder:__init() super()
-    dbg_printf("[WG] UI Rangefinder | Constructing GUI...")
+function UIMineDetector:__init() super()
+    dbg_printf("[WG] UI MineDetector | Constructing GUI...")
 
     self:Show(true)
     self:Enable(true)
+
+    -- Build UI
+    self.xml = CScriptXmlInit()
+    self.xml:ParseFile("ui_western_goods_minedetect.xml")
+    self.xml:InitWindow("mine_detectror", 0, self)
+
+    self.detect = self.xml:InitStatic("mine_detectror:detect", self)
+
+    -- Sound effects
+    self.detect_sfx = sound_object([[western_goods_tech\rangefinder_btn]])
+
+    -- Build variables
+    self.update_timer = 0
+    self.detect_timer = 0
+    self.angle_min = -20
+    self.angle_max = 20
 end
 
-function UIRangefinder:__finalize()
+function UIMineDetector:__finalize()
     GUI = nil
 end
 
-function UIRangefinder:Update()
+function UIMineDetector:Update()
 
     CUIScriptWnd.Update(self)
 
@@ -71,16 +95,100 @@ function UIRangefinder:Update()
         self.update_timer = tg + CONST_UPDATE_FREQ
     end
 
-    local mines_fields = self:GetMineFields()
-    local mines_obj = self:GetMineObjects()
+    local best_aim, _ = self:FindBest()
 
-    dbg_printf("/[WG] Mine fields : %s", size_table(mines_fields))
-    dbg_printf("/[WG] Mine objects : %s", size_table(mines_obj))
+    if (tg < self.detect_timer) then
+        return
+    else
+        self:UpdateDetectorState(best_aim)
+    end
 end
 
-function UIRangefinder:GetMineFields()
+function UIMineDetector:UpdateDetectorState(aim)
+    local tg = time_global()
+
+    dbg_printf("/[WG] detect_timer : %s", self.detect_timer)
+
+    -- No mine detected : detector off
+    if (not aim or aim > CONST_DETECT_DIST_MAX) then
+        dbg_printf("/[WG] detect out")
+        self.detect_timer = tg + CONST_DETECT_FREQ_MAX
+        self.detect:Show(false)
+        return
+    end
+
+    self.detect_sfx:play(db.actor, 0, sound_object.s2d)
+
+    -- Mine detected but far : slow tick
+    if (aim > CONST_DETECT_DIST_MID) then
+        dbg_printf("/[WG] detect far")
+        self.detect_timer = tg + CONST_DETECT_FREQ_MAX
+        self.detect:Show(not self.detect:IsShown())
+        return
+    end
+
+    -- Mine detected, not close : medium tick
+    if (aim > CONST_DETECT_DIST_MIN) then
+        dbg_printf("/[WG] detect mid")
+        self.detect_timer = tg + CONST_DETECT_FREQ_MID
+        self.detect:Show(not self.detect:IsShown())
+        return
+    end
+
+    -- Mine detected, close : fast tick
+    dbg_printf("/[WG] detect close")
+    self.detect_timer = tg + CONST_DETECT_FREQ_MIN
+    self.detect:Show(not self.detect:IsShown())
+end
+
+function UIMineDetector:FindBest()
+    local mine_fields = self:GetMineFields()
+    local mine_objs = self:GetMineObjects()
+
+    dbg_printf("/[WG] Mine fields : %s", size_table(mine_fields))
+    dbg_printf("/[WG] Mine objects : %s", size_table(mine_objs))
+
+    local best_aim, best_mine = nil, nil
+
+    local function try_best_mine(obj)
+        local aim = self:CheckAim(obj)
+        if self:IsValidMine(obj) and (not best_aim or aim < best_aim) then
+            best_aim, best_mine = aim, obj
+        end
+    end
+
+    for _, obj in pairs(mine_fields) do
+        dbg_printf("[WG] mine_field : %s", obj)
+        try_best_mine(obj)
+    end
+
+    for _, obj in pairs(mine_objs) do
+        dbg_printf("[WG] mine_obj : %s", obj)
+        try_best_mine(obj)
+    end
+
+    dbg_printf("/[WG] Best aim : %s", best_aim)
+    dbg_printf("/[WG] Best mine : %s", best_mine and best_mine:name())
+
+    return best_aim, best_mine
+end
+
+function UIMineDetector:IsValidMine(mine)
+    return db.actor:position():distance_to_sqr(mine:position()) <= CONST_MAX_RANGE_SQR
+end
+
+function UIMineDetector:CheckAim(mine)
+    local w2ui = game.world2ui(mine:position())
+
+    local center = vector():set(512, 384, 0)
+    local aim = vector():set(w2ui.x, w2ui.y, 0)
+
+    return center:distance_to_sqr(aim)
+end
+
+function UIMineDetector:GetMineFields()
     local mines = {}
-    for name,obj in pairs(db.zone_by_name) do
+    for _,obj in pairs(db.zone_by_name) do
         if (western_goods_utils.is_minefield(obj)) then
             mines[obj:id()] = obj
         end
@@ -88,9 +196,9 @@ function UIRangefinder:GetMineFields()
     return mines
 end
 
-function UIRangefinder:GetMineObjects()
+function UIMineDetector:GetMineObjects()
     local mines = {}
-    for id,data in pairs(txr_mines._mines) do
+    for id,_ in pairs(txr_mines._mines) do
         mines[id] = western_goods_utils.level_object_by_id(id)
     end
     return mines

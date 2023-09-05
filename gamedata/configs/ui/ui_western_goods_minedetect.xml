@@ -1,0 +1,21 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 01/07/2022                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    UI Template for the GPS Locator of Western Goods.                                                            -->
+<!--                                                                                                                 -->
+<!--    Note : Since this UI is displayed in the game world, and not on a 2D display, coordinates aren't in pixels.  -->
+<!--                                                                                                                 -->
+<!-- ================================================================================================================-->
+<w>
+    <mine_detectror>
+
+        <detect    x="0.0254"    y="0.0920"    width="0.008"    height="0.008"    stretch="1">
+            <texture shader="hud\p3d" color="red">red_diod</texture>
+        </detect>
+
+    </mine_detectror>
+</w>

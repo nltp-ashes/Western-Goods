@@ -172,4 +172,24 @@
 			%c[d_orange] • %c[ui_gray_2] usable\n
 		</text>
 	</string>
+
+	<string id="st_wg_minedetect">
+		<text>Mine detector</text>
+	</string>
+
+	<string id="st_wg_minedetect_s">
+		<text>Mine detector</text>
+	</string>
+
+	<string id="st_wg_minedetect_descr">
+		<text>
+			TODO\n
+			\n
+			%c[ui_gray_1]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] technological item\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_orange] • %c[ui_gray_2] usable\n
+		</text>
+	</string>
 </string_table>
