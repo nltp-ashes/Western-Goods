@@ -178,4 +178,16 @@
 		<text>Allows for a safe removal of the addon. Enable this setting, then save your game. After this, you can remove the addon and load that save again, and continue playing without Western Goods.</text>
 	</string>
 
+	<!-- ============================================================================================================-->
+	<!--	DEVICE SELECTOR KEY INTEGRATION																  		     -->
+	<!-- ============================================================================================================-->
+
+	<string id="ui_mcm_detector_selector_keybind_wg_gps">
+		<text>GPS Locator select key</text>
+	</string>
+
+	<string id="ui_mcm_detector_selector_keybind_wg_minedetect">
+		<text>Mine Detector select key</text>
+	</string>
+
 </string_table>
