@@ -1,4 +1,4 @@
-# WESTERN GOODS [![Latest Stable Build](https://img.shields.io/github/v/release/nltp-ashes/Western-Goods?label=latest-stable-build&color=brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/latest--test--build-v2.3.0_RC1-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test) [![License](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+# WESTERN GOODS [![License](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/) [![Latest Stable Build](https://img.shields.io/github/v/release/nltp-ashes/Western-Goods?label=latest-stable-build&color=brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -64,7 +64,7 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.3.0 - 11/09/2023 - Minor Update**
+> **v2.3.0 - 12/09/2023 - Minor Update**
 > ```
 > • Additions :
 >    - Added native integration with Device Selector Key addon.
