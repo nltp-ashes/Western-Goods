@@ -71,3 +71,24 @@ function on_mcm_load()
 
     return op
 end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Device Selector Key Integration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+if detector_selector_mcm then
+
+    detector_selector_mcm.categories.wg_gps = {
+        devices = {
+            ["wg_gps"] = 1
+        },
+        defaults = {keybind = DIK_keys.DIK_B, modifier = 2, second_key = 1}
+    }
+    detector_selector_mcm.categories.wg_minedetect = {
+        devices = {
+            ["wg_minedetect"] = 1
+        },
+        defaults = {keybind = DIK_keys.DIK_B, modifier = 2, second_key = 2}
+    }
+
+end

@@ -63,25 +63,10 @@ end
 --- @param obj game_object
 --- @return nil
 function use_item(obj,_,cf)
-
-    -- French MRE
-    if (obj:section() == "wg_french_mre") then
-        dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        this.use_french_mre(obj)
-        return
-    end
-
     -- Toblerone
     if (obj:section() == "wg_toblerone") then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
         this.use_toblerone(obj)
-        return
-    end
-
-    -- Suitcase
-    if (obj:section() == "wg_money_suitcase") then
-        dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        this.use_suitcase(obj)
         return
     end
 
@@ -361,49 +346,6 @@ if TEMP_LIGHTER_ENABLED then
         end
     end
 end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- French MRE
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called when the RCIR item is used by the player.
---- @param obj game_object
---- @return nil
-function use_french_mre(obj)
-    local content = parse_list(ini_sys, obj:section(), "content")
-
-    for _,item in pairs(content) do
-        local section = str_explode(item, ":")[1]
-        local quantity = str_explode(item, ":")[2]
-
-        if IsItem("multiuse",section) then
-            dbg_printf("[WG] Usable Items | French MRE - Unpacked '%s' (%s uses)",section,quantity)
-            alife_create_item(section, db.actor, {uses = quantity})
-        else
-            for i=1,quantity do
-                alife_create_item(section, db.actor)
-            end
-            dbg_printf("[WG] Usable Items | French MRE - Unpacked '%s' (%s pcs)",section,quantity)
-        end
-    end
-
-    alife_release(alife_object(obj:id()))
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Suitcase
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called when the RCIR item is used by the player.
---- @param obj game_object
---- @return nil
-function use_suitcase(obj)
-    for i=1,200 do
-        alife_create_item("wg_euros_50", db.actor)
-    end
-    alife_release(alife_object(obj:id()))
-end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Toblerone

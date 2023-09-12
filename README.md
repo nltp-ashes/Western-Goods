@@ -1,4 +1,4 @@
-# WESTERN GOODS [![Latest Stable Build](https://img.shields.io/badge/latest--stable--build-2.2.0-brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test) [![License](https://img.shields.io/badge/licence-CC--BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+# WESTERN GOODS [![License](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/) [![Latest Stable Build](https://img.shields.io/github/v/release/nltp-ashes/Western-Goods?label=latest-stable-build&color=brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -22,11 +22,16 @@ These addons are **absolutely required** in order for Western Goods to work :
 1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152);
 2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes).
 
-These addons can be used to enrich the experience, but **aren't required** :
+Western Goods natively integrates with the following addons, but they **aren't required** :
 1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
 2. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest) (allows you to make EUR/USD/RUB currency exchanges);
 3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
-4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon).
+4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
+5. [Device Selector Key](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-required-device-selector-key) (makes it easier to switch between various devices);
+6. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.1-readables-ext) (adds more pages to magazines in the addon).
+
+These patches can be used when native compatibility with other addons cannot be achieved :
+1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.0-patch-rbn).
 
 ---
 
@@ -58,6 +63,17 @@ To **uninstall** the addon :
 ### CHANGELOG
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
+
+> **v2.3.0 - 12/09/2023 - Minor Update**
+> ```
+> • Additions :
+>    - Added native integration with Device Selector Key addon.
+> • Changes :
+>    - Ported unpackable items (MRE and Suitcase) the the vanilla unpack system.
+> • Bug fixes :
+>    - Fixed incorrect addon version in core script (yes, again...);
+>    - Fixed missing texture descriptions for two of the quest items (Thanks Blackjeison);
+> ```
 
 > **v2.2.1 - 02/09/2023 - Hotfix**
 > ```
@@ -313,12 +329,14 @@ If you would like to help development for future updates, you can :
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
+If you truly believe your problem is new, please open an issue [on the addon's GitHub page](https://github.com/nltp-ashes/Western-Goods/issues).
+
 ---
 
 ### SUPPORT & SUGGESTIONS
 
 If you need help with anything, or if you have any suggestions, you can :
-- ✅ Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) (recommended);
+- ✅ Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) ;
 - ✅ Message me on Discord : @nltp_ashes (formerly NLTP_ASHES#0117) (recommended);
 - ✅ Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended).
 - ⚠️ Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
@@ -358,6 +376,7 @@ Special thanks to these people for their help in the making of this addon :
 
 |                                                                                                               Name                                                                                                                |                                                 Motive                                                  |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
+|                                                                                                              Rambito                                                                                                              |               For voluntarily providing a compatibility patch with Realistic Bodily Needs               |
 |                                                          **[Lucy](https://www.moddb.com/members/r3zy)**, **[MrDemonized](https://www.moddb.com/members/themrdemonized)**                                                          |      For fixing the issue that caused 3D UIs to be transparent when not backed by another texture       |
 |                                                      **[Barry Bogs](https://www.moddb.com/members/barrybogs)**, **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**                                                      |              For dedicating some of their free time to helping me with modeling/animation               |
 |                                                        **[RavenAscendant](https://www.moddb.com/members/ravenascendant)**, **[Lucy](https://www.moddb.com/members/r3zy)**                                                         | Helped to mitigate an issue from vanilla Anomaly 1.5.2 that caused detectors displays to be transparent |
