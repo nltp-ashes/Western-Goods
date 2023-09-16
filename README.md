@@ -69,7 +69,7 @@ To **uninstall** the addon :
 > • Additions :
 >    - Added native integration with Device Selector Key addon.
 > • Changes :
->    - Ported unpackable items (MRE and Suitcase) the the vanilla unpack system.
+>    - Ported unpackable items (MRE and Suitcase) the vanilla unpack system.
 > • Bug fixes :
 >    - Fixed incorrect addon version in core script (yes, again...);
 >    - Fixed missing texture descriptions for two of the quest items (Thanks Blackjeison);
