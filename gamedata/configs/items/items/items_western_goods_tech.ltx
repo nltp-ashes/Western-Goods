@@ -84,7 +84,7 @@ anm_throw_end                                    = d1_throw_end, idle
 
 [wg_lighter_bic]:tch_detector
 class									         = D_FLALIT
-visual									         = dynamics\western_goods_tech\wg_zippo.ogf
+visual									         = dynamics\western_goods_tech\wg_lighter_bic.ogf
 kind                                             = i_device
 tier                                             = 2
 
@@ -119,7 +119,7 @@ can_light_strong                                 = true              ; used to k
 degradation_factor                               = 0.05              ; how many % will be consumed when used
 
 [wg_lighter_bic_hud]:detector_base_hud
-item_visual								         = dynamics\western_goods_tech\wg_zippo_hud.ogf
+item_visual								         = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
 
 attach_place_idx						         = 1
 freelook_z_offset_mul					         = 0.1
@@ -177,7 +177,7 @@ spot_angle								         = 65                ; spot angle in gradus
 glow_texture							         = glow\glow_tactical_torch ; glow texture name (required)
 glow_radius								         = 0.2               ; glow radius in meters
 
-color_animator							         = empty             ; color animator name (empty - not using animator) //light_torch_01
+color_animator							         = koster             ; color animator name (empty - not using animator) //light_torch_01
 color									         = 0.8,0.4,0.0,0.8   ; four color components <r,g,b,a> 0.f<X<3.f
 color_r2								         = 0.8,0.4,0.0,0.8   ; four color components <r,g,b,a> 0.f<X<3.f
 range									         = 2                 ; range in meters
