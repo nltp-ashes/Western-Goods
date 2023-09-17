@@ -82,33 +82,106 @@ anm_throw_end                                    = d1_throw_end, idle
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;[wg_lighter_bic]:wg_tech_base,booster
-;visual                                           = dynamics\western_goods_tech\wg_lighter_bic.ogf
-;kind                                             = i_tool
-;
-;inv_name                                         = st_wg_lighter_bic
-;inv_name_short                                   = st_wg_lighter_bic_s
-;description                                      = st_wg_lighter_bic_descr
-;inv_weight                                       = 0.025
-;cost                                             = 1950
-;
-;inv_grid_width                                   = 1
-;inv_grid_height                                  = 1
-;inv_grid_x                                       = 8
-;inv_grid_y                                       = 1
-;
-;use_condition                                    = true
-;condition_bar                                    = condition_progess_bar
-;allow_repair                                     = false
-;remove_after_use                                 = false
-;
-;; custom properties
-;use_fill                                         = true     ; used to display 'Fill:100%' in description
-;can_light_weak                                   = true     ; used to know if it can light a cig
-;can_light_strong                                 = true     ; used to know if it can light a campfire
-;degradation_factor                               = 0.05     ; how many % will be consumed when used
-;
-;tier                                             = 2
+[wg_lighter_bic]:tch_detector
+class									         = D_FLALIT
+visual									         = dynamics\western_goods_tech\wg_zippo.ogf
+kind                                             = i_device
+tier                                             = 2
+
+slot									         = 8
+animation_slot							         = 7
+
+hud										         = wg_lighter_bic_hud
+light_section							         = wg_lighter_bic_light
+
+inv_name								         = st_wg_lighter_bic
+inv_name_short							         = st_wg_lighter_bic_s
+description								         = st_wg_lighter_bic_descr
+inv_weight                                       = 0.025
+cost									         = 1950
+
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech.dds
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 1
+
+power_critical							         = 0.012
+power_drain								         = 0.00033            ; 50 IRL minutes eq.
+
+snd_draw								         = western_goods_tech\lighter_draw.ogg
+snd_holster								         = western_goods_tech\lighter_holster.ogg
+
+; custom properties
+use_fill                                         = true              ; used to display 'Fill:100%' in description
+can_light_weak                                   = true              ; used to know if it can light a cig
+can_light_strong                                 = true              ; used to know if it can light a campfire
+degradation_factor                               = 0.05              ; how many % will be consumed when used
+
+[wg_lighter_bic_hud]:detector_base_hud
+item_visual								         = dynamics\western_goods_tech\wg_zippo_hud.ogf
+
+attach_place_idx						         = 1
+freelook_z_offset_mul					         = 0.1
+
+item_position							         = -0.063151,0.018406,0.003229
+item_orientation						         = 285.918793,-121.405334,123.054497
+hands_position							         = 0.1,-0.19,-0.04
+hands_position_16x9                              = 0.0,-0.19,0.14
+hands_orientation						         = 2,2,0
+hands_orientation_16x9                           = 2,2,0
+
+aim_hud_offset_pos						         = -0.275, 0.07, -0.05
+aim_hud_offset_pos_16x9					         = -0.275, 0.07, -0.05
+aim_hud_offset_rot						         = 0.0005, 0.09, -0.015
+aim_hud_offset_rot_16x9					         = 0.0005, 0.09, -0.015
+
+fire_point								         = 0,0,0.05
+fire_point2								         = 0,0,0
+fire_bone								         = lid
+fire_bone2								         = lid
+
+anm_show                                         = wg_hand_lighter_draw, wg_lighter_draw
+anm_show_16x9                                    = wg_hand_lighter_draw, wg_lighter_draw
+anm_show_fast                                    = wg_hand_lighter_draw, wg_lighter_draw
+anm_show_fast_16x9                               = wg_hand_lighter_draw, wg_lighter_draw
+anm_hide                                         = wg_hand_lighter_holster, wg_lighter_holster
+anm_hide_16x9                                    = wg_hand_lighter_holster, wg_lighter_holster
+anm_hide_fast                                    = wg_hand_lighter_holster, wg_lighter_holster
+anm_hide_fast_16x9                               = wg_hand_lighter_holster, wg_lighter_holster
+anm_idle                                         = wg_hand_lighter_idle, wg_lighter_idle
+anm_idle_16x9                                    = wg_hand_lighter_idle, wg_lighter_idle
+anm_idle_moving                                  = wg_hand_lighter_idle, wg_lighter_idle
+anm_idle_moving_16x9                             = wg_hand_lighter_idle, wg_lighter_idle
+anm_idle_sprint                                  = wg_hand_lighter_idle, wg_lighter_idle
+anm_idle_sprint_16x9                             = wg_hand_lighter_idle, wg_lighter_idle
+
+[wg_lighter_bic_light]
+type									         = 1                 ; type  0-Direct 1-Point 2-Spot 3-OMNIPART 4-Reflected
+guide_bone								         = lid               ; guid bone name (required)
+
+volumetric								         = false
+volumetric_quality						         = 0.5
+volumetric_intensity					         = 0.10
+volumetric_distance						         = 0.25
+
+omni_type								         = 1                 ; type  0-Direct 1-Point 2-Spot 3-OMNIPART 4-Reflected
+omni_range								         = 2                 ; range in meters
+omni_range_r2							         = 0.5               ; range in meters
+omni_color								         = 0.35,0.3,0.35,0.1 ; four color components <r,g,b,a> 0.f<X<3.f
+omni_color_r2							         = 0.45,0.4,0.45,0.1 ; four color components <r,g,b,a> 0.f<X<3.f
+
+spot_texture							         = internal\internal_tactical_torch ; spot texture name (using only in Second Render)
+spot_angle								         = 65                ; spot angle in gradus
+
+glow_texture							         = glow\glow_tactical_torch ; glow texture name (required)
+glow_radius								         = 0.2               ; glow radius in meters
+
+color_animator							         = empty             ; color animator name (empty - not using animator) //light_torch_01
+color									         = 0.8,0.4,0.0,0.8   ; four color components <r,g,b,a> 0.f<X<3.f
+color_r2								         = 0.8,0.4,0.0,0.8   ; four color components <r,g,b,a> 0.f<X<3.f
+range									         = 2                 ; range in meters
+range_r2								         = 2                 ; range in meters
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -109,26 +109,6 @@ end
 -- Lighter
 -- ---------------------------------------------------------------------------------------------------------------------
 
-BuildHeader = ui_item.build_desc_header
---- Function used to display the fill level of the lighter in the inventory.
---- @param obj game_object
---- @param sec string
---- @param str string
-function ui_item.build_desc_header(obj, sec, str)
-    str = str or gc(ini_sys:r_string_ex(sec, "description"))
-    if (not str) then return "" end
-
-    if ini_sys:r_bool_ex(obj:section(), "use_fill") then
-        local con = math.ceil(obj:condition() * 100)
-        local clr = utils_xml.get_color_con(con)
-        local clr_2  = utils_xml.get_color("ui_gray_1")
-        local _str = clr .. " " .. western_goods_utils.get_translation("st_wg_bullet_point") .. " " .. clr_2 .. western_goods_utils.get_translation("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
-        return _str .. BuildHeader(obj, sec, str)
-    end
-
-    return BuildHeader(obj, sec, str)
-end
-
 if TEMP_LIGHTER_ENABLED then
     BeforeUse = itms_manager.actor_on_item_before_use
     --- Function used to allow the lighter to light cigarettes.
