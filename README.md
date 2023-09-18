@@ -1,4 +1,4 @@
-# WESTERN GOODS [![License](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/) [![Latest Stable Build](https://img.shields.io/github/v/release/nltp-ashes/Western-Goods?label=latest-stable-build&color=brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/latest--test--build-none-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test)
+# WESTERN GOODS [![License](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/) [![Latest Stable Build](https://img.shields.io/github/v/release/nltp-ashes/Western-Goods?label=Latest%20Stable%20Build&color=brightgreen)](https://github.com/nltp-ashes/Western-Goods/releases/latest) [![Latest Test Build](https://img.shields.io/badge/Latest%20Test%20Build-none-yellow)](https://github.com/nltp-ashes/Western-Goods/releases/test)
 
 The Zone is host to people from various horizons. Overtime, the demand for goods imported from the west became such that some traders of the Zone couldn't overlook the potential profit anymore.
 
@@ -62,7 +62,7 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-[![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg)](https://github.com/nltp-ashes/Western-Goods/releases/latest)
+[![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg?label=Downloads%20(All%20Time))](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg?label=Downloads%20(Latest%20Release))](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
 > **v2.3.0 - 12/09/2023 - Minor Update**
 > ```
@@ -192,7 +192,7 @@ To **uninstall** the addon :
 >    - Fixed an issue due to which some items were missing from traders/corpses;
 >    - Fixed incorrect calories for the Yoo-hoo chocolate drink (Thanks Servalion).
 > ```
-> 
+>
 > **Note 1:** v2.0.0 is not compatible with S.T.A.L.K.E.R. Anomaly 1.5.1 anymore.  
 > **Note 2:** v2.0.0 has a new requirement. Make sure to read **REQUIREMENTS** again.
 
@@ -298,7 +298,7 @@ To **uninstall** the addon :
 >    - Rearranged some of the files to avoid further conflicts (Thanks lsandoval0000);
 >    - Renamed all of the items to avoid further conflicts.
 > ```
-> 
+>
 > **Note:** v1.0.1 is not compatible with previous versions. Use the addon removal before updating to the new version.
 
 > **v1.0.0 - 03/12/2022 - Initial Release**
