@@ -10,5 +10,5 @@
 > • Cleaned-up and improved rangefinder code;
 
 **• Bug fixes :**
-> • Fixed normals on some models;
+> • Fixed normals on most models;
 > • Fixed a benign typo in rangefinder animations;
