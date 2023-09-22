@@ -85,14 +85,15 @@ anm_throw_end                                    = d1_throw_end, idle
 [wg_lighter_bic]:tch_detector
 class                                            = D_FLALIT
 visual                                           = dynamics\western_goods_tech\wg_lighter_bic.ogf
+hud                                              = wg_lighter_bic_hud
 kind                                             = i_device
 tier                                             = 2
 
 slot                                             = 8
 animation_slot                                   = 7
 
-hud                                              = wg_lighter_bic_hud
 light_section                                    = wg_lighter_bic_light
+light_trace_bone                                 = lid
 
 inv_name                                         = st_wg_lighter_bic
 inv_name_short                                   = st_wg_lighter_bic_s
@@ -112,6 +113,11 @@ power_drain                                      = 0.00033            ; 50 IRL m
 snd_draw                                         = western_goods_tech\lighter_draw.ogg
 snd_holster                                      = western_goods_tech\lighter_holster.ogg
 
+custom_ui_pos                                    = -0.0281,-0.0130,0.0375
+custom_ui_rot                                    = 0,63,0
+custom_ui_func                                   = western_goods_ui_lighter.get_ui
+custom_ui_bone                                   = cover
+
 ; custom properties
 use_fill                                         = true              ; used to display 'Fill:100%' in description
 can_light_weak                                   = true              ; used to know if it can light a cig
@@ -124,10 +130,10 @@ item_visual                                      = dynamics\western_goods_tech\w
 attach_place_idx                                 = 1
 freelook_z_offset_mul                            = 0.1
 
-item_position                                    = -0.057362, 0.029423, -0.000874
+item_position                                    = -0.058158, 0.028926, -0.003146
 item_orientation                                 = -110, -10, 75
-hands_position                                   = 0.002565, 0.007684, 0.028593
-hands_position_16x9                              = 0.002565, 0.007684, 0.028593
+hands_position                                   = 0.023692, 0.011115, 0.028593
+hands_position_16x9                              = 0.023692, 0.011115, 0.028593
 hands_orientation                                = 0, 0, 0
 hands_orientation_16x9                           = 0, 0, 0
 
@@ -150,13 +156,19 @@ anm_idle_moving                                  = wg_lighter_moving, moving, 2
 anm_idle_sprint                                  = wg_lighter_sprint, sprint, 1.6
 
 [wg_lighter_bic_light]
-type                                             = 1                                ; type  0-Direct 1-Point 2-Spot 3-OMNIPART 4-Reflected
 guide_bone                                       = lid                              ; guid bone name (required)
+color_animator                                   = koster                           ; color animator name ('empty' - not using animator)
 
 volumetric                                       = false
 volumetric_quality                               = 0.5
 volumetric_intensity                             = 0.10
 volumetric_distance                              = 0.25
+
+type                                             = 1                                ; type  0-Direct 1-Point 2-Spot 3-OMNIPART 4-Reflected
+range                                            = 20                               ; range in meters
+range_r2                                         = 20                               ; range in meters
+color                                            = 0.8,0.4,0.0,0.8                  ; four color components <r,g,b,a> 0.f<X<3.f
+color_r2                                         = 0.8,0.4,0.0,0.8                  ; four color components <r,g,b,a> 0.f<X<3.f
 
 omni_type                                        = 1                                ; type  0-Direct 1-Point 2-Spot 3-OMNIPART 4-Reflected
 omni_range                                       = 2                                ; range in meters
@@ -169,12 +181,6 @@ spot_angle                                       = 65                           
 
 glow_texture                                     = glow\glow_tactical_torch         ; glow texture name (required)
 glow_radius                                      = 0.2                              ; glow radius in meters
-
-color_animator                                   = koster                           ; color animator name ('empty' - not using animator)
-color                                            = 0.8,0.4,0.0,0.8                  ; four color components <r,g,b,a> 0.f<X<3.f
-color_r2                                         = 0.8,0.4,0.0,0.8                  ; four color components <r,g,b,a> 0.f<X<3.f
-range                                            = 3                                ; range in meters
-range_r2                                         = 3                                ; range in meters
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

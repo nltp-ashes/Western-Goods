@@ -866,9 +866,14 @@ end
 --- @param obj game_object
 --- @param bone string
 --- @return vector
-function get_bone_position(obj,bone)
-    if not validate_params({obj, bone,"get_bone_position"}) then return end
+function get_bone_position(obj,bone, is_hud)
+    if not validate_params({obj,bone,"get_bone_position"}) then return end
 
-    local bone_id = obj:get_bone_id(bone)
-    return obj:bone_position(bone_id == 65535 and "" or bone)
+    if is_hud and level.get_active_cam() ~= 0 then
+        is_hud = false
+    end
+
+    local bone_id = obj:get_bone_id(bone, is_hud)
+
+    return obj:bone_position(bone_id, is_hud)
 end

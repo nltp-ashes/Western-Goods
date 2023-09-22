@@ -1,0 +1,112 @@
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 22/06/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script used to handle the UI for the BIC Lighter.
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local CONST_UPDATE_FREQ      = 10                              -- in milliseconds
+
+-- Imported functions
+local dbg_printf             = western_goods_utils.dbg_printf
+
+-- Singleton
+GUI					         = nil                              -- instance, don't touch
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the UI singleton for the UILighter class.
+--- @return UILighter
+function get_ui()
+    if (not GUI) then
+        GUI = UILighter()
+    end
+
+    return GUI
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "UILighter" (CUIScriptWnd)
+
+function UILighter:__init() super()
+    dbg_printf("[WG] UI Lighter | Constructing GUI...")
+
+    self:Show(true)
+    self:Enable(true)
+
+    self.m_xml = CScriptXmlInit()
+    self.m_xml:ParseFile("ui_western_goods_lighter.xml")
+    self.m_xml:InitWindow("lighter", 0, self)
+
+    -- Script light
+    --self.m_light = script_light()
+    --self.m_light.hud_mode = false
+    --self.m_light.enabled = true
+    --self.m_light.type = 1
+    --self.m_light.range = 3
+    --self.m_light.shadow = false
+    --self.m_light.brightness = 1.0
+    --self.m_light.color = fcolor():set(0.8, 0.4, 0.0, 0.8)
+    --self.m_light.lanim = "koster"
+    --self.m_light.lanim_brightness = 0.0025
+
+    -- Build variables
+    self.m_update_timer = 0
+    -- TODO
+end
+
+function UILighter:__finalize()
+    GUI = nil
+end
+
+function UILighter:Update()
+
+    CUIScriptWnd.Update(self)
+
+    local tg = time_global()
+
+    if (tg < self.m_update_timer) then
+        return
+    else
+        self.m_update_timer = tg + CONST_UPDATE_FREQ
+    end
+
+    --self:UpdateLight()
+    --self:DebugLightBone()
+end
+
+function UILighter:UpdateLight()
+    local pos = self:GetLightBonePosition()
+    if not pos then return end
+
+    self.m_light:set_position(pos)
+    self.m_light:update()
+end
+
+function UILighter:GetLightBonePosition()
+    local obj = db.actor:active_detector()
+    if not obj then return end
+
+    return western_goods_utils.get_bone_position(obj, "lid", true)
+end
+
+function UILighter:DebugLightBone()
+    local pos = self:GetLightBonePosition()
+    if not pos then return end
+
+    local box = debug_render.add_object(12, DBG_ScriptObject.box):cast_dbg_box()
+    box.size = vector():set(0.01,0.01,0.01)
+    box.matrix = matrix():translate(pos)
+    box.hud = true
+end
