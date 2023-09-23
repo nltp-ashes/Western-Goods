@@ -9,9 +9,6 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
--- Constants
-local CONST_UPDATE_FREQ      = 10                              -- in milliseconds
-
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
 
@@ -50,20 +47,21 @@ function UILighter:__init() super()
     self.m_xml:InitWindow("lighter", 0, self)
 
     -- Script light
-    --self.m_light = script_light()
-    --self.m_light.hud_mode = false
-    --self.m_light.enabled = true
-    --self.m_light.type = 1
-    --self.m_light.range = 3
-    --self.m_light.shadow = false
-    --self.m_light.brightness = 1.0
-    --self.m_light.color = fcolor():set(0.8, 0.4, 0.0, 0.8)
-    --self.m_light.lanim = "koster"
-    --self.m_light.lanim_brightness = 0.0025
+    self.m_light = script_light()
+    self.m_light.hud_mode = false
+    self.m_light.enabled = true
+    self.m_light.type = 1
+    self.m_light.range = 3
+    self.m_light.shadow = false
+    self.m_light.brightness = 1.0
+    self.m_light.color = fcolor():set(0.8, 0.4, 0.0, 0.8)
+    self.m_light.lanim = "koster"
+    self.m_light.lanim_brightness = 0.0025
 
     -- Build variables
+    self.m_update_rate = 100
     self.m_update_timer = 0
-    -- TODO
+    self.m_valid_sections = { "wg_lighter_bic" }
 end
 
 function UILighter:__finalize()
@@ -74,39 +72,33 @@ function UILighter:Update()
 
     CUIScriptWnd.Update(self)
 
-    local tg = time_global()
-
-    if (tg < self.m_update_timer) then
+    -- Don't update if check fails
+    if not self:Check() then
+        self.m_light.enabled = false
         return
-    else
-        self.m_update_timer = tg + CONST_UPDATE_FREQ
     end
 
-    --self:UpdateLight()
-    --self:DebugLightBone()
+    -- Update
+    self:UpdateLight(db.actor:active_detector())
 end
 
-function UILighter:UpdateLight()
-    local pos = self:GetLightBonePosition()
-    if not pos then return end
+function UILighter:Check()
+    local obj = db.actor:active_detector()
+    if not obj then return false end
 
-    self.m_light:set_position(pos)
+    local state = obj:get_state()
+    if state ~= 0 then return false end
+
+    return western_goods_utils.table_contains(self.m_valid_sections, obj:section())
+end
+
+function UILighter:UpdateLight(obj)
+    self.m_light.enabled = true
+    self.m_light:set_position(self:GetLightBonePosition(obj))
     self.m_light:update()
 end
 
-function UILighter:GetLightBonePosition()
-    local obj = db.actor:active_detector()
-    if not obj then return end
-
-    return western_goods_utils.get_bone_position(obj, "lid", true)
-end
-
-function UILighter:DebugLightBone()
-    local pos = self:GetLightBonePosition()
-    if not pos then return end
-
-    local box = debug_render.add_object(12, DBG_ScriptObject.box):cast_dbg_box()
-    box.size = vector():set(0.01,0.01,0.01)
-    box.matrix = matrix():translate(pos)
-    box.hud = true
+function UILighter:GetLightBonePosition(obj)
+    local pos = western_goods_utils.get_bone_position(obj, "lid", true)
+    return pos or db.actor:position()
 end
