@@ -1,4 +1,4 @@
-## **v2.4.0 - 19/09/2023 - Minor Update**
+## **v2.4.0 - 27/09/2023 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.4.0/total?label=Downloads)]()
 
@@ -12,3 +12,4 @@
 **• Bug fixes :**
 > • Fixed normals on most models;
 > • Fixed a benign typo in rangefinder animations;
+> • Fixed rangefinder hud model being abnormally small.
