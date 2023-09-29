@@ -1,0 +1,85 @@
+name: 'Bug report'
+description: 'File a bug report.'
+title: '[BUG]: '
+labels:
+  - triage
+  - bug
+assignees:
+  - nltp-ashes
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please write a short description about the issue you encountered.
+      placeholder: 'Example : "I was doing ..., when ... happened. I use ... mockpack. I modified ... in the addons files. I use a patch/tweak from ... addon."'
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Addon version
+      description: Please select which version of the addon you are using.
+      options:
+        - v2.3.0
+        - v2.2.1
+        - v2.2.0
+        - v2.1.1
+        - v2.1.0
+        - v2.0.2
+        - v2.0.1
+        - v2.0.0
+        - v1.4.4
+        - v1.4.3
+        - v1.4.2
+        - v1.4.1
+        - v1.4.0
+        - v1.3.0
+        - v1.2.1
+        - v1.2.0
+        - v1.1.2
+        - v1.1.1
+        - v1.1.0
+        - v1.0.1
+        - v1.0.0
+        - v0.1.0
+        - Test build (RC)
+        - Dev build
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Game version
+      description: Please select the version of S.T.A.L.K.E.R. Anomaly you are running.
+      options:
+        - 1.5.2
+        - 1.5.1
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Log output
+      description: Please copy and paste any relevant log output (found in Anomaly\appdata\logs\xray_user.log).
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Illustrations
+      description: If possible, please provide links (separated by a ;) to images or videos illustrating the issue.
+      placeholder: 'Example : "https://www.youtube.com/watch?v=dQw4w9WgXcQ ; https://www.youtube.com/watch?v=dQw4w9WgXcQ"'
+  - type: input
+    attributes:
+      label: Contact
+      description: Please provide a way for us to contact you if needed.
+      placeholder: 'Example : "Discord: @nltp_ashes"'
+  - type: checkboxes
+    attributes:
+      label: Confirmation
+      description: >-
+        I have installed the addon following the
+        [instructions](https://github.com/nltp-ashes/potential-umbrella/wiki/Installation)
+        and I made sure I have all the necessary
+        [pre-requisites](https://github.com/nltp-ashes/Western-Goods#requirements).
+      options:
+        - label: Yes, I have.
+          required: true
+

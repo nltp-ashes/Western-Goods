@@ -1,0 +1,41 @@
+name: 'Change suggestion'
+description: 'File a change suggestion.'
+title: '[CHANGE]: '
+assignees:
+  - nltp-ashes
+labels:
+  - triage
+  - suggestion
+body:
+  - type: textarea
+    attributes:
+      label: Abstract
+      description: Please give a short summary of your suggestion. Be concise.
+      placeholder: 'I think ... would be better if it worked like ... instead.'
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Importance
+      description: Please estimate the importance of your suggestion.
+      options:
+        - 0 - Not needed at all
+        - 1 - Shower thought
+        - 2 - Just a nice idea
+        - 3 - Nice but not required
+        - 4 - Greatly appreciated
+        - 5 - Absolutely necessary
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please detail your change suggestion.
+      placeholder: 'I would like ... to work like ... instead. For example, ... game does what I have in mind.'
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Contact
+      description: Please provide a way for us to contact you if needed.
+      placeholder: 'Example : "Discord: @nltp_ashes"'
