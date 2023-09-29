@@ -64,13 +64,14 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg?label=Downloads%20(All%20Time))](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg?label=Downloads%20(Latest%20Release))](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.4.0 - 27/09/2023 - Minor Update**
+> **v2.4.0 - 29/09/2023 - Minor Update**
 > ```
 > • Additions :
 >    - Added GitHub CI to autonomously build addon releases on GitHub;
 >    - Added GitHub issues templates to ease out bug/feature/suggestion reporting;
 > • Changes :
 >    - Cleaned-up and improved rangefinder code;
+>    - Reanimated the GPS Locator (Thanks TheParaziT);
 > • Bug fixes :
 >    - Fixed normals on most models;
 >    - Fixed a benign typo in rangefinder animations;
