@@ -1,4 +1,4 @@
-## **v2.4.0 - 29/09/2023 - Minor Update**
+## **v2.4.0 - 30/09/2023 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.4.0/total?label=Downloads)]()
 
