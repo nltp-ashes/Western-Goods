@@ -354,13 +354,18 @@ function get_character_id(se_obj)
         se_obj = alife_object(se_obj:id())
     end
 
-    if not IsStalker(se_obj) then return end
+    if not IsStalker(se_obj) then
+        return
+    end
 
     local net_data = utils_stpk.get_stalker_data(se_obj)
-    if net_data then
-        dbg_printf("[WG] Utils | NPC %s(%s) has character ID '%s'", se_obj:section_name(), se_obj.id, net_data.specific_character)
-        return net_data.specific_character
+    if not net_data then
+        printf("![WG] ERROR | Utils | Failed to get Stalker Net Data for %s", se_obj:section_name())
+        return
     end
+
+    dbg_printf("[WG] Utils | NPC %s(%s) has character ID '%s'", se_obj:section_name(), se_obj.id, net_data.specific_character)
+    return net_data.specific_character
 end
 
 --- Function used to get the list of dialogs of a given character.
