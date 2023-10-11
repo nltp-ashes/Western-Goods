@@ -1,0 +1,41 @@
+name: 'Feature request'
+description: 'File a feature request.'
+title: '[FEATURE]: '
+assignees:
+  - nltp-ashes
+labels:
+  - triage
+  - enhancement
+body:
+  - type: textarea
+    attributes:
+      label: Abstract
+      description: Please write a short description of your feature request. Be concise.
+      placeholder: 'I would like ... to be added, similar to ... from the game called ... .'
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Importance
+      description: Please estimate the importance of your feature.
+      options:
+        - 0 - Not needed at all
+        - 1 - Shower thought
+        - 2 - Just a nice idea
+        - 3 - Nice but not required
+        - 4 - Greatly appreciated
+        - 5 - Absolutely necessary
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please write the complete, feature oriented, description of your idea.
+      placeholder: 'This ... must do ... . It should look like ... . I would like the player to be able to do ... with it. Some traders from ... should offer the item.'
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Contact
+      description: Please provide a way for us to contact you if needed.
+      placeholder: 'Example : "Discord: @nltp_ashes"'

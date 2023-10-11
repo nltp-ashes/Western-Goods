@@ -1,181 +1,193 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
-<!--=================================================================================================================-->
+<!-- =============================================================================================================== -->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	Translation file for Western Goods' tab in the Mod Configuration Menu.									     -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 11/09/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!-- ================================================================================================================-->
+<!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
+<!--                                                                                                                 -->
+<!-- =============================================================================================================== -->
 <string_table>
 
-	<!-- ============================================================================================================-->
-	<!--	Main Strings																				  		     -->
-	<!-- ============================================================================================================-->
+    <!-- =========================================================================================================== -->
+    <!--     MAIN STRINGS                                                                                            -->
+    <!-- =========================================================================================================== -->
 
-	<!-- Page Title -->
-	<string id="ui_mcm_western_goods_title">
-		<text>Western Goods</text>
-	</string>
+    <!-- Page Title -->
+    <string id="ui_mcm_western_goods_title">
+        <text>Western Goods</text>
+    </string>
 
-	<!-- Menu Title -->
-	<string id="ui_mcm_menu_western_goods">
-		<text>Western Goods</text>
-	</string>
+    <!-- Menu Title -->
+    <string id="ui_mcm_menu_western_goods">
+        <text>Western Goods</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	GENERAL SETTINGS																			  		     -->
-	<!-- ============================================================================================================-->
+    <!-- =========================================================================================================== -->
+    <!--     GENERAL SETTINGS                                                                                        -->
+    <!-- =========================================================================================================== -->
 
-	<!-- Section Title -->
-	<string id="ui_mcm_western_goods_general_settings_title">
-		<text>GENERAL SETTINGS</text>
-	</string>
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_general_settings_title">
+        <text>GENERAL SETTINGS</text>
+    </string>
 
-	<!-- Guided Surges -->
-	<string id="ui_mcm_western_goods_guided_surge">
-		<text>Guided emissions/psi-storms</text>
-	</string>
+    <!-- Guided Surges -->
+    <string id="ui_mcm_western_goods_guided_surge">
+        <text>Guided emissions/psi-storms</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_guided_surge_desc">
-		<text>If enabled, when an emission/psi-storm occur, you will get a task in your PDA, and this task will point to the nearest cover. If disabled, you will still have the task, but it won't indicate the nearest cover. The GPS Locator can be used to locate the nearest cover.</text>
-	</string>
+    <string id="ui_mcm_western_goods_guided_surge_desc">
+        <text>If enabled, when an emission/psi-storm occur, you will get a task in your PDA, and this task will point to the nearest cover. If disabled, you will still have the task, but it won't indicate the nearest cover. The GPS Locator can be used to locate the nearest cover.</text>
+    </string>
 
-	<!-- Guided Tasks -->
-	<string id="ui_mcm_western_goods_guided_tasks">
-		<text>Guided tasks</text>
-	</string>
+    <!-- Guided Tasks -->
+    <string id="ui_mcm_western_goods_guided_tasks">
+        <text>Guided tasks</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_guided_tasks_desc">
-		<text>Part of some tasks are intentionally un-guided, to encourage exploration and thinking. You can change this setting in real-time to have a marker on your PDA for your objective.</text>
-	</string>
+    <string id="ui_mcm_western_goods_guided_tasks_desc">
+        <text>Part of some tasks are intentionally un-guided, to encourage exploration and thinking. You can change this setting in real-time to have a marker on your PDA for your objective.</text>
+    </string>
 
-	<!-- Magazines Psy-Regen -->
-	<string id="ui_mcm_western_goods_magazine_psi_regen">
-		<text>Psi-health regen factor for reading magazines</text>
-	</string>
+    <!-- Magazines Psy-Regen -->
+    <string id="ui_mcm_western_goods_magazine_psi_regen">
+        <text>Psi-health regen factor for reading magazines</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_magazine_psi_regen_desc">
-		<text>Defines the factor by which to multiply your psi-health (mental health) regeneration when you're reading a magazine.</text>
-	</string>
+    <string id="ui_mcm_western_goods_magazine_psi_regen_desc">
+        <text>Defines the factor by which to multiply your psi-health (mental health) regeneration when you're reading a magazine.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	KEY-BINDINGS																			     		     -->
-	<!-- ============================================================================================================-->
+    <!-- =========================================================================================================== -->
+    <!--     KEY-BINDINGS                                                                                            -->
+    <!-- =========================================================================================================== -->
 
-	<!-- Section Title -->
-	<string id="ui_mcm_western_goods_keybindings_title">
-		<text>KEY-BINDINGS</text>
-	</string>
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_keybindings_title">
+        <text>KEY-BINDINGS</text>
+    </string>
 
-	<!-- Helicopter Attack Order -->
-	<string id="ui_mcm_western_goods_heli_attack">
-		<text>Order helicopter to attack</text>
-	</string>
+    <!-- Helicopter Attack Order -->
+    <string id="ui_mcm_western_goods_heli_attack">
+        <text>Order helicopter to attack</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_heli_attack_desc">
-		<text>Key-bind used to send an attack order to a helicopter. Aim at a target and use the key-bind to send the order.</text>
-	</string>
+    <string id="ui_mcm_western_goods_heli_attack_desc">
+        <text>Key-bind used to send an attack order to a helicopter. Aim at a target and use the key-bind to send the order.</text>
+    </string>
 
-	<!-- Rangefinder Night Vision -->
-	<string id="ui_mcm_western_goods_rangefinder_nv">
-		<text>Rangefinder night-vision</text>
-	</string>
+    <!-- Rangefinder Night Vision -->
+    <string id="ui_mcm_western_goods_rangefinder_nv">
+        <text>Rangefinder night-vision</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_rangefinder_nv_desc">
-		<text>Key-bind used to enable/disable night-vision for the SigSauer KILO5K Rangefinder.</text>
-	</string>
+    <string id="ui_mcm_western_goods_rangefinder_nv_desc">
+        <text>Key-bind used to enable/disable night-vision for the SigSauer KILO5K Rangefinder.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	LOOT SETTINGS																				  		     -->
-	<!-- ============================================================================================================-->
+    <!-- =========================================================================================================== -->
+    <!--     LOOT SETTINGS                                                                                           -->
+    <!-- =========================================================================================================== -->
 
-	<!-- Section Title -->
-	<string id="ui_mcm_western_goods_loot_settings_title">
-		<text>LOOT SETTINGS</text>
-	</string>
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_loot_settings_title">
+        <text>LOOT SETTINGS</text>
+    </string>
 
-	<!-- Trader Loot Chance -->
-	<string id="ui_mcm_western_goods_trader_loot_factor">
-		<text>Trader loot factor</text>
-	</string>
+    <!-- Trader Loot Chance -->
+    <string id="ui_mcm_western_goods_trader_loot_factor">
+        <text>Trader loot factor</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_trader_loot_factor_desc">
-		<text>Defines the factor by which to affect loot spawn chance in traders. This only affects the probability of spawn, not the quantity.</text>
-	</string>
+    <string id="ui_mcm_western_goods_trader_loot_factor_desc">
+        <text>Defines the factor by which to affect loot spawn chance in traders. This only affects the probability of spawn, not the quantity.</text>
+    </string>
 
-	<!-- Corpse Loot Chance -->
-	<string id="ui_mcm_western_goods_corpse_loot_factor">
-		<text>Corpse loot factor</text>
-	</string>
+    <!-- Corpse Loot Chance -->
+    <string id="ui_mcm_western_goods_corpse_loot_factor">
+        <text>Corpse loot factor</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_corpse_loot_factor_desc">
-		<text>Defines the factor by which to affect loot spawn chance in corpses. This only affects the probability of spawn, not the quantity.</text>
-	</string>
+    <string id="ui_mcm_western_goods_corpse_loot_factor_desc">
+        <text>Defines the factor by which to affect loot spawn chance in corpses. This only affects the probability of spawn, not the quantity.</text>
+    </string>
 
-	<!-- Items Per Corpse -->
-	<string id="ui_mcm_western_goods_max_item_per_corpse">
-		<text>Maximum number of items per corpse</text>
-	</string>
+    <!-- Items Per Corpse -->
+    <string id="ui_mcm_western_goods_max_item_per_corpse">
+        <text>Maximum number of items per corpse</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_max_item_per_corpse_desc">
-		<text>Defines the maximum amount of items X that can spawn in a single corpse. The game will select X items to spawn, and then run the drop rates for each of the selected items. In terms, you can get anywhere from 0 to X items.</text>
-	</string>
+    <string id="ui_mcm_western_goods_max_item_per_corpse_desc">
+        <text>Defines the maximum amount of items X that can spawn in a single corpse. The game will select X items to spawn, and then run the drop rates for each of the selected items. In terms, you can get anywhere from 0 to X items.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	COMPATIBILITY SETTINGS																			  		     -->
-	<!-- ============================================================================================================-->
+    <!-- =========================================================================================================== -->
+    <!--     COMPATIBILITY SETTINGS                                                                                  -->
+    <!-- =========================================================================================================== -->
 
-	<!-- Section Title -->
-	<string id="ui_mcm_western_goods_compatibility_title">
-		<text>COMPATIBILITY SETTINGS</text>
-	</string>
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_compatibility_title">
+        <text>COMPATIBILITY SETTINGS</text>
+    </string>
 
-	<!-- Lighter lock -->
-	<string id="ui_mcm_western_goods_lighter_item">
-		<text>Lighter item</text>
-	</string>
+    <!-- Lighter lock -->
+    <string id="ui_mcm_western_goods_lighter_item">
+        <text>Lighter item</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_lighter_item_desc">
-		<text>Enables part of the functionality of the lighter item. Enabling this option will allow you to use the lighter to light cigarettes and campfires, but may expose you to conflicts with other addons.\n \n/!\ After enabling, requires save reload to take effect.</text>
-	</string>
+    <string id="ui_mcm_western_goods_lighter_item_desc">
+        <text>Enables part of the functionality of the lighter item. Enabling this option will allow you to use the lighter to light cigarettes and campfires, but may expose you to conflicts with other addons.\n \n/!\ After enabling, requires save reload to take effect.</text>
+    </string>
 
-	<!-- Compatibility with 'No drug limit' -->
-	<string id="ui_mcm_western_goods_compat_no_drug_limit">
-		<text>Lighter item compatibility 'No Drug Limit'</text>
-	</string>
+    <!-- Compatibility with 'No drug limit' -->
+    <string id="ui_mcm_western_goods_compat_no_drug_limit">
+        <text>Lighter item compatibility 'No Drug Limit'</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_compat_no_drug_limit_desc">
-		<text>Enables compatibility with No Drug Limit. If enabled, the 'You already have a similar effect with greater efficiency' thing will be disabled, and it'll let you use whatever items you want.\n \n/!\ Requires 'Lighter item' to be enabled.</text>
-	</string>
+    <string id="ui_mcm_western_goods_compat_no_drug_limit_desc">
+        <text>Enables compatibility with No Drug Limit. If enabled, the 'You already have a similar effect with greater efficiency' thing will be disabled, and it'll let you use whatever items you want.\n \n/!\ Requires 'Lighter item' to be enabled.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	TECHNICAL SETTINGS																			  		     -->
-	<!-- ============================================================================================================-->
+    <!-- =========================================================================================================== -->
+    <!--     TECHNICAL SETTINGS                                                                                      -->
+    <!-- =========================================================================================================== -->
 
-	<!-- Section Title -->
-	<string id="ui_mcm_western_goods_technical_settings_title">
-		<text>TECHNICAL SETTINGS</text>
-	</string>
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_technical_settings_title">
+        <text>TECHNICAL SETTINGS</text>
+    </string>
 
-	<!-- Debug mode -->
-	<string id="ui_mcm_western_goods_debug_mode">
-		<text>Debug mode</text>
-	</string>
+    <!-- Debug mode -->
+    <string id="ui_mcm_western_goods_debug_mode">
+        <text>Debug mode</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_debug_mode_desc">
-		<text>Makes the addon print out some information in the console/logs, for later reference when trying to identify problems.</text>
-	</string>
-	
-	<!-- Addon removal -->
-	<string id="ui_mcm_western_goods_addon_removal">
-		<text>Addon removal</text>
-	</string>
+    <string id="ui_mcm_western_goods_debug_mode_desc">
+        <text>Makes the addon print out some information in the console/logs, for later reference when trying to identify problems.</text>
+    </string>
 
-	<string id="ui_mcm_western_goods_addon_removal_desc">
-		<text>Allows for a safe removal of the addon. Enable this setting, then save your game. After this, you can remove the addon and load that save again, and continue playing without Western Goods.</text>
-	</string>
+    <!-- Addon removal -->
+    <string id="ui_mcm_western_goods_addon_removal">
+        <text>Addon removal</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_addon_removal_desc">
+        <text>Allows for a safe removal of the addon. Enable this setting, then save your game. After this, you can remove the addon and load that save again, and continue playing without Western Goods.</text>
+    </string>
+
+    <!-- =========================================================================================================== -->
+    <!--     DEVICE SELECTOR KEY INTEGRATION                                                                         -->
+    <!-- =========================================================================================================== -->
+
+    <string id="ui_mcm_detector_selector_keybind_wg_gps">
+        <text>GPS Locator select key</text>
+    </string>
+
+    <string id="ui_mcm_detector_selector_keybind_wg_minedetect">
+        <text>Mine Detector select key</text>
+    </string>
 
 </string_table>

@@ -35,7 +35,7 @@ upgr_icon_width                                  = 150
 upgr_icon_height                                 = 100
 upgr_icon_path                                   = ui\misc\ui_western_goods_upgrades.dds
 
-custom_ui_pos                                    = 0, 0.02, -0.005
+custom_ui_pos                                    = 0.0002, 0.026, -0.03
 custom_ui_rot                                    = 180,0,180
 custom_ui_func                                   = western_goods_ui_rangefinder.get_ui
 custom_ui_bone                                   = link
@@ -155,25 +155,18 @@ item_visual                                      = dynamics\western_goods_tech\w
 attach_place_idx                                 = 0
 zoom_hide_crosshair                              = true
 
-; SEVA hands
-item_position                                    = 0.009364, -0.000794, -0.03
-item_orientation                                 = 0.836261, -0.600134, -42.448766
-aim_hud_offset_pos                               = -0.086074, 0.007378, -0.069
-aim_hud_offset_pos_16x9                          = -0.086074, 0.007378, -0.069
+item_position                                    = 0.0166, -0.00523, 0.01
+item_orientation                                 = 0, 0, -50
 
-; no outfit hands
-;item_position                                   = 0.012078, 0.000768, -0.03
-;item_orientation                                = 0.836261, -0.600134, -42.448766
-;aim_hud_offset_pos                              = -0.089103, 0.008017, -0.069
-;aim_hud_offset_pos_16x9                         = -0.089103, 0.008017, -0.069
-
-aim_hud_offset_rot                               = -0.016204, -0.089297, -0.53
-aim_hud_offset_rot_16x9                          = -0.016204, -0.089297, -0.53
+aim_hud_offset_pos                               = -0.076977, 0.021183, -0.06
+aim_hud_offset_pos_16x9                          = -0.076977, 0.021183, -0.06
+aim_hud_offset_rot                               = -0.008599, -0.104174, -0.66
+aim_hud_offset_rot_16x9                          = -0.008599, -0.104174, -0.66
 
 hands_position                                   = 0.020589, 0.053214, 0.046443
 hands_position_16x9                              = 0.020589, 0.053214, 0.046443
-hands_orientation                                = 0, 0, 0
-hands_orientation_16x9                           = 0, 0, 0
+hands_orientation                                = 0, 0, 1.5
+hands_orientation_16x9                           = 0, 0, 1.5
 
 gl_hud_offset_pos                                = 0, 0, 0
 gl_hud_offset_rot                                = 0, 0, 0
@@ -181,12 +174,12 @@ gl_hud_offset_rot                                = 0, 0, 0
 lean_hud_offset_pos                              = 0, 0, 0
 lean_hud_offset_rot                              = 0, 0, 0
 
-anm_hide                                         = wg_fangefinder_holster, idle
-anm_idle                                         = wg_fangefinder_idle, idle
-anm_idle_aim                                     = wg_fangefinder_aim, idle
-anm_idle_moving                                  = wg_fangefinder_walk, idle
-anm_idle_moving_crouch                           = wg_fangefinder_walk, idle, 0.75
-anm_idle_sprint                                  = wg_fangefinder_sprint, idle, 1.2
-anm_show                                         = wg_fangefinder_draw, idle
+anm_hide                                         = wg_rangefinder_holster, idle
+anm_idle                                         = wg_rangefinder_idle, idle
+anm_idle_aim                                     = wg_rangefinder_aim, idle
+anm_idle_moving                                  = wg_rangefinder_walk, idle
+anm_idle_moving_crouch                           = wg_rangefinder_walk, idle, 0.75
+anm_idle_sprint                                  = wg_rangefinder_sprint, idle, 1.2
+anm_show                                         = wg_rangefinder_draw, idle
 
 freelook_z_offset_mul                            = 0.75

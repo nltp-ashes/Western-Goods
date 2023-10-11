@@ -1,0 +1,56 @@
+name: CI Pre-Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build-ver:
+        description: 'Build version'
+        required: true
+        default: 'v0.0.0'
+      rc-ver:
+        description: 'Release candidate'
+        required: true
+        default: '1'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref_name != 'master' }}
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: 'actions/checkout@master'
+      with:
+        submodules: recursive
+
+    - name: Archive
+      id: archive
+      uses: 'thedoctor0/zip-release@0.7.1'
+      with:
+        type: 'zip'
+        filename: 'Western.Goods.${{ github.event.inputs.build-ver }}.RC${{ github.event.inputs.rc-ver }}.zip'
+        exclusions: '*.git*'
+
+    - name: Release
+      id: release
+      uses: 'actions/create-release@latest'
+      env: 
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      with: 
+        tag_name: '${{ github.event.inputs.build-ver }}-rc${{ github.event.inputs.rc-ver }}'
+        release_name: 'Western Goods ${{ github.event.inputs.build-ver }} RC${{ github.event.inputs.rc-ver }}'
+        body_path : './CHANGELOG.md'
+        prerelease: true
+
+    - name: Upload Archive
+      id: upload-archive 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_path: './Western.Goods.${{ github.event.inputs.build-ver }}.RC${{ github.event.inputs.rc-ver }}.zip'
+        asset_name: 'Western.Goods.${{ github.event.inputs.build-ver }}.RC${{ github.event.inputs.rc-ver }}.zip'
+        asset_content_type: application/zip

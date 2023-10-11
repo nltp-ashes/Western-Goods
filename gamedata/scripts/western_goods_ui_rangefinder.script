@@ -36,60 +36,6 @@ function get_ui()
     return GUI
 end
 
---- Function used to decrease the hud_fov when the player aims down sights with the rangefinder.
---- @return nil
-function actor_on_weapon_zoom_in(wpn)
-    if wpn:section() ~= CONST_ITEM_SEC then return end
-
-    local old_hud_fov = ui_options.get("video/basic/hud_fov")
-    local new_hud_fov = ini_sys:r_float_ex(wpn:section(),"scope_hud_fov")
-
-    exec_console_cmd("hud_fov ".. new_hud_fov)
-    hud_fov = old_hud_fov
-
-    RegisterScriptCallback("on_key_press", on_key_press)
-
-    dbg_printf("[WG] UI Rangefinder | Changed 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
-end
-
---- Function used to restore user defined hud_fov when the player exits ADS with the rangefinder.
---- @return nil
-function actor_on_weapon_zoom_out(wpn)
-    if wpn:section() ~= CONST_ITEM_SEC then return end
-
-    local old_hud_fov = ui_options.get("video/basic/hud_fov")
-    local new_hud_fov = hud_fov
-
-    exec_console_cmd("hud_fov " .. new_hud_fov)
-    hud_fov = nil
-
-    UnregisterScriptCallback("on_key_press", on_key_press)
-
-    dbg_printf("[WG] UI Rangefinder | Restored 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
-end
-
---- Function used to toggle the range finder's night-vision mode.
---- @param dik DIK_keys
---- @return nil
-function on_key_press(dik)
-    if dik ~= western_goods_mcm.get_config("rangefinder_nv") then return end
-    if db.actor:active_item() and db.actor:active_item():section() ~= CONST_ITEM_SEC then return end
-
-    GUI.night_vision = not GUI.night_vision
-    GUI.btn_sfx:play(db.actor, 0, sound_object.s2d)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Callbacks registration
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to register callbacks.
---- @return nil
-function on_game_start()
-    RegisterScriptCallback("actor_on_weapon_zoom_in", actor_on_weapon_zoom_in)
-    RegisterScriptCallback("actor_on_weapon_zoom_out", actor_on_weapon_zoom_out)
-end
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- UI Class
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -102,11 +48,18 @@ function UIRangefinder:__init() super()
     self:Show(true)
     self:Enable(true)
 
-    -- Build UI
     self.xml = CScriptXmlInit()
     self.xml:ParseFile("ui_western_goods_rangefinder.xml")
     self.xml:InitWindow("rangefinder", 0, self)
 
+    -- Sound effects
+    self.m_sfx_btn = sound_object([[western_goods_tech\rangefinder_btn]])
+
+    -- Build variables
+    self.m_update_timer = 0
+    self.m_night_vision = false
+
+    -- Build UI
     self.m_los1 = self.xml:InitStatic("rangefinder:los1", self)
     self.m_los2 = self.xml:InitStatic("rangefinder:los2", self)
     self.m_los3 = self.xml:InitStatic("rangefinder:los3", self)
@@ -117,12 +70,9 @@ function UIRangefinder:__init() super()
 
     self.m_reticule = self.xml:InitStatic("rangefinder:reticule", self)
 
-    -- Sound effects
-    self.btn_sfx = sound_object([[western_goods_tech\rangefinder_btn]])
-
-    -- Build variables
-    self.update_timer = 0
-    self.night_vision = false
+    -- Callbacks
+    RegisterScriptCallback("actor_on_weapon_zoom_in", self)
+    RegisterScriptCallback("actor_on_weapon_zoom_out", self)
 end
 
 function UIRangefinder:__finalize()
@@ -135,10 +85,10 @@ function UIRangefinder:Update()
 
     local tg = time_global()
 
-    if (tg < self.update_timer) then
+    if (tg < self.m_update_timer) then
         return
     else
-        self.update_timer = tg + CONST_UPDATE_FREQ
+        self.m_update_timer = tg + CONST_UPDATE_FREQ
     end
 
     -- Line Of Sight Distance
@@ -165,7 +115,7 @@ function UIRangefinder:Update()
 end
 
 function UIRangefinder:GetNightVisionSuffix()
-    if self.night_vision then
+    if self.m_night_vision then
         return "_g"
     else
         return "_r"
@@ -206,4 +156,40 @@ function UIRangefinder:GetHCDTextures()
     end
 
     return "rf_dash", "rf_dash", "rf_dash"
+end
+
+function UIRangefinder:actor_on_weapon_zoom_in(wpn)
+    if wpn:section() ~= CONST_ITEM_SEC then return end
+
+    local old_hud_fov = ui_options.get("video/basic/hud_fov")
+    local new_hud_fov = ini_sys:r_float_ex(wpn:section(),"scope_hud_fov")
+
+    exec_console_cmd("hud_fov ".. new_hud_fov)
+    hud_fov = old_hud_fov
+
+    RegisterScriptCallback("on_key_press", self)
+
+    dbg_printf("[WG] UI Rangefinder | Changed 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
+end
+
+function UIRangefinder:actor_on_weapon_zoom_out(wpn)
+    if wpn:section() ~= CONST_ITEM_SEC then return end
+
+    local old_hud_fov = ui_options.get("video/basic/hud_fov")
+    local new_hud_fov = hud_fov
+
+    exec_console_cmd("hud_fov " .. new_hud_fov)
+    hud_fov = nil
+
+    UnregisterScriptCallback("on_key_press", self)
+
+    dbg_printf("[WG] UI Rangefinder | Restored 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
+end
+
+function UIRangefinder:on_key_press(dik)
+    if dik ~= western_goods_mcm.get_config("rangefinder_nv") then return end
+    if db.actor:active_item() and db.actor:active_item():section() ~= CONST_ITEM_SEC then return end
+
+    GUI.m_night_vision = not GUI.m_night_vision
+    GUI.m_sfx_btn:play(db.actor, 0, sound_object.s2d)
 end
