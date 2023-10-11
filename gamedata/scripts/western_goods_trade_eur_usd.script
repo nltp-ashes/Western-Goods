@@ -50,6 +50,7 @@ local bags_to_tint = { actor_equ = true, actor_bag = true, actor_trade = true, a
 
 -- Variables
 local traders_list = {}
+local traders_names = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Dialog Functions
@@ -133,9 +134,9 @@ function tint_functor(cell)
     or (not bags_to_tint[cell.container.ID])
     or (not obj)
     or (not partner)
-    or (not this.is_eur_usd_trader(partner))
     or (utils_item.in_npc_inv(partner, obj))
     or (this.is_tradable(obj:section()))
+    or (not this.is_eur_usd_trader(partner))
     then return end
 
     -- If you're in the trade mode with a EUR/USD trader, and the item isn't tradable, tint it in red
@@ -388,8 +389,16 @@ end
 --- @param section string
 --- @return boolean
 function is_eur_usd_trader(obj)
+    -- Check cache
+    if traders_names[obj:name()] ~= nil then
+        return traders_names[obj:name()]
+    end
+
+    -- Query and cache character_id
     local character_id = western_goods_utils.get_character_id(obj)
-    return traders_list[character_id] or false
+    traders_names[obj:name()] = traders_list[character_id] or false
+
+    return traders_names[obj:name()]
 end
 
 --- Function used to know if an object is tradable with the western goods trader.
