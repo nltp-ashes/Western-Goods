@@ -1,4 +1,4 @@
-## **v2.4.0 - 30/09/2023 - Minor Update**
+## **v2.4.0 - 12/10/2023 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.4.0/total?label=Downloads)]()
 
@@ -13,4 +13,5 @@
 **• Bug fixes :**
 > • Fixed normals on most models;
 > • Fixed a benign typo in rangefinder animations;
-> • Fixed rangefinder hud model being abnormally small.
+> • Fixed rangefinder hud model being abnormally small;
+> • Fixed small lag caused by repeated calls made to western_goods_utils.get_character_id(game_object) (Thanks Sark).

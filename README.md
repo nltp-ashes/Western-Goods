@@ -64,7 +64,7 @@ To **uninstall** the addon :
 
 [![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg?label=Downloads%20(All%20Time))](https://github.com/nltp-ashes/Western-Goods/releases) [![Latest Release Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/latest/total.svg?label=Downloads%20(Latest%20Release))](https://github.com/nltp-ashes/Western-Goods/releases/latest)
 
-> **v2.4.0 - 30/09/2023 - Minor Update**
+> **v2.4.0 - 12/10/2023 - Minor Update**
 > ```
 > • Additions :
 >    - Added GitHub CI to autonomously build addon releases on GitHub;
@@ -75,7 +75,8 @@ To **uninstall** the addon :
 > • Bug fixes :
 >    - Fixed normals on most models;
 >    - Fixed a benign typo in rangefinder animations;
->    - Fixed rangefinder hud model being abnormally small.
+>    - Fixed rangefinder hud model being abnormally small;
+>    - Fixed small lag caused by repeated calls made to western_goods_utils.get_character_id(game_object) (Thanks Sark).
 > ```
 
 > **v2.3.0 - 12/09/2023 - Minor Update**
