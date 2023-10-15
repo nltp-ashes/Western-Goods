@@ -7,7 +7,7 @@
 > • Added GitHub issues templates to ease out bug/feature/suggestion reporting;
 
 **• Changes :**
-> • Cleaned-up and improved rangefinder code;
+> • Cleaned-up and improved various UI code;
 > • Reanimated the GPS Locator (Thanks TheParaziT);
 
 **• Bug fixes :**
