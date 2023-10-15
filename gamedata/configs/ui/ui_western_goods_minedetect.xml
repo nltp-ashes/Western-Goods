@@ -11,11 +11,11 @@
 <!--                                                                                                                 -->
 <!-- ================================================================================================================-->
 <w>
-    <mine_detectror>
+    <mine_detector>
 
         <detect    x="0.0254"    y="0.0920"    width="0.008"    height="0.008"    stretch="1">
             <texture shader="hud\p3d" color="red">red_diod</texture>
         </detect>
 
-    </mine_detectror>
+    </mine_detector>
 </w>
