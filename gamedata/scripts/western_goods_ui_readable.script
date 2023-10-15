@@ -24,7 +24,7 @@ local CONST_MAGAZINE_PSI_REGEN      = 0.0080
 -- Variables
 local magazine_textures             = {}
 
--- Global variables
+-- Singleton
 GUI                                 = nil -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
