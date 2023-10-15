@@ -9,18 +9,11 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
--- Constants
-local CONST_UPDATE_FREQ      = 222                              -- in milliseconds
-local CONST_ITEM_SEC         = "wg_rangefinder"                 -- name of the range finder section
-
 -- Imported functions
 local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI					         = nil                              -- instance, don't touch
-
--- Variables
-local hud_fov                                                   -- cache for user defined hud_fov
+GUI					         = nil -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
@@ -48,27 +41,30 @@ function UIRangefinder:__init() super()
     self:Show(true)
     self:Enable(true)
 
-    self.xml = CScriptXmlInit()
-    self.xml:ParseFile("ui_western_goods_rangefinder.xml")
-    self.xml:InitWindow("rangefinder", 0, self)
+    -- Build UI
+    self.m_xml = CScriptXmlInit()
+    self.m_xml:ParseFile("ui_western_goods_rangefinder.xml")
+    self.m_xml:InitWindow("rangefinder", 0, self)
+
+    self.m_los1 = self.m_xml:InitStatic("rangefinder:los1", self)
+    self.m_los2 = self.m_xml:InitStatic("rangefinder:los2", self)
+    self.m_los3 = self.m_xml:InitStatic("rangefinder:los3", self)
+
+    self.m_hcd1 = self.m_xml:InitStatic("rangefinder:hcd1", self)
+    self.m_hcd2 = self.m_xml:InitStatic("rangefinder:hcd2", self)
+    self.m_hcd3 = self.m_xml:InitStatic("rangefinder:hcd3", self)
+
+    self.m_reticule = self.m_xml:InitStatic("rangefinder:reticule", self)
 
     -- Sound effects
     self.m_sfx_btn = sound_object([[western_goods_tech\rangefinder_btn]])
 
     -- Build variables
+    self.m_hud_fov = nil
     self.m_update_timer = 0
+    self.m_update_freq = 222
     self.m_night_vision = false
-
-    -- Build UI
-    self.m_los1 = self.xml:InitStatic("rangefinder:los1", self)
-    self.m_los2 = self.xml:InitStatic("rangefinder:los2", self)
-    self.m_los3 = self.xml:InitStatic("rangefinder:los3", self)
-
-    self.m_hcd1 = self.xml:InitStatic("rangefinder:hcd1", self)
-    self.m_hcd2 = self.xml:InitStatic("rangefinder:hcd2", self)
-    self.m_hcd3 = self.xml:InitStatic("rangefinder:hcd3", self)
-
-    self.m_reticule = self.xml:InitStatic("rangefinder:reticule", self)
+    self.m_valid_sections = { "wg_rangefinder" }
 
     -- Callbacks
     RegisterScriptCallback("actor_on_weapon_zoom_in", self)
@@ -84,11 +80,10 @@ function UIRangefinder:Update()
     CUIScriptWnd.Update(self)
 
     local tg = time_global()
-
     if (tg < self.m_update_timer) then
         return
     else
-        self.m_update_timer = tg + CONST_UPDATE_FREQ
+        self.m_update_timer = tg + self.m_update_freq
     end
 
     -- Line Of Sight Distance
@@ -115,11 +110,7 @@ function UIRangefinder:Update()
 end
 
 function UIRangefinder:GetNightVisionSuffix()
-    if self.m_night_vision then
-        return "_g"
-    else
-        return "_r"
-    end
+    return self.m_night_vision and "_g" or "_r"
 end
 
 function UIRangefinder:GetLOSTextures()
@@ -128,15 +119,17 @@ function UIRangefinder:GetLOSTextures()
     -- Get LOS number as a 3 char string (5 -> "005")
     local s_los = western_goods_utils.as_string(los, 3)
 
-    -- Line Of Sight format
-    if los < 999 then
-        local los1 = strformat("rf_num_%s", s_los:sub(1, 1))
-        local los2 = strformat("rf_num_%s", s_los:sub(2, 2))
-        local los3 = strformat("rf_num_%s", s_los:sub(3, 3))
-        return los1, los2, los3
+    -- Max range at 999m
+    if los > 999 then
+        return "rf_dash", "rf_dash", "rf_dash"
     end
 
-    return "rf_dash", "rf_dash", "rf_dash"
+    -- Line Of Sight format
+    local los1 = strformat("rf_num_%s", s_los:sub(1, 1))
+    local los2 = strformat("rf_num_%s", s_los:sub(2, 2))
+    local los3 = strformat("rf_num_%s", s_los:sub(3, 3))
+
+    return los1, los2, los3
 end
 
 function UIRangefinder:GetHCDTextures()
@@ -147,25 +140,29 @@ function UIRangefinder:GetHCDTextures()
     -- Get HCD number as a 3 char string (5 -> "005")
     local s_hcd = western_goods_utils.as_string(hcd, 3)
 
-    -- Horizontal Compensation Distance format
-    if hcd < 999 then
-        local hcd1 = strformat("rf_num_%s", s_hcd:sub(1, 1))
-        local hcd2 = strformat("rf_num_%s", s_hcd:sub(2, 2))
-        local hcd3 = strformat("rf_num_%s", s_hcd:sub(3, 3))
-        return hcd1, hcd2, hcd3
+    -- Max range at 999m
+    if hcd > 999 then
+        return "rf_dash", "rf_dash", "rf_dash"
     end
 
-    return "rf_dash", "rf_dash", "rf_dash"
+    -- Horizontal Compensation Distance format
+    local hcd1 = strformat("rf_num_%s", s_hcd:sub(1, 1))
+    local hcd2 = strformat("rf_num_%s", s_hcd:sub(2, 2))
+    local hcd3 = strformat("rf_num_%s", s_hcd:sub(3, 3))
+
+    return hcd1, hcd2, hcd3
 end
 
 function UIRangefinder:actor_on_weapon_zoom_in(wpn)
-    if wpn:section() ~= CONST_ITEM_SEC then return end
+    if not western_goods_utils.table_contains(self.m_valid_sections, wpn:section()) then
+        return
+    end
 
     local old_hud_fov = ui_options.get("video/basic/hud_fov")
     local new_hud_fov = ini_sys:r_float_ex(wpn:section(),"scope_hud_fov")
 
     exec_console_cmd("hud_fov ".. new_hud_fov)
-    hud_fov = old_hud_fov
+    self.m_hud_fov = old_hud_fov
 
     RegisterScriptCallback("on_key_press", self)
 
@@ -173,13 +170,15 @@ function UIRangefinder:actor_on_weapon_zoom_in(wpn)
 end
 
 function UIRangefinder:actor_on_weapon_zoom_out(wpn)
-    if wpn:section() ~= CONST_ITEM_SEC then return end
+    if not western_goods_utils.table_contains(self.m_valid_sections, wpn:section()) then
+        return
+    end
 
     local old_hud_fov = ui_options.get("video/basic/hud_fov")
-    local new_hud_fov = hud_fov
+    local new_hud_fov = self.m_hud_fov
 
     exec_console_cmd("hud_fov " .. new_hud_fov)
-    hud_fov = nil
+    self.m_hud_fov = nil
 
     UnregisterScriptCallback("on_key_press", self)
 
@@ -187,8 +186,14 @@ function UIRangefinder:actor_on_weapon_zoom_out(wpn)
 end
 
 function UIRangefinder:on_key_press(dik)
-    if dik ~= western_goods_mcm.get_config("rangefinder_nv") then return end
-    if db.actor:active_item() and db.actor:active_item():section() ~= CONST_ITEM_SEC then return end
+    if dik ~= western_goods_mcm.get_config("rangefinder_nv") then
+        return
+    end
+
+    local active_item = db.actor:active_item()
+    if not active_item or not western_goods_utils.table_contains(self.m_valid_sections, active_item:section()) then
+        return
+    end
 
     GUI.m_night_vision = not GUI.m_night_vision
     GUI.m_sfx_btn:play(db.actor, 0, sound_object.s2d)
