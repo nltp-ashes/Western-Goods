@@ -59,7 +59,7 @@ function UILighter:__init() super()
     self.m_light.lanim_brightness = 0.0025
 
     -- Build variables
-    self.m_update_rate = 100
+    self.m_update_rate = 1000
     self.m_update_timer = 0
     self.m_valid_sections = { "wg_lighter_bic" }
 end
@@ -84,10 +84,18 @@ function UILighter:Update()
     if not self:CheckFuel(obj) then
         self:SetLightStatus(obj, false)
         return
+    else
+        self:DrainFuel(obj)
     end
 
     -- Update
     self:UpdateLight(obj)
+end
+
+function UILighter:UpdateLight(obj)
+    self:SetLightStatus(obj, true)
+    self.m_light:set_position(self:GetLightBonePosition(obj))
+    self.m_light:update()
 end
 
 function UILighter:Check(obj)
@@ -99,15 +107,19 @@ end
 
 function UILighter:CheckFuel(obj)
     local fuel = western_goods_utils.value_or_default(obj:condition(), 0)
-    local fuel_critical = western_goods_utils.value_or_default(ini_sys:r_float_ex(obj:section(), "power_critical"), 0.01)
+    local fuel_critical = western_goods_utils.value_or_default(ini_sys:r_float_ex(obj:section(), "fuel_critical"), 0.01)
 
     return fuel > fuel_critical
 end
 
-function UILighter:UpdateLight(obj)
-    self:SetLightStatus(obj, true)
-    self.m_light:set_position(self:GetLightBonePosition(obj))
-    self.m_light:update()
+function UILighter:DrainFuel(obj)
+    if (time_global() < self.m_update_timer) then return end
+    self.m_update_timer = time_global() + self.m_update_rate
+
+    local fuel_level = obj:condition()
+    local fuel_consumption = western_goods_utils.value_or_default(ini_sys:r_float_ex(obj:section(), "fuel_consumption"), 0.003)
+
+    obj:set_condition(fuel_level - fuel_consumption)
 end
 
 function UILighter:GetLightBonePosition(obj)
