@@ -107,6 +107,7 @@ Credit goes to these people for their work contained in this addon :
 
 |                                   Name                                    |                                     Motive                                      |                                    License                                     |
 |:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+|                                  _TheDJ                                   |                   Produced two sound effects for the lighter                    |                                  Proprietary                                   |
 |          **[VodoXleb](https://www.moddb.com/members/vodoxleb)**           |                     Translated the entire addon to Russian                      |                                  Proprietary                                   |
 |         **[Barry Bogs](https://www.moddb.com/members/barrybogs)**         |            Adapted the Rangefinder model on their set of animations             |                                  Proprietary                                   |
 |       **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**        |               Ported and prepared the Rangefinder model for X-Ray               |                                  Proprietary                                   |
