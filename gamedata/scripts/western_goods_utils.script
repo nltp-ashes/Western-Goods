@@ -690,15 +690,22 @@ end
 --- @param obj game_object
 --- @param bone string
 --- @return vector
-function bone_position(obj, bone, is_hud)
+function bone_position(obj, bone)
     if not validate_params({obj,bone,"bone_position"}) then return end
 
-    -- Validation
-    is_hud = validate_is_hud(is_hud)
+    return obj:bone_position(obj:get_bone_id(bone, false), false)
+end
 
-    local bone_id = obj:get_bone_id(bone, is_hud)
+function bone_hud_position(obj, hud_bone, bone)
+    if not validate_params({obj,hud_bone,bone,"bone_hud_position"}) then return end
 
-    return obj:bone_position(bone_id, is_hud)
+    -- Cant find hud bone in TPS, use default bone
+    if level.get_active_cam() ~= 0 then
+        printf("~[WG] WARNING | Utils | Trying to get HUD bone '%s' position in third person ! Fallback to '%s'", hud_bone, bone)
+        return this.bone_position(obj, bone)
+    end
+
+    return obj:bone_position(obj:get_bone_id(hud_bone, true), true)
 end
 
 --- Function used to set the visibility a bone off a game object.
@@ -706,17 +713,28 @@ end
 --- @param obj game_object
 --- @param bone string
 --- @return nil
-function bone_visibility(obj, bone, visibility, silent, is_hud)
+function bone_visibility(obj, bone, visibility)
     if not validate_params({obj,bone,"bone_visibility"}) then return end
 
     -- Default values
     visibility = this.value_or_default(visibility, true)
-    silent = this.value_or_default(silent, true)
 
-    -- Validation
-    is_hud = this.validate_is_hud(is_hud)
+    obj:set_bone_visible(bone, visibility, false, false)
+end
 
-    obj:set_bone_visible(bone, visibility, silent)
+function bone_hud_visibility(obj, hud_bone, bone, visibility)
+    if not validate_params({obj,hud_bone,bone,"bone_hud_visibility"}) then return end
+
+    -- Default values
+    visibility = this.value_or_default(visibility, true)
+
+    -- Cant find hud bone in TPS, use default bone
+    if level.get_active_cam() ~= 0 then
+        printf("~[WG] WARNING | Utils | Trying to set HUD bone '%s' visibility in third person ! Fallback to '%s'", hud_bone, bone)
+        return this.bone_visibility(obj, bone, visibility)
+    end
+
+    obj:set_bone_visible(hud_bone, visibility, false, true)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -738,22 +756,6 @@ function validate_params(params)
         index = index + 1
     end
     return true
-end
-
---- Function used to make sure is_hud is valid.
---- is_hud is an argument often passed to engine functions regarding bones.
---- If is_hud is passed wrongfully (checking is_hud = true in 3rd person for example), issues can occur.
---- @param is_hud boolean
---- @return boolean
-function validate_is_hud(is_hud)
-    if not validate_params({is_hud,"validate_is_hud"}) then return end
-
-    -- is_hud cannot be true if we are not in 1st person
-    if is_hud and level.get_active_cam() ~= 0 then
-        return false
-    end
-
-    return is_hud
 end
 
 --- Function used to check if an object is a type of PDA device.

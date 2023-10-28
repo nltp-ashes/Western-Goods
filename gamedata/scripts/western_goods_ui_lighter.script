@@ -72,33 +72,50 @@ function UILighter:Update()
 
     CUIScriptWnd.Update(self)
 
+    local obj = db.actor:active_detector()
+    if not obj then return false end
+
     -- Don't update if check fails
-    if not self:Check() then
-        self.m_light.enabled = false
+    if not self:Check(obj) then
+        self:SetLightStatus(obj, false)
+        return
+    end
+
+    if not self:CheckFuel(obj) then
+        self:SetLightStatus(obj, false)
         return
     end
 
     -- Update
-    self:UpdateLight(db.actor:active_detector())
+    self:UpdateLight(obj)
 end
 
-function UILighter:Check()
-    local obj = db.actor:active_detector()
-    if not obj then return false end
-
+function UILighter:Check(obj)
     local state = obj:get_state()
     if state ~= 0 then return false end
 
     return western_goods_utils.table_contains(self.m_valid_sections, obj:section())
 end
 
+function UILighter:CheckFuel(obj)
+    local fuel = western_goods_utils.value_or_default(obj:condition(), 0)
+    local fuel_critical = western_goods_utils.value_or_default(ini_sys:r_float_ex(obj:section(), "power_critical"), 0.01)
+
+    return fuel > fuel_critical
+end
+
 function UILighter:UpdateLight(obj)
-    self.m_light.enabled = true
+    self:SetLightStatus(obj, true)
     self.m_light:set_position(self:GetLightBonePosition(obj))
     self.m_light:update()
 end
 
 function UILighter:GetLightBonePosition(obj)
-    local pos = western_goods_utils.get_bone_position(obj, "lid", true)
+    local pos = western_goods_utils.bone_hud_position(obj, "lid", "bone01")
     return pos or db.actor:position()
+end
+
+function UILighter:SetLightStatus(obj, status)
+    self.m_light.enabled = status
+    western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
 end
