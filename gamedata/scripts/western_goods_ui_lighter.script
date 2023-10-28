@@ -62,6 +62,9 @@ function UILighter:__init() super()
     self.m_update_rate = 1000
     self.m_update_timer = 0
     self.m_valid_sections = { "wg_lighter_bic" }
+
+    -- Callbacks
+    RegisterScriptCallback("actor_item_to_slot", self)
 end
 
 function UILighter:__finalize()
@@ -72,15 +75,20 @@ function UILighter:Update()
 
     CUIScriptWnd.Update(self)
 
+    -- Turn off if nothing is drawn
     local obj = db.actor:active_detector()
-    if not obj then return false end
+    if not obj then
+        self.m_light.enabled = false
+        return
+    end
 
-    -- Don't update if check fails
+    -- Turn off on wrong devices / device state
     if not self:Check(obj) then
         self:SetLightStatus(obj, false)
         return
     end
 
+    -- Turn off when out of fuel / consume fuel
     if not self:CheckFuel(obj) then
         self:SetLightStatus(obj, false)
         return
@@ -130,4 +138,8 @@ end
 function UILighter:SetLightStatus(obj, status)
     self.m_light.enabled = status
     western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
+end
+
+function UILighter:actor_item_to_slot(obj)
+    self:Update()
 end
