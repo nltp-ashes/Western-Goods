@@ -98,7 +98,7 @@ end
 function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
 
     -- Danylo's pendrive
-    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.is_pda(dropped_on_item) then
+    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.validate_is_pda(dropped_on_item) then
         if slot_from == EDDListType.iActorBag and slot_to == EDDListType.iActorSlot then
             this.use_danylo_pendrive(dragged_item)
         end
