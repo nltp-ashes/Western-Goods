@@ -15,6 +15,7 @@
 >    - Fixed normals on most models;
 >    - Fixed a benign typo in rangefinder animations;
 >    - Fixed rangefinder hud model being abnormally small;
+>    - Fixed small issues in Russian translation (Thanks VodoXleb);
 >    - Fixed small lag caused by repeated calls made to western_goods_utils.get_character_id(game_object) (Thanks Sark).
 > ```
 
