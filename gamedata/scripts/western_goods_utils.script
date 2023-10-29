@@ -723,7 +723,7 @@ end
 --- @param visibility boolean
 --- @return nil
 function bone_visibility(obj, bone, visibility)
-    if not validate_params({obj,bone,visibility,"bone_visibility"}) then return end
+    if not validate_params({obj,bone,"bone_visibility"}) then return end
 
     if visibility == nil then
         return obj:bone_visible(bone, false)
@@ -741,7 +741,7 @@ end
 --- @param visibility boolean
 --- @return nil
 function bone_hud_visibility(obj, hud_bone, bone, visibility)
-    if not validate_params({obj,hud_bone,bone,visibility,"bone_hud_visibility"}) then return end
+    if not validate_params({obj,hud_bone,bone,"bone_hud_visibility"}) then return end
 
     -- Cant find hud bone in TPS, use default bone
     if level.get_active_cam() ~= 0 then
