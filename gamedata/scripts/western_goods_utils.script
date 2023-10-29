@@ -686,6 +686,7 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the position of a bone by its name.
+--- This function should be used in case the bone is from a world model.
 --- @author Thial
 --- @param obj game_object
 --- @param bone string
@@ -696,6 +697,12 @@ function bone_position(obj, bone)
     return obj:bone_position(obj:get_bone_id(bone, false), false)
 end
 
+--- Function used to get the position of a bone by its name.
+--- This function should be used in case the bone is from a hud model.
+--- @param obj game_object
+--- @param hud_bone string
+--- @param bone string
+--- @return vector
 function bone_hud_position(obj, hud_bone, bone)
     if not validate_params({obj,hud_bone,bone,"bone_hud_position"}) then return end
 
@@ -709,24 +716,32 @@ function bone_hud_position(obj, hud_bone, bone)
 end
 
 --- Function used to set the visibility a bone off a game object.
---- If no visibility argument is passed, the bone will be set to visible.
+--- This function can be used as a getter or as a setter.
+--- This function should be used in case the bone is from a world model.
 --- @param obj game_object
 --- @param bone string
+--- @param visibility boolean
 --- @return nil
 function bone_visibility(obj, bone, visibility)
-    if not validate_params({obj,bone,"bone_visibility"}) then return end
+    if not validate_params({obj,bone,visibility,"bone_visibility"}) then return end
 
-    -- Default values
-    if visibility == nil then visibility = true end
+    if visibility == nil then
+        return obj:bone_visible(bone, false)
+    end
 
-    obj:set_bone_visible(bone, visibility, false, false)
+    obj:set_bone_visible(bone, visibility, true, false)
 end
 
+--- Function used to set the visibility a bone off a game object.
+--- This function can be used as a getter or as a setter.
+--- This function should be used in case the bone is from a hud model.
+--- @param obj game_object
+--- @param hud_bone string
+--- @param bone string
+--- @param visibility boolean
+--- @return nil
 function bone_hud_visibility(obj, hud_bone, bone, visibility)
-    if not validate_params({obj,hud_bone,bone,"bone_hud_visibility"}) then return end
-
-    -- Default values
-    if visibility == nil then visibility = true end
+    if not validate_params({obj,hud_bone,bone,visibility,"bone_hud_visibility"}) then return end
 
     -- Cant find hud bone in TPS, use default bone
     if level.get_active_cam() ~= 0 then
@@ -734,7 +749,11 @@ function bone_hud_visibility(obj, hud_bone, bone, visibility)
         return this.bone_visibility(obj, bone, visibility)
     end
 
-    obj:set_bone_visible(hud_bone, visibility, false, true)
+    if visibility == nil then
+        return obj:bone_visible(hud_bone, true)
+    end
+
+    obj:set_bone_visible(hud_bone, visibility, true, true)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
