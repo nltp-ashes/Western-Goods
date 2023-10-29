@@ -717,7 +717,7 @@ function bone_visibility(obj, bone, visibility)
     if not validate_params({obj,bone,"bone_visibility"}) then return end
 
     -- Default values
-    visibility = this.value_or_default(visibility, true)
+    if visibility == nil then visibility = true end
 
     obj:set_bone_visible(bone, visibility, false, false)
 end
@@ -726,7 +726,7 @@ function bone_hud_visibility(obj, hud_bone, bone, visibility)
     if not validate_params({obj,hud_bone,bone,"bone_hud_visibility"}) then return end
 
     -- Default values
-    visibility = this.value_or_default(visibility, true)
+    if visibility == nil then visibility = true end
 
     -- Cant find hud bone in TPS, use default bone
     if level.get_active_cam() ~= 0 then
@@ -922,18 +922,4 @@ function get_section_price(section, count, default)
     local discount = factor * eco_factor
 
     return (cost * discount) * count
-end
-
---- Function used to return a default value if the passed value is nil.
---- @param value any
---- @param default any
---- @return any
-function value_or_default(value, default)
-    if not validate_params({default,"value_or_default"}) then return end
-
-    if value == nil then
-        return default
-    end
-
-    return value
 end
