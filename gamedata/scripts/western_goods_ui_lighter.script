@@ -30,9 +30,9 @@ function get_ui()
     return GUI
 end
 
-function use_campfire(actor,zone,p)
+function use_campfire()
     dbg_printf("[WG] UI Lighter | Use campfire - called from game_tutorials.xml")
-    this.get_ui():TurnCampfireOn(actor,zone,p)
+    this.get_ui():TurnCampfireOn()
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -146,7 +146,7 @@ function UILighter:SetLightStatus(obj, status)
     western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
 end
 
-function UILighter:TurnCampfireOn(actor,zone,p)
+function UILighter:TurnCampfireOn()
     -- Get held object (if any) and return if none
     local obj = db.actor:active_detector()
     if not obj then
@@ -154,7 +154,7 @@ function UILighter:TurnCampfireOn(actor,zone,p)
     end
 
     -- Return on invalid item in hands
-    if not western_goods_utils.table_contains(this.get_ui().m_valid_sections, obj:section()) then
+    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then
         dbg_printf("[WG] UI Lighter | Cannot use '%s' to light campfires", obj:section())
         return
     end
