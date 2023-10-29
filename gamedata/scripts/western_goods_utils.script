@@ -216,7 +216,7 @@ function give_info(info_name, who)
     if not validate_params({info_name,"give_info"}) then return end
 
     -- Default values
-    who = this.value_or_default(who, db.actor)
+    who = who or db.actor
 
     if not has_info(info_name,who) then
         who:give_info_portion(info_name)
@@ -233,7 +233,7 @@ function has_info(info_name, who)
     if not validate_params({info_name,"has_info"}) then return end
 
     -- Default values
-    who = this.value_or_default(who, db.actor)
+    who = who or db.actor
 
     return alife():has_info(who:id(), info_name)
 end
@@ -247,7 +247,7 @@ function rem_info(info_name, who)
     if not validate_params({info_name,"rem_info"}) then return end
 
     -- Default values
-    who = this.value_or_default(who, db.actor)
+    who = who or db.actor
 
     if has_info(info_name,who) then
         who:disable_info_portion(info_name)
@@ -517,7 +517,7 @@ function spawn_story_squad(sec, pos, smart)
     end
 
     -- Default value
-    pos = this.value_or_default(pos, smart.position)
+    pos = pos or smart.position
 
     -- Spawn squad on the appropriate smart terrain
     se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id, smart)
@@ -906,8 +906,8 @@ function get_section_price(section, count, default)
     if not validate_params({section,"get_section_price"}) then return end
 
     -- Default values
-    count = this.value_or_default(count, 1)
-    default = this.value_or_default(default, 0)
+    count = count or 1
+    default = default or 0
 
     local condlist = ini_trade and ini_trade:r_string_to_condlist("trader","discounts")
     local sect = condlist and xr_logic.pick_section_from_condlist(db.actor, nil, condlist)
