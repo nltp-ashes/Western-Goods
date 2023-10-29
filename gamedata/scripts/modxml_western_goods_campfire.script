@@ -1,0 +1,16 @@
+--- Original Author(s) : NLTP_ASHES
+--- Edited : N/A
+--- Date : 29/10/2023
+--- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+---
+--- Script using the DXML functionality to add a new action when interacting with a campfire.
+
+function on_xml_read()
+	RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
+		if xml_file_name == [[ui\game_tutorials.xml]] then
+			local xml_elem_on = xml_obj:query("tutorial_campfire_ignite > item")[1]
+			if not xml_elem_on then return end
+			xml_obj:insertFromXMLString([[<action id="use" finalize="1">western_goods_ui_lighter.use_campfire</action>]], xml_elem_on, #xml_elem_on.kids)
+		end
+	end)
+end

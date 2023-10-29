@@ -23,11 +23,16 @@ GUI					         = nil                              -- instance, don't touch
 --- Function used to get the UI singleton for the UILighter class.
 --- @return UILighter
 function get_ui()
-    if (not GUI) then
+    if not GUI then
         GUI = UILighter()
     end
 
     return GUI
+end
+
+function use_campfire(actor,zone,p)
+    dbg_printf("[WG] UI Lighter | Use campfire - called from game_tutorials.xml")
+    this.get_ui():TurnCampfireOn(actor,zone,p)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +70,6 @@ function UILighter:__init() super()
     self.m_valid_sections = { "wg_lighter_bic" }
 
     -- Callbacks
-    RegisterScriptCallback("actor_on_item_use", self)
     RegisterScriptCallback("actor_item_to_slot", self)
 end
 
@@ -116,18 +120,18 @@ function UILighter:Check(obj)
 end
 
 function UILighter:CheckFuel(obj)
-    local fuel = western_goods_utils.value_or_default(obj:condition(), 0)
-    local fuel_critical = western_goods_utils.value_or_default(ini_sys:r_float_ex(obj:section(), "fuel_critical"), 0.01)
+    local fuel_level = obj:condition() or 0
+    local fuel_critical = ini_sys:r_float_ex(obj:section(), "fuel_critical", 0.01)
 
-    return fuel > fuel_critical
+    return fuel_level > fuel_critical
 end
 
 function UILighter:DrainFuel(obj)
     if (time_global() < self.m_update_timer) then return end
     self.m_update_timer = time_global() + self.m_update_rate
 
-    local fuel_level = obj:condition()
-    local fuel_consumption = western_goods_utils.value_or_default(ini_sys:r_float_ex(obj:section(), "fuel_consumption"), 0.003)
+    local fuel_level = obj:condition() or 0
+    local fuel_consumption = ini_sys:r_float_ex(obj:section(), "fuel_consumption", 0.003)
 
     obj:set_condition(fuel_level - fuel_consumption)
 end
@@ -142,15 +146,67 @@ function UILighter:SetLightStatus(obj, status)
     western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
 end
 
-function UILighter:actor_on_item_use(obj, _, cf)
-    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then return end
+function UILighter:TurnCampfireOn(actor,zone,p)
+    -- Get held object (if any) and return if none
+    local obj = db.actor:active_detector()
+    if not obj then
+        return
+    end
+
+    -- Return on invalid item in hands
+    if not western_goods_utils.table_contains(this.get_ui().m_valid_sections, obj:section()) then
+        dbg_printf("[WG] UI Lighter | Cannot use '%s' to light campfires", obj:section())
+        return
+    end
 
     -- Hide inventory UI
-    if (get_hud()) then
+    if get_hud() then
         hide_hud_inventory()
     end
 
-    bind_campfire.campfire_go_on(obj, cf)
+    local fuel_level = obj:condition() or 0
+    local fuel_consumption_cf = ini_sys:r_float_ex(obj:section(), "fuel_consumption_cf", 0.05)
+
+    -- Check fuel level
+    if fuel_level < fuel_consumption_cf then
+        actor_menu.set_msg(1, western_goods_utils.get_translation("st_wg_not_enough_fuel"), 3)
+        dbg_printf("[WG] UI Lighter | Turn Campfire On - Not enough fuel : %s/%s", fuel_level, fuel_consumption_cf)
+        return
+    end
+
+    -- Get nearby campfire (or use campfire passed as argument)
+    local campfire = bind_campfire.get_nearby_campfire(4, true)
+    if not campfire then
+        printf("~[WG] WARNING | UI Lighter | Turn Campfire On - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
+        return
+    end
+
+    -- Return if campfire is already on
+    if (campfire:is_on()) then
+        dbg_printf("[WG] UI Lighter | Turn Campfire On - Campfire is already on")
+        return
+    end
+
+    -- We wuzz rain and shit
+    if bind_campfire.rain_pass() then
+        if (bind_campfire.k_rain < 1) then
+            bind_campfire.k_rain = bind_campfire.k_rain + 1
+            actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
+        end
+        actor_effects.play_item_fx("matches_script")
+        xr_sound.set_sound_play(AC_ID,"inv_matches")
+        campfire:turn_on()
+        dbg_printf("[WG] UI Lighter | Turn Campfire On - Successfully light campfire")
+    else
+        actor_effects.play_item_fx("matches_script")
+        actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
+        dbg_printf("[WG] UI Lighter | Turn Campfire On - Failed to light campfire because of rain")
+    end
+
+    -- Use fuel
+    dbg_printf("[WG] UI Lighter | Turn Campfire On - Lighter old fuel level '%s'", obj:condition())
+    obj:set_condition(clamp(fuel_level - fuel_consumption_cf, 0.01, 1))
+    dbg_printf("[WG] UI Lighter | Turn Campfire On - Lighter new fuel level '%s'", obj:condition())
 end
 
 function UILighter:actor_item_to_slot(obj)

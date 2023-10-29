@@ -108,6 +108,10 @@
 		<text>Требуется инструмент!</text>
 	</string>
 
+	<string id="st_wg_not_enough_fuel">
+		<text>Недостаточно топлива</text>
+	</string>
+
 	<!-- Строки для чемодана -->
 	<string id="st_wg_open">
 		<text>Открыть</text>

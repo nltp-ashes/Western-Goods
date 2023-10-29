@@ -104,9 +104,6 @@ inv_grid_height                                  = 1
 inv_grid_x                                       = 8
 inv_grid_y                                       = 1
 
-fuel_consumption                                 = 0.003             ; 55 in-game minutes
-fuel_critical                                    = 0.01              ; lighter dies at 1%
-
 snd_draw                                         = western_goods_tech\lighter_draw.ogg
 snd_holster                                      = western_goods_tech\lighter_holster.ogg
 
@@ -116,10 +113,9 @@ custom_ui_func                                   = western_goods_ui_lighter.get_
 custom_ui_bone                                   = cover
 
 ; custom properties
-use_fill                                         = true              ; used to display 'Fill:100%' in description
-can_light_weak                                   = true              ; used to know if it can light a cig
-can_light_strong                                 = true              ; used to know if it can light a campfire
-degradation_factor                               = 0.05              ; how many % will be consumed when used
+fuel_critical                                    = 0.01              ; lighter dies at 1%
+fuel_consumption                                 = 0.003             ; 55 in-game minutes
+fuel_consumption_cf                              = 0.05              ; 55 in-game minutes
 
 [wg_lighter_bic_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf

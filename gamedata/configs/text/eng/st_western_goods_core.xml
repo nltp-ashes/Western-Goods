@@ -106,6 +106,10 @@
 		<text>A tool is required!</text>
 	</string>
 
+	<string id="st_wg_not_enough_fuel">
+		<text>Not enough fuel</text>
+	</string>
+
 	<!-- Suitcase use strings -->
 	<string id="st_wg_open">
 		<text>Open</text>

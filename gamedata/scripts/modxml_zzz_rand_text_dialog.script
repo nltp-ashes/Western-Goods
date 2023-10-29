@@ -103,7 +103,7 @@ function collect_translations(st, is_translated)
 
 	if (#tr_t == 0) then
 		if (not string.find(st,"st_msg")) then
-			printf("! WARNING: collect_translations | strings of (%s) don't exist!", st)
+			printf("~[WG] WARNING | Random Text Tag | collect_translations - strings of (%s) don't exist!", st)
 		end
 		return false
 	end
