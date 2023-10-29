@@ -42,6 +42,7 @@ function UILighter:__init() super()
     self:Show(true)
     self:Enable(true)
 
+    -- Build UI
     self.m_xml = CScriptXmlInit()
     self.m_xml:ParseFile("ui_western_goods_lighter.xml")
     self.m_xml:InitWindow("lighter", 0, self)
@@ -64,6 +65,7 @@ function UILighter:__init() super()
     self.m_valid_sections = { "wg_lighter_bic" }
 
     -- Callbacks
+    RegisterScriptCallback("actor_on_item_use", self)
     RegisterScriptCallback("actor_item_to_slot", self)
 end
 
@@ -138,6 +140,17 @@ end
 function UILighter:SetLightStatus(obj, status)
     self.m_light.enabled = status
     western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
+end
+
+function UILighter:actor_on_item_use(obj, _, cf)
+    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then return end
+
+    -- Hide inventory UI
+    if (get_hud()) then
+        hide_hud_inventory()
+    end
+
+    bind_campfire.campfire_go_on(obj, cf)
 end
 
 function UILighter:actor_item_to_slot(obj)
