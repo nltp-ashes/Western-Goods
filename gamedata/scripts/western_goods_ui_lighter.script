@@ -30,9 +30,33 @@ function get_ui()
     return GUI
 end
 
+--- Function called from game_tutorials.xml used to light up campfires with a lighter.
+--- @return nil
 function use_campfire()
     dbg_printf("[WG] UI Lighter | Use campfire - called from game_tutorials.xml")
     this.get_ui():TurnCampfireOn()
+end
+
+--- Function called when the user uses a cigarette.
+--- @param obj game_object
+--- @param flags table
+--- @return nil
+function use_cigarette(obj,flags)
+    itms_manager_actor_on_item_before_use(obj,flags)
+    this.get_ui():actor_on_item_before_use(obj,flags)
+end
+
+--- Monkey-patch either :
+--- - FDDA's enhanced_animations.originalAOIBU
+--- - or Anomaly's itms_manager_actor_on_item_before_use
+if enhanced_animations then
+    dbg_printf("[WG] UI Lighter | Monkey-patching FDDA's enhanced_animations.originalAOIBU function...")
+    itms_manager_actor_on_item_before_use = enhanced_animations.originalAOIBU
+    enhanced_animations.originalAOIBU = use_cigarette
+else
+    dbg_printf("[WG] UI Lighter | Monkey-patching Anomaly's itms_manager.actor_on_item_before_use function...")
+    itms_manager_actor_on_item_before_use = itms_manager.actor_on_item_before_use
+    itms_manager.actor_on_item_before_use = use_cigarette
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -127,6 +151,7 @@ function UILighter:CheckFuel(obj)
 end
 
 function UILighter:DrainFuel(obj)
+    -- Throttle update
     if (time_global() < self.m_update_timer) then return end
     self.m_update_timer = time_global() + self.m_update_rate
 
@@ -165,12 +190,12 @@ function UILighter:TurnCampfireOn()
     end
 
     local fuel_level = obj:condition() or 0
-    local fuel_consumption_cf = ini_sys:r_float_ex(obj:section(), "fuel_consumption_cf", 0.05)
+    local fuel_consumption_use = ini_sys:r_float_ex(obj:section(), "fuel_consumption_use", 0.05)
 
     -- Check fuel level
-    if fuel_level < fuel_consumption_cf then
+    if fuel_level < fuel_consumption_use then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_wg_not_enough_fuel"), 3)
-        dbg_printf("[WG] UI Lighter | Turn Campfire On - Not enough fuel : %s/%s", fuel_level, fuel_consumption_cf)
+        dbg_printf("[WG] UI Lighter | Turn Campfire On - Not enough fuel : %s/%s", fuel_level, fuel_consumption_use)
         return
     end
 
@@ -205,10 +230,50 @@ function UILighter:TurnCampfireOn()
 
     -- Use fuel
     dbg_printf("[WG] UI Lighter | Turn Campfire On - Lighter old fuel level '%s'", obj:condition())
-    obj:set_condition(clamp(fuel_level - fuel_consumption_cf, 0.01, 1))
+    obj:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
     dbg_printf("[WG] UI Lighter | Turn Campfire On - Lighter new fuel level '%s'", obj:condition())
 end
 
 function UILighter:actor_item_to_slot(obj)
+    dbg_printf("[WG] UI Lighter | actor_item_to_slot - Switched slot to '%s'", obj and obj:section())
     self:Update()
+end
+
+function UILighter:actor_on_item_before_use(obj,flags)
+    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
+    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
+
+    -- Return if no tool is required, or if player already has a tool
+    if not require_tool or obj_tool then
+        dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Object requires no tool or player has necessary tool already")
+        return
+    end
+
+    -- Search for valid items in player inventory
+    local lighter = nil
+    western_goods_utils.inventory_iter(db.actor,function(owner, object)
+        if western_goods_utils.table_contains(self.m_valid_sections, object:section()) then
+            dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Found valid item")
+            lighter = object
+            return true
+        end
+    end)
+
+    -- Return if player doesn't have a lighter
+    if not lighter then
+        dbg_printf("[WG] UI Lighter | actor_on_item_before_use - No valid item found")
+        return
+    end
+
+    local fuel_level = lighter:condition() or 0
+    local fuel_consumption_use = ini_sys:r_float_ex(lighter:section(), "fuel_consumption_use", 0.05)
+
+    -- Use fuel
+    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter old fuel level '%s'", lighter:condition())
+    lighter:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
+    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter new fuel level '%s'", lighter:condition())
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+    flags.ret_value = true
 end
