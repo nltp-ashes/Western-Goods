@@ -216,11 +216,11 @@ function UILighter:UseCampfire()
     if bind_campfire.rain_pass() then
         if (bind_campfire.k_rain < 1) then
             bind_campfire.k_rain = bind_campfire.k_rain + 1
-            actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
         end
         actor_effects.play_item_fx("matches_script")
         xr_sound.set_sound_play(AC_ID,"inv_matches")
         campfire:turn_on()
+        actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
         dbg_printf("[WG] UI Lighter | Use Campfire - Successfully light campfire")
     else
         actor_effects.play_item_fx("matches_script")
