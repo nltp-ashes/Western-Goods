@@ -32,9 +32,9 @@ end
 
 --- Function called from game_tutorials.xml used to light up campfires with a lighter.
 --- @return nil
-function use_campfire()
-    dbg_printf("[WG] UI Lighter | Use campfire - called from game_tutorials.xml")
-    this.get_ui():TurnCampfireOn()
+function turn_campfire_on()
+    dbg_printf("[WG] UI Lighter | Turn Campfire On - called from game_tutorials.xml")
+    this.get_ui():UseCampfire()
 end
 
 --- Function called when the user uses a cigarette.
@@ -43,7 +43,7 @@ end
 --- @return nil
 function use_cigarette(obj,flags)
     itms_manager_actor_on_item_before_use(obj,flags)
-    this.get_ui():actor_on_item_before_use(obj,flags)
+    this.get_ui():UseCigarette(obj,flags)
 end
 
 --- Monkey-patch either :
@@ -171,7 +171,7 @@ function UILighter:SetLightStatus(obj, status)
     western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
 end
 
-function UILighter:TurnCampfireOn()
+function UILighter:UseCampfire()
     -- Get held object (if any) and return if none
     local obj = db.actor:active_detector()
     if not obj then
@@ -180,7 +180,7 @@ function UILighter:TurnCampfireOn()
 
     -- Return on invalid item in hands
     if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then
-        dbg_printf("[WG] UI Lighter | Cannot use '%s' to light campfires", obj:section())
+        dbg_printf("[WG] UI Lighter | Use Campfire - Cannot use '%s' to light campfires", obj:section())
         return
     end
 
@@ -195,20 +195,20 @@ function UILighter:TurnCampfireOn()
     -- Check fuel level
     if fuel_level < fuel_consumption_use then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_wg_not_enough_fuel"), 3)
-        dbg_printf("[WG] UI Lighter | Turn Campfire On - Not enough fuel : %s/%s", fuel_level, fuel_consumption_use)
+        dbg_printf("[WG] UI Lighter | Use Campfire - Not enough fuel : %s/%s", fuel_level, fuel_consumption_use)
         return
     end
 
     -- Get nearby campfire (or use campfire passed as argument)
     local campfire = bind_campfire.get_nearby_campfire(4, true)
     if not campfire then
-        printf("~[WG] WARNING | UI Lighter | Turn Campfire On - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
+        printf("~[WG] WARNING | UI Lighter | Use Campfire - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
         return
     end
 
     -- Return if campfire is already on
     if (campfire:is_on()) then
-        dbg_printf("[WG] UI Lighter | Turn Campfire On - Campfire is already on")
+        dbg_printf("[WG] UI Lighter | Use Campfire - Campfire is already on")
         return
     end
 
@@ -221,31 +221,26 @@ function UILighter:TurnCampfireOn()
         actor_effects.play_item_fx("matches_script")
         xr_sound.set_sound_play(AC_ID,"inv_matches")
         campfire:turn_on()
-        dbg_printf("[WG] UI Lighter | Turn Campfire On - Successfully light campfire")
+        dbg_printf("[WG] UI Lighter | Use Campfire - Successfully light campfire")
     else
         actor_effects.play_item_fx("matches_script")
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
-        dbg_printf("[WG] UI Lighter | Turn Campfire On - Failed to light campfire because of rain")
+        dbg_printf("[WG] UI Lighter | Use Campfire - Failed to light campfire because of rain")
     end
 
     -- Use fuel
-    dbg_printf("[WG] UI Lighter | Turn Campfire On - Lighter old fuel level '%s'", obj:condition())
+    dbg_printf("[WG] UI Lighter | Use Campfire - Lighter old fuel level '%s'", obj:condition())
     obj:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
-    dbg_printf("[WG] UI Lighter | Turn Campfire On - Lighter new fuel level '%s'", obj:condition())
+    dbg_printf("[WG] UI Lighter | Use Campfire - Lighter new fuel level '%s'", obj:condition())
 end
 
-function UILighter:actor_item_to_slot(obj)
-    dbg_printf("[WG] UI Lighter | actor_item_to_slot - Switched slot to '%s'", obj and obj:section())
-    self:Update()
-end
-
-function UILighter:actor_on_item_before_use(obj,flags)
+function UILighter:UseCigarette(obj,flags)
     local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
     local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
 
     -- Return if no tool is required, or if player already has a tool
     if not require_tool or obj_tool then
-        dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Object requires no tool or player has necessary tool already")
+        dbg_printf("[WG] UI Lighter | Use Cigarette - Object requires no tool or player has necessary tool already")
         return
     end
 
@@ -260,7 +255,7 @@ function UILighter:actor_on_item_before_use(obj,flags)
 
     -- Return if player doesn't have a lighter
     if not obj_tool then
-        dbg_printf("[WG] UI Lighter | actor_on_item_before_use - No valid item found")
+        dbg_printf("[WG] UI Lighter | Use Cigarette - No valid item found")
         return
     end
 
@@ -268,11 +263,16 @@ function UILighter:actor_on_item_before_use(obj,flags)
     local fuel_consumption_use = ini_sys:r_float_ex(obj_tool:section(), "fuel_consumption_use", 0.05)
 
     -- Use fuel
-    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter old fuel level '%s'", obj_tool:condition())
+    dbg_printf("[WG] UI Lighter | Use Cigarette - Lighter old fuel level '%s'", obj_tool:condition())
     obj_tool:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
-    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter new fuel level '%s'", obj_tool:condition())
+    dbg_printf("[WG] UI Lighter | Use Cigarette - Lighter new fuel level '%s'", obj_tool:condition())
 
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
     flags.ret_value = true
+end
+
+function UILighter:actor_item_to_slot(obj)
+    dbg_printf("[WG] UI Lighter | actor_item_to_slot - Switched slot to '%s'", obj and obj:section())
+    self:Update()
 end

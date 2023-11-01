@@ -10,7 +10,7 @@ function on_xml_read()
 		if xml_file_name == [[ui\game_tutorials.xml]] then
 			local xml_elem_on = xml_obj:query("tutorial_campfire_ignite > item")[1]
 			if not xml_elem_on then return end
-			xml_obj:insertFromXMLString([[<action id="use" finalize="1">western_goods_ui_lighter.use_campfire</action>]], xml_elem_on, #xml_elem_on.kids)
+			xml_obj:insertFromXMLString([[<action id="use" finalize="1">western_goods_ui_lighter.turn_campfire_on</action>]], xml_elem_on, #xml_elem_on.kids)
 		end
 	end)
 end
