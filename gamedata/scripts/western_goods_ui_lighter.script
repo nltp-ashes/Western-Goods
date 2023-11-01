@@ -250,28 +250,27 @@ function UILighter:actor_on_item_before_use(obj,flags)
     end
 
     -- Search for valid items in player inventory
-    local lighter = nil
     western_goods_utils.inventory_iter(db.actor,function(owner, object)
         if western_goods_utils.table_contains(self.m_valid_sections, object:section()) then
             dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Found valid item")
-            lighter = object
+            obj_tool = object
             return true
         end
     end)
 
     -- Return if player doesn't have a lighter
-    if not lighter then
+    if not obj_tool then
         dbg_printf("[WG] UI Lighter | actor_on_item_before_use - No valid item found")
         return
     end
 
-    local fuel_level = lighter:condition() or 0
-    local fuel_consumption_use = ini_sys:r_float_ex(lighter:section(), "fuel_consumption_use", 0.05)
+    local fuel_level = obj_tool:condition() or 0
+    local fuel_consumption_use = ini_sys:r_float_ex(obj_tool:section(), "fuel_consumption_use", 0.05)
 
     -- Use fuel
-    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter old fuel level '%s'", lighter:condition())
-    lighter:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
-    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter new fuel level '%s'", lighter:condition())
+    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter old fuel level '%s'", obj_tool:condition())
+    obj_tool:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
+    dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Lighter new fuel level '%s'", obj_tool:condition())
 
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
