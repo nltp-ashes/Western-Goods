@@ -22,18 +22,28 @@
 
 function on_xml_read()
 	RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-		if not string.find(xml_file_name, [[gameplay\]]) then return end
+		-- Only execute on gamedata\configs\gameplay\*.xml
+		if not string.find(xml_file_name, [[gameplay\]]) then
+			return
+		end
 
+		-- Query the file to get the node(s) to modify
 		local query_res = xml_obj:query("rand_text")
 
-		if not query_res then return end
+		-- Return if no results were found
+		if is_empty(query_res) then
+			return
+		end
 
+		-- Replace rand_text with script_text
 		for _,elem in pairs(query_res) do
 			local value = xml_obj:getText(elem)
 			local phrase_elem = elem.parent
 
+			local new_value = [[<script_text>modxml_zzz_rand_text_dialog.]]..value..[[</script_text>]]
+
 			xml_obj:removeElement(elem)
-			xml_obj:insertFromXMLString([[<script_text>modxml_zzz_rand_text_dialog.]]..value..[[</script_text>]], phrase_elem, #phrase_elem.kids)
+			xml_obj:insertFromXMLString(new_value, phrase_elem, #phrase_elem.kids)
 
 			this[value] = function()
 				local translations = this.collect_translations(value, true)
