@@ -7,18 +7,46 @@
 
 function on_xml_read()
 	RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-		if xml_file_name == [[ui\ui_barter.xml]] then
-			local query_1_res = xml_obj:query("background > texture")
-			if query_1_res[1] then
-				el = query_1_res[1]
-				xml_obj:setText(el, "ui\\barter\\ui_barter_background.dds")
-			end
-
-			local query_2_res = xml_obj:query("barter > background")
-			if query_2_res[1] then
-				el = query_2_res[1]
-				xml_obj:setElementAttr(el, {x=-228, y=-47, width=1024, height=768})
-			end
+		-- Only execute on gamedata\configs\ui\ui_barter.xml
+		if xml_file_name ~= [[ui\ui_barter.xml]] then
+			return
 		end
+
+		modify_background_texture(xml_obj)
+		modify_background_size(xml_obj)
 	end)
+end
+
+function modify_background_texture(xml_obj)
+	-- Query the file to get the node(s) to modify
+	local query_res = xml_obj:query("background > texture")
+
+	-- Expect one, and only one match
+	if size_table(query_res) ~= 1 then
+		printf("~[WG] WARNING | DXML | Aborting. Invalid number of results, got %s, expected %s.", size_table(query_res), 1)
+		return
+	end
+
+	-- Get the resulting element
+	local elem = query_res[1]
+
+	-- Change node text content
+	xml_obj:setText(elem, "ui\\barter\\ui_barter_background.dds")
+end
+
+function modify_background_size(xml_obj)
+	-- Query the file to get the node(s) to modify
+	local query_res = xml_obj:query("barter > background")
+
+	-- Expect one, and only one match
+	if size_table(query_res) ~= 1 then
+		printf("~[WG] WARNING | DXML | Aborting. Invalid number of results, got %s, expected %s.", size_table(query_res), 1)
+		return
+	end
+
+	-- Get the resulting element
+	local elem = query_res[1]
+
+	-- Change node attributes
+	xml_obj:setElementAttr(elem, {x=-228, y=-47, width=1024, height=768})
 end
