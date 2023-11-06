@@ -91,6 +91,9 @@ function UILighter:__init() super()
     -- Build variables
     self.m_update_rate = 1000
     self.m_update_timer = 0
+    self.m_snd_use_cf = sound_object("gestures\\gesture_sound")
+    self.m_amn_use_cf = "anm_rally"
+    self.m_amn_hud_use_cf = "point_rally"
     self.m_valid_sections = { "wg_lighter_bic" }
 
     -- Callbacks
@@ -220,6 +223,7 @@ function UILighter:UseCampfire()
         actor_effects.play_item_fx("matches_script")
         xr_sound.set_sound_play(AC_ID,"inv_matches")
         campfire:turn_on()
+        self:CampfireAnimation()
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
         dbg_printf("[WG] UI Lighter | Use Campfire - Successfully light campfire")
     else
@@ -232,6 +236,12 @@ function UILighter:UseCampfire()
     dbg_printf("[WG] UI Lighter | Use Campfire - Lighter old fuel level '%s'", obj:condition())
     obj:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
     dbg_printf("[WG] UI Lighter | Use Campfire - Lighter new fuel level '%s'", obj:condition())
+end
+
+function UILighter:CampfireAnimation()
+    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+    game.play_hud_motion(1, self.m_amn_hud_use_cf, self.m_amn_use_cf, true, 1.0)
+    dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s with cam anim %s", self.m_amn_hud_use_cf, self.m_amn_use_cf)
 end
 
 function UILighter:UseCigarette(obj,flags)
