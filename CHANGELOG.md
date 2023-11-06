@@ -10,6 +10,7 @@
 >    - Added camera animations when using consumables (similar to vanilla Anomaly) (Thanks Rambito).
 > • Changes :
 >    - Cleaned-up and improved various UI code;
+>    - Cleaned-up and improved safety in DXML scripts;
 >    - Reanimated the GPS Locator (Thanks TheParaziT);
 > • Bug fixes :
 >    - Fixed normals on most models;
