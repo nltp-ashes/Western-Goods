@@ -106,6 +106,7 @@
 
         <start_dialog>stalker_crew_member_start</start_dialog>
 
+        <actor_dialog>stalker_crew_member_barter</actor_dialog>
         <actor_dialog>stalker_crew_member_rescue</actor_dialog>
         <actor_dialog>stalker_crew_member_reward</actor_dialog>
         <actor_dialog>actor_break_dialog</actor_dialog>

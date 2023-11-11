@@ -125,6 +125,19 @@ function ashes_can_show_trade(actor,npc,flags)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Crew Member functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+if western_goods_core.is_barter_ui_installed() then
+    --- Function used to initiate the Barter UI.
+    --- @return nil
+    function crew_member_barter()
+        utils_obj.play_sound("interface\\inv_open")
+        barter_ui.start()
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
 
