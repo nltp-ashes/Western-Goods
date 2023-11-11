@@ -295,7 +295,7 @@
         <text>Hey friend, I'm happy to see you!</text>
     </string>
 
-    <!-- Dialogs strings -->
+    <!-- Dialogs rescue strings -->
     <string id="stalker_crew_member_rescue_0">
         <text>Hey, you're still with us? Get hold of yourself, and come with me, fast!</text>
     </string>
@@ -316,6 +316,7 @@
         <text>Come on! We don't have a lot of time before the Monolith squads nearby will call for reinforcements. Come!</text>
     </string>
 
+    <!-- Dialogs reward strings -->
     <string id="stalker_crew_member_reward_0">
         <text>Hey, Heades said you wanted to see me?</text>
     </string>
@@ -336,8 +337,34 @@
         <text>Thank you.</text>
     </string>
 
+    <!-- Dialogs barter strings -->
     <string id="st_stalker_crew_member_barter">
         <text>I'd like to exchange some stuff. %c[d_orange][Exchange]</text>
+    </string>
+
+    <!-- Lore strings -->
+    <string id="st_stalker_crew_member_lore_init">
+        <text>I'd like to ask you a few questions.</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_ask">
+        <text>Alright, what do you want to ask?</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_question_1">
+        <text>Why are you looking for flight recorders?</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_answer_1">
+        <text>Well, they frequently contain information about the Army's or the Monolith's operations in the Zone. It is useful for us to plan safe routes to fly with our own helicopters.</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_question_2">
+        <text>Why do you think the Monolith squad kept you alive?</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_answer_2">
+        <text>They probably wanted to turn me into one of their own to fly their helicopters. I'm lucky you got me out of there...</text>
     </string>
 
     <!--=============================================================================================================-->
@@ -1305,7 +1332,7 @@
     </string>
 
     <string id="st_wg_trader_act_1_task_3_stage_1_message_10">
-        <text>Sorry I'm still a bit confused. Anyway, I'm probably still alive because those Monolithians wanted me to fly one of their own helicopters.</text>
+        <text>Sorry I'm still a bit confused.</text>
     </string>
 
     <string id="st_wg_trader_act_1_task_3_stage_3_message_1">
