@@ -1,4 +1,47 @@
 ;;--============================================================================--;;
+;;--================| Black Boxes |=============================================--;;
+;;--============================================================================--;;
+
+[wg_barter_blackbox_to_eur]
+trader          = stalker_western_goods_trader
+give            = wg_euros_100:3
+take            = blackbox_mlr:1
+type            = allOf
+has_info        = western_goods_act_1_finished
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 1
+desc            = st_wg_barter_blackbox_to_eur_desc
+desc_done       = st_wg_barter_blackbox_to_eur_desc_done
+
+[wg_barter_blackbox_to_rpg7]
+trader          = stalker_western_goods_trader
+give            = wpn_rpg7:1
+take            = blackbox_mlr:1
+type            = allOf
+has_info        = western_goods_act_1_finished
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = fixed
+limit           = 1
+desc            = st_wg_barter_blackbox_to_rpg7_desc
+desc_done       = st_wg_barter_blackbox_to_rpg7_desc_done
+
+[wg_barter_blackbox_to_og7v]
+trader          = stalker_western_goods_trader
+give            = ammo_og-7b:3
+take            = blackbox_mlr:1
+type            = allOf
+has_info        = western_goods_act_1_finished
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 3
+desc            = st_wg_barter_blackbox_to_og7v_desc
+desc_done       = st_wg_barter_blackbox_to_og7v_desc_done
+
+;;--============================================================================--;;
 ;;--================| Money Transfers - Dollars to Dollars |====================--;;
 ;;--============================================================================--;;
 
@@ -25,7 +68,6 @@ repeat          = restock
 limit           = 10
 desc            = st_wg_barter_dollars_100_to_10_desc
 desc_done       = st_wg_barter_money_desc_done
-
 
 [wg_barter_dollars_10_to_50]
 trader          = stalker_western_goods_trader 
