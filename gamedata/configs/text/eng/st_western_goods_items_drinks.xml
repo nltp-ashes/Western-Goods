@@ -10,6 +10,7 @@
 <!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
+
     <string id="st_wg_cola_bottle">
         <text>Coca-Cola bottle</text>
     </string>
@@ -401,4 +402,5 @@
             %c[d_green] • %c[ui_gray_2] clean nutrition source\n
         </text>
     </string>
+
 </string_table>
