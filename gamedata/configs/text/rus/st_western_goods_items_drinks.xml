@@ -1,406 +1,404 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
-<!--	Изменено : N/A																							     -->
-<!--	Дата создания : 17/03/2023																						     -->
-<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	Translation file for Western Goods' drinks items.											     -->
-<!--	Файл локализации для напитков Western Goods.											     -->
-<!--    Переводчик:VodoXleb                                                                                                             -->
-<!--																											     -->
-<!-- ================================================================================================================-->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : VodoXleb (Translation)                                                                              -->
+<!--    Date : 11/11/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' drinks items.                                                            -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
 <string_table>
-	<string id="st_wg_cola_bottle">
-		<text>Бутылка Кока-Колы</text>
-	</string>
-	
-	<string id="st_wg_cola_bottle_s">
-		<text>Бутылка Колы</text>
-	</string>
-	
-	<string id="st_wg_cola_bottle_descr">
-		<text>
-			Кока-Кола, известная также как Кола, - газированный безалкогольный. Изначально считался успокаивающим напитком, и был запатентован как лекарство. Некоторые торговцы в Зоне иногда завозят несколько бутылок. В то время, как многие сталкеры ценят её как напиток, колу можно использовать для ликвидации ржавчины на старом оружии.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-			%c[d_cyan] • %c[ui_gray_2] ценный\n
-		</text>
-	</string>
-	
-	<string id="st_wg_gorbatschow_bottle">
-		<text>Бутылка водки "Горбачёв"</text>
-	</string>
-	
-	<string id="st_wg_gorbatschow_bottle_s">
-		<text>Водка "Горбачёв"</text>
-	</string>
-	
-	<string id="st_wg_gorbatschow_bottle_descr">
-		<text>
-			Водка "Горбачёв" - один из самых известных брендов данной категории, производимый и разливаемый в Германии. Ценится за хороший вкус при относительно низкой цене.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_blue] • %c[ui_gray_2] стимулятор\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-			%c[d_red] • %c[ui_gray_2] крепкий алгоколь\n
-		</text>
-	</string>
-	
-	<string id="st_wg_wine_chateau_latour">
-		<text>Гранд Вин де Шато Латур</text>
-	</string>
-	
-	<string id="st_wg_wine_chateau_latour_s">
-		<text>Вино Шато Латур</text>
-	</string>
-	
-	<string id="st_wg_wine_chateau_latour_descr">
-		<text>
-			Шато Латур - один из старейших действующих производителей вина в Бордо. Этот экземпляр является главным вином данного хозяйства. Вино относится к категории "Первых Гранд Крю". Вино состоит на 80% из винограда сорта Каберне-Совиньон, на 18% из Мерло и на 2% из Каберне-Фран и Пти вердо. Бутылки этого вину довольно дороги, довольно странно увидеть такую в Зоне.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_blue] • %c[ui_gray_2] стимулятор\n
-			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-			%c[d_red] • %c[ui_gray_2] крепкий алгоколь\n
-		</text>
-	</string>
-	
-	<string id="st_wg_yoohoo_bottle">
-		<text>Шоколадный напиток Yoo-hoo</text>
-	</string>
-	
-	<string id="st_wg_yoohoo_bottle_s">
-		<text>Шоколадный напиток Yoo-hoo</text>
-	</string>
-	
-	<string id="st_wg_yoohoo_bottle_descr">
-		<text>
-			Изобретённый в 1920-х Натали Олайвери, Yoo-hoo - холодных напиток со вкусом шоколада. Он на 99% без жиров и на 100% без кофеина, а также богат кальцием и витамином D.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
-	
-	<string id="st_wg_mountain_dew_bottle">
-		<text>Бутылка Mountain Dew</text>
-	</string>
-	
-	<string id="st_wg_mountain_dew_bottle_s">
-		<text>Бутылка Mountain Dew</text>
-	</string>
-	
-	<string id="st_wg_mountain_dew_bottle_descr">
-		<text>
-			Mountain Dew,известный как Маунтин Дью - богатая кофеином сильногазированная содовая со вкусом цитрусовых, производимая PepsiCo Group. Это безалкогольный напиток со вкусом цитрусовых, изначально называвшийся энергетическим, но со временем стал больше похож на содовую.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
-	
-	<string id="st_wg_nestea_icetea_bottle">
-		<text>Бутылка холодного чая Nestea</text>
-	</string>
-	
-	<string id="st_wg_nestea_icetea_bottle_s">
-		<text>Бутылка чая Nestea</text>
-	</string>
-	
-	<string id="st_wg_nestea_icetea_bottle_descr">
-		<text>
-			Nestea - освежающий негазированный чайный напиток со вкусом лемона. Лучше всего на вкус пить холодным, несмотря на то что в Зоне этого достичь сложно. Идеален в жаркие летние дни.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
-	
-	<string id="st_wg_cola_can">
-		<text>Банка Кока-Колы</text>
-	</string>
-	
-	<string id="st_wg_cola_can_s">
-		<text>Банка колы</text>
-	</string>
-	
-	<string id="st_wg_cola_can_descr">
-		<text>
-			Кока-Кола, известная также как Кола, - газированный безалкогольный. Изначально считался успокаивающим напитком, и был запатентован как лекарство. Некоторые торговцы в Зоне иногда завозят несколько бутылок. В то время, как многие сталкеры ценят её как напиток, колу можно использовать для ликвидации ржавчины на старом оружии.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-			%c[d_cyan] • %c[ui_gray_2] ценная вещь\n
-		</text>
-	</string>
-	
-	<string id="st_wg_sprite_can">
-		<text>Банка "Спрайта"</text>
-	</string>
-	
-	<string id="st_wg_sprite_can_s">
-		<text>Банка "Спрайта"</text>
-	</string>
-	
-	<string id="st_wg_sprite_can_descr">
-		<text>
-			Спрайт - безалкогольный напиток, сделаный из лимона и экстрактов лайма. На вкус как лимонад.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
-	
-	<string id="st_wg_redbull_can">
-		<text>Банка RedBull</text>
-	</string>
-	
-	<string id="st_wg_redbull_can_s">
-		<text>Банка RedBull</text>
-	</string>
-	
-	<string id="st_wg_redbull_can_descr">
-		<text>
-			Red Bull - энергетический напиток для снятия психологической и физической усталости или истощения. Red Bull совмещает две натуральные субстанции и важные метаболиты - аминокислоты таурин и глюкоронолактон - со стимулирующим кофеином, витаминами и энергией углеводов.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_blue] • %c[ui_gray_2] стимулятор\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_cola_bottle">
+        <text>Бутылка Кока-Колы</text>
+    </string>
 
-	<string id="st_wg_fanta_can">
-		<text>Банка "Фанты"</text>
-	</string>
-	
-	<string id="st_wg_fanta_can_s">
-		<text>Банка "Фанты"</text>
-	</string>
-	
-	<string id="st_wg_fanta_can_descr">
-		<text>
-			Яркая, пузырящаяся и популярная, Фанта - безалкогольный напиток, впервые появившийся в 1940. Фанта - второй по старости бренд компании Coca-Cola.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_cola_bottle_s">
+        <text>Бутылка Колы</text>
+    </string>
 
-	<string id="st_wg_pepsi_can">
-		<text>Банка Пепси</text>
-	</string>
-	
-	<string id="st_wg_pepsi_can_s">
-		<text>Банка Пепси</text>
-	</string>
-	
-	<string id="st_wg_pepsi_can_descr">
-		<text>
-			Пепси - газированный безалкогольный напиток, производимый PepsiCo. Является главным конкурентом Кока-Колы. Часто описывается как мягкий и сладкий, со средним вкусом колы и меньшим количеством пузырей.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_cola_bottle_descr">
+        <text>
+            Кока-Кола, известная также как Кола, газированный безалкогольный. Изначально считался успокаивающим напитком, и был запатентован как лекарство. Некоторые торговцы в Зоне иногда завозят несколько бутылок. В то время, как многие сталкеры ценят её как напиток, колу можно использовать для ликвидации ржавчины на старом оружии.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+            %c[d_cyan] • %c[ui_gray_2] ценный\n
+        </text>
+    </string>
 
-	<string id="st_wg_mountain_dew_can">
-		<text>Банка Mountain Dew</text>
-	</string>
-	
-	<string id="st_wg_mountain_dew_can_s">
-		<text>Банка Mountain Dew</text>
-	</string>
-	
-	<string id="st_wg_mountain_dew_can_descr">
-		<text>
-			Mountain Dew,известный как Маунтин Дью - богатая кофеином сильногазированная содовая со вкусом цитрусовых, производимая PepsiCo Group. Это безалкогольный напиток со вкусом цитрусовых, изначально называвшийся энергетическим, но со временем стал больше похож на содовую.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_gorbatschow_bottle">
+        <text>Бутылка водки "Горбачёв"</text>
+    </string>
 
-	<string id="st_wg_perrier_can">
-		<text>Банка Perrier</text>
-	</string>
-	
-	<string id="st_wg_perrier_can_s">
-		<text>Банка Perrier</text>
-	</string>
-	
-	<string id="st_wg_perrier_can_descr">
-		<text>
-			Perrier - газированная минеральная вода без сахара и калорий. Источник, из которого берут воду для этого напитка естественно газирован, но вода и углекислый газ для напитка берутся независимо. Вода затем очищается, и вовремя разлива углекислый газ добавляется так, чтобы его уровень соответствовал первичному.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_gorbatschow_bottle_s">
+        <text>Водка "Горбачёв"</text>
+    </string>
 
-	<string id="st_wg_rockstar_energy_can">
-		<text>Банка Rockstar Energy</text>
-	</string>
-	
-	<string id="st_wg_rockstar_energy_can_s">
-		<text>Банка Rockstar Energy</text>
-	</string>
-	
-	<string id="st_wg_rockstar_energy_can_descr">
-		<text>
-			Rockstar Energy Drink Original содержит 160 мг кафеина на 16 унций, являющихся размером одной банки. Кроме кофеина и сахара, Rockstar Energy Drink содержит разные травы.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_blue] • %c[ui_gray_2] стимулятор\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_gorbatschow_bottle_descr">
+        <text>
+            Водка "Горбачёв" - один из самых известных брендов данной категории, производимый и разливаемый в Германии. Ценится за хороший вкус при относительно низкой цене.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_blue] • %c[ui_gray_2] стимулятор\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+            %c[d_red] • %c[ui_gray_2] крепкий алгоколь\n
+        </text>
+    </string>
 
-	<string id="st_wg_monster_energy_can">
-		<text>Банка Monster Energy</text>
-	</string>
-	
-	<string id="st_wg_monster_energy_can_s">
-		<text>Банка Monster Energy</text>
-	</string>
-	
-	<string id="st_wg_monster_energy_can_descr">
-		<text>
-			Газированный энергетик с таурином, женьшенем, L-карнитином, кофеином, витаминами группы B, сахаром и подсластителями. Это один из популярнейших энергетиков в мире. Однако, некоторые не любят его за химический вкус.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_blue] • %c[ui_gray_2] стимулятор\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
-	
-	<string id="st_wg_beer_86_can">
-		<text>Банка светлого вина Бавария 86</text>
-	</string>
-	
-	<string id="st_wg_beer_86_can_s">
-		<text>Банка Баварии 86</text>
-	</string>
-	
-	<string id="st_wg_beer_86_can_descr">
-		<text>
-			Бавария 8.6 - специальное светлое вино со своим уникальным характером. Сильное и крепкое пиво с золотым привкусом, приятно-сладкое и вяжущее в послевкусии.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_blue] • %c[ui_gray_2] стимулятор\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-			%c[d_orange] • %c[ui_gray_2] слабый алкоголь\n
-		</text>
-	</string>
+    <string id="st_wg_wine_chateau_latour">
+        <text>Гранд Вин де Шато Латур</text>
+    </string>
 
-	<string id="st_wg_sevenup_can">
-		<text>Банка Seven-UP</text>
-	</string>
-	
-	<string id="st_wg_sevenup_can_s">
-		<text>Банка 7UP</text>
-	</string>
-	
-	<string id="st_wg_sevenup_can_descr">
-		<text>
-			Seven-UP (также известный, как 7UP) - газированный безалкогольный напиток со вкусом лемона-лайма. Это главный конкурент "Спрайта". Вкуснее всего пить холодным.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_wine_chateau_latour_s">
+        <text>Вино Шато Латур</text>
+    </string>
 
-	<string id="st_wg_dr_bob_can">
-		<text>Банка Dr. Bob</text>
-	</string>
-	
-	<string id="st_wg_dr_bob_can_s">
-		<text>Банк Dr. Bob</text>
-	</string>
-	
-	<string id="st_wg_dr_bob_can_descr">
-		<text>
-			Dr. Bob - газированный безалкогольный напиток, часто называемый копией Dr. Pepper. Хотя напиток пытается изобразить тот вкус, он отличается от Dr. Pepper. Вкус более острый и сухой.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_wine_chateau_latour_descr">
+        <text>
+            Шато Латур - один из старейших действующих производителей вина в Бордо. Этот экземпляр является главным вином данного хозяйства. Вино относится к категории "Первых Гранд Крю". Вино состоит на 80% из винограда сорта Каберне-Совиньон, на 18% из Мерло и на 2% из Каберне-Фран и Пти вердо. Бутылки этого вину довольно дороги, довольно странно увидеть такую в Зоне.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_blue] • %c[ui_gray_2] стимулятор\n
+            %c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+            %c[d_red] • %c[ui_gray_2] крепкий алгоколь\n
+        </text>
+    </string>
 
-	<string id="st_wg_lipton_icetea_can">
-		<text>Банка холодного чая Lipton</text>
-	</string>
-	
-	<string id="st_wg_lipton_icetea_can_s">
-		<text>Банка чая Lipton</text>
-	</string>
-	
-	<string id="st_wg_lipton_icetea_can_descr">
-		<text>
-			Lipton - негазированный безалкогольный напиток, с экстрактом чая и персиковым соком, смешанным с сахаром и подсластителями. Содержит мало калорий и не содержит консервантов, что делает его довольно здоровым напитком.\n
-			\n
-			%c[ui_gray_1]СВОЙСТВА:\n
-			%c[d_blue] • %c[ui_gray_2] напиток\n
-			%c[d_blue] • %c[ui_gray_2] импортный\n
-			%c[d_green] • %c[ui_gray_2] высокое качество\n
-			%c[d_green] • %c[ui_gray_2] чистый источник питания\n
-		</text>
-	</string>
+    <string id="st_wg_yoohoo_bottle">
+        <text>Шоколадный напиток Yoo-hoo</text>
+    </string>
+
+    <string id="st_wg_yoohoo_bottle_s">
+        <text>Шоколадный напиток Yoo-hoo</text>
+    </string>
+
+    <string id="st_wg_yoohoo_bottle_descr">
+        <text>
+            Изобретённый в 1920-х Натали Олайвери, Yoo-hoo - холодных напиток со вкусом шоколада. Он на 99% без жиров и на 100% без кофеина, а также богат кальцием и витамином D.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_mountain_dew_bottle">
+        <text>Бутылка Mountain Dew</text>
+    </string>
+
+    <string id="st_wg_mountain_dew_bottle_s">
+        <text>Бутылка Mountain Dew</text>
+    </string>
+
+    <string id="st_wg_mountain_dew_bottle_descr">
+        <text>
+            Mountain Dew,известный как Маунтин Дью - богатая кофеином сильногазированная содовая со вкусом цитрусовых, производимая PepsiCo Group. Это безалкогольный напиток со вкусом цитрусовых, изначально называвшийся энергетическим, но со временем стал больше похож на содовую.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_nestea_icetea_bottle">
+        <text>Бутылка холодного чая Nestea</text>
+    </string>
+
+    <string id="st_wg_nestea_icetea_bottle_s">
+        <text>Бутылка чая Nestea</text>
+    </string>
+
+    <string id="st_wg_nestea_icetea_bottle_descr">
+        <text>
+            Nestea - освежающий негазированный чайный напиток со вкусом лемона. Лучше всего на вкус пить холодным, несмотря на то что в Зоне этого достичь сложно. Идеален в жаркие летние дни.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_cola_can">
+        <text>Банка Кока-Колы</text>
+    </string>
+
+    <string id="st_wg_cola_can_s">
+        <text>Банка колы</text>
+    </string>
+
+    <string id="st_wg_cola_can_descr">
+        <text>
+            Кока-Кола, известная также как Кола, - газированный безалкогольный. Изначально считался успокаивающим напитком, и был запатентован как лекарство. Некоторые торговцы в Зоне иногда завозят несколько бутылок. В то время, как многие сталкеры ценят её как напиток, колу можно использовать для ликвидации ржавчины на старом оружии.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+            %c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+        </text>
+    </string>
+
+    <string id="st_wg_sprite_can">
+        <text>Банка "Спрайта"</text>
+    </string>
+
+    <string id="st_wg_sprite_can_s">
+        <text>Банка "Спрайта"</text>
+    </string>
+
+    <string id="st_wg_sprite_can_descr">
+        <text>
+            Спрайт - безалкогольный напиток, сделаный из лимона и экстрактов лайма. На вкус как лимонад.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_redbull_can">
+        <text>Банка RedBull</text>
+    </string>
+
+    <string id="st_wg_redbull_can_s">
+        <text>Банка RedBull</text>
+    </string>
+
+    <string id="st_wg_redbull_can_descr">
+        <text>
+            Red Bull - энергетический напиток для снятия психологической и физической усталости или истощения. Red Bull совмещает две натуральные субстанции и важные метаболиты - аминокислоты таурин и глюкоронолактон - со стимулирующим кофеином, витаминами и энергией углеводов.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_blue] • %c[ui_gray_2] стимулятор\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_fanta_can">
+        <text>Банка "Фанты"</text>
+    </string>
+
+    <string id="st_wg_fanta_can_s">
+        <text>Банка "Фанты"</text>
+    </string>
+
+    <string id="st_wg_fanta_can_descr">
+        <text>
+            Яркая, пузырящаяся и популярная, Фанта - безалкогольный напиток, впервые появившийся в 1940. Фанта - второй по старости бренд компании Coca-Cola.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_pepsi_can">
+        <text>Банка Пепси</text>
+    </string>
+
+    <string id="st_wg_pepsi_can_s">
+        <text>Банка Пепси</text>
+    </string>
+
+    <string id="st_wg_pepsi_can_descr">
+        <text>
+            Пепси - газированный безалкогольный напиток, производимый PepsiCo. Является главным конкурентом Кока-Колы. Часто описывается как мягкий и сладкий, со средним вкусом колы и меньшим количеством пузырей.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_mountain_dew_can">
+        <text>Банка Mountain Dew</text>
+    </string>
+
+    <string id="st_wg_mountain_dew_can_s">
+        <text>Банка Mountain Dew</text>
+    </string>
+
+    <string id="st_wg_mountain_dew_can_descr">
+        <text>
+            Mountain Dew,известный как Маунтин Дью - богатая кофеином сильногазированная содовая со вкусом цитрусовых, производимая PepsiCo Group. Это безалкогольный напиток со вкусом цитрусовых, изначально называвшийся энергетическим, но со временем стал больше похож на содовую.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_perrier_can">
+        <text>Банка Perrier</text>
+    </string>
+
+    <string id="st_wg_perrier_can_s">
+        <text>Банка Perrier</text>
+    </string>
+
+    <string id="st_wg_perrier_can_descr">
+        <text>
+            Perrier - газированная минеральная вода без сахара и калорий. Источник, из которого берут воду для этого напитка естественно газирован, но вода и углекислый газ для напитка берутся независимо. Вода затем очищается, и вовремя разлива углекислый газ добавляется так, чтобы его уровень соответствовал первичному.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_rockstar_energy_can">
+        <text>Банка Rockstar Energy</text>
+    </string>
+
+    <string id="st_wg_rockstar_energy_can_s">
+        <text>Банка Rockstar Energy</text>
+    </string>
+
+    <string id="st_wg_rockstar_energy_can_descr">
+        <text>
+            Rockstar Energy Drink Original содержит 160 мг кафеина на 16 унций, являющихся размером одной банки. Кроме кофеина и сахара, Rockstar Energy Drink содержит разные травы.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_blue] • %c[ui_gray_2] стимулятор\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_monster_energy_can">
+        <text>Банка Monster Energy</text>
+    </string>
+
+    <string id="st_wg_monster_energy_can_s">
+        <text>Банка Monster Energy</text>
+    </string>
+
+    <string id="st_wg_monster_energy_can_descr">
+        <text>
+            Газированный энергетик с таурином, женьшенем, L-карнитином, кофеином, витаминами группы B, сахаром и подсластителями. Это один из популярнейших энергетиков в мире. Однако, некоторые не любят его за химический вкус.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_blue] • %c[ui_gray_2] стимулятор\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_beer_86_can">
+        <text>Банка светлого вина Бавария 86</text>
+    </string>
+
+    <string id="st_wg_beer_86_can_s">
+        <text>Банка Баварии 86</text>
+    </string>
+
+    <string id="st_wg_beer_86_can_descr">
+        <text>
+            Бавария 8.6 - специальное светлое вино со своим уникальным характером. Сильное и крепкое пиво с золотым привкусом, приятно-сладкое и вяжущее в послевкусии.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_blue] • %c[ui_gray_2] стимулятор\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+            %c[d_orange] • %c[ui_gray_2] слабый алкоголь\n
+        </text>
+    </string>
+
+    <string id="st_wg_sevenup_can">
+        <text>Банка Seven-UP</text>
+    </string>
+
+    <string id="st_wg_sevenup_can_s">
+        <text>Банка 7UP</text>
+    </string>
+
+    <string id="st_wg_sevenup_can_descr">
+        <text>
+            Seven-UP (также известный, как 7UP) - газированный безалкогольный напиток со вкусом лемона-лайма. Это главный конкурент "Спрайта". Вкуснее всего пить холодным.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_dr_bob_can">
+        <text>Банка Dr. Bob</text>
+    </string>
+
+    <string id="st_wg_dr_bob_can_s">
+        <text>Банк Dr. Bob</text>
+    </string>
+
+    <string id="st_wg_dr_bob_can_descr">
+        <text>
+            Dr. Bob - газированный безалкогольный напиток, часто называемый копией Dr. Pepper. Хотя напиток пытается изобразить тот вкус, он отличается от Dr. Pepper. Вкус более острый и сухой.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
+
+    <string id="st_wg_lipton_icetea_can">
+        <text>Банка холодного чая Lipton</text>
+    </string>
+
+    <string id="st_wg_lipton_icetea_can_s">
+        <text>Банка чая Lipton</text>
+    </string>
+
+    <string id="st_wg_lipton_icetea_can_descr">
+        <text>
+            Lipton - негазированный безалкогольный напиток, с экстрактом чая и персиковым соком, смешанным с сахаром и подсластителями. Содержит мало калорий и не содержит консервантов, что делает его довольно здоровым напитком.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] напиток\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_green] • %c[ui_gray_2] высокое качество\n
+            %c[d_green] • %c[ui_gray_2] чистый источник питания\n
+        </text>
+    </string>
 </string_table>
