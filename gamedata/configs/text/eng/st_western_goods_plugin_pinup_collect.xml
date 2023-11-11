@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 08/05/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	Translation file for Western Goods' integration of the Pinup Collector addon.                                -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 11/11/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!-- ================================================================================================================-->
+<!--    Translation file for Western Goods' integration of the Pinup Collector addon.                                -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
 <string_table>
 
     <string id="st_wg_tear_page">
@@ -145,4 +145,5 @@
     <string id="pinup_wg_porn_mag_3_10">
         <text>PLAYBOY (Carrie Stevens) Page 108</text>
     </string>
+
 </string_table>
