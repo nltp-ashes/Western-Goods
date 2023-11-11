@@ -1,300 +1,300 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	Translation file for Western Goods' tasks.																     -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 11/11/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!-- ================================================================================================================-->
+<!--    Translation file for Western Goods' tasks.                                                                   -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
 <string_table>
 
-	<!--=============================================================================================================-->
-	<!--	ACT 1 - HELICOPTER DELIVERY																			     -->
-	<!-- ============================================================================================================-->
-	<!--	TASK 1 - ROAD BUMPS																			  		     -->
-	<!-- ============================================================================================================-->
+    <!--=============================================================================================================-->
+    <!--    ACT 1 - HELICOPTER DELIVERY                                                                              -->
+    <!--=============================================================================================================-->
+    <!--    TASK 1 - ROAD BUMPS                                                                                      -->
+    <!--=============================================================================================================-->
 
-	<string id="st_wg_act_1_task_1_title">
-		<text>Helicopter Delivery : Road Bumps</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_1_stage_0_descr">
-		<text>Williams Heades was awaiting a resupply by helicopter, but the crew stop responding. Follow their GPS signal and see if everything is all right.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_1_stage_1_descr">
-		<text>The helicopter is empty. The crew isn't here. Their GPS signal is active at a sawmill not far. Head over there.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_1_stage_2_descr">
-		<text>Some of the supplies are missing, but there are a few of them left. Take them and return them.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_1_stage_3_descr">
-		<text>The crew is dead. Bring back what remains of the shipment to Williams Heades.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_1_job_descr">
-		<text>You want to help me? I'm awaiting a delivery. The shipment is being conveyed with a helicopter towards Zaton.\n \nProblem is, I've sent multiple messages to the crew of the helicopter, and they won't answer me. These guys are real pros, so I'm not too worried. I'd go out there and check myself, but I need to meet someone important here soon.\n \nCan you go to the delivery point, and see if everything is all right? Tell the crew I sent you. And tell them to answer the god-damn messages, while you're at it.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_1_task_complete_descr">
-		<text>You made it! Thank god... This whole delivery is such a mess. So, the crew was dead? Damn it. These guys were tough, whatever got them must be serious business. At least you were able to recover some of it. I wonder where the rest went. Hell, I wonder why they even left the helicopter behind.\n \nI'll ask the guys at the Waste Processing Station in Zaton to go investigate. I cannot have that happen again. It's hard enough getting these supplies in the Zone, I don't need stuff like this to happen everytime.\n \nAnyway, thanks for your help Stalker. Good to know I can count on you.</text>
-	</string>
+    <string id="st_wg_act_1_task_1_title">
+        <text>Helicopter Delivery : Road Bumps</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	TASK 2 - CONSPIRACY																			  		     -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_1_task_1_stage_0_descr">
+        <text>Williams Heades was awaiting a resupply by helicopter, but the crew stop responding. Follow their GPS signal and see if everything is all right.</text>
+    </string>
 
-	<string id="st_wg_act_1_task_2_title">
-		<text>Helicopter Delivery : Conspiracy</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_stage_0_descr">
-		<text>The Mercs at the Waste Processing Station secured the helicopter. Some of its electronics were fried. Some Stalkers over at Yanov station talk about strange lights. Continue the investigation from here.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_stage_1_descr">
-		<text>The stalker you found at Yanov station talked about strange lights coming from the Container Warehouse. Keep investigating.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_stage_2_descr">
-		<text>The helicopter has spotted bandit reinforcements ! Defend your position.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_stage_3_descr">
-		<text>Find clues that could explain what happened to the helicopter.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_stage_4_descr">
-		<text>Bring back the clues you found to Williams Heades.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_job_descr">
-		<text>You remember the helicopter delivery you help me with? Well, I sent a few squads to secure and retrieve the helicopter. They spent hours getting its electronics back in shape. Half of it was fried. Anyway, thankfully they were able to get it flying again, helicopters aren't exactly cheap.\n \nI really don't like what's happening. I've heard rumors a group of bandits settled at the Container Warehouse in Jupiter. Some Stalkers over at Yanov station keep saying they see bright flashes at night coming from that place. The helicopter flew over that place, so I worried the two might be connected.\n \nCould you go there and clarify just what is going on?</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_2_task_complete_descr">
-		<text>Let's see... Hm, so it was just Bandits? You see, this is exactly what I told you. I don't care about conflicts in the Zone, I take people for what they are. Except for Bandits. I don't know why Dushman wants to keep good relations with them. We should just eradicate them all. Vermin.\n \nAnyway - sorry, I got carried away - Thank you for helping me to figure this whole thing out. At least it wasn't a targeted attack, so business shouldn't be impacted too much.</text>
-	</string>
+    <string id="st_wg_act_1_task_1_stage_1_descr">
+        <text>The helicopter is empty. The crew isn't here. Their GPS signal is active at a sawmill not far. Head over there.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	TASK 3 - THE RESCUE																		  		    	 -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_1_task_1_stage_2_descr">
+        <text>Some of the supplies are missing, but there are a few of them left. Take them and return them.</text>
+    </string>
 
-	<string id="st_wg_act_1_task_3_title">
-		<text>Helicopter Delivery : The Rescue</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_stage_0_descr">
-		<text>A mercenary scouting team spotted what seems to be one of their own, captured by Monolith forces. Rescue him.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_stage_1_descr">
-		<text>The rescued Merc isn't in good shape. Escort him safely to the bridge, in the Red Forest, where he will be evacuated.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_stage_2_descr">
-		<text>Enemies across the bridge will prevent the helicopter from landing. Clear the area.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_stage_3_descr">
-		<text>Wait for the helicopter to pick up the rescued Merc.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_stage_4_descr">
-		<text>The Merc was successfully rescued and extracted. Come back to Williams Heades.</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_job_descr">
-		<text>I'm glad you ask. There is a situation you can help me with. We often send squads deep into the Zone to keep track of enemy movements, and define safe corridors for the helicopters to go through.\n \nA few hours ago, one of our squads came back and said the spotted a stalker taken hostage by a Monolith group. They said it could have been one of our own, but they couldn't get close enough to make sure. And considering how many Monolithians they spotted, no-one wants to go there and find out.\n \nI know it's a tall ask, but could you head there and make sure we're not leaving someone behind?</text>
-	</string>
-	
-	<string id="st_wg_act_1_task_3_task_complete_descr">
-		<text>Yeah, the helicopter dropped him off here about an hour ago. Thanks for rescuing him!\n \nI don't know if he was able to tell you when you escorted him back to the Red Forest, but he was actually the co-pilot from the first crew of the helicopter, the one you found dead in the Sawmill at Zaton.\n \nAnyway, I gave him some meds to try and tame his confusion.\n \nOh, before I forget, he said he wanted to see you.</text>
-	</string>
+    <string id="st_wg_act_1_task_1_stage_3_descr">
+        <text>The crew is dead. Bring back what remains of the shipment to Williams Heades.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	ACT 2 - CONTRACT WORK																			  		 -->
-	<!-- ============================================================================================================-->
-	<!--	TASK 1 - KOLOBOK																			  		     -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_1_task_1_job_descr">
+        <text>You want to help me? I'm awaiting a delivery. The shipment is being conveyed with a helicopter towards Zaton.\n \nProblem is, I've sent multiple messages to the crew of the helicopter, and they won't answer me. These guys are real pros, so I'm not too worried. I'd go out there and check myself, but I need to meet someone important here soon.\n \nCan you go to the delivery point, and see if everything is all right? Tell the crew I sent you. And tell them to answer the god-damn messages, while you're at it.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_1_title">
-		<text>Contract Work : Kolobok</text>
-	</string>
+    <string id="st_wg_act_1_task_1_task_complete_descr">
+        <text>You made it! Thank god... This whole delivery is such a mess. So, the crew was dead? Damn it. These guys were tough, whatever got them must be serious business. At least you were able to recover some of it. I wonder where the rest went. Hell, I wonder why they even left the helicopter behind.\n \nI'll ask the guys at the Waste Processing Station in Zaton to go investigate. I cannot have that happen again. It's hard enough getting these supplies in the Zone, I don't need stuff like this to happen everytime.\n \nAnyway, thanks for your help Stalker. Good to know I can count on you.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_1_stage_0_descr">
-		<text>Dushman has an important client asking for a Kolobok. Find one and deliver it in Deadcity.</text>
-	</string>
+    <!--=============================================================================================================-->
+    <!--    TASK 2 - CONSPIRACY                                                                                      -->
+    <!--=============================================================================================================-->
 
-	<string id="st_wg_act_2_task_1_stage_1_descr">
-		<text>You found the Kolobok. Return it to Dushman, so he can get it to his client.</text>
-	</string>
+    <string id="st_wg_act_1_task_2_title">
+        <text>Helicopter Delivery : Conspiracy</text>
+    </string>
 
-	<string id="st_wg_act_2_task_1_job_descr">
-		<text>Special work? Big clients don't tend to trust anyone. Look, if you want, one of my clients asked us to find them a Kolobok. This is a quite rare and valuable artefact. So if you can resit selling it for money and bring one to me, it'll be a start to prove you're trustworthy.\n \nIf you handle that, I'll let in a word telling them you're looking for more work, deal?</text>
-	</string>
+    <string id="st_wg_act_1_task_2_stage_0_descr">
+        <text>The Mercs at the Waste Processing Station secured the helicopter. Some of its electronics were fried. Some Stalkers over at Yanov station talk about strange lights. Continue the investigation from here.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_1_task_complete_descr">
-		<text>Alright, so you are indeed a man of your word.\n \nYou held your end of the deal, and I'll hold mine. Do you still want me to tell my client you're looking for more work?</text>
-	</string>
+    <string id="st_wg_act_1_task_2_stage_1_descr">
+        <text>The stalker you found at Yanov station talked about strange lights coming from the Container Warehouse. Keep investigating.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	TASK 2 - RETRIEVAL MISSION																		  		 -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_1_task_2_stage_2_descr">
+        <text>The helicopter has spotted bandit reinforcements ! Defend your position.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_title">
-		<text>Contract Work : Retrieval Mission</text>
-	</string>
+    <string id="st_wg_act_1_task_2_stage_3_descr">
+        <text>Find clues that could explain what happened to the helicopter.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_0_descr">
-		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
-	</string>
+    <string id="st_wg_act_1_task_2_stage_4_descr">
+        <text>Bring back the clues you found to Williams Heades.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_1_descr">
-		<text>Zombies lie in your way, clear them out before advancing.</text>
-	</string>
+    <string id="st_wg_act_1_task_2_job_descr">
+        <text>You remember the helicopter delivery you help me with? Well, I sent a few squads to secure and retrieve the helicopter. They spent hours getting its electronics back in shape. Half of it was fried. Anyway, thankfully they were able to get it flying again, helicopters aren't exactly cheap.\n \nI really don't like what's happening. I've heard rumors a group of bandits settled at the Container Warehouse in Jupiter. Some Stalkers over at Yanov station keep saying they see bright flashes at night coming from that place. The helicopter flew over that place, so I worried the two might be connected.\n \nCould you go there and clarify just what is going on?</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_2_descr">
-		<text>A deployment of soldiers is clearing a group of zombies. Wait for them to move on or clear the path yourself.</text>
-	</string>
+    <string id="st_wg_act_1_task_2_task_complete_descr">
+        <text>Let's see... Hm, so it was just Bandits? You see, this is exactly what I told you. I don't care about conflicts in the Zone, I take people for what they are. Except for Bandits. I don't know why Dushman wants to keep good relations with them. We should just eradicate them all. Vermin.\n \nAnyway - sorry, I got carried away - Thank you for helping me to figure this whole thing out. At least it wasn't a targeted attack, so business shouldn't be impacted too much.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_3_descr">
-		<text>Get to the school, but kill or escape any pursuer before you get there.</text>
-	</string>
+    <!--=============================================================================================================-->
+    <!--    TASK 3 - THE RESCUE                                                                                      -->
+    <!--=============================================================================================================-->
 
-	<string id="st_wg_act_2_task_2_stage_4_descr">
-		<text>Get to the school, and avoid being noticed while getting there.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_title">
+        <text>Helicopter Delivery : The Rescue</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_5_descr">
-		<text>Get to the basement of the school and hide there while the convoy arrives.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_stage_0_descr">
+        <text>A mercenary scouting team spotted what seems to be one of their own, captured by Monolith forces. Rescue him.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_6_descr">
-		<text>Get to the basement of the school and hide there while the convoy arrives.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_stage_1_descr">
+        <text>The rescued Merc isn't in good shape. Escort him safely to the bridge, in the Red Forest, where he will be evacuated.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_7_descr">
-		<text>The convoy is about to arrive, get to the third floor of the school.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_stage_2_descr">
+        <text>Enemies across the bridge will prevent the helicopter from landing. Clear the area.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_8_descr">
-		<text>The convoy is about to arrive, find a position at one of the windows to ambush the convoy. Wait for confirmation from your contact before opening fire.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_stage_3_descr">
+        <text>Wait for the helicopter to pick up the rescued Merc.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_9_descr">
-		<text>The convoy has been attacked by bandits. Wait for confirmation from your contact before opening fire.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_stage_4_descr">
+        <text>The Merc was successfully rescued and extracted. Come back to Williams Heades.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_10_descr">
-		<text>An emission is about to hit, take cover in the basement now !</text>
-	</string>
+    <string id="st_wg_act_1_task_3_job_descr">
+        <text>I'm glad you ask. There is a situation you can help me with. We often send squads deep into the Zone to keep track of enemy movements, and define safe corridors for the helicopters to go through.\n \nA few hours ago, one of our squads came back and said the spotted a stalker taken hostage by a Monolith group. They said it could have been one of our own, but they couldn't get close enough to make sure. And considering how many Monolithians they spotted, no-one wants to go there and find out.\n \nI know it's a tall ask, but could you head there and make sure we're not leaving someone behind?</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_11_descr">
-		<text>The scientists fled during the emission. Get to their last known GPS location.</text>
-	</string>
+    <string id="st_wg_act_1_task_3_task_complete_descr">
+        <text>Yeah, the helicopter dropped him off here about an hour ago. Thanks for rescuing him!\n \nI don't know if he was able to tell you when you escorted him back to the Red Forest, but he was actually the co-pilot from the first crew of the helicopter, the one you found dead in the Sawmill at Zaton.\n \nAnyway, I gave him some meds to try and tame his confusion.\n \nOh, before I forget, he said he wanted to see you.</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_stage_12_descr">
-		<text>Get the package from the Ecologist, in the KBO.</text>
-	</string>
+    <!--=============================================================================================================-->
+    <!--    ACT 2 - CONTRACT WORK                                                                                    -->
+    <!--=============================================================================================================-->
+    <!--    TASK 1 - KOLOBOK                                                                                         -->
+    <!--=============================================================================================================-->
 
-	<string id="st_wg_act_2_task_2_stage_13_descr">
-		<text>You have found the package. Retrieve it to your contact.</text>
-	</string>
+    <string id="st_wg_act_2_task_1_title">
+        <text>Contract Work : Kolobok</text>
+    </string>
 
-	<string id="st_wg_act_2_task_2_job_descr">
-		<text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
-	</string>
+    <string id="st_wg_act_2_task_1_stage_0_descr">
+        <text>Dushman has an important client asking for a Kolobok. Find one and deliver it in Deadcity.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--    ACT 3 - CHERNENKO BROTHERS                                                                               -->
-	<!-- ============================================================================================================-->
-	<!--    TASK 1 - OLD STASH                                                                                       -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_2_task_1_stage_1_descr">
+        <text>You found the Kolobok. Return it to Dushman, so he can get it to his client.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_1_title">
-		<text>Chernenko Brothers : Old Stash</text>
-	</string>
+    <string id="st_wg_act_2_task_1_job_descr">
+        <text>Special work? Big clients don't tend to trust anyone. Look, if you want, one of my clients asked us to find them a Kolobok. This is a quite rare and valuable artefact. So if you can resit selling it for money and bring one to me, it'll be a start to prove you're trustworthy.\n \nIf you handle that, I'll let in a word telling them you're looking for more work, deal?</text>
+    </string>
 
-	<string id="st_wg_act_3_task_1_stage_0_descr">
-		<text>The brother of one of the traders at the Flea Market is missing. When they used to be in the Army, they kept a stash in the Agroprom Underground. Locate and investigate the stash.</text>
-	</string>
+    <string id="st_wg_act_2_task_1_task_complete_descr">
+        <text>Alright, so you are indeed a man of your word.\n \nYou held your end of the deal, and I'll hold mine. Do you still want me to tell my client you're looking for more work?</text>
+    </string>
 
-	<string id="st_wg_act_3_task_1_stage_1_descr">
-		<text>Get the USB drive you found in the Chernenko brothers' stash.</text>
-	</string>
+    <!--=============================================================================================================-->
+    <!--    TASK 2 - RETRIEVAL MISSION                                                                               -->
+    <!--=============================================================================================================-->
 
-	<string id="st_wg_act_3_task_1_stage_2_descr">
-		<text>You found the Chernenko brothers' stash. It contained a USB pendrive. Find a way to access its content.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_title">
+        <text>Contract Work : Retrieval Mission</text>
+    </string>
 
-	<string id="st_wg_act_3_task_1_stage_3_descr">
-		<text>The USB pendrive contained, among other things, a map with handwritten drawings. Find the location shown on that map.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_0_descr">
+        <text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--    TASK 2 - PURSUERS                                                                   				     -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_2_task_2_stage_1_descr">
+        <text>Zombies lie in your way, clear them out before advancing.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_2_title">
-		<text>Chernenko Brothers : Pursuers</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_2_descr">
+        <text>A deployment of soldiers is clearing a group of zombies. Wait for them to move on or clear the path yourself.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_2_stage_0_descr">
-		<text>You found Oleksandr's brother. It seems some people are looking for him. Interrogate the SSU soldier he captured and try to obtain information.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_3_descr">
+        <text>Get to the school, but kill or escape any pursuer before you get there.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_2_stage_1_descr">
-		<text>After interrogating the SSU soldier, he revealed the location of another SSU squad. Head to their location, and eliminate them.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_4_descr">
+        <text>Get to the school, and avoid being noticed while getting there.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_2_stage_2_descr">
-		<text>You eliminated the SSU squad, investigate the bodies for useful information.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_5_descr">
+        <text>Get to the basement of the school and hide there while the convoy arrives.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_2_stage_3_descr">
-		<text>One of the soldiers of the SSU squad you eliminated was in possession of a deployment notice. Get it and return it to Danylo.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_6_descr">
+        <text>Get to the basement of the school and hide there while the convoy arrives.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_2_stage_4_descr">
-		<text>Return the deployment notice you found to Danylo.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_7_descr">
+        <text>The convoy is about to arrive, get to the third floor of the school.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--    TASK 3 - HEAD OF OPERATIONS                                                                              -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_2_task_2_stage_8_descr">
+        <text>The convoy is about to arrive, find a position at one of the windows to ambush the convoy. Wait for confirmation from your contact before opening fire.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_3_title">
-		<text>Chernenko Brothers : Head of Operations</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_9_descr">
+        <text>The convoy has been attacked by bandits. Wait for confirmation from your contact before opening fire.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_3_stage_0_descr">
-		<text>Find and eliminate the corrupt SSU supervisor. His last known whereabouts is the Machine Yard, in the Great Swamps.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_10_descr">
+        <text>An emission is about to hit, take cover in the basement now !</text>
+    </string>
 
-	<string id="st_wg_act_3_task_3_stage_1_descr">
-		<text>The SSU supervisor is eliminated. Return to Danylo.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_11_descr">
+        <text>The scientists fled during the emission. Get to their last known GPS location.</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--    TASK 4 - REUNION                                                                                         -->
-	<!-- ============================================================================================================-->
+    <string id="st_wg_act_2_task_2_stage_12_descr">
+        <text>Get the package from the Ecologist, in the KBO.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_4_title">
-		<text>Chernenko Brothers : Reunion</text>
-	</string>
+    <string id="st_wg_act_2_task_2_stage_13_descr">
+        <text>You have found the package. Retrieve it to your contact.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_4_stage_0_descr">
-		<text>With the Army taken care of, Danylo wants to reunite with his brother. Meet with Danylo.</text>
-	</string>
+    <string id="st_wg_act_2_task_2_job_descr">
+        <text>Retrieve documents escorted by a convoy of scientists. Location is Outskirts.</text>
+    </string>
 
-	<string id="st_wg_act_3_task_4_stage_1_descr">
-		<text>With the Army taken care of, Danylo wants to reunite with his brother. Escort him to the Flea Market, in the Garbage.</text>
-	</string>
+    <!--=============================================================================================================-->
+    <!--    ACT 3 - CHERNENKO BROTHERS                                                                               -->
+    <!--=============================================================================================================-->
+    <!--    TASK 1 - OLD STASH                                                                                       -->
+    <!--=============================================================================================================-->
+
+    <string id="st_wg_act_3_task_1_title">
+        <text>Chernenko Brothers : Old Stash</text>
+    </string>
+
+    <string id="st_wg_act_3_task_1_stage_0_descr">
+        <text>The brother of one of the traders at the Flea Market is missing. When they used to be in the Army, they kept a stash in the Agroprom Underground. Locate and investigate the stash.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_1_stage_1_descr">
+        <text>Get the USB drive you found in the Chernenko brothers' stash.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_1_stage_2_descr">
+        <text>You found the Chernenko brothers' stash. It contained a USB pendrive. Find a way to access its content.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_1_stage_3_descr">
+        <text>The USB pendrive contained, among other things, a map with handwritten drawings. Find the location shown on that map.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    TASK 2 - PURSUERS                                                                                        -->
+    <!--=============================================================================================================-->
+
+    <string id="st_wg_act_3_task_2_title">
+        <text>Chernenko Brothers : Pursuers</text>
+    </string>
+
+    <string id="st_wg_act_3_task_2_stage_0_descr">
+        <text>You found Oleksandr's brother. It seems some people are looking for him. Interrogate the SSU soldier he captured and try to obtain information.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_2_stage_1_descr">
+        <text>After interrogating the SSU soldier, he revealed the location of another SSU squad. Head to their location, and eliminate them.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_2_stage_2_descr">
+        <text>You eliminated the SSU squad, investigate the bodies for useful information.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_2_stage_3_descr">
+        <text>One of the soldiers of the SSU squad you eliminated was in possession of a deployment notice. Get it and return it to Danylo.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_2_stage_4_descr">
+        <text>Return the deployment notice you found to Danylo.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    TASK 3 - HEAD OF OPERATIONS                                                                              -->
+    <!--=============================================================================================================-->
+
+    <string id="st_wg_act_3_task_3_title">
+        <text>Chernenko Brothers : Head of Operations</text>
+    </string>
+
+    <string id="st_wg_act_3_task_3_stage_0_descr">
+        <text>Find and eliminate the corrupt SSU supervisor. His last known whereabouts is the Machine Yard, in the Great Swamps.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_3_stage_1_descr">
+        <text>The SSU supervisor is eliminated. Return to Danylo.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    TASK 4 - REUNION                                                                                         -->
+    <!--=============================================================================================================-->
+
+    <string id="st_wg_act_3_task_4_title">
+        <text>Chernenko Brothers : Reunion</text>
+    </string>
+
+    <string id="st_wg_act_3_task_4_stage_0_descr">
+        <text>With the Army taken care of, Danylo wants to reunite with his brother. Meet with Danylo.</text>
+    </string>
+
+    <string id="st_wg_act_3_task_4_stage_1_descr">
+        <text>With the Army taken care of, Danylo wants to reunite with his brother. Escort him to the Flea Market, in the Garbage.</text>
+    </string>
 
 </string_table>
