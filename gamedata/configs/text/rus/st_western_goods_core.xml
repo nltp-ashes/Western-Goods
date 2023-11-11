@@ -1,129 +1,127 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Автор оригинала(s) : NLTP_ASHES																			     -->
-<!--	Изменено : N/A																							     -->
-<!--	Дата создания : 17/03/2023																						     -->
-<!--	Лицензия : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	Translation file for Western Goods' general purpose strings.											     -->
-<!--	Файл локализации для строк общего назначения Western Goods.											     -->
-<!--    Переводчик:VodoXleb                                                                                                             -->
-<!--																											     -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : VodoXleb (Translation)                                                                              -->
+<!--    Date : 11/11/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' general purpose strings.                                                 -->
+<!--                                                                                                                 -->
 <!-- ================================================================================================================-->
 <string_table>
 
-	<!-- ============================================================================================================-->
-	<!--	Фатальные ошибки																					  		 -->
-	<!-- ============================================================================================================-->
+    <!-- ============================================================================================================-->
+    <!--	Fatal Errors																					  		 -->
+    <!-- ============================================================================================================-->
 
-	<!-- Устаревшая версия игры  -->
-	<string id="st_err_outdated_game_title">
-		<text>Версия игры не поддерживается или устарела.</text>
-	</string>
+    <!-- Out-of-date game -->
+    <string id="st_err_outdated_game_title">
+        <text>Версия игры не поддерживается или устарела.</text>
+    </string>
 
-	<string id="st_err_outdated_game_what">
-		<text>Версия вашей игры не поддерживается модификацией. Пожалуйста, установите версию игры S.T.A.L.K.E.R. Anomaly 1.5.2.</text>
-	</string>
+    <string id="st_err_outdated_game_what">
+        <text>Версия вашей игры не поддерживается модификацией. Пожалуйста, установите версию игры S.T.A.L.K.E.R. Anomaly 1.5.2.</text>
+    </string>
 
-	<string id="st_err_outdated_game_why">
-		<text>Western Goods требует функций игры, добавленных только в 1.5.2, и/или использует для работы модификации требующие версии игры 1.5.2.</text>
-	</string>
+    <string id="st_err_outdated_game_why">
+        <text>Western Goods требует функций игры, добавленных только в 1.5.2, и/или использует для работы модификации требующие версии игры 1.5.2.</text>
+    </string>
 
-	<string id="st_err_outdated_game_where">
-		<text>Вы можете скачать S.T.A.L.K.E.R. Anomaly 1.5.2 с ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
-	</string>
+    <string id="st_err_outdated_game_where">
+        <text>Вы можете скачать S.T.A.L.K.E.R. Anomaly 1.5.2 с ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+    </string>
 
-	<!-- Не найден DXML -->
-	<string id="st_err_missing_dxml_title">
-		<text>Не найдена требуемая модификация - DXML.</text>
-	</string>
+    <!-- Missing DXML -->
+    <string id="st_err_missing_dxml_title">
+        <text>Не найдена требуемая модификация - DXML.</text>
+    </string>
 
-	<string id="st_err_missing_dxml_what">
-		<text>DXML не найден. Пожалуйста, установите или обновите ваши Modded Exes перед использованием Western Goods.</text>
-	</string>
+    <string id="st_err_missing_dxml_what">
+        <text>DXML не найден. Пожалуйста, установите или обновите ваши Modded Exes перед использованием Western Goods.</text>
+    </string>
 
-	<string id="st_err_missing_dxml_why">
-		<text>Western Goods требует DXML для увеличения совместимости с другими аддонами и избежания перезаписи файлов игры.</text>
-	</string>
+    <string id="st_err_missing_dxml_why">
+        <text>Western Goods требует DXML для увеличения совместимости с другими аддонами и избежания перезаписи файлов игры.</text>
+    </string>
 
-	<string id="st_err_missing_dxml_where">
-		<text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
-	</string>
+    <string id="st_err_missing_dxml_where">
+        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+    </string>
 
-	<!-- Не найден LUA unlocalizer -->
-	<string id="st_err_missing_unlocalizer_title">
-		<text>Не найдена требуемая модификация - LUA unlocalizer.</text>
-	</string>
+    <!-- Missing LUA unlocalizer -->
+    <string id="st_err_missing_unlocalizer_title">
+        <text>Не найдена требуемая модификация - LUA unlocalizer.</text>
+    </string>
 
-	<string id="st_err_missing_unlocalizer_what">
-		<text>LUA unlocalizer не найден. Пожалуйста, установите или обновите ваши Modded Exes перед использованием Western Goods.</text>
-	</string>
+    <string id="st_err_missing_unlocalizer_what">
+        <text>LUA unlocalizer не найден. Пожалуйста, установите или обновите ваши Modded Exes перед использованием Western Goods.</text>
+    </string>
 
-	<string id="st_err_missing_unlocalizer_why">
-		<text>Western Goods требует Lua unlocalizer для увеличения совместимости с другими аддонами и избежания перезаписи файлов игры.</text>
-	</string>
+    <string id="st_err_missing_unlocalizer_why">
+        <text>Western Goods требует Lua unlocalizer для увеличения совместимости с другими аддонами и избежания перезаписи файлов игры.</text>
+    </string>
 
-	<string id="st_err_missing_unlocalizer_where">
-		<text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
-	</string>
+    <string id="st_err_missing_unlocalizer_where">
+        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+    </string>
 
-	<!-- ============================================================================================================-->
-	<!--	Общие строки																					  		 -->
-	<!-- ============================================================================================================-->
+    <!-- ============================================================================================================-->
+    <!--	Core Strings																					  		 -->
+    <!-- ============================================================================================================-->
 
-	<!-- Строка для распаковки предметов в инвентаре -->
-	<string id="st_wg_unpack">
-		<text>Распаковать</text>
-	</string>
+    <!-- Unpacking inventory string -->
+    <string id="st_wg_unpack">
+        <text>Распаковать</text>
+    </string>
 
-	<!-- Строка для чтения предметов в инвентаре -->
-	<string id="st_wg_view">
-		<text>View</text>
-	</string>
+    <!-- Reading inventory string -->
+    <string id="st_wg_view">
+        <text>View</text>
+    </string>
 
-	<!-- Строки для GPS локатора -->
-	<string id="st_wg_gps_use_1">
-		<text>Местоположение :</text>
-	</string>
+    <!-- GPS Locator use strings -->
+    <string id="st_wg_gps_use_1">
+        <text>Местоположение :</text>
+    </string>
 
-	<string id="st_wg_gps_use_2">
-		<text>неизвестно</text>
-	</string>
+    <string id="st_wg_gps_use_2">
+        <text>неизвестно</text>
+    </string>
 
-	<string id="st_wg_gps_use_3">
-		<text>вне радиуса действия спутника</text>
-	</string>
+    <string id="st_wg_gps_use_3">
+        <text>вне радиуса действия спутника</text>
+    </string>
 
-	<string id="st_wg_gps_use_4">
-		<text>не найдено в базе данных</text>
-	</string>
+    <string id="st_wg_gps_use_4">
+        <text>не найдено в базе данных</text>
+    </string>
 
-	<!-- Строки для зажигалки -->
-	<string id="st_wg_use">
-		<text>Использовать</text>
-	</string>
+    <!-- Lighter use strings -->
+    <string id="st_wg_use">
+        <text>Использовать</text>
+    </string>
 
-	<string id="st_wg_fill">
-		<text>Наполнить</text>
-	</string>
+    <string id="st_wg_fill">
+        <text>Наполнить</text>
+    </string>
 
-	<string id="st_wg_bullet_point">
-		<text>•</text>
-	</string>
+    <string id="st_wg_bullet_point">
+        <text>•</text>
+    </string>
 
-	<string id="st_wg_missing_requirements_ext">
-		<text>Требуется инструмент!</text>
-	</string>
+    <string id="st_wg_missing_requirements_ext">
+        <text>Требуется инструмент!</text>
+    </string>
 
-	<!-- Строки для чемодана -->
-	<string id="st_wg_open">
-		<text>Открыть</text>
-	</string>
+    <!-- Suitcase use strings -->
+    <string id="st_wg_open">
+        <text>Открыть</text>
+    </string>
 
-	<!-- Читаемые строки UI -->
-	<string id="ui_wg_dx8_retard_notice">
-		<text>Похожи, что вы используете рендерер DirectX 8, вы можете наблюдать растяжение текстур. Используйте более современный рендерер для избежания данных ошибок.</text>
-	</string>
+    <!-- Readable UI strings -->
+    <string id="ui_wg_dx8_retard_notice">
+        <text>Похожи, что вы используете рендерер DirectX 8, вы можете наблюдать растяжение текстур. Используйте более современный рендерер для избежания данных ошибок.</text>
+    </string>
 
 </string_table>

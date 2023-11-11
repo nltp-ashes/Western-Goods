@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
-<!--	Original Author(s) : NLTP_ASHES																			     -->
-<!--	Edited : N/A																							     -->
-<!--	Date : 17/03/2023																						     -->
-<!--	License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)		     -->
-<!--																											     -->
-<!--	Translation file for Western Goods' entries in the PDA Guide.											     -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 11/11/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' entries in the PDA Guide.                                                -->
 <!--                                                                                                                 -->
 <!-- ================================================================================================================-->
 <string_table>
@@ -18,12 +18,12 @@
 
     <string id="encyclopedia_characters_western_goods_ashes_text">
         <text>
-		%c[pda_white]Williams "Ashes" Heades%c[ui_gray_1] is a trader. He hangs around at the Book Store (Pripyat Outskirts).\n
-		\n%c[pda_green]Information%c[ui_gray_1]\n
-		\nWilliams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece.\n
-		\nHe was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.\n
-		\n%c[pda_yellow]Trivia%c[ui_gray_1]\n
-		\n• This trader is the main importer for western goods in the Zone.
+        %c[pda_white]Williams "Ashes" Heades%c[ui_gray_1] is a trader. He hangs around at the Book Store (Pripyat Outskirts).\n
+        \n%c[pda_green]Information%c[ui_gray_1]\n
+        \nWilliams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece.\n
+        \nHe was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.\n
+        \n%c[pda_yellow]Trivia%c[ui_gray_1]\n
+        \n• This trader is the main importer for western goods in the Zone.
         </text>
     </string>
 
@@ -34,11 +34,11 @@
 
     <string id="encyclopedia_items_western_goods_gps_text">
         <text>
-		%c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
-		\n%c[pda_green]Information%c[ui_gray_1]\n
+        %c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
+        \n%c[pda_green]Information%c[ui_gray_1]\n
         \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
         \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
-		\n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
+        \n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
         </text>
     </string>
 
