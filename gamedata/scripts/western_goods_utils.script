@@ -424,13 +424,12 @@ end
 --- @return table
 function list_files(path)
     local file_list_fs = getFS():file_list_open("$game_config$", path, bit_or(FS.FS_ListFiles, FS.FS_RootOnly))
+    local file_list = {}
 
     local count = file_list_fs and file_list_fs:Size() or 0
     if count <= 0 then
-        return {}
+        return file_list
     end
-
-    local file_list = {}
 
     for i = 1, count do
         local file_name = file_list_fs:GetAt(i - 1)
@@ -438,7 +437,6 @@ function list_files(path)
             file_list[#file_list + 1] = file_name
         end
     end
-
     return file_list
 end
 
