@@ -7,7 +7,9 @@
 > • Additions:
 >    - Added GitHub CI to autonomously build addon releases on GitHub;
 >    - Added GitHub issues templates to ease out bug/feature/suggestion reporting;
->    - Added camera animations when using consumables (similar to vanilla Anomaly) (Thanks Rambito).
+>    - Added camera animations when using consumables (similar to vanilla Anomaly) (Thanks Rambito);
+>    - Added new barters to Patrick "Odysseus" Dunbar (Thanks nekromaster);
+>    - Added checks against missing translations.
 > • Changes :
 >    - Cleaned-up and improved various UI code;
 >    - Cleaned-up and improved safety in DXML scripts;
