@@ -36,10 +36,10 @@
 
     <string id="encyclopedia_items_western_goods_gps_text">
         <text>
-		%c[pda_white]GPS локатор%c[ui_gray_1] - устройство, предназначенное для определения дистанции и названия ближайшей известной территории.\n
+		%c[pda_white]GPS-локатор%c[ui_gray_1] - устройство, предназначенное для определения дистанции и названия ближайшей известной территории.\n
 		\n%c[pda_green]Информация%c[ui_gray_1]\n
-        \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
-        \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
+        \nВоенный GPS-навигатор, использовавшийся для определения и нахождения дистанции до ближайшей к пользователю территории. Он также выводит регион, в котором игрок находится.\n
+        \nДля экрана устройства использована специальная технология, позволяющая выводить информацию с минимальными затратами энергии. Единственный недостаток заключается в монохромности экрана.\n
 		\n• %c[pda_white]Очень низкое потребление энергии%c[ui_gray_1]. Требует зарядки примерно раз в год.
         </text>
     </string>
@@ -53,7 +53,7 @@
         <text>
             %c[pda_white]Барахолка%c[ui_gray_1] посволяет игроку покупать временные предложения, где вещи продаются в нескольких экземплярах, но со скидкой.\n
             \n%c[pda_green]Информация%c[ui_gray_1]\n
-            \nBy talking to a trader at the Flea Market, the player has the option to purchase special offers. These offers are limited in time, and will eventually expire and get replaced with newer offers.\n
+            \nИгрок имеет возможность приобретать специальные предложения путём общения с торговцем на Барахолке. Эти предложения ограничены во времени и постепенно истекут, но будут заменены другими.\n
             \nПредложение описывается так:\n
             \n• %c[pda_white]Предмет%c[ui_gray_1]. Предлагаемая вещь;
             \n• %c[pda_white]Кол-во%c[ui_gray_1]. Количество предметов в предложении. Колеблется между 2 и 10 предметами;

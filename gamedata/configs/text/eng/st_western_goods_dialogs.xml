@@ -123,6 +123,31 @@
 		<text>You need to give, in cash, an equal or great value to what you're buying.</text>
 	</string>
 
+	<!-- Flight recorder barters -->
+	<string id="st_wg_barter_blackbox_to_eur_desc">
+		<text>Exchange a %c[d_orange]Flight recorder%c[ui_gray_2] for %c[d_orange]300 EUR%c[ui_gray_2].</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_eur_desc_done">
+		<text>The trader is not looking to purchase this item for now. Come back later.</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_rpg7_desc">
+		<text>Exchange a %c[d_orange]Flight recorder%c[ui_gray_2] for an %c[d_orange]RPG-7%c[ui_gray_2].</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_rpg7_desc_done">
+		<text>The trader only had one RPG-7 to exchange.</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_og7v_desc">
+		<text>Exchange a %c[d_orange]Flight recorder%c[ui_gray_2] for three %c[d_orange]OG-7V warheads%c[ui_gray_2].</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_og7v_desc_done">
+		<text>The trader is out of warheads for now, come back later.</text>
+	</string>
+
 	<!-- No more money barters available -->
 	<string id="st_wg_barter_money_desc_done">
 		<text>The trader want to keep some change for other clients, come back later.</text>
@@ -130,78 +155,78 @@
 
 	<!-- Dollars to Dollars barters -->
 	<string id="st_wg_barter_dollars_10_to_50_desc">
-		<text>Exchange five %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]50 dollars%c[ui_gray_2] bill.</text>
+		<text>Exchange five %c[d_orange]10 USD%c[ui_gray_2] bills for a %c[d_orange]50 USD%c[ui_gray_2] bill.</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_10_desc">
-		<text>Exchange a %c[d_orange]50 dollars%c[ui_gray_2] bill for five %c[d_orange]10 dollars%c[ui_gray_2] bills.</text>
+		<text>Exchange a %c[d_orange]50 USD%c[ui_gray_2] bill for five %c[d_orange]10 USD%c[ui_gray_2] bills.</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_100_desc">
-		<text>Exchange two %c[d_orange]50 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
+		<text>Exchange two %c[d_orange]50 USD%c[ui_gray_2] bills for a %c[d_orange]100 USD%c[ui_gray_2] bill.</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_100_to_50_desc">
-		<text>Exchange a %c[d_orange]100 dollars%c[ui_gray_2] bill for two %c[d_orange]50 dollars%c[ui_gray_2] bills.</text>
+		<text>Exchange a %c[d_orange]100 USD%c[ui_gray_2] bill for two %c[d_orange]50 USD%c[ui_gray_2] bills.</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_100_to_10_desc">
-		<text>Exchange a %c[d_orange]100 dollars%c[ui_gray_2] bill for ten %c[d_orange]10 dollars%c[ui_gray_2] bills.</text>
+		<text>Exchange a %c[d_orange]100 USD%c[ui_gray_2] bill for ten %c[d_orange]10 USD%c[ui_gray_2] bills.</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_10_to_100_desc">
-		<text>Exchange ten %c[d_orange]10 dollars%c[ui_gray_2] bills for a %c[d_orange]100 dollars%c[ui_gray_2] bill.</text>
+		<text>Exchange ten %c[d_orange]10 USD%c[ui_gray_2] bills for a %c[d_orange]100 USD%c[ui_gray_2] bill.</text>
 	</string>
 
 	<!-- Euros to Euros barters -->
 	<string id="st_wg_barter_euros_10_to_50_desc">
-		<text>Exchange five %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]50 euros%c[ui_gray_2] bill.</text>
+		<text>Exchange five %c[d_orange]10 EUR%c[ui_gray_2] bills for a %c[d_orange]50 EUR%c[ui_gray_2] bill.</text>
 	</string>
 
 	<string id="st_wg_barter_euros_50_to_10_desc">
-		<text>Exchange a %c[d_orange]50 euros%c[ui_gray_2] bill for five %c[d_orange]10 euros%c[ui_gray_2] bills.</text>
+		<text>Exchange a %c[d_orange]50 EUR%c[ui_gray_2] bill for five %c[d_orange]10 EUR%c[ui_gray_2] bills.</text>
 	</string>
 
 	<string id="st_wg_barter_euros_50_to_100_desc">
-		<text>Exchange two %c[d_orange]50 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
+		<text>Exchange two %c[d_orange]50 EUR%c[ui_gray_2] bills for a %c[d_orange]100 EUR%c[ui_gray_2] bill.</text>
 	</string>
 
 	<string id="st_wg_barter_euros_100_to_50_desc">
-		<text>Exchange a %c[d_orange]100 euros%c[ui_gray_2] bill for two %c[d_orange]50 euros%c[ui_gray_2] bills.</text>
+		<text>Exchange a %c[d_orange]100 EUR%c[ui_gray_2] bill for two %c[d_orange]50 EUR%c[ui_gray_2] bills.</text>
 	</string>
 
 	<string id="st_wg_barter_euros_100_to_10_desc">
-		<text>Exchange a %c[d_orange]100 euros%c[ui_gray_2] bill for ten %c[d_orange]10 euros%c[ui_gray_2] bills.</text>
+		<text>Exchange a %c[d_orange]100 EUR%c[ui_gray_2] bill for ten %c[d_orange]10 EUR%c[ui_gray_2] bills.</text>
 	</string>
 
 	<string id="st_wg_barter_euros_10_to_100_desc">
-		<text>Exchange ten %c[d_orange]10 euros%c[ui_gray_2] bills for a %c[d_orange]100 euros%c[ui_gray_2] bill.</text>
+		<text>Exchange ten %c[d_orange]10 EUR%c[ui_gray_2] bills for a %c[d_orange]100 EUR%c[ui_gray_2] bill.</text>
 	</string>
 
 	<!-- Dollars to Roubles barters -->
 	<string id="st_wg_barter_dollars_rouble_10_to_700_desc">
-		<text>Exchange %c[d_orange]10 dollars%c[ui_gray_2] for %c[d_orange]700 roubles%c[ui_gray_2].</text>
+		<text>Exchange %c[d_orange]10 USD%c[ui_gray_2] for %c[d_orange]700 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_rouble_50_to_3500_desc">
-		<text>Exchange %c[d_orange]50 dollars%c[ui_gray_2] for %c[d_orange]3500 roubles%c[ui_gray_2].</text>
+		<text>Exchange %c[d_orange]50 USD%c[ui_gray_2] for %c[d_orange]3500 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_rouble_100_to_7000_desc">
-		<text>Exchange %c[d_orange]100 dollars%c[ui_gray_2] for %c[d_orange]7000 roubles%c[ui_gray_2].</text>
+		<text>Exchange %c[d_orange]100 USD%c[ui_gray_2] for %c[d_orange]7000 RU%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Euros to Roubles barters -->
 	<string id="st_wg_barter_euros_rouble_10_to_680_desc">
-		<text>Exchange %c[d_orange]10 euros%c[ui_gray_2] for %c[d_orange]680 roubles%c[ui_gray_2].</text>
+		<text>Exchange %c[d_orange]10 EUR%c[ui_gray_2] for %c[d_orange]680 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_rouble_50_to_3400_desc">
-		<text>Exchange %c[d_orange]50 euros%c[ui_gray_2] for %c[d_orange]3400 roubles%c[ui_gray_2].</text>
+		<text>Exchange %c[d_orange]50 EUR%c[ui_gray_2] for %c[d_orange]3400 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_rouble_100_to_6800_desc">
-		<text>Exchange %c[d_orange]100 euros%c[ui_gray_2] for %c[d_orange]6800 roubles%c[ui_gray_2].</text>
+		<text>Exchange %c[d_orange]100 EUR%c[ui_gray_2] for %c[d_orange]6800 RU%c[ui_gray_2].</text>
 	</string>
 
 	<!-- ============================================================================================================-->

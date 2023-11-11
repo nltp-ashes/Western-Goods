@@ -112,7 +112,7 @@
 		<text>Заброшенный госпиталь, у обрушенного входа. %c[d_orange][Бесплатно]</text>
 	</string>
 
-	<!-- Обмен -->
+	<!-- Western Goods Trader Trade strings -->
 	<string id="st_wg_trader_empty_sell">
 		<text>Вам нужно заплатить зя выбранные вещи (Евро или Долларами).</text>
 	</string>
@@ -125,85 +125,110 @@
 		<text>Вам нужно заплатить наличными равную или большую цену за то, что ты покупаешь.</text>
 	</string>
 
-	<!-- Нет доступных обменов -->
+	<!-- Flight recorder barters -->
+	<string id="st_wg_barter_blackbox_to_eur_desc">
+		<text>Обменяйте %c[d_orange]бортовой самописец%c[ui_gray_2] на %c[d_orange]300 EUR%c[ui_gray_2].</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_eur_desc_done">
+		<text>Трейдер пока не собирается покупать этот предмет. Вернуться позже.</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_rpg7_desc">
+		<text>Обменяйте %c[d_orange]бортовой самописец%c[ui_gray_2] на %c[d_orange]РПГ-7%c[ui_gray_2].</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_rpg7_desc_done">
+		<text>У торговца был только один РПГ-7 на обмен.</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_og7v_desc">
+		<text>Обменяйте %c[d_orange]бортовой самописец%c[ui_gray_2] на три %c[d_orange]боеголовки ОГ-7В%c[ui_gray_2].</text>
+	</string>
+
+	<string id="st_wg_barter_blackbox_to_og7v_desc_done">
+		<text>У торговца пока нет боеголовок, вернитесь позже.</text>
+	</string>
+
+	<!-- No more money barters available -->
 	<string id="st_wg_barter_money_desc_done">
 		<text>Торговец хочет оставить сдачу для других клиентов, приходите позже.</text>
 	</string>
 
-	<!-- Размен долларов -->
+	<!-- Dollars to Dollars barters -->
 	<string id="st_wg_barter_dollars_10_to_50_desc">
-		<text>Разменяй пять банкнот по %c[d_orange]10 долларов%c[ui_gray_2]  на  одну в %c[d_orange]50 долларов%c[ui_gray_2].</text>
+		<text>Разменяй пять банкнот по %c[d_orange]10 USD%c[ui_gray_2]  на  одну в %c[d_orange]50 USD%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_10_desc">
-		<text>Разменяй банкноту в %c[d_orange]50 долларов%c[ui_gray_2] на пять по %c[d_orange]10 долларов%c[ui_gray_2].</text>
+		<text>Разменяй банкноту в %c[d_orange]50 USD%c[ui_gray_2] на пять по %c[d_orange]10 USD%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_50_to_100_desc">
-		<text>Разменяй две банкноты по %c[d_orange]50 долларов%c[ui_gray_2] на одну в %c[d_orange]100 долларов%c[ui_gray_2].</text>
+		<text>Разменяй две банкноты по %c[d_orange]50 USD%c[ui_gray_2] на одну в %c[d_orange]100 USD%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_100_to_50_desc">
-		<text>Разменяй одну банкноту в %c[d_orange]100 долларов%c[ui_gray_2] на две по %c[d_orange]50 долларов%c[ui_gray_2].</text>
+		<text>Разменяй одну банкноту в %c[d_orange]100 USD%c[ui_gray_2] на две по %c[d_orange]50 USD%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_100_to_10_desc">
-		<text>Разменяй банкноту в %c[d_orange]100 долларов%c[ui_gray_2] на десять по %c[d_orange]10 долларов%c[ui_gray_2].</text>
+		<text>Разменяй банкноту в %c[d_orange]100 USD%c[ui_gray_2] на десять по %c[d_orange]10 USD%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_10_to_100_desc">
-		<text>Разменяй десять банкнот по %c[d_orange]10 долларов%c[ui_gray_2] на одну в %c[d_orange]100 долларов%c[ui_gray_2].</text>
+		<text>Разменяй десять банкнот по %c[d_orange]10 USD%c[ui_gray_2] на одну в %c[d_orange]100 USD%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Euros to Euros barters -->
 	<string id="st_wg_barter_euros_10_to_50_desc">
-		<text>Разменяй пять банкнот по %c[d_orange]10 евро%c[ui_gray_2] на одну в %c[d_orange]50 евро%c[ui_gray_2].</text>
+		<text>Разменяй пять банкнот по %c[d_orange]10 EUR%c[ui_gray_2] на одну в %c[d_orange]50 EUR%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_50_to_10_desc">
-		<text>Разменяй банкноту в %c[d_orange]50 евро%c[ui_gray_2] на пять по %c[d_orange]10 евро%c[ui_gray_2].</text>
+		<text>Разменяй банкноту в %c[d_orange]50 EUR%c[ui_gray_2] на пять по %c[d_orange]10 EUR%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_50_to_100_desc">
-		<text>Разменяй две банкноты по %c[d_orange]50 евро%c[ui_gray_2] на одну в %c[d_orange]100 евро%c[ui_gray_2].</text>
+		<text>Разменяй две банкноты по %c[d_orange]50 EUR%c[ui_gray_2] на одну в %c[d_orange]100 EUR%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_100_to_50_desc">
-		<text>Разменяй банкноту в %c[d_orange]100 евро%c[ui_gray_2] на две по %c[d_orange]50 евро%c[ui_gray_2].</text>
+		<text>Разменяй банкноту в %c[d_orange]100 EUR%c[ui_gray_2] на две по %c[d_orange]50 EUR%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_100_to_10_desc">
-		<text>Разменяй банкноту в %c[d_orange]100 евро%c[ui_gray_2] на десять по %c[d_orange]10 евро%c[ui_gray_2].</text>
+		<text>Разменяй банкноту в %c[d_orange]100 EUR%c[ui_gray_2] на десять по %c[d_orange]10 EUR%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_10_to_100_desc">
-		<text>Разменяй десять банкнот по %c[d_orange]10 евро%c[ui_gray_2] на одну в %c[d_orange]100 евро%c[ui_gray_2].</text>
+		<text>Разменяй десять банкнот по %c[d_orange]10 EUR%c[ui_gray_2] на одну в %c[d_orange]100 EUR%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Dollars to Roubles barters -->
 	<string id="st_wg_barter_dollars_rouble_10_to_700_desc">
-		<text>Разменяй %c[d_orange]10 долларов%c[ui_gray_2] на %c[d_orange]700 рублей%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]10 USD%c[ui_gray_2] на %c[d_orange]700 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_rouble_50_to_3500_desc">
-		<text>Разменяй %c[d_orange]50 долларов%c[ui_gray_2] на %c[d_orange]3500 рублей%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]50 USD%c[ui_gray_2] на %c[d_orange]3500 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_dollars_rouble_100_to_7000_desc">
-		<text>Разменяй %c[d_orange]100 долларов%c[ui_gray_2] на %c[d_orange]7000 рублей%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]100 USD%c[ui_gray_2] на %c[d_orange]7000 RU%c[ui_gray_2].</text>
 	</string>
 
 	<!-- Euros to Roubles barters -->
 	<string id="st_wg_barter_euros_rouble_10_to_680_desc">
-		<text>Разменяй %c[d_orange]10 евро%c[ui_gray_2] на %c[d_orange]680 рублей%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]10 EUR%c[ui_gray_2] на %c[d_orange]680 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_rouble_50_to_3400_desc">
-		<text>Разменяй %c[d_orange]50 евро%c[ui_gray_2] на %c[d_orange]3400 рублей%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]50 EUR%c[ui_gray_2] на %c[d_orange]3400 RU%c[ui_gray_2].</text>
 	</string>
 
 	<string id="st_wg_barter_euros_rouble_100_to_6800_desc">
-		<text>Разменяй %c[d_orange]100 евро%c[ui_gray_2] на %c[d_orange]6800 рублей%c[ui_gray_2].</text>
+		<text>Разменяй %c[d_orange]100 EUR%c[ui_gray_2] на %c[d_orange]6800 RU%c[ui_gray_2].</text>
 	</string>
 
 	<!-- ============================================================================================================-->
@@ -1377,7 +1402,7 @@
 	</string>
 
 	<string id="st_wg_act_3_task_3_stage_0_message_4">
-		<text>Не то чего я хотел, но, надеюсь, это сработает. Слушай, можешь мне помочь в последний раз? Я буду ждать тебя на Армейских Складах.</text>
+		<text>Не то, чего я хотел, но, надеюсь, это сработает. Слушай, можешь мне помочь в последний раз? Я буду ждать тебя на Армейских Складах.</text>
 	</string>
 
 </string_table>
