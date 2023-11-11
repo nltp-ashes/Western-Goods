@@ -211,6 +211,54 @@ function check_prerequisites()
     assert(is_lua_unlocalizer_installed() , error_message)
 end
 
+--- Function used to detect missing translations.
+--- This function will iterate all files in gamedata/configs/text/[eng|rus]/*.xml.
+--- Then, it will compare the strings found, and warn if any language has missing translation.
+--- @return nil
+function check_missing_translations()
+    dbg_printf("[WG] Core | Starting check for missing translations...")
+
+    local profiler = profile_timer()
+    profiler:start()
+
+    local folders = { "eng", "rus" }
+    local strings = {}
+
+    for _, folder in pairs(folders) do
+        local file_list = western_goods_utils.list_files("text\\" .. folder .. "\\")
+
+        dbg_printf("[WG] Core | Gathering strings for '%s' language", folder)
+        strings[folder] = {}
+
+        for _,file_name in pairs(file_list) do
+            if string.find(file_name, "western_goods") then
+                dbg_printf("[WG] Core | Parsing file '%s'", file_name)
+
+                local xml = CScriptXmlInit()
+                xml:ParseDirFile("text\\" .. folder, file_name)
+                xml:NavigateToNode("string_table", 0)
+
+                for i=0, xml:GetNodesNum("", 0, "string") - 1 do
+                    strings[folder][i+1] = xml:ReadAttribute("string", i, "id")
+                end
+            end
+        end
+    end
+
+    for lang_curr, strings_curr in pairs(strings) do
+        for _, str_curr in pairs(strings_curr) do
+            for lang_other, strings_other in pairs(strings) do
+                if lang_curr ~= lang_other and not western_goods_utils.table_contains(strings_other, str_curr) then
+                    printf("![WG] ERROR | Core | String '" .. str_curr .. "' found in '" .. lang_curr .. "' but not in '" .. lang_other .. "' !")
+                end
+            end
+        end
+    end
+
+    profiler:stop()
+    dbg_printf("[WG] Core | Check for missing translations ended in %sms", profiler:time()/1000)
+end
+
 --- Function used to check if the Barter UI is installed.
 --- @return boolean
 function is_barter_ui_installed()
@@ -244,6 +292,7 @@ end
 function on_game_start()
     RegisterScriptCallback("on_game_load", print_addon_version)
     RegisterScriptCallback("on_game_load", check_prerequisites)
+    RegisterScriptCallback("on_game_load", check_missing_translations)
     RegisterScriptCallback("on_option_change", check_addon_removal)
 end
 
