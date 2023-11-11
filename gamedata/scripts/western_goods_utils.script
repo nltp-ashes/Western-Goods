@@ -423,18 +423,21 @@ end
 --- @param path string
 --- @return table
 function list_files(path)
-    local fileList = getFS():file_list_open("$game_config$", path, bit_or(FS.FS_ListFiles, FS.FS_RootOnly))
-    local count = fileList and fileList:Size() or 0
-    local tbl = {}
-    if count > 0 then
-        for i = 1, count do
-            local file_name = fileList:GetAt(i - 1)
-            if file_name then
-                tbl[#tbl + 1] = file_name
-            end
+    local file_list_fs = getFS():file_list_open("$game_config$", path, bit_or(FS.FS_ListFiles, FS.FS_RootOnly))
+    local file_list = {}
+
+    local count = file_list_fs and file_list_fs:Size() or 0
+    if count <= 0 then
+        return file_list
+    end
+
+    for i = 1, count do
+        local file_name = file_list_fs:GetAt(i - 1)
+        if file_name then
+            file_list[#file_list + 1] = file_name
         end
     end
-    return tbl
+    return file_list
 end
 
 --- Function used to list all the texture descriptions matching a given pattern.
@@ -446,12 +449,10 @@ function collect_texture_descriptions(pattern)
     this.dbg_printf("[WG] Utils | Getting matching texture descriptions for '%s'...", pattern)
 
     local profiler = profile_timer()
-
     profiler:start()
 
-    local matches = {}
-
     local file_list = this.list_files("ui\\textures_descr\\")
+    local matches = {}
 
     for _,file_name in pairs(file_list) do
         local xml = CScriptXmlInit()
@@ -478,7 +479,6 @@ function collect_texture_descriptions(pattern)
     end
 
     profiler:stop()
-
     this.dbg_printf("[WG] Utils | Found %s matching texture descriptions for %s in %sms :\n%s", size_table(matches), pattern, profiler:time()/1000, utils_data.print_table(matches, false, true))
 
     return matches
