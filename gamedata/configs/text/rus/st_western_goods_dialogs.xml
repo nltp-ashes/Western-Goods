@@ -295,7 +295,7 @@
         <text>Здравствуй друг, Я счастлив тебя видеть!</text>
     </string>
 
-    <!-- Dialogs strings -->
+    <!-- Dialogs rescue strings -->
     <string id="stalker_crew_member_rescue_0">
         <text>Эй, ты ещё с нами? Давай, бери себя в руки и идём со мной, быстро!</text>
     </string>
@@ -316,6 +316,7 @@
         <text>Ну же! У нас мало времени до того как отряд Монолита неподалёку вызовет подкрепление. Пошли!</text>
     </string>
 
+    <!-- Dialogs reward strings -->
     <string id="stalker_crew_member_reward_0">
         <text>Привет, Хедес сказал, ты хотел меня видеть?</text>
     </string>
@@ -336,8 +337,34 @@
         <text>Спасибо.</text>
     </string>
 
+    <!-- Dialogs barter strings -->
     <string id="st_stalker_crew_member_barter">
         <text>Я бы хотел обменять кое-что. %c[d_orange][Размен]</text>
+    </string>
+
+    <!-- Lore strings -->
+    <string id="st_stalker_crew_member_lore_init">
+        <text>Я хотел бы задать вам несколько вопросов.</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_ask">
+        <text>Хорошо, что ты хочешь спросить?</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_question_1">
+        <text>Почему вы ищете бортовые самописцы?</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_answer_1">
+        <text>Ну, они часто содержат информацию об операциях Армии или Монолита в Зоне. Нам полезно планировать безопасные маршруты для полетов на собственных вертолетах.</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_question_2">
+        <text>Как ты думаешь, почему отряд Монолит сохранил тебе жизнь?</text>
+    </string>
+
+    <string id="st_stalker_crew_member_lore_answer_2">
+        <text>Veroyatno, oni khoteli prevratit' menya v odnogo iz svoikh, chtoby ya mog upravlyat' ikh vertoletami. Mne povezlo, chto ty vytashchil menya ottuda...</text>
     </string>
 
     <!--=============================================================================================================-->
