@@ -1,27 +1,31 @@
---- Original Author(s) : Tweaki_Breeki
---- Edited : NLTP_ASHES
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the fake space restrictors used in the Western Goods addon.
----
---- These fake space restrictors are composed of :
---- - A point 'pos_a' : the lowest north-western point of an area;
---- - A point 'pos_b' : the highest south-eastern point of the area.
----
----         |\¯¯¯¯¯|\
----   pos_a |_\____| \               y
----         \  \___\__\ pos_b	     |__ z
----   	     \ |    \ |	             \
----           \|_____\|	              x
----
---- The in_bounds(...) can be used to know if the player is inside that area.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : Tweaki_Breeki                                                                            ---
+---    Edited : NLTP_ASHES                                                                                           ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the fake space restrictors used in the Western Goods addon.                             ---
+---                                                                                                                  ---
+---    These fake space restrictors are composed of :                                                                ---
+---     - A point 'pos_a' : the lowest north-western point of an area;                                               ---
+---     - A point 'pos_b' : the highest south-eastern point of the area.                                             ---
+---                                                                                                                  ---
+---          |\¯¯¯¯¯|\                                                                                               ---
+---    pos_a |_\____| \                y                                                                             ---
+---          \  \___\__\ pos_b         |__ z                                                                         ---
+---           \ |    \ |               \                                                                             ---
+---            \|_____\|                x                                                                            ---
+---                                                                                                                  ---
+---    The in_bounds(...) can be used to know if the player is inside that area.                                     ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Functions

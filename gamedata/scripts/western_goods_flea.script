@@ -1,47 +1,57 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 02/06/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the Mercenary flea market system.
----
---- You can add new sections to the item pool using a file :
----
---- == gamedata/configs/plugins/western_goods/flea_market/flea_<some_unique_name_of_your_choice>.ltx ===================
---- [some_unique_name_of_your_choice]
---- some_item_section
---- some_other_item_section
---- ====================================================================================================================
----
---- Or you can use the callback to add new items :
----
---- == gamedata/scripts/my_addon_s_script.script =======================================================================
---- function on_game_start()
----    RegisterScriptCallback("western_goods_flea_on_collect_sections", function(flags)
----        local items_to_add = {
----            "some_item_section",
----            "some_other_item_section",
----        }
----        for k,v in pairs(items_to_add) do
----            table.insert(flags.result,v)
----        end
----    end)
---- end
---- ====================================================================================================================
----
---- By default, if the npc has "western_goods_flea_offers" line of dialog, the dialog will be available to the player.
---- If you want to have more control over this dialog, you can use the "western_goods_flea_on_dialog" callback.
----
---- == gamedata/scripts/my_addon_s_script.script =======================================================================
---- function on_game_start()
----    RegisterScriptCallback("western_goods_flea_on_dialog", function(actor,npc,flags)
----        if npc:section() == "my_npc_section" and some_condition() then
----            -- The line of dialog will now be hidden
----            flags.result = false
----        end
----    end)
---- end
---- ====================================================================================================================
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 02/06/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the Mercenary flea market system.                                                       ---
+---                                                                                                                  ---
+---    You can add new sections to the item pool using a file :                                                      ---
+---                                                                                                                  ---
+---=== gamedata/configs/plugins/western_goods/flea_market/flea_<some_unique_name_of_your_choice>.ltx ================---
+---                                                                                                                  ---
+---    [some_unique_name_of_your_choice]                                                                             ---
+---    some_item_section                                                                                             ---
+---    some_other_item_section                                                                                       ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Or you can use the callback to add new items :                                                                ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function on_game_start()                                                                                      ---
+---       RegisterScriptCallback("western_goods_flea_on_collect_sections", function(flags)                           ---
+---           local items_to_add = {                                                                                 ---
+---               "some_item_section",                                                                               ---
+---               "some_other_item_section",                                                                         ---
+---           }                                                                                                      ---
+---           for k,v in pairs(items_to_add) do                                                                      ---
+---               table.insert(flags.result,v)                                                                       ---
+---           end                                                                                                    ---
+---       end)                                                                                                       ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---    By default, if the npc has the "western_goods_flea_offers" dialog, it will be available to the player.        ---
+---    If you want to have more control over this dialog, you can use the "western_goods_flea_on_dialog" callback.   ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function on_game_start()                                                                                      ---
+---       RegisterScriptCallback("western_goods_flea_on_dialog", function(actor,npc,flags)                           ---
+---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
+---               -- The line of dialog will now be hidden                                                           ---
+---               flags.result = false                                                                               ---
+---           end                                                                                                    ---
+---       end)                                                                                                       ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables, imported functions and new callbacks
@@ -52,20 +62,20 @@ AddScriptCallback("western_goods_flea_on_dialog")
 AddScriptCallback("western_goods_flea_on_collect_sections")
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- Constants
-local ini_sections = ini_file([[plugins\western_goods\flea_market\importer.ltx]])
-local offers_per_npc = 5
-local offers_exp_freq = 3600000
-local min_item_count = 2
-local max_item_count = 10
-local min_discount = 5
-local max_discount = 50
+local ini_sections              = ini_file([[plugins\western_goods\flea_market\importer.ltx]])
+local offers_per_npc            = 5
+local offers_exp_freq           = 3600000
+local min_item_count            = 2
+local max_item_count            = 10
+local min_discount              = 5
+local max_discount              = 50
 
 -- Variables
-local current_offer = 1
-local offers = {}
+local current_offer             = 1
+local offers                    = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Core Functions

@@ -1,74 +1,77 @@
---- Original Author(s) : NLTP_ASHES, RavenAscendant
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- This script represents an API to make handling of helicopters easier.
----
---- While all the functions are accessible outside of the script, only two are really designed to be used externally :
----
---- - heli_spawn(...) :
----   A function you can use to create an helicopter at a location (default mode is idle);
----
---- - heli_register(...) :
----   A function you can use to give an order to the helicopter.
----
----
---- Helicopters using this API have "modes", or sort of objectives, and they go as follows :
----
---- - HELICOPTERS_MODES.IDLE :
----   The helicopter will wait at its current position until it is put in anther mode;
----
---- - HELICOPTERS_MODES.PROTECT_ACTOR :
----   The helicopter will fly over the player, and react to attack orders;
----
---- - HELICOPTERS_MODES.MOVE_TO_POINT :
----   The helicopter will fly in a straight line to a given point in space;
----
---- - HELICOPTERS_MODES.LAND_AT_POINT :
----   The helicopter will fly high until it gets close to the landing spot, then it'll descend to land, and
----   automatically switch to "idle" mode;
----
---- - HELICOPTERS_MODES.LEAVE_AT_POINT :
----   The helicopter will fly high until it gets close to its leaving spot, then it'll descend, and upon reaching
----   the spot, it'll automatically get released and it'll be removed from the system.
----
---- - HELICOPTERS_MODES.RELEASE :
----   The helicopter will immediately get released. This isn't really meant to be used, and is more so here as a
----   last resort in case it would be needed. Normally, you'd use HELICOPTERS_MODES.LEAVE_AT_POINT.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES, RavenAscendant                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script represents an API to make handling of helicopters easier.                                         ---
+---                                                                                                                  ---
+---    While all the functions are accessible outside of the script, only two are designed to be used externally :   ---
+---                                                                                                                  ---
+---     - heli_spawn(...) :                                                                                          ---
+---       A function you can use to create an helicopter at a location (default mode is idle);                       ---
+---                                                                                                                  ---
+---     - heli_register(...) :                                                                                       ---
+---       A function you can use to give an order to the helicopter.                                                 ---
+---                                                                                                                  ---
+---    Helicopters using this API have "modes", or sort of objectives, and they go as follows :                      ---
+---                                                                                                                  ---
+---     - HELICOPTERS_MODES.IDLE :                                                                                   ---
+---       The helicopter will wait at its current position until it is put in anther mode;                           ---
+---                                                                                                                  ---
+---     - HELICOPTERS_MODES.PROTECT_ACTOR :                                                                          ---
+---       The helicopter will fly over the player, and react to attack orders;                                       ---
+---                                                                                                                  ---
+---     - HELICOPTERS_MODES.MOVE_TO_POINT :                                                                          ---
+---       The helicopter will fly in a straight line to a given point in space;                                      ---
+---                                                                                                                  ---
+---     - HELICOPTERS_MODES.LAND_AT_POINT :                                                                          ---
+---       The helicopter will fly high until it gets close to the landing spot, then it'll descend to land, and      ---
+---       automatically switch to "idle" mode;                                                                       ---
+---                                                                                                                  ---
+---     - HELICOPTERS_MODES.LEAVE_AT_POINT :                                                                         ---
+---       The helicopter will fly high until it gets close to its leaving spot, then it'll descend, and upon         ---
+---       reaching the spot, it'll automatically get released and it'll be removed from the system.                  ---
+---                                                                                                                  ---
+---     - HELICOPTERS_MODES.RELEASE :                                                                                ---
+---       The helicopter will immediately get released. This isn't really meant to be used, and is more so here as a ---
+---       last resort in case it would be needed. Normally, you'd use HELICOPTERS_MODES.LEAVE_AT_POINT.              ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 HELICOPTERS_MODES = {
-    IDLE = 1,
-    PROTECT_ACTOR = 2,
-    MOVE_TO_POINT = 3,
-    LAND_AT_POINT = 4,
-    LEAVE_AT_POINT = 5,
-    RELEASE = 6
+    IDLE                              = 1,
+    PROTECT_ACTOR                     = 2,
+    MOVE_TO_POINT                     = 3,
+    LAND_AT_POINT                     = 4,
+    LEAVE_AT_POINT                    = 5,
+    RELEASE                           = 6
 }
 
 -- Helicopter constants
-local CONST_HELICOPTER_UPDATE_FREQ = 5000
-local CONST_HELICOPTER_FLIGHT_ALT = 100
+local CONST_HELICOPTER_UPDATE_FREQ    = 5000
+local CONST_HELICOPTER_FLIGHT_ALT     = 100
 local CONST_HELICOPTER_FLIGHT_ALT_SQR = 10000
-local CONST_HELICOPTER_SPOT = "secondary_task_location"
+local CONST_HELICOPTER_SPOT           = "secondary_task_location"
 
 -- Helicopter variables
-local HELICOPTERS_TABLE = {}
+local HELICOPTERS_TABLE               = {}
 
-local helicopters_targets = {}
-local helicopters_sounds = {
+local helicopters_targets             = {}
+local helicopters_sounds              = {
     sound_object([[western_goods_misc\helicopter\heli_attack_1]]),
     sound_object([[western_goods_misc\helicopter\heli_attack_2]]),
     sound_object([[western_goods_misc\helicopter\heli_attack_3]])
 }
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
-local level_object_by_id = western_goods_utils.level_object_by_id
+local dbg_printf                      = western_goods_utils.dbg_printf
+local level_object_by_id              = western_goods_utils.level_object_by_id
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Functions

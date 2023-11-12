@@ -1,27 +1,33 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- This script holds the 'core' of the addon. Stuff that ensure proper working of the addon, or that are general purpose.
---- Notable mentions are :
---- - This script holds the logic of spawning items in NPC corpses;
---- - This script holds the logic if spawning items in traders' inventories;
---- - This script is responsible for ensuring the player has the required game version and pre-requisites;
---- - This script is responsible for cleaning the save-game in case the player decides to remove the addon;
---- - This script is the source of truth for the list of items and objects added by the addon.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script holds the 'core' of the addon.                                                                    ---
+---    Stuff that ensure proper working of the addon, or that are general purpose.                                   ---
+---                                                                                                                  ---
+---    Notable mentions are :                                                                                        ---
+---     - This script holds the logic of spawning items in NPC corpses;                                              ---
+---     - This script holds the logic if spawning items in traders' inventories;                                     ---
+---     - This script is responsible for ensuring the player has the required game version and pre-requisites;       ---
+---     - This script is responsible for cleaning the save-game in case the player decides to remove the addon;      ---
+---     - This script is the source of truth for the list of items and objects added by the addon.                   ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local VERSION = "2.4.0"
+local VERSION                       = "2.4.0"
 
-local CONST_BARMAN_TYPE_BUY_LIST = {"food","drink"}
+local CONST_BARMAN_TYPE_BUY_LIST   = {"food","drink"}
 local CONST_SUPPLIER_TYPE_BUY_LIST = {"magazine"}
 local CONST_MECHANIC_TYPE_BUY_LIST = {"tech"}
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                   = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Traders

@@ -1,19 +1,23 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the various usable items from the Western Goods addon.
---- This script contains functions used to return the text displayed when right clicking on items in the inventory.
---- It also contains a use_item(...) function where items will be filtered to their respective functions.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the various usable items from the Western Goods addon.                                  ---
+---    This script contains functions used to return the text displayed when right-clicking on items.                ---
+---    It also contains a use_item(...) function where items will be filtered to their respective functions.         ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
+local TEMP_LIGHTER_ENABLED      = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -154,12 +158,12 @@ if TEMP_LIGHTER_ENABLED then
         local pass = true
 
         -- read important boosts
-        local period		= ini_sys:r_float_ex(sec, "boost_time") or 0
-        local rad_boost 	= ini_sys:r_float_ex(sec, "boost_radiation_restore") or 0
-        local psy_boost 	= ini_sys:r_float_ex(sec, "boost_telepat_protection") or 0
-        local bld_boost 	= ini_sys:r_float_ex(sec, "boost_bleeding_restore") or 0
-        local hp_boost 		= ini_sys:r_float_ex(sec, "boost_health_restore") or 0
-        local pwr_boost 	= ini_sys:r_float_ex(sec, "boost_power_restore") or 0
+        local period        = ini_sys:r_float_ex(sec, "boost_time") or 0
+        local rad_boost     = ini_sys:r_float_ex(sec, "boost_radiation_restore") or 0
+        local psy_boost     = ini_sys:r_float_ex(sec, "boost_telepat_protection") or 0
+        local bld_boost     = ini_sys:r_float_ex(sec, "boost_bleeding_restore") or 0
+        local hp_boost         = ini_sys:r_float_ex(sec, "boost_health_restore") or 0
+        local pwr_boost     = ini_sys:r_float_ex(sec, "boost_power_restore") or 0
 
         -- if an item is required
         local requires_tool = ini_sys:r_bool_ex(sec, "requires_light_weak")
@@ -179,7 +183,7 @@ if TEMP_LIGHTER_ENABLED then
 
         -- store boosts in a table
         curr_booster["section"]   = sec
-        curr_booster["period"]	  = (period > 0) and (time_g + period*1000) or time_g
+        curr_booster["period"]      = (period > 0) and (time_g + period*1000) or time_g
         curr_booster["pwr"]       = (pwr_boost > unlocalized_boost_min) and pwr_boost or 0
         curr_booster["psy"]       = (psy_boost > unlocalized_boost_min) and psy_boost or 0
         curr_booster["bld"]       = (bld_boost > unlocalized_boost_min) and bld_boost or 0
