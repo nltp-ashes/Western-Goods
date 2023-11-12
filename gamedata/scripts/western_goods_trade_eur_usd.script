@@ -1,37 +1,45 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 02/06/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the trade system, but with Euros/Dollars instead of Roubles.
----
---- By default, if the npc has "western_goods_trade_eur_usd" line of dialog, the dialog will be available to the player.
---- If you want to have more control over this dialog, you can use the "western_goods_trade_eur_usd_on_dialog" callback.
----
---- == gamedata/scripts/my_addon_s_script.script =======================================================================
---- function on_game_start()
----    RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", function(actor,npc,flags)
----        if npc:section() == "my_npc_section" and some_condition() then
----            -- The line of dialog will now be hidden
----            flags.result = false
----        end
----    end)
---- end
---- ====================================================================================================================
----
---- By default, NPCs using the EUR/USD trade system are shielded (aka unaffected) from trader_autoinject.script.
---- If you want change that, you can use the "western_goods_trade_eur_usd_on_trader_autoinject" callback.
----
---- == gamedata/scripts/my_addon_s_script.script =======================================================================
---- function on_game_start()
----    RegisterScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject", function(npc,flags)
----        if npc:section() == "my_npc_section" and some_condition() then
----            -- The NPC will now receive items from trader_autoinject.script
----            flags.result = true
----        end
----    end)
---- end
---- ====================================================================================================================
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 02/06/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
+---                                                                                                                  ---
+---    By default, if the npc has the "western_goods_trade_eur_usd" dialog, it will be available to the player.      ---
+---    If you want more control over this dialog, you can use the "western_goods_trade_eur_usd_on_dialog" callback.  ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function on_game_start()                                                                                      ---
+---       RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", function(actor,npc,flags)                  ---
+---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
+---               -- The line of dialog will now be hidden                                                           ---
+---               flags.result = false                                                                               ---
+---           end                                                                                                    ---
+---       end)                                                                                                       ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---    By default, NPCs using the EUR/USD trade system are shielded (aka unaffected) from trader_autoinject.script.  ---
+---    If you want change that, you can use the "western_goods_trade_eur_usd_on_trader_autoinject" callback.         ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function on_game_start()                                                                                      ---
+---       RegisterScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject", function(npc,flags)             ---
+---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
+---               -- The NPC will now receive items from trader_autoinject.script                                    ---
+---               flags.result = true                                                                                ---
+---           end                                                                                                    ---
+---       end)                                                                                                       ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables, imported functions and new callbacks

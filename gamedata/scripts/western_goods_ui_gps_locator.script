@@ -1,9 +1,13 @@
---- Original Author(s) : <unknown>
---- Edited : NLTP_ASHES
---- Date : 26/05/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 26/05/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.              ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
@@ -13,7 +17,7 @@
 local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI					         = nil -- instance, don't touch
+GUI                             = nil -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
@@ -290,39 +294,39 @@ end
 
 function UIGPSLocator:GetLevelTexture(level_name)
     local level_textures         = {
-        ["jupiter"]					= "gps_jup",
-        ["jupiter_underground"]		= "gps_no_sig",
-        ["k00_marsh"]				= "gps_mar",
-        ["k01_darkscape"]			= "gps_darkscape",
-        ["k02_trucks_cemetery"]		= "gps_truck",
-        ["l01_escape"]				= "gps_esc",
-        ["l02_garbage"]				= "gps_gar",
-        ["l03_agroprom"]			= "gps_agroprom",
-        ["l03u_agr_underground"]	= "gps_no_sig",
-        ["l04_darkvalley"]			= "gps_darkvalley",
-        ["l04u_labx18"]				= "gps_no_sig",
-        ["l05_bar"]					= "gps_bar",
-        ["l06_rostok"]				= "gps_wild",
-        ["l07_military"]			= "gps_mil",
-        ["l08_yantar"]				= "gps_yantar",
-        ["l08u_brainlab"]			= "gps_no_sig",
-        ["l09_deadcity"]			= "gps_dead",
-        ["l10_limansk"]				= "gps_lim",
-        ["l10_radar"]				= "gps_rad",
-        ["l10_red_forest"]			= "gps_red",
-        ["l10u_bunker"]				= "gps_no_sig",
-        ["l11_hospital"]			= "gps_hospital",
-        ["l11_pripyat"]				= "gps_pri_soc",
-        ["l12_stancia"]				= "gps_cnpp",
-        ["l12_stancia_2"]			= "gps_cnpp",
-        ["l12u_control_monolith"]	= "gps_no_sig",
-        ["l12u_sarcofag"]			= "gps_no_sig",
-        ["l13_generators"]			= "gps_gen",
-        ["l13u_warlab"]				= "gps_no_sig",
-        ["labx8"]					= "gps_no_sig",
-        ["pripyat"]					= "gps_pri",
-        ["zaton"]					= "gps_zat",
-        ["y04_pole"]				= "gps_pole",
+        ["jupiter"]                    = "gps_jup",
+        ["jupiter_underground"]        = "gps_no_sig",
+        ["k00_marsh"]                = "gps_mar",
+        ["k01_darkscape"]            = "gps_darkscape",
+        ["k02_trucks_cemetery"]        = "gps_truck",
+        ["l01_escape"]                = "gps_esc",
+        ["l02_garbage"]                = "gps_gar",
+        ["l03_agroprom"]            = "gps_agroprom",
+        ["l03u_agr_underground"]    = "gps_no_sig",
+        ["l04_darkvalley"]            = "gps_darkvalley",
+        ["l04u_labx18"]                = "gps_no_sig",
+        ["l05_bar"]                    = "gps_bar",
+        ["l06_rostok"]                = "gps_wild",
+        ["l07_military"]            = "gps_mil",
+        ["l08_yantar"]                = "gps_yantar",
+        ["l08u_brainlab"]            = "gps_no_sig",
+        ["l09_deadcity"]            = "gps_dead",
+        ["l10_limansk"]                = "gps_lim",
+        ["l10_radar"]                = "gps_rad",
+        ["l10_red_forest"]            = "gps_red",
+        ["l10u_bunker"]                = "gps_no_sig",
+        ["l11_hospital"]            = "gps_hospital",
+        ["l11_pripyat"]                = "gps_pri_soc",
+        ["l12_stancia"]                = "gps_cnpp",
+        ["l12_stancia_2"]            = "gps_cnpp",
+        ["l12u_control_monolith"]    = "gps_no_sig",
+        ["l12u_sarcofag"]            = "gps_no_sig",
+        ["l13_generators"]            = "gps_gen",
+        ["l13u_warlab"]                = "gps_no_sig",
+        ["labx8"]                    = "gps_no_sig",
+        ["pripyat"]                    = "gps_pri",
+        ["zaton"]                    = "gps_zat",
+        ["y04_pole"]                = "gps_pole",
     }
 
     if self.m_connectivity > 0 then

@@ -1,9 +1,13 @@
---- Original Author(s) : <unknown>
---- Edited : NLTP_ASHES
---- Date : 19/06/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the Rangefinder.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 19/06/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to handle the UI for the Rangefinder.                                                             ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
@@ -13,7 +17,7 @@
 local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI					         = nil -- instance, don't touch
+GUI                             = nil -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions

@@ -1,20 +1,24 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the tasks of the first act of the addon's storyline.
----
---- Each task is composed of the following elements :
---- - A act_1_task_X_start(...) function, used to start the task;
---- - A act_1_task_X_end(...) function, used to end the task;
---- - A xr_effects.act_1_task_X_init(...) function, called when the task has started;
---- - A xr_effects.act_1_task_X_complete(...) function, called when the task was successfully completed;
---- - A xr_effects.act_1_task_X_fail(...) function, called when the task was failed;
---- - A task_functor.act_1_task_X_title_f(...) function, called periodically to get the task's name;
---- - A task_functor.act_1_task_X_descr_f(...) function, called periodically to get the task's description;
---- - A task_functor.act_1_task_X_target_f(...) function, called periodically to get the task's target (for the PDA);
---- - A task_status_functor.act_1_task_X_status_f(...) function, called periodically to run the core logic of the task.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the tasks of the first act of the addon's storyline.                                    ---
+---                                                                                                                  ---
+---    Each task is composed of the following elements :                                                             ---
+---     - A act_1_task_X_start(...) function, used to start the task;                                                ---
+---     - A act_1_task_X_end(...) function, used to end the task;                                                    ---
+---     - A xr_effects.act_1_task_X_init(...) function, called when the task has started;                            ---
+---     - A xr_effects.act_1_task_X_complete(...) function, called when the task was successfully completed;         ---
+---     - A xr_effects.act_1_task_X_fail(...) function, called when the task was failed;                             ---
+---     - A task_functor.act_1_task_X_title_f(...) function, called periodically to get the name;                    ---
+---     - A task_functor.act_1_task_X_descr_f(...) function, called periodically to get the description;             ---
+---     - A task_functor.act_1_task_X_target_f(...) function, called periodically to get the target (for the PDA);   ---
+---     - A task_status_functor.act_1_task_X_status_f(...) function, called periodically to run the core logic.      ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
@@ -32,21 +36,21 @@ local send_dialog = western_goods_dialogs_manager.send_dialog
 local HELICOPTERS_MODES = western_goods_helicopter.HELICOPTERS_MODES
 
 -- Constants
-local CONST_TASK_2_HARD_DELAY = 1800000						-- milliseconds
-local CONST_TASK_3_HARD_DELAY = 1800000						-- milliseconds
-local CONST_TASK_1_HELI_DIST = 625							-- meters squared
-local CONST_TASK_1_SUPPLIES_DIST = 25						-- meters squared
-local CONST_TASK_1_PROGRESS_DELAY = 43000					-- milliseconds
-local CONST_TASK_2_HELI_DELAY = 50000						-- milliseconds
-local CONST_TASK_2_SHOW_TARGETS_DELAY = 300000				-- milliseconds
-local CONST_TASK_2_REP_THEFT = -100							-- reputation points
-local CONST_TASK_3_PROGRESS_DELAY = 38000					-- milliseconds
-local CONST_TASK_3_SHOW_TARGETS_DELAY = 300000				-- milliseconds
-local CONST_TASK_3_DIALOG_DIST = 625						-- meters squared
-local CONST_TASK_3_DIALOG_EX_DIST = 2500					-- meters squared
-local CONST_TASK_3_BRIDGE_DIST = 10000						-- meters squared
-local CONST_TASK_3_HELI_DIST = 100						    -- meters squared
-local CONST_TASK_3_NPC_DIST = 25						    -- meters squared
+local CONST_TASK_2_HARD_DELAY = 1800000                        -- milliseconds
+local CONST_TASK_3_HARD_DELAY = 1800000                        -- milliseconds
+local CONST_TASK_1_HELI_DIST = 625                            -- meters squared
+local CONST_TASK_1_SUPPLIES_DIST = 25                        -- meters squared
+local CONST_TASK_1_PROGRESS_DELAY = 43000                    -- milliseconds
+local CONST_TASK_2_HELI_DELAY = 50000                        -- milliseconds
+local CONST_TASK_2_SHOW_TARGETS_DELAY = 300000                -- milliseconds
+local CONST_TASK_2_REP_THEFT = -100                            -- reputation points
+local CONST_TASK_3_PROGRESS_DELAY = 38000                    -- milliseconds
+local CONST_TASK_3_SHOW_TARGETS_DELAY = 300000                -- milliseconds
+local CONST_TASK_3_DIALOG_DIST = 625                        -- meters squared
+local CONST_TASK_3_DIALOG_EX_DIST = 2500                    -- meters squared
+local CONST_TASK_3_BRIDGE_DIST = 10000                        -- meters squared
+local CONST_TASK_3_HELI_DIST = 100                            -- meters squared
+local CONST_TASK_3_NPC_DIST = 25                            -- meters squared
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -54,9 +58,9 @@ TASK_2_CACHE = {}
 TASK_3_CACHE = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
---	ACT 1 - HELICOPTER DELIVERY
+--    ACT 1 - HELICOPTER DELIVERY
 -- ---------------------------------------------------------------------------------------------------------------------
---	TASK 1 - ROAD BUMPS
+--    TASK 1 - ROAD BUMPS
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to start Act 1, Task 1.
@@ -341,7 +345,7 @@ function task_status_functor.act_1_task_1_status_f(tsk,task_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
---	TASK 2 - CONSPIRACY
+--    TASK 2 - CONSPIRACY
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to start Act 1, Task 2.
@@ -795,7 +799,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
             end
 
             -- If the player dropped one of the quest items, rollback to stage 3
-            if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID)	then
+            if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID)    then
                 dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 4 - Player dropped the items - %s - %s", quest_item_1.id, quest_item_2.id)
 
                 if western_goods_utils.has_info("western_goods_act_1_task_2_ready_finished") then
@@ -811,7 +815,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
---	TASK 3 - THE RESCUE
+--    TASK 3 - THE RESCUE
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to start Act 1, Task 3.
@@ -1288,7 +1292,7 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
---	Callbacks registration
+--    Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to register callbacks.
@@ -1301,7 +1305,7 @@ function on_game_start()
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
---	Data persistence
+--    Data persistence
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to store information in the save file.
@@ -1368,7 +1372,7 @@ function load_state(m_data)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
---	General functions
+--    General functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to setup the automatic start of Act 2, Task 2.

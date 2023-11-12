@@ -1,9 +1,14 @@
---- Original Author(s) : arti
---- Edited : N/A
---- Date : 07/02/2023
---- License : Shareware
----
---- Common redistribuable script used to make it easier to add items from addons to traders, without conflicts. Always use the latest version of that script.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : arti                                                                                     ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 07/02/2023                                                                                             ---
+---    License : Shareware                                                                                           ---
+---                                                                                                                  ---
+---    Common redistributable script used to make it easier to add items from addons to traders, without conflicts.  ---
+---    Always use the latest version of that script.                                                                 ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 --[[
 Wrapper class to let you autoinject things via monkey patch to all traders, respecting the restock time.

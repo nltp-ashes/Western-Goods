@@ -1,15 +1,19 @@
---- Original Author(s) : Tronex
---- Edited : NLTP_ASHES
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon.
----
---- Naming for some files/folders is based on the following contract :
---- - texture descriptions must be named like : "ui_<name_of_the_section>_page_<page_number>"
----
---- When the Readable UI  is displayed, the player will start healing psi-health.
---- The value of that healing is driven by CONST_MAGAZINE_PSI_REGEN and the factor defined in MCM.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : Tronex                                                                                   ---
+---    Edited : NLTP_ASHES                                                                                           ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon. ---
+---                                                                                                                  ---
+---    Naming for some files/folders is based on the following contract :                                            ---
+---     - texture descriptions must be named like : "ui_<name_of_the_section>_page_<page_number>"                    ---
+---                                                                                                                  ---
+---    When the Readable UI  is displayed, the player will start healing psi-health.                                 ---
+---    The value of that healing is driven by CONST_MAGAZINE_PSI_REGEN and the factor defined in MCM.                ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions

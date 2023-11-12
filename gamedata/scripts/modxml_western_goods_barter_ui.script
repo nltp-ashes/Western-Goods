@@ -1,54 +1,58 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 12/11/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml                       ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 function on_xml_read()
-	RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-		-- Only execute on gamedata\configs\ui\ui_barter.xml
-		if xml_file_name ~= [[ui\ui_barter.xml]] then
-			return
-		end
+    RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
+        -- Only execute on gamedata\configs\ui\ui_barter.xml
+        if xml_file_name ~= [[ui\ui_barter.xml]] then
+            return
+        end
 
-		modify_background_texture(xml_obj)
-		modify_background_size(xml_obj)
-	end)
+        modify_background_texture(xml_obj)
+        modify_background_size(xml_obj)
+    end)
 end
 
 function modify_background_texture(xml_obj)
-	-- Query the file to get the node(s) to modify
-	local query = "background > texture"
-	local query_res = xml_obj:query(query)
+    -- Query the file to get the node(s) to modify
+    local query = "background > texture"
+    local query_res = xml_obj:query(query)
 
-	-- Expect one, and only one match
-	if size_table(query_res) ~= 1 then
-		printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
-		return
-	end
+    -- Expect one, and only one match
+    if size_table(query_res) ~= 1 then
+        printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+        return
+    end
 
-	-- Get the resulting element
-	local elem = query_res[1]
+    -- Get the resulting element
+    local elem = query_res[1]
 
-	-- Change node text content
-	xml_obj:setText(elem, "ui\\barter\\ui_barter_background.dds")
+    -- Change node text content
+    xml_obj:setText(elem, "ui\\barter\\ui_barter_background.dds")
 end
 
 function modify_background_size(xml_obj)
-	-- Query the file to get the node(s) to modify
-	local query = "barter > background"
-	local query_res = xml_obj:query(query)
+    -- Query the file to get the node(s) to modify
+    local query = "barter > background"
+    local query_res = xml_obj:query(query)
 
-	-- Expect one, and only one match
-	if size_table(query_res) ~= 1 then
-		printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
-		return
-	end
+    -- Expect one, and only one match
+    if size_table(query_res) ~= 1 then
+        printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+        return
+    end
 
-	-- Get the resulting element
-	local elem = query_res[1]
+    -- Get the resulting element
+    local elem = query_res[1]
 
-	-- Change node attributes
-	xml_obj:setElementAttr(elem, {x=-228, y=-47, width=1024, height=768})
+    -- Change node attributes
+    xml_obj:setElementAttr(elem, {x=-228, y=-47, width=1024, height=768})
 end

@@ -1,20 +1,24 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the tasks of the third act of the addon's storyline.
----
---- Each task is composed of the following elements :
---- - A act_3_task_X_start(...) function, used to start the task;
---- - A act_3_task_X_end(...) function, used to end the task;
---- - A xr_effects.act_3_task_X_init(...) function, called when the task has started;
---- - A xr_effects.act_3_task_X_complete(...) function, called when the task was successfully completed;
---- - A xr_effects.act_3_task_X_fail(...) function, called when the task was failed;
---- - A task_functor.act_3_task_X_title_f(...) function, called periodically to get the task's name;
---- - A task_functor.act_3_task_X_descr_f(...) function, called periodically to get the task's description;
---- - A task_functor.act_3_task_X_target_f(...) function, called periodically to get the task's target (for the PDA);
---- - A task_status_functor.act_3_task_X_status_f(...) function, called periodically to run the core logic of the task.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the tasks of the third act of the addon's storyline.                                    ---
+---                                                                                                                  ---
+---    Each task is composed of the following elements :                                                             ---
+---     - A act_3_task_X_start(...) function, used to start the task;                                                ---
+---     - A act_3_task_X_end(...) function, used to end the task;                                                    ---
+---     - A xr_effects.act_3_task_X_init(...) function, called when the task has started;                            ---
+---     - A xr_effects.act_3_task_X_complete(...) function, called when the task was successfully completed;         ---
+---     - A xr_effects.act_3_task_X_fail(...) function, called when the task was failed;                             ---
+---     - A task_functor.act_3_task_X_title_f(...) function, called periodically to get the name;                    ---
+---     - A task_functor.act_3_task_X_descr_f(...) function, called periodically to get the description;             ---
+---     - A task_functor.act_3_task_X_target_f(...) function, called periodically to get the  target (for the PDA);  ---
+---     - A task_status_functor.act_3_task_X_status_f(...) function, called periodically to run the core logic.      ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions

@@ -1,20 +1,24 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the tasks of the second act of the addon's storyline.
----
---- Each task is composed of the following elements :
---- - A act_2_task_X_start(...) function, used to start the task;
---- - A act_2_task_X_end(...) function, used to end the task;
---- - A xr_effects.act_2_task_X_init(...) function, called when the task has started;
---- - A xr_effects.act_2_task_X_complete(...) function, called when the task was successfully completed;
---- - A xr_effects.act_2_task_X_fail(...) function, called when the task was failed;
---- - A task_functor.act_2_task_X_title_f(...) function, called periodically to get the task's name;
---- - A task_functor.act_2_task_X_descr_f(...) function, called periodically to get the task's description;
---- - A task_functor.act_2_task_X_target_f(...) function, called periodically to get the task's target (for the PDA);
---- - A task_status_functor.act_2_task_X_status_f(...) function, called periodically to run the core logic of the task.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the tasks of the second act of the addon's storyline.                                   ---
+---                                                                                                                  ---
+---    Each task is composed of the following elements :                                                             ---
+---     - A act_2_task_X_start(...) function, used to start the task;                                                ---
+---     - A act_2_task_X_end(...) function, used to end the task;                                                    ---
+---     - A xr_effects.act_2_task_X_init(...) function, called when the task has started;                            ---
+---     - A xr_effects.act_2_task_X_complete(...) function, called when the task was successfully completed;         ---
+---     - A xr_effects.act_2_task_X_fail(...) function, called when the task was failed;                             ---
+---     - A task_functor.act_2_task_X_title_f(...) function, called periodically to get the name;                    ---
+---     - A task_functor.act_2_task_X_descr_f(...) function, called periodically to get the description;             ---
+---     - A task_functor.act_2_task_X_target_f(...) function, called periodically to get the target (for the PDA);   ---
+---     - A task_status_functor.act_2_task_X_status_f(...) function, called periodically to run the core logic.      ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
@@ -26,19 +30,19 @@ local send_dialog = western_goods_dialogs_manager.send_dialog
 local level_object_by_id = western_goods_utils.level_object_by_id
 
 -- Constants
-local CONST_SPAWN_THROTTLE = 5000									-- milliseconds
-local CONST_TASK_2_HARD_DELAY = 1800000								-- milliseconds
-local CONST_TASK_2_SOFT_DELAY_MIN = 600								-- seconds
-local CONST_TASK_2_SOFT_DELAY_MAX = 1800							-- seconds
-local CONST_TASK_2_ECOLOG_TELEPORT_DELAY = 50000					-- milliseconds
-local CONST_TASK_2_STAGE_6_PROGRESS_DELAY = 30000					-- milliseconds
-local CONST_TASK_2_STAGE_8_PROGRESS_DELAY = 60000					-- milliseconds
-local CONST_TASK_2_STAGE_9_PROGRESS_DELAY = 40000					-- milliseconds
-local CONST_TASK_2_BANDIT_AUTOKILL_DELAY = 40000					-- milliseconds
-local CONST_TASK_2_CLEAR_SMART_DIST = 2500							-- meters squared
-local CONST_TASK_2_ZOMBIE_1_DIST = 15625							-- meters squared
-local CONST_TASK_2_SCHOOL_CLOSE = 400								-- meters squared
-local CONST_TASK_2_SCHOOL_FAR = 4900								-- meters squared
+local CONST_SPAWN_THROTTLE = 5000                                    -- milliseconds
+local CONST_TASK_2_HARD_DELAY = 1800000                                -- milliseconds
+local CONST_TASK_2_SOFT_DELAY_MIN = 600                                -- seconds
+local CONST_TASK_2_SOFT_DELAY_MAX = 1800                            -- seconds
+local CONST_TASK_2_ECOLOG_TELEPORT_DELAY = 50000                    -- milliseconds
+local CONST_TASK_2_STAGE_6_PROGRESS_DELAY = 30000                    -- milliseconds
+local CONST_TASK_2_STAGE_8_PROGRESS_DELAY = 60000                    -- milliseconds
+local CONST_TASK_2_STAGE_9_PROGRESS_DELAY = 40000                    -- milliseconds
+local CONST_TASK_2_BANDIT_AUTOKILL_DELAY = 40000                    -- milliseconds
+local CONST_TASK_2_CLEAR_SMART_DIST = 2500                            -- meters squared
+local CONST_TASK_2_ZOMBIE_1_DIST = 15625                            -- meters squared
+local CONST_TASK_2_SCHOOL_CLOSE = 400                                -- meters squared
+local CONST_TASK_2_SCHOOL_FAR = 4900                                -- meters squared
 
 -- Task variables
 TASK_1_CACHE = {}
@@ -287,28 +291,28 @@ function xr_effects.act_2_task_2_init(actor,npc)
         main_item = "wg_act_2_task_2_quest_item",
         marked_enemies = {},
         objects = {
-            btr 			= { sec="veh_btr",x=-32.9,y=-0.5,z=20.9,lvid=155155,gvid=4971 		},
-            sleeping_bag 	= { sec="itm_sleepbag",x=26.6,y=-4.3,z=129.2,lvid=232806,gvid=4970 	}
+            btr             = { sec="veh_btr",x=-32.9,y=-0.5,z=20.9,lvid=155155,gvid=4971         },
+            sleeping_bag     = { sec="itm_sleepbag",x=26.6,y=-4.3,z=129.2,lvid=232806,gvid=4970     }
         },
         squads = {
-            army_spawn_data 		= { sec="western_goods_act_2_task_2_army_squad", 	 	smart="pri_sim_3" 							},
-            mono_spawn_data 		= { sec="western_goods_act_2_task_2_mono_squad", 	 	smart="pri_sim_3" 							},
-            snork_spawn_data 		= { sec="western_goods_act_2_task_2_snork_squad", 	 	smart="pri_b301" 							},
-            ecolog_spawn_data 		= { sec="western_goods_act_2_task_2_ecolog_squad", 	 	smart="pri_a28_school",	smart2="pri_b303" 	},
-            zombie_1_spawn_data 	= { sec="western_goods_act_2_task_2_zombie_1_squad", 	smart="pri_sim_3" 							},
-            zombie_2_spawn_data 	= { sec="western_goods_act_2_task_2_zombie_2_squad", 	smart="pri_sim_3" 							},
-            bandit_1_spawn_data 	= { sec="western_goods_act_2_task_2_bandit_1_squad", 	smart="pri_b301" 							},
-            bandit_2_spawn_data 	= { sec="western_goods_act_2_task_2_bandit_2_squad", 	smart="pri_a28_school" 						},
-            controller_spawn_data 	= { sec="western_goods_act_2_task_2_controller_squad", 	smart="pri_b303" 							},
-            lynn_spawn_data 		= { sec="stalker_dunn_lynn_squad", 						smart="ds2_lager_st" 						},
-            lynn_guards_spawn_data 	= { sec="western_goods_act_2_task_2_lynn_guards_squad", smart="ds2_lager_st" 						}
+            army_spawn_data         = { sec="western_goods_act_2_task_2_army_squad",          smart="pri_sim_3"                             },
+            mono_spawn_data         = { sec="western_goods_act_2_task_2_mono_squad",          smart="pri_sim_3"                             },
+            snork_spawn_data         = { sec="western_goods_act_2_task_2_snork_squad",          smart="pri_b301"                             },
+            ecolog_spawn_data         = { sec="western_goods_act_2_task_2_ecolog_squad",          smart="pri_a28_school",    smart2="pri_b303"     },
+            zombie_1_spawn_data     = { sec="western_goods_act_2_task_2_zombie_1_squad",     smart="pri_sim_3"                             },
+            zombie_2_spawn_data     = { sec="western_goods_act_2_task_2_zombie_2_squad",     smart="pri_sim_3"                             },
+            bandit_1_spawn_data     = { sec="western_goods_act_2_task_2_bandit_1_squad",     smart="pri_b301"                             },
+            bandit_2_spawn_data     = { sec="western_goods_act_2_task_2_bandit_2_squad",     smart="pri_a28_school"                         },
+            controller_spawn_data     = { sec="western_goods_act_2_task_2_controller_squad",     smart="pri_b303"                             },
+            lynn_spawn_data         = { sec="stalker_dunn_lynn_squad",                         smart="ds2_lager_st"                         },
+            lynn_guards_spawn_data     = { sec="western_goods_act_2_task_2_lynn_guards_squad", smart="ds2_lager_st"                         }
         },
         restrictors = {
-            zombie 		= { ax=-97.150344848633,ay=-1.1752129793167,az=-45.473430633545,bx=-81.533813476563,by=5.2640190124512,	bz=-64.902114868164 },
-            snork 		= { ax=17.24550819397,	ay=-4.823212146759,	az=129.98883056641,	bx=29.521947860718,	by=-1.0844190120697,bz=121.89762878418 	},
-            school 		= { ax=2.7305309772491,	ay=-4.823212146759,	az=180.73071289063,	bx=76.082359313965,	by=17.772342681885,	bz=112.70443725586 	},
-            overlook 	= { ax=27.744569778442,	ay=7.1062412261963,	az=129.99130249023,	bx=53.035232543945,	by=16.793748855591,	bz=121.89153289795 	},
-            kbo         = { ax=3.7310662269592,	ay=4.2264876365662,	az=272.10140991211,	bx=14.69687461853,	by=8.0234889984131,	bz=265.22302246094	}
+            zombie         = { ax=-97.150344848633,ay=-1.1752129793167,az=-45.473430633545,bx=-81.533813476563,by=5.2640190124512,    bz=-64.902114868164 },
+            snork         = { ax=17.24550819397,    ay=-4.823212146759,    az=129.98883056641,    bx=29.521947860718,    by=-1.0844190120697,bz=121.89762878418     },
+            school         = { ax=2.7305309772491,    ay=-4.823212146759,    az=180.73071289063,    bx=76.082359313965,    by=17.772342681885,    bz=112.70443725586     },
+            overlook     = { ax=27.744569778442,    ay=7.1062412261963,    az=129.99130249023,    bx=53.035232543945,    by=16.793748855591,    bz=121.89153289795     },
+            kbo         = { ax=3.7310662269592,    ay=4.2264876365662,    az=272.10140991211,    bx=14.69687461853,    by=8.0234889984131,    bz=265.22302246094    }
         }
     }
 

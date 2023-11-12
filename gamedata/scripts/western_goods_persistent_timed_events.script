@@ -1,14 +1,18 @@
---- Original Author(s) : Unknown
---- Edited : NLTP_ASHES
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage time events, that are persistent through saves. To be used like regular time events.
----
---- The LOAD_DELAY variable is here because the game runs load_state before the save is finished loading.
---- This results in some function calls happening before the game is ready to play.
----
---- An important mention is, the functions passed to CreatePersistentTimeEvent must not contain pointers to engine classes.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : Unknown                                                                                  ---
+---    Edited : NLTP_ASHES                                                                                           ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage time events, that are persistent through saves. To be used like regular time events.    ---
+---                                                                                                                  ---
+---    The LOAD_DELAY variable is here because the game runs load_state before the save is finished loading.         ---
+---    This results in some function calls happening before the game is ready to play.                               ---
+---                                                                                                                  ---
+---    Important : the functions passed to CreatePersistentTimeEvent must not contain pointers to engine classes.    ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
@@ -18,7 +22,6 @@ local EVENT_QUEUE = {}
 local LOAD_DELAY = 15000
 
 local dbg_printf = western_goods_utils.dbg_printf
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Main Script
@@ -105,7 +108,6 @@ function GetPersistentTimeEventsCount(ev_id)
     return EVENT_QUEUE[ev_id] and EVENT_QUEUE[ev_id].__size or 0
 end
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +119,6 @@ function on_game_start()
     RegisterScriptCallback("load_state", load_state)
     RegisterScriptCallback("actor_on_update", ProcessPersistentEventQueue)
 end
-
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Data persistence
