@@ -18,7 +18,7 @@ function on_xml_read()
 
         -- Expect one, and only one match
         if size_table(query_res) ~= 1 then
-            printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got %s, expected %s.", query, size_table(query_res), 1)
+            printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
             return
         end
 
