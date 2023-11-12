@@ -799,7 +799,7 @@ function task_status_functor.act_1_task_2_status_f(tsk,task_id)
             end
 
             -- If the player dropped one of the quest items, rollback to stage 3
-            if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID)    then
+            if (not quest_item_1 or quest_item_1 and quest_item_1.parent_id ~= AC_ID) or (not quest_item_2 or quest_item_2 and quest_item_2.parent_id ~= AC_ID) then
                 dbg_printf("[WG] Tasks Act 1 | Task 2 - Stage 4 - Player dropped the items - %s - %s", quest_item_1.id, quest_item_2.id)
 
                 if western_goods_utils.has_info("western_goods_act_1_task_2_ready_finished") then
