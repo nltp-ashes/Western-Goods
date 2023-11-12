@@ -20,16 +20,16 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf                    = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- Constants
-local CONST_MAGAZINE_PSI_REGEN      = 0.0080
+local CONST_MAGAZINE_PSI_REGEN  = 0.0080
 
 -- Variables
-local magazine_textures             = {}
+local magazine_textures         = {}
 
 -- Singleton
-GUI                                 = nil -- instance, don't touch
+GUI                             = nil -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions

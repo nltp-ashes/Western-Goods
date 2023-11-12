@@ -23,7 +23,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- Constants
 local squads_to_spawn = {

@@ -14,7 +14,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf             = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- Singleton
 GUI                             = nil -- instance, don't touch

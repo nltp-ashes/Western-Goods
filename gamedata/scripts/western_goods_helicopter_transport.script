@@ -15,11 +15,11 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local dbg_printf = western_goods_utils.dbg_printf
-local heli_spawn = western_goods_helicopter.heli_spawn
-local heli_register = western_goods_helicopter.heli_register
-local level_object_by_id = western_goods_utils.level_object_by_id
-local HELICOPTERS_MODES = western_goods_helicopter.HELICOPTERS_MODES
+local dbg_printf                = western_goods_utils.dbg_printf
+local level_object_by_id        = western_goods_utils.level_object_by_id
+local heli_spawn                = western_goods_helicopter.heli_spawn
+local heli_register             = western_goods_helicopter.heli_register
+local HELICOPTERS_MODES         = western_goods_helicopter.HELICOPTERS_MODES
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Helicopter transport order

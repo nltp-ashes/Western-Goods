@@ -25,20 +25,19 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
-local send_dialog = western_goods_dialogs_manager.send_dialog
-local level_object_by_id = western_goods_utils.level_object_by_id
+local dbg_printf                        = western_goods_utils.dbg_printf
+local send_dialog                       = western_goods_dialogs_manager.send_dialog
 
 -- Constants
 local CONST_TASK_1_USB_UNLOCK_DIALOG_ID = "western_goods_act_3_task_1_usb_unlock"
-local CONST_TASK_1_USB_UNLOCK_COST = 5000
-local CONST_TASK_3_BRIBE_COST = 20000
+local CONST_TASK_1_USB_UNLOCK_COST      = 5000
+local CONST_TASK_3_BRIBE_COST           = 20000
 
 -- Task variables
-TASK_1_CACHE = {}
-TASK_2_CACHE = {}
-TASK_3_CACHE = {}
-TASK_4_CACHE = {}
+TASK_1_CACHE                            = {}
+TASK_2_CACHE                            = {}
+TASK_3_CACHE                            = {}
+TASK_4_CACHE                            = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- ACT 3 - CHERNENKO BROTHERS

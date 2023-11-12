@@ -18,21 +18,21 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Dialog constants
-local CONST_DISPLAY_TIME = 15
-local CONST_DELAY_MSG = 7000
-local CONST_DELAY_QUICK_MSG = 1000
-local CONST_DELAY_LOAD = 15000
-local CONST_MSG_HEADER = western_goods_utils.get_translation("st_wg_dm_message_header")
-local CONST_DEFAULT_NAME = western_goods_utils.get_translation("st_wg_dm_default_name")
-local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
+local CONST_DISPLAY_TIME        = 15
+local CONST_DELAY_MSG           = 7000
+local CONST_DELAY_QUICK_MSG     = 1000
+local CONST_DELAY_LOAD          = 15000
+local CONST_MSG_HEADER          = western_goods_utils.get_translation("st_wg_dm_message_header")
+local CONST_DEFAULT_NAME        = western_goods_utils.get_translation("st_wg_dm_default_name")
+local CONST_DEFAULT_ICON        = "ui_inGame2_no_data"
 
 -- Dialog variables
-DIALOGS_TABLE = {}
-local sound = true
-local last_sender = nil
+DIALOGS_TABLE                   = {}
+local sound                     = true
+local last_sender               = nil
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Dialog Manager

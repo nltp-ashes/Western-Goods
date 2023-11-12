@@ -25,37 +25,37 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
-local level_object_by_id = western_goods_utils.level_object_by_id
-local heli_spawn = western_goods_helicopter.heli_spawn
-local heli_register = western_goods_helicopter.heli_register
-local spawn_squad = western_goods_utils.spawn_squad
-local spawn_dead_squad = western_goods_utils.spawn_dead_squad
-local spawn_story_squad = western_goods_utils.spawn_story_squad
-local send_dialog = western_goods_dialogs_manager.send_dialog
-local HELICOPTERS_MODES = western_goods_helicopter.HELICOPTERS_MODES
+local dbg_printf                      = western_goods_utils.dbg_printf
+local level_object_by_id              = western_goods_utils.level_object_by_id
+local spawn_squad                     = western_goods_utils.spawn_squad
+local spawn_dead_squad                = western_goods_utils.spawn_dead_squad
+local spawn_story_squad               = western_goods_utils.spawn_story_squad
+local send_dialog                     = western_goods_dialogs_manager.send_dialog
+local heli_spawn                      = western_goods_helicopter.heli_spawn
+local heli_register                   = western_goods_helicopter.heli_register
+local HELICOPTERS_MODES               = western_goods_helicopter.HELICOPTERS_MODES
 
 -- Constants
-local CONST_TASK_2_HARD_DELAY = 1800000                        -- milliseconds
-local CONST_TASK_3_HARD_DELAY = 1800000                        -- milliseconds
-local CONST_TASK_1_HELI_DIST = 625                            -- meters squared
-local CONST_TASK_1_SUPPLIES_DIST = 25                        -- meters squared
-local CONST_TASK_1_PROGRESS_DELAY = 43000                    -- milliseconds
-local CONST_TASK_2_HELI_DELAY = 50000                        -- milliseconds
+local CONST_TASK_2_HARD_DELAY         = 1800000               -- milliseconds
+local CONST_TASK_3_HARD_DELAY         = 1800000               -- milliseconds
+local CONST_TASK_1_HELI_DIST          = 625                   -- meters squared
+local CONST_TASK_1_SUPPLIES_DIST      = 25                    -- meters squared
+local CONST_TASK_1_PROGRESS_DELAY     = 43000                 -- milliseconds
+local CONST_TASK_2_HELI_DELAY         = 50000                 -- milliseconds
 local CONST_TASK_2_SHOW_TARGETS_DELAY = 300000                -- milliseconds
-local CONST_TASK_2_REP_THEFT = -100                            -- reputation points
-local CONST_TASK_3_PROGRESS_DELAY = 38000                    -- milliseconds
+local CONST_TASK_2_REP_THEFT          = -100                  -- reputation points
+local CONST_TASK_3_PROGRESS_DELAY     = 38000                 -- milliseconds
 local CONST_TASK_3_SHOW_TARGETS_DELAY = 300000                -- milliseconds
-local CONST_TASK_3_DIALOG_DIST = 625                        -- meters squared
-local CONST_TASK_3_DIALOG_EX_DIST = 2500                    -- meters squared
-local CONST_TASK_3_BRIDGE_DIST = 10000                        -- meters squared
-local CONST_TASK_3_HELI_DIST = 100                            -- meters squared
-local CONST_TASK_3_NPC_DIST = 25                            -- meters squared
+local CONST_TASK_3_DIALOG_DIST        = 625                   -- meters squared
+local CONST_TASK_3_DIALOG_EX_DIST     = 2500                  -- meters squared
+local CONST_TASK_3_BRIDGE_DIST        = 10000                 -- meters squared
+local CONST_TASK_3_HELI_DIST          = 100                   -- meters squared
+local CONST_TASK_3_NPC_DIST           = 25                    -- meters squared
 
 -- Task variables
-TASK_1_CACHE = {}
-TASK_2_CACHE = {}
-TASK_3_CACHE = {}
+TASK_1_CACHE                          = {}
+TASK_2_CACHE                          = {}
+TASK_3_CACHE                          = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 --    ACT 1 - HELICOPTER DELIVERY

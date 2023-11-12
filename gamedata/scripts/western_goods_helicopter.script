@@ -45,33 +45,33 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 HELICOPTERS_MODES = {
-    IDLE = 1,
-    PROTECT_ACTOR = 2,
-    MOVE_TO_POINT = 3,
-    LAND_AT_POINT = 4,
-    LEAVE_AT_POINT = 5,
-    RELEASE = 6
+    IDLE                              = 1,
+    PROTECT_ACTOR                     = 2,
+    MOVE_TO_POINT                     = 3,
+    LAND_AT_POINT                     = 4,
+    LEAVE_AT_POINT                    = 5,
+    RELEASE                           = 6
 }
 
 -- Helicopter constants
-local CONST_HELICOPTER_UPDATE_FREQ = 5000
-local CONST_HELICOPTER_FLIGHT_ALT = 100
+local CONST_HELICOPTER_UPDATE_FREQ    = 5000
+local CONST_HELICOPTER_FLIGHT_ALT     = 100
 local CONST_HELICOPTER_FLIGHT_ALT_SQR = 10000
-local CONST_HELICOPTER_SPOT = "secondary_task_location"
+local CONST_HELICOPTER_SPOT           = "secondary_task_location"
 
 -- Helicopter variables
-local HELICOPTERS_TABLE = {}
+local HELICOPTERS_TABLE               = {}
 
-local helicopters_targets = {}
-local helicopters_sounds = {
+local helicopters_targets             = {}
+local helicopters_sounds              = {
     sound_object([[western_goods_misc\helicopter\heli_attack_1]]),
     sound_object([[western_goods_misc\helicopter\heli_attack_2]]),
     sound_object([[western_goods_misc\helicopter\heli_attack_3]])
 }
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
-local level_object_by_id = western_goods_utils.level_object_by_id
+local dbg_printf                      = western_goods_utils.dbg_printf
+local level_object_by_id              = western_goods_utils.level_object_by_id
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Functions

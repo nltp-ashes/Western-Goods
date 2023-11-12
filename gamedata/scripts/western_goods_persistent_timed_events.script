@@ -18,10 +18,10 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local EVENT_QUEUE = {}
-local LOAD_DELAY = 15000
+local EVENT_QUEUE               = {}
+local LOAD_DELAY                = 15000
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Main Script

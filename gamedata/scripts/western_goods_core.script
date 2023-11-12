@@ -21,13 +21,13 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local VERSION = "2.4.0"
+local VERSION                       = "2.4.0"
 
-local CONST_BARMAN_TYPE_BUY_LIST = {"food","drink"}
+local CONST_BARMAN_TYPE_BUY_LIST   = {"food","drink"}
 local CONST_SUPPLIER_TYPE_BUY_LIST = {"magazine"}
 local CONST_MECHANIC_TYPE_BUY_LIST = {"tech"}
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                   = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Traders

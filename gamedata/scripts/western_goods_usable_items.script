@@ -15,9 +15,9 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local TEMP_LIGHTER_ENABLED = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
+local TEMP_LIGHTER_ENABLED      = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------
