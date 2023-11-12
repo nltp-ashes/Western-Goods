@@ -14,6 +14,7 @@
 >    - Cleaned-up and improved various UI code;
 >    - Cleaned-up and improved safety in DXML scripts;
 >    - Reanimated the GPS Locator (Thanks TheParaziT);
+>    - Unified file comments (and added comments to configs).
 > • Bug fixes :
 >    - Fixed normals on most models;
 >    - Fixed a benign typo in rangefinder animations;
