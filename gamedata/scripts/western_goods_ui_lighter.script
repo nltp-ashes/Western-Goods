@@ -88,12 +88,14 @@ function UILighter:__init() super()
     self.m_light.lanim = "koster"
     self.m_light.lanim_brightness = 0.0025
 
+    -- Sound effects
+    self.m_snd_use_cf = sound_object("gestures\\gesture_sound")
+
     -- Build variables
     self.m_update_rate = 1000
     self.m_update_timer = 0
-    self.m_snd_use_cf = sound_object("gestures\\gesture_sound")
-    self.m_amn_use_cf = "anm_rally"
-    self.m_amn_hud_use_cf = "point_rally"
+    self.m_amn_motion_sec = "motion_campfire"
+    self.m_amn_motion = "anm_campfire"
     self.m_valid_sections = { "wg_lighter_bic" }
 
     -- Callbacks
@@ -240,8 +242,8 @@ end
 
 function UILighter:CampfireAnimation()
     self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
-    game.play_hud_motion(1, self.m_amn_hud_use_cf, self.m_amn_use_cf, true, 1.0)
-    dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s with cam anim %s", self.m_amn_hud_use_cf, self.m_amn_use_cf)
+    game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
+    dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
 end
 
 function UILighter:UseCigarette(obj,flags)
