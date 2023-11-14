@@ -1,17 +1,21 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the various usable items from the Western Goods addon.
---- This script contains functions used to return the text displayed when right clicking on items in the inventory.
---- It also contains a use_item(...) function where items will be filtered to their respective functions.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the various usable items from the Western Goods addon.                                  ---
+---    This script contains functions used to return the text displayed when right-clicking on items.                ---
+---    It also contains a use_item(...) function where items will be filtered to their respective functions.         ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------

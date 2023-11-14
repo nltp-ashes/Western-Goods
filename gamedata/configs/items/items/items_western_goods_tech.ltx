@@ -1,6 +1,13 @@
-;;--================================================================================================================--;;
-;;--================| Tech |========================================================================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 12/11/2023                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used to add new technological items to the game.                                                    ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
 
 [wg_tech_base]:tch_junk
 $spawn                                           = "devices\pda"
@@ -37,8 +44,8 @@ upgr_icon_width                                  = 100
 upgr_icon_height                                 = 100
 upgr_icon_path                                   = ui\misc\ui_western_goods_upgrades.dds
 
-custom_ui_pos                                    = -0.0281,-0.0130,0.0375
-custom_ui_rot                                    = 0,63,0
+custom_ui_pos                                    = -0.028058, -0.012221, 0.034925
+custom_ui_rot                                    = 0, 63, 0
 custom_ui_func                                   = western_goods_ui_gps_locator.get_ui
 custom_ui_bone                                   = cover
 
@@ -53,32 +60,44 @@ snd_holster                                      = weapons\detector\detector_8_h
 [wg_gps_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
 
-item_position                                    = -0.075, 0.036188, -0.015934
-item_orientation                                 = 325.589233,-190.420761,-185.323669
+item_position                                    = -0.08, 0.05, -0.01
+item_orientation                                 = 130, 15, -10
 
-hands_orientation                                = 2, 38, 0
-hands_orientation_16x9                           = 2, 38, 0
-hands_position                                   = 0.079682, -0.488929, -0.097779
-hands_position_16x9                              = 0.079682, -0.488929, -0.097779
+hands_position                                   = -0.125, -0.03, -0.1
+hands_position_16x9                              = -0.125, -0.03, -0.1
+hands_orientation                                = -30, 0, 0
+hands_orientation_16x9                           = -30, 0, 0
+
+aim_hud_offset_pos                               = 0.05, 0, 0.2
+aim_hud_offset_pos_16x9                          = 0.05, 0, 0.2
+aim_hud_offset_rot                               = 0, -0.5, 0
+aim_hud_offset_rot_16x9                          = 0, -0.5, 0
 
 attach_place_idx                                 = 1
 
-anm_show                                         = d1_draw, draw_dos
-anm_show_fast                                    = d1_draw, draw_dos, 1.5
-anm_hide                                         = d1_holster, holster_dos
-anm_hide_fast                                    = d1_holster, holster_dos, 1.5
-anm_idle                                         = d1_idle, idle
-anm_idle_moving                                  = d1_move, move
-anm_idle_moving_crouch                           = d1_crouch, move, 0.8
-anm_idle_sprint                                  = d1_sprint, sprint
-anm_idle_zoom                                    = d1_zoom, idle
-anm_zoom                                         = d1_zoom_in, idle
-anm_zoom_show                                    = d1_zoom_draw, idle, 1.5
-anm_zoom_hide                                    = d1_zoom_holster, idle, 1.5
-anm_zoom_hide_fast                               = d1_zoom_holster, idle, 2
-anm_throw_start                                  = d1_throw_start, idle
-anm_throw                                        = d1_throw_idle, idle
-anm_throw_end                                    = d1_throw_end, idle
+anm_show                                         = hand_gps_show, idle
+anm_show_fast                                    = hand_gps_show, idle
+
+anm_hide                                         = hand_gps_hide, idle, 2
+anm_hide_fast                                    = hand_gps_hide, idle, 2
+
+anm_idle                                         = hand_gps_idle, idle, 2
+anm_idle_variant1                                = hand_gps_idle_2, idle, 2
+anm_idle_moving                                  = hand_gps_walk, idle, 2
+anm_idle_moving_crouch                           = hand_gps_walk, idle, 2
+anm_idle_sprint                                  = hand_gps_sprint, idle, 2
+anm_idle_zoom                                    = hand_gps_zoom_idle, idle, 2
+
+anm_zoom_in                                      = hand_gps_zoom_in, idle, 2
+anm_zoom_out                                     = hand_gps_zoom_out, idle, 3
+anm_zoom_show                                    = hand_gps_zoom_show, idle, 2
+anm_zoom_hide                                    = hand_gps_zoom_hide, idle, 2
+anm_zoom_hide_fast                               = hand_gps_zoom_hide, idle, 2
+
+anm_throw_start                                  = hand_gps_throw_start, idle, 2
+anm_throw                                        = hand_gps_throw_idle, idle, 2
+anm_throw_variant1                               = hand_gps_throw_idle_2, idle, 2
+anm_throw_end                                    = hand_gps_throw_end, idle, 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

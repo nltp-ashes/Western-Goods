@@ -1,40 +1,43 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the tasks of the third act of the addon's storyline.
----
---- Each task is composed of the following elements :
---- - A act_3_task_X_start(...) function, used to start the task;
---- - A act_3_task_X_end(...) function, used to end the task;
---- - A xr_effects.act_3_task_X_init(...) function, called when the task has started;
---- - A xr_effects.act_3_task_X_complete(...) function, called when the task was successfully completed;
---- - A xr_effects.act_3_task_X_fail(...) function, called when the task was failed;
---- - A task_functor.act_3_task_X_title_f(...) function, called periodically to get the task's name;
---- - A task_functor.act_3_task_X_descr_f(...) function, called periodically to get the task's description;
---- - A task_functor.act_3_task_X_target_f(...) function, called periodically to get the task's target (for the PDA);
---- - A task_status_functor.act_3_task_X_status_f(...) function, called periodically to run the core logic of the task.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the tasks of the third act of the addon's storyline.                                    ---
+---                                                                                                                  ---
+---    Each task is composed of the following elements :                                                             ---
+---     - A act_3_task_X_start(...) function, used to start the task;                                                ---
+---     - A act_3_task_X_end(...) function, used to end the task;                                                    ---
+---     - A xr_effects.act_3_task_X_init(...) function, called when the task has started;                            ---
+---     - A xr_effects.act_3_task_X_complete(...) function, called when the task was successfully completed;         ---
+---     - A xr_effects.act_3_task_X_fail(...) function, called when the task was failed;                             ---
+---     - A task_functor.act_3_task_X_title_f(...) function, called periodically to get the name;                    ---
+---     - A task_functor.act_3_task_X_descr_f(...) function, called periodically to get the description;             ---
+---     - A task_functor.act_3_task_X_target_f(...) function, called periodically to get the  target (for the PDA);  ---
+---     - A task_status_functor.act_3_task_X_status_f(...) function, called periodically to run the core logic.      ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
-local send_dialog = western_goods_dialogs_manager.send_dialog
-local level_object_by_id = western_goods_utils.level_object_by_id
+local dbg_printf                        = western_goods_utils.dbg_printf
+local send_dialog                       = western_goods_dialogs_manager.send_dialog
 
 -- Constants
 local CONST_TASK_1_USB_UNLOCK_DIALOG_ID = "western_goods_act_3_task_1_usb_unlock"
-local CONST_TASK_1_USB_UNLOCK_COST = 5000
-local CONST_TASK_3_BRIBE_COST = 20000
+local CONST_TASK_1_USB_UNLOCK_COST      = 5000
+local CONST_TASK_3_BRIBE_COST           = 20000
 
 -- Task variables
-TASK_1_CACHE = {}
-TASK_2_CACHE = {}
-TASK_3_CACHE = {}
-TASK_4_CACHE = {}
+TASK_1_CACHE                            = {}
+TASK_2_CACHE                            = {}
+TASK_3_CACHE                            = {}
+TASK_4_CACHE                            = {}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- ACT 3 - CHERNENKO BROTHERS
