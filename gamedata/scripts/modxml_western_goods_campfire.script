@@ -1,16 +1,38 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 29/10/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script using the DXML functionality to add a new action when interacting with a campfire.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 14/11/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script using the DXML functionality to add a new action when interacting with a campfire.                     ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 function on_xml_read()
     RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-        if xml_file_name == [[ui\game_tutorials.xml]] then
-            local xml_elem_on = xml_obj:query("tutorial_campfire_ignite > item")[1]
-            if not xml_elem_on then return end
-            xml_obj:insertFromXMLString([[<action id="use" finalize="1">western_goods_ui_lighter.turn_campfire_on</action>]], xml_elem_on, #xml_elem_on.kids)
+        -- Only execute on gamedata\configs\ui\game_tutorials.xml
+        if xml_file_name ~= [[ui\game_tutorials.xml]] then
+            return
         end
+
+        -- Query the file to get the node(s) to modify
+        local query = "tutorial_campfire_ignite > item"
+        local query_res = xml_obj:query(query)
+
+        -- Expect one, and only one match
+        if size_table(query_res) ~= 1 then
+            printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+            return
+        end
+
+        -- Get the resulting element
+        local xml_elem = query_res[1]
+
+        -- XML Code to inject
+        local xml_inject = [[<action id="use" finalize="1">western_goods_ui_lighter.turn_campfire_on</action>]]
+
+        -- Inject XML Code
+        xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
     end)
 end
