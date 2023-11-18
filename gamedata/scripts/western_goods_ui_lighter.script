@@ -92,7 +92,8 @@ function UILighter:__init() super()
     self.m_light.lanim_brightness = 0.0025
 
     -- Sound effects
-    self.m_snd_use_cf = sound_object("gestures\\gesture_sound")
+    self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
+    self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
 
     -- Build variables
     self.m_update_rate = 1000
@@ -208,8 +209,9 @@ function UILighter:UseCampfire()
     end
 
     -- Get nearby campfire (or use campfire passed as argument)
-    local campfire = bind_campfire.get_nearby_campfire(4, true)
-    if not campfire then
+    local campfire_obj = bind_campfire.get_nearby_campfire(4, false)
+    local campfire = campfire_obj and campfire_obj:get_campfire()
+    if not campfire_obj or not campfire then
         printf("~[WG] WARNING | UI Lighter | Use Campfire - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
         return
     end
@@ -220,19 +222,19 @@ function UILighter:UseCampfire()
         return
     end
 
+    self:CampfireAnimation()
+    actor_effects.play_item_fx("matches_script")
+
     -- We wuzz rain and shit
     if bind_campfire.rain_pass() then
         if (bind_campfire.k_rain < 1) then
             bind_campfire.k_rain = bind_campfire.k_rain + 1
         end
-        actor_effects.play_item_fx("matches_script")
-        xr_sound.set_sound_play(AC_ID,"inv_matches")
         campfire:turn_on()
-        self:CampfireAnimation()
+        self.m_snd_use_cf_fire:play_at_pos(campfire_obj, campfire_obj:position(), 0, sound_object.s3d)
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
         dbg_printf("[WG] UI Lighter | Use Campfire - Successfully light campfire")
     else
-        actor_effects.play_item_fx("matches_script")
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
         dbg_printf("[WG] UI Lighter | Use Campfire - Failed to light campfire because of rain")
     end
