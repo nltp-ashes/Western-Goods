@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 22/06/2023                                                                                             ---
+---    Date : 18/11/2023                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the UI for the BIC Lighter.                                                             ---
@@ -222,8 +222,8 @@ function UILighter:UseCampfire()
         return
     end
 
+    -- Play animation
     self:CampfireAnimation()
-    actor_effects.play_item_fx("matches_script")
 
     -- We wuzz rain and shit
     if bind_campfire.rain_pass() then
@@ -247,6 +247,7 @@ end
 
 function UILighter:CampfireAnimation()
     self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+    actor_effects.play_item_fx("matches_script")
     game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
     dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
 end
