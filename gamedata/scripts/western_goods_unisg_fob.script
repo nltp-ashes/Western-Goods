@@ -1,17 +1,21 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script used to manage the UNISG Forward Operating Base in the Meadows (y04_pole).
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the UNISG Forward Operating Base in the Meadows (y04_pole).                             ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
-local fob_enabled = false
+local fob_enabled               = false
 local fob_no_anomaly_restrictor = { ax=-32.640064239502,ay=-3.688939332962,az=214.10537719727,bx=119.68379211426,by=12.376997947693,bz=89.003326416016 }
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -61,7 +65,7 @@ function load_state(m_data)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Test functions		TODO : Remove this section
+-- Test functions        TODO : Remove this section
 -- ---------------------------------------------------------------------------------------------------------------------
 
 function test_func(dik)

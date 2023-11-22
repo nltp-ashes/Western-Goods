@@ -1,82 +1,93 @@
-;;--================================================================================================================--;;
-;;--================| Logic Extension (GhenTuong's xr_logic_ex.script) |============================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 12/11/2023                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    NPC logic config file used for Danylo Chernenko.                                                                ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+;;====================================================================================================================;;
+;;==================| Logic Extension (GhenTuong's xr_logic_ex.script) |==============================================;;
+;;====================================================================================================================;;
 
 [section@squad]
-target@1                        = {+western_goods_act_3_finished} gar_smart_terrain_6_3,
-target@2                        = {+western_goods_danylo_army_warehouses} mil_smart_terrain_2_4,
-target@3                        = {+western_goods_danylo_red_forest} red_smart_terrain_monsters_2,
-target@4                        = jup_a6
+target@1                         = {+western_goods_act_3_finished} gar_smart_terrain_6_3,
+target@2                         = {+western_goods_danylo_army_warehouses} mil_smart_terrain_2_4,
+target@3                         = {+western_goods_danylo_red_forest} red_smart_terrain_monsters_2,
+target@4                         = jup_a6
 
 
 [section@logic]
 logic@danylo_chernenko
 
-;;--================================================================================================================--;;
-;;--================| Logic |=======================================================================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;==================| Logic |=========================================================================================;;
+;;====================================================================================================================;;
 
 [logic@danylo_chernenko]
-suitable 						= {=check_npc_name(stalker_danylo_chernenko)} true
-active 							= {+western_goods_act_3_finished} beh@flea_sit, {+western_goods_danylo_army_warehouses} beh@mil_sit, {+western_goods_danylo_red_forest} beh@red_hide, beh@jup_stand
-level_spot 						= quest_npc
-relationship 					= neutral
-dont_keep_items 				= true
-net_spawn						= pt1
+suitable                         = {=check_npc_name(stalker_danylo_chernenko)} true
+active                           = {+western_goods_act_3_finished} beh@flea_sit, {+western_goods_danylo_army_warehouses} beh@mil_sit, {+western_goods_danylo_red_forest} beh@red_hide, beh@jup_stand
+level_spot                       = quest_npc
+relationship                     = neutral
+dont_keep_items                  = true
+net_spawn                        = pt1
 
-;;--================================================================================================================--;;
-;;--================| Scheme |======================================================================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;==================| Scheme |========================================================================================;;
+;;====================================================================================================================;;
 
 [beh@general]
-behavior_state 					= beh_move
-path_end 						= loop
+behavior_state                   = beh_move
+path_end                         = loop
 
-target 							= waypoint
-walk_dist 						= 100
-jog_dist 						= 220
+target                           = waypoint
+walk_dist                        = 100
+jog_dist                         = 220
 
-walk_anim 						= walk
-jog_anim 						= rush
-run_anim 						= rush
+walk_anim                        = walk
+jog_anim                         = rush
+run_anim                         = rush
 
-invulnerable 					= true
-relationship 					= neutral
-meet 							= meet@base
-before_hit						= invulnerable
-	
-enemy_ignore_cond				= {!is_enemy_actor !fighting_dist_le(40)} true
-combat_ignore_cond 				= {=is_warfare} false, {=actor_true_enemy =check_enemy_name(actor)} false, true
-combat_ignore_keep_when_attacked= {=is_warfare} false, true
+invulnerable                     = true
+relationship                     = neutral
+meet                             = meet@base
+before_hit                       = invulnerable
+
+enemy_ignore_cond                = {!is_enemy_actor !fighting_dist_le(40)} true
+combat_ignore_cond               = {=is_warfare} false, {=actor_true_enemy =check_enemy_name(actor)} false, true
+combat_ignore_keep_when_attacked = {=is_warfare} false, true
 
 [beh@jup_stand]:beh@general
-pt1 							= 60000, guard | pos:-8.7367105484009,23.104553222656,246.11489868164 look:-9.6491342186928,23.104553222656,245.71250587702
+pt1                              = 60000, guard | pos:-8.7367105484009,23.104553222656,246.11489868164 look:-9.6491342186928,23.104553222656,245.71250587702
 
 [beh@red_hide]:beh@general
-pt1 							= 60000, hide | pos:176.26148986816,-0.2088755518198,-208.05140686035 look:176.71762144566,-0.2088755518198,-207.16361427307
+pt1                              = 60000, hide | pos:176.26148986816,-0.2088755518198,-208.05140686035 look:176.71762144566,-0.2088755518198,-207.16361427307
 
 [beh@mil_sit]:beh@general
-pt1 							= 60000, sit_ass | pos:-192.93893432617,-15.954886436462,369.48672485352 look:-191.96842962503,-15.954886436462,369.71198856831
-use_camp                        = true
-turn_on_campfire                = true
+pt1                              = 60000, sit_ass | pos:-192.93893432617,-15.954886436462,369.48672485352 look:-191.96842962503,-15.954886436462,369.71198856831
+use_camp                         = true
+turn_on_campfire                 = true
 
 [beh@flea_sit]:beh@general
-pt1 							= 60000, sit_ass | pos:106.19451141357,-5.6759400367737,156.35110473633 look:107.07929331064,-5.6759400367737,156.80917441845
-pt2 							= 30000, use_pda | pos:106.19451141357,-5.6759400367737,156.35110473633 look:107.07929331064,-5.6759400367737,156.80917441845
-pt3 							= 45000, sit_ass | pos:106.19451141357,-5.6759400367737,156.35110473633 look:107.07929331064,-5.6759400367737,156.80917441845
+pt1                              = 60000, sit_ass | pos:106.19451141357,-5.6759400367737,156.35110473633 look:107.07929331064,-5.6759400367737,156.80917441845
+pt2                              = 30000, use_pda | pos:106.19451141357,-5.6759400367737,156.35110473633 look:107.07929331064,-5.6759400367737,156.80917441845
+pt3                              = 45000, sit_ass | pos:106.19451141357,-5.6759400367737,156.35110473633 look:107.07929331064,-5.6759400367737,156.80917441845
 
-;;--================================================================================================================--;;
-;;--================| Meet |========================================================================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;==================| Meet |==========================================================================================;;
+;;====================================================================================================================;;
 
 [meet@base]
-close_snd_hello                 = meet_hello
-close_snd_bye                   = nil
-close_anim 		                = nil
-close_victim 	                = nil
-close_distance                  = 0
-far_anim 		                = nil
-far_victim 		                = nil
-far_distance 	                = 0
-meet_on_talking	                = false
-use				                = true
+close_snd_hello                  = meet_hello
+close_snd_bye                    = nil
+close_anim                       = nil
+close_victim                     = nil
+close_distance                   = 0
+far_anim                         = nil
+far_victim                       = nil
+far_distance                     = 0
+meet_on_talking                  = false
+use                              = true

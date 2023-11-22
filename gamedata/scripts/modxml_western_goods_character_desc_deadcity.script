@@ -1,21 +1,42 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 12/11/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script using the DXML functionality to edit configs\gameplay\character_desc_pripyat.xml                       ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 function on_xml_read()
     RegisterScriptCallback("on_xml_read", function(xml_file_name, xml_obj)
-        if xml_file_name == [[gameplay\character_desc_deadcity.xml]] then
-            local xml_inject = [[
+        -- Only execute on gamedata\configs\gameplay\character_desc_deadcity.xml
+        if xml_file_name ~= [[gameplay\character_desc_deadcity.xml]] then
+            return
+        end
+
+        -- Query the file to get the node(s) to modify
+        local query = "specific_character[id=cit_killers_merc_trader_stalker]"
+        local query_res = xml_obj:query(query)
+
+        -- Expect one, and only one match
+        if size_table(query_res) ~= 1 then
+            printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+            return
+        end
+
+        -- Get the resulting element
+        local xml_elem = query_res[1]
+
+        -- XML Code to inject
+        local xml_inject = [[
             <actor_dialog>western_goods_act_2_task_1_start</actor_dialog>
             <actor_dialog>western_goods_act_2_task_1_end</actor_dialog>
             <actor_dialog>western_goods_act_2_task_2_differed_opt_in</actor_dialog>
-            ]]
-            local query_1_res = xml_obj:query("specific_character[id=cit_killers_merc_trader_stalker]")
-            local xml_elem = query_1_res[1]
-            xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
-        end
+        ]]
+
+        -- Inject XML Code
+        xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
     end)
 end

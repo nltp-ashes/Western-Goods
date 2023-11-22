@@ -1,6 +1,13 @@
-;;--================================================================================================================--;;
-;;--================| Tech |========================================================================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 12/11/2023                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used to add new technological items to the game.                                                    ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
 
 [wg_tech_base]:tch_junk
 $spawn                                           = "devices\pda"
@@ -37,8 +44,8 @@ upgr_icon_width                                  = 100
 upgr_icon_height                                 = 100
 upgr_icon_path                                   = ui\misc\ui_western_goods_upgrades.dds
 
-custom_ui_pos                                    = -0.0281,-0.0130,0.0375
-custom_ui_rot                                    = 0,63,0
+custom_ui_pos                                    = -0.028058, -0.012221, 0.034925
+custom_ui_rot                                    = 0, 63, 0
 custom_ui_func                                   = western_goods_ui_gps_locator.get_ui
 custom_ui_bone                                   = cover
 
@@ -53,38 +60,56 @@ snd_holster                                      = weapons\detector\detector_8_h
 [wg_gps_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
 
-item_position                                    = -0.075, 0.036188, -0.015934
-item_orientation                                 = 325.589233,-190.420761,-185.323669
+item_position                                    = -0.08, 0.05, -0.01
+item_orientation                                 = 130, 15, -10
 
-hands_orientation                                = 2, 38, 0
-hands_orientation_16x9                           = 2, 38, 0
-hands_position                                   = 0.079682, -0.488929, -0.097779
-hands_position_16x9                              = 0.079682, -0.488929, -0.097779
+hands_position                                   = -0.125, -0.03, -0.1
+hands_position_16x9                              = -0.125, -0.03, -0.1
+hands_orientation                                = -30, 0, 0
+hands_orientation_16x9                           = -30, 0, 0
+
+aim_hud_offset_pos                               = 0.05, 0, 0.2
+aim_hud_offset_pos_16x9                          = 0.05, 0, 0.2
+aim_hud_offset_rot                               = 0, -0.5, 0
+aim_hud_offset_rot_16x9                          = 0, -0.5, 0
 
 attach_place_idx                                 = 1
 
-anm_show                                         = d1_draw, draw_dos
-anm_show_fast                                    = d1_draw, draw_dos, 1.5
-anm_hide                                         = d1_holster, holster_dos
-anm_hide_fast                                    = d1_holster, holster_dos, 1.5
-anm_idle                                         = d1_idle, idle
-anm_idle_moving                                  = d1_move, move
-anm_idle_moving_crouch                           = d1_crouch, move, 0.8
-anm_idle_sprint                                  = d1_sprint, sprint
-anm_idle_zoom                                    = d1_zoom, idle
-anm_zoom                                         = d1_zoom_in, idle
-anm_zoom_show                                    = d1_zoom_draw, idle, 1.5
-anm_zoom_hide                                    = d1_zoom_holster, idle, 1.5
-anm_zoom_hide_fast                               = d1_zoom_holster, idle, 2
-anm_throw_start                                  = d1_throw_start, idle
-anm_throw                                        = d1_throw_idle, idle
-anm_throw_end                                    = d1_throw_end, idle
+anm_show                                         = hand_gps_show, idle
+anm_show_fast                                    = hand_gps_show, idle
+
+anm_hide                                         = hand_gps_hide, idle, 2
+anm_hide_fast                                    = hand_gps_hide, idle, 2
+
+anm_idle                                         = hand_gps_idle, idle, 2
+anm_idle_variant1                                = hand_gps_idle_2, idle, 2
+anm_idle_moving                                  = hand_gps_walk, idle, 2
+anm_idle_moving_crouch                           = hand_gps_walk, idle, 2
+anm_idle_sprint                                  = hand_gps_sprint, idle, 2
+anm_idle_zoom                                    = hand_gps_zoom_idle, idle, 2
+
+anm_zoom_in                                      = hand_gps_zoom_in, idle, 2
+anm_zoom_out                                     = hand_gps_zoom_out, idle, 3
+anm_zoom_show                                    = hand_gps_zoom_show, idle, 2
+anm_zoom_hide                                    = hand_gps_zoom_hide, idle, 2
+anm_zoom_hide_fast                               = hand_gps_zoom_hide, idle, 2
+
+anm_throw_start                                  = hand_gps_throw_start, idle, 2
+anm_throw                                        = hand_gps_throw_idle, idle, 2
+anm_throw_variant1                               = hand_gps_throw_idle_2, idle, 2
+anm_throw_end                                    = hand_gps_throw_end, idle, 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_lighter_bic]:wg_tech_base,booster
+[wg_lighter_bic]:tch_detector
+class                                            = D_CUSTOM
 visual                                           = dynamics\western_goods_tech\wg_lighter_bic.ogf
-kind                                             = i_tool
+hud                                              = wg_lighter_bic_hud
+kind                                             = i_device
+tier                                             = 2
+
+slot                                             = 8
+animation_slot                                   = 7
 
 inv_name                                         = st_wg_lighter_bic
 inv_name_short                                   = st_wg_lighter_bic_s
@@ -92,23 +117,55 @@ description                                      = st_wg_lighter_bic_descr
 inv_weight                                       = 0.025
 cost                                             = 1950
 
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech.dds
 inv_grid_width                                   = 1
 inv_grid_height                                  = 1
 inv_grid_x                                       = 8
 inv_grid_y                                       = 1
 
-use_condition                                    = true
-condition_bar                                    = condition_progess_bar
-allow_repair                                     = false
-remove_after_use                                 = false
+snd_draw                                         = western_goods_tech\lighter_draw.ogg
+snd_holster                                      = western_goods_tech\lighter_holster.ogg
+
+custom_ui_pos                                    = -0.0281,-0.0130,0.0375
+custom_ui_rot                                    = 0,63,0
+custom_ui_func                                   = western_goods_ui_lighter.get_ui
+custom_ui_bone                                   = cover
 
 ; custom properties
-use_fill                                         = true     ; used to display 'Fill:100%' in description
-can_light_weak                                   = true     ; used to know if it can light a cig
-can_light_strong                                 = true     ; used to know if it can light a campfire
-degradation_factor                               = 0.05     ; how many % will be consumed when used
+fuel_critical                                    = 0.01             ; lighter dies at 1%
+fuel_consumption                                 = 0.0003           ; 0.03%/second (55 real-life minutes)
+fuel_consumption_use                             = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
 
-tier                                             = 2
+[wg_lighter_bic_hud]:detector_base_hud
+item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
+
+attach_place_idx                                 = 1
+freelook_z_offset_mul                            = 0.1
+
+item_position                                    = -0.065, 0.032, 0.0025
+item_orientation                                 = -110, -15, 80
+hands_position                                   = 0.023692, 0.011115, 0.028593
+hands_orientation                                = 0, 0, 0
+hands_position_16x9                              = 0.023692, 0.011115, 0.028593
+hands_orientation_16x9                           = 0, 0, 0
+
+aim_hud_offset_pos                               = -0.175, 0.12, -0.05
+aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
+aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
+aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
+
+fire_point                                       = 0,0,0.05
+fire_point2                                      = 0,0,0
+fire_bone                                        = lid
+fire_bone2                                       = lid
+
+anm_show                                         = wg_lighter_draw, draw, 1
+anm_show_fast                                    = wg_lighter_draw, draw, 1
+anm_hide                                         = wg_lighter_holster, holster, 1
+anm_hide_fast                                    = wg_lighter_holster, holster, 1
+anm_idle                                         = wg_lighter_idle, idle
+anm_idle_moving                                  = wg_lighter_moving, moving, 2
+anm_idle_sprint                                  = wg_lighter_sprint, sprint, 1.6
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

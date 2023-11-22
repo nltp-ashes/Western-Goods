@@ -1,33 +1,38 @@
---- Original Author(s) : NLTP_ASHES
---- Edited : N/A
---- Date : 17/04/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- This script is used to manage the script-side of dialogs in the addon.
---- It essentially is composed of two things :
---- - The addon's own dialog system (also referred as auto-rolling dialogs - using the game's news manager);
---- - The functions used to generate start dialogs for NPCs.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/04/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script is used to manage the script-side of dialogs in the addon.                                        ---
+---                                                                                                                  ---
+---    It essentially is composed of two things :                                                                    ---
+---     - The addon's own dialog system (also referred as auto-rolling dialogs - using the game's news manager);     ---
+---     - The functions used to generate start dialogs for NPCs.                                                     ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Dialog constants
-local CONST_DISPLAY_TIME = 15
-local CONST_DELAY_MSG = 7000
-local CONST_DELAY_QUICK_MSG = 1000
-local CONST_DELAY_LOAD = 15000
-local CONST_MSG_HEADER = western_goods_utils.get_translation("st_wg_dm_message_header")
-local CONST_DEFAULT_NAME = western_goods_utils.get_translation("st_wg_dm_default_name")
-local CONST_DEFAULT_ICON = "ui_inGame2_no_data"
+local CONST_DISPLAY_TIME        = 15
+local CONST_DELAY_MSG           = 7000
+local CONST_DELAY_QUICK_MSG     = 1000
+local CONST_DELAY_LOAD          = 15000
+local CONST_MSG_HEADER          = western_goods_utils.get_translation("st_wg_dm_message_header")
+local CONST_DEFAULT_NAME        = western_goods_utils.get_translation("st_wg_dm_default_name")
+local CONST_DEFAULT_ICON        = "ui_inGame2_no_data"
 
 -- Dialog variables
-DIALOGS_TABLE = {}
-local sound = true
-local last_sender = nil
+DIALOGS_TABLE                   = {}
+local sound                     = true
+local last_sender               = nil
 
 -- Imported functions
-local dbg_printf = western_goods_utils.dbg_printf
+local dbg_printf                = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Dialog Manager
@@ -132,7 +137,7 @@ function st_crew_member_start_dialog()
     elseif not western_goods_utils.has_info("western_goods_act_1_task_3_finished") then
         return western_goods_utils.get_translation("st_stalker_crew_member_start_5")
 
-    else return western_goods_utils.get_translation("st_stalker_crew_member_start_6")	end
+    else return western_goods_utils.get_translation("st_stalker_crew_member_start_6") end
 end
 
 --- Function called to determine the start dialog's text of yellow crewmate.
@@ -153,7 +158,7 @@ function st_dunn_lynn_start_dialog()
     elseif math.random() < 0.0001 then
         return western_goods_utils.get_translation("st_wg_dunn_lynn_start_x")
 
-    else return western_goods_utils.get_translation("st_wg_dunn_lynn_start_" .. math.random(0,5))	end
+    else return western_goods_utils.get_translation("st_wg_dunn_lynn_start_" .. math.random(0,5)) end
 end
 
 --- Function called to determine the second phrase of Oleksandr Chernenko start dialog.
