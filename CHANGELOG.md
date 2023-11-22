@@ -15,6 +15,7 @@
 >    - Cleaned-up and improved safety in DXML scripts;
 >    - Reanimated the GPS Locator (Thanks TheParaziT);
 >    - Unified file comments (and added comments to configs).
+>    - Turned the BIC lighter into a 3D hand-held device (Thanks Kyne's Peace);
 > • Bug fixes :
 >    - Fixed normals on most models;
 >    - Fixed a benign typo in rangefinder animations;
