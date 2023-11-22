@@ -72,7 +72,7 @@ end
 --- @param tab table
 --- @param pos number
 --- @return boolean
-function has_next(tab,pos)
+function has_next(tab, pos)
     if not validate_params({tab,pos,"has_next"}) then return end
     return next(tab,pos) ~= nil
 end
@@ -172,7 +172,7 @@ end
 --- Function used to know if there exists a translation for a given game string.
 --- @param str string
 --- @return boolean
-function get_translation(str,...)
+function get_translation(str, ...)
     if not validate_params({str,"get_translation"}) then return end
 
     if not has_translation(str) then return "No translation" end
@@ -216,7 +216,7 @@ end
 --- @param info_name string
 --- @param who game_object
 --- @return nil
-function give_info(info_name,who)
+function give_info(info_name, who)
     if not validate_params({info_name,"give_info"}) then return end
 
     -- Default values
@@ -233,7 +233,7 @@ end
 --- @param info_name string
 --- @param who game_object
 --- @return nil
-function has_info(info_name,who)
+function has_info(info_name, who)
     if not validate_params({info_name,"has_info"}) then return end
 
     -- Default values
@@ -247,7 +247,7 @@ end
 --- @param info_name string
 --- @param who game_object
 --- @return nil
-function rem_info(info_name,who)
+function rem_info(info_name, who)
     if not validate_params({info_name,"rem_info"}) then return end
 
     -- Default values
@@ -294,7 +294,7 @@ end
 --- @param func function
 --- @param ... table
 --- @return nil
-function server_objects_iter(func,...)
+function server_objects_iter(func, ...)
     if not validate_params({func,"server_objects_iter"}) then return end
 
     dbg_printf("[WG] Utils | Iterating through all possible IDs...")
@@ -525,6 +525,7 @@ function spawn_story_squad(sec, pos, smart)
         return se_squad
     end
 
+    -- Default value
     pos = pos or smart.position
 
     -- Spawn squad on the appropriate smart terrain
@@ -548,7 +549,7 @@ end
 --- @param gvid number
 --- @param smart cse_alife_smart_zone
 --- @return cse_alife_online_offline_group
-function spawn_squad(sec,pos,lvid,gvid,smart)
+function spawn_squad(sec, pos, lvid, gvid, smart)
     if not validate_params({sec,pos,lvid,gvid,"spawn_squad"}) then return end
 
     local squad = alife_create(sec, pos, lvid, gvid)
@@ -599,7 +600,7 @@ end
 --- @param sec string
 --- @param smart_name string
 --- @return number
-function spawn_dead_squad(sec,smart_name)
+function spawn_dead_squad(sec, smart_name)
     if not validate_params({sec,smart_name,"spawn_dead_squad"}) then return end
 
     local squad = spawn_squad_smart(sec, smart_name)
@@ -661,7 +662,7 @@ end
 --- @param squad cse_alife_online_offline_group
 --- @param id number
 --- @return boolean
-function is_id_from_squad(squad,id)
+function is_id_from_squad(squad, id)
     if not validate_params({squad,id,"is_id_from_squad"}) then return end
 
     for member in squad:squad_members() do
@@ -690,27 +691,83 @@ function squad_iterate_members(squad, func, ...)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Other Utils Functions
+-- Bone Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to iterate through the inventory of a game object.
---- The function passed in arguments will be called once per game object inside of the inventory.
---- Extra arguments passed to 'inventory_iter' function are passed on to 'func' function.
---- If 'func' function returns true, then the iteration stops.
---- @param who game_object
---- @param func function
---- @param ... table
---- @return nil
-function inventory_iter(who,func,...)
-    if not validate_params({who,func,"inventory_iter"}) then return end
+--- Function used to get the position of a bone by its name.
+--- This function should be used in case the bone is from a world model.
+--- @author Thial
+--- @param obj game_object
+--- @param bone string
+--- @return vector
+function bone_position(obj, bone)
+    if not validate_params({obj,bone,"bone_position"}) then return end
 
-    dbg_printf("[WG] Utils | Iterating inventory of '%s'",who:section())
-
-    local args = {...}
-    who:iterate_inventory(function(owner, obj)
-        return func(owner, obj, unpack(args))
-    end,who)
+    return obj:bone_position(obj:get_bone_id(bone, false), false)
 end
+
+--- Function used to get the position of a bone by its name.
+--- This function should be used in case the bone is from a hud model.
+--- @param obj game_object
+--- @param hud_bone string
+--- @param bone string
+--- @return vector
+function bone_hud_position(obj, hud_bone, bone)
+    if not validate_params({obj,hud_bone,bone,"bone_hud_position"}) then return end
+
+    -- Cant find hud bone in TPS, use default bone
+    if level.get_active_cam() ~= 0 then
+        printf("~[WG] WARNING | Utils | Trying to get HUD bone '%s' position in third person ! Fallback to '%s'", hud_bone, bone)
+        return this.bone_position(obj, bone)
+    end
+
+    return obj:bone_position(obj:get_bone_id(hud_bone, true), true)
+end
+
+--- Function used to set the visibility a bone off a game object.
+--- This function can be used as a getter or as a setter.
+--- This function should be used in case the bone is from a world model.
+--- @param obj game_object
+--- @param bone string
+--- @param visibility boolean
+--- @return nil
+function bone_visibility(obj, bone, visibility)
+    if not validate_params({obj,bone,"bone_visibility"}) then return end
+
+    if visibility == nil then
+        return obj:bone_visible(bone, false)
+    end
+
+    obj:set_bone_visible(bone, visibility, true, false)
+end
+
+--- Function used to set the visibility a bone off a game object.
+--- This function can be used as a getter or as a setter.
+--- This function should be used in case the bone is from a hud model.
+--- @param obj game_object
+--- @param hud_bone string
+--- @param bone string
+--- @param visibility boolean
+--- @return nil
+function bone_hud_visibility(obj, hud_bone, bone, visibility)
+    if not validate_params({obj,hud_bone,bone,"bone_hud_visibility"}) then return end
+
+    -- Cant find hud bone in TPS, use default bone
+    if level.get_active_cam() ~= 0 then
+        printf("~[WG] WARNING | Utils | Trying to set HUD bone '%s' visibility in third person ! Fallback to '%s'", hud_bone, bone)
+        return this.bone_visibility(obj, bone, visibility)
+    end
+
+    if visibility == nil then
+        return obj:bone_visible(hud_bone, true)
+    end
+
+    obj:set_bone_visible(hud_bone, visibility, true, true)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Validation Functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to check if all necessary parameters were correctly passed to a function.
 --- Last element of the table has to be the name of the function calling validate_params.
@@ -729,12 +786,50 @@ function validate_params(params)
     return true
 end
 
+--- Function used to check if an object is a type of PDA device.
+--- @param obj game_object
+--- @return boolean
+function validate_is_pda(obj)
+    if not validate_params({obj,"validate_is_pda"}) then return end
+
+    local pda_sections = {
+        ["device_pda_1"] = true,
+        ["device_pda_2"] = true,
+        ["device_pda_3"] = true,
+    }
+
+    return pda_sections[obj:section()]
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Other Utils Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to iterate through the inventory of a game object.
+--- The function passed in arguments will be called once per game object inside of the inventory.
+--- Extra arguments passed to 'inventory_iter' function are passed on to 'func' function.
+--- If 'func' function returns true, then the iteration stops.
+--- @param who game_object
+--- @param func function
+--- @param ... table
+--- @return nil
+function inventory_iter(who ,func, ...)
+    if not validate_params({who,func,"inventory_iter"}) then return end
+
+    dbg_printf("[WG] Utils | Iterating inventory of '%s'",who:section())
+
+    local args = {...}
+    who:iterate_inventory(function(owner, obj)
+        return func(owner, obj, unpack(args))
+    end,who)
+end
+
 --- Function used to find an NPC by its section name in the player squad.
 --- @author mr_demonized
 --- @param func function
 --- @param ... table
 --- @return nil
-function next_tick(func,...)
+function next_tick(func, ...)
     if not validate_params({func,"next_tick"}) then return end
 
     local args = {...}
@@ -750,7 +845,7 @@ end
 --- @param obj game_object
 --- @param play_anim boolean
 --- @return nil
-function open_container(obj,play_anim)
+function open_container(obj, play_anim)
     if not validate_params({obj,"open_container"}) then return end
 
     local break_con
@@ -794,21 +889,6 @@ function is_player_fighting()
     return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
 end
 
---- Function used to check if an object is a type of PDA device.
---- @param obj game_object
---- @return boolean
-function is_pda(obj)
-    if not validate_params({obj,"is_pda"}) then return end
-
-    local pda_sections = {
-        ["device_pda_1"] = true,
-        ["device_pda_2"] = true,
-        ["device_pda_3"] = true,
-    }
-
-    return pda_sections[obj:section()]
-end
-
 --- Function used to get the real community of the NPC by checking spawn id.
 --- @author HarukaSai
 --- @param npc game_object
@@ -850,34 +930,24 @@ end
 --- @param count number
 --- @param default number
 --- @return number
-function get_section_price(section,count,default)
+function get_section_price(section, count, default)
     if not validate_params({section,"get_section_price"}) then return end
 
+    -- Default values
     count = count or 1
     default = default or 0
 
     local condlist = ini_trade and ini_trade:r_string_to_condlist("trader","discounts")
     local sect = condlist and xr_logic.pick_section_from_condlist(db.actor, nil, condlist)
 
-    if not (sect == nil or sect == "") then
-        local cost = SYS_GetParam(2, section, "cost", 0)
-        local factor = ini_trade:r_float_ex(sect,"sell") or 1
-        local eco_factor = game_difficulties.get_eco_factor("sell") or 1
-        local discount = factor * eco_factor
-        return (cost * discount) * count
-    else
+    if sect == nil or sect == "" then
         return default
     end
-end
 
---- Function used to get the position of a bone by its name.
---- @author Thial
---- @param obj game_object
---- @param bone string
---- @return vector
-function get_bone_position(obj,bone)
-    if not validate_params({obj, bone,"get_bone_position"}) then return end
+    local cost = SYS_GetParam(2, section, "cost", 0)
+    local factor = ini_trade:r_float_ex(sect,"sell") or 1
+    local eco_factor = game_difficulties.get_eco_factor("sell") or 1
+    local discount = factor * eco_factor
 
-    local bone_id = obj:get_bone_id(bone)
-    return obj:bone_position(bone_id == 65535 and "" or bone)
+    return (cost * discount) * count
 end

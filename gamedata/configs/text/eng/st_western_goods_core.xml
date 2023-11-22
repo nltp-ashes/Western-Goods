@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 14/11/2023                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -102,16 +102,12 @@
         <text>Use</text>
     </string>
 
-    <string id="st_wg_fill">
-        <text>Fill</text>
-    </string>
-
-    <string id="st_wg_bullet_point">
-        <text>•</text>
-    </string>
-
     <string id="st_wg_missing_requirements_ext">
         <text>A tool is required!</text>
+    </string>
+
+    <string id="st_wg_not_enough_fuel">
+        <text>Not enough fuel</text>
     </string>
 
     <!-- Suitcase use strings -->

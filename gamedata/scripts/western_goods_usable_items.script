@@ -15,13 +15,11 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local TEMP_LIGHTER_ENABLED      = western_goods_mcm.get_config("lighter_item")    -- Enables the lighter - temporary solution
-
 local dbg_printf                = western_goods_utils.dbg_printf
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Usable Items
+-- Inventory Labels
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to return the text written when right clicking on a lighter.
@@ -56,11 +54,15 @@ end
 --- @param obj game_object
 --- @return string
 function menu_tear_page(obj)
-    if item_pinup_collect then
-        return western_goods_utils.get_translation("st_wg_tear_page")
+    if not item_pinup_collect then
+        return nil
     end
-    return nil
+    return western_goods_utils.get_translation("st_wg_tear_page")
 end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Use Functions
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function called by callback when any object in the game is used.
 --- This redirects to the proper functions if the item used is one from Western Goods.
@@ -74,21 +76,8 @@ function use_item(obj,_,cf)
         return
     end
 
-    -- Campfires
-    if TEMP_LIGHTER_ENABLED then
-        local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
-        if can_light then
-            dbg_printf("[WG] Usable Items | Used %s",obj:section())
-            if (get_hud()) then
-                hide_hud_inventory()
-            end
-            bind_campfire.campfire_go_on(obj, cf)
-            return
-        end
-    end
-
     -- Readable items (magazines, paper notes)
-    if ini_sys:r_bool_ex(obj:section(), "readable") then
+    if ini_sys:r_bool_ex(obj:section(), "readable", false) then
         dbg_printf("[WG] Usable Items | Used %s",obj:section())
         western_goods_ui_readable.display(obj:section())
         return
@@ -100,253 +89,10 @@ end
 --- @param obj game_object
 --- @return nil
 function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
-
     -- Danylo's pendrive
-    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.is_pda(dropped_on_item) then
+    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.validate_is_pda(dropped_on_item) then
         if slot_from == EDDListType.iActorBag and slot_to == EDDListType.iActorSlot then
             this.use_danylo_pendrive(dragged_item)
-        end
-    end
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Lighter
--- ---------------------------------------------------------------------------------------------------------------------
-
-BuildHeader = ui_item.build_desc_header
---- Function used to display the fill level of the lighter in the inventory.
---- @param obj game_object
---- @param sec string
---- @param str string
-function ui_item.build_desc_header(obj, sec, str)
-    str = str or gc(ini_sys:r_string_ex(sec, "description"))
-    if (not str) then return "" end
-
-    if ini_sys:r_bool_ex(obj:section(), "use_fill") then
-        local con = math.ceil(obj:condition() * 100)
-        local clr = utils_xml.get_color_con(con)
-        local clr_2  = utils_xml.get_color("ui_gray_1")
-        local _str = clr .. " " .. western_goods_utils.get_translation("st_wg_bullet_point") .. " " .. clr_2 .. western_goods_utils.get_translation("st_wg_fill") .. ": " .. clr .. tostring(con) .. "%" .. "\\n \\n" .. clr_2
-        return _str .. BuildHeader(obj, sec, str)
-    end
-
-    return BuildHeader(obj, sec, str)
-end
-
-if TEMP_LIGHTER_ENABLED then
-    BeforeUse = itms_manager.actor_on_item_before_use
-    --- Function used to allow the lighter to light cigarettes.
-    --- @param obj game_object
-    --- @param flags table
-    function itms_manager.actor_on_item_before_use(obj,flags)
-        local sec = obj:section()
-
-        local unlocalized_boost_min = itms_manager.boost_min
-        local unlocalized_old_booster = itms_manager.old_booster
-        local unlocalized_booster_string = itms_manager.booster_string
-
-        -- no need to check for tools
-        if IsItem("tool",sec) then
-            --printf("- actor_on_item_before_use [%s] | ignore utility item", sec)
-            flags.ret_value = true
-            return
-        end
-
-        local curr_booster = {}
-        local time_g = time_global()
-        local str = ""
-        local pass = true
-
-        -- read important boosts
-        local period        = ini_sys:r_float_ex(sec, "boost_time") or 0
-        local rad_boost     = ini_sys:r_float_ex(sec, "boost_radiation_restore") or 0
-        local psy_boost     = ini_sys:r_float_ex(sec, "boost_telepat_protection") or 0
-        local bld_boost     = ini_sys:r_float_ex(sec, "boost_bleeding_restore") or 0
-        local hp_boost         = ini_sys:r_float_ex(sec, "boost_health_restore") or 0
-        local pwr_boost     = ini_sys:r_float_ex(sec, "boost_power_restore") or 0
-
-        -- if an item is required
-        local requires_tool = ini_sys:r_bool_ex(sec, "requires_light_weak")
-        local required_tool_legacy = ini_sys:r_string_ex(sec, "required_tool")
-
-        local obj_tool
-        if requires_tool or required_tool_legacy then
-            western_goods_utils.inventory_iter(db.actor,function(owner, object)
-                local can_light = ini_sys:r_bool_ex(object:section(), "can_light_weak")
-                local is_legacy_tool = object:section() == required_tool_legacy
-                if can_light or is_legacy_tool then
-                    obj_tool = object
-                    return true
-                end
-            end)
-        end
-
-        -- store boosts in a table
-        curr_booster["section"]   = sec
-        curr_booster["period"]      = (period > 0) and (time_g + period*1000) or time_g
-        curr_booster["pwr"]       = (pwr_boost > unlocalized_boost_min) and pwr_boost or 0
-        curr_booster["psy"]       = (psy_boost > unlocalized_boost_min) and psy_boost or 0
-        curr_booster["bld"]       = (bld_boost > unlocalized_boost_min) and bld_boost or 0
-        curr_booster["hp"]        = (hp_boost > unlocalized_boost_min) and hp_boost or 0
-        curr_booster["rad"]       = (rad_boost > unlocalized_boost_min) and rad_boost or 0
-
-        -- A required tool is missing -> no eat
-        if requires_tool and not obj_tool then
-            dbg_printf("[WG] Usable Items | Before use - Require tools '%s'",requires_tool)
-            dbg_printf("[WG] Usable Items | Before use - Object tool '%s'",obj_tool)
-            str = western_goods_utils.get_translation("st_wg_missing_requirements_ext")
-            pass = false
-
-            -- older booster is still active
-        elseif not western_goods_mcm.get_config("compat_no_drug_limit") then
-            if unlocalized_old_booster["period"] and (unlocalized_old_booster["period"] > time_g) then
-                --printf("~ actor_on_item_before_use [%s] | older booster [%s] is still active", sec, old_booster['section'])
-                local weaker_effect
-                local stronger_effect
-                for k,v in pairs(curr_booster) do
-                    if (k ~= "section") and (k ~= "period") then
-                        local v2 = unlocalized_old_booster[k]
-                        if v2  and (v > unlocalized_boost_min) and (v2 > unlocalized_boost_min) then
-                            if (v <= v2) then
-                                weaker_effect = k
-                            else
-                                stronger_effect = k
-                            end
-                        elseif (v2 == 0) and (v > unlocalized_boost_min) then
-                            stronger_effect = k
-                        end
-                    end
-                end
-
-                -- older booster has some stronger effect, while new one doesn't have any stronger effect
-                if weaker_effect and (not stronger_effect) then
-                    --printf("~ actor_on_item_before_use [%s] | older booster [%s] has stronger effect: %s", sec, old_booster['section'], weaker_effect)
-                    local boost_str = western_goods_utils.get_translation(unlocalized_booster_string[weaker_effect])
-                    str = strformat(western_goods_utils.get_translation("st_itm_manager_greater_effect"),boost_str)
-                    pass = false
-                end
-            end
-
-            -- prevent player to take anabiotic during combat
-        elseif sec == "drug_anabiotic" then
-            if (not is_empty(xr_combat_ignore.fighting_with_actor_npcs)) then
-                str = western_goods_utils.get_translation("st_anabiotic_combat")
-                pass = false
-            end
-        end
-
-        -- to eat or not to eat
-        if pass then
-            --printf("- actor_on_item_before_use [%s] | pass = true", sec)
-            flags.ret_value = true
-            copy_table(unlocalized_old_booster, curr_booster)
-            if obj_tool then
-                dbg_printf("[WG] Usable Items | Before use - Requires tool '%s'",requires_tool)
-                dbg_printf("[WG] Usable Items | Before use - Object tool '%s'",obj_tool:section())
-                if utils_item.is_degradable(obj_tool, obj_tool:section()) then
-                    dbg_printf("[WG] Usable Items | Before use - Degrading '%s'",obj_tool:section())
-                    local degradation = ini_sys:r_float_ex(obj:section(), "degradation_factor") or 0.05
-                    utils_item.degrade(obj_tool, degradation)
-                else
-                    dbg_printf("[WG] Usable Items | Before use - Discharging '%s'",obj_tool:section())
-                    utils_item.discharge(obj_tool, 1)
-                end
-            end
-        else
-            --printf("! actor_on_item_before_use [%s] | pass = false", sec)
-            flags.ret_value = false
-
-            utils_xml.hide_menu()
-            actor_menu.set_msg(1, str,3)
-        end
-
-        -- FDDA Compatibility
-        if enhanced_animations then
-            dbg_printf("[WG] Usable Items | Before use - FDDA Compatibility")
-            local item = obj:section()
-            if IsMoveState("mcClimb") then
-                actor_menu.set_msg(1, western_goods_utils.get_translation("st_EA_ladder_item_not_allowed"),3)
-                flags.ret_value = false
-                return
-            end
-            if enhanced_animations.ini_eff:r_string_ex(item, "snd") and enhanced_animations.enable_animations and flags.ret_value then
-                enhanced_animations.use_item(obj)
-                flags.ret_value = false
-                return
-            end
-            return
-        end
-    end
-
-    CampfireGoOn = bind_campfire.campfire_go_on
-    --- Function used to light up a campfire if the conditions are right.
-    --- @param obj game_object
-    --- @param cf campfire_binder
-    function bind_campfire.campfire_go_on(obj, cf)
-        cf = cf or bind_campfire.get_nearby_campfire(bind_campfire.dist_cf,true)
-        if (not cf) then
-            return
-        end
-
-        if (cf:is_on()) then
-            return
-        end
-
-        if bind_campfire.rain_pass() then
-            if (bind_campfire.k_rain < 1) then
-                bind_campfire.k_rain = bind_campfire.k_rain + 1
-                actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"),3)
-            end
-            actor_effects.play_item_fx("matches_script")
-            --local snd_obj = sound_object("interface\\inv_matches")
-            --snd_obj:play(db.actor,0,sound_object.s2d)
-            xr_sound.set_sound_play(AC_ID,"inv_matches")
-            cf:turn_on()
-        else
-            actor_effects.play_item_fx("matches_script")
-            actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"),3)
-        end
-
-        dbg_printf("[WG] Usable Items | Campfire go on - Object tool '%s'",obj:section())
-        if utils_item.is_degradable(obj, obj:section()) then
-            dbg_printf("[WG] Usable Items | Campfire go on - Degrading '%s'",obj:section())
-            utils_item.degrade(obj, 0.05)
-        else
-            dbg_printf("[WG] Usable Items | Campfire go on - Discharging '%s'",obj:section())
-            utils_item.discharge(obj, 1)
-        end
-    end
-
-    UseCampfire = bind_campfire.use_campfire
-    --- Function called from game_tutorials.xml when the player interacts with a campfire.
-    --- @param actor game_object
-    --- @param zone space_restrictor
-    --- @param p table
-    function bind_campfire.use_campfire(actor,zone,p)
-        local pos = db.actor:position()
-        for id,binder in pairs(bind_campfire.campfires_all) do
-            if (binder and binder.campfire) then
-                if (pos:distance_to_sqr(binder.object:position()) <= 2) then
-                    if (binder.campfire:is_on()) then
-                        bind_campfire.campfire_go_off(binder.campfire)
-                    else
-                        local obj_tool
-                        western_goods_utils.inventory_iter(db.actor,function(owner, obj)
-                            local can_light = ini_sys:r_bool_ex(obj:section(), "can_light_strong")
-                            if can_light then
-                                obj_tool = obj
-                                return true
-                            end
-                        end)
-                        if obj_tool then
-                            dbg_printf("[WG] Usable Items | Use campfire - Object tool '%s'",obj_tool:section())
-                            use_item(obj_tool, nil, binder.campfire)
-                        else
-                            actor_menu.set_msg(1, western_goods_utils.get_translation("st_wg_missing_requirements_ext"),3)
-                        end
-                    end
-                end
-            end
         end
     end
 end

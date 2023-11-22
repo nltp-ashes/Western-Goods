@@ -102,16 +102,12 @@
         <text>Использовать</text>
     </string>
 
-    <string id="st_wg_fill">
-        <text>Наполнить</text>
-    </string>
-
-    <string id="st_wg_bullet_point">
-        <text>•</text>
-    </string>
-
     <string id="st_wg_missing_requirements_ext">
         <text>Требуется инструмент!</text>
+    </string>
+
+    <string id="st_wg_not_enough_fuel">
+        <text>Недостаточно топлива</text>
     </string>
 
     <!-- Suitcase use strings -->
