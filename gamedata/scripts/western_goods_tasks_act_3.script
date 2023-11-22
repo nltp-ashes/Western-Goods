@@ -790,12 +790,19 @@ function task_status_functor.act_3_task_4_status_f(tsk,task_id)
             end
         end
 
-        -- First stage : Meet with Oleksandr
+        -- Second stage : Meet with Oleksandr
         if tsk.stage == 1 then
             local npc_se = western_goods_utils.server_object_by_sid("stalker_danylo_chernenko")
+            local npc_obj = npc_se and western_goods_utils.level_object_by_id(npc_se.id)
 
             -- Fail task if Danylo is dead
             if not npc_se or not npc_se:alive() then return "fail" end
+
+            -- Wait for object to be online
+            if not npc_obj then
+                western_goods_utils.rem_info("western_goods_act_3_task_4_ready_finished")
+                return
+            end
 
             western_goods_utils.give_info("western_goods_act_3_task_4_ready_finished")
         end
