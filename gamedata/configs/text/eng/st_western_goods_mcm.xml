@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
-<!-- =============================================================================================================== -->
+<!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/09/2023                                                                                            -->
+<!--    Date : 11/11/2023                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
 <!--                                                                                                                 -->
-<!-- =============================================================================================================== -->
+<!--=================================================================================================================-->
 <string_table>
 
-    <!-- =========================================================================================================== -->
-    <!--     MAIN STRINGS                                                                                            -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
+    <!--    MAIN STRINGS                                                                                             -->
+    <!--=============================================================================================================-->
 
     <!-- Page Title -->
     <string id="ui_mcm_western_goods_title">
@@ -25,9 +25,9 @@
         <text>Western Goods</text>
     </string>
 
-    <!-- =========================================================================================================== -->
-    <!--     GENERAL SETTINGS                                                                                        -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
+    <!--    GENERAL SETTINGS                                                                                         -->
+    <!--=============================================================================================================-->
 
     <!-- Section Title -->
     <string id="ui_mcm_western_goods_general_settings_title">
@@ -61,9 +61,9 @@
         <text>Defines the factor by which to multiply your psi-health (mental health) regeneration when you're reading a magazine.</text>
     </string>
 
-    <!-- =========================================================================================================== -->
-    <!--     KEY-BINDINGS                                                                                            -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
+    <!--    KEY-BINDINGS                                                                                             -->
+    <!--=============================================================================================================-->
 
     <!-- Section Title -->
     <string id="ui_mcm_western_goods_keybindings_title">
@@ -88,9 +88,9 @@
         <text>Key-bind used to enable/disable night-vision for the SigSauer KILO5K Rangefinder.</text>
     </string>
 
-    <!-- =========================================================================================================== -->
-    <!--     LOOT SETTINGS                                                                                           -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
+    <!--    LOOT SETTINGS                                                                                            -->
+    <!--=============================================================================================================-->
 
     <!-- Section Title -->
     <string id="ui_mcm_western_goods_loot_settings_title">
@@ -124,36 +124,18 @@
         <text>Defines the maximum amount of items X that can spawn in a single corpse. The game will select X items to spawn, and then run the drop rates for each of the selected items. In terms, you can get anywhere from 0 to X items.</text>
     </string>
 
-    <!-- =========================================================================================================== -->
-    <!--     COMPATIBILITY SETTINGS                                                                                  -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
+    <!--    COMPATIBILITY SETTINGS                                                                                   -->
+    <!--=============================================================================================================-->
 
     <!-- Section Title -->
     <string id="ui_mcm_western_goods_compatibility_title">
         <text>COMPATIBILITY SETTINGS</text>
     </string>
 
-    <!-- Lighter lock -->
-    <string id="ui_mcm_western_goods_lighter_item">
-        <text>Lighter item</text>
-    </string>
-
-    <string id="ui_mcm_western_goods_lighter_item_desc">
-        <text>Enables part of the functionality of the lighter item. Enabling this option will allow you to use the lighter to light cigarettes and campfires, but may expose you to conflicts with other addons.\n \n/!\ After enabling, requires save reload to take effect.</text>
-    </string>
-
-    <!-- Compatibility with 'No drug limit' -->
-    <string id="ui_mcm_western_goods_compat_no_drug_limit">
-        <text>Lighter item compatibility 'No Drug Limit'</text>
-    </string>
-
-    <string id="ui_mcm_western_goods_compat_no_drug_limit_desc">
-        <text>Enables compatibility with No Drug Limit. If enabled, the 'You already have a similar effect with greater efficiency' thing will be disabled, and it'll let you use whatever items you want.\n \n/!\ Requires 'Lighter item' to be enabled.</text>
-    </string>
-
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
     <!--     TECHNICAL SETTINGS                                                                                      -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
 
     <!-- Section Title -->
     <string id="ui_mcm_western_goods_technical_settings_title">
@@ -178,9 +160,9 @@
         <text>Allows for a safe removal of the addon. Enable this setting, then save your game. After this, you can remove the addon and load that save again, and continue playing without Western Goods.</text>
     </string>
 
-    <!-- =========================================================================================================== -->
-    <!--     DEVICE SELECTOR KEY INTEGRATION                                                                         -->
-    <!-- =========================================================================================================== -->
+    <!--=============================================================================================================-->
+    <!--    DEVICE SELECTOR KEY INTEGRATION                                                                          -->
+    <!--=============================================================================================================-->
 
     <string id="ui_mcm_detector_selector_keybind_wg_gps">
         <text>GPS Locator select key</text>

@@ -1,6 +1,13 @@
-;;--================================================================================================================--;;
-;;--================| Tech |========================================================================================--;;
-;;--================================================================================================================--;;
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 12/11/2023                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used to add new technological items to the game.                                                    ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
 
 [wg_tech_base]:tch_junk
 $spawn                                           = "devices\pda"
@@ -94,6 +101,74 @@ anm_throw_end                                    = hand_gps_throw_end, idle, 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+[wg_lighter_bic]:tch_detector
+class                                            = D_CUSTOM
+visual                                           = dynamics\western_goods_tech\wg_lighter_bic.ogf
+hud                                              = wg_lighter_bic_hud
+kind                                             = i_device
+tier                                             = 2
+
+slot                                             = 8
+animation_slot                                   = 7
+
+inv_name                                         = st_wg_lighter_bic
+inv_name_short                                   = st_wg_lighter_bic_s
+description                                      = st_wg_lighter_bic_descr
+inv_weight                                       = 0.025
+cost                                             = 1950
+
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech.dds
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 1
+
+snd_draw                                         = western_goods_tech\lighter_draw.ogg
+snd_holster                                      = western_goods_tech\lighter_holster.ogg
+
+custom_ui_pos                                    = -0.0281,-0.0130,0.0375
+custom_ui_rot                                    = 0,63,0
+custom_ui_func                                   = western_goods_ui_lighter.get_ui
+custom_ui_bone                                   = cover
+
+; custom properties
+fuel_critical                                    = 0.01             ; lighter dies at 1%
+fuel_consumption                                 = 0.0003           ; 0.03%/second (55 real-life minutes)
+fuel_consumption_use                             = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
+
+[wg_lighter_bic_hud]:detector_base_hud
+item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
+
+attach_place_idx                                 = 1
+freelook_z_offset_mul                            = 0.1
+
+item_position                                    = -0.065, 0.032, 0.0025
+item_orientation                                 = -110, -15, 80
+hands_position                                   = 0.023692, 0.011115, 0.028593
+hands_orientation                                = 0, 0, 0
+hands_position_16x9                              = 0.023692, 0.011115, 0.028593
+hands_orientation_16x9                           = 0, 0, 0
+
+aim_hud_offset_pos                               = -0.175, 0.12, -0.05
+aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
+aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
+aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
+
+fire_point                                       = 0,0,0.05
+fire_point2                                      = 0,0,0
+fire_bone                                        = lid
+fire_bone2                                       = lid
+
+anm_show                                         = wg_lighter_draw, draw, 1
+anm_show_fast                                    = wg_lighter_draw, draw, 1
+anm_hide                                         = wg_lighter_holster, holster, 1
+anm_hide_fast                                    = wg_lighter_holster, holster, 1
+anm_idle                                         = wg_lighter_idle, idle
+anm_idle_moving                                  = wg_lighter_moving, moving, 2
+anm_idle_sprint                                  = wg_lighter_sprint, sprint, 1.6
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 [wg_minedetect]:tch_detector
 GroupControlSection                              = spawn_group
 $prefetch                                        = 32
@@ -164,36 +239,6 @@ anm_zoom_hide_fast                               = d1_zoom_holster, idle, 2
 anm_throw_start                                  = d1_throw_start, idle
 anm_throw                                        = d1_throw_idle, idle
 anm_throw_end                                    = d1_throw_end, idle
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_lighter_bic]:wg_tech_base,booster
-visual                                           = dynamics\western_goods_tech\wg_lighter_bic.ogf
-kind                                             = i_tool
-
-inv_name                                         = st_wg_lighter_bic
-inv_name_short                                   = st_wg_lighter_bic_s
-description                                      = st_wg_lighter_bic_descr
-inv_weight                                       = 0.025
-cost                                             = 1950
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 8
-inv_grid_y                                       = 1
-
-use_condition                                    = true
-condition_bar                                    = condition_progess_bar
-allow_repair                                     = false
-remove_after_use                                 = false
-
-; custom properties
-use_fill                                         = true     ; used to display 'Fill:100%' in description
-can_light_weak                                   = true     ; used to know if it can light a cig
-can_light_strong                                 = true     ; used to know if it can light a campfire
-degradation_factor                               = 0.05     ; how many % will be consumed when used
-
-tier                                             = 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
