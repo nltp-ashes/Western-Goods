@@ -165,7 +165,7 @@ function UILighter:DrainFuel(obj)
     self.m_update_timer = time_global() + self.m_update_rate
 
     local fuel_level = obj:condition() or 0
-    local fuel_consumption = ini_sys:r_float_ex(obj:section(), "fuel_consumption", 0.003)
+    local fuel_consumption = ini_sys:r_float_ex(obj:section(), "fuel_consumption", 0.0003)
 
     obj:set_condition(fuel_level - fuel_consumption)
 end
