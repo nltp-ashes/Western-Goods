@@ -12,11 +12,11 @@ The Zone is host to people from various horizons. Overtime, the demand for goods
 
 This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding new mechanics, consumables, readable magazines, trade items, new unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
 
-|                                                                                                                                 |                                                          Illustrations                                                           |                                                                                                                                            |
-|:-------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
-|     ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_      |      ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_       | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
-| ![Showcase GPS](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png) _New device: GPS Locator_ | ![Showcase Tech](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_3.3.png) _New technological items_ |   ![Showcase Rangefinder](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png) _New device: Rangefinder_    |
-|     ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_      |         ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_          |     ![Showcase Mechanics](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png) _New gameplay features_      |
+|                                                                                                                                 |                                                     Illustrations                                                      |                                                                                                                                            |
+|:-------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+|     ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_      | ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_  | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
+| ![Showcase GPS](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png) _New device: GPS Locator_ | ![Showcase Lighter](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_10.png) _BIC lighter_ |   ![Showcase Rangefinder](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png) _New device: Rangefinder_    |
+|     ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_      |    ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_     |     ![Showcase Mechanics](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png) _New gameplay features_      |
 
 ---
 
@@ -66,7 +66,7 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-You can find the entire changelog [here](CHANGELOG.md).
+You can find the entire change-log [here](CHANGELOG.md).
 
 ---
 
