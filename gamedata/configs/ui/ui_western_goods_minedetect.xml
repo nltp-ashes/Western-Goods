@@ -2,14 +2,14 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 01/07/2022                                                                                            -->
+<!--    Date : 22/11/2023                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    UI Template for the GPS Locator of Western Goods.                                                            -->
+<!--    UI Template for the mine detector of Western Goods.                                                          -->
 <!--                                                                                                                 -->
 <!--    Note : Since this UI is displayed in the game world, and not on a 2D display, coordinates aren't in pixels.  -->
 <!--                                                                                                                 -->
-<!-- ================================================================================================================-->
+<!--=================================================================================================================-->
 <w>
     <mine_detector>
 

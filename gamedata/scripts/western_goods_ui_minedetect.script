@@ -1,11 +1,14 @@
---- Original Author(s) : <unknown>
---- Edited : NLTP_ASHES
---- Date : 19/06/2023
---- License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
----
---- Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the Rangefinder.
----
---- UIMineDetector:Check function was written by GhenTuong.
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 22/11/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script handles the core logic of the mine detector device.                                               ---
+---    UIMineDetector:Check function was written by GhenTuong.                                                       ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Constants, global variables and imported functions
@@ -15,14 +18,14 @@
 local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI					         = nil                              -- instance, don't touch
+GUI                          = nil                              -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to get the UI singleton for the UIRangefinder class.
---- @return UIRangefinder
+--- Function used to get the UI singleton for the UIMineDetector class.
+--- @return UIMineDetector
 function get_ui()
     if (not GUI) then
         GUI = UIMineDetector()
@@ -95,8 +98,11 @@ function UIMineDetector:Update()
         return
     end
 
+    -- Get best aim 'score', and corresponding object
+    local best_aim, best_obj = self:FindBest()
+
     -- Refresh device
-    self:RefreshDevice(self:FindBest())
+    self:RefreshDevice(best_aim, best_obj)
 end
 
 function UIMineDetector:RefreshDevice(best_aim, best_obj)
