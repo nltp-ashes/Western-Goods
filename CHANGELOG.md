@@ -2,7 +2,7 @@
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.4.0/total?label=Downloads)]()
 
-> **v2.4.0 - 12/10/2023 - Minor Update**
+> **v2.4.0 - 22/11/2023 - Minor Update**
 > ```
 > • Additions:
 >    - Added GitHub CI to autonomously build addon releases on GitHub;
@@ -22,6 +22,8 @@
 >    - Fixed rangefinder hud model being abnormally small;
 >    - Fixed small issues in Russian translation (Thanks VodoXleb);
 >    - Fixed small lag caused by repeated calls made to western_goods_utils.get_character_id(game_object) (Thanks Sark).
+>    - Fixed small inconsistencies with the stats of some drinks;
+>    - Fixed a CTD when trying to complete Act 3, Task 4 with the companion offline (Thanks jarednarco).
 > ```
 
 ## **PAST-UPDATES**
