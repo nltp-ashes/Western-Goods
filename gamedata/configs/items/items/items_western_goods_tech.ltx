@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 12/11/2023                                                                                               ;;
+;;    Date : 23/11/2023                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -166,6 +166,91 @@ anm_hide_fast                                    = wg_lighter_holster, holster, 
 anm_idle                                         = wg_lighter_idle, idle
 anm_idle_moving                                  = wg_lighter_moving, moving, 2
 anm_idle_sprint                                  = wg_lighter_sprint, sprint, 1.6
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_compass]:tch_detector
+GroupControlSection                              = spawn_group
+$prefetch                                        = 32
+class                                            = D_CUSTOM
+visual                                           = dynamics\western_goods_tech\wg_gps.ogf
+hud                                              = wg_compass_hud
+
+kind                                             = i_device
+icons_texture                                    = ui\icons\ui_icon_western_goods_tech
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 8
+inv_grid_y                                       = 0
+inv_weight                                       = 0.85
+inv_name                                         = st_wg_gps
+inv_name_short                                   = st_wg_gps_s
+description                                      = st_wg_gps_descr
+cost                                             = 7500
+
+upgrades                                         = ; no upgrades
+installed_upgrades                               = ; no installed upgrades
+upgrade_scheme                                   = ; no upgrade scheme
+upgr_icon_x                                      = 150
+upgr_icon_y                                      = 0
+upgr_icon_width                                  = 100
+upgr_icon_height                                 = 100
+upgr_icon_path                                   = ui\misc\ui_western_goods_upgrades.dds
+
+custom_ui_pos                                    = -0.028058, -0.012221, 0.034925
+custom_ui_rot                                    = 0, 63, 0
+custom_ui_func                                   = western_goods_ui_compass.get_ui
+custom_ui_bone                                   = cover
+
+slot                                             = 8
+ef_detector_type                                 = 1
+animation_slot                                   = 7
+default_to_ruck                                  = true
+
+snd_draw                                         = weapons\detector\detector_8_draw
+snd_holster                                      = weapons\detector\detector_8_holster
+
+[wg_compass_hud]:detector_base_hud
+item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
+
+item_position                                    = -0.08, 0.05, -0.01
+item_orientation                                 = 130, 15, -10
+
+hands_position                                   = -0.125, -0.03, -0.1
+hands_position_16x9                              = -0.125, -0.03, -0.1
+hands_orientation                                = -30, 0, 0
+hands_orientation_16x9                           = -30, 0, 0
+
+aim_hud_offset_pos                               = 0.05, 0, 0.2
+aim_hud_offset_pos_16x9                          = 0.05, 0, 0.2
+aim_hud_offset_rot                               = 0, -0.5, 0
+aim_hud_offset_rot_16x9                          = 0, -0.5, 0
+
+attach_place_idx                                 = 1
+
+anm_show                                         = hand_gps_show, idle
+anm_show_fast                                    = hand_gps_show, idle
+
+anm_hide                                         = hand_gps_hide, idle, 2
+anm_hide_fast                                    = hand_gps_hide, idle, 2
+
+anm_idle                                         = hand_gps_idle, idle, 2
+anm_idle_variant1                                = hand_gps_idle_2, idle, 2
+anm_idle_moving                                  = hand_gps_walk, idle, 2
+anm_idle_moving_crouch                           = hand_gps_walk, idle, 2
+anm_idle_sprint                                  = hand_gps_sprint, idle, 2
+anm_idle_zoom                                    = hand_gps_zoom_idle, idle, 2
+
+anm_zoom_in                                      = hand_gps_zoom_in, idle, 2
+anm_zoom_out                                     = hand_gps_zoom_out, idle, 3
+anm_zoom_show                                    = hand_gps_zoom_show, idle, 2
+anm_zoom_hide                                    = hand_gps_zoom_hide, idle, 2
+anm_zoom_hide_fast                               = hand_gps_zoom_hide, idle, 2
+
+anm_throw_start                                  = hand_gps_throw_start, idle, 2
+anm_throw                                        = hand_gps_throw_idle, idle, 2
+anm_throw_variant1                               = hand_gps_throw_idle_2, idle, 2
+anm_throw_end                                    = hand_gps_throw_end, idle, 2
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

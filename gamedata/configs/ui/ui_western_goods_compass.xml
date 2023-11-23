@@ -1,0 +1,18 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 23/11/2023                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    UI Template for the Compass of Western Goods.                                                                -->
+<!--                                                                                                                 -->
+<!--    Note : Since this UI is displayed in the game world, and not on a 2D display, coordinates aren't in pixels.  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<w>
+    <compass>
+        <heading  x="0.0048"    y="0.0475"    width="0.048"    height="0.048"    stretch="1"    align="c"    heading="1"    heading_angle="0" />
+        <cursor   x="0.0048"    y="0.0475"    width="0.048"    height="0.048"    stretch="1"    align="c"    heading="1"    heading_angle="0"/>
+    </compass>
+</w>

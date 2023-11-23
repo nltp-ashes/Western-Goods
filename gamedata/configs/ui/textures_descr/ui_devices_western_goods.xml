@@ -2,7 +2,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 01/07/2022                                                                                            -->
+<!--    Date : 23/11/2022                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Texture descriptions for UI elements of the GPS Locator of Western Goods.                                    -->
@@ -98,5 +98,11 @@
         <texture id="rf_num_8_g"       x="850"     y="120"    width="40"     height="120" />
         <texture id="rf_num_9_g"       x="730"     y="240"    width="40"     height="120" />
         <texture id="rf_num_0_g"       x="770"     y="240"    width="40"     height="120" />
+    </file>
+
+    <!-- Compass -->
+    <file name="ui\items\ui_compass.dds">
+        <texture id="cp_heading"       x="0"       y="0"      width="1024"    height="1024" />
+        <texture id="cp_cursor"        x="1024"    y="0"      width="1024"    height="1024" />
     </file>
 </w>
