@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 24/11/2023                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -21,7 +21,7 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local VERSION                       = "2.4.0"
+local VERSION                       = "2.5.0"
 
 local CONST_BARMAN_TYPE_BUY_LIST   = {"food","drink"}
 local CONST_SUPPLIER_TYPE_BUY_LIST = {"magazine"}
