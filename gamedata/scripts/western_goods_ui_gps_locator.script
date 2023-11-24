@@ -55,11 +55,11 @@ function UIGPSLocator:__init() super()
     self:Show(true)
     self:Enable(true)
 
+    -- Build UI
     self.m_xml = CScriptXmlInit()
     self.m_xml:ParseFile("ui_western_goods_gps_locator.xml")
     self.m_xml:InitWindow("gps_locator", 0, self)
 
-    -- Build UI
     self.m_lname = self.m_xml:InitStatic("gps_locator:lname", self)
 
     self.m_conn = self.m_xml:InitStatic("gps_locator:conn", self)
