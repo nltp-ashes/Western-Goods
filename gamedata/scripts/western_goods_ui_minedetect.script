@@ -86,15 +86,10 @@ function UIMineDetector:Update()
 
     CUIScriptWnd.Update(self)
 
-    -- Don't refresh if device isn't drawn out
-    local active_det = db.actor:active_detector()
-    if not active_det or not western_goods_utils.table_contains(self.m_valid_sections, active_det:section()) then
-        return
-    end
+    self.m_time_global = time_global()
 
     -- Don't refresh if timer isn't hit
-    self.m_time_global = time_global()
-    if (self.m_time_global < self.m_update_timer) then
+    if not self:ShouldUpdate() then
         return
     end
 
@@ -103,6 +98,24 @@ function UIMineDetector:Update()
 
     -- Refresh device
     self:RefreshDevice(best_aim, best_obj)
+end
+
+function UIMineDetector:ShouldUpdate()
+    local active_det = db.actor:active_detector()
+
+    if not active_det then
+        return false
+    end
+
+    if not western_goods_utils.table_contains(self.m_valid_sections, active_det:section()) then
+        return false
+    end
+
+    if (self.m_time_global < self.m_update_timer) then
+        return false
+    end
+
+    return true
 end
 
 function UIMineDetector:RefreshDevice(best_aim, best_obj)
