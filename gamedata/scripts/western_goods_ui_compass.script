@@ -50,8 +50,6 @@ function UICompass:__init() super()
     self.m_xml:ParseFile("ui_western_goods_compass.xml")
     self.m_xml:InitWindow("compass", 0, self)
 
-    printf("ash utils_xml.screen_ratio() %s", utils_xml.screen_ratio())
-
     self.m_heading = self.m_xml:InitStatic("compass:heading", self)
     self.m_heading:InitTextureEx("cp_heading", "hud\\p3d")
 
