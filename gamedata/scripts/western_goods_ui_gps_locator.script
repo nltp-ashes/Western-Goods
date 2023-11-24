@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 26/05/2023                                                                                             ---
+---    Date : 24/11/2023                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.              ---
@@ -68,28 +68,76 @@ function UIGPSLocator:__init() super()
     self.m_dist2 = self.m_xml:InitStatic("gps_locator:dist2", self)
     self.m_dist3 = self.m_xml:InitStatic("gps_locator:dist3", self)
     self.m_dist4 = self.m_xml:InitStatic("gps_locator:dist4", self)
-    self.m_distu = self.m_xml:InitStatic("gps_locator:distu", self)
     self.m_distl = self.m_xml:InitStatic("gps_locator:distl", self)
 
     self.m_time1 = self.m_xml:InitStatic("gps_locator:time1", self)
     self.m_time2 = self.m_xml:InitStatic("gps_locator:time2", self)
-    self.m_timed = self.m_xml:InitStatic("gps_locator:timed", self)
     self.m_time3 = self.m_xml:InitStatic("gps_locator:time3", self)
     self.m_time4 = self.m_xml:InitStatic("gps_locator:time4", self)
 
     self.m_date1 = self.m_xml:InitStatic("gps_locator:date1", self)
     self.m_date2 = self.m_xml:InitStatic("gps_locator:date2", self)
-    self.m_dates1 = self.m_xml:InitStatic("gps_locator:dates1", self)
     self.m_date3 = self.m_xml:InitStatic("gps_locator:date3", self)
     self.m_date4 = self.m_xml:InitStatic("gps_locator:date4", self)
-    self.m_dates2 = self.m_xml:InitStatic("gps_locator:dates2", self)
     self.m_date5 = self.m_xml:InitStatic("gps_locator:date5", self)
     self.m_date6 = self.m_xml:InitStatic("gps_locator:date6", self)
 
+    self.m_timed = self.m_xml:InitStatic("gps_locator:timed", self)
+    self.m_timed:InitTextureEx("gps_dots", "hud\\p3d")
+
+    self.m_distu = self.m_xml:InitStatic("gps_locator:distu", self)
+    self.m_distu:InitTextureEx("gps_meters", "hud\\p3d")
+
+    self.m_dates1 = self.m_xml:InitStatic("gps_locator:dates1", self)
+    self.m_dates1:InitTextureEx("gps_slash", "hud\\p3d")
+
+    self.m_dates2 = self.m_xml:InitStatic("gps_locator:dates2", self)
+    self.m_dates2:InitTextureEx("gps_slash", "hud\\p3d")
+
     -- Build variables
     self.m_update_timer = 0
-    self.m_update_freq = 555
+    self.m_update_freq = 500
     self.m_connectivity = 5
+    self.m_level_textures = {
+        ["jupiter"]               = "gps_jup",
+        ["jupiter_underground"]   = "gps_no_sig",
+        ["k00_marsh"]             = "gps_mar",
+        ["k01_darkscape"]         = "gps_darkscape",
+        ["k02_trucks_cemetery"]   = "gps_truck",
+        ["l01_escape"]            = "gps_esc",
+        ["l02_garbage"]           = "gps_gar",
+        ["l03_agroprom"]          = "gps_agroprom",
+        ["l03u_agr_underground"]  = "gps_no_sig",
+        ["l04_darkvalley"]        = "gps_darkvalley",
+        ["l04u_labx18"]           = "gps_no_sig",
+        ["l05_bar"]               = "gps_bar",
+        ["l06_rostok"]            = "gps_wild",
+        ["l07_military"]          = "gps_mil",
+        ["l08_yantar"]            = "gps_yantar",
+        ["l08u_brainlab"]         = "gps_no_sig",
+        ["l09_deadcity"]          = "gps_dead",
+        ["l10_limansk"]           = "gps_lim",
+        ["l10_radar"]             = "gps_rad",
+        ["l10_red_forest"]        = "gps_red",
+        ["l10u_bunker"]           = "gps_no_sig",
+        ["l11_hospital"]          = "gps_hospital",
+        ["l11_pripyat"]           = "gps_pri_soc",
+        ["l12_stancia"]           = "gps_cnpp",
+        ["l12_stancia_2"]         = "gps_cnpp",
+        ["l12u_control_monolith"] = "gps_no_sig",
+        ["l12u_sarcofag"]         = "gps_no_sig",
+        ["l13_generators"]        = "gps_gen",
+        ["l13u_warlab"]           = "gps_no_sig",
+        ["labx8"]                 = "gps_no_sig",
+        ["pripyat"]               = "gps_pri",
+        ["zaton"]                 = "gps_zat",
+        ["y04_pole"]              = "gps_pole",
+        ["bunker_a1"]             = "gps_bunker",
+        ["collaider"]             = "gps_collaider",
+        ["grimwood"]              = "gps_grimwood",
+        ["poselok_ug"]            = "gps_yuzhniy",
+        ["promzona"]              = "gps_promzone",
+    }
 end
 
 function UIGPSLocator:__finalize()
@@ -100,11 +148,8 @@ function UIGPSLocator:Update()
 
     CUIScriptWnd.Update(self)
 
-    local tg = time_global()
-    if (tg < self.m_update_timer) then
+    if not self:ShouldUpdate() then
         return
-    else
-        self.m_update_timer = tg + self.m_update_freq
     end
 
     -- Connectivity
@@ -130,23 +175,29 @@ function UIGPSLocator:Update()
     self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
     self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
     self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
-    self.m_distu:InitTextureEx("gps_meters", "hud\\p3d")
     self.m_distl:InitTextureEx(distl, "hud\\p3d")
 
     self.m_time1:InitTextureEx(time1, "hud\\p3d")
     self.m_time2:InitTextureEx(time2, "hud\\p3d")
-    self.m_timed:InitTextureEx("gps_dots", "hud\\p3d")
     self.m_time3:InitTextureEx(time3, "hud\\p3d")
     self.m_time4:InitTextureEx(time4, "hud\\p3d")
 
     self.m_date1:InitTextureEx(date1, "hud\\p3d")
     self.m_date2:InitTextureEx(date2, "hud\\p3d")
-    self.m_dates1:InitTextureEx("gps_slash", "hud\\p3d")
     self.m_date3:InitTextureEx(date3, "hud\\p3d")
     self.m_date4:InitTextureEx(date4, "hud\\p3d")
-    self.m_dates2:InitTextureEx("gps_slash", "hud\\p3d")
     self.m_date5:InitTextureEx(date5, "hud\\p3d")
     self.m_date6:InitTextureEx(date6, "hud\\p3d")
+end
+
+function UIGPSLocator:ShouldUpdate()
+    local tg = time_global()
+    if (tg < self.m_update_timer) then
+        return false
+    else
+        self.m_update_timer = tg + self.m_update_freq
+        return true
+    end
 end
 
 function UIGPSLocator:GetConnectivityTexture()
@@ -293,45 +344,9 @@ function UIGPSLocator:GetDistOffset()
 end
 
 function UIGPSLocator:GetLevelTexture(level_name)
-    local level_textures = {
-        ["jupiter"]               = "gps_jup",
-        ["jupiter_underground"]   = "gps_no_sig",
-        ["k00_marsh"]             = "gps_mar",
-        ["k01_darkscape"]         = "gps_darkscape",
-        ["k02_trucks_cemetery"]   = "gps_truck",
-        ["l01_escape"]            = "gps_esc",
-        ["l02_garbage"]           = "gps_gar",
-        ["l03_agroprom"]          = "gps_agroprom",
-        ["l03u_agr_underground"]  = "gps_no_sig",
-        ["l04_darkvalley"]        = "gps_darkvalley",
-        ["l04u_labx18"]           = "gps_no_sig",
-        ["l05_bar"]               = "gps_bar",
-        ["l06_rostok"]            = "gps_wild",
-        ["l07_military"]          = "gps_mil",
-        ["l08_yantar"]            = "gps_yantar",
-        ["l08u_brainlab"]         = "gps_no_sig",
-        ["l09_deadcity"]          = "gps_dead",
-        ["l10_limansk"]           = "gps_lim",
-        ["l10_radar"]             = "gps_rad",
-        ["l10_red_forest"]        = "gps_red",
-        ["l10u_bunker"]           = "gps_no_sig",
-        ["l11_hospital"]          = "gps_hospital",
-        ["l11_pripyat"]           = "gps_pri_soc",
-        ["l12_stancia"]           = "gps_cnpp",
-        ["l12_stancia_2"]         = "gps_cnpp",
-        ["l12u_control_monolith"] = "gps_no_sig",
-        ["l12u_sarcofag"]         = "gps_no_sig",
-        ["l13_generators"]        = "gps_gen",
-        ["l13u_warlab"]           = "gps_no_sig",
-        ["labx8"]                 = "gps_no_sig",
-        ["pripyat"]               = "gps_pri",
-        ["zaton"]                 = "gps_zat",
-        ["y04_pole"]              = "gps_pole",
-    }
-
-    if self.m_connectivity > 0 then
-        return level_textures[level_name] or "gps_no_sig"
-    else
+    if self.m_connectivity <= 0 then
         return "gps_no_sig"
     end
+
+    return self.m_level_textures[level_name] or "gps_no_sig"
 end

@@ -63,6 +63,11 @@
         <texture id="gps_pri"           x="500"    y="100"    width="250"    height="100" />
         <texture id="gps_gen"           x="500"    y="200"    width="250"    height="100" />
         <texture id="gps_hospital"      x="500"    y="300"    width="250"    height="100" />
+        <texture id="gps_bunker"        x="500"    y="500"    width="250"    height="100" />
+        <texture id="gps_collaider"      x="500"    y="600"    width="250"    height="100" />
+        <texture id="gps_grimwood"      x="500"    y="700"    width="250"    height="100" />
+        <texture id="gps_yuzhniy"       x="500"    y="800"    width="250"    height="100" />
+        <texture id="gps_promzone"      x="500"    y="900"    width="250"    height="100" />
     </file>
 
     <!-- Rangefinder -->
