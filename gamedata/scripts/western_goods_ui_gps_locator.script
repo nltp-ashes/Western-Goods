@@ -202,15 +202,9 @@ end
 
 function UIGPSLocator:GetConnectivityTexture()
     if GetEvent("underground") or GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
-        if self.m_connectivity > 0 then
-            self.m_connectivity = self.m_connectivity - 1
-        end
+        self.m_connectivity = (self.m_connectivity > 0) and self.m_connectivity - 1 or 0
     else
-        if self.m_connectivity < 4 then
-            self.m_connectivity = self.m_connectivity + 1
-        else
-            self.m_connectivity = math.random(4, 5)
-        end
+        self.m_connectivity = (self.m_connectivity < 4) and self.m_connectivity + 1 or math.random(4, 5)
     end
 
     return "gps_conn_" .. tostring(self.m_connectivity)
@@ -258,17 +252,10 @@ function UIGPSLocator:GetDistTextures()
 
     if GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
         distl = "gps_dist_safe"
-
-        -- Find dist to safe zone
         dist = self:FindDistSafeZone()
     else
         distl = "gps_dist"
-
-        -- Find dist via world info
-        dist = self:FindDistWorld()
-
-        -- Failsafe via PDA info
-        dist = dist or self:FindDistPDA()
+        dist = self:FindDistWorld() or self:FindDistPDA()
     end
 
     -- Apply event multiplier
@@ -306,12 +293,10 @@ function UIGPSLocator:FindDistPDA()
     for _,v in pairs(pda.primary_objects_tbl) do
         local smart_se = western_goods_utils.server_object_by_sid(v.target)
         local smart_obj = smart_se and western_goods_utils.level_object_by_id(smart_se.id)
-        if smart_obj then
-            local smart_dist = western_goods_utils.get_distance_sqr(db.actor:position(),smart_obj:position())
+        local smart_dist = smart_obj and western_goods_utils.get_distance_sqr(db.actor:position(), smart_obj:position())
 
-            if (smart_dist <= (closest_smart_dist or smart_dist)) then
-                closest_smart_dist = smart_dist
-            end
+        if smart_dist and (smart_dist <= (closest_smart_dist or smart_dist)) then
+            closest_smart_dist = smart_dist
         end
     end
 
@@ -333,11 +318,7 @@ function UIGPSLocator:GetDistOffset()
 
     -- Psi-storms: huge spike when a vortex hits the ground
     if GetEvent("psi_storm", "state") then
-        if GetEvent("psi_storm", "vortex") then
-            return random_float(0.5, 2)
-        else
-            return random_float(0.9, 1.1)
-        end
+        return GetEvent("psi_storm", "vortex") and random_float(0.5, 2) or random_float(0.9, 1.1)
     end
 
     return 1
@@ -345,8 +326,13 @@ end
 
 function UIGPSLocator:GetLevelTexture(level_name)
     if self.m_connectivity <= 0 then
+        -- We do a little trolling
+        if (GetEvent("surge", "state") or GetEvent("psi_storm", "state")) and math.random(0, 1000) <= 1 then
+            return "gps_strelok"
+        end
+
         return "gps_no_sig"
     end
 
-    return self.m_level_textures[level_name] or "gps_no_sig"
+    return self.m_level_textures[level_name] or "gps_unknown"
 end
