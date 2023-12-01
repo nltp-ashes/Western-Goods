@@ -1,6 +1,18 @@
-## **NEW IN v2.4.0**
+## **NEW IN v2.5.0**
 
-[![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.4.0/total?label=Downloads)]()
+[![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.5.0/total?label=Downloads)]()
+
+> **v2.5.0 - 24/11/2023 - Minor Update**
+> ```
+> • Additions:
+>    - Added support for New Levels for the GPS Locator.
+> • Changes :
+>    - Optimized GPS Locator code;
+> ```
+
+## **PAST-UPDATES**
+
+[![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg?label=Downloads%20(All%20Time))](https://github.com/nltp-ashes/Western-Goods/releases)
 
 > **v2.4.0 - 22/11/2023 - Minor Update**
 > ```
@@ -14,8 +26,8 @@
 >    - Cleaned-up and improved various UI code;
 >    - Cleaned-up and improved safety in DXML scripts;
 >    - Reanimated the GPS Locator (Thanks TheParaziT);
->    - Unified file comments (and added comments to configs).
->    - Turned the BIC lighter into a 3D hand-held device (Thanks Kyne's Peace);
+>    - Unified file comments (and added comments to configs);
+>    - Turned the BIC lighter into a 3D hand-held device (Thanks Kyne's Peace).
 > • Bug fixes :
 >    - Fixed normals on most models;
 >    - Fixed a benign typo in rangefinder animations;
@@ -25,10 +37,6 @@
 >    - Fixed small inconsistencies with the stats of some drinks;
 >    - Fixed a CTD when trying to complete Act 3, Task 4 with the companion offline (Thanks jarednarco).
 > ```
-
-## **PAST-UPDATES**
-
-[![Total Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/total.svg?label=Downloads%20(All%20Time))](https://github.com/nltp-ashes/Western-Goods/releases)
 
 > **v2.3.0 - 12/09/2023 - Minor Update**
 > ```

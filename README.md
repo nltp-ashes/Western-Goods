@@ -32,7 +32,8 @@ Western Goods natively integrates with the following addons, but they **aren't r
 3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
 4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
 5. [Device Selector Key](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-required-device-selector-key) (makes it easier to switch between various devices);
-6. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.1-readables-ext) (adds more pages to magazines in the addon).
+6. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
+7. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.1-readables-ext) (adds more pages to magazines in the addon).
 
 These patches can be used when native compatibility with other addons cannot be achieved :
 1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.0-patch-rbn).
