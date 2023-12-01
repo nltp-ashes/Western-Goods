@@ -2,7 +2,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 23/11/2022                                                                                            -->
+<!--    Date : 24/11/2023                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Texture descriptions for UI elements of the GPS Locator of Western Goods.                                    -->
@@ -27,8 +27,8 @@
         <texture id="gps_meters"        x="830"    y="150"    width="40"     height="120" />
         <texture id="gps_slash"         x="830"    y="270"    width="40"     height="120" />
         <texture id="gps_dots"          x="830"    y="390"    width="40"     height="120" />
-        <texture id="gps_dist"          x="500"    y="400"    width="250"    height="50" />
-        <texture id="gps_dist_safe"     x="500"    y="450"    width="250"    height="50" />
+        <texture id="gps_dist"          x="750"    y="900"    width="250"    height="50" />
+        <texture id="gps_dist_safe"     x="750"    y="950"    width="250"    height="50" />
 
         <!-- Connectivity icons -->
         <texture id="gps_conn_5"        x="750"    y="0"      width="100"    height="50" />
@@ -63,6 +63,15 @@
         <texture id="gps_pri"           x="500"    y="100"    width="250"    height="100" />
         <texture id="gps_gen"           x="500"    y="200"    width="250"    height="100" />
         <texture id="gps_hospital"      x="500"    y="300"    width="250"    height="100" />
+        <texture id="gps_unknown"       x="500"    y="400"    width="250"    height="100" />
+        <texture id="gps_bunker"        x="500"    y="500"    width="250"    height="100" />
+        <texture id="gps_collaider"     x="500"    y="600"    width="250"    height="100" />
+        <texture id="gps_grimwood"      x="500"    y="700"    width="250"    height="100" />
+        <texture id="gps_yuzhniy"       x="500"    y="800"    width="250"    height="100" />
+        <texture id="gps_promzone"      x="500"    y="900"    width="250"    height="100" />
+
+        <!-- Misc -->
+        <texture id="gps_strelok"       x="750"    y="800"    width="250"    height="100" />
     </file>
 
     <!-- Rangefinder -->

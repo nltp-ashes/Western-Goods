@@ -11,7 +11,7 @@ body:
     attributes:
       label: Description
       description: Please write a short description about the issue you encountered.
-      placeholder: 'Example : "I was doing ..., when ... happened. I use ... mockpack. I modified ... in the addons files. I use a patch/tweak from ... addon."'
+      placeholder: 'Example : "I was doing ..., when ... happened. I use ... mod-pack. I modified ... in the addons files. I use a patch/tweak from ... addon."'
     validations:
       required: true
   - type: dropdown
@@ -19,6 +19,7 @@ body:
       label: Addon version
       description: Please select which version of the addon you are using.
       options:
+        - v2.4.0
         - v2.3.0
         - v2.2.1
         - v2.2.0
