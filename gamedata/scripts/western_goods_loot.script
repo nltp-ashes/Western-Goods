@@ -10,7 +10,7 @@
 ---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions
+-- Constants, global variables, imported functions and monkey-patches
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
@@ -22,6 +22,10 @@ local trade_lists = {
 
 -- Imported functions
 local dbg_printf                    = western_goods_utils.dbg_printf
+
+-- Monkey-patches
+TraderAuto = trader_autoinject.update
+SpawnCosmetics = death_manager.spawn_cosmetics
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Traders
@@ -43,7 +47,6 @@ function spawn_trader_loot(npc)
     trader_autoinject.spawn_items(npc, trader_table, true)
 end
 
-TraderAuto = trader_autoinject.update
 --- Monkey-patching trader_autoinject.update to inject western goods items in the traders.
 --- @param npc cse_alife_object
 --- @return nil
@@ -71,7 +74,6 @@ function spawn_corpse_loot(npc, npc_rank, npc_comm)
     end
 end
 
-SpawnCosmetics = death_manager.spawn_cosmetics
 --- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods.
 --- @param npc cse_alife_object
 --- @param npc_id string
