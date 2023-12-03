@@ -24,8 +24,8 @@ local trade_lists = {
 local dbg_printf                    = western_goods_utils.dbg_printf
 
 -- Monkey-patches
-TraderAuto = trader_autoinject.update
-SpawnCosmetics = death_manager.spawn_cosmetics
+TraderAuto                          = trader_autoinject.update
+SpawnCosmetics                      = death_manager.spawn_cosmetics
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Traders
