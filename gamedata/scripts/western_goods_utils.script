@@ -692,6 +692,11 @@ function squad_iterate_members(squad, func, ...)
     end
 end
 
+--- Function used to get the squad of an object.
+--- Unlike the global 'get_object_squad', this function checks if the passed object is the actor.
+--- Doing so will kill the script engine thread, and this function ensures this never happens.
+--- @param obj game_object
+--- @return cse_alife_online_offline_group
 function get_squad_of(obj)
     if (not validate_params({obj,"get_squad_of"})) then
         return
