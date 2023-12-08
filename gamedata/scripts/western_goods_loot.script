@@ -1,0 +1,200 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 03/12/2023                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script handles the loot generation (in bodies and traders) for the addon.                                ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables, imported functions and monkey-patches
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local trade_lists = {
+    [trader_autoinject.SUPPLIER]    = { "food", "drink" },
+    [trader_autoinject.BARMAN]      = { "magazine" },
+    [trader_autoinject.MECHANIC]    = { "tech" }
+}
+
+-- Imported functions
+local dbg_printf                    = western_goods_utils.dbg_printf
+
+-- Monkey-patches
+TraderAuto                          = trader_autoinject.update
+SpawnCosmetics                      = death_manager.spawn_cosmetics
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Traders
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to spawn items in a specific npc with the help of trader_autoinject.script.
+--- @param npc cse_alife_object
+--- @return nil
+function spawn_trader_loot(npc)
+    local trader_type = trader_autoinject.get_trader_type(npc)
+    local community = western_goods_utils.get_real_community(npc, "stalker")
+    local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
+
+    local trade_list = trade_lists[trader_type] or {}
+    local trader_table = this.table_inject_ready(community, trade_list, supply_level)
+
+    dbg_printf("[WG] Core | NPC trading (%s) - type %s\n%s", community, trader_type, utils_data.print_table(trader_table, false, true))
+
+    trader_autoinject.spawn_items(npc, trader_table, true)
+end
+
+--- Monkey-patching trader_autoinject.update to inject western goods items in the traders.
+--- @param npc cse_alife_object
+--- @return nil
+function trader_autoinject.update(npc)
+    TraderAuto(npc)
+    spawn_trader_loot(npc)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Dead Bodies
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to spawn items in a corpse.
+--- @param npc cse_alife_object
+--- @param npc_rank string
+--- @param npc_comm string
+--- @return nil
+function spawn_corpse_loot(npc, npc_rank, npc_comm)
+    local loot_to_spawn = this.table_corpse_ready(npc_rank, npc_comm)
+
+    dbg_printf("[WG] Core | NPC loot (%s)\n%s", npc_comm, utils_data.print_table(loot_to_spawn, false, true))
+
+    for sec,qte in pairs(loot_to_spawn) do
+        alife_create_item(sec, npc, {uses = qte})
+    end
+end
+
+--- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods.
+--- @param npc cse_alife_object
+--- @param npc_id string
+--- @param npc_comm string
+--- @param npc_rank string
+--- @param visual string
+--- @param rand_condition string
+--- @return nil
+function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
+    SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
+    this.spawn_corpse_loot(npc, npc_rank, npc_comm)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Utility Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items.
+--- This function takes parameters to filter items to be kept in the final table.
+--- @param comm string
+--- @param types table
+--- @param supply_level number
+--- @return table
+function table_inject_ready(comm, types, supply_level)
+    local loot_to_spawn = {}
+
+    -- Get general params
+    local loot_factor = western_goods_mcm.get_config("trader_loot_factor") or 1.0
+
+    -- Function used to get a quantity if item should be added to trader, nil otherwise
+    local function eval_item(section, data)
+        -- Short circuit if no trade params
+        if not data.trader_params[comm] then
+            return
+        end
+
+        -- Short circuit if trader doesn't sell this type of item
+        if not western_goods_utils.table_contains(types, data.type) then
+            return
+        end
+
+        -- Short circuit if player doesn't meet supply level
+        if not data.trader_params[comm].sl == supply_level then
+            return
+        end
+
+        local dice = math.random()
+        local luck = clamp(data.trader_params[comm].prob * loot_factor,0.0,1.0)
+        local qte = data.trader_params[comm].qte
+
+        -- Short circuit if we miss the spawn rate
+        if dice > luck then
+            dbg_printf("[WG] Core | NPC trading missed '%s' [%s>%s]", section, dice, luck)
+            return
+        end
+
+        dbg_printf("[WG] Core | NPC trading diced '%s' [%s<=%s] - qte: %s", section, dice, luck, qte)
+        return qte
+    end
+
+    -- Go through each of the addon's items
+    for section,data in pairs(western_goods_core.western_goods_items) do
+        loot_to_spawn[section] = eval_item(section, data)
+    end
+
+    return loot_to_spawn
+end
+
+--- Function used to transform western_goods_items into a table ready for trader_autoinject.
+--- This function takes parameters to filter items to be kept in the final table.
+--- @param npc_rank string
+--- @param npc_comm string
+--- @return table
+function table_corpse_ready(npc_rank, npc_comm)
+    local loot_to_spawn = {}
+
+    -- Get general params
+    local max_items = western_goods_mcm.get_config("max_item_per_corpse") or 0
+    local loot_factor = western_goods_mcm.get_config("corpse_loot_factor") or 1.0
+
+    -- Function used to get a quantity if item should be added to corpse, nil otherwise
+    local function eval_item(section, data, iter)
+        if not data.corpse_params[npc_comm] then
+            dbg_printf("[WG] Core | NPC loot (%s of %s) no dice '%s' - comm: %s", iter, max_items, section, npc_comm)
+            return
+        end
+
+        local dice = math.random()
+        local luck = clamp(data.corpse_params[npc_comm].prob * loot_factor, 0.0, 1.0)
+        local qte = data.corpse_params[npc_comm].qte
+
+        -- If we hit the drop rate, spawn the item in the corpse
+        if dice > luck then
+            dbg_printf("[WG] Core | NPC loot (%s of %s) missed '%s' [%s>%s]", iter, max_items, section, dice, luck)
+            return
+        end
+
+        dbg_printf("[WG] Core | NPC loot (%s of %s) diced '%s' [%s<=%s] - qte: %s", iter, max_items, section, dice, luck, qte)
+        return qte
+    end
+
+    -- For a user-defined number of tries, try adding a random item
+    for i = 1, max_items do
+        local section = western_goods_utils.table_random_key(western_goods_core.western_goods_items)
+        local data = western_goods_core.western_goods_items[section]
+        loot_to_spawn[section] = eval_item(section, data, i)
+    end
+
+    -- Special
+    if max_items > 1 and npc_comm == "killer" and npc_rank == "legend" then
+
+        local dice = math.random()
+        local luck = 0.001
+
+        if dice < luck then
+            dbg_printf("[WG] Core | NPC loot (special) diced 'wg_money_suitcase' [%s<%s]", dice, luck)
+            loot_to_spawn["wg_money_suitcase"] = 1
+        else
+            dbg_printf("[WG] Core | NPC loot (special) missed 'wg_money_suitcase' [%s>=%s]", dice, luck)
+        end
+    end
+
+    return loot_to_spawn
+end
