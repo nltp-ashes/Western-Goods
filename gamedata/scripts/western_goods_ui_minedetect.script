@@ -62,6 +62,16 @@ function UIMineDetector:__init() super()
 
     self.m_detect = self.m_xml:InitStatic("mine_detector:detect", self)
 
+    -- TODO: Remove this
+    self.m_aim1 = self.m_xml:InitStatic("mine_detector:aim1", self)
+    self.m_aim2 = self.m_xml:InitStatic("mine_detector:aim2", self)
+    self.m_aim3 = self.m_xml:InitStatic("mine_detector:aim3", self)
+    self.m_aim4 = self.m_xml:InitStatic("mine_detector:aim4", self)
+    self.m_dist1 = self.m_xml:InitStatic("mine_detector:dist1", self)
+    self.m_dist2 = self.m_xml:InitStatic("mine_detector:dist2", self)
+    self.m_dist3 = self.m_xml:InitStatic("mine_detector:dist3", self)
+    self.m_dist4 = self.m_xml:InitStatic("mine_detector:dist4", self)
+    
     -- Sound effects
     self.m_detect_sfx = sound_object([[detectors\art_beep1]])
 
@@ -71,8 +81,10 @@ function UIMineDetector:__init() super()
     self.m_angle_max = 20
     self.m_update_freq_min = 111
     self.m_update_freq_max = 999
-    self.m_detect_dist_min_sqr = 2500
-    self.m_detect_dist_max_sqr = 40000
+    self.m_detect_dist_min_sqr = 1
+    self.m_detect_dist_max_sqr = 49
+    self.m_detect_aim_dist_min_sqr = 4000
+    self.m_detect_aim_dist_max_sqr = 40000
     self.m_max_scan_range = 49
     self.m_valid_sections = { "wg_minedetect" }
     self.m_time_global = time_global()
@@ -119,16 +131,32 @@ function UIMineDetector:ShouldUpdate()
 end
 
 function UIMineDetector:RefreshDevice(best_aim, best_obj)
+    -- Get normals (dist_normal forced to 0.0 if aim_normal is at 0.0)
+    local aim_normal = self:GetAimNormal(best_aim)
+    local dist_normal = aim_normal ~= 0 and self:GetDistNormal(best_obj) or 0.0
+    local avg_normal = (aim_normal + dist_normal) / 2
 
+    -- TODO: Remove this
+    local aim1, aim2, aim3, aim4 = self:GetNormalAsTextures(aim_normal)
+    local dist1, dist2, dist3, dist4 = self:GetNormalAsTextures(dist_normal)
+    self.m_aim1:InitTextureEx(aim1, "hud\\p3d")
+    self.m_aim2:InitTextureEx(aim2, "hud\\p3d")
+    self.m_aim3:InitTextureEx(aim3, "hud\\p3d")
+    self.m_aim4:InitTextureEx(aim4, "hud\\p3d")
+    self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
+    self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
+    self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
+    self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
+    
     -- If best mine is too far, no detection
-    if (not best_aim or best_aim > self.m_detect_dist_max_sqr) then
+    if avg_normal <= 0.0 then
         self.m_update_timer = self.m_time_global + self.m_update_freq_max
         self.m_detect:Show(false)
         return
     end
 
     -- If best mine is really close, fast ticking
-    if (best_aim < self.m_detect_dist_min_sqr) then
+    if avg_normal >= 1.0 then
         self.m_update_timer = self.m_time_global + self.m_update_freq_min
         self.m_detect:Show(not self.m_detect:IsShown())
         self.m_detect_sfx:play(db.actor, 0, sound_object.s2d)
@@ -136,12 +164,68 @@ function UIMineDetector:RefreshDevice(best_aim, best_obj)
     end
 
     -- If best mine is somewhere in between
-    local freq = normalize(best_aim, self.m_detect_dist_min_sqr, self.m_detect_dist_max_sqr) * self.m_update_freq_max
+    local freq = avg_normal * self.m_update_freq_max
     freq = clamp(freq, self.m_update_freq_min, self.m_update_freq_max)
 
     self.m_update_timer = self.m_time_global + freq
     self.m_detect:Show(not self.m_detect:IsShown())
     self.m_detect_sfx:play(db.actor, 0, sound_object.s2d)
+end
+
+-- TODO: Remove this
+function UIMineDetector:GetNormalAsTextures(normal)
+    local s_norm = western_goods_utils.as_string(normal * 1000, 4)
+
+    dbg_printf("[WG] DEBUG | s_norm %s", s_norm)
+
+    local norm1 = strformat("gps_num_%s", s_norm:sub(1, 1))
+    local norm2 = strformat("gps_num_%s", s_norm:sub(2, 2))
+    local norm3 = strformat("gps_num_%s", s_norm:sub(3, 3))
+    local norm4 = strformat("gps_num_%s", s_norm:sub(4, 4))
+
+    return norm1, norm2, norm3, norm4
+end
+
+function UIMineDetector:GetDistNormal(mine_obj)
+    -- No target
+    if not mine_obj then
+        return 0.0
+    end
+
+    local dist_sqr =  mine_obj:position():distance_to_sqr(db.actor:position())
+
+    -- Target too far
+    if dist_sqr > self.m_detect_dist_max_sqr then
+        return 0.0
+    end
+
+    -- Target close enough
+    if dist_sqr < self.m_detect_dist_min_sqr then
+        return 1.0
+    end
+
+    -- Target in-between
+    return normalize(dist_sqr, self.m_detect_dist_min_sqr, self.m_detect_dist_max_sqr)
+end
+
+function UIMineDetector:GetAimNormal(aim)
+    -- No target
+    if not aim then
+        return 0.0
+    end
+
+    -- Target outside of max radius
+    if aim > self.m_detect_aim_dist_max_sqr then
+        return 0.0
+    end
+
+    -- Target inside of min radius
+    if aim < self.m_detect_aim_dist_min_sqr then
+        return 1.0
+    end
+
+    -- Target in radius
+    return normalize(aim, self.m_detect_aim_dist_min_sqr, self.m_detect_aim_dist_max_sqr)
 end
 
 function UIMineDetector:FindBest()
@@ -194,7 +278,7 @@ end
 
 function UIMineDetector:GetMineObjects()
     local mines = {}
-    for id,_ in pairs(txr_mines._mines) do
+    for id, _ in pairs(txr_mines._mines) do
         mines[id] = western_goods_utils.level_object_by_id(id)
     end
     return mines

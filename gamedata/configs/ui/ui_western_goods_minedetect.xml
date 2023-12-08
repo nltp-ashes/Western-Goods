@@ -17,5 +17,15 @@
             <texture shader="hud\p3d" color="red">red_diod</texture>
         </detect>
 
+        <!-- TODO: Remove this -->
+        <aim1   x="0.0088"      y="0.0200"    width="0.008"     height="0.024"     stretch="1" />
+        <aim2   x="0.0168"      y="0.0200"    width="0.008"     height="0.024"     stretch="1" />
+        <aim3   x="0.0248"      y="0.0200"    width="0.008"     height="0.024"     stretch="1" />
+        <aim4   x="0.0328"      y="0.0200"    width="0.008"     height="0.024"     stretch="1" />
+        <dist1  x="0.0088"      y="0.0400"    width="0.008"     height="0.024"     stretch="1" />
+        <dist2  x="0.0168"      y="0.0400"    width="0.008"     height="0.024"     stretch="1" />
+        <dist3  x="0.0248"      y="0.0400"    width="0.008"     height="0.024"     stretch="1" />
+        <dist4  x="0.0328"      y="0.0400"    width="0.008"     height="0.024"     stretch="1" />
+
     </mine_detector>
 </w>
