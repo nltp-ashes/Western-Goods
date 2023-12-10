@@ -87,6 +87,7 @@ function UILighter:__init() super()
     self.m_light.lanim_brightness = 0.0025
 
     -- Sound effects
+    self.m_sounds = {}
     self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
 
@@ -95,10 +96,12 @@ function UILighter:__init() super()
 
     -- Build variables
     self.m_range = 4
+    self.m_burn_damage = 0.5
     self.m_update_rate = 1000
     self.m_update_timer = 0
     self.m_amn_motion = "anm_set_on_fire"
     self.m_amn_motion_sec = "motion_set_on_fire"
+    self.m_amn_motion_playing = false
     self.m_valid_sections = { "wg_lighter_bic" }
 
     -- Callbacks
@@ -154,14 +157,33 @@ function UILighter:UpdateParticles()
     for id, part in pairs(self.m_particles) do
         local obj = id and level.object_by_id(id)
         if obj then
-            local offset = vector():set(0, 1, 0) --vector():set(0, -1, 0)
-            local pos = obj:position():add(offset)
+            local pos = vector():set(western_goods_utils.bone_position(obj, "bip01_spine1")) or obj:position()
             if not part:playing() then
                 part:play_at_pos(pos)
             end
             part:move_to(pos, VEC_ZERO)
         else
             self.m_particles[id] = nil
+        end
+    end
+end
+
+function UILighter:UpdateSounds()
+    if is_empty(self.m_sounds) then
+        return
+    end
+
+    for id, snd in pairs(self.m_sounds) do
+        local obj = id and level.object_by_id(id)
+        if obj then
+            local pos = vector():set(western_goods_utils.bone_position(obj, "bip01_spine1")) or obj:position()
+            if not snd:playing() then
+                snd:play_at_pos(obj, pos, 0, sound_object.s3d)
+                snd.volume = 5
+            end
+            snd:set_position(pos)
+        else
+            self.m_sounds[id] = nil
         end
     end
 end
@@ -267,10 +289,31 @@ function UILighter:UseCampfire()
 end
 
 function UILighter:SetOnFireAnimation()
-    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
-    actor_effects.play_item_fx("matches_script")
+    -- Don't play if anim is already playing
+    if self.m_amn_motion_playing then
+        return false
+    end
+
+    -- HUD motion
     game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
+    self.m_amn_motion_playing = true
+
+    -- Cam anim
+    actor_effects.play_item_fx("matches_script")
+
+    -- Sound effect
+    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+
     dbg_printf("[WG] UI Lighter | Set On Fire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
+
+    -- Re-allow anim when it is done
+    local duration = game.get_motion_length(self.m_amn_motion_sec, self.m_amn_motion, 1.0) / 1000
+    CreateTimeEvent("western_goods_set_on_fire_anim_e", "western_goods_set_on_fire_anim_a", duration, function()
+        self.m_amn_motion_playing = false
+        return true
+    end)
+
+    return true
 end
 
 function UILighter:UseCigarette(obj,flags)
@@ -368,34 +411,65 @@ function UILighter:SetOnFire()
         return
     end
 
-    dbg_printf("[WG] UI Lighter | Set On Fire - Successfully set '%s' on fire", target:name())
+    dbg_printf("[WG] UI Lighter | Set On Fire - Setting '%s' on fire", target:id())
 
     -- Play animation
-    self:SetOnFireAnimation()
+    local anim_played = self:SetOnFireAnimation()
+    if not anim_played then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, animation is playing")
+        return
+    end
 
     -- Set on fire after 1s
     local burn_event_id = "western_goods_burn_e_" .. target:id()
     local burn_action_id = "western_goods_burn_a_" .. target:id()
-    local burn_delay = 0.5
-    CreateTimeEvent(burn_event_id, burn_action_id, burn_delay, function(target_id)
-        -- Add particle
+    CreateTimeEvent(burn_event_id, burn_action_id, 0.5, function(target_id)
+        local target = western_goods_utils.level_object_by_id(target_id)
+        if not target then
+            printf("~[WG] UI Lighter | Set On Fire - No game_object found for '%s' when trying to set on fire", target_id)
+            return true
+        end
+
+        -- Add PFX and SFX
         self.m_particles[target_id] = particles_object([[damage_fx\burn_creatures00]])
+        self.m_sounds[target_id] = sound_object([[anomaly\fire2]])
+        dbg_printf("[WG] UI Lighter | Set On Fire - Created PFX '%' and SFX '%' for '%'", self.m_particles[target_id], self.m_sounds[target_id], target_id)
 
         -- Add panic
         local demonized_panic_id = "western_goods_panic_" .. target_id
         demonized_stalker_aoe_panic.npc_add_aoe_panic(target_id, demonized_panic_id)
+        dbg_printf("[WG] UI Lighter | Set On Fire - Set '%s' in panic state", target_id)
+
+        -- Scripted hit
+        local shit = hit()
+        shit.power = self.m_burn_damage
+        shit.impulse = self.m_burn_damage
+        shit:bone("bip01_spine1")
+        shit.type = hit.burn
+        shit.direction = vector():set(target):sub(db.actor)
+        shit.draftsman = db.actor
+        target:hit(shit)
 
         -- Remove panic after 5s
         local panic_event_id = "western_goods_panic_e_" .. target_id
         local panic_action_id = "western_goods_panic_a_" .. target_id
-        local panic_duration = 5
-        CreateTimeEvent(panic_event_id, panic_action_id, panic_duration, function()
-            -- Remove panic
-            demonized_stalker_aoe_panic.npc_remove_aoe_panic(target_id, demonized_panic_id)
+        CreateTimeEvent(panic_event_id, panic_action_id, 5, function()
+            local target = western_goods_utils.level_object_by_id(target_id)
 
-            -- Remove PFX
+            -- Remove panic
+            if target then
+                demonized_stalker_aoe_panic.npc_remove_aoe_panic(target_id, demonized_panic_id)
+                dbg_printf("[WG] UI Lighter | Set On Fire - Stopped panic state for '%s'", target_id)
+            else
+                printf("~[WG] UI Lighter | Set On Fire - No game_object found for '%s' when trying to unset panic state", target_id)
+            end
+
+            -- Remove PFX and SFX
             self.m_particles[target_id]:stop()
             self.m_particles[target_id] = nil
+            self.m_sounds[target_id]:stop()
+            self.m_sounds[target_id] = nil
+            dbg_printf("[WG] UI Lighter | Set On Fire - Destroyed PFX '%' and SFX '%' for '%'", self.m_particles[target_id], self.m_sounds[target_id], target_id)
 
             -- Kill time event
             return true
@@ -413,6 +487,7 @@ end
 
 function UILighter:actor_on_update()
     self:UpdateParticles()
+    self:UpdateSounds()
 end
 
 function UILighter:on_key_press(dik)
