@@ -1,0 +1,449 @@
+-- Generic panic scheme for arbitrary panic states
+-- Checks db.storage[<npc_id>].aoe_panic to evaluate
+-- Used by AOE classes, hence the name, but can be used for any arbitrary danger
+-- Based on axr_stalker_panic
+
+local enable_debug = false
+local print_tip = function(s, ...)
+    local f = print_tip or printf
+    if enable_debug then
+        return f("AOE Panic: " .. s, ...)
+    end
+end
+
+-- Check if dir2 is to the left of dir1
+local function angle_left_xz(dir1, dir2)
+	local dir1 = vector():set(dir1.x, 0, dir1.z)
+	local dir2 = vector():set(dir2.x, 0, dir2.z)
+	local dir_res = vector():set(VEC_ZERO):crossproduct(dir1, dir2)
+	return dir_res.y <= 0
+end
+
+actid = 188121
+evaid = 188121
+
+-- Default panic check function, you can use this when checking need to panic or define your own
+function can_panic(npc)
+	return npc 
+	and IsStalker(npc)
+	and npc:id() ~= AC_ID
+	and npc.alive and npc:alive()
+	and not (
+		character_community(npc) == "zombied"
+		or npc:section() == "actor_visual_stalker"
+	)
+end
+
+function npc_init_aoe_tables(obj_id)
+	if obj_id == AC_ID then return end
+	if not db.storage[obj_id] then
+		print_tip("npc %s storage not exists", obj_id)
+		return
+	end
+	if db.storage[obj_id].aoe_panic == nil then db.storage[obj_id].aoe_panic = false end
+	if db.storage[obj_id].active_aoe_panic == nil then db.storage[obj_id].active_aoe_panic = {} end
+	-- print_tip("npc %s aoe panic init", obj_id)
+	return true
+end
+
+function npc_update_panic_state(obj_id)
+	if not npc_init_aoe_tables(obj_id) then return end
+	db.storage[obj_id].aoe_panic = size_table(db.storage[obj_id].active_aoe_panic) > 0
+	print_tip("npc %s panic %s", obj_id, db.storage[obj_id].aoe_panic)
+end
+
+function npc_add_aoe_panic(obj_id, AOE_class, time, danger_dir, danger_pos)
+	if not npc_init_aoe_tables(obj_id) then return end
+	local lifetime = time_global() + (time or 0) * 1000
+	if db.storage[obj_id].active_aoe_panic[AOE_class] then
+		if time and not db.storage[obj_id].active_aoe_panic[AOE_class].time then
+			npc_remove_aoe_panic_deferred(obj_id, AOE_class)
+		end
+		db.storage[obj_id].active_aoe_panic[AOE_class].time = time and lifetime
+		db.storage[obj_id].danger_dir = danger_dir
+		db.storage[obj_id].danger_pos = danger_pos
+		return
+	end
+
+	db.storage[obj_id].active_aoe_panic[AOE_class] = {
+		time = time and lifetime
+	}
+	db.storage[obj_id].danger_dir = danger_dir
+	db.storage[obj_id].danger_pos = danger_pos
+	npc_update_panic_state(obj_id)
+	if time then npc_remove_aoe_panic_deferred(obj_id, AOE_class) end
+end
+
+function npc_remove_aoe_panic(obj_id, AOE_class, force)
+	if not npc_init_aoe_tables(obj_id) then return end
+	if not db.storage[obj_id].active_aoe_panic[AOE_class] then return end
+
+	if force
+	or not db.storage[obj_id].active_aoe_panic[AOE_class].time
+	or (
+		db.storage[obj_id].active_aoe_panic[AOE_class].time
+		and time_global() > db.storage[obj_id].active_aoe_panic[AOE_class].time
+	) then
+		db.storage[obj_id].active_aoe_panic[AOE_class] = nil
+		npc_update_panic_state(obj_id)
+		return true
+	end
+end
+
+-- This will remove aoe panic when time is elapsed, checking on each game update
+function npc_remove_aoe_panic_deferred(obj_id, AOE_class)
+	if not npc_init_aoe_tables(obj_id) then return end
+	if not db.storage[obj_id].active_aoe_panic[AOE_class] then return end
+
+	AddUniqueCall(function()
+		return npc_remove_aoe_panic(obj_id, AOE_class)
+	end)
+end
+
+class "evaluator_stalker_aoe_panic" (property_evaluator)
+function evaluator_stalker_aoe_panic:__init(npc,name,storage) super (nil, name)
+	self.st = storage
+	self.st.stage = 0
+end
+
+function evaluator_stalker_aoe_panic:evaluate()
+	--utils_data.debug_write("eva_panic")
+	local npc = self.object
+	
+	if not npc:alive() then 
+		return false 
+	end 
+	
+	if IsWounded(npc) then 
+		return false 
+	end 
+	
+	local st = db.storage[npc:id()]
+	if st and st.aoe_panic then
+		return true
+	end
+
+	return false
+end
+
+class "action_stalker_aoe_panic" (action_base)
+function action_stalker_aoe_panic:__init (npc,name,storage) super (nil,name)
+	self.st = storage
+end
+function action_stalker_aoe_panic:initialize()
+	action_base.initialize(self)
+
+	local npc = self.object
+	self.movement_type = npc:movement_type()
+	self.body_state = npc:body_state()
+	self.mental_state = npc:mental_state()
+	self.path = npc:path_type()
+
+	npc:set_desired_position()
+	npc:set_desired_direction()
+	db.storage[npc:id()].panicked = true
+	self.first_update = true
+
+	-- Minus value means instant reaction, the movement would still be inert a bit
+	self.panic_threshold = math.random(100, 300)
+	self.panic_time = time_global()
+end
+
+function action_stalker_aoe_panic:validate(vid)
+	local npc = self.object
+	return vid and vid < 4294967295 -- Is existing lvid
+	and npc:accessible(vid) -- Accessible by npc
+	and vid ~= npc:level_vertex_id() -- Not current npc lvid
+	and not db.used_level_vertex_ids[vid] -- Not taken by another entity
+	and math.abs(level.vertex_position(vid).y - npc:position().y) < 2 -- Not higher or lower from npc position than this threshold so npcs wont run vertically
+end
+
+function action_stalker_aoe_panic:lmove(vid)
+	-- Return if not valid
+	if not self:validate(vid) then 
+		return 
+	end
+
+	local npc = self.object
+	local st = self.st
+
+	if (st.vid) then 
+		db.used_level_vertex_ids[st.vid] = nil
+		st.vid = nil
+	end
+
+	db.used_level_vertex_ids[vid] = npc:id()
+	npc:set_dest_level_vertex_id(vid)
+	st.vid = vid
+	return vid
+end
+
+function action_stalker_aoe_panic:try_go_away()
+	local npc = self.object
+	local id = npc:id()
+	local base_point = npc:level_vertex_id()
+	local tries = 5
+	
+	for i = 1, self.initial_dir and tries * 2 or tries do
+		-- If cant find lvid in initial direction after <tries> tries - invalidate it
+		if i > tries then self.initial_dir = nil end
+
+		-- Check lvid in npc direction
+		-- If has information about danger - run away from it
+		-- If already run towards initial direction - continue in same direction until invalidation
+		local dir = npc:direction()
+		local danger_dir = db.storage[id].danger_dir
+		danger_dir = danger_dir and vector():set(danger_dir.x, dir.y, danger_dir.z):normalize()
+		local danger_pos = db.storage[id].danger_pos
+
+		-- Case 1: danger_dir and danger_pos are known, run away from danger in about 90 degrees from it
+		if danger_dir and danger_pos then
+			local npc_to_danger = vector():set(npc:position()):sub(danger_pos):normalize()
+			if angle_left_xz(danger_dir, npc_to_danger) then
+				away_dir = vector_rotate_y(danger_dir, 90)
+			else
+				away_dir = vector_rotate_y(danger_dir, -90)
+			end
+
+			print_tip("npc %s has danger_dir and pos", npc:name())
+			-- demonized_geometry_ray.VisualizeRay(npc:position():add(vector():set(0, 1, 0)), vector():mad(npc:position():add(vector():set(0, 1, 0)), away_dir, 3), nil, 300)
+
+		-- Case 2: danger_pos is known, maximize distance away from it
+		elseif danger_pos then
+			local npc_to_danger = vector():set(npc:position()):sub(danger_pos):normalize()
+			away_dir = vector_rotate_y(npc_to_danger, random_choice(-20, 20))
+
+			print_tip("npc %s has danger_pos", npc:name())
+			-- demonized_geometry_ray.VisualizeRay(npc:position():add(vector():set(0, 1, 0)), vector():mad(npc:position():add(vector():set(0, 1, 0)), away_dir, 3), nil, 300)
+
+		-- Case 3: danger_dir is known, choose random 90 degree direction
+		elseif danger_dir then
+			away_dir = vector_rotate_y(danger_dir, random_choice(90, -90))
+
+			print_tip("npc %s has danger_dir", npc:name())
+			-- demonized_geometry_ray.VisualizeRay(npc:position():add(vector():set(0, 1, 0)), vector():mad(npc:position():add(vector():set(0, 1, 0)), away_dir, 3), nil, 300)
+
+		-- Case 4: no information, just run somewhere
+		else
+			away_dir = vector_rotate_y(dir, random_choice(120, -120))
+		end
+
+		-- Randomize direction a bit
+		away_dir = vector_rotate_y(away_dir, random_float(-30, 30))
+
+		-- Set new lvid and direction
+		local dir = self.initial_dir and vector_rotate_y(self.initial_dir, random_float(-30, 30)) or away_dir
+		for radius = 10, 1, -1 do
+			local lvid = level.vertex_in_direction(base_point, dir, radius)
+			if self:validate(lvid) then
+
+				-- If found lvid - invalidate dangers, next update pick in initial direction or randomly
+				if not self.initial_dir then
+					db.storage[id].danger_dir = nil
+					db.storage[id].danger_pos = nil
+				end
+				self.initial_dir = level.vertex_position(lvid):sub(npc:position()):normalize()
+		
+				-- demonized_geometry_ray.VisualizeRay(npc:position():add(vector():set(0, 1, 0)), vector():mad(npc:position():add(vector():set(0, 1, 0)), self.initial_dir, 3), nil, 300)
+
+				return self:lmove(lvid)
+			end
+		end
+	end
+end
+
+function action_stalker_aoe_panic:execute()
+	--utils_data.debug_write(strformat("action_stalker_aoe_panic:execute start"))
+	action_base.execute(self)
+
+	-- Check reaction time first
+	if time_global() - self.panic_time < self.panic_threshold then
+		print_tip("npc hasn't reacted yet, pt %s, pthr %s", time_global() - self.panic_time, self.panic_threshold)
+		return
+	end
+
+	local npc = self.object	
+	--printf("enemy = %s",enemy and enemy:name())
+	
+	-- ensure and enforce path type
+	if (npc:path_type() ~= game_object.level_path) then 
+		npc:set_path_type(game_object.level_path)
+	end
+
+	-- Set panic state
+	local bw = npc:active_item()
+	local new_state = bw and "sprint" or "panic"
+	local lvid
+
+	-- Find new lvid to reach
+	if self.st.vid then
+		if (npc:level_vertex_id() == self.st.vid) then
+			print_tip("npc reached lvid %s, switch", self.st.vid)
+			lvid = self:try_go_away()
+			print_tip("npc switched to new lvid %s", lvid)
+		else
+			npc:set_dest_level_vertex_id(self.st.vid)
+			lvid = self.st.vid
+			-- print_tip("npc trying to reach lvid %s", lvid)
+		end 	
+	else
+		lvid = self:try_go_away()
+		print_tip("npc init new lvid %s", lvid)
+	end
+
+	-- Set sight in direction of new lvid and confirm the state
+	npc:set_sight(look.direction, lvid and level.vertex_position(lvid):sub(npc:position()):normalize() or npc:direction())
+	state_mgr.set_state(npc, new_state, nil, nil, {
+		look_position = lvid and level.vertex_position(lvid) or npc:position(),
+		look_object = lvid,
+		look_dir = lvid and level.vertex_position(lvid):sub(npc:position()):normalize() or npc:direction(),
+	}, {
+		fast_set = true,
+		animation = false,
+	})
+
+	-- First update force movement 
+	if self.first_update then
+		npc:clear_animations()
+		npc:movement_enabled(true)
+		npc:set_movement_type(move.run)
+		npc:set_body_state(move.standing)
+		npc:set_mental_state(anim.panic)
+		self.first_update = false
+	end
+end
+
+function action_stalker_aoe_panic:finalize()
+    action_base.finalize(self)
+    self.first_update = true
+    self.initial_dir = nil
+	if (self.st.vid) then 
+		db.used_level_vertex_ids[self.st.vid] = nil
+	end
+	self.st.vid = nil
+	db.storage[self.object:id()].panicked = nil
+	self.panic_time = time_global()
+
+	local npc = self.object
+	npc:clear_animations()
+	npc:movement_enabled(true)
+	npc:set_movement_type(self.movement_type)
+	npc:set_body_state(self.body_state)
+	npc:set_mental_state(self.mental_state)
+	-- npc:set_path_type(self.path)
+end
+
+function setup_generic_scheme(npc,ini,scheme,section,stype,temp)
+	local st = xr_logic.assign_storage_and_bind(npc,ini,"stalker_aoe_panic",section,temp)
+end
+
+function add_to_binder(npc,ini,scheme,section,storage,temp)
+	if not npc then return end
+	local manager = npc:motivation_action_manager()
+	if not manager then return end
+	
+	if not npc:alive() or npc:section() == "actor_visual_stalker" then
+		manager:add_evaluator(evaid,property_evaluator_const(false))
+		temp.needs_configured = false
+		return 
+	end
+
+	local evaluator = evaluator_stalker_aoe_panic(npc,"eva_stalker_aoe_panic",storage)
+	temp.action = action_stalker_aoe_panic(npc,"act_stalker_aoe_panic",storage)
+	
+	if not evaluator or not temp.action then return end
+	manager:add_evaluator(evaid,evaluator)
+	
+	temp.action:add_precondition(world_property(stalker_ids.property_alive,true))
+	-- temp.action:add_precondition(world_property(stalker_ids.property_danger, false))
+	temp.action:add_precondition(world_property(evaid,true))
+	
+	temp.action:add_effect(world_property(evaid,false))
+	
+	manager:add_action(actid,temp.action)
+	
+	--xr_logic.subscribe_action_for_events(npc, storage, temp.action)
+end
+
+function configure_actions(npc,ini,scheme,section,stype,temp)
+	if not npc then return end
+	local manager = npc:motivation_action_manager()
+	if not manager or not temp.action then return end
+
+	temp.action:add_precondition(world_property(xr_evaluators_id.sidor_wounded_base,false))
+	temp.action:add_precondition(world_property(xr_evaluators_id.wounded_exist,false))
+
+	-- if (_G.schemes["rx_ff"]) then 
+	-- 	temp.action:add_precondition(world_property(rx_ff.evaid,false))
+	-- end
+	if (_G.schemes["gl"]) then
+		temp.action:add_precondition(world_property(rx_gl.evid_gl_reload,false))
+	end
+	-- if (_G.schemes["facer"]) then
+	-- 	temp.action:add_precondition(world_property(xrs_facer.evid_facer,false))
+	-- 	temp.action:add_precondition(world_property(xrs_facer.evid_steal_up_facer,false))
+	-- end
+
+	local action
+	local p = {xr_danger.actid, stalker_ids.action_combat_planner, stalker_ids.action_danger_planner, xr_actions_id.state_mgr + 2, xr_actions_id.alife}
+	
+	for i=1,#p do
+		--printf("ACTION_ALIFE_ID(demonized_stalker_aoe_panic.configure_actions): " .. tostring(p[i]))
+		action = manager:action(p[i])
+		if (action) then
+			action:add_precondition(world_property(evaid,false))
+		else
+			printf("axr_panic: no action id p[%s]",i)
+		end
+	end
+end 
+
+function disable_generic_scheme(npc,scheme,stype)
+	local st = db.storage[npc:id()][scheme]
+	if st then
+		st.enabled = false
+	end
+end
+
+function npc_add_precondition(action)
+	if not action then return end
+	action:add_precondition(world_property(evaid,false))
+end
+
+LoadScheme("demonized_stalker_aoe_panic", "stalker_aoe_panic", modules.stype_stalker)
+
+-- Disable aggroing on panic
+function on_enemy_eval(obj, enemy, flags)
+	if not IsStalker(obj) then return end
+	local id = obj:id()
+	if id == AC_ID then return end
+	if db.storage[id] and db.storage[id].aoe_panic then
+		flags.override = true
+		flags.ret_value = true
+	end
+end
+
+function on_game_start()
+	RegisterScriptCallback("on_enemy_eval", on_enemy_eval)
+end
+
+-- Disable talk
+process_npc_usability = xr_meet.process_npc_usability
+xr_meet.process_npc_usability = function(npc, ...)
+	local id = npc:id()
+	if db.storage[id] and db.storage[id].aoe_panic then
+		npc:disable_talk()
+		return
+	end
+	return process_npc_usability(npc, ...)
+end
+
+-- Disable npc evaluation
+evaluator_contact_evaluate = xr_meet.evaluator_contact.evaluate
+xr_meet.evaluator_contact.evaluate = function(self, ...)
+	local id = self.object:id()
+	if db.storage[id] and db.storage[id].aoe_panic then
+		return false
+	end
+	return evaluator_contact_evaluate(self, ...)
+end

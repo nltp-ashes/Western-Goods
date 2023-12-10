@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 18/11/2023                                                                                             ---
+---    Date : 10/12/2023                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the UI for the BIC Lighter.                                                             ---
@@ -95,15 +95,21 @@ function UILighter:__init() super()
     self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
 
+    -- Particle objects
+    self.m_particles = {}
+
     -- Build variables
+    self.m_range = 4
     self.m_update_rate = 1000
     self.m_update_timer = 0
-    self.m_amn_motion_sec = "motion_campfire"
-    self.m_amn_motion = "anm_campfire"
+    self.m_amn_motion = "anm_set_on_fire"
+    self.m_amn_motion_sec = "motion_set_on_fire"
     self.m_valid_sections = { "wg_lighter_bic" }
 
     -- Callbacks
     RegisterScriptCallback("actor_item_to_slot", self)
+    RegisterScriptCallback("actor_on_update", self)
+    RegisterScriptCallback("on_key_press", self)
 end
 
 function UILighter:__finalize()
@@ -143,6 +149,29 @@ function UILighter:UpdateLight(obj)
     self:SetLightStatus(obj, true)
     self.m_light:set_position(self:GetLightBonePosition(obj))
     self.m_light:update()
+end
+
+function UILighter:UpdateParticles()
+    if is_empty(self.m_particles) then
+        printf("[WG] DEBUG | empty tbl")
+        return
+    end
+
+    for id, part in pairs(self.m_particles) do
+        local obj = id and level.object_by_id(id)
+        if obj then
+            local pos = vector():set(obj:bone_position("bip01_spine1"))
+            if pos then
+                printf("[WG] DEBUG | Updating part")
+                part:move_to(pos, VEC_ZERO)
+            else
+                printf("[WG] DEBUG | No pos")
+            end
+        else
+            printf("[WG] DEBUG | No obj")
+            self.m_particles[id] = nil
+        end
+    end
 end
 
 function UILighter:Check(obj)
@@ -209,7 +238,7 @@ function UILighter:UseCampfire()
     end
 
     -- Get nearby campfire (or use campfire passed as argument)
-    local campfire_obj = bind_campfire.get_nearby_campfire(4, false)
+    local campfire_obj = bind_campfire.get_nearby_campfire(self.m_range, false)
     local campfire = campfire_obj and campfire_obj:get_campfire()
     if not campfire_obj or not campfire then
         printf("~[WG] WARNING | UI Lighter | Use Campfire - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
@@ -223,7 +252,7 @@ function UILighter:UseCampfire()
     end
 
     -- Play animation
-    self:CampfireAnimation()
+    self:SetOnFireAnimation()
 
     -- We wuzz rain and shit
     if bind_campfire.rain_pass() then
@@ -245,11 +274,11 @@ function UILighter:UseCampfire()
     dbg_printf("[WG] UI Lighter | Use Campfire - Lighter new fuel level '%s'", obj:condition())
 end
 
-function UILighter:CampfireAnimation()
+function UILighter:SetOnFireAnimation()
     self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
     actor_effects.play_item_fx("matches_script")
     game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
-    dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
+    dbg_printf("[WG] UI Lighter | Set On Fire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
 end
 
 function UILighter:UseCigarette(obj,flags)
@@ -290,7 +319,94 @@ function UILighter:UseCigarette(obj,flags)
     flags.ret_value = true
 end
 
+function UILighter:SetOnFire()
+    local target = level.get_target_obj()
+    if not target then
+        dbg_printf("[WG] UI Lighter | Set On Fire - No target in sight")
+        return
+    end
+
+    dbg_printf("[WG] UI Lighter | Set On Fire - Trying to set '%s' on fire", target:name())
+
+    -- Check no weapons in hands
+    local wpn = db.actor:active_item()
+    if wpn then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, a weapon '%s' is drawn", wpn:name())
+        return
+    end
+
+    -- Check if a device is drawn
+    local dev = db.actor:active_detector()
+    if not dev then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, no device in hands")
+        return
+    end
+
+    -- Check if device is a lighter
+    if not self:Check(dev) then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, device '%s' in hands is not a lighter (or is not in ready state)", dev:section())
+        return
+    end
+
+    -- Check fuel
+    if not self:CheckFuel(dev) then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, lighter is out of fuel")
+        return
+    end
+
+    -- Check target exists and is either stalker or mutant
+    if not (IsStalker(target) or IsMonster(target)) then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, target '%s' is not a live object", target:name())
+        return
+    end
+
+    -- Check object within range
+    local dist = western_goods_utils.get_distance_sqr(db.actor:position(), target:position())
+    if dist > self.m_range then
+        dbg_printf("[WG] UI Lighter | Set On Fire - Failed to set on fire, target '%s' is too far away", target:name())
+        return
+    end
+
+    dbg_printf("[WG] UI Lighter | Set On Fire - Successfully set '%s' on fire", target:name())
+
+    -- Play animation
+    self:SetOnFireAnimation()
+
+    -- Add particle
+    -- FIXME: Particle is not visible
+    self.m_particles[target:id()] = particles_object([[artefact\artefact_gravi]])
+
+    -- Add panic
+    local demonized_panic_id = "western_goods_burn_" .. target:id()
+    demonized_stalker_aoe_panic.npc_add_aoe_panic(target:id(), demonized_panic_id)
+
+    -- Remove after 5s
+    local event_id = "western_goods_burn_e_" .. target:id()
+    local action_id = "western_goods_burn_a_" .. target:id()
+    local duration = 5
+    CreateTimeEvent(event_id, action_id, duration, function(clazz, id, panic_id)
+        demonized_stalker_aoe_panic.npc_remove_aoe_panic(id, panic_id)
+        clazz.m_particles[id]:stop()
+        clazz.m_particles[id] = nil
+        return true
+    end, self, target:id(), demonized_panic_id)
+end
+
 function UILighter:actor_item_to_slot(obj)
     dbg_printf("[WG] UI Lighter | actor_item_to_slot - Switched slot to '%s'", obj and obj:section())
     self:Update()
+end
+
+function UILighter:actor_on_update()
+    self:UpdateParticles()
+end
+
+function UILighter:on_key_press(dik)
+    -- Get key-bind
+    local bind = dik_to_bind(dik)
+
+    -- Set object on fire
+    if (bind == key_bindings.kWPN_FIRE) then
+        self:SetOnFire()
+    end
 end
