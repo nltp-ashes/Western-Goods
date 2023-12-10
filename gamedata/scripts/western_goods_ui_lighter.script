@@ -74,11 +74,6 @@ function UILighter:__init() super()
     self:Show(true)
     self:Enable(true)
 
-    -- Build UI
-    self.m_xml = CScriptXmlInit()
-    self.m_xml:ParseFile("ui_western_goods_lighter.xml")
-    self.m_xml:InitWindow("lighter", 0, self)
-
     -- Script light
     self.m_light = script_light()
     self.m_light.hud_mode = false
@@ -153,22 +148,19 @@ end
 
 function UILighter:UpdateParticles()
     if is_empty(self.m_particles) then
-        printf("[WG] DEBUG | empty tbl")
         return
     end
 
     for id, part in pairs(self.m_particles) do
         local obj = id and level.object_by_id(id)
         if obj then
-            local pos = vector():set(obj:bone_position("bip01_spine1"))
-            if pos then
-                printf("[WG] DEBUG | Updating part")
-                part:move_to(pos, VEC_ZERO)
-            else
-                printf("[WG] DEBUG | No pos")
+            local offset = vector():set(0, 1, 0) --vector():set(0, -1, 0)
+            local pos = obj:position():add(offset)
+            if not part:playing() then
+                part:play_at_pos(pos)
             end
+            part:move_to(pos, VEC_ZERO)
         else
-            printf("[WG] DEBUG | No obj")
             self.m_particles[id] = nil
         end
     end
@@ -282,6 +274,15 @@ function UILighter:SetOnFireAnimation()
 end
 
 function UILighter:UseCigarette(obj,flags)
+    -- Call original function
+    itms_manager_actor_on_item_before_use(obj,flags)
+
+    if flags.ret_value == true then
+        dbg_printf("[WG] UI Lighter | Use Cigarette - Object was already handled by original function")
+        return
+    end
+
+    -- Get required tool
     local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
     local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
 
@@ -372,24 +373,37 @@ function UILighter:SetOnFire()
     -- Play animation
     self:SetOnFireAnimation()
 
-    -- Add particle
-    -- FIXME: Particle is not visible
-    self.m_particles[target:id()] = particles_object([[artefact\artefact_gravi]])
+    -- Set on fire after 1s
+    local burn_event_id = "western_goods_burn_e_" .. target:id()
+    local burn_action_id = "western_goods_burn_a_" .. target:id()
+    local burn_delay = 0.5
+    CreateTimeEvent(burn_event_id, burn_action_id, burn_delay, function(target_id)
+        -- Add particle
+        self.m_particles[target_id] = particles_object([[damage_fx\burn_creatures00]])
 
-    -- Add panic
-    local demonized_panic_id = "western_goods_burn_" .. target:id()
-    demonized_stalker_aoe_panic.npc_add_aoe_panic(target:id(), demonized_panic_id)
+        -- Add panic
+        local demonized_panic_id = "western_goods_panic_" .. target_id
+        demonized_stalker_aoe_panic.npc_add_aoe_panic(target_id, demonized_panic_id)
 
-    -- Remove after 5s
-    local event_id = "western_goods_burn_e_" .. target:id()
-    local action_id = "western_goods_burn_a_" .. target:id()
-    local duration = 5
-    CreateTimeEvent(event_id, action_id, duration, function(clazz, id, panic_id)
-        demonized_stalker_aoe_panic.npc_remove_aoe_panic(id, panic_id)
-        clazz.m_particles[id]:stop()
-        clazz.m_particles[id] = nil
+        -- Remove panic after 5s
+        local panic_event_id = "western_goods_panic_e_" .. target_id
+        local panic_action_id = "western_goods_panic_a_" .. target_id
+        local panic_duration = 5
+        CreateTimeEvent(panic_event_id, panic_action_id, panic_duration, function()
+            -- Remove panic
+            demonized_stalker_aoe_panic.npc_remove_aoe_panic(target_id, demonized_panic_id)
+
+            -- Remove PFX
+            self.m_particles[target_id]:stop()
+            self.m_particles[target_id] = nil
+
+            -- Kill time event
+            return true
+        end)
+
+        -- Kill time event
         return true
-    end, self, target:id(), demonized_panic_id)
+    end, target:id())
 end
 
 function UILighter:actor_item_to_slot(obj)
