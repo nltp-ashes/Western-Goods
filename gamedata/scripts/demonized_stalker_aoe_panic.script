@@ -1,7 +1,16 @@
--- Generic panic scheme for arbitrary panic states
--- Checks db.storage[<npc_id>].aoe_panic to evaluate
--- Used by AOE classes, hence the name, but can be used for any arbitrary danger
--- Based on axr_stalker_panic
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : demonized                                                                                ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 02/02/2023                                                                                             ---
+---    License : Proprietary                                                                                         ---
+---                                                                                                                  ---
+---    Generic panic scheme for arbitrary panic states.                                                              ---
+---    Checks db.storage[<npc_id>].aoe_panic to evaluate.                                                            ---
+---    Used by AOE classes, hence the name, but can be used for any arbitrary danger.                                ---
+---    Based on axr_stalker_panic.                                                              					 ---
+---                                                                                                                  ---
+---==================================================================================================================---
 
 local enable_debug = false
 local print_tip = function(s, ...)
