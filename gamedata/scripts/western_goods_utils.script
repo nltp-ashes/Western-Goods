@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 02/12/2023                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -15,7 +15,7 @@
 
 local ini_loc                   = ini_file_ex([[localization.ltx]])
 local ini_keys                  = ini_file_ex([[plugins\western_goods\misc\western_goods_key_localization.ltx]])
-local ini_trade                 = ini_file("items\\trade\\trade_generic.ltx")
+local ini_trade                 = ini_file([[items\trade\trade_generic.ltx]])
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
@@ -175,7 +175,9 @@ end
 function get_translation(str, ...)
     if not validate_params({str,"get_translation"}) then return end
 
-    if not has_translation(str) then return "No translation" end
+    if not has_translation(str) then
+        return str.."[Missing translation]"
+    end
 
     local string = game.translate_string(str)
 
@@ -688,6 +690,24 @@ function squad_iterate_members(squad, func, ...)
             func(se_obj, unpack(args))
         end
     end
+end
+
+--- Function used to get the squad of an object.
+--- Unlike the global 'get_object_squad', this function checks if the passed object is the actor.
+--- Doing so will kill the script engine thread, and this function ensures this never happens.
+--- @param obj game_object
+--- @return cse_alife_online_offline_group
+function get_squad_of(obj)
+    if (not validate_params({obj,"get_squad_of"})) then
+        return
+    end
+
+    -- Calling get_object_squad() or actor object grounds the game !
+    if (obj:id() == AC_ID) then
+        return
+    end
+
+    return get_object_squad(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
