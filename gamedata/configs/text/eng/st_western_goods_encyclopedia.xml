@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 12/12/2023                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' entries in the PDA Guide.                                                -->
@@ -34,11 +34,41 @@
 
     <string id="encyclopedia_items_western_goods_gps_text">
         <text>
-        %c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
+        The %c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
         \n%c[pda_green]Information%c[ui_gray_1]\n
         \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
         \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
         \n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
+        </text>
+    </string>
+
+    <!-- BIC Lighter encyclopedia entry -->
+    <!-- TODO: Add RUS translation -->
+    <string id="encyclopedia_items_western_goods_bic_lighter">
+        <text>BIC Lighter</text>
+    </string>
+
+    <!-- TODO: Add RUS translation -->
+    <string id="encyclopedia_items_western_goods_bic_lighter_text">
+        <text>
+            The %c[pda_white]BIC lighter%c[ui_gray_1] is a small and disposable lighter that can be used to light up your surroundings, but also to ignite a number of things.\n
+            \n%c[pda_green]Information%c[ui_gray_1]\n
+            \nTODO
+        </text>
+    </string>
+
+    <!-- SigSauer KILO5K encyclopedia entry -->
+    <!-- TODO: Add RUS translation -->
+    <string id="encyclopedia_items_western_goods_rangefinder">
+        <text>SigSauer KILO5K laser rangefinder</text>
+    </string>
+
+    <!-- TODO: Add RUS translation -->
+    <string id="encyclopedia_items_western_goods_rangefinder_text">
+        <text>
+            The %c[pda_white]SigSauer KILO5K%c[ui_gray_1] is a compact rangefinder that can be used to read the Line of Sight (LOS) and the Horizontal Component Distance (HCD) to a target.\n
+            \n%c[pda_green]Information%c[ui_gray_1]\n
+            \nTODO
         </text>
     </string>
 
