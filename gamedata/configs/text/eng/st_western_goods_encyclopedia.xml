@@ -69,7 +69,7 @@
             The %c[pda_white]SigSauer KILO5K%c[ui_gray_1] is a laser rangefinder that can be used to read distances to a target.\n
             \n%c[pda_green]Information%c[ui_gray_1]\n
             \nThis compact and robust rangefinder is a powerful tool to measure distances to various targets. It measures the Line of Sight (LOS) distance, that is, a direct line from the rangefinder to the target. It also measures the Horizontal Component Distance (HCD), a two-dimensional distance (not taking in elevation) from the rangefinder to the target.\n
-            \nTo ensure a consistent comfort of use, the rangefinder has two color modes, red (optimal during day) and green (optimal during night under night vision goggles).
+            \nTo ensure a consistent comfort of use, the rangefinder has two color modes, red (optimal during the day) and green (optimal at night under night vision goggles).
         </text>
     </string>
 
