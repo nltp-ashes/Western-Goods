@@ -43,12 +43,10 @@
     </string>
 
     <!-- BIC Lighter encyclopedia entry -->
-    <!-- TODO: Add RUS translation -->
     <string id="encyclopedia_items_western_goods_bic_lighter">
         <text>BIC Lighter</text>
     </string>
 
-    <!-- TODO: Add RUS translation -->
     <string id="encyclopedia_items_western_goods_bic_lighter_text">
         <text>
             The %c[pda_white]BIC lighter%c[ui_gray_1] is a small and disposable lighter that can be used to light up your surroundings, but also to ignite a number of things.\n
@@ -59,12 +57,10 @@
     </string>
 
     <!-- SigSauer KILO5K encyclopedia entry -->
-    <!-- TODO: Add RUS translation -->
     <string id="encyclopedia_items_western_goods_rangefinder">
         <text>SigSauer KILO5K</text>
     </string>
 
-    <!-- TODO: Add RUS translation -->
     <string id="encyclopedia_items_western_goods_rangefinder_text">
         <text>
             The %c[pda_white]SigSauer KILO5K%c[ui_gray_1] is a laser rangefinder that can be used to read distances to a target.\n
