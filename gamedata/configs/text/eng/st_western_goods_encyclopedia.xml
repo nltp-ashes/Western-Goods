@@ -53,7 +53,8 @@
         <text>
             The %c[pda_white]BIC lighter%c[ui_gray_1] is a small and disposable lighter that can be used to light up your surroundings, but also to ignite a number of things.\n
             \n%c[pda_green]Information%c[ui_gray_1]\n
-            \nThe BIC lighter is a powerful tool in the Zone. Many Stalkers use it to light up cigarettes. But it is strong enough to light up campfires (equip and pull the lighter out to do so). It also provides a small light, which can be used to light up your immediate surroundings while remaining somewhat discrete, especially at night.
+            \nLighters are considered by many Stalkers to be one of the essentials to survive in the Zone. Often used to light up cigarettes, but not only - it is strong enough to light up campfires (equip and pull the lighter out to do so).\n
+            \nIt also provides a small light, which can be used to light up your immediate surroundings while remaining somewhat discrete, especially at night.
         </text>
     </string>
 
@@ -68,7 +69,10 @@
         <text>
             The %c[pda_white]SigSauer KILO5K%c[ui_gray_1] is a laser rangefinder that can be used to read distances to a target.\n
             \n%c[pda_green]Information%c[ui_gray_1]\n
-            \nThis compact and robust rangefinder is a powerful tool to measure distances to various targets. It measures the Line of Sight (LOS) distance, that is, a direct line from the rangefinder to the target. It also measures the Horizontal Component Distance (HCD), a two-dimensional distance (not taking in elevation) from the rangefinder to the target.\n
+            \nThis compact and robust rangefinder is a powerful tool to measure distances to various targets.\n
+            \nIt measures:
+            \n• the Line of Sight (LOS) distance, that is, a direct line from the rangefinder to the target;
+            \n• the Horizontal Component Distance (HCD), a two-dimensional distance (not taking in elevation) from the rangefinder to the target.\n
             \nTo ensure a consistent comfort of use, the rangefinder has two color modes, red (optimal during the day) and green (optimal at night under night vision goggles).
         </text>
     </string>
