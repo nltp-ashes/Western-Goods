@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 12/12/2023                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tech items.                                                              -->
@@ -154,11 +154,11 @@
     </string>
 
     <string id="st_wg_rangefinder">
-        <text>SigSauer KILO5K Laser Rangefinder</text>
+        <text>SigSauer KILO5K laser rangefinder</text>
     </string>
 
     <string id="st_wg_rangefinder_s">
-        <text>KILO5K Rangefinder</text>
+        <text>KILO5K rangefinder</text>
     </string>
 
     <string id="st_wg_rangefinder_descr">
