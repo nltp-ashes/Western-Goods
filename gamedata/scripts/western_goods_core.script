@@ -174,7 +174,7 @@ function check_missing_translations()
                 xml:NavigateToNode("string_table", 0)
 
                 for i=0, xml:GetNodesNum("", 0, "string") - 1 do
-                    strings[folder][i+1] = xml:ReadAttribute("string", i, "id")
+                    strings[folder][#strings[folder]+1] = xml:ReadAttribute("string", i, "id")
                 end
             end
         end
