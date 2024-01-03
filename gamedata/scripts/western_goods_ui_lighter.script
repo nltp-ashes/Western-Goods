@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 18/11/2023                                                                                             ---
+---    Date : 03/01/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the UI for the BIC Lighter.                                                             ---
@@ -14,10 +14,10 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
-local dbg_printf             = western_goods_utils.dbg_printf
+local dbg_printf                       = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI                          = nil                              -- instance, don't touch
+GUI                                    = nil                              -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
@@ -35,23 +35,43 @@ end
 
 --- Function called from game_tutorials.xml used to light up campfires with a lighter.
 --- @return nil
-function turn_campfire_on()
+function use_campfire()
     dbg_printf("[WG] UI Lighter | Turn Campfire On - called from game_tutorials.xml")
     this.get_ui():UseCampfire()
 end
 
---- Function called when the user uses a cigarette.
+--- Function called when the player uses a cigarette.
 --- @param obj game_object
 --- @param flags table
 --- @return nil
-function use_cigarette(obj,flags)
-    itms_manager_actor_on_item_before_use(obj,flags)
-    this.get_ui():UseCigarette(obj,flags)
+function use_cigarette(obj, flags)
+    itms_manager_actor_on_item_before_use(obj, flags)
+    this.get_ui():UseCigarette(obj, flags)
 end
 
---- Monkey-patch either :
---- - FDDA's enhanced_animations.originalAOIBU
---- - or Anomaly's itms_manager_actor_on_item_before_use
+--- Function called when the player interacts with a Hideout Furniture gas lamp.
+--- Only call this function if you made sure Hideout Furniture is installed.
+--- @param obj_id number
+--- @return nil
+function use_light_hf(obj_id)
+    local is_on_before = hf_obj_manager.get_data(obj_id).is_on
+    ui_furniture_light_toggle_light(obj_id)
+    local is_on_after = hf_obj_manager.get_data(obj_id).is_on
+    this.get_ui():UseLightHF(obj_id, is_on_before, is_on_after)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Monkey-patches
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Monkey-patching Hideout Furniture's toggle_light function in order to allow the lighter to light gas lamps.
+if ui_furniture_light and hf_obj_manager then
+    dbg_printf("[WG] UI Lighter | Monkey-patching HF's ui_furniture_light.toggle_light function...")
+    ui_furniture_light_toggle_light = ui_furniture_light.toggle_light
+    ui_furniture_light.toggle_light = use_light_hf
+end
+
+--- Monkey-patch itms_manager.actor_on_item_before_use (or FDDA's copy) to allow the lighter to light cigs.
 if enhanced_animations then
     dbg_printf("[WG] UI Lighter | Monkey-patching FDDA's enhanced_animations.originalAOIBU function...")
     itms_manager_actor_on_item_before_use = enhanced_animations.originalAOIBU
@@ -159,15 +179,17 @@ function UILighter:CheckFuel(obj)
     return fuel_level > fuel_critical
 end
 
-function UILighter:DrainFuel(obj)
+function UILighter:DrainFuel(obj, consumption_override)
     -- Throttle update
     if (time_global() < self.m_update_timer) then return end
     self.m_update_timer = time_global() + self.m_update_rate
 
     local fuel_level = obj:condition() or 0
-    local fuel_consumption = ini_sys:r_float_ex(obj:section(), "fuel_consumption", 0.0003)
+    local fuel_consumption = consumption_override or ini_sys:r_float_ex(obj:section(), "fuel_consumption", 0.0003)
 
-    obj:set_condition(fuel_level - fuel_consumption)
+    dbg_printf("[WG] UI Lighter | Drain Fuel - Lighter old fuel level '%s'", obj:condition())
+    obj:set_condition(clamp(fuel_level - fuel_consumption, 0.01, 1))
+    dbg_printf("[WG] UI Lighter | Drain Fuel - Lighter new fuel level '%s'", obj:condition())
 end
 
 function UILighter:GetLightBonePosition(obj)
@@ -180,32 +202,60 @@ function UILighter:SetLightStatus(obj, status)
     western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
 end
 
-function UILighter:UseCampfire()
-    -- Get held object (if any) and return if none
-    local obj = db.actor:active_detector()
-    if not obj then
-        return
+function UILighter:CampfireAnimation()
+    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+    actor_effects.play_item_fx("matches_script")
+    game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
+    dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
+end
+
+function UILighter:TryUseLighter(must_be_drawn)
+    -- Variable to store lighter object
+    local obj_tool
+
+    if must_be_drawn then
+        -- Get held object (if any) and return if none
+        obj_tool = db.actor:active_detector()
+    else
+        -- Search for valid items in player inventory
+        western_goods_utils.inventory_iter(db.actor,function(owner, object)
+            if western_goods_utils.table_contains(self.m_valid_sections, object:section()) then
+                dbg_printf("[WG] UI Lighter | Try Use Lighter - Found valid item '%s'", object:section())
+                obj_tool = object
+                return true
+            end
+        end)
     end
 
-    -- Return on invalid item in hands
-    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then
-        dbg_printf("[WG] UI Lighter | Use Campfire - Cannot use '%s' to light campfires", obj:section())
-        return
+    if not obj_tool then
+        dbg_printf("[WG] UI Lighter | Try Use Lighter - No tool found")
+        return false
     end
 
-    -- Hide inventory UI
-    if get_hud() then
-        hide_hud_inventory()
+    if not western_goods_utils.table_contains(self.m_valid_sections, obj_tool:section()) then
+        dbg_printf("[WG] UI Lighter | Try Use Lighter - Cannot use '%s' to light target", obj_tool:section())
+        return false
     end
 
-    local fuel_level = obj:condition() or 0
-    local fuel_consumption_use = ini_sys:r_float_ex(obj:section(), "fuel_consumption_use", 0.05)
+    local fuel_level = obj_tool:condition() or 0
+    local fuel_consumption_use = ini_sys:r_float_ex(obj_tool:section(), "fuel_consumption_use", 0.05)
 
     -- Check fuel level
     if fuel_level < fuel_consumption_use then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_wg_not_enough_fuel"), 3)
-        dbg_printf("[WG] UI Lighter | Use Campfire - Not enough fuel : %s/%s", fuel_level, fuel_consumption_use)
-        return
+        dbg_printf("[WG] UI Lighter | Try Use Lighter - Not enough fuel : %s/%s", fuel_level, fuel_consumption_use)
+        return false
+    end
+
+    -- Use fuel
+    self:DrainFuel(obj_tool, fuel_consumption_use)
+    return true
+end
+
+function UILighter:UseCampfire()
+    -- Hide inventory UI
+    if get_hud() then
+        hide_hud_inventory()
     end
 
     -- Get nearby campfire (or use campfire passed as argument)
@@ -222,37 +272,34 @@ function UILighter:UseCampfire()
         return
     end
 
+    -- Try to use the lighter, return if fails
+    if not self:TryUseLighter(true) then
+        return
+    end
+
     -- Play animation
     self:CampfireAnimation()
 
     -- We wuzz rain and shit
-    if bind_campfire.rain_pass() then
-        if (bind_campfire.k_rain < 1) then
-            bind_campfire.k_rain = bind_campfire.k_rain + 1
-        end
-        campfire:turn_on()
-        self.m_snd_use_cf_fire:play_at_pos(campfire_obj, campfire_obj:position(), 0, sound_object.s3d)
-        actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
-        dbg_printf("[WG] UI Lighter | Use Campfire - Successfully light campfire")
-    else
+    if not bind_campfire.rain_pass() then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
         dbg_printf("[WG] UI Lighter | Use Campfire - Failed to light campfire because of rain")
+        return
     end
 
-    -- Use fuel
-    dbg_printf("[WG] UI Lighter | Use Campfire - Lighter old fuel level '%s'", obj:condition())
-    obj:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
-    dbg_printf("[WG] UI Lighter | Use Campfire - Lighter new fuel level '%s'", obj:condition())
+    if (bind_campfire.k_rain < 1) then
+        bind_campfire.k_rain = bind_campfire.k_rain + 1
+    end
+
+    self.m_snd_use_cf_fire:play_at_pos(campfire_obj, campfire_obj:position(), 0, sound_object.s3d)
+
+    actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
+
+    campfire:turn_on()
+    dbg_printf("[WG] UI Lighter | Use Campfire - Successfully lit campfire")
 end
 
-function UILighter:CampfireAnimation()
-    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
-    actor_effects.play_item_fx("matches_script")
-    game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
-    dbg_printf("[WG] UI Lighter | Campfire Animation - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
-end
-
-function UILighter:UseCigarette(obj,flags)
+function UILighter:UseCigarette(obj, flags)
     local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
     local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
 
@@ -262,32 +309,38 @@ function UILighter:UseCigarette(obj,flags)
         return
     end
 
-    -- Search for valid items in player inventory
-    western_goods_utils.inventory_iter(db.actor,function(owner, object)
-        if western_goods_utils.table_contains(self.m_valid_sections, object:section()) then
-            dbg_printf("[WG] UI Lighter | actor_on_item_before_use - Found valid item")
-            obj_tool = object
-            return true
-        end
-    end)
-
-    -- Return if player doesn't have a lighter
-    if not obj_tool then
-        dbg_printf("[WG] UI Lighter | Use Cigarette - No valid item found")
+    -- Try to use the lighter, return if fails
+    if not self:TryUseLighter(false) then
         return
     end
 
-    local fuel_level = obj_tool:condition() or 0
-    local fuel_consumption_use = ini_sys:r_float_ex(obj_tool:section(), "fuel_consumption_use", 0.05)
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
 
-    -- Use fuel
-    dbg_printf("[WG] UI Lighter | Use Cigarette - Lighter old fuel level '%s'", obj_tool:condition())
-    obj_tool:set_condition(clamp(fuel_level - fuel_consumption_use, 0.01, 1))
-    dbg_printf("[WG] UI Lighter | Use Cigarette - Lighter new fuel level '%s'", obj_tool:condition())
+    flags.ret_value = true
+    dbg_printf("[WG] UI Lighter | Use Cigarette - Successfully lit cigarette")
+end
+
+function UILighter:UseLightHF(obj_id, is_on_before, is_on_after)
+    -- Short circuit if gas lamp was already turned on
+    if is_on_before or is_on_after then
+        dbg_printf("[WG] UI Lighter | Use Light HF - Gas lamp is already on or was just turned off")
+        return
+    end
+
+    -- Try to use the lighter, return if fails
+    if not self:TryUseLighter(true) then
+        return
+    end
+
+    -- Play animation
+    self:CampfireAnimation()
 
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
-    flags.ret_value = true
+
+    hf_obj_manager.update_data(obj_id, { is_on = true })
+    dbg_printf("[WG] UI Lighter | Use Light HF - Successfully lit gas lamp")
 end
 
 function UILighter:actor_item_to_slot(obj)

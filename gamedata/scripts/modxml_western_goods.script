@@ -34,7 +34,7 @@ function dxml_game_tutorials(xml_file_name, xml_obj)
     local xml_elem = query_res[1]
 
     -- XML Code to inject
-    local xml_inject = [[<action id="use" finalize="1">western_goods_ui_lighter.turn_campfire_on</action>]]
+    local xml_inject = [[<action id="use" finalize="1">western_goods_ui_lighter.use_campfire</action>]]
 
     -- Inject XML Code
     xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
