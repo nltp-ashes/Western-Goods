@@ -68,7 +68,9 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-You can find the entire change-log [here](CHANGELOG.md).
+You can check out the changelog of the last update in the [CHANGELOG.md](CHANGELOG.md) file.
+
+For past updates, please refer to the description of each release, in the [releases tab](https://github.com/nltp-ashes/Western-Goods/releases).
 
 ---
 
