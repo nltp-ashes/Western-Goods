@@ -915,11 +915,7 @@ function get_real_community(npc, default)
     if not blacklisted_comms[community] then
         return community
     end
-    local npc_squad = get_object_squad(npc)
-    if not npc_squad then
-        return default
-    end
-    local squad_community = npc_squad:get_squad_community()
+    local squad_community = get_object_squad(npc):get_squad_community()
     if not blacklisted_comms[squad_community] then
         return squad_community
     else
