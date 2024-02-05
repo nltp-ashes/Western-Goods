@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 25/12/2023                                                                                             ---
+---    Date : 05/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -82,7 +82,7 @@ function check_addon_removal(status)
 
         -- Check if is Western Goods NPC
         for _,sec in pairs(western_goods_npcs) do
-            if se_obj:section_name() == sec and (not get_object_squad(se_obj)) then
+            if se_obj:section_name() == sec and (not western_goods_utils.get_squad_of(se_obj)) then
                 released_objects = released_objects + 1
                 dbg_printf("[WG] Core | Addon removal releasing squad-less NPC '%s'", se_obj:section_name())
                 alife():release(se_obj)
@@ -116,34 +116,29 @@ end
 function check_prerequisites()
     UnregisterScriptCallback("on_game_load", check_prerequisites)
 
-    local error_message = "Unknown error"
-
     -- Out-of-date game
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_outdated_game_title"),
-            western_goods_utils.get_translation("st_err_outdated_game_what"),
-            western_goods_utils.get_translation("st_err_outdated_game_why"),
-            western_goods_utils.get_translation("st_err_outdated_game_where")
-    )
-    assert(is_version_1_5_2(), error_message)
+    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_game_title"),
+        western_goods_utils.get_translation("st_err_outdated_game_what"),
+        western_goods_utils.get_translation("st_err_outdated_game_why"),
+        western_goods_utils.get_translation("st_err_outdated_game_where")
+    ))
 
     -- Missing DXML
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_dxml_title"),
-            western_goods_utils.get_translation("st_err_missing_dxml_what"),
-            western_goods_utils.get_translation("st_err_missing_dxml_why"),
-            western_goods_utils.get_translation("st_err_missing_dxml_where")
-    )
-    assert(is_dxml_installed(), error_message)
+    assert(is_dxml_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_dxml_title"),
+        western_goods_utils.get_translation("st_err_missing_dxml_what"),
+        western_goods_utils.get_translation("st_err_missing_dxml_why"),
+        western_goods_utils.get_translation("st_err_missing_dxml_where")
+    ))
 
     -- Missing LUA unlocalizer
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
-    )
-    assert(is_lua_unlocalizer_installed() , error_message)
+    assert(is_lua_unlocalizer_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+    ))
 end
 
 --- Function used to detect missing translations.

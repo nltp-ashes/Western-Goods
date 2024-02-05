@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 02/12/2023                                                                                             ---
+---    Date : 05/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -707,7 +707,20 @@ function get_squad_of(obj)
         return
     end
 
-    return get_object_squad(obj)
+    -- Maybe don't call 'get_squad_of' on a door or something
+    if not (IsStalker(obj) or IsMonster(obj)) then
+        printf("~[WG] WARNING | Utils | Aborting, trying to get the squad of an object that cannot be in a squad (obj : '%s')", obj and obj:name())
+        return
+    end
+
+    local squad = get_object_squad(obj)
+
+    if not squad then
+        printf("~[WG] WARNING | Utils | Object '%s' has no squad, this will probably crash the game eventually since stalkers/mutants MUST be in squads !", obj and obj:name())
+        return
+    end
+
+    return squad
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -935,8 +948,9 @@ function get_real_community(npc, default)
     if not blacklisted_comms[community] then
         return community
     end
-    local squad_community = get_object_squad(npc):get_squad_community()
-    if not blacklisted_comms[squad_community] then
+    local squad = this.get_squad_of(npc)
+    local squad_community = squad and squad:get_squad_community()
+    if not squad_community or not blacklisted_comms[squad_community] then
         return squad_community
     else
         return default
