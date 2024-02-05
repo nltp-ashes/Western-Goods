@@ -796,6 +796,7 @@ function validate_is_pda(obj)
         ["device_pda_1"] = true,
         ["device_pda_2"] = true,
         ["device_pda_3"] = true,
+        ["device_pda_milspec"] = true
     }
 
     return pda_sections[obj:section()]
@@ -914,7 +915,11 @@ function get_real_community(npc, default)
     if not blacklisted_comms[community] then
         return community
     end
-    local squad_community = get_object_squad(npc):get_squad_community()
+    local npc_squad = get_object_squad(npc)
+    if not npc_squad then
+        return default
+    end
+    local squad_community = npc_squad:get_squad_community()
     if not blacklisted_comms[squad_community] then
         return squad_community
     else
