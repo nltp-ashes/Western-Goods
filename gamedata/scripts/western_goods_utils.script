@@ -829,6 +829,7 @@ function validate_is_pda(obj)
         ["device_pda_1"] = true,
         ["device_pda_2"] = true,
         ["device_pda_3"] = true,
+        ["device_pda_milspec"] = true
     }
 
     return pda_sections[obj:section()]
