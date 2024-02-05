@@ -66,6 +66,23 @@
         <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
     </string>
 
+    <!-- Squad-less NPC -->
+    <string id="st_err_missing_squad_title">
+        <text>Runtime error - NPC has no squad.</text>
+    </string>
+
+    <string id="st_err_missing_squad_what">
+        <text>Western Goods attempted to get the squad of '%s', but the object has no squad.</text>
+    </string>
+
+    <string id="st_err_missing_squad_why">
+        <text>The game needs NPCs to have squads, in order to run the Alife simulation. Spawning NPCs without squads (which Western Goods does not do!) can permanently damage your save-game.</text>
+    </string>
+
+    <string id="st_err_missing_squad_where">
+        <text>Identify the addon that spawns NPCs without squads (again, it isn't Western Goods), and remove it from your mod list.</text>
+    </string>
+
     <!--=============================================================================================================-->
     <!--    Core Strings                                                                                             -->
     <!--=============================================================================================================-->
