@@ -24,14 +24,14 @@ local dbg_printf                       = western_goods_utils.dbg_printf
 --- @param obj game_object
 --- @return nil
 function bind(obj)
-    obj:bind_object(lighter_binder(obj))
+    obj:bind_object(lighter_binder(obj).binder)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Object Binder Class
 -- ---------------------------------------------------------------------------------------------------------------------
 
-class "lighter_binder" (item_device.device_binder)
+class "lighter_binder" (western_goods_bind_object.object_binder_lua)
 
 function lighter_binder:__init(obj) super(obj)
     dbg_printf("[WG] Lighter Binder | Binding object '%s'", obj:name())
@@ -65,12 +65,9 @@ function lighter_binder:__init(obj) super(obj)
     printf("[WG DEBUG] lighter_binder init 2")
 end
 
-function lighter_binder:el_grande_update(delta)
-    printf("[WG DEBUG] lighter_binder update 0")
+function lighter_binder:update(delta)
 
-    item_device.device_binder.el_grande_update(self, delta)
-
-    printf("[WG DEBUG] lighter_binder update 1")
+    --item_device.device_binder.update(self.binder, delta)
 
     -- Turn off if nothing is drawn
     local obj = db.actor:active_detector()
@@ -79,23 +76,17 @@ function lighter_binder:el_grande_update(delta)
         return
     end
 
-    printf("[WG DEBUG] lighter_binder update 2")
-
     -- Turn off on wrong devices / device state
     if not self:check(obj) then
         self:set_light_status(obj, false)
         return
     end
 
-    printf("[WG DEBUG] lighter_binder update 3")
-
     -- Turn off when out of fuel / consume fuel
     if not self:check_fuel(obj) then
         self:set_light_status(obj, false)
         return
     end
-
-    printf("[WG DEBUG] lighter_binder update 4")
 
     -- Update
     self:drain_fuel(obj)
