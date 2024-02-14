@@ -2,20 +2,13 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 03/01/2024                                                                                             ---
+---    Date : 14/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    DXML script used to modify some XML files according to some criteria.                                         ---
 ---    Modifying these files allows Western Goods to power some features.                                            ---
 ---                                                                                                                  ---
 ---==================================================================================================================---
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables, imported functions and new callbacks
--- ---------------------------------------------------------------------------------------------------------------------
-
--- New callback
-AddScriptCallback("western_goods_on_campfire_use")
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- DXML for game_tutorials.xml
@@ -41,16 +34,10 @@ function dxml_game_tutorials(xml_file_name, xml_obj)
     local xml_elem = query_res[1]
 
     -- XML Code to inject
-    local xml_inject = [[<action id="use" finalize="1">modxml_western_goods.use_campfire</action>]]
+    local xml_inject = [[<action id="use" finalize="1">western_goods_core.use_campfire</action>]]
 
     -- Inject XML Code
     xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
-end
-
-function use_campfire(a,b,c,d,e,f,g)
-    printf("[WG] DXML | Use Campfire - Called from game_tutorials.xml")
-    printf("[WG] DXML | Args : a=%s b=%s c=%s d=%s e=%s f=%s g=%s",a,b,c,d,e,f,g)
-    SendScriptCallback("western_goods_on_campfire_use")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 05/02/2024                                                                                             ---
+---    Date : 14/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -16,7 +16,7 @@
 ---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions
+-- Constants, global variables and imported functions and new callbacks
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
@@ -24,6 +24,9 @@ local VERSION                       = "2.5.0"
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
+
+-- New callback
+AddScriptCallback("western_goods_on_campfire_use")
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Service Functions
@@ -211,6 +214,13 @@ end
 --- @return boolean
 function is_lua_unlocalizer_installed()
     return western_goods_core.VERSION == VERSION
+end
+
+--- Function called from game_tutorials.xml when the player interacts with a campfire.
+--- @return nil
+function use_campfire()
+    printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+    SendScriptCallback("western_goods_on_campfire_use")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
