@@ -62,24 +62,42 @@ function lighter_binder:__init(obj) super(obj)
     self.m_update_timer = 0
     self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
+
+    dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
 end
 
 function lighter_binder:update(delta)
-    -- Turn off on wrong devices / device state
+    -- Turn off on wrong device state
     if not self:check() then
         self:set_light_status(false)
         return
     end
 
-    -- Turn off when out of fuel / consume fuel
+    -- Turn off when out of fuel
     if not self:check_fuel() then
         self:set_light_status(false)
         return
     end
 
-    -- Update
-    self:drain_fuel()
+    -- Fast update
     self:update_light()
+
+    -- Throttled update
+    if not self:update_throttle(delta) then
+        return
+    end
+
+    self:drain_fuel()
+end
+
+function lighter_binder:update_throttle(delta)
+    self.m_update_timer = self.m_update_timer - (delta or 0)
+    if self.m_update_timer <= 0 then
+        self.m_update_timer = self.m_update_rate
+        return true
+    else
+        return false
+    end
 end
 
 function lighter_binder:update_light()
@@ -89,18 +107,16 @@ function lighter_binder:update_light()
 end
 
 function lighter_binder:check()
-    return self.object:get_state() == 0
+    local state = self.object:get_state()
+    return state == 0
 end
 
 function lighter_binder:check_fuel()
-    return self.object:condition() > self.m_fuel_critical
+    local fuel_level = self.object:condition()
+    return fuel_level > self.m_fuel_critical
 end
 
 function lighter_binder:drain_fuel(fuel_consumption_override)
-    -- Throttle update
-    if (time_global() < self.m_update_timer) then return end
-    self.m_update_timer = time_global() + self.m_update_rate
-
     local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
     local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
     local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
