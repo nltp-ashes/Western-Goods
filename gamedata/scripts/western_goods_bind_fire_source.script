@@ -17,6 +17,8 @@
 local dbg_printf                       = western_goods_utils.dbg_printf
 
 -- New callbacks
+AddScriptCallback("western_goods_on_cigarette_before_use")
+AddScriptCallback("western_goods_on_cigarette_use")
 AddScriptCallback("western_goods_on_campfire_before_turn_on")
 AddScriptCallback("western_goods_on_campfire_turn_on")
 
@@ -159,7 +161,29 @@ function fire_source_binder:use_campfire()
 end
 
 function fire_source_binder:use_cigarette(obj, flags)
-    dbg_printf("[WG] Fire Source Binder | Hello use_cigarette")
+    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
+    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
+
+    -- Return if no tool is required, or if player already has a tool
+    if not require_tool or obj_tool then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
+        return
+    end
+
+    -- Try to use the lighter, return if fails
+    local cig_flags = { result = false }
+    SendScriptCallback("western_goods_on_cigarette_before_use", cig_flags, obj)
+    if not cig_flags.result then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Failed to light cigarette, no callback allowed the action")
+        return
+    end
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+
+    flags.ret_value = true
+    SendScriptCallback("western_goods_on_cigarette_use", obj)
+    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
 end
 
 function fire_source_binder:use_hideout_furniture_light(obj_id)

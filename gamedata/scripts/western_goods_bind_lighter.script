@@ -64,8 +64,10 @@ function lighter_binder:__init(obj) super(obj)
     self.m_amn_motion = "anm_campfire"
 
     -- Callbacks
-    RegisterScriptCallback("western_goods_on_campfire_before_turn_on", function(...) self:campfire_before_turn_on(...) end)
-    RegisterScriptCallback("western_goods_on_campfire_turn_on", function(...) self:campfire_turn_on(...) end)
+    RegisterScriptCallback("western_goods_on_cigarette_before_use", function(...) self:check_before_use(...) end)
+    RegisterScriptCallback("western_goods_on_campfire_before_turn_on", function(...) self:check_before_use(...) end)
+    RegisterScriptCallback("western_goods_on_cigarette_use", function(...) self:drain_fuel(self.fuel_consumption_use) end)
+    RegisterScriptCallback("western_goods_on_campfire_turn_on", function(...) self:drain_fuel(self.fuel_consumption_use) end)
     RegisterScriptCallback("western_goods_on_campfire_interact", function(...) self:campfire_interact(...) end)
 
     dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
@@ -121,6 +123,13 @@ function lighter_binder:check_fuel()
     return fuel_level > self.m_fuel_critical
 end
 
+function lighter_binder:check_before_use(flags)
+    local parent = self.object:parent()
+    if parent and parent:id() == AC_ID and self:check_fuel() then
+        flags.result = true
+    end
+end
+
 function lighter_binder:drain_fuel(fuel_consumption_override)
     local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
     local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
@@ -138,17 +147,6 @@ end
 function lighter_binder:set_light_status(status)
     self.m_light.enabled = status
     western_goods_utils.bone_hud_visibility(self.object, "lid", "bone01", status)
-end
-
-function lighter_binder:campfire_before_turn_on(flags)
-    local parent = self.object:parent()
-    if parent and parent:id() == AC_ID then
-        flags.result = true
-    end
-end
-
-function lighter_binder:campfire_turn_on(campfire_obj, campfire)
-    self:drain_fuel(self.fuel_consumption_use)
 end
 
 function lighter_binder:campfire_interact()
