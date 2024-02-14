@@ -53,15 +53,20 @@ function lighter_binder:__init(obj) super(obj)
 
     -- Sound effects
     self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
-    self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
 
     -- Build variables
     self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "fuel_critical", 0.01)
     self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "fuel_consumption", 0.0003)
+    self.fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "fuel_consumption_use", 0.05)
     self.m_update_rate = 1000
     self.m_update_timer = 0
     self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
+
+    -- Callbacks
+    RegisterScriptCallback("western_goods_on_campfire_before_turn_on", function(...) self:campfire_before_turn_on(...) end)
+    RegisterScriptCallback("western_goods_on_campfire_turn_on", function(...) self:campfire_turn_on(...) end)
+    RegisterScriptCallback("western_goods_on_campfire_interact", function(...) self:campfire_interact(...) end)
 
     dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
 end
@@ -133,4 +138,38 @@ end
 function lighter_binder:set_light_status(status)
     self.m_light.enabled = status
     western_goods_utils.bone_hud_visibility(self.object, "lid", "bone01", status)
+end
+
+function lighter_binder:campfire_before_turn_on(flags)
+    local parent = self.object:parent()
+    if parent and parent:id() == AC_ID then
+        flags.result = true
+    end
+end
+
+function lighter_binder:campfire_turn_on(campfire_obj, campfire)
+    self:drain_fuel(self.fuel_consumption_use)
+end
+
+function lighter_binder:campfire_interact()
+    local parent = self.object:parent()
+    if not parent or parent:id() ~= AC_ID then
+        return
+    end
+
+    -- Play SFX
+    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+
+    -- Play CFX
+    actor_effects.play_item_fx("matches_script")
+
+    -- Play animation if lighter is drawn
+    local active_det = db.actor:active_detector()
+    if not active_det or active_det:id() ~= self.object:id() then
+        return
+    end
+
+    -- Play HUD motion
+    game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
+    dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
 end

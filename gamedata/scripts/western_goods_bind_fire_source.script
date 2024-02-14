@@ -10,11 +10,15 @@
 ---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions
+-- Constants, global variables and imported functions and new callbacks
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
 local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- New callbacks
+AddScriptCallback("western_goods_on_campfire_before_turn_on")
+AddScriptCallback("western_goods_on_campfire_turn_on")
 
 -- Variables
 monkey_patches                         = {
@@ -60,14 +64,16 @@ function fire_source_binder:__init(obj) super(obj)
         local is_on_after = hf_obj_manager.get_data(obj_id).is_on
         self:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
     end)
-
     self:make_monkey_patch(monkey_patches.actor_on_item_before_use, function(obj, flags)
         self.actor_on_item_before_use(obj, flags)
         self:use_cigarette(obj, flags)
     end)
 
+    -- Sound effects
+    self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
+
     -- Callbacks
-    RegisterScriptCallback("western_goods_on_campfire_use", self.use_campfire, self)
+    RegisterScriptCallback("western_goods_on_campfire_interact", function(...) self:use_campfire(...) end)
 
     dbg_printf("[WG] Fire Source Binder | Successfully bound object '%s'", obj:name())
 end
@@ -105,7 +111,51 @@ function fire_source_binder:make_monkey_patch(monkey_patch_group, func)
 end
 
 function fire_source_binder:use_campfire()
-    dbg_printf("[WG] Fire Source Binder | Hello use_campfire")
+    -- Hide inventory UI
+    if get_hud() then
+        hide_hud_inventory()
+    end
+
+    -- Get nearby campfire (or use campfire passed as argument)
+    local campfire_obj = bind_campfire.get_nearby_campfire(4, false)
+    local campfire = campfire_obj and campfire_obj:get_campfire()
+    if not campfire_obj or not campfire then
+        printf("~[WG] WARNING | Fire Source Binder | Use Campfire - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
+        return
+    end
+
+    -- Return if campfire is already on
+    if (campfire:is_on()) then
+        dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, it is already on")
+        return
+    end
+
+    -- Try to use the lighter, return if fails
+    local flags = { result = false }
+    SendScriptCallback("western_goods_on_campfire_before_turn_on", flags, campfire_obj, campfire)
+    if not flags.result then
+        dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, no callback allowed the action")
+        return
+    end
+
+    -- We wuzz rain and shit
+    if not bind_campfire.rain_pass() then
+        actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
+        dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, because of rain")
+        return
+    end
+
+    if (bind_campfire.k_rain < 1) then
+        bind_campfire.k_rain = bind_campfire.k_rain + 1
+    end
+
+    self.m_snd_use_cf_fire:play_at_pos(campfire_obj, campfire_obj:position(), 0, sound_object.s3d)
+
+    actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
+
+    campfire:turn_on()
+    SendScriptCallback("western_goods_on_campfire_turn_on", campfire_obj, campfire)
+    dbg_printf("[WG] Fire Source Binder | Use Campfire - Successfully lit campfire")
 end
 
 function fire_source_binder:use_cigarette(obj, flags)
