@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 06/02/2024                                                                                             ---
+---    Date : 14/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -36,6 +36,9 @@ class "lighter_binder" (western_goods_bind_object.object_binder_lua)
 function lighter_binder:__init(obj) super(obj)
     dbg_printf("[WG] Lighter Binder | Binding object '%s'", obj:name())
 
+    -- Fast call required so that script_light doesn't lag behind the hands
+    self.object:set_fastcall(self.binder.update, self.binder)
+
     -- Script light
     self.m_light = script_light()
     self.m_light.hud_mode = false
@@ -48,26 +51,18 @@ function lighter_binder:__init(obj) super(obj)
     self.m_light.lanim = "koster"
     self.m_light.lanim_brightness = 0.0025
 
-    printf("[WG DEBUG] lighter_binder init 0")
-
     -- Sound effects
     self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
-
-    printf("[WG DEBUG] lighter_binder init 1")
 
     -- Build variables
     self.m_update_rate = 1000
     self.m_update_timer = 0
     self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
-
-    printf("[WG DEBUG] lighter_binder init 2")
 end
 
 function lighter_binder:update(delta)
-
-    --item_device.device_binder.update(self.binder, delta)
 
     -- Turn off if nothing is drawn
     local obj = db.actor:active_detector()
