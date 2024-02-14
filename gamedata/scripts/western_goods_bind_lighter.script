@@ -31,7 +31,7 @@ end
 -- Object Binder Class
 -- ---------------------------------------------------------------------------------------------------------------------
 
-class "lighter_binder" (western_goods_bind_object.object_binder_lua)
+class "lighter_binder" (western_goods_bind_fire_source.fire_source_binder)
 
 function lighter_binder:__init(obj) super(obj)
     dbg_printf("[WG] Lighter Binder | Binding object '%s'", obj:name())

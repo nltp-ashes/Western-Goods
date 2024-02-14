@@ -1,0 +1,117 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 14/02/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- Variables
+monkey_patches                         = {
+    hideout_furniture_light = {
+        name = "hideout_furniture_light",
+        patches = {
+            { prio=1, script="ui_furniture_light",  func="toggle_light",             cond = function() return ui_furniture_light and hf_obj_manager end }
+        }
+    },
+    actor_on_item_before_use = {
+        name = "actor_on_item_before_use",
+        patches = {
+            { prio=1, script="itms_manager",        func="actor_on_item_before_use", cond = function() return true end },
+            { prio=2, script="enhanced_animations", func="originalAOIBU",            cond = function() return enhanced_animations end }
+        }
+    }
+}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to bind an object to the Fire Source Binder
+--- @param obj game_object
+--- @return nil
+function bind(obj)
+    obj:bind_object(fire_source_binder(obj).binder)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Object Binder Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "fire_source_binder" (western_goods_bind_object.object_binder_lua)
+
+function fire_source_binder:__init(obj) super(obj)
+    dbg_printf("[WG] Fire Source Binder | Binding object '%s'", obj:name())
+
+    -- Monkey-patches
+    self:make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
+        local is_on_before = hf_obj_manager.get_data(obj_id).is_on
+        self.hideout_furniture_light(obj_id)
+        local is_on_after = hf_obj_manager.get_data(obj_id).is_on
+        self:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
+    end)
+
+    self:make_monkey_patch(monkey_patches.actor_on_item_before_use, function(obj, flags)
+        self.actor_on_item_before_use(obj, flags)
+        self:use_cigarette(obj, flags)
+    end)
+
+    -- Callbacks
+    RegisterScriptCallback("western_goods_on_campfire_use", self.use_campfire, self)
+
+    dbg_printf("[WG] Fire Source Binder | Successfully bound object '%s'", obj:name())
+end
+
+function fire_source_binder:make_monkey_patch(monkey_patch_group, func)
+    -- Filter out invalid monkey-patches (keep only ones that can be executed)
+    local valid_patches = {}
+    for _,patch in pairs(monkey_patch_group.patches) do
+        if patch.cond() then
+            table.insert(valid_patches, patch)
+        end
+    end
+
+    -- Find highest priority-monkey patch
+    local monkey_patch = nil
+    for idx,patch in pairs(valid_patches) do
+        monkey_patch = monkey_patch or patch
+        if monkey_patch.prio <= patch.prio then
+            monkey_patch = patch
+        end
+    end
+
+    if not monkey_patch then
+        dbg_printf("[WG] Fire Source Binder | No applicable monkey-patch for %s", monkey_patch_group.name)
+        return
+    end
+
+    -- Variabilized to fix a highlight bug in my IDE
+    local script_name = monkey_patch.script
+    local function_name = monkey_patch.func
+
+    dbg_printf("[WG] Fire Source Binder | Monkey-patching %s function in %s.script", function_name, script_name)
+    self[monkey_patch_group.name] = _G[script_name][function_name]
+    _G[script_name][function_name] = func
+end
+
+function fire_source_binder:use_campfire()
+    dbg_printf("[WG] Fire Source Binder | Hello use_campfire")
+end
+
+function fire_source_binder:use_cigarette(obj, flags)
+    dbg_printf("[WG] Fire Source Binder | Hello use_cigarette")
+end
+
+function fire_source_binder:use_hideout_furniture_light(obj_id)
+    dbg_printf("[WG] Fire Source Binder | Hello use_light_hf")
+end
