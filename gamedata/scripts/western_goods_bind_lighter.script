@@ -56,6 +56,9 @@ function lighter_binder:__init(obj) super(obj)
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
 
     -- Build variables
+    self.m_fuel_level = self.object:condition()
+    self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "fuel_critical", 0.01)
+    self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "fuel_consumption", 0.0003)
     self.m_update_rate = 1000
     self.m_update_timer = 0
     self.m_amn_motion_sec = "motion_campfire"
@@ -63,71 +66,59 @@ function lighter_binder:__init(obj) super(obj)
 end
 
 function lighter_binder:update(delta)
-
-    -- Turn off if nothing is drawn
-    local obj = db.actor:active_detector()
-    if not obj then
-        self.m_light.enabled = false
-        return
-    end
+    -- Update fuel level
+    self.m_fuel_level = self.object:condition()
 
     -- Turn off on wrong devices / device state
-    if not self:check(obj) then
-        self:set_light_status(obj, false)
+    if not self:check() then
+        self:set_light_status(false)
         return
     end
 
     -- Turn off when out of fuel / consume fuel
-    if not self:check_fuel(obj) then
-        self:set_light_status(obj, false)
+    if not self:check_fuel() then
+        self:set_light_status(false)
         return
     end
 
     -- Update
-    self:drain_fuel(obj)
-    self:update_light(obj)
+    self:drain_fuel()
+    self:update_light()
 end
 
-function lighter_binder:update_light(obj)
-    self:set_light_status(obj, true)
-    self.m_light:set_position(self:get_light_bone_position(obj))
+function lighter_binder:update_light()
+    self:set_light_status(true)
+    self.m_light:set_position(self:get_light_bone_position())
     self.m_light:update()
 end
 
-function lighter_binder:check(obj)
-    local state = obj:get_state()
-    if state ~= 0 then
-        return false
-    end
-    return true
+function lighter_binder:check()
+    return self.object:get_state() == 0
 end
 
-function lighter_binder:check_fuel(obj)
-    local fuel_level = obj:condition() or 0
-    local fuel_critical = ini_sys:r_float_ex(obj:section(), "fuel_critical", 0.01)
-
-    return fuel_level > fuel_critical
+function lighter_binder:check_fuel()
+    return self.m_fuel_level > self.m_fuel_critical
 end
 
-function lighter_binder:drain_fuel(obj, consumption_override)
+function lighter_binder:drain_fuel(fuel_consumption_override)
     -- Throttle update
     if (time_global() < self.m_update_timer) then return end
     self.m_update_timer = time_global() + self.m_update_rate
 
-    local fuel_level = obj:condition() or 0
-    local fuel_consumption = consumption_override or ini_sys:r_float_ex(obj:section(), "fuel_consumption", 0.0003)
+    local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
+    local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
+    local fuel_level_new = clamp(self.m_fuel_level - fuel_consumed, 0.01, 1)
 
-    dbg_printf("[WG] UI Lighter | Drain Fuel - Lighter old fuel level '%s'", obj:condition())
-    obj:set_condition(clamp(fuel_level - fuel_consumption, 0.01, 1))
-    dbg_printf("[WG] UI Lighter | Drain Fuel - Lighter new fuel level '%s'", obj:condition())
+    self.object:set_condition(fuel_level_new)
+    dbg_printf("[WG] Lighter Binder | Drain Fuel - Lighter new fuel level '%s'", self.object:condition())
 end
 
-function lighter_binder:get_light_bone_position(obj)
-    local pos = western_goods_utils.bone_hud_position(obj, "lid", "bone01")
+function lighter_binder:get_light_bone_position()
+    local pos = western_goods_utils.bone_hud_position(self.object, "lid", "bone01")
     return pos or db.actor:position()
 end
 
-function lighter_binder:set_light_status(obj, status)
+function lighter_binder:set_light_status(status)
     self.m_light.enabled = status
-    western_goods_utils.bone_hud_visibility(obj, "lid", "bone01", status)
+    western_goods_utils.bone_hud_visibility(self.object, "lid", "bone01", status)
 end
