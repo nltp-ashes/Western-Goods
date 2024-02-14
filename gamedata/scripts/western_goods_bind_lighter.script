@@ -56,7 +56,6 @@ function lighter_binder:__init(obj) super(obj)
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
 
     -- Build variables
-    self.m_fuel_level = self.object:condition()
     self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "fuel_critical", 0.01)
     self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "fuel_consumption", 0.0003)
     self.m_update_rate = 1000
@@ -66,9 +65,6 @@ function lighter_binder:__init(obj) super(obj)
 end
 
 function lighter_binder:update(delta)
-    -- Update fuel level
-    self.m_fuel_level = self.object:condition()
-
     -- Turn off on wrong devices / device state
     if not self:check() then
         self:set_light_status(false)
@@ -97,7 +93,7 @@ function lighter_binder:check()
 end
 
 function lighter_binder:check_fuel()
-    return self.m_fuel_level > self.m_fuel_critical
+    return self.object:condition() > self.m_fuel_critical
 end
 
 function lighter_binder:drain_fuel(fuel_consumption_override)
@@ -107,7 +103,7 @@ function lighter_binder:drain_fuel(fuel_consumption_override)
 
     local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
     local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
-    local fuel_level_new = clamp(self.m_fuel_level - fuel_consumed, 0.01, 1)
+    local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
 
     self.object:set_condition(fuel_level_new)
     dbg_printf("[WG] Lighter Binder | Drain Fuel - Lighter new fuel level '%s'", self.object:condition())
