@@ -1,0 +1,217 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 15/02/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to bind an object to the Lighter Binder
+--- @param obj game_object
+--- @return nil
+function bind(obj)
+    obj:bind_object(lighter_binder(obj).binder)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Object Binder Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "lighter_binder" (western_goods_bind_fire_source.fire_source_binder)
+
+function lighter_binder:__init(obj) super(obj)
+    dbg_printf("[WG] Lighter Binder | Binding object '%s'", obj:name())
+
+    -- Fast call required so that script_light doesn't lag behind the hands
+    self.object:set_fastcall(self.binder.update, self.binder)
+
+    -- Script light
+    self.m_light = script_light()
+    self.m_light.hud_mode = false
+    self.m_light.enabled = true
+    self.m_light.type = 1
+    self.m_light.range = 2.5
+    self.m_light.shadow = false
+    self.m_light.brightness = 1.0
+    self.m_light.color = fcolor():set(0.8, 0.7, 0.3, 0.8)
+    self.m_light.lanim = "koster"
+    self.m_light.lanim_brightness = 0.0025
+
+    -- Sound effects
+    self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
+
+    -- Build variables
+    self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "fuel_critical", 0.01)
+    self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "fuel_consumption", 0.0003)
+    self.fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "fuel_consumption_use", 0.05)
+    self.m_update_rate = 1000
+    self.m_update_timer = 0
+    self.m_detector_slot_id = 9
+    self.m_amn_motion_sec = "motion_campfire"
+    self.m_amn_motion = "anm_campfire"
+
+    dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
+end
+
+function lighter_binder:update(delta)
+    -- Turn off on wrong device state
+    if not self:check_state() then
+        self:set_light_status(false)
+        return
+    end
+
+    -- Turn off when out of fuel
+    if not self:check_is_fueled() then
+        self:set_light_status(false)
+        return
+    end
+
+    -- Fast update
+    self:update_light()
+
+    -- Throttled update
+    if not self:update_throttle(delta) then
+        return
+    end
+
+    self:drain_fuel()
+end
+
+function lighter_binder:update_throttle(delta)
+    self.m_update_timer = self.m_update_timer - (delta or 0)
+    if self.m_update_timer <= 0 then
+        self.m_update_timer = self.m_update_rate
+        return true
+    else
+        return false
+    end
+end
+
+function lighter_binder:update_light()
+    self:set_light_status(true)
+    self.m_light:set_position(self:get_light_bone_position())
+    self.m_light:update()
+end
+
+function lighter_binder:check_state()
+    local state = self.object:get_state()
+    return state == 0
+end
+
+function lighter_binder:check_is_fueled()
+    local fuel_level = self.object:condition()
+    return fuel_level > self.m_fuel_critical
+end
+
+function lighter_binder:check_is_actor_owner()
+    local parent = self.object:parent()
+    return parent and parent:id() == AC_ID or false
+end
+
+function lighter_binder:check_is_primary()
+    local det = db.actor:item_in_slot(self.m_detector_slot_id)
+    if det and det:id() == self.object:id() then
+        return true
+    end
+    if det and ini_sys:r_string_ex(det:section(), "script_binding") == "western_goods_bind_lighter.bind" then
+        return false
+    end
+    return true
+end
+
+function lighter_binder:check_is_drawn()
+    local active_det = db.actor:active_detector()
+    return active_det and active_det:id() == self.object:id() or false
+end
+
+function lighter_binder:drain_fuel(fuel_consumption_override)
+    local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
+    local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
+    local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
+
+    self.object:set_condition(fuel_level_new)
+    dbg_printf("[WG] Lighter Binder | Drain Fuel - Lighter new fuel level '%s'", self.object:condition())
+end
+
+function lighter_binder:get_light_bone_position()
+    local pos = western_goods_utils.bone_hud_position(self.object, "lid", "bone01")
+    return pos or db.actor:position()
+end
+
+function lighter_binder:set_light_status(status)
+    self.m_light.enabled = status
+    western_goods_utils.bone_hud_visibility(self.object, "lid", "bone01", status)
+end
+
+function lighter_binder:play_animation()
+    -- Play SFX
+    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+
+    -- Play CFX
+    actor_effects.play_item_fx("matches_script")
+
+    -- Play animation if lighter is drawn
+    local active_det = db.actor:active_detector()
+    if not active_det or active_det:id() ~= self.object:id() then
+        return
+    end
+
+    -- Play HUD motion
+    game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
+    dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
+end
+
+function lighter_binder:use_cigarette(obj, flags)
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
+        return
+    end
+
+    local result = western_goods_bind_fire_source.fire_source_binder.use_cigarette(self, obj, flags)
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+end
+
+function lighter_binder:use_campfire()
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
+        return
+    end
+
+    if self:check_is_drawn() then
+        self:play_animation()
+    end
+
+    local result = western_goods_bind_fire_source.fire_source_binder.use_campfire(self)
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+end
+
+function lighter_binder:use_hideout_furniture_light(obj_id)
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
+        return
+    end
+
+    if self:check_is_drawn() then
+        self:play_animation()
+    end
+
+    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id)
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+end
