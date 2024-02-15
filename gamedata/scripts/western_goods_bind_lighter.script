@@ -63,13 +63,6 @@ function lighter_binder:__init(obj) super(obj)
     self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
 
-    -- Callbacks
-    RegisterScriptCallback("western_goods_on_cigarette_before_use", function(...) self:check_before_use(...) end)
-    RegisterScriptCallback("western_goods_on_campfire_before_turn_on", function(...) self:check_before_use(...) end)
-    RegisterScriptCallback("western_goods_on_cigarette_use", function(...) self:drain_fuel(self.fuel_consumption_use) end)
-    RegisterScriptCallback("western_goods_on_campfire_turn_on", function(...) self:drain_fuel(self.fuel_consumption_use) end)
-    RegisterScriptCallback("western_goods_on_campfire_interact", function(...) self:campfire_interact(...) end)
-
     dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
 end
 
@@ -123,11 +116,14 @@ function lighter_binder:check_fuel()
     return fuel_level > self.m_fuel_critical
 end
 
-function lighter_binder:check_before_use(flags)
+function lighter_binder:check_before_use()
     local parent = self.object:parent()
-    if parent and parent:id() == AC_ID and self:check_fuel() then
-        flags.result = true
-    end
+    return parent and parent:id() == AC_ID and self:check_fuel() or false
+end
+
+function lighter_binder:check_before_animation()
+    local active_det = db.actor:active_detector()
+    return active_det and active_det:id() == self.object:id() or false
 end
 
 function lighter_binder:drain_fuel(fuel_consumption_override)
@@ -149,12 +145,7 @@ function lighter_binder:set_light_status(status)
     western_goods_utils.bone_hud_visibility(self.object, "lid", "bone01", status)
 end
 
-function lighter_binder:campfire_interact()
-    local parent = self.object:parent()
-    if not parent or parent:id() ~= AC_ID then
-        return
-    end
-
+function lighter_binder:play_animation()
     -- Play SFX
     self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
 
@@ -170,4 +161,36 @@ function lighter_binder:campfire_interact()
     -- Play HUD motion
     game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
     dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
+end
+
+function lighter_binder:use_cigarette(obj, flags)
+    local result = western_goods_bind_fire_source.fire_source_binder.use_cigarette(self, obj, flags)
+
+    if result and self:check_before_use() then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+end
+
+function lighter_binder:use_campfire()
+    local result = western_goods_bind_fire_source.fire_source_binder.use_campfire(self)
+
+    if result and self:check_before_use() then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+
+    if result and self:check_before_animation() then
+        self:play_animation()
+    end
+end
+
+function lighter_binder:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
+    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id, is_on_before, is_on_after)
+
+    if result and self:check_before_use() then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+
+    if result and self:check_before_animation() then
+        self:play_animation()
+    end
 end

@@ -10,17 +10,11 @@
 ---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions and new callbacks
+-- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Imported functions
 local dbg_printf                       = western_goods_utils.dbg_printf
-
--- New callbacks
-AddScriptCallback("western_goods_on_cigarette_before_use")
-AddScriptCallback("western_goods_on_cigarette_use")
-AddScriptCallback("western_goods_on_campfire_before_turn_on")
-AddScriptCallback("western_goods_on_campfire_turn_on")
 
 -- Variables
 monkey_patches                         = {
@@ -35,6 +29,12 @@ monkey_patches                         = {
         patches = {
             { prio=1, script="itms_manager",        func="actor_on_item_before_use", cond = function() return true end },
             { prio=2, script="enhanced_animations", func="originalAOIBU",            cond = function() return enhanced_animations end }
+        }
+    },
+    campfire_on_interact = {
+        name = "campfire_on_interact",
+        patches = {
+            { prio=1, script="western_goods_core",  func="use_campfire",             cond = function() return true end }
         }
     }
 }
@@ -70,12 +70,13 @@ function fire_source_binder:__init(obj) super(obj)
         self.actor_on_item_before_use(obj, flags)
         self:use_cigarette(obj, flags)
     end)
+    self:make_monkey_patch(monkey_patches.campfire_on_interact, function()
+        self.campfire_on_interact()
+        self:use_campfire()
+    end)
 
     -- Sound effects
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
-
-    -- Callbacks
-    RegisterScriptCallback("western_goods_on_campfire_interact", function(...) self:use_campfire(...) end)
 
     dbg_printf("[WG] Fire Source Binder | Successfully bound object '%s'", obj:name())
 end
@@ -112,6 +113,33 @@ function fire_source_binder:make_monkey_patch(monkey_patch_group, func)
     _G[script_name][function_name] = func
 end
 
+function fire_source_binder:check_before_use()
+    return true
+end
+
+function fire_source_binder:use_cigarette(obj, flags)
+    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
+    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
+
+    -- Return if no tool is required, or if player already has a tool
+    if not require_tool or obj_tool then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
+        return false
+    end
+
+    -- Try to light the cigarette
+    if not self:check_before_use() then
+        return false
+    end
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+
+    flags.ret_value = true
+    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
+    return true
+end
+
 function fire_source_binder:use_campfire()
     -- Hide inventory UI
     if get_hud() then
@@ -123,69 +151,57 @@ function fire_source_binder:use_campfire()
     local campfire = campfire_obj and campfire_obj:get_campfire()
     if not campfire_obj or not campfire then
         printf("~[WG] WARNING | Fire Source Binder | Use Campfire - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
-        return
+        return false
     end
 
     -- Return if campfire is already on
     if (campfire:is_on()) then
         dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, it is already on")
-        return
+        return false
     end
 
     -- Try to use the lighter, return if fails
-    local flags = { result = false }
-    SendScriptCallback("western_goods_on_campfire_before_turn_on", flags, campfire_obj, campfire)
-    if not flags.result then
-        dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, no callback allowed the action")
-        return
+    if not self:check_before_use() then
+        return false
     end
 
     -- We wuzz rain and shit
     if not bind_campfire.rain_pass() then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
         dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, because of rain")
-        return
+        return false
     end
 
     if (bind_campfire.k_rain < 1) then
         bind_campfire.k_rain = bind_campfire.k_rain + 1
     end
 
+    -- Play SFX
     self.m_snd_use_cf_fire:play_at_pos(campfire_obj, campfire_obj:position(), 0, sound_object.s3d)
 
     actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
 
     campfire:turn_on()
-    SendScriptCallback("western_goods_on_campfire_turn_on", campfire_obj, campfire)
     dbg_printf("[WG] Fire Source Binder | Use Campfire - Successfully lit campfire")
+    return true
 end
 
-function fire_source_binder:use_cigarette(obj, flags)
-    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
-    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
-
-    -- Return if no tool is required, or if player already has a tool
-    if not require_tool or obj_tool then
-        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
-        return
+function fire_source_binder:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
+    -- Short circuit if gas lamp was already turned on
+    if is_on_before or is_on_after then
+        dbg_printf("[WG] Fire Source Binder | Use HF Light - Gas lamp is already on or was just turned off")
+        return false
     end
 
-    -- Try to use the lighter, return if fails
-    local cig_flags = { result = false }
-    SendScriptCallback("western_goods_on_cigarette_before_use", cig_flags, obj)
-    if not cig_flags.result then
-        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Failed to light cigarette, no callback allowed the action")
-        return
+    -- Try to turn the light on
+    if not self:check_before_use() then
+        return false
     end
 
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
 
-    flags.ret_value = true
-    SendScriptCallback("western_goods_on_cigarette_use", obj)
-    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
-end
-
-function fire_source_binder:use_hideout_furniture_light(obj_id)
-    dbg_printf("[WG] Fire Source Binder | Hello use_light_hf")
+    hf_obj_manager.update_data(obj_id, { is_on = true })
+    dbg_printf("[WG] Fire Source Binder | Use HF Light - Successfully lit gas lamp")
+    return true
 end

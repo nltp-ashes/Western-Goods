@@ -16,7 +16,7 @@
 ---==================================================================================================================---
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Constants, global variables and imported functions and new callbacks
+-- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
@@ -24,9 +24,6 @@ local VERSION                       = "2.5.0"
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
-
--- New callback
-AddScriptCallback("western_goods_on_campfire_interact")
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Service Functions
@@ -220,7 +217,6 @@ end
 --- @return nil
 function use_campfire()
     printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
-    SendScriptCallback("western_goods_on_campfire_interact")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
