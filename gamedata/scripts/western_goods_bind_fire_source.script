@@ -113,10 +113,6 @@ function fire_source_binder:make_monkey_patch(monkey_patch_group, func)
     _G[script_name][function_name] = func
 end
 
-function fire_source_binder:check_before_use()
-    return true
-end
-
 function fire_source_binder:use_cigarette(obj, flags)
     local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
     local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
