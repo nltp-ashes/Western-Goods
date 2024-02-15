@@ -164,33 +164,41 @@ function lighter_binder:play_animation()
 end
 
 function lighter_binder:use_cigarette(obj, flags)
+    if not self:check_before_use() then
+        return
+    end
+
     local result = western_goods_bind_fire_source.fire_source_binder.use_cigarette(self, obj, flags)
 
-    if result and self:check_before_use() then
+    if result then
         self:drain_fuel(self.fuel_consumption_use)
     end
 end
 
 function lighter_binder:use_campfire()
-    local result = western_goods_bind_fire_source.fire_source_binder.use_campfire(self)
-
-    if result and self:check_before_use() then
-        self:drain_fuel(self.fuel_consumption_use)
+    if not self:check_before_use() or not self:check_before_animation() then
+        return
     end
 
-    if result and self:check_before_animation() then
-        self:play_animation()
+    self:play_animation()
+
+    local result = western_goods_bind_fire_source.fire_source_binder.use_campfire(self)
+
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
     end
 end
 
 function lighter_binder:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
-    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id, is_on_before, is_on_after)
-
-    if result and self:check_before_use() then
-        self:drain_fuel(self.fuel_consumption_use)
+    if not self:check_before_use() or not self:check_before_animation() then
+        return
     end
 
-    if result and self:check_before_animation() then
-        self:play_animation()
+    self:play_animation()
+
+    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id, is_on_before, is_on_after)
+
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
     end
 end

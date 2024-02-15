@@ -127,11 +127,6 @@ function fire_source_binder:use_cigarette(obj, flags)
         return false
     end
 
-    -- Try to light the cigarette
-    if not self:check_before_use() then
-        return false
-    end
-
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
 
@@ -160,11 +155,6 @@ function fire_source_binder:use_campfire()
         return false
     end
 
-    -- Try to use the lighter, return if fails
-    if not self:check_before_use() then
-        return false
-    end
-
     -- We wuzz rain and shit
     if not bind_campfire.rain_pass() then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
@@ -190,11 +180,6 @@ function fire_source_binder:use_hideout_furniture_light(obj_id, is_on_before, is
     -- Short circuit if gas lamp was already turned on
     if is_on_before or is_on_after then
         dbg_printf("[WG] Fire Source Binder | Use HF Light - Gas lamp is already on or was just turned off")
-        return false
-    end
-
-    -- Try to turn the light on
-    if not self:check_before_use() then
         return false
     end
 
