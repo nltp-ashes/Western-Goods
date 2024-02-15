@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 14/02/2024                                                                                             ---
+---    Date : 15/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -60,6 +60,7 @@ function lighter_binder:__init(obj) super(obj)
     self.fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "fuel_consumption_use", 0.05)
     self.m_update_rate = 1000
     self.m_update_timer = 0
+    self.m_detector_slot_id = 9
     self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
 
@@ -68,13 +69,13 @@ end
 
 function lighter_binder:update(delta)
     -- Turn off on wrong device state
-    if not self:check() then
+    if not self:check_state() then
         self:set_light_status(false)
         return
     end
 
     -- Turn off when out of fuel
-    if not self:check_fuel() then
+    if not self:check_is_fueled() then
         self:set_light_status(false)
         return
     end
@@ -106,22 +107,33 @@ function lighter_binder:update_light()
     self.m_light:update()
 end
 
-function lighter_binder:check()
+function lighter_binder:check_state()
     local state = self.object:get_state()
     return state == 0
 end
 
-function lighter_binder:check_fuel()
+function lighter_binder:check_is_fueled()
     local fuel_level = self.object:condition()
     return fuel_level > self.m_fuel_critical
 end
 
-function lighter_binder:check_before_use()
+function lighter_binder:check_is_actor_owner()
     local parent = self.object:parent()
-    return parent and parent:id() == AC_ID and self:check_fuel() or false
+    return parent and parent:id() == AC_ID or false
 end
 
-function lighter_binder:check_before_animation()
+function lighter_binder:check_is_primary()
+    local det = db.actor:item_in_slot(self.m_detector_slot_id)
+    if det and det:id() == self.object:id() then
+        return true
+    end
+    if det and ini_sys:r_string_ex(det:section(), "script_binding") == "western_goods_bind_lighter.bind" then
+        return false
+    end
+    return true
+end
+
+function lighter_binder:check_is_drawn()
     local active_det = db.actor:active_detector()
     return active_det and active_det:id() == self.object:id() or false
 end
@@ -164,40 +176,41 @@ function lighter_binder:play_animation()
 end
 
 function lighter_binder:use_cigarette(obj, flags)
-    if not self:check_before_use() then
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
         return
     end
 
     local result = western_goods_bind_fire_source.fire_source_binder.use_cigarette(self, obj, flags)
-
     if result then
         self:drain_fuel(self.fuel_consumption_use)
     end
 end
 
 function lighter_binder:use_campfire()
-    if not self:check_before_use() or not self:check_before_animation() then
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
         return
     end
 
-    self:play_animation()
+    if self:check_is_drawn() then
+        self:play_animation()
+    end
 
     local result = western_goods_bind_fire_source.fire_source_binder.use_campfire(self)
-
     if result then
         self:drain_fuel(self.fuel_consumption_use)
     end
 end
 
-function lighter_binder:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
-    if not self:check_before_use() or not self:check_before_animation() then
+function lighter_binder:use_hideout_furniture_light(obj_id)
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
         return
     end
 
-    self:play_animation()
+    if self:check_is_drawn() then
+        self:play_animation()
+    end
 
-    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id, is_on_before, is_on_after)
-
+    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id)
     if result then
         self:drain_fuel(self.fuel_consumption_use)
     end

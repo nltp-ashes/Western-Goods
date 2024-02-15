@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 14/02/2024                                                                                             ---
+---    Date : 15/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -64,7 +64,9 @@ function fire_source_binder:__init(obj) super(obj)
         local is_on_before = hf_obj_manager.get_data(obj_id).is_on
         self.hideout_furniture_light(obj_id)
         local is_on_after = hf_obj_manager.get_data(obj_id).is_on
-        self:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
+        if not is_on_before and not is_on_after then
+            self:use_hideout_furniture_light(obj_id)
+        end
     end)
     self:make_monkey_patch(monkey_patches.actor_on_item_before_use, function(obj, flags)
         self.actor_on_item_before_use(obj, flags)
@@ -172,13 +174,7 @@ function fire_source_binder:use_campfire()
     return true
 end
 
-function fire_source_binder:use_hideout_furniture_light(obj_id, is_on_before, is_on_after)
-    -- Short circuit if gas lamp was already turned on
-    if is_on_before or is_on_after then
-        dbg_printf("[WG] Fire Source Binder | Use HF Light - Gas lamp is already on or was just turned off")
-        return false
-    end
-
+function fire_source_binder:use_hideout_furniture_light(obj_id)
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
 
