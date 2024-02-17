@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 15/02/2024                                                                                             ---
+---    Date : 17/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -15,29 +15,6 @@
 
 -- Imported functions
 local dbg_printf                       = western_goods_utils.dbg_printf
-
--- Variables
-monkey_patches                         = {
-    hideout_furniture_light = {
-        name = "hideout_furniture_light",
-        patches = {
-            { prio=1, script="ui_furniture_light",  func="toggle_light",             cond = function() return ui_furniture_light and hf_obj_manager end }
-        }
-    },
-    actor_on_item_before_use = {
-        name = "actor_on_item_before_use",
-        patches = {
-            { prio=1, script="itms_manager",        func="actor_on_item_before_use", cond = function() return true end },
-            { prio=2, script="enhanced_animations", func="originalAOIBU",            cond = function() return enhanced_animations end }
-        }
-    },
-    campfire_on_interact = {
-        name = "campfire_on_interact",
-        patches = {
-            { prio=1, script="western_goods_core",  func="use_campfire",             cond = function() return true end }
-        }
-    }
-}
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
@@ -59,81 +36,26 @@ class "fire_source_binder" (western_goods_bind_object.object_binder_lua)
 function fire_source_binder:__init(obj) super(obj)
     dbg_printf("[WG] Fire Source Binder | Binding object '%s'", obj:name())
 
-    -- Monkey-patches
-    self:make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
-        local is_on_before = hf_obj_manager.get_data(obj_id).is_on
-        self.hideout_furniture_light(obj_id)
-        local is_on_after = hf_obj_manager.get_data(obj_id).is_on
-        if not is_on_before and not is_on_after then
-            self:use_hideout_furniture_light(obj_id)
-        end
-    end)
-    self:make_monkey_patch(monkey_patches.actor_on_item_before_use, function(obj, flags)
-        self.actor_on_item_before_use(obj, flags)
-        self:use_cigarette(obj, flags)
-    end)
-    self:make_monkey_patch(monkey_patches.campfire_on_interact, function()
-        self.campfire_on_interact()
-        self:use_campfire()
-    end)
-
     -- Sound effects
     self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
+
+    -- Callbacks
+    RegisterScriptCallback("western_goods_on_campfire_use", self)
+    RegisterScriptCallback("western_goods_on_item_before_use", self)
+    RegisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
 
     dbg_printf("[WG] Fire Source Binder | Successfully bound object '%s'", obj:name())
 end
 
-function fire_source_binder:make_monkey_patch(monkey_patch_group, func)
-    -- Filter out invalid monkey-patches (keep only ones that can be executed)
-    local valid_patches = {}
-    for _,patch in pairs(monkey_patch_group.patches) do
-        if patch.cond() then
-            table.insert(valid_patches, patch)
-        end
-    end
+function fire_source_binder:net_destroy()
+    UnregisterScriptCallback("western_goods_on_campfire_use", self)
+    UnregisterScriptCallback("western_goods_on_item_before_use", self)
+    UnregisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
 
-    -- Find highest priority-monkey patch
-    local monkey_patch = nil
-    for idx,patch in pairs(valid_patches) do
-        monkey_patch = monkey_patch or patch
-        if monkey_patch.prio <= patch.prio then
-            monkey_patch = patch
-        end
-    end
-
-    if not monkey_patch then
-        dbg_printf("[WG] Fire Source Binder | No applicable monkey-patch for %s", monkey_patch_group.name)
-        return
-    end
-
-    -- Variabilized to fix a highlight bug in my IDE
-    local script_name = monkey_patch.script
-    local function_name = monkey_patch.func
-
-    dbg_printf("[WG] Fire Source Binder | Monkey-patching %s function in %s.script", function_name, script_name)
-    self[monkey_patch_group.name] = _G[script_name][function_name]
-    _G[script_name][function_name] = func
+    western_goods_bind_object.object_binder_lua.net_destroy(self)
 end
 
-function fire_source_binder:use_cigarette(obj, flags)
-    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
-    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
-
-    -- Return if no tool is required, or if player already has a tool
-    if not require_tool or obj_tool then
-        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
-        return false
-    end
-
-    -- Override "missing tool" message
-    actor_menu.set_msg(1, "", 5)
-
-    flags.ret_value = true
-    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
-    return true
-end
-
-function fire_source_binder:use_campfire()
+function fire_source_binder:western_goods_on_campfire_use()
     -- Hide inventory UI
     if get_hud() then
         hide_hud_inventory()
@@ -174,11 +96,41 @@ function fire_source_binder:use_campfire()
     return true
 end
 
-function fire_source_binder:use_hideout_furniture_light(obj_id)
+function fire_source_binder:western_goods_on_item_before_use(obj, flags)
+    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
+    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
+
+    -- Return if no tool is required, or if player already has a tool
+    if not require_tool or obj_tool then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
+        return false
+    end
+
+    -- Return if action was already allowed
+    if flags.ret_value then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Action was already allowed")
+        return false
+    end
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+
+    flags.ret_value = true
+    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
+    return true
+end
+
+function fire_source_binder:western_goods_on_hideout_furniture_light_use(obj_id)
+    -- Return if light is already on
+    if hf_obj_manager.get_data(obj_id).is_on then
+        dbg_printf("[WG] Fire Source Binder | Use HF Light - Failed to turn on light, it is already on")
+        return false
+    end
+
     -- Override "missing tool" message
     actor_menu.set_msg(1, "", 5)
 
     hf_obj_manager.update_data(obj_id, { is_on = true })
-    dbg_printf("[WG] Fire Source Binder | Use HF Light - Successfully lit gas lamp")
+    dbg_printf("[WG] Fire Source Binder | Use HF Light - Successfully turned on light")
     return true
 end

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 15/02/2024                                                                                             ---
+---    Date : 17/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -175,18 +175,7 @@ function lighter_binder:play_animation()
     dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
 end
 
-function lighter_binder:use_cigarette(obj, flags)
-    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
-        return
-    end
-
-    local result = western_goods_bind_fire_source.fire_source_binder.use_cigarette(self, obj, flags)
-    if result then
-        self:drain_fuel(self.fuel_consumption_use)
-    end
-end
-
-function lighter_binder:use_campfire()
+function lighter_binder:western_goods_on_campfire_use()
     if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
         return
     end
@@ -195,13 +184,24 @@ function lighter_binder:use_campfire()
         self:play_animation()
     end
 
-    local result = western_goods_bind_fire_source.fire_source_binder.use_campfire(self)
+    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_campfire_use(self)
     if result then
         self:drain_fuel(self.fuel_consumption_use)
     end
 end
 
-function lighter_binder:use_hideout_furniture_light(obj_id)
+function lighter_binder:western_goods_on_item_before_use(obj, flags)
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
+        return
+    end
+
+    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_item_before_use(self, obj, flags)
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+end
+
+function lighter_binder:western_goods_on_hideout_furniture_light_use(obj_id)
     if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
         return
     end
@@ -210,7 +210,7 @@ function lighter_binder:use_hideout_furniture_light(obj_id)
         self:play_animation()
     end
 
-    local result = western_goods_bind_fire_source.fire_source_binder.use_hideout_furniture_light(self, obj_id)
+    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_hideout_furniture_light_use(self, obj_id)
     if result then
         self:drain_fuel(self.fuel_consumption_use)
     end

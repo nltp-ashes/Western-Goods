@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES, Aoldri                                                                       ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 10/02/2024                                                                                             ---
+---    Date : 17/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -65,6 +65,9 @@ function object_binder_lua:net_spawn(se_abstract)
 end
 
 function object_binder_lua:net_destroy()
+    self.binder.wrapper = nil
+    self.binder = nil
+    self.object = nil
 end
 
 function object_binder_lua:net_import(net_packet)
@@ -103,74 +106,57 @@ end
 
 function object_binder_wrapper:reinit()
     object_binder.reinit(self)
+    self.wrapper:reinit()
 end
 
 function object_binder_wrapper:reload(section)
     object_binder.reload(self, section)
+    self.wrapper:reload(section)
 end
 
 function object_binder_wrapper:net_spawn(se_abstract)
     if not object_binder.net_spawn(self, se_abstract) then
         return false
     end
-    if self.wrapper and self.wrapper.net_spawn then
-        return self.wrapper:net_spawn(se_abstract)
-    end
-    return true
+    return self.wrapper:net_spawn(se_abstract)
 end
 
 function object_binder_wrapper:net_destroy()
-    if self.wrapper and self.wrapper.net_destroy then
-        self.wrapper:net_destroy()
-    end
+    self.wrapper:net_destroy()
     object_binder.net_destroy(self)
 end
 
 function object_binder_wrapper:net_import(net_packet)
     object_binder.net_import(self, net_packet)
-    if self.wrapper and self.wrapper.net_import then
-        self.wrapper:net_import(net_packet)
-    end
+    self.wrapper:net_import(net_packet)
 end
 
 function object_binder_wrapper:net_export(net_packet)
     object_binder.net_export(self, net_packet)
-    if self.wrapper and self.wrapper.net_export then
-        self.wrapper:net_export(net_packet)
-    end
+    self.wrapper:net_export(net_packet)
 end
 
 function object_binder_wrapper:update(delta)
     object_binder.update(self, delta)
-    if self.wrapper and self.wrapper.update then
-        self.wrapper:update(delta)
-    end
+    self.wrapper:update(delta)
 end
 
 function object_binder_wrapper:save(output_packet)
     object_binder.save(self, output_packet)
-    if self.wrapper and self.wrapper.save then
-        self.wrapper:save(output_packet)
-    end
+    self.wrapper:save(output_packet)
 end
 
 function object_binder_wrapper:load(input_packet)
     object_binder.load(self, input_packet)
-    if self.wrapper and self.wrapper.load then
-        self.wrapper:load(input_packet)
-    end
+    self.wrapper:load(input_packet)
 end
 
 function object_binder_wrapper:net_save_relevant()
     object_binder.net_save_relevant(self)
-    if self.wrapper and self.wrapper.net_save_relevant then
-        self.wrapper:net_save_relevant()
-    end
+    self.wrapper:net_save_relevant()
 end
 
 function object_binder_wrapper:net_Relcase(obj)
     object_binder.net_Relcase(self, obj)
-    if self.wrapper and self.wrapper.net_Relcase then
-        self.wrapper:net_Relcase(obj)
-    end
+    self.wrapper:net_Relcase(obj)
 end
