@@ -175,17 +175,6 @@ function lighter_binder:play_animation()
     dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
 end
 
-function lighter_binder:western_goods_on_cigarette_use(obj, flags)
-    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
-        return
-    end
-
-    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_cigarette_use(self, obj, flags)
-    if result then
-        self:drain_fuel(self.fuel_consumption_use)
-    end
-end
-
 function lighter_binder:western_goods_on_campfire_use()
     if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
         return
@@ -196,6 +185,17 @@ function lighter_binder:western_goods_on_campfire_use()
     end
 
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_campfire_use(self)
+    if result then
+        self:drain_fuel(self.fuel_consumption_use)
+    end
+end
+
+function lighter_binder:western_goods_on_item_before_use(obj, flags)
+    if not (self:check_is_actor_owner() and self:check_is_fueled() and self:check_is_primary()) then
+        return
+    end
+
+    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_item_before_use(self, obj, flags)
     if result then
         self:drain_fuel(self.fuel_consumption_use)
     end

@@ -55,30 +55,6 @@ function fire_source_binder:net_destroy()
     western_goods_bind_object.object_binder_lua.net_destroy(self)
 end
 
-function fire_source_binder:western_goods_on_cigarette_use(obj, flags)
-    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
-    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
-
-    -- Return if no tool is required, or if player already has a tool
-    if not require_tool or obj_tool then
-        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
-        return false
-    end
-
-    -- Return if action was already allowed
-    if flags.ret_value then
-        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Action was already allowed")
-        return false
-    end
-
-    -- Override "missing tool" message
-    actor_menu.set_msg(1, "", 5)
-
-    flags.ret_value = true
-    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
-    return true
-end
-
 function fire_source_binder:western_goods_on_campfire_use()
     -- Hide inventory UI
     if get_hud() then
@@ -117,6 +93,30 @@ function fire_source_binder:western_goods_on_campfire_use()
 
     campfire:turn_on()
     dbg_printf("[WG] Fire Source Binder | Use Campfire - Successfully lit campfire")
+    return true
+end
+
+function fire_source_binder:western_goods_on_item_before_use(obj, flags)
+    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
+    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
+
+    -- Return if no tool is required, or if player already has a tool
+    if not require_tool or obj_tool then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
+        return false
+    end
+
+    -- Return if action was already allowed
+    if flags.ret_value then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Action was already allowed")
+        return false
+    end
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+
+    flags.ret_value = true
+    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
     return true
 end
 

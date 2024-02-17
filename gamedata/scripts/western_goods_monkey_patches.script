@@ -19,10 +19,10 @@ AddScriptCallback("western_goods_on_item_before_use")
 AddScriptCallback("western_goods_on_hideout_furniture_light_use")
 
 -- Imported functions
-local dbg_printf                = western_goods_utils.dbg_printf
+local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Configuration
-monkey_patches                         = {
+monkey_patches               = {
     hideout_furniture_light = {
         name = "hideout_furniture_light",
         patches = {
@@ -47,25 +47,6 @@ monkey_patches                         = {
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Functions
 -- ---------------------------------------------------------------------------------------------------------------------
-
-function apply_monkey_patches()
-    this.make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
-        local is_on_before = hf_obj_manager.get_data(obj_id).is_on
-        this.hideout_furniture_light(obj_id)
-        local is_on_after = hf_obj_manager.get_data(obj_id).is_on
-        if not is_on_before and not is_on_after then
-            SendScriptCallback("western_goods_on_hideout_furniture_light_use", obj_id)
-        end
-    end)
-    this.make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
-        this.item_before_use(obj, flags)
-        SendScriptCallback("western_goods_on_item_before_use", obj, flags)
-    end)
-    this.make_monkey_patch(monkey_patches.campfire_on_interact, function()
-        this.campfire_on_interact()
-        SendScriptCallback("western_goods_on_campfire_use")
-    end)
-end
 
 function find_best_monkey_patch(monkey_patch_group)
     -- Filter out invalid monkey-patches (keep only ones that can be executed)
@@ -109,11 +90,24 @@ function make_monkey_patch(monkey_patch_group, func)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Callbacks registration
+-- Monkey-patches
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to register callbacks.
---- @return nil
-function on_game_start()
-    RegisterScriptCallback("on_game_load", apply_monkey_patches)
-end
+make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
+    local is_on_before = hf_obj_manager.get_data(obj_id).is_on
+    this.hideout_furniture_light(obj_id)
+    local is_on_after = hf_obj_manager.get_data(obj_id).is_on
+    if not is_on_before and not is_on_after then
+        SendScriptCallback("western_goods_on_hideout_furniture_light_use", obj_id)
+    end
+end)
+
+make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
+    this.item_before_use(obj, flags)
+    SendScriptCallback("western_goods_on_item_before_use", obj, flags)
+end)
+
+make_monkey_patch(monkey_patches.campfire_on_interact, function()
+    this.campfire_on_interact()
+    SendScriptCallback("western_goods_on_campfire_use")
+end)
