@@ -24,8 +24,8 @@ monkey_patches                         = {
             { prio=1, script="ui_furniture_light",  func="toggle_light",             cond = function() return ui_furniture_light and hf_obj_manager end }
         }
     },
-    actor_on_item_before_use = {
-        name = "actor_on_item_before_use",
+    item_before_use = {
+        name = "item_before_use",
         patches = {
             { prio=1, script="itms_manager",        func="actor_on_item_before_use", cond = function() return true end },
             { prio=2, script="enhanced_animations", func="originalAOIBU",            cond = function() return enhanced_animations end }
@@ -78,8 +78,8 @@ function fire_source_binder:net_spawn(se_abstract)
             self:use_hideout_furniture_light(obj_id)
         end
     end)
-    self:make_monkey_patch(monkey_patches.actor_on_item_before_use, function(obj, flags)
-        self.actor_on_item_before_use(obj, flags)
+    self:make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
+        self.item_before_use(obj, flags)
         self:use_cigarette(obj, flags)
     end)
     self:make_monkey_patch(monkey_patches.campfire_on_interact, function()
@@ -92,7 +92,7 @@ end
 
 function fire_source_binder:net_destroy()
     self:unmake_monkey_patch(monkey_patches.hideout_furniture_light)
-    self:unmake_monkey_patch(monkey_patches.actor_on_item_before_use)
+    self:unmake_monkey_patch(monkey_patches.item_before_use)
     self:unmake_monkey_patch(monkey_patches.campfire_on_interact)
 
     western_goods_bind_object.object_binder_lua.net_destroy(self)
