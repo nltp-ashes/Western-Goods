@@ -15,7 +15,7 @@
 
 -- New callbacks
 AddScriptCallback("western_goods_on_campfire_use")
-AddScriptCallback("western_goods_on_cigarette_use")
+AddScriptCallback("western_goods_on_item_before_use")
 AddScriptCallback("western_goods_on_hideout_furniture_light_use")
 
 -- Imported functions
@@ -59,7 +59,7 @@ function apply_monkey_patches()
     end)
     this.make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
         this.item_before_use(obj, flags)
-        SendScriptCallback("western_goods_on_cigarette_use", obj, flags)
+        SendScriptCallback("western_goods_on_item_before_use", obj, flags)
     end)
     this.make_monkey_patch(monkey_patches.campfire_on_interact, function()
         this.campfire_on_interact()

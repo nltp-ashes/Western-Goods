@@ -41,7 +41,7 @@ function fire_source_binder:__init(obj) super(obj)
 
     -- Callbacks
     RegisterScriptCallback("western_goods_on_campfire_use", self)
-    RegisterScriptCallback("western_goods_on_cigarette_use", self)
+    RegisterScriptCallback("western_goods_on_item_before_use", self)
     RegisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
 
     dbg_printf("[WG] Fire Source Binder | Successfully bound object '%s'", obj:name())
@@ -49,7 +49,7 @@ end
 
 function fire_source_binder:net_destroy()
     UnregisterScriptCallback("western_goods_on_campfire_use", self)
-    UnregisterScriptCallback("western_goods_on_cigarette_use", self)
+    UnregisterScriptCallback("western_goods_on_item_before_use", self)
     UnregisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
 
     western_goods_bind_object.object_binder_lua.net_destroy(self)
