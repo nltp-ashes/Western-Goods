@@ -16,29 +16,6 @@
 -- Imported functions
 local dbg_printf                       = western_goods_utils.dbg_printf
 
--- Variables
-monkey_patches                         = {
-    hideout_furniture_light = {
-        name = "hideout_furniture_light",
-        patches = {
-            { prio=1, script="ui_furniture_light",  func="toggle_light",             cond = function() return ui_furniture_light and hf_obj_manager end }
-        }
-    },
-    item_before_use = {
-        name = "item_before_use",
-        patches = {
-            { prio=1, script="itms_manager",        func="actor_on_item_before_use", cond = function() return true end },
-            { prio=2, script="enhanced_animations", func="originalAOIBU",            cond = function() return enhanced_animations end }
-        }
-    },
-    campfire_on_interact = {
-        name = "campfire_on_interact",
-        patches = {
-            { prio=1, script="western_goods_core",  func="use_campfire",             cond = function() return true end }
-        }
-    }
-}
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------

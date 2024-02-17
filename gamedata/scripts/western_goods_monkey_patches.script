@@ -18,8 +18,10 @@ AddScriptCallback("western_goods_on_campfire_use")
 AddScriptCallback("western_goods_on_cigarette_use")
 AddScriptCallback("western_goods_on_hideout_furniture_light_use")
 
+-- Imported functions
 local dbg_printf                = western_goods_utils.dbg_printf
 
+-- Configuration
 monkey_patches                         = {
     hideout_furniture_light = {
         name = "hideout_furniture_light",
