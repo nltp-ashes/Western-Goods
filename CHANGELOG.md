@@ -1,4 +1,4 @@
-## **v2.5.0 - 15/02/2024 - Minor Update**
+## **v2.5.0 - 20/02/2024 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.5.0/total?label=Downloads)]()
 
@@ -24,12 +24,13 @@
 > • Removed unused sections, models and textures;
 > • Refactored loot generation into a separate script;
 > • Refactored DXML files into a single file to reduce the number of scripts;
-> • Refactored DLTX files for system.ltx into two files : one for overrides and one for definitions.
+> • Refactored DLTX files for system.ltx into two files : one for overrides and one for definitions;
+> • Changed monkey-patches to use a new system able to dynamically resolve the correct monkey-patch to apply.
 
 **• Bug fixes :**
 > • Fixed rangefinder being marked as repairable by helmet repair kits;
 > • Fixed lighter and rangefinder not having parts;
 > • Fixed missing translations check not properly gathering the list of all string ids;
 > • Fixed rangefinder having infinite zoom (Thanks Motorolª);
-> • Fixed the "Rangefinder night-vision mode" option being confusing, and leading to believe the rangefinder had actual NV abilities (Thanks Motorolª);
+> • Fixed "night-vision mode" option being confusing, and leading to believe the rangefinder had actual NV abilities (Thanks Motorolª);
 > • Fixed lighter being able to light cigarettes even when out of fuel (Thanks Tosox).
