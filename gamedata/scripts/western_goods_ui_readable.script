@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : Tronex                                                                                   ---
 ---    Edited : NLTP_ASHES                                                                                           ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 20/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon. ---
@@ -60,16 +60,6 @@ function display(sec)
         GUI:ShowDialog(true)
         Register_UI("UIReadable","western_goods_ui_readable")
     end
-end
-
-get_psy_health_regenerationBase = arszi_psy.get_psy_health_regeneration
---- Monkey-patching the function managing psy-regen, to add a bonus when reading a magazine.
---- @return number
-function arszi_psy.get_psy_health_regeneration()
-    local base_psy_heal = get_psy_health_regenerationBase()
-    local bonus_psy_heal_magazine = get_psy_health_regeneration_magazine()
-
-    return base_psy_heal + bonus_psy_heal_magazine
 end
 
 --- Function used to get the bonus for reading a magazine.
