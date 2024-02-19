@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/02/2024                                                                                             ---
+---    Date : 20/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to monkey-patch some functions of base anomaly, or other addons.                                  ---
@@ -26,14 +26,14 @@ monkey_patches               = {
     hideout_furniture_light = {
         name = "hideout_furniture_light",
         patches = {
-            { prio=1, script="ui_furniture_light", func="toggle_light", cond = function() return ui_furniture_light and hf_obj_manager end }
+            { prio=1, script="ui_furniture_light", func="toggle_light", cond = function() return western_goods_core.is_hideout_furniture_installed() end }
         }
     },
     item_before_use = {
         name = "item_before_use",
         patches = {
             { prio=1, script="itms_manager", func="actor_on_item_before_use", cond = function() return true end },
-            { prio=2, script="enhanced_animations", func="originalAOIBU", cond = function() return enhanced_animations end }
+            { prio=2, script="enhanced_animations", func="originalAOIBU", cond = function() return western_goods_core.is_fdda_installed() end }
         }
     },
     campfire_on_interact = {

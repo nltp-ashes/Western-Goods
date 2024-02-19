@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 14/02/2024                                                                                             ---
+---    Date : 20/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -26,7 +26,7 @@ local VERSION                       = "2.5.0"
 local dbg_printf                   = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Service Functions
+-- Core functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print the version of the addon in the console/log.
@@ -111,36 +111,6 @@ function check_addon_removal(status)
     western_goods_mcm.set_config("addon_removal", false)
 end
 
---- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
---- @return nil
-function check_prerequisites()
-    UnregisterScriptCallback("on_game_load", check_prerequisites)
-
-    -- Out-of-date game
-    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-        western_goods_utils.get_translation("st_err_outdated_game_title"),
-        western_goods_utils.get_translation("st_err_outdated_game_what"),
-        western_goods_utils.get_translation("st_err_outdated_game_why"),
-        western_goods_utils.get_translation("st_err_outdated_game_where")
-    ))
-
-    -- Missing DXML
-    assert(is_dxml_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-        western_goods_utils.get_translation("st_err_missing_dxml_title"),
-        western_goods_utils.get_translation("st_err_missing_dxml_what"),
-        western_goods_utils.get_translation("st_err_missing_dxml_why"),
-        western_goods_utils.get_translation("st_err_missing_dxml_where")
-    ))
-
-    -- Missing LUA unlocalizer
-    assert(is_lua_unlocalizer_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-        western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
-        western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
-        western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
-        western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
-    ))
-end
-
 --- Function used to detect missing translations.
 --- This function will iterate all files in gamedata/configs/text/[eng|rus]/*.xml.
 --- Then, it will compare the strings found, and warn if any language has missing translation.
@@ -189,10 +159,70 @@ function check_missing_translations()
     dbg_printf("[WG] Core | Check for missing translations ended in %sms", profiler:time()/1000)
 end
 
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Other functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called from game_tutorials.xml when the player interacts with a campfire.
+--- @return nil
+function use_campfire()
+    printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Addons detection functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
 --- Function used to check if the Barter UI is installed.
 --- @return boolean
 function is_barter_ui_installed()
     return barter_core ~= nil
+end
+
+--- Function used to check if the Hideout Furniture is installed.
+--- @return boolean
+function is_hideout_furniture_installed()
+    return ui_furniture_light ~= nil and hf_obj_manager ~= nil
+end
+
+--- Function used to check if the Food, Drugs and Drinks Animations (FDDA) is installed.
+--- @return boolean
+function is_fdda_installed()
+    return enhanced_animations ~= nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Prerequisites functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
+--- @return nil
+function check_prerequisites()
+    UnregisterScriptCallback("on_game_load", check_prerequisites)
+
+    -- Out-of-date game
+    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_game_title"),
+        western_goods_utils.get_translation("st_err_outdated_game_what"),
+        western_goods_utils.get_translation("st_err_outdated_game_why"),
+        western_goods_utils.get_translation("st_err_outdated_game_where")
+    ))
+
+    -- Missing DXML
+    assert(is_dxml_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_dxml_title"),
+        western_goods_utils.get_translation("st_err_missing_dxml_what"),
+        western_goods_utils.get_translation("st_err_missing_dxml_why"),
+        western_goods_utils.get_translation("st_err_missing_dxml_where")
+    ))
+
+    -- Missing LUA unlocalizer
+    assert(is_lua_unlocalizer_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+    ))
 end
 
 --- Function used to check if game version number is 1.5.2.
@@ -211,12 +241,6 @@ end
 --- @return boolean
 function is_lua_unlocalizer_installed()
     return western_goods_core.VERSION == VERSION
-end
-
---- Function called from game_tutorials.xml when the player interacts with a campfire.
---- @return nil
-function use_campfire()
-    printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
