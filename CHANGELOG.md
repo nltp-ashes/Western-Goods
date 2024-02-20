@@ -21,16 +21,17 @@
 > • Changed how the lighter behaves : you can now light stuff, even if the item is in the backpack;
 > • Changed how the lighter behaves : the animation when lighting something up only plays when the device is drawn;
 > • Changed how the lighter behaves : if the player has two lighters, the one in the device slot will always be used first;
+> • Changed "night-vision mode" option to not imply that the rangefinder has actual NV abilities (Thanks Motorolª);
+> • Changed monkey-patches to use a new system able to dynamically resolve the correct monkey-patch to apply;
 > • Removed unused sections, models and textures;
 > • Refactored loot generation into a separate script;
 > • Refactored DXML files into a single file to reduce the number of scripts;
-> • Refactored DLTX files for system.ltx into two files : one for overrides and one for definitions;
-> • Changed monkey-patches to use a new system able to dynamically resolve the correct monkey-patch to apply.
+> • Refactored DLTX files for system.ltx into two files : one for overrides and one for definitions.
 
 **• Bug fixes :**
 > • Fixed rangefinder being marked as repairable by helmet repair kits;
 > • Fixed lighter and rangefinder not having parts;
 > • Fixed missing translations check not properly gathering the list of all string ids;
 > • Fixed rangefinder having infinite zoom (Thanks Motorolª);
-> • Fixed "night-vision mode" option being confusing, and leading to believe the rangefinder had actual NV abilities (Thanks Motorolª);
 > • Fixed lighter being able to light cigarettes even when out of fuel (Thanks Tosox).
+
