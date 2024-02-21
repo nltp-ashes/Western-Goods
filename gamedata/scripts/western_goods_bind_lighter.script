@@ -73,14 +73,14 @@ function lighter_binder:save()
     western_goods_bind_fire_source.fire_source_binder.save(self)
 
     se_save_var(self.object:id(), nil, "fuel_level", self.object:condition())
-    dbg_printf("[WG] Lighter Binder | Object '%s' saved fuel level %s", self.object:name(), self.m_fuel_level_saved)
+    dbg_printf("[WG] Lighter Binder | Save - Saved fuel level for '%s' : %s", self.object:name(), self.m_fuel_level_saved)
 end
 
 function lighter_binder:load()
     western_goods_bind_fire_source.fire_source_binder.load(self)
 
     self.m_fuel_level_saved = se_load_var(self.object:id(), nil, "fuel_level") or 1.0
-    dbg_printf("[WG] Lighter Binder | Object '%s' loaded fuel level %s", self.object:name(), self.m_fuel_level_saved)
+    dbg_printf("[WG] Lighter Binder | Load - Loaded fuel level for '%s' : %s", self.object:name(), self.m_fuel_level_saved)
 end
 
 function lighter_binder:first_update(delta)
