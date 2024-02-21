@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/02/2024                                                                                             ---
+---    Date : 21/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -57,14 +57,35 @@ function lighter_binder:__init(obj) super(obj)
     -- Build variables
     self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "fuel_critical", 0.01)
     self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "fuel_consumption", 0.0003)
-    self.fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "fuel_consumption_use", 0.05)
+    self.m_fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "fuel_consumption_use", 0.05)
+    self.m_fuel_level_saved = nil
+    self.m_first_update = false
     self.m_update_rate = 1000
-    self.m_update_timer = 0
+    self.m_update_timer = 1000
     self.m_detector_slot_id = 9
     self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
 
     dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
+end
+
+function lighter_binder:save()
+    western_goods_bind_fire_source.fire_source_binder.save(self)
+
+    se_save_var(self.object:id(), nil, "fuel_level", self.object:condition())
+    dbg_printf("[WG] Lighter Binder | Object '%s' saved fuel level %s", self.object:name(), self.m_fuel_level_saved)
+end
+
+function lighter_binder:load()
+    western_goods_bind_fire_source.fire_source_binder.load(self)
+
+    self.m_fuel_level_saved = se_load_var(self.object:id(), nil, "fuel_level") or 1.0
+    dbg_printf("[WG] Lighter Binder | Object '%s' loaded fuel level %s", self.object:name(), self.m_fuel_level_saved)
+end
+
+function lighter_binder:first_update(delta)
+    self.object:set_condition(self.m_fuel_level_saved)
+    self.m_fuel_level_saved = nil
 end
 
 function lighter_binder:update(delta)
@@ -83,12 +104,18 @@ function lighter_binder:update(delta)
     -- Fast update
     self:update_light()
 
+    -- First update
+    if not self.m_first_update then
+        self.m_first_update = true
+        self:first_update(delta)
+    end
+
     -- Throttled update
     if not self:update_throttle(delta) then
         return
     end
 
-    self:drain_fuel()
+    self:update_fuel()
 end
 
 function lighter_binder:update_throttle(delta)
@@ -105,6 +132,15 @@ function lighter_binder:update_light()
     self:set_light_status(true)
     self.m_light:set_position(self:get_light_bone_position())
     self.m_light:update()
+end
+
+function lighter_binder:update_fuel(fuel_consumption_override)
+    local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
+    local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
+    local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
+
+    self.object:set_condition(fuel_level_new)
+    dbg_printf("[WG] Lighter Binder | Drain Fuel - Lighter new fuel level '%s'", self.object:condition())
 end
 
 function lighter_binder:check_state()
@@ -136,15 +172,6 @@ end
 function lighter_binder:check_is_drawn()
     local active_det = db.actor:active_detector()
     return active_det and active_det:id() == self.object:id() or false
-end
-
-function lighter_binder:drain_fuel(fuel_consumption_override)
-    local fuel_consumption_factor = game_difficulties.get_eco_factor("battery_consumption")
-    local fuel_consumed = fuel_consumption_override or self.m_fuel_consumption * fuel_consumption_factor
-    local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
-
-    self.object:set_condition(fuel_level_new)
-    dbg_printf("[WG] Lighter Binder | Drain Fuel - Lighter new fuel level '%s'", self.object:condition())
 end
 
 function lighter_binder:get_light_bone_position()
@@ -186,7 +213,7 @@ function lighter_binder:western_goods_on_campfire_use()
 
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_campfire_use(self)
     if result then
-        self:drain_fuel(self.fuel_consumption_use)
+        self:update_fuel(self.m_fuel_consumption_use)
     end
 end
 
@@ -197,7 +224,7 @@ function lighter_binder:western_goods_on_item_before_use(obj, flags)
 
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_item_before_use(self, obj, flags)
     if result then
-        self:drain_fuel(self.fuel_consumption_use)
+        self:update_fuel(self.m_fuel_consumption_use)
     end
 end
 
@@ -212,6 +239,6 @@ function lighter_binder:western_goods_on_hideout_furniture_light_use(obj_id)
 
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_hideout_furniture_light_use(self, obj_id)
     if result then
-        self:drain_fuel(self.fuel_consumption_use)
+        self:update_fuel(self.m_fuel_consumption_use)
     end
 end
