@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 24/11/2023                                                                                             ---
+---    Date : 20/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.              ---
@@ -33,12 +33,11 @@ function get_ui()
     return GUI
 end
 
-GetTaskTargetBase = surge_manager.get_task_target
 --- Function used to hide/show the task marker during emissions/psi-storms, according to user preference.
 --- @return number|nil
-function surge_manager.get_task_target()
+function surge_manager_get_task_target()
     if western_goods_mcm.get_config("guided_surge") then
-        return GetTaskTargetBase()
+        return western_goods_monkey_patches.surge_manager_get_task_target()
     end
     return nil
 end

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 03/12/2023                                                                                             ---
+---    Date : 19/01/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script handles the loot generation (in bodies and traders) for the addon.                                ---
@@ -22,10 +22,6 @@ local trade_lists = {
 
 -- Imported functions
 local dbg_printf                    = western_goods_utils.dbg_printf
-
--- Monkey-patches
-TraderAuto                          = trader_autoinject.update
-SpawnCosmetics                      = death_manager.spawn_cosmetics
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Traders
@@ -47,14 +43,6 @@ function spawn_trader_loot(npc)
     trader_autoinject.spawn_items(npc, trader_table, true)
 end
 
---- Monkey-patching trader_autoinject.update to inject western goods items in the traders.
---- @param npc cse_alife_object
---- @return nil
-function trader_autoinject.update(npc)
-    TraderAuto(npc)
-    spawn_trader_loot(npc)
-end
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Dead Bodies
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -72,19 +60,6 @@ function spawn_corpse_loot(npc, npc_rank, npc_comm)
     for sec,qte in pairs(loot_to_spawn) do
         alife_create_item(sec, npc, {uses = qte})
     end
-end
-
---- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods.
---- @param npc cse_alife_object
---- @param npc_id string
---- @param npc_comm string
---- @param npc_rank string
---- @param visual string
---- @param rand_condition string
---- @return nil
-function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    this.spawn_corpse_loot(npc, npc_rank, npc_comm)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

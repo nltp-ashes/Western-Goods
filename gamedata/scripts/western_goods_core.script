@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 03/12/2023                                                                                             ---
+---    Date : 20/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -26,7 +26,7 @@ local VERSION                       = "2.5.0"
 local dbg_printf                   = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Service Functions
+-- Core functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print the version of the addon in the console/log.
@@ -82,7 +82,7 @@ function check_addon_removal(status)
 
         -- Check if is Western Goods NPC
         for _,sec in pairs(western_goods_npcs) do
-            if se_obj:section_name() == sec and (not get_object_squad(se_obj)) then
+            if se_obj:section_name() == sec and (not western_goods_utils.get_squad_of(se_obj)) then
                 released_objects = released_objects + 1
                 dbg_printf("[WG] Core | Addon removal releasing squad-less NPC '%s'", se_obj:section_name())
                 alife():release(se_obj)
@@ -109,41 +109,6 @@ function check_addon_removal(status)
     dbg_printf("[WG] Core | Addon removal finished : %s", released_objects)
 
     western_goods_mcm.set_config("addon_removal", false)
-end
-
---- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
---- @return nil
-function check_prerequisites()
-    UnregisterScriptCallback("on_game_load", check_prerequisites)
-
-    local error_message = "Unknown error"
-
-    -- Out-of-date game
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_outdated_game_title"),
-            western_goods_utils.get_translation("st_err_outdated_game_what"),
-            western_goods_utils.get_translation("st_err_outdated_game_why"),
-            western_goods_utils.get_translation("st_err_outdated_game_where")
-    )
-    assert(is_version_1_5_2(), error_message)
-
-    -- Missing DXML
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_dxml_title"),
-            western_goods_utils.get_translation("st_err_missing_dxml_what"),
-            western_goods_utils.get_translation("st_err_missing_dxml_why"),
-            western_goods_utils.get_translation("st_err_missing_dxml_where")
-    )
-    assert(is_dxml_installed(), error_message)
-
-    -- Missing LUA unlocalizer
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
-    )
-    assert(is_lua_unlocalizer_installed() , error_message)
 end
 
 --- Function used to detect missing translations.
@@ -174,7 +139,7 @@ function check_missing_translations()
                 xml:NavigateToNode("string_table", 0)
 
                 for i=0, xml:GetNodesNum("", 0, "string") - 1 do
-                    strings[folder][i+1] = xml:ReadAttribute("string", i, "id")
+                    strings[folder][#strings[folder]+1] = xml:ReadAttribute("string", i, "id")
                 end
             end
         end
@@ -194,10 +159,70 @@ function check_missing_translations()
     dbg_printf("[WG] Core | Check for missing translations ended in %sms", profiler:time()/1000)
 end
 
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Other functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called from game_tutorials.xml when the player interacts with a campfire.
+--- @return nil
+function use_campfire()
+    printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Addons detection functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
 --- Function used to check if the Barter UI is installed.
 --- @return boolean
 function is_barter_ui_installed()
     return barter_core ~= nil
+end
+
+--- Function used to check if the Hideout Furniture is installed.
+--- @return boolean
+function is_hideout_furniture_installed()
+    return ui_furniture_light ~= nil and hf_obj_manager ~= nil
+end
+
+--- Function used to check if the Food, Drugs and Drinks Animations (FDDA) is installed.
+--- @return boolean
+function is_fdda_installed()
+    return enhanced_animations ~= nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Prerequisites functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
+--- @return nil
+function check_prerequisites()
+    UnregisterScriptCallback("on_game_load", check_prerequisites)
+
+    -- Out-of-date game
+    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_game_title"),
+        western_goods_utils.get_translation("st_err_outdated_game_what"),
+        western_goods_utils.get_translation("st_err_outdated_game_why"),
+        western_goods_utils.get_translation("st_err_outdated_game_where")
+    ))
+
+    -- Missing DXML
+    assert(is_dxml_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_dxml_title"),
+        western_goods_utils.get_translation("st_err_missing_dxml_what"),
+        western_goods_utils.get_translation("st_err_missing_dxml_why"),
+        western_goods_utils.get_translation("st_err_missing_dxml_where")
+    ))
+
+    -- Missing LUA unlocalizer
+    assert(is_lua_unlocalizer_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+    ))
 end
 
 --- Function used to check if game version number is 1.5.2.
@@ -1105,7 +1130,11 @@ western_goods_items = {
         type                 = "tech",
         trader_params = {
             ["isg"]          = { qte=1, sl=1, prob=1.0 },
-            ["killer"]       = { qte=2, sl=2, prob=0.9 }
+            ["killer"]       = { qte=2, sl=2, prob=0.9 },
+            ["stalker"]      = { qte=1, sl=2, prob=0.6 },
+            ["freedom"]      = { qte=1, sl=2, prob=0.8 },
+            ["bandit"]       = { qte=1, sl=2, prob=0.7 },
+            ["monolith"]     = { qte=1, sl=1, prob=0.7 }
         },
         corpse_params = {
             ["stalker"]      = { qte=1, prob=0.03 },
@@ -1113,7 +1142,8 @@ western_goods_items = {
             ["freedom"]      = { qte=1, prob=0.03 },
             ["renegade"]     = { qte=1, prob=0.03 },
             ["killer"]       = { qte=1, prob=0.05 },
-            ["isg"]          = { qte=1, prob=0.10 }
+            ["isg"]          = { qte=1, prob=0.10 },
+            ["monolith"]     = { qte=1, prob=0.05 }
         },
     },
     ["wg_rangefinder"] =  {
@@ -1121,14 +1151,16 @@ western_goods_items = {
         trader_params = {
             ["army"]         = { qte=1, sl=2, prob=0.5 },
             ["isg"]          = { qte=1, sl=1, prob=1.0 },
-            ["killer"]       = { qte=1, sl=2, prob=1.0 }
+            ["killer"]       = { qte=1, sl=2, prob=1.0 },
+            ["monolith"]     = { qte=1, sl=2, prob=1.0 }
         },
         corpse_params = {
             ["stalker"]      = { qte=1, prob=0.02 },
             ["freedom"]      = { qte=1, prob=0.02 },
             ["army"]         = { qte=1, prob=0.03 },
             ["killer"]       = { qte=1, prob=0.03 },
-            ["isg"]          = { qte=1, prob=0.05 }
+            ["isg"]          = { qte=1, prob=0.05 },
+            ["monolith"]     = { qte=1, prob=0.05 }
         },
     }
 }

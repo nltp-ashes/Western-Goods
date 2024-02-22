@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 13/02/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
@@ -81,11 +81,11 @@
 
     <!-- Rangefinder Night Vision -->
     <string id="ui_mcm_western_goods_rangefinder_nv">
-        <text>Rangefinder night-vision</text>
+        <text>Toggle Rangefinder reticule color</text>
     </string>
 
     <string id="ui_mcm_western_goods_rangefinder_nv_desc">
-        <text>Key-bind used to enable/disable night-vision for the SigSauer KILO5K Rangefinder.</text>
+        <text>Key-bind used to toggle the color (red/green) of the SigSauer KILO5K Rangefinder's reticule.</text>
     </string>
 
     <!--=============================================================================================================-->

@@ -1,0 +1,136 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 17/02/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to bind an object to the Fire Source Binder
+--- @param obj game_object
+--- @return nil
+function bind(obj)
+    obj:bind_object(fire_source_binder(obj).binder)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Object Binder Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "fire_source_binder" (western_goods_bind_object.object_binder_lua)
+
+function fire_source_binder:__init(obj) super(obj)
+    dbg_printf("[WG] Fire Source Binder | Binding object '%s'", obj:name())
+
+    -- Sound effects
+    self.m_snd_use_cf_fire = sound_object([[western_goods_tech\lighter_use_cf_fire]])
+
+    -- Callbacks
+    RegisterScriptCallback("western_goods_on_campfire_use", self)
+    RegisterScriptCallback("western_goods_on_item_before_use", self)
+    RegisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
+
+    dbg_printf("[WG] Fire Source Binder | Successfully bound object '%s'", obj:name())
+end
+
+function fire_source_binder:net_destroy()
+    UnregisterScriptCallback("western_goods_on_campfire_use", self)
+    UnregisterScriptCallback("western_goods_on_item_before_use", self)
+    UnregisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
+
+    western_goods_bind_object.object_binder_lua.net_destroy(self)
+end
+
+function fire_source_binder:western_goods_on_campfire_use()
+    -- Hide inventory UI
+    if get_hud() then
+        hide_hud_inventory()
+    end
+
+    -- Get nearby campfire (or use campfire passed as argument)
+    local campfire_obj = bind_campfire.get_nearby_campfire(4, false)
+    local campfire = campfire_obj and campfire_obj:get_campfire()
+    if not campfire_obj or not campfire then
+        printf("~[WG] WARNING | Fire Source Binder | Use Campfire - No campfire found ! [pos: %s | lvid: %s | gvid: %s]", db.actor:position(), db.actor:level_vertex_id(), db.actor:game_vertex_id())
+        return false
+    end
+
+    -- Return if campfire is already on
+    if (campfire:is_on()) then
+        dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, it is already on")
+        return false
+    end
+
+    -- We wuzz rain and shit
+    if not bind_campfire.rain_pass() then
+        actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
+        dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, because of rain")
+        return false
+    end
+
+    if (bind_campfire.k_rain < 1) then
+        bind_campfire.k_rain = bind_campfire.k_rain + 1
+    end
+
+    -- Play SFX
+    self.m_snd_use_cf_fire:play_at_pos(campfire_obj, campfire_obj:position(), 0, sound_object.s3d)
+
+    actor_menu.set_msg(1, western_goods_utils.get_translation("st_camp_help"), 3)
+
+    campfire:turn_on()
+    dbg_printf("[WG] Fire Source Binder | Use Campfire - Successfully lit campfire")
+    return true
+end
+
+function fire_source_binder:western_goods_on_item_before_use(obj, flags)
+    local require_tool = ini_sys:r_string_ex(obj:section(), "required_tool")
+    local obj_tool = require_tool and ini_sys:section_exist(require_tool) and db.actor:object(require_tool)
+
+    -- Return if no tool is required, or if player already has a tool
+    if not require_tool or obj_tool then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Object requires no tool or player has necessary tool already")
+        return false
+    end
+
+    -- Return if action was already allowed
+    if flags.ret_value then
+        dbg_printf("[WG] Fire Source Binder | Use Cigarette - Action was already allowed")
+        return false
+    end
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+
+    flags.ret_value = true
+    dbg_printf("[WG] Fire Source Binder | Use Cigarette - Successfully lit cigarette")
+    return true
+end
+
+function fire_source_binder:western_goods_on_hideout_furniture_light_use(obj_id)
+    -- Return if light is already on
+    if hf_obj_manager.get_data(obj_id).is_on then
+        dbg_printf("[WG] Fire Source Binder | Use HF Light - Failed to turn on light, it is already on")
+        return false
+    end
+
+    -- Override "missing tool" message
+    actor_menu.set_msg(1, "", 5)
+
+    hf_obj_manager.update_data(obj_id, { is_on = true })
+    dbg_printf("[WG] Fire Source Binder | Use HF Light - Successfully turned on light")
+    return true
+end
