@@ -1,4 +1,4 @@
-## **v2.5.0 - 20/02/2024 - Minor Update**
+## **v2.5.0 - 23/02/2024 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.5.0/total?label=Downloads)]()
 
@@ -23,6 +23,8 @@
 > • Changed how the lighter behaves : if the player has two lighters, the one in the device slot will always be used first;
 > • Changed "night-vision mode" option to not imply that the rangefinder has actual NV abilities (Thanks Motorolª);
 > • Changed monkey-patches to use a new system able to dynamically resolve the correct monkey-patch to apply;
+> • Changed stashes loot pool : the Bic lighter was added to the list;
+> • Changed GPS Locator's power consumption;
 > • Removed unused sections, models and textures;
 > • Refactored loot generation into a separate script;
 > • Refactored DXML files into a single file to reduce the number of scripts;
@@ -34,4 +36,3 @@
 > • Fixed missing translations check not properly gathering the list of all string ids;
 > • Fixed rangefinder having infinite zoom (Thanks Motorolª);
 > • Fixed lighter being able to light cigarettes even when out of fuel (Thanks Tosox).
-
