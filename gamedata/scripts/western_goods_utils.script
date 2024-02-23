@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 05/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -15,7 +15,7 @@
 
 local ini_loc                   = ini_file_ex([[localization.ltx]])
 local ini_keys                  = ini_file_ex([[plugins\western_goods\misc\western_goods_key_localization.ltx]])
-local ini_trade                 = ini_file("items\\trade\\trade_generic.ltx")
+local ini_trade                 = ini_file([[items\trade\trade_generic.ltx]])
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
@@ -175,7 +175,9 @@ end
 function get_translation(str, ...)
     if not validate_params({str,"get_translation"}) then return end
 
-    if not has_translation(str) then return "No translation" end
+    if not has_translation(str) then
+        return str.."[Missing translation]"
+    end
 
     local string = game.translate_string(str)
 
@@ -690,6 +692,37 @@ function squad_iterate_members(squad, func, ...)
     end
 end
 
+--- Function used to get the squad of an object.
+--- Unlike the global 'get_object_squad', this function checks if the passed object is the actor.
+--- Doing so will kill the script engine thread, and this function ensures this never happens.
+--- @param obj game_object
+--- @return cse_alife_online_offline_group
+function get_squad_of(obj)
+    if (not validate_params({obj,"get_squad_of"})) then
+        return
+    end
+
+    -- Calling get_object_squad() or actor object grounds the game !
+    if (obj:id() == AC_ID) then
+        return
+    end
+
+    -- Maybe don't call 'get_squad_of' on a door or something
+    if not (IsStalker(obj) or IsMonster(obj)) then
+        printf("~[WG] WARNING | Utils | Aborting, trying to get the squad of an object that cannot be in a squad (obj : '%s')", obj and obj:name())
+        return
+    end
+
+    local squad = get_object_squad(obj)
+
+    if not squad then
+        printf("~[WG] WARNING | Utils | Object '%s' has no squad, this will probably crash the game eventually since stalkers/mutants MUST be in squads !", obj and obj:name())
+        return
+    end
+
+    return squad
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Bone Functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -796,6 +829,7 @@ function validate_is_pda(obj)
         ["device_pda_1"] = true,
         ["device_pda_2"] = true,
         ["device_pda_3"] = true,
+        ["device_pda_milspec"] = true
     }
 
     return pda_sections[obj:section()]
@@ -914,8 +948,9 @@ function get_real_community(npc, default)
     if not blacklisted_comms[community] then
         return community
     end
-    local squad_community = get_object_squad(npc):get_squad_community()
-    if not blacklisted_comms[squad_community] then
+    local squad = this.get_squad_of(npc)
+    local squad_community = squad and squad:get_squad_community()
+    if not squad_community or not blacklisted_comms[squad_community] then
         return squad_community
     else
         return default

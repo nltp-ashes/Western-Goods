@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 12/11/2023                                                                                               ;;
+;;    Date : 02/12/2023                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new drinks to the game.                                                                 ;;
@@ -10,7 +10,7 @@
 ;;====================================================================================================================;;
 
 ;;====================================================================================================================;;
-;;==================| Bottles |=======================================================================================;;
+;;==================| Base Section |==================================================================================;;
 ;;====================================================================================================================;;
 
 [wg_drink_base]:booster
@@ -20,7 +20,9 @@ kind                                             = i_drink
 script_binding                                   = bind_item.bind
 icons_texture                                    = ui\icons\ui_icon_western_goods_drinks
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================================================================;;
+;;==================| Drinks |========================================================================================;;
+;;====================================================================================================================;;
 
 [wg_cola_bottle]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_cola_bottle.ogf
@@ -59,7 +61,13 @@ repair_part_bonus                                = 0.05
 
 tier                                             = 3
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_cola_bottle_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_cola_bottle_hud.ogf
+hands_position                                   = -0.0055,-0.06, 0.34
+hands_position_16x9                              = -0.0055,-0.06, 0.34
+anm_ea_show                                      = wg_cola_bottle_use, wg_cola_bottle_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_gorbatschow_bottle]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_gorbatschow_bottle.ogf
@@ -95,7 +103,13 @@ empty_weight                                     = 0.8
 
 tier                                             = 1
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_gorbatschow_bottle_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_gorbatschow_bottle_hud.ogf
+hands_position                                   = -0.0055,-0.06, 0.34
+hands_position_16x9                              = -0.0055,-0.06, 0.34
+anm_ea_show                                      = wg_gorbatschow_bottle_use, wg_gorbatschow_bottle_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_wine_chateau_latour]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_wine_chateau_latour.ogf
@@ -130,7 +144,13 @@ empty_weight                                     = 0.8
 
 tier                                             = 3
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_wine_chateau_latour_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_wine_chateau_latour_hud.ogf
+hands_position                                   = -0.0055,-0.09, 0.27
+hands_position_16x9                              = -0.0055,-0.09, 0.27
+anm_ea_show                                      = wg_wine_chateau_latour_use, wg_wine_chateau_latour_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_yoohoo_bottle]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_yoohoo_bottle.ogf
@@ -157,7 +177,13 @@ eat_thirstiness                                  = -2.26
 
 tier                                             = 1
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_yoohoo_bottle_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_yoohoo_bottle_hud.ogf
+hands_position                                   = -0.0055,-0.06, 0.34
+hands_position_16x9                              = -0.0055,-0.06, 0.34
+anm_ea_show                                      = wg_yoohoo_bottle_use, wg_yoohoo_bottle_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_mountain_dew_bottle]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_mountain_dew_bottle.ogf
@@ -192,7 +218,13 @@ empty_weight                                     = 0.1
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_mountain_dew_bottle_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_mountain_dew_bottle_hud.ogf
+hands_position                                   = -0.0055,-0.09, 0.27
+hands_position_16x9                              = -0.0055,-0.09, 0.27
+anm_ea_show                                      = wg_mountain_dew_bottle_use, wg_mountain_dew_bottle_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_nestea_icetea_bottle]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_nestea_icetea_bottle.ogf
@@ -223,7 +255,13 @@ max_uses                                         = 3
 remove_after_use                                 = true
 empty_weight                                     = 0.1
 
-tier                                              = 2
+tier                                             = 2
+
+[wg_nestea_icetea_bottle_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_nestea_icetea_bottle_hud.ogf
+hands_position                                   = -0.0055,-0.09, 0.27
+hands_position_16x9                              = -0.0055,-0.09, 0.27
+anm_ea_show                                      = wg_nestea_icetea_bottle_use, wg_nestea_icetea_bottle_item_use
 
 ;;====================================================================================================================;;
 ;;==================| Cans |==========================================================================================;;
@@ -260,7 +298,13 @@ repair_part_bonus                                = 0.03
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_cola_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_cola_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_cola_can_use, wg_cola_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_sprite_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_sprite_can.ogf
@@ -288,7 +332,13 @@ eat_thirstiness                                  = -2.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_sprite_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_sprite_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_sprite_can_use, wg_sprite_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_redbull_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_redbull_can.ogf
@@ -319,7 +369,13 @@ eat_thirstiness                                  = -2.22
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_redbull_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_redbull_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_redbull_can_use, wg_redbull_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_fanta_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_fanta_can.ogf
@@ -347,7 +403,13 @@ eat_thirstiness                                  = -2.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_fanta_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_fanta_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_fanta_can_use, wg_fanta_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_pepsi_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_pepsi_can.ogf
@@ -375,7 +437,13 @@ eat_thirstiness                                  = -2.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_pepsi_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_pepsi_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_pepsi_can_use, wg_pepsi_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_mountain_dew_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_mountain_dew_can.ogf
@@ -403,7 +471,13 @@ eat_thirstiness                                  = -2.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_mountain_dew_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_mountain_dew_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_mountain_dew_can_use, wg_mountain_dew_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_perrier_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_perrier_can.ogf
@@ -431,7 +505,13 @@ eat_thirstiness                                  = -3.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_perrier_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_perrier_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_perrier_can_use, wg_perrier_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_rockstar_energy_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_rockstar_energy_can.ogf
@@ -462,7 +542,13 @@ eat_thirstiness                                  = -2.22
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_rockstar_energy_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_rockstar_energy_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_rockstar_energy_can_use, wg_rockstar_energy_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_monster_energy_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_monster_energy_can.ogf
@@ -493,7 +579,13 @@ eat_thirstiness                                  = -2.22
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_monster_energy_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_monster_energy_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_monster_energy_can_use, wg_monster_energy_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_beer_86_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_beer_86_can.ogf
@@ -523,7 +615,13 @@ eat_health                                       = -0.015
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_beer_86_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_beer_86_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_beer_86_can_use, wg_beer_86_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_sevenup_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_sevenup_can.ogf
@@ -551,7 +649,13 @@ eat_thirstiness                                  = -3.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_sevenup_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_sevenup_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_sevenup_can_use, wg_sevenup_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_dr_bob_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_dr_bob_can.ogf
@@ -579,7 +683,13 @@ eat_thirstiness                                  = -3.20
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wg_dr_bob_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_dr_bob_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_dr_bob_can_use, wg_dr_bob_can_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_lipton_icetea_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_lipton_icetea_can.ogf
@@ -608,3 +718,9 @@ eat_sleepiness                                   = -0.06
 eat_thirstiness                                  = -3.20
 
 tier                                             = 2
+
+[wg_lipton_icetea_can_hud]
+item_visual                                      = dynamics\western_goods_drinks\wg_lipton_icetea_can_hud.ogf
+hands_position                                   = -0.0055,-0.072, 0.31
+hands_position_16x9                              = -0.0055,-0.072, 0.31
+anm_ea_show                                      = wg_lipton_icetea_can_use, wg_lipton_icetea_can_item_use

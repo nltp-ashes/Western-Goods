@@ -10,13 +10,13 @@ The Zone is host to people from various horizons. Overtime, the demand for goods
 
 ### ABOUT
 
-This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding new mechanics, consumables, readable magazines, trade items, new unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
+This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding new gameplay mechanics, consumables, readable magazines, trade items, devices, unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
 
-|                                                                                                                                 |                                                     Illustrations                                                      |                                                                                                                                            |
-|:-------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
-|     ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_      | ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_  | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
-| ![Showcase GPS](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png) _New device: GPS Locator_ | ![Showcase Lighter](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_10.png) _BIC lighter_ |   ![Showcase Rangefinder](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png) _New device: Rangefinder_    |
-|     ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_      |    ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_     |     ![Showcase Mechanics](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png) _New gameplay features_      |
+|                                                                                                                                 |                                                           Illustrations                                                            |                                                                                                                                            |
+|:-------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+|     ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_      |       ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_        | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
+| ![Showcase GPS](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png) _New device: GPS Locator_ | ![Showcase Lighter](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_10.png) _New device: BIC lighter_ |   ![Showcase Rangefinder](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png) _New device: Rangefinder_    |
+|     ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_      |          ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_           |     ![Showcase Mechanics](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png) _New gameplay features_      |
 
 ---
 
@@ -32,7 +32,9 @@ Western Goods natively integrates with the following addons, but they **aren't r
 3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
 4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
 5. [Device Selector Key](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-required-device-selector-key) (makes it easier to switch between various devices);
-6. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.1-readables-ext) (adds more pages to magazines in the addon).
+6. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
+7. [Interactive PDA](https://www.moddb.com/mods/stalker-anomaly/addons/interactive-pda-01) (adds more interactions with the world (and not only) via PDA);
+8. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.1-readables-ext) (adds more pages to magazines in the addon).
 
 These patches can be used when native compatibility with other addons cannot be achieved :
 1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.0-patch-rbn).
@@ -66,7 +68,9 @@ To **uninstall** the addon :
 
 ### CHANGELOG
 
-You can find the entire change-log [here](CHANGELOG.md).
+You can check out the changelog of the last update in the [CHANGELOG.md](CHANGELOG.md) file.
+
+For past updates, please refer to the description of each release, in the [releases tab](https://github.com/nltp-ashes/Western-Goods/releases).
 
 ---
 
@@ -136,6 +140,7 @@ Special thanks to these people for their help in the making of this addon :
 
 |                                                                                                               Name                                                                                                                |                                                 Motive                                                  |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
+|                                                                                         **[Tosox](https://www.moddb.com/members/tosox)**                                                                                          |      For contributing to the addon, however small that contribution was, it is always appreciated!      |
 |                                                                                   **[Kyne's Peace](https://www.moddb.com/members/kynespeace)**                                                                                    |                                        For being such a homie 🥹                                        |
 |                                                                                                              Rambito                                                                                                              |               For voluntarily providing a compatibility patch with Realistic Bodily Needs               |
 |                                                          **[Lucy](https://www.moddb.com/members/r3zy)**, **[MrDemonized](https://www.moddb.com/members/themrdemonized)**                                                          |      For fixing the issue that caused 3D UIs to be transparent when not backed by another texture       |

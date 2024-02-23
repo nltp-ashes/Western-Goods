@@ -2,15 +2,13 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 20/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
 ---    Stuff that ensure proper working of the addon, or that are general purpose.                                   ---
 ---                                                                                                                  ---
 ---    Notable mentions are :                                                                                        ---
----     - This script holds the logic of spawning items in NPC corpses;                                              ---
----     - This script holds the logic if spawning items in traders' inventories;                                     ---
 ---     - This script is responsible for ensuring the player has the required game version and pre-requisites;       ---
 ---     - This script is responsible for cleaning the save-game in case the player decides to remove the addon;      ---
 ---     - This script is the source of truth for the list of items and objects added by the addon.                   ---
@@ -21,83 +19,14 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-local VERSION                       = "2.4.0"
+-- Constants
+local VERSION                       = "2.5.0"
 
-local CONST_BARMAN_TYPE_BUY_LIST   = {"food","drink"}
-local CONST_SUPPLIER_TYPE_BUY_LIST = {"magazine"}
-local CONST_MECHANIC_TYPE_BUY_LIST = {"tech"}
-
+-- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Traders
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to spawn items in a specific npc with the help of trader_autoinject.script.
---- @param npc cse_alife_object
---- @return nil
-function spawn_western_goods_in_trader(npc)
-
-    local is_supplier = trader_autoinject.get_trader_type(npc) == trader_autoinject.SUPPLIER
-    local is_barman = trader_autoinject.get_trader_type(npc) == trader_autoinject.BARMAN
-    local is_mechanic = trader_autoinject.get_trader_type(npc) == trader_autoinject.MECHANIC
-
-    local community = western_goods_utils.get_real_community(npc, "stalker")
-    local supply_level = clamp(trader_autoinject.supply_level(npc, true) or 1, 1, 2)
-
-    local sell_list = is_barman and CONST_BARMAN_TYPE_BUY_LIST or is_supplier and CONST_SUPPLIER_TYPE_BUY_LIST or is_mechanic and CONST_MECHANIC_TYPE_BUY_LIST
-
-    local trader_table = sell_list and table_inject_ready(community, sell_list, supply_level) or {}
-
-    dbg_printf("[WG] Core | NPC trading (%s) - is_supplier %s - is_barman %s - is_mechanic %s\n%s",community,is_supplier,is_barman,is_mechanic,utils_data.print_table(trader_table, false, true))
-
-    trader_autoinject.spawn_items(npc, trader_table, true)
-end
-
-TraderAuto = trader_autoinject.update
---- Monkey-patching trader_autoinject.update to inject western goods items in the traders.
---- @param npc cse_alife_object
---- @return nil
-function trader_autoinject.update(npc)
-    TraderAuto(npc)
-    spawn_western_goods_in_trader(npc)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Dead Bodies
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to spawn items in a corpse.
---- @param npc cse_alife_object
---- @param npc_rank string
---- @param npc_comm string
---- @return nil
-function spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
-    local items_to_spawn = table_corpse_ready(npc_rank, npc_comm)
-
-    dbg_printf("[WG] Core | NPC loot (%s)\n%s",npc_comm,utils_data.print_table(items_to_spawn, false, true))
-
-    for sec,qte in pairs(items_to_spawn) do
-        alife_create_item(sec, npc, {uses = qte})
-    end
-end
-
-SpawnCosmetics = death_manager.spawn_cosmetics
---- Monkey-patching death_manager.spawn_cosmetics to spawn items from western goods.
---- @param npc cse_alife_object
---- @param npc_id string
---- @param npc_comm string
---- @param npc_rank string
---- @param visual string
---- @param rand_condition string
---- @return nil
-function death_manager.spawn_cosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    SpawnCosmetics(npc, npc_id, npc_comm, npc_rank, visual, rand_condition)
-    spawn_western_goods_in_corpse(npc, npc_rank, npc_comm)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Service Functions
+-- Core functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print the version of the addon in the console/log.
@@ -153,7 +82,7 @@ function check_addon_removal(status)
 
         -- Check if is Western Goods NPC
         for _,sec in pairs(western_goods_npcs) do
-            if se_obj:section_name() == sec and (not get_object_squad(se_obj)) then
+            if se_obj:section_name() == sec and (not western_goods_utils.get_squad_of(se_obj)) then
                 released_objects = released_objects + 1
                 dbg_printf("[WG] Core | Addon removal releasing squad-less NPC '%s'", se_obj:section_name())
                 alife():release(se_obj)
@@ -180,41 +109,6 @@ function check_addon_removal(status)
     dbg_printf("[WG] Core | Addon removal finished : %s", released_objects)
 
     western_goods_mcm.set_config("addon_removal", false)
-end
-
---- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
---- @return nil
-function check_prerequisites()
-    UnregisterScriptCallback("on_game_load", check_prerequisites)
-
-    local error_message = "Unknown error"
-
-    -- Out-of-date game
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_outdated_game_title"),
-            western_goods_utils.get_translation("st_err_outdated_game_what"),
-            western_goods_utils.get_translation("st_err_outdated_game_why"),
-            western_goods_utils.get_translation("st_err_outdated_game_where")
-    )
-    assert(is_version_1_5_2(), error_message)
-
-    -- Missing DXML
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_dxml_title"),
-            western_goods_utils.get_translation("st_err_missing_dxml_what"),
-            western_goods_utils.get_translation("st_err_missing_dxml_why"),
-            western_goods_utils.get_translation("st_err_missing_dxml_where")
-    )
-    assert(is_dxml_installed(), error_message)
-
-    -- Missing LUA unlocalizer
-    error_message = string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
-            western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
-    )
-    assert(is_lua_unlocalizer_installed() , error_message)
 end
 
 --- Function used to detect missing translations.
@@ -245,7 +139,7 @@ function check_missing_translations()
                 xml:NavigateToNode("string_table", 0)
 
                 for i=0, xml:GetNodesNum("", 0, "string") - 1 do
-                    strings[folder][i+1] = xml:ReadAttribute("string", i, "id")
+                    strings[folder][#strings[folder]+1] = xml:ReadAttribute("string", i, "id")
                 end
             end
         end
@@ -265,10 +159,70 @@ function check_missing_translations()
     dbg_printf("[WG] Core | Check for missing translations ended in %sms", profiler:time()/1000)
 end
 
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Other functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called from game_tutorials.xml when the player interacts with a campfire.
+--- @return nil
+function use_campfire()
+    printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Addons detection functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
 --- Function used to check if the Barter UI is installed.
 --- @return boolean
 function is_barter_ui_installed()
     return barter_core ~= nil
+end
+
+--- Function used to check if the Hideout Furniture is installed.
+--- @return boolean
+function is_hideout_furniture_installed()
+    return ui_furniture_light ~= nil and hf_obj_manager ~= nil
+end
+
+--- Function used to check if the Food, Drugs and Drinks Animations (FDDA) is installed.
+--- @return boolean
+function is_fdda_installed()
+    return enhanced_animations ~= nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Prerequisites functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
+--- @return nil
+function check_prerequisites()
+    UnregisterScriptCallback("on_game_load", check_prerequisites)
+
+    -- Out-of-date game
+    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_game_title"),
+        western_goods_utils.get_translation("st_err_outdated_game_what"),
+        western_goods_utils.get_translation("st_err_outdated_game_why"),
+        western_goods_utils.get_translation("st_err_outdated_game_where")
+    ))
+
+    -- Missing DXML
+    assert(is_dxml_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_dxml_title"),
+        western_goods_utils.get_translation("st_err_missing_dxml_what"),
+        western_goods_utils.get_translation("st_err_missing_dxml_why"),
+        western_goods_utils.get_translation("st_err_missing_dxml_where")
+    ))
+
+    -- Missing LUA unlocalizer
+    assert(is_lua_unlocalizer_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+    ))
 end
 
 --- Function used to check if game version number is 1.5.2.
@@ -300,112 +254,6 @@ function on_game_start()
     RegisterScriptCallback("on_game_load", check_prerequisites)
     RegisterScriptCallback("on_game_load", check_missing_translations)
     RegisterScriptCallback("on_option_change", check_addon_removal)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Utility Functions
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to transform western_goods_items into a table ready for trader_autoinject.spawn_items.
---- This function takes parameters to filter items to be kept in the final table.
---- @param comm string
---- @param types table
---- @param supply_level number
---- @return table
-function table_inject_ready(comm, types, supply_level)
-    local tab = {}
-
-    -- Get general params
-    local loot_factor = western_goods_mcm.get_config("trader_loot_factor") or 1.0
-
-    -- Function used to get a quantity if item should be added to trader, nil otherwise
-    local function eval_item(section, data)
-        -- Short circuit if no trade params
-        if not data.trader_params[comm] then return end
-
-        -- Short circuit if trader doesn't sell this type of item
-        if not western_goods_utils.table_contains(types, data.type) then return end
-
-        -- Short circuit if player doesn't meet supply level
-        if not data.trader_params[comm].sl == supply_level then return end
-
-        local dice = math.random()
-        local luck = clamp(data.trader_params[comm].prob * loot_factor,0.0,1.0)
-        local qte = data.trader_params[comm].qte
-
-        -- If we hit the spawn rate, add to trader
-        if dice < luck then
-            dbg_printf("[WG] Core | NPC trading diced '%s' [%s<%s] - qte: %s", section, dice, luck, qte)
-            return qte
-        else
-            dbg_printf("[WG] Core | NPC trading missed '%s' [%s>%s]", section, dice, luck)
-            return nil
-        end
-    end
-
-    -- Go through each of the addon's items
-    for section,data in pairs(western_goods_items) do
-        tab[section] = eval_item(section, data)
-    end
-
-    return tab
-end
-
---- Function used to transform western_goods_items into a table ready for trader_autoinject.
---- This function takes parameters to filter items to be kept in the final table.
---- @param npc_rank string
---- @param npc_comm string
---- @return table
-function table_corpse_ready(npc_rank, npc_comm)
-    local tab = {}
-
-    -- Get general params
-    local max_items = western_goods_mcm.get_config("max_item_per_corpse") or 0
-    local loot_factor = western_goods_mcm.get_config("corpse_loot_factor") or 1.0
-
-    -- Function used to get a quantity if item should be added to corpse, nil otherwise
-    local function eval_item(section, data, iter)
-        if not data.corpse_params[npc_comm] then
-            dbg_printf("[WG] Core | NPC loot (%s of %s) no dice '%s' - comm: %s", iter, max_items, section, npc_comm)
-            return
-        end
-
-        local dice = math.random()
-        local luck = clamp(data.corpse_params[npc_comm].prob * loot_factor,0.0,1.0)
-        local qte = data.corpse_params[npc_comm].qte
-
-        -- If we hit the drop rate, spawn the item in the corpse
-        if dice < luck then
-            dbg_printf("[WG] Core | NPC loot (%s of %s) diced '%s' [%s<%s] - qte: %s", iter, max_items, section, dice, luck, qte)
-            return qte
-        else
-            dbg_printf("[WG] Core | NPC loot (%s of %s) missed '%s' [%s>%s]", iter, max_items, section, dice, luck)
-            return nil
-        end
-    end
-
-    -- For a user-defined number of tries, try adding a random item
-    for i = 1, max_items do
-        local section = western_goods_utils.table_random_key(western_goods_items)
-        local data = western_goods_items[section]
-        tab[section] = eval_item(section, data, i)
-    end
-
-    -- Special
-    if max_items > 1 and npc_comm == "killer" and npc_rank == "legend" then
-
-        local dice = math.random()
-        local luck = 0.001
-
-        if dice < luck then
-            dbg_printf("[WG] Core | NPC loot (special) diced 'wg_money_suitcase' [%s<%s]", dice, luck)
-            tab["wg_money_suitcase"] = 1
-        else
-            dbg_printf("[WG] Core | NPC loot (special) missed 'wg_money_suitcase' [%s>%s]", dice, luck)
-        end
-    end
-
-    return tab
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1282,7 +1130,11 @@ western_goods_items = {
         type                 = "tech",
         trader_params = {
             ["isg"]          = { qte=1, sl=1, prob=1.0 },
-            ["killer"]       = { qte=2, sl=2, prob=0.9 }
+            ["killer"]       = { qte=2, sl=2, prob=0.9 },
+            ["stalker"]      = { qte=1, sl=2, prob=0.6 },
+            ["freedom"]      = { qte=1, sl=2, prob=0.8 },
+            ["bandit"]       = { qte=1, sl=2, prob=0.7 },
+            ["monolith"]     = { qte=1, sl=1, prob=0.7 }
         },
         corpse_params = {
             ["stalker"]      = { qte=1, prob=0.03 },
@@ -1290,7 +1142,8 @@ western_goods_items = {
             ["freedom"]      = { qte=1, prob=0.03 },
             ["renegade"]     = { qte=1, prob=0.03 },
             ["killer"]       = { qte=1, prob=0.05 },
-            ["isg"]          = { qte=1, prob=0.10 }
+            ["isg"]          = { qte=1, prob=0.10 },
+            ["monolith"]     = { qte=1, prob=0.05 }
         },
     },
     ["wg_rangefinder"] =  {
@@ -1298,14 +1151,16 @@ western_goods_items = {
         trader_params = {
             ["army"]         = { qte=1, sl=2, prob=0.5 },
             ["isg"]          = { qte=1, sl=1, prob=1.0 },
-            ["killer"]       = { qte=1, sl=2, prob=1.0 }
+            ["killer"]       = { qte=1, sl=2, prob=1.0 },
+            ["monolith"]     = { qte=1, sl=2, prob=1.0 }
         },
         corpse_params = {
             ["stalker"]      = { qte=1, prob=0.02 },
             ["freedom"]      = { qte=1, prob=0.02 },
             ["army"]         = { qte=1, prob=0.03 },
             ["killer"]       = { qte=1, prob=0.03 },
-            ["isg"]          = { qte=1, prob=0.05 }
+            ["isg"]          = { qte=1, prob=0.05 },
+            ["monolith"]     = { qte=1, prob=0.05 }
         },
     }
 }

@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 12/11/2023                                                                                               ;;
+;;    Date : 22/02/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new food and snacks to the game.                                                        ;;
@@ -10,7 +10,7 @@
 ;;====================================================================================================================;;
 
 ;;====================================================================================================================;;
-;;==================| Food |==========================================================================================;;
+;;==================| Base Section |==================================================================================;;
 ;;====================================================================================================================;;
 
 [wg_food_base]:booster
@@ -20,7 +20,9 @@ kind                                             = i_food
 script_binding                                   = bind_item.bind
 icons_texture                                    = ui\icons\ui_icon_western_goods_food
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================================================================;;
+;;==================| Special Items |=================================================================================;;
+;;====================================================================================================================;;
 
 [wg_french_mre]:identity_immunities
 $spawn                                           = "food and drugs\bread"
@@ -50,7 +52,84 @@ use_sound                                        = western_goods_food\wg_french_
 
 tier                                             = 3
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;====================================================================================================================;;
+;;==================| Animated Items |================================================================================;;
+;;====================================================================================================================;;
+
+[wg_mnms]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_mnms.ogf
+
+inv_name                                         = st_wg_mnms
+inv_name_short                                   = st_wg_mnms_s
+description                                      = st_wg_mnms_descr
+inv_weight                                       = 0.12
+cost                                             = 2625
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 2
+inv_grid_y                                       = 0
+
+break_sound                                      = western_goods_food\wg_mnms_drop
+use_sound                                        = western_goods_food\wg_mnms_eat
+snd_on_take                                      = pills
+
+eat_satiety                                      = 0.05
+eat_sleepiness                                   = 0.0005
+eat_thirstiness                                  = 0.02
+
+use_condition                                    = true
+max_uses                                         = 10
+remove_after_use                                 = true
+empty_weight                                     = 0.02
+
+tier                                             = 2
+
+[wg_mnms_hud]
+item_visual                                      = dynamics\western_goods_food\wg_mnms_hud.ogf
+hands_position                                   = -0.0055, 0.00, 0.12
+hands_position_16x9                              = -0.0055, 0.00, 0.12
+anm_ea_show                                      = wg_mnms_use, wg_mnms_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_mentos]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_mentos.ogf
+
+inv_name                                         = st_wg_mentos
+inv_name_short                                   = st_wg_mentos_s
+description                                      = st_wg_mentos_descr
+inv_weight                                       = 0.12
+cost                                             = 2625
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 2
+inv_grid_y                                       = 1
+
+break_sound                                      = western_goods_food\wg_mentos_drop
+use_sound                                        = western_goods_food\wg_mentos_eat
+
+eat_satiety                                      = 0.02
+eat_sleepiness                                   = 0.0002
+eat_thirstiness                                  = 0.01
+
+use_condition                                    = true
+max_uses                                         = 5
+remove_after_use                                 = true
+empty_weight                                     = 0.01
+
+tier                                             = 2
+
+[wg_mentos_hud]
+item_visual                                      = dynamics\western_goods_food\wg_mentos_hud.ogf
+hands_position                                   = -0.0055,-0.07, 0.32
+hands_position_16x9                              = -0.0055,-0.07, 0.32
+anm_ea_show                                      = wg_mentos_use, wg_mentos_item_use
+
+;;====================================================================================================================;;
+;;==================| Misc Items |====================================================================================;;
+;;====================================================================================================================;;
 
 [wg_hamborgir]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_hamborgir.ogf
@@ -76,7 +155,7 @@ eat_thirstiness                                  = 0.0425
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_sandwich]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_sandwich.ogf
@@ -128,7 +207,7 @@ eat_thirstiness                                  = 0.06
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_twix]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_twix.ogf
@@ -158,7 +237,7 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_mars]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_mars.ogf
@@ -183,7 +262,7 @@ eat_thirstiness                                  = 0.075
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_milkyway]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_milkyway.ogf
@@ -208,7 +287,7 @@ eat_thirstiness                                  = 0.04
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_bounty]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_bounty.ogf
@@ -238,7 +317,7 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_kinder_maxi]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_kinder_maxi.ogf
@@ -263,7 +342,7 @@ eat_thirstiness                                  = 0.03
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_kinder_bueno]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_kinder_bueno.ogf
@@ -293,7 +372,7 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_kitkat]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_kitkat.ogf
@@ -323,7 +402,7 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_milka]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_milka.ogf
@@ -348,68 +427,7 @@ eat_thirstiness                                  = 0.2
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_mnms]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_mnms.ogf
-
-inv_name                                         = st_wg_mnms
-inv_name_short                                   = st_wg_mnms_s
-description                                      = st_wg_mnms_descr
-inv_weight                                       = 0.12
-cost                                             = 2625
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 2
-inv_grid_y                                       = 0
-
-break_sound                                      = western_goods_food\wg_mnms_drop
-use_sound                                        = western_goods_food\wg_mnms_eat
-snd_on_take                                      = pills
-
-eat_satiety                                      = 0.05
-eat_sleepiness                                   = 0.0005
-eat_thirstiness                                  = 0.02
-
-use_condition                                    = true
-max_uses                                         = 10
-remove_after_use                                 = true
-empty_weight                                     = 0.02
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_mentos]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_mentos.ogf
-
-inv_name                                         = st_wg_mentos
-inv_name_short                                   = st_wg_mentos_s
-description                                      = st_wg_mentos_descr
-inv_weight                                       = 0.12
-cost                                             = 2625
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 2
-inv_grid_y                                       = 1
-
-break_sound                                      = western_goods_food\wg_mentos_drop
-use_sound                                        = western_goods_food\wg_mentos_eat
-
-eat_satiety                                      = 0.02
-eat_sleepiness                                   = 0.0002
-eat_thirstiness                                  = 0.01
-
-use_condition                                    = true
-max_uses                                         = 5
-remove_after_use                                 = true
-empty_weight                                     = 0.01
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_lays]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_lays.ogf
@@ -434,7 +452,7 @@ eat_thirstiness                                  = 0.2
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_doritos]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_doritos.ogf
@@ -459,7 +477,7 @@ eat_thirstiness                                  = 0.2
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_pringles]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_pringles.ogf
@@ -484,7 +502,7 @@ eat_thirstiness                                  = 0.2
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_oreo]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_oreo.ogf
@@ -509,7 +527,7 @@ eat_thirstiness                                  = 0.6
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_ferrero_rocher]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_ferrero_rocher.ogf
@@ -539,7 +557,7 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_mon_cheri]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_mon_cheri.ogf
@@ -570,7 +588,7 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_toblerone]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_toblerone.ogf

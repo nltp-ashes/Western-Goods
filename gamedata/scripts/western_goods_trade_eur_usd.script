@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 02/06/2023                                                                                             ---
+---    Date : 19/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
@@ -55,6 +55,8 @@ local level_object_by_id        = western_goods_utils.level_object_by_id
 
 -- Constants
 local bags_to_tint              = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
+local eur_rouble_rate           = 68
+local usd_rouble_rate           = 70
 
 -- Variables
 local traders_list              = {}
@@ -90,19 +92,18 @@ end
 -- Trading actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-TraderUpdate = trade_manager.update
 --- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader.
 --- Got it? Me neither. In the end, it works.
 --- @param npc game_object
 --- @param force_refresh boolean
 --- @return nil
-function trade_manager.update(npc, force_refresh)
+function trade_manager_update(npc, force_refresh)
     local flags = { result = false }
     SendScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject",npc,flags)
-    if is_eur_usd_trader(npc) and not flags.result then
+    if this.is_eur_usd_trader(npc) and not flags.result then
         trader_autoinject.TraderUpdate(npc, force_refresh)
     else
-        TraderUpdate(npc, force_refresh)
+        western_goods_monkey_patches.trade_manager_update(npc, force_refresh)
     end
 end
 
@@ -151,11 +152,10 @@ function tint_functor(cell)
     return GetARGB(240, 250, 0, 0)
 end
 
-UpdateCharacterBase = ui_inventory.UIInventory.UpdateCharacter
-function ui_inventory.UIInventory.UpdateCharacter(self)
-
-    UpdateCharacterBase(self)
-
+--- Monkey-patching ui_inventory.UIInventory.UpdateCharacter to display custom currencies in the character wallet.
+--- @param self UIInventory
+--- @return nil
+function ui_inventory_UIInventory_UpdateCharacter(self)
     local partner = self:GetPartner()
 
     if (not self.mode == "trade")
@@ -184,11 +184,13 @@ function ui_inventory.UIInventory.UpdateCharacter(self)
     self.npc_money:SetText("... EUR | ... USD")
 end
 
-TMode_UpdatePriceBase = ui_inventory.UIInventory.TMode_UpdatePrice
-function ui_inventory.UIInventory.TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
-
-    TMode_UpdatePriceBase(self, ele_txt, ele_btn, bag)
-
+--- Monkey-patching ui_inventory.UIInventory.UpdatePrice to display custom value for items in cart.
+--- @param self UIInventory
+--- @param ele_txt ?
+--- @param ele_btn ?
+--- @param bag string
+--- @return nil
+function ui_inventory_UIInventory_TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
     local partner = self:GetPartner()
 
     if (not self.mode == "trade")
@@ -207,44 +209,42 @@ function ui_inventory.UIInventory.TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
         local obj = level_object_by_id(obj_id)
         local currency,value = this.get_money_value(obj:section())
         if currency == "eur" then
-            tot_cost = tot_cost + value * 68
+            tot_cost = tot_cost + value * eur_rouble_rate
         end
         if currency == "usd" then
-            tot_cost = tot_cost + value * 70
+            tot_cost = tot_cost + value * usd_rouble_rate
         end
         if currency == "unknown" then
             tot_cost = tot_cost + cc:GetCellCost(cc.cell[idx])
         end
     end
 
-    ele_txt:SetText(math.ceil(tot_cost/68) .. " EUR or " .. math.ceil(tot_cost/70) .. " USD")
+    ele_txt:SetText(math.ceil(tot_cost/eur_rouble_rate) .. " EUR or " .. math.ceil(tot_cost/usd_rouble_rate) .. " USD")
     ele_btn:Enable(math.ceil(tot_cost) > 0)
 end
 
-TMode_SellBase = ui_inventory.UIInventory.TMode_Sell
 --- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader.
 --- @param self UIInventory
 --- @return nil
-function ui_inventory.UIInventory.TMode_Sell(self)
+function ui_inventory_UIInventory_TMode_Sell(self)
     -- If we aren't talking to a EUR/USD trader, process normally
     local npc = self:GetPartner()
     if not npc or not this.is_eur_usd_trader(npc) then
-        TMode_SellBase(self)
+        western_goods_monkey_patches.ui_inventory_t_mode_sell(self)
         return
     end
 
     make_exchange(self, npc)
 end
 
-TMode_BuyBase = ui_inventory.UIInventory.TMode_Buy
 --- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader.
 --- @param self UIInventory
 --- @return nil
-function ui_inventory.UIInventory.TMode_Buy(self)
+function ui_inventory_UIInventory_TMode_Buy(self)
     -- If we aren't talking to a EUR/USD trader, process normally
     local npc = self:GetPartner()
     if not npc or not this.is_eur_usd_trader(npc) then
-        TMode_BuyBase(self)
+        western_goods_monkey_patches.ui_inventory_t_mode_buy(self)
         return
     end
 
@@ -287,10 +287,10 @@ function make_exchange(self, npc)
         local obj = level_object_by_id(obj_id)
         local currency,value = this.get_money_value(obj:section())
         if currency == "eur" then
-            tot_sell_cost = tot_sell_cost + value * 68
+            tot_sell_cost = tot_sell_cost + value * eur_rouble_rate
         end
         if currency == "usd" then
-            tot_sell_cost = tot_sell_cost + value * 70
+            tot_sell_cost = tot_sell_cost + value * usd_rouble_rate
         end
         if currency == "unknown" then
             tot_sell_cost = tot_sell_cost + cc_sell:GetCellCost(cc_sell.cell[idx])
@@ -303,10 +303,10 @@ function make_exchange(self, npc)
         local obj = level_object_by_id(obj_id)
         local currency,value = this.get_money_value(obj:section())
         if currency == "eur" then
-            tot_buy_cost = tot_buy_cost + value * 68
+            tot_buy_cost = tot_buy_cost + value * eur_rouble_rate
         end
         if currency == "usd" then
-            tot_buy_cost = tot_buy_cost + value * 70
+            tot_buy_cost = tot_buy_cost + value * usd_rouble_rate
         end
         if currency == "unknown" then
             tot_buy_cost = tot_buy_cost + cc_buy:GetCellCost(cc_buy.cell[idx])
@@ -359,22 +359,23 @@ end
 -- Barter actions/restrictions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-if western_goods_core.is_barter_ui_installed() then
-    GUI_on_showBase = barter_ui.GUI_on_show
-    --- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is a EUR/USD trader.
-    --- @param name string
-    --- @param path string
-    --- @return nil
-    function barter_ui.GUI_on_show(name, path)
-        local ui_instance = ui_inventory.GUI
-        if name ~= "UIInventory" or (not ui_instance) then return end
-
-        local partner = ui_instance:GetPartner()
-
-        if partner and this.is_eur_usd_trader(partner) then return end
-
-        GUI_on_showBase(name, path)
+--- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is a EUR/USD trader.
+--- @param name string
+--- @param path string
+--- @return nil
+function barter_ui_gui_on_show(name, path)
+    local ui_instance = ui_inventory.GUI
+    if name ~= "UIInventory" or (not ui_instance) then
+        return
     end
+
+    local partner = ui_instance:GetPartner()
+
+    if partner and this.is_eur_usd_trader(partner) then
+        return
+    end
+
+    western_goods_monkey_patches.barter_ui_gui_on_show(name, path)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
