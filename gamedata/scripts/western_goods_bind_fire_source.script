@@ -79,7 +79,7 @@ function fire_source_binder:western_goods_on_campfire_use()
     if not bind_campfire.rain_pass() then
         actor_menu.set_msg(1, western_goods_utils.get_translation("st_fail"), 3)
         dbg_printf("[WG] Fire Source Binder | Use Campfire - Failed to light campfire, because of rain")
-        return false
+        return true
     end
 
     if (bind_campfire.k_rain < 1) then

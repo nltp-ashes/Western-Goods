@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 21/02/2024                                                                                             ---
+---    Date : 23/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -84,11 +84,17 @@ function lighter_binder:load()
 end
 
 function lighter_binder:first_update(delta)
-    self.object:set_condition(self.m_fuel_level_saved)
+    self.object:set_condition(self.m_fuel_level_saved or 1.0)
     self.m_fuel_level_saved = nil
 end
 
 function lighter_binder:update(delta)
+    -- First update
+    if not self.m_first_update then
+        self.m_first_update = true
+        self:first_update(delta)
+    end
+
     -- Turn off on wrong device state
     if not self:check_state() then
         self:set_light_status(false)
@@ -103,12 +109,6 @@ function lighter_binder:update(delta)
 
     -- Fast update
     self:update_light()
-
-    -- First update
-    if not self.m_first_update then
-        self.m_first_update = true
-        self:first_update(delta)
-    end
 
     -- Throttled update
     if not self:update_throttle(delta) then
