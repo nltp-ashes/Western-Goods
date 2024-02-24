@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 05/02/2024                                                                                             ---
+---    Date : 24/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -151,13 +151,25 @@ function as_boolean(var)
     return var
 end
 
---- Function used to clear the code a bit.
+--- Function used to round a number to the closest natural number.
 --- @param num number
 --- @return number
-function round_number(num)
+function number_round(num)
     if not validate_params({num,"round_number"}) then return end
 
     return tostring(math.floor(num+0.5))
+end
+
+function number_wrap(num, lower_bound, upper_bound)
+    if not validate_params({num,lower_bound,upper_bound,"number_wrap"}) then return end
+    local diff = upper_bound - lower_bound
+    while num < lower_bound do
+        num = num + diff
+    end
+    while num >= upper_bound do
+        num = num - diff
+    end
+    return num
 end
 
 --- Function used to know if there exists a translation for a given game string.

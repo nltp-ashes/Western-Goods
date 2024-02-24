@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 23/11/2023                                                                                             ---
+---    Date : 24/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -13,11 +13,14 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- Constants
+DEGREES_PER_RADIAN                = 57.296
+
 -- Imported functions
-local dbg_printf                = western_goods_utils.dbg_printf
+dbg_printf                        = western_goods_utils.dbg_printf
 
 -- Singleton
-GUI                             = nil -- instance, don't touch
+GUI                               = nil -- instance, don't touch
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General Functions
@@ -75,10 +78,11 @@ function UICompass:Update()
     end
 
     -- Get heading
-    local heading = self:GetHeading()
+    local heading_rad = self:GetHeadingRadians()
+    local heading_deg = self:GetHeadingDegrees()
 
     -- Update heading
-    self.m_heading:SetHeading(heading)
+    self.m_heading:SetHeading(heading_rad)
 end
 
 function UICompass:ShouldUpdate()
@@ -91,12 +95,18 @@ function UICompass:ShouldUpdate()
     end
 end
 
-function UICompass:GetHeading()
+function UICompass:GetHeadingRadians()
     local position = vector():set(0, 0, 0)
-    local direction = vector():set(0, 0, 0):sub(device().cam_dir)
+    local direction = vector():set(0, 0, 0):sub(db.actor:direction())
 
     local dx = position.x - direction.x
     local dz = position.z - direction.z
 
     return math.atan2(dx, dz)
+end
+
+function UICompass:GetHeadingDegrees()
+    local heading_rad = self:GetHeadingRadians()
+    local heading_deg = heading_rad * DEGREES_PER_RADIAN
+    return western_goods_utils.number_wrap(heading_deg, 0, 360)
 end
