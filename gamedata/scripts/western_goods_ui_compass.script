@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 24/02/2024                                                                                             ---
+---    Date : 25/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -53,11 +53,34 @@ function UICompass:__init() super()
     self.m_xml:ParseFile("ui_western_goods_compass.xml")
     self.m_xml:InitWindow("compass", 0, self)
 
-    self.m_heading = self.m_xml:InitStatic("compass:heading", self)
-    self.m_heading:InitTextureEx("cp_heading", "hud\\p3d")
+    self.m_xml:InitWindow("compass:speed", 0, self)
+    self.m_speed_bg = self.m_xml:InitStatic("compass:speed:background", self)
+    self.m_speed_m = self.m_xml:InitStatic("compass:speed:m", self)
+    self.m_speed_dm = self.m_xml:InitStatic("compass:speed:dm", self)
 
-    self.m_cursor = self.m_xml:InitStatic("compass:cursor", self)
-    self.m_cursor:InitTextureEx("cp_cursor", "hud\\p3d")
+    self.m_xml:InitWindow("compass:dist", 0, self)
+    self.m_dist_bg = self.m_xml:InitStatic("compass:dist:background", self)
+    self.m_dist_km = self.m_xml:InitStatic("compass:dist:km", self)
+    self.m_dist_hm = self.m_xml:InitStatic("compass:dist:hm", self)
+    self.m_dist_dam = self.m_xml:InitStatic("compass:dist:dam", self)
+
+    self.m_xml:InitWindow("compass:eta", 0, self)
+    self.m_eta_bg = self.m_xml:InitStatic("compass:eta:background", self)
+    self.m_eta_hh = self.m_xml:InitStatic("compass:eta:hh", self)
+    self.m_eta_h = self.m_xml:InitStatic("compass:eta:h", self)
+    self.m_eta_mm = self.m_xml:InitStatic("compass:eta:mm", self)
+    self.m_eta_m = self.m_xml:InitStatic("compass:eta:m", self)
+
+    self.m_xml:InitWindow("compass:time", 0, self)
+    self.m_time_bg = self.m_xml:InitStatic("compass:time:background", self)
+    self.m_time_mm = self.m_xml:InitStatic("compass:time:mm", self)
+    self.m_time_m = self.m_xml:InitStatic("compass:time:m", self)
+    self.m_time_ss = self.m_xml:InitStatic("compass:time:ss", self)
+    self.m_time_s = self.m_xml:InitStatic("compass:time:s", self)
+
+    self.m_xml:InitWindow("compass:heading", 0, self)
+    self.m_heading_bg = self.m_xml:InitStatic("compass:heading:background", self)
+    self.m_heading_cursor = self.m_xml:InitStatic("compass:heading:cursor", self)
 
     -- Build variables
     self.m_update_timer = 0
@@ -82,7 +105,7 @@ function UICompass:Update()
     local heading_deg = self:GetHeadingDegrees()
 
     -- Update heading
-    self.m_heading:SetHeading(heading_rad)
+    self.m_heading_bg:SetHeading(heading_rad)
 end
 
 function UICompass:ShouldUpdate()
@@ -97,7 +120,7 @@ end
 
 function UICompass:GetHeadingRadians()
     local position = vector():set(0, 0, 0)
-    local direction = vector():set(0, 0, 0):sub(db.actor:direction())
+    local direction = vector():set(0, 0, 0):sub(device().cam_dir)
 
     local dx = position.x - direction.x
     local dz = position.z - direction.z
