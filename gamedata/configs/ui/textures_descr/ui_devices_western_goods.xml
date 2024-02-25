@@ -111,10 +111,22 @@
 
     <!-- Compass -->
     <file name="ui\items\ui_compass.dds">
-        <texture id="cp_test_marker_bk"   x="497"     y="96"     width="2"       height="2"    />
-        <texture id="cp_test_marker_rd"   x="495"     y="180"     width="2"       height="2"    />
-        <texture id="cp_test_marker_bl"   x="495"     y="806"     width="2"       height="2"    />
-        <texture id="cp_heading"       x="0"       y="0"      width="1024"    height="1024" />
-        <texture id="cp_cursor"        x="1024"    y="0"      width="1024"    height="1024" />
+        <texture id="cp_test_marker_bk"   x="497"     y="96"     width="2"    height="2" />
+        <texture id="cp_test_marker_rd"   x="495"     y="180"     width="2"   height="2" />
+        <texture id="cp_test_marker_bl"   x="495"     y="806"     width="2"   height="2" />
+        <texture id="wg_cp_heading"       x="0"       y="0"      width="1024"    height="1024" />
+        <texture id="wg_cp_cursor"        x="1024"    y="0"      width="1024"    height="1024" />
+    </file>
+    <file name="ui\items\ui_compass_new.dds">
+        <texture id="wg_cp_digit_0"     x="0"       y="0"      width="200"     height="497" />
+        <texture id="wg_cp_digit_1"     x="200"     y="0"      width="200"     height="497" />
+        <texture id="wg_cp_digit_2"     x="400"     y="0"      width="200"     height="497" />
+        <texture id="wg_cp_digit_3"     x="600"     y="0"      width="200"     height="497" />
+        <texture id="wg_cp_digit_4"     x="800"     y="0"      width="200"     height="497" />
+        <texture id="wg_cp_digit_5"     x="0"       y="497"    width="200"     height="497" />
+        <texture id="wg_cp_digit_6"     x="200"     y="497"    width="200"     height="497" />
+        <texture id="wg_cp_digit_7"     x="400"     y="497"    width="200"     height="497" />
+        <texture id="wg_cp_digit_8"     x="600"     y="497"    width="200"     height="497" />
+        <texture id="wg_cp_digit_9"     x="800"     y="497"    width="200"     height="497" />
     </file>
 </w>

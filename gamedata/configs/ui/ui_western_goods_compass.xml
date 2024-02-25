@@ -14,79 +14,79 @@
     <compass>
         <!-- Speed display -->
         <speed>
-            <m x="0.0005" y="0.0" width="0.00775" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+            <m x="0.004625" y="0.0" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </m>
-            <dm x="0.00875" y="0.0" width="0.00775" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+            <dm x="0.00875" y="0.0" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </dm>
             <background x="0.0" y="0.0" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bk</texture>
+                <texture shader="hud\p3d">cp_test_marker_rd</texture>
             </background>
         </speed>
 
         <!-- Distance to waypoint display -->
         <dist>
-            <km x="0.0185" y="0.0" width="0.0050" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+            <km x="0.0205625" y="0.0" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </km>
-            <hm x="0.0240" y="0.0" width="0.0050" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+            <hm x="0.0246875" y="0.0" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </hm>
-            <dam x="0.0295" y="0.0" width="0.0050" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+            <dam x="0.0288125" y="0.0" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </dam>
             <background x="0.0180" y="0.0" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bk</texture>
+                <texture shader="hud\p3d">cp_test_marker_bl</texture>
             </background>
         </dist>
 
         <!-- Estimated Time of Arrival (ETA) to waypoint display -->
         <eta>
             <hh x="0.0005" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </hh>
             <h x="0.004625" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </h>
-            <mm x="0.00885" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+            <mm x="0.00875" y="0.01" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </mm>
-            <m x="0.012975" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+            <m x="0.012875" y="0.01" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </m>
             <background x="0.0" y="0.01" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bk</texture>
+                <texture shader="hud\p3d">cp_test_marker_bl</texture>
             </background>
         </eta>
 
         <!-- Time to waypoint display -->
         <time>
             <mm x="0.0185" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </mm>
             <m x="0.022625" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </m>
-            <ss x="0.02685" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+            <ss x="0.02675" y="0.01" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </ss>
-            <s x="0.030975" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+            <s x="0.030875" y="0.01" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_digit_6</texture>
             </s>
             <background x="0.0180" y="0.01" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bk</texture>
+                <texture shader="hud\p3d">cp_test_marker_rd</texture>
             </background>
         </time>
 
         <!-- Compass display -->
         <heading>
             <cursor x="0.0045" y="0.02" width="0.026" height="0.026" stretch="1" align="c" heading="1" heading_angle="0">
-                <texture shader="hud\p3d">cp_cursor</texture>
+                <texture shader="hud\p3d">wg_cp_cursor</texture>
             </cursor>
 
             <background x="0.0045" y="0.02" width="0.026" height="0.026" stretch="1" align="c" heading="1" heading_angle="0">
-                <texture shader="hud\p3d">cp_heading</texture>
+                <texture shader="hud\p3d">wg_cp_heading</texture>
             </background>
         </heading>
     </compass>
