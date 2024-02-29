@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : RavenAscendant                                                                           ---
 ---    Edited : NLTP_ASHES                                                                                           ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 29/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define the options in MCM.                                                                     ---
@@ -31,7 +31,11 @@ local defaults = {
 --- @param key string
 --- @return any
 function get_config(key)
-    if ui_mcm then return ui_mcm.get("western_goods/"..key) else return defaults[key] end
+    if western_goods_core.is_mcm_installed() then
+        return ui_mcm.get("western_goods/"..key)
+    else
+        return defaults[key]
+    end
 end
 
 --- Function used to set the value of a given setting defined in MCM.
@@ -39,7 +43,11 @@ end
 --- @param key string
 --- @return any
 function set_config(key,value)
-    if ui_mcm then return ui_mcm.set("western_goods/"..key, value) else defaults[key] = value end
+    if western_goods_core.is_mcm_installed() then
+        return ui_mcm.set("western_goods/"..key, value)
+    else
+        defaults[key] = value
+    end
 end
 
 --- MCM UI definition.
@@ -61,8 +69,6 @@ function on_mcm_load()
          { id="corpse_loot_factor",      type="track",       val=2,    def=1.0,              min=0.0,     max=2.0,    step=0.25                                       },
          { id="max_item_per_corpse",     type="track",       val=2,    def=5,                min=0,       max=5,      step=1                                          },
          { id="divider",                 type="line"                                                                                                                  },
-       --{                               type="title",       text="ui_mcm_western_goods_compatibility_title"                                                          },
-       --{ id="divider",                 type="line"                                                                                                                  },
          {                               type="title",       text="ui_mcm_western_goods_technical_settings_title"                                                     },
          { id="debug_mode",              type="check",       val=1,    def=false                                                                                      },
          { id="addon_removal",           type="check",       val=1,    def=false                                                                                      },
@@ -75,19 +81,13 @@ end
 -- Device Selector Key Integration
 -- ---------------------------------------------------------------------------------------------------------------------
 
-if detector_selector_mcm then
+if western_goods_core.is_device_selector_installed() then
 
     detector_selector_mcm.categories.wg_gps = {
         devices = {
             ["wg_gps"] = 1
         },
         defaults = {keybind = DIK_keys.DIK_B, modifier = 2, second_key = 1}
-    }
-    detector_selector_mcm.categories.wg_minedetect = {
-        devices = {
-            ["wg_minedetect"] = 1
-        },
-        defaults = {keybind = DIK_keys.DIK_B, modifier = 2, second_key = 2}
     }
 
 end

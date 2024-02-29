@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 20/02/2024                                                                                             ---
+---    Date : 29/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -12,6 +12,7 @@
 ---     - This script is responsible for ensuring the player has the required game version and pre-requisites;       ---
 ---     - This script is responsible for cleaning the save-game in case the player decides to remove the addon;      ---
 ---     - This script is the source of truth for the list of items and objects added by the addon.                   ---
+---     - This script is the source of truth to check if other specific addons are installed.                        ---
 ---                                                                                                                  ---
 ---==================================================================================================================---
 
@@ -20,7 +21,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local VERSION                       = "2.5.0"
+local VERSION                       = "2.6.0"
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
@@ -179,16 +180,28 @@ function is_barter_ui_installed()
     return barter_core ~= nil
 end
 
---- Function used to check if the Hideout Furniture is installed.
+--- Function used to check if Hideout Furniture is installed.
 --- @return boolean
 function is_hideout_furniture_installed()
     return ui_furniture_light ~= nil and hf_obj_manager ~= nil
 end
 
---- Function used to check if the Food, Drugs and Drinks Animations (FDDA) is installed.
+--- Function used to check if Food, Drugs and Drinks Animations (FDDA) is installed.
 --- @return boolean
 function is_fdda_installed()
     return enhanced_animations ~= nil
+end
+
+--- Function used to check if the Device Selector Key addon is installed.
+--- @return boolean
+function is_device_selector_installed()
+    return detector_selector_mcm ~= nil
+end
+
+--- Function used to check if the Mod Configuration Menu (MCM) is installed.
+--- @return boolean
+function is_mcm_installed()
+    return ui_mcm ~= nil
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
