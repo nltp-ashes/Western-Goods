@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 05/02/2024                                                                                             ---
+---    Date : 29/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -151,13 +151,32 @@ function as_boolean(var)
     return var
 end
 
---- Function used to clear the code a bit.
+--- Function used to round a number to the closest natural number.
 --- @param num number
 --- @return number
 function round_number(num)
     if not validate_params({num,"round_number"}) then return end
 
     return tostring(math.floor(num+0.5))
+end
+
+--- Function used to wrap a number between a lower and a higher bound.
+--- When the number exceeds the upper bound, it is reset to the lower bound.
+--- E.g. : number_wrap(15, 0, 10) -> 5
+--- @param num number
+--- @param lower_bound number
+--- @param upper_bound number
+--- @return number
+function number_wrap(num, lower_bound, upper_bound)
+    if not validate_params({num,lower_bound,upper_bound,"number_wrap"}) then return end
+    local diff = upper_bound - lower_bound
+    while num < lower_bound do
+        num = num + diff
+    end
+    while num >= upper_bound do
+        num = num - diff
+    end
+    return num
 end
 
 --- Function used to know if there exists a translation for a given game string.
@@ -799,6 +818,27 @@ function bone_hud_visibility(obj, hud_bone, bone, visibility)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- 3D UIs Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used transform digits (as strings) to matching texture descriptions.
+--- E.g. : get_digits_as_textures("hi_", "02", "5") -> "hi_0", "hi_2", "hi_5"
+--- @param prefix string
+--- @param ... strings
+--- @return strings (multiple return values)
+function get_digits_as_textures(prefix, ...)
+    local elems = {...}
+    local textures = {}
+    for _,str in pairs(elems) do
+        for i = 1, #str do
+            local texture = strformat(prefix.."%s", str:sub(i, i))
+            table.insert(textures, texture)
+        end
+    end
+    return unpack(textures)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Validation Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -920,7 +960,8 @@ end
 --- Function used to check if there are NPCs currently in a fight with the player.
 --- @return boolean
 function is_player_fighting()
-    return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
+    local fighting_with = xr_combat_ignore.fighting_with_actor_npcs
+    return not is_empty(fighting_with)
 end
 
 --- Function used to get the real community of the NPC by checking spawn id.
