@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 20/02/2024                                                                                             ---
+---    Date : 29/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.              ---
@@ -97,6 +97,7 @@ function UIGPSLocator:__init() super()
     self.m_update_timer = 0
     self.m_update_freq = 500
     self.m_connectivity = 5
+    self.m_digit_texture_prefix = "gps_num_"
     self.m_level_textures = {
         ["jupiter"]               = "gps_jup",
         ["jupiter_underground"]   = "gps_no_sig",
@@ -153,40 +154,36 @@ function UIGPSLocator:Update()
 
     -- Connectivity
     local conn = self:GetConnectivityTexture()
+    self.m_conn:InitTextureEx(conn, "hud\\p3d")
 
     -- Dist to smart terrain
     local dist1, dist2, dist3, dist4, distl = self:GetDistTextures()
-
-    -- Time of day
-    local time1, time2, time3, time4 = self:GetTimeOfDayTextures()
-
-    -- Date
-    local date1, date2, date3, date4, date5, date6 = self:GetDateTextures()
-
-    -- Level name
-    local lname = self:GetLevelTexture(level.name())
-
-    self.m_lname:InitTextureEx(lname, "hud\\p3d")
-
-    self.m_conn:InitTextureEx(conn, "hud\\p3d")
-
     self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
     self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
     self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
     self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
     self.m_distl:InitTextureEx(distl, "hud\\p3d")
 
+    -- Time of day
+    local time1, time2, time3, time4 = self:GetTimeOfDayTextures()
     self.m_time1:InitTextureEx(time1, "hud\\p3d")
     self.m_time2:InitTextureEx(time2, "hud\\p3d")
     self.m_time3:InitTextureEx(time3, "hud\\p3d")
     self.m_time4:InitTextureEx(time4, "hud\\p3d")
 
+    -- Date
+    local date1, date2, date3, date4, date5, date6 = self:GetDateTextures()
     self.m_date1:InitTextureEx(date1, "hud\\p3d")
     self.m_date2:InitTextureEx(date2, "hud\\p3d")
     self.m_date3:InitTextureEx(date3, "hud\\p3d")
     self.m_date4:InitTextureEx(date4, "hud\\p3d")
     self.m_date5:InitTextureEx(date5, "hud\\p3d")
     self.m_date6:InitTextureEx(date6, "hud\\p3d")
+
+    -- Level name
+    local lname = self:GetLevelTexture(level.name())
+    self.m_lname:InitTextureEx(lname, "hud\\p3d")
+
 end
 
 function UIGPSLocator:ShouldUpdate()
@@ -214,15 +211,7 @@ function UIGPSLocator:GetTimeOfDayTextures()
     local s_hrs = western_goods_utils.as_string(ctt.h, 2)
     local s_mins = western_goods_utils.as_string(ctt.m, 2)
 
-    -- Hours format
-    local time1 = strformat("gps_num_%s", s_hrs:sub(1, 1))
-    local time2 = strformat("gps_num_%s", s_hrs:sub(2, 2))
-
-    -- Mins format
-    local time3 = strformat("gps_num_%s", s_mins:sub(1, 1))
-    local time4 = strformat("gps_num_%s", s_mins:sub(2, 2))
-
-    return time1, time2, time3, time4
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
 end
 
 function UIGPSLocator:GetDateTextures()
@@ -231,19 +220,7 @@ function UIGPSLocator:GetDateTextures()
     local s_month = western_goods_utils.as_string(ctt.M, 2)
     local s_year = western_goods_utils.as_string(ctt.Y, 4)
 
-    -- Day format
-    local date1 = strformat("gps_num_%s", s_day:sub(1, 1))
-    local date2 = strformat("gps_num_%s", s_day:sub(2, 2))
-
-    -- Month format
-    local date3 = strformat("gps_num_%s", s_month:sub(1, 1))
-    local date4 = strformat("gps_num_%s", s_month:sub(2, 2))
-
-    -- Year format
-    local date5 = strformat("gps_num_%s", s_year:sub(3, 3))
-    local date6 = strformat("gps_num_%s", s_year:sub(4, 4))
-
-    return date1, date2, date3, date4, date5, date6
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_day, s_month, s_year)
 end
 
 function UIGPSLocator:GetDistTextures()
@@ -263,13 +240,7 @@ function UIGPSLocator:GetDistTextures()
     -- Get dist number as a 4 char string (5 -> "0005")
     local s_dist = western_goods_utils.as_string(dist, 4)
 
-    -- Distance format
-    local dist1 = strformat("gps_num_%s", s_dist:sub(1, 1))
-    local dist2 = strformat("gps_num_%s", s_dist:sub(2, 2))
-    local dist3 = strformat("gps_num_%s", s_dist:sub(3, 3))
-    local dist4 = strformat("gps_num_%s", s_dist:sub(4, 4))
-
-    return dist1, dist2, dist3, dist4, distl
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist), distl
 end
 
 function UIGPSLocator:FindDistSafeZone()
