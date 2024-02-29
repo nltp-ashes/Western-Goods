@@ -2,7 +2,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 25/02/2024                                                                                            -->
+<!--    Date : 29/02/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    UI Template for the Compass of Western Goods.                                                                -->
@@ -14,12 +14,8 @@
     <compass>
         <!-- Speed display -->
         <speed>
-            <m x="0.004625" y="0.0" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </m>
-            <dm x="0.00875" y="0.0" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </dm>
+            <m x="0.004625" y="0.0" width="0.003625" height="0.009" stretch="1" />
+            <dm x="0.00875" y="0.0" width="0.003625" height="0.009" stretch="1" />
             <background x="0.0" y="0.0" width="0.0170" height="0.009" stretch="1">
                 <texture shader="hud\p3d">cp_test_marker_rd</texture>
             </background>
@@ -27,15 +23,9 @@
 
         <!-- Distance to waypoint display -->
         <dist>
-            <km x="0.0205625" y="0.0" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </km>
-            <hm x="0.0246875" y="0.0" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </hm>
-            <dam x="0.0288125" y="0.0" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </dam>
+            <km x="0.0205625" y="0.0" width="0.003625" height="0.009" stretch="1" />
+            <hm x="0.0246875" y="0.0" width="0.003625" height="0.009" stretch="1" />
+            <dam x="0.0288125" y="0.0" width="0.003625" height="0.009" stretch="1" />
             <background x="0.0180" y="0.0" width="0.0170" height="0.009" stretch="1">
                 <texture shader="hud\p3d">cp_test_marker_bl</texture>
             </background>
@@ -43,18 +33,10 @@
 
         <!-- Estimated Time of Arrival (ETA) to waypoint display -->
         <eta>
-            <hh x="0.0005" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </hh>
-            <h x="0.004625" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </h>
-            <mm x="0.00875" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </mm>
-            <m x="0.012875" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </m>
+            <hh x="0.0005" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <h x="0.004625" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <mm x="0.00875" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <m x="0.012875" y="0.01" width="0.003625" height="0.009" stretch="1" />
             <background x="0.0" y="0.01" width="0.0170" height="0.009" stretch="1">
                 <texture shader="hud\p3d">cp_test_marker_bl</texture>
             </background>
@@ -62,18 +44,10 @@
 
         <!-- Time to waypoint display -->
         <time>
-            <mm x="0.0185" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </mm>
-            <m x="0.022625" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </m>
-            <ss x="0.02675" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </ss>
-            <s x="0.030875" y="0.01" width="0.003625" height="0.009" stretch="1">
-                <texture shader="hud\p3d">wg_cp_digit_6</texture>
-            </s>
+            <mm x="0.0185" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <m x="0.022625" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <ss x="0.02675" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <s x="0.030875" y="0.01" width="0.003625" height="0.009" stretch="1" />
             <background x="0.0180" y="0.01" width="0.0170" height="0.009" stretch="1">
                 <texture shader="hud\p3d">cp_test_marker_rd</texture>
             </background>

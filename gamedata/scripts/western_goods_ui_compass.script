@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 25/02/2024                                                                                             ---
+---    Date : 29/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -85,6 +85,7 @@ function UICompass:__init() super()
     -- Build variables
     self.m_update_timer = 0
     self.m_update_freq = 16
+    self.m_digit_texture_prefix = "wg_cp_digit_"
 end
 
 function UICompass:__finalize()
@@ -106,6 +107,31 @@ function UICompass:Update()
 
     -- Update heading
     self.m_heading_bg:SetHeading(heading_rad)
+
+    -- Speed
+    local speed1, speed2 = self:GetSpeedTextures()
+    self.m_speed_m:InitTextureEx(speed1, "hud\\p3d")
+    self.m_speed_dm:InitTextureEx(speed2, "hud\\p3d")
+
+    -- Distance to waypoint
+    local dist1, dist2, dist3 = self:GetDistTextures()
+    self.m_dist_km:InitTextureEx(dist1, "hud\\p3d")
+    self.m_dist_hm:InitTextureEx(dist2, "hud\\p3d")
+    self.m_dist_dam:InitTextureEx(dist3, "hud\\p3d")
+
+    -- Estimated Time of Arrival (ETA) to waypoint
+    local eta1, eta2, eta3, eta4 = self:GetETATextures()
+    self.m_eta_hh:InitTextureEx(eta1, "hud\\p3d")
+    self.m_eta_h:InitTextureEx(eta2, "hud\\p3d")
+    self.m_eta_mm:InitTextureEx(eta3, "hud\\p3d")
+    self.m_eta_m:InitTextureEx(eta4, "hud\\p3d")
+
+    -- Time to waypoint
+    local time1, time2, time3, time4 = self:GetTimeTextures()
+    self.m_time_mm:InitTextureEx(time1, "hud\\p3d")
+    self.m_time_m:InitTextureEx(time2, "hud\\p3d")
+    self.m_time_ss:InitTextureEx(time3, "hud\\p3d")
+    self.m_time_s:InitTextureEx(time4, "hud\\p3d")
 end
 
 function UICompass:ShouldUpdate()
@@ -132,4 +158,34 @@ function UICompass:GetHeadingDegrees()
     local heading_rad = self:GetHeadingRadians()
     local heading_deg = heading_rad * DEGREES_PER_RADIAN
     return western_goods_utils.number_wrap(heading_deg, 0, 360)
+end
+
+function UICompass:GetSpeedTextures()
+    local speed = math.random(0, 99)
+    local s_speed = western_goods_utils.as_string(speed, 2)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_speed)
+end
+
+function UICompass:GetDistTextures()
+    local dist = math.random(0, 999)
+    local s_dist = western_goods_utils.as_string(dist, 3)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)
+end
+
+function UICompass:GetETATextures()
+    local ctt = utils_data.CTime_to_table(game.get_game_time())
+    local s_hrs = western_goods_utils.as_string(ctt.h, 2)
+    local s_mins = western_goods_utils.as_string(ctt.m, 2)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
+end
+
+function UICompass:GetTimeTextures()
+    local ctt = utils_data.CTime_to_table(game.get_game_time())
+    local s_hrs = western_goods_utils.as_string(ctt.h, 2)
+    local s_mins = western_goods_utils.as_string(ctt.m, 2)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
 end
