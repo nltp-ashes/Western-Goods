@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 29/02/2024                                                                                             ---
+---    Date : 01/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -294,7 +294,7 @@ function get_distance(position_1, position_2)
     return position_1:distance_to(position_2) or 100000
 end
 
---- Function used to get the distance between two points in on the X and Z axis.
+--- Function used to get the distance squared between two points in on the X and Z axis.
 --- @param position_1 vector
 --- @param position_2 vector
 --- @return number
@@ -302,6 +302,32 @@ function get_distance_sqr(position_1, position_2)
     if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
 
     return position_1:distance_to_sqr(position_2) or 10000000000
+end
+
+--- Function used to get the distance between two points in on the X and Z axis, using global positions.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
+function get_distance_global(se_obj_1, se_obj_2)
+    if not validate_params({se_obj_1,se_obj_2,"get_distance_global"}) then return end
+
+    local pos_1 = global_position.from(se_obj_1)
+    local pos_2 = global_position.from(se_obj_2)
+
+    return pos_1:distance_to_xz(pos_2) or 100000
+end
+
+--- Function used to get the distance squared between two points in on the X and Z axis, using global positions.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
+function get_distance_global_sqr(se_obj_1, se_obj_2)
+    if not validate_params({se_obj_1,se_obj_2,"get_distance_global_sqr"}) then return end
+
+    local pos_1 = global_position.from(se_obj_1)
+    local pos_2 = global_position.from(se_obj_2)
+
+    return pos_1:distance_to_xz_sqr(pos_2) or 100000
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -836,6 +862,30 @@ function get_digits_as_textures(prefix, ...)
         end
     end
     return unpack(textures)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Task Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the target of a task, if it exists.
+--- @param tsk CGeneralTask
+--- @return alife_object
+function task_get_target(tsk)
+    local target_id = tsk.current_target
+    return target_id and alife_object(target_id)
+end
+
+--- Function used to get the current active task of the player, if the player has any task at all.
+--- @return CGeneralTask
+function task_get_active()
+    local tm = task_manager.get_task_manager()
+    for id,tsk in pairs(tm.task_info) do
+        if db.actor:is_active_task(tsk.t) then
+            return tsk
+        end
+    end
+    return nil
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

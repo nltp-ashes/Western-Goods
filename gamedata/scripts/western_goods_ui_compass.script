@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 29/02/2024                                                                                             ---
+---    Date : 01/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -168,7 +168,17 @@ function UICompass:GetSpeedTextures()
 end
 
 function UICompass:GetDistTextures()
-    local dist = math.random(0, 999)
+    local tsk_active = western_goods_utils.task_get_active()
+    local tsk_target = tsk_active and western_goods_utils.task_get_target(tsk_active)
+
+    if not tsk_target then
+        return "rf_dash_r", "rf_dash_r", "rf_dash_r"
+    end
+
+    local dist = western_goods_utils.get_distance_global(alife():actor(), tsk_target)
+    dist = dist / 10 -- convert from meters to decameters
+    dist = clamp(math.floor(dist), 0, 999) -- round and clamp
+
     local s_dist = western_goods_utils.as_string(dist, 3)
 
     return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)
