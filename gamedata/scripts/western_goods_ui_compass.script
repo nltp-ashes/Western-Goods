@@ -160,42 +160,61 @@ function UICompass:GetHeadingDegrees()
     return western_goods_utils.number_wrap(heading_deg, 0, 360)
 end
 
-function UICompass:GetSpeedTextures()
+function UICompass:GetSpeed()
     local speed = math.random(0, 99)
+    return speed
+end
+
+function UICompass:GetDist()
+    local tsk_active = western_goods_utils.task_get_active()
+    local tsk_target = tsk_active and western_goods_utils.task_get_target(tsk_active)
+
+    if not tsk_target then
+        return nil
+    end
+
+    -- Get distance (/10 to convert from meters to decameters)
+    local dist = western_goods_utils.get_distance_global(alife():actor(), tsk_target) / 10
+
+    return clamp(math.floor(dist), 0, 999)
+end
+
+function UICompass:GetETA()
+    local ctt = utils_data.CTime_to_table(game.get_game_time())
+    return ctt.h, ctt.m
+end
+
+function UICompass:GetTime()
+    local ctt = utils_data.CTime_to_table(game.get_game_time())
+    return ctt.h, ctt.m
+end
+
+function UICompass:GetSpeedTextures()
+    local speed = self:GetSpeed()
     local s_speed = western_goods_utils.as_string(speed, 2)
 
     return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_speed)
 end
 
 function UICompass:GetDistTextures()
-    local tsk_active = western_goods_utils.task_get_active()
-    local tsk_target = tsk_active and western_goods_utils.task_get_target(tsk_active)
-
-    if not tsk_target then
-        return "rf_dash_r", "rf_dash_r", "rf_dash_r"
-    end
-
-    local dist = western_goods_utils.get_distance_global(alife():actor(), tsk_target)
-    dist = dist / 10 -- convert from meters to decameters
-    dist = clamp(math.floor(dist), 0, 999) -- round and clamp
-
+    local dist = self:GetDist()
     local s_dist = western_goods_utils.as_string(dist, 3)
 
     return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)
 end
 
 function UICompass:GetETATextures()
-    local ctt = utils_data.CTime_to_table(game.get_game_time())
-    local s_hrs = western_goods_utils.as_string(ctt.h, 2)
-    local s_mins = western_goods_utils.as_string(ctt.m, 2)
+    local hrs, mins = self:GetETA()
+    local s_hrs = western_goods_utils.as_string(hrs, 2)
+    local s_mins = western_goods_utils.as_string(mins, 2)
 
     return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
 end
 
 function UICompass:GetTimeTextures()
-    local ctt = utils_data.CTime_to_table(game.get_game_time())
-    local s_hrs = western_goods_utils.as_string(ctt.h, 2)
-    local s_mins = western_goods_utils.as_string(ctt.m, 2)
+    local hrs, mins = self:GetTime()
+    local s_hrs = western_goods_utils.as_string(hrs, 2)
+    local s_mins = western_goods_utils.as_string(mins, 2)
 
     return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
 end
