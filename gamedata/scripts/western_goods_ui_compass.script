@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 01/03/2024                                                                                             ---
+---    Date : 03/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -157,12 +157,15 @@ end
 function UICompass:GetHeadingDegrees()
     local heading_rad = self:GetHeadingRadians()
     local heading_deg = heading_rad * DEGREES_PER_RADIAN
+
     return western_goods_utils.number_wrap(heading_deg, 0, 360)
 end
 
 function UICompass:GetSpeed()
-    local speed = math.random(0, 99)
-    return speed
+    local movement = db.actor:get_movement_speed()
+    local speed = western_goods_utils.vec_magnitude_xz(movement)
+
+    return clamp(math.floor(speed), 0, 999)
 end
 
 function UICompass:GetDist()
@@ -198,6 +201,11 @@ end
 
 function UICompass:GetDistTextures()
     local dist = self:GetDist()
+
+    if not dist then
+        return "rf_dash_r", "rf_dash_r", "rf_dash_r"
+    end
+
     local s_dist = western_goods_utils.as_string(dist, 3)
 
     return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)

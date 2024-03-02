@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 01/03/2024                                                                                             ---
+---    Date : 03/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -1076,4 +1076,11 @@ function get_section_price(section, count, default)
     local discount = factor * eco_factor
 
     return (cost * discount) * count
+end
+
+function vec_magnitude_xz(vec)
+    if not validate_params({vec,"vec_magnitude_xz"}) then return end
+
+    local vec_xz = vector():set(vec.x, 0, vec.z)
+    return vec_xz:magnitude()
 end
