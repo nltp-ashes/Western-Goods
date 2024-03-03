@@ -85,6 +85,7 @@ function UICompass:__init() super()
     -- Build variables
     self.m_update_timer = 0
     self.m_update_freq = 16
+    self.m_idle_speed_threshold = 1
     self.m_digit_texture_prefix = "wg_cp_digit_"
 end
 
@@ -176,8 +177,8 @@ function UICompass:GetDist()
         return nil
     end
 
-    -- Get distance (/10 to convert from meters to decameters)
-    local dist = western_goods_utils.get_distance_global(alife():actor(), tsk_target) / 10
+    local dist = western_goods_utils.get_distance_global(alife():actor(), tsk_target)
+    dist = dist / 10 -- /10 to convert from meters to decameters
 
     return clamp(math.floor(dist), 0, 999)
 end
@@ -188,8 +189,27 @@ function UICompass:GetETA()
 end
 
 function UICompass:GetTime()
-    local ctt = utils_data.CTime_to_table(game.get_game_time())
-    return ctt.h, ctt.m
+    local dist = self:GetDist()
+
+    if not dist then
+        return nil
+    end
+
+    local speed = self:GetSpeed()
+
+    if speed < self.m_idle_speed_threshold then
+        return nil
+    end
+
+    local time_to_dest_sec = dist * 10 / speed -- x10 to convert from decameters to meters
+    local time_to_dest_ct = utils_data.CTime_from_table({ Y=1, M=1, D=1, h=0, m=0, s=time_to_dest_sec, ms=0 })
+    local time_to_dest_ctt = utils_data.CTime_to_table(time_to_dest_ct)
+
+    if time_to_dest_ctt.h > 0 then
+        return time_to_dest_ctt.h, time_to_dest_ctt.m
+    else
+        return time_to_dest_ctt.m, time_to_dest_ctt.s
+    end
 end
 
 function UICompass:GetSpeedTextures()
@@ -221,6 +241,11 @@ end
 
 function UICompass:GetTimeTextures()
     local hrs, mins = self:GetTime()
+
+    if not hrs or not mins then
+        return "rf_dash_g", "rf_dash_g", "rf_dash_g", "rf_dash_g"
+    end
+
     local s_hrs = western_goods_utils.as_string(hrs, 2)
     local s_mins = western_goods_utils.as_string(mins, 2)
 
