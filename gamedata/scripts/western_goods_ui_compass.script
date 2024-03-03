@@ -169,6 +169,13 @@ function UICompass:GetSpeed()
     return clamp(math.floor(speed), 0, 999)
 end
 
+function UICompass:GetSpeedTextures()
+    local speed = self:GetSpeed()
+    local s_speed = western_goods_utils.as_string(speed, 2)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_speed)
+end
+
 function UICompass:GetDist()
     local tsk_active = western_goods_utils.task_get_active()
     local tsk_target = tsk_active and western_goods_utils.task_get_target(tsk_active)
@@ -183,9 +190,54 @@ function UICompass:GetDist()
     return clamp(math.floor(dist), 0, 999)
 end
 
+function UICompass:GetDistTextures()
+    local dist = self:GetDist()
+
+    if not dist then
+        return "rf_dash_r", "rf_dash_r", "rf_dash_r"
+    end
+
+    local s_dist = western_goods_utils.as_string(dist, 3)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)
+end
+
 function UICompass:GetETA()
-    local ctt = utils_data.CTime_to_table(game.get_game_time())
-    return ctt.h, ctt.m
+    local dist = self:GetDist()
+
+    if not dist then
+        return nil
+    end
+
+    local speed = self:GetSpeed()
+
+    if speed < self.m_idle_speed_threshold then
+        return nil
+    end
+
+    local time_to_dest_sec = dist * 10 / speed -- x10 to convert from decameters to meters
+    local time_at_dest_sec = utils_data.CTimeAddSec(game.get_game_time(), time_to_dest_sec)
+    local time_at_dest_ct = utils_data.CTime_from_table({ Y=1, M=1, D=1, h=0, m=0, s=time_at_dest_sec, ms=0 })
+    local time_at_dest_ctt = utils_data.CTime_to_table(time_at_dest_ct)
+
+    if time_at_dest_ctt.h > 0 then
+        return time_at_dest_ctt.h, time_at_dest_ctt.m
+    else
+        return time_at_dest_ctt.m, time_at_dest_ctt.s
+    end
+end
+
+function UICompass:GetETATextures()
+    local hrs, mins = self:GetETA()
+
+    if not hrs or not mins then
+        return "rf_dash_g", "rf_dash_g", "rf_dash_g", "rf_dash_g"
+    end
+
+    local s_hrs = western_goods_utils.as_string(hrs, 2)
+    local s_mins = western_goods_utils.as_string(mins, 2)
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
 end
 
 function UICompass:GetTime()
@@ -210,33 +262,6 @@ function UICompass:GetTime()
     else
         return time_to_dest_ctt.m, time_to_dest_ctt.s
     end
-end
-
-function UICompass:GetSpeedTextures()
-    local speed = self:GetSpeed()
-    local s_speed = western_goods_utils.as_string(speed, 2)
-
-    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_speed)
-end
-
-function UICompass:GetDistTextures()
-    local dist = self:GetDist()
-
-    if not dist then
-        return "rf_dash_r", "rf_dash_r", "rf_dash_r"
-    end
-
-    local s_dist = western_goods_utils.as_string(dist, 3)
-
-    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)
-end
-
-function UICompass:GetETATextures()
-    local hrs, mins = self:GetETA()
-    local s_hrs = western_goods_utils.as_string(hrs, 2)
-    local s_mins = western_goods_utils.as_string(mins, 2)
-
-    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hrs, s_mins)
 end
 
 function UICompass:GetTimeTextures()
