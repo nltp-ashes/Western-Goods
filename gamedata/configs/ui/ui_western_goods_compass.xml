@@ -2,7 +2,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 29/02/2024                                                                                            -->
+<!--    Date : 05/03/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    UI Template for the Compass of Western Goods.                                                                -->
@@ -17,17 +17,20 @@
             <m x="0.004625" y="0.0" width="0.003625" height="0.009" stretch="1" />
             <dm x="0.00875" y="0.0" width="0.003625" height="0.009" stretch="1" />
             <background x="0.0" y="0.0" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+                <texture shader="hud\p3d">wg_cp_background</texture>
             </background>
         </speed>
 
         <!-- Distance to waypoint display -->
         <dist>
-            <km x="0.0205625" y="0.0" width="0.003625" height="0.009" stretch="1" />
-            <hm x="0.0246875" y="0.0" width="0.003625" height="0.009" stretch="1" />
-            <dam x="0.0288125" y="0.0" width="0.003625" height="0.009" stretch="1" />
-            <background x="0.0180" y="0.0" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+            <km x="0.0205" y="0.0" width="0.003625" height="0.009" stretch="1" />
+            <dot x="0.0225625" y="0.0" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_char_dot</texture>
+            </dot>
+            <hm x="0.024625" y="0.0" width="0.003625" height="0.009" stretch="1" />
+            <dam x="0.02875" y="0.0" width="0.003625" height="0.009" stretch="1" />
+            <background x="0.0179375" y="0.0" width="0.0170" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_background</texture>
             </background>
         </dist>
 
@@ -35,21 +38,27 @@
         <eta>
             <hh x="0.0005" y="0.01" width="0.003625" height="0.009" stretch="1" />
             <h x="0.004625" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <dots x="0.0066875" y="0.01" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_char_dots</texture>
+            </dots>
             <mm x="0.00875" y="0.01" width="0.003625" height="0.009" stretch="1" />
             <m x="0.012875" y="0.01" width="0.003625" height="0.009" stretch="1" />
             <background x="0.0" y="0.01" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_bl</texture>
+                <texture shader="hud\p3d">wg_cp_background</texture>
             </background>
         </eta>
 
         <!-- Time to waypoint display -->
         <time>
-            <mm x="0.0185" y="0.01" width="0.003625" height="0.009" stretch="1" />
-            <m x="0.022625" y="0.01" width="0.003625" height="0.009" stretch="1" />
-            <ss x="0.02675" y="0.01" width="0.003625" height="0.009" stretch="1" />
-            <s x="0.030875" y="0.01" width="0.003625" height="0.009" stretch="1" />
-            <background x="0.0180" y="0.01" width="0.0170" height="0.009" stretch="1">
-                <texture shader="hud\p3d">cp_test_marker_rd</texture>
+            <mm x="0.0184375" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <m x="0.0225625" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <dots x="0.024625" y="0.01" width="0.003625" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_char_dots</texture>
+            </dots>
+            <ss x="0.0266875" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <s x="0.0308125" y="0.01" width="0.003625" height="0.009" stretch="1" />
+            <background x="0.0179375" y="0.01" width="0.0170" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_background</texture>
             </background>
         </time>
 

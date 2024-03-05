@@ -2,7 +2,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 25/02/2024                                                                                            -->
+<!--    Date : 05/03/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Texture descriptions for UI elements of the GPS Locator of Western Goods.                                    -->
@@ -111,22 +111,41 @@
 
     <!-- Compass -->
     <file name="ui\items\ui_compass.dds">
-        <texture id="cp_test_marker_bk"   x="497"     y="96"     width="2"    height="2" />
-        <texture id="cp_test_marker_rd"   x="495"     y="180"     width="2"   height="2" />
-        <texture id="cp_test_marker_bl"   x="495"     y="806"     width="2"   height="2" />
-        <texture id="wg_cp_heading"       x="0"       y="0"      width="1024"    height="1024" />
-        <texture id="wg_cp_cursor"        x="1024"    y="0"      width="1024"    height="1024" />
+        <texture id="cp_test_marker_bk"    x="497"     y="96"     width="2"       height="2" />
+        <texture id="cp_test_marker_rd"    x="495"     y="180"    width="2"       height="2" />
+        <texture id="cp_test_marker_bl"    x="495"     y="806"    width="2"       height="2" />
+        <texture id="wg_cp_heading"        x="0"       y="0"      width="1024"    height="1024" />
+        <texture id="wg_cp_cursor"         x="1024"    y="0"      width="1024"    height="1024" />
     </file>
     <file name="ui\items\ui_compass_new.dds">
-        <texture id="wg_cp_digit_0"     x="0"       y="0"      width="200"     height="497" />
-        <texture id="wg_cp_digit_1"     x="200"     y="0"      width="200"     height="497" />
-        <texture id="wg_cp_digit_2"     x="400"     y="0"      width="200"     height="497" />
-        <texture id="wg_cp_digit_3"     x="600"     y="0"      width="200"     height="497" />
-        <texture id="wg_cp_digit_4"     x="800"     y="0"      width="200"     height="497" />
-        <texture id="wg_cp_digit_5"     x="0"       y="497"    width="200"     height="497" />
-        <texture id="wg_cp_digit_6"     x="200"     y="497"    width="200"     height="497" />
-        <texture id="wg_cp_digit_7"     x="400"     y="497"    width="200"     height="497" />
-        <texture id="wg_cp_digit_8"     x="600"     y="497"    width="200"     height="497" />
-        <texture id="wg_cp_digit_9"     x="800"     y="497"    width="200"     height="497" />
+        <!-- Digits -->
+        <texture id="wg_cp_digit_0"         x="0"      y="0"      width="120"    height="210" />
+        <texture id="wg_cp_digit_1"         x="120"    y="0"      width="120"    height="210" />
+        <texture id="wg_cp_digit_2"         x="240"    y="0"      width="120"    height="210" />
+        <texture id="wg_cp_digit_3"         x="360"    y="0"      width="120"    height="210" />
+        <texture id="wg_cp_digit_4"         x="480"    y="0"      width="120"    height="210" />
+        <texture id="wg_cp_digit_5"         x="0"      y="210"    width="120"    height="210" />
+        <texture id="wg_cp_digit_6"         x="120"    y="210"    width="120"    height="210" />
+        <texture id="wg_cp_digit_7"         x="240"    y="210"    width="120"    height="210" />
+        <texture id="wg_cp_digit_8"         x="360"    y="210"    width="120"    height="210" />
+        <texture id="wg_cp_digit_9"         x="480"    y="210"    width="120"    height="210" />
+
+        <!-- Characters -->
+        <texture id="wg_cp_char_dash"       x="600"    y="0"      width="120"    height="210" />
+        <texture id="wg_cp_char_dot"        x="720"    y="420"    width="120"    height="210" />
+        <texture id="wg_cp_char_dots"       x="600"    y="210"    width="120"    height="210" />
+
+        <!-- Units -->
+        <texture id="wg_cp_unit_ms"         x="720"    y="0"      width="240"    height="210" />
+        <texture id="wg_cp_unit_km"         x="720"    y="210"    width="240"    height="210" />
+
+        <!-- Labels -->
+        <texture id="wg_cp_label_speed"     x="0"      y="420"    width="360"    height="105" />
+        <texture id="wg_cp_label_dist"      x="360"    y="420"    width="360"    height="105" />
+        <texture id="wg_cp_label_eta"       x="0"      y="525"    width="360"    height="105" />
+        <texture id="wg_cp_label_time"      x="360"    y="525"    width="360"    height="105" />
+
+        <!-- Background -->
+        <texture id="wg_cp_background"      x="0"      y="782"    width="500"    height="242" />
     </file>
 </w>
