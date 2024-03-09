@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 05/03/2024                                                                                             ---
+---    Date : 09/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -55,18 +55,23 @@ function UICompass:__init() super()
 
     self.m_xml:InitWindow("compass:speed", 0, self)
     self.m_speed_bg = self.m_xml:InitStatic("compass:speed:background", self)
+    self.m_speed_label = self.m_xml:InitStatic("compass:speed:label", self)
     self.m_speed_m = self.m_xml:InitStatic("compass:speed:m", self)
     self.m_speed_dm = self.m_xml:InitStatic("compass:speed:dm", self)
+    self.m_speed_unit = self.m_xml:InitStatic("compass:speed:unit", self)
 
     self.m_xml:InitWindow("compass:dist", 0, self)
     self.m_dist_bg = self.m_xml:InitStatic("compass:dist:background", self)
+    self.m_dist_label = self.m_xml:InitStatic("compass:dist:label", self)
     self.m_dist_km = self.m_xml:InitStatic("compass:dist:km", self)
     self.m_dist_dot = self.m_xml:InitStatic("compass:dist:dot", self)
     self.m_dist_hm = self.m_xml:InitStatic("compass:dist:hm", self)
     self.m_dist_dam = self.m_xml:InitStatic("compass:dist:dam", self)
+    self.m_dist_unit = self.m_xml:InitStatic("compass:dist:unit", self)
 
     self.m_xml:InitWindow("compass:eta", 0, self)
     self.m_eta_bg = self.m_xml:InitStatic("compass:eta:background", self)
+    self.m_eta_label = self.m_xml:InitStatic("compass:eta:label", self)
     self.m_eta_hh = self.m_xml:InitStatic("compass:eta:hh", self)
     self.m_eta_h = self.m_xml:InitStatic("compass:eta:h", self)
     self.m_eta_dots = self.m_xml:InitStatic("compass:eta:dots", self)
@@ -75,6 +80,7 @@ function UICompass:__init() super()
 
     self.m_xml:InitWindow("compass:time", 0, self)
     self.m_time_bg = self.m_xml:InitStatic("compass:time:background", self)
+    self.m_time_label = self.m_xml:InitStatic("compass:time:label", self)
     self.m_time_mm = self.m_xml:InitStatic("compass:time:mm", self)
     self.m_time_m = self.m_xml:InitStatic("compass:time:m", self)
     self.m_time_dots = self.m_xml:InitStatic("compass:time:dots", self)
@@ -168,6 +174,7 @@ end
 function UICompass:GetSpeed()
     local movement = db.actor:get_movement_speed()
     local speed = western_goods_utils.vec_magnitude_xz(movement)
+    speed = speed * 3.6 -- x3.6 to convert from m/s to km/h
 
     return clamp(math.floor(speed), 0, 999)
 end
