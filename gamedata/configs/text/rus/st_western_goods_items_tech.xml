@@ -154,11 +154,11 @@
     </string>
 
     <string id="st_wg_rangefinder">
-        <text>Ћазерный дальномер SigSauer KILO5K</text>
+        <text>SigSauer KILO5K</text>
     </string>
 
     <string id="st_wg_rangefinder_s">
-        <text>ƒальномер KILO5K</text>
+        <text>SigSauer KILO5K</text>
     </string>
 
     <string id="st_wg_rangefinder_descr">
@@ -171,6 +171,26 @@
             %c[d_blue] Х %c[ui_gray_2] импортный\n
             %c[d_cyan] Х %c[ui_gray_2] ценна€ вещь\n
             %c[d_red] Х %c[ui_gray_2] возможно использовать\n
+        </text>
+    </string>
+
+    <string id="st_wg_compass">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="st_wg_compass_s">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="st_wg_compass_descr">
+        <text>
+            Garmin eTrex 10 Ч портативное GPS-устройство. —ери€ eTrex известна своей прочной конструкцией, доступной ценой и длительным временем автономной работы. eTrex 10 оснащен 2,2-дюймовым дисплеем, который легко читаетс€ при любом освещении. ¬ среднем он может работать в течение 25 часов от 2 батареек типа јј.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] Х %c[ui_gray_2] technological item\n
+            %c[d_blue] Х %c[ui_gray_2] imported\n
+            %c[d_cyan] Х %c[ui_gray_2] valuable\n
+            %c[d_orange] Х %c[ui_gray_2] usable\n
         </text>
     </string>
 
