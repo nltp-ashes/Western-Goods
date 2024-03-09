@@ -83,13 +83,11 @@
 
         <!-- Compass display -->
         <heading>
-            <cursor x="0.0045" y="0.02" width="0.026" height="0.026" stretch="1" align="c" heading="1" heading_angle="0">
+            <cursor x="0.005" y="0.02" width="0.025" height="0.025" stretch="1" align="c" heading="1" heading_angle="0">
                 <texture shader="hud\p3d">wg_cp_cursor</texture>
             </cursor>
 
-            <background x="0.0045" y="0.02" width="0.026" height="0.026" stretch="1" align="c" heading="1" heading_angle="0">
-                <texture shader="hud\p3d">wg_cp_heading</texture>
-            </background>
+            <background x="0.005" y="0.02" width="0.025" height="0.025" stretch="1" align="c" heading="1" heading_angle="0" />
         </heading>
     </compass>
 </w>

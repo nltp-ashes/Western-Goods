@@ -111,13 +111,6 @@ function UICompass:Update()
         return
     end
 
-    -- Get heading
-    local heading_rad = self:GetHeadingRadians()
-    local heading_deg = self:GetHeadingDegrees()
-
-    -- Update heading
-    self.m_heading_bg:SetHeading(heading_rad)
-
     -- Speed
     local speed1, speed2 = self:GetSpeedTextures()
     self.m_speed_m:InitTextureEx(speed1, "hud\\p3d")
@@ -142,6 +135,18 @@ function UICompass:Update()
     self.m_time_m:InitTextureEx(time2, "hud\\p3d")
     self.m_time_ss:InitTextureEx(time3, "hud\\p3d")
     self.m_time_s:InitTextureEx(time4, "hud\\p3d")
+
+    -- Compass
+    local heading_rad = self:GetHeadingRadians()
+    if western_goods_mcm.get_config("compass_north_lock") then
+        self.m_heading_bg:InitTextureEx("wg_cp_heading_locked", "hud\\p3d")
+        self.m_heading_bg:SetHeading(0)
+        self.m_heading_cursor:SetHeading(heading_rad)
+    else
+        self.m_heading_bg:InitTextureEx("wg_cp_heading_unlocked", "hud\\p3d")
+        self.m_heading_bg:SetHeading(heading_rad)
+        self.m_heading_cursor:SetHeading(0)
+    end
 end
 
 function UICompass:ShouldUpdate()
@@ -162,13 +167,6 @@ function UICompass:GetHeadingRadians()
     local dz = position.z - direction.z
 
     return math.atan2(dx, dz)
-end
-
-function UICompass:GetHeadingDegrees()
-    local heading_rad = self:GetHeadingRadians()
-    local heading_deg = heading_rad * DEGREES_PER_RADIAN
-
-    return western_goods_utils.number_wrap(heading_deg, 0, 360)
 end
 
 function UICompass:GetSpeed()
