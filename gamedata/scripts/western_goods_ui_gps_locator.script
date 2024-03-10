@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 29/02/2024                                                                                             ---
+---    Date : 10/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off ui_dosimeter.script by <unknown>, script used to handle the UI for the 3D GPS Locator.              ---
@@ -157,12 +157,11 @@ function UIGPSLocator:Update()
     self.m_conn:InitTextureEx(conn, "hud\\p3d")
 
     -- Dist to smart terrain
-    local dist1, dist2, dist3, dist4, distl = self:GetDistTextures()
+    local dist1, dist2, dist3, dist4 = self:GetDistTextures()
     self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
     self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
     self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
     self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
-    self.m_distl:InitTextureEx(distl, "hud\\p3d")
 
     -- Time of day
     local time1, time2, time3, time4 = self:GetTimeOfDayTextures()
@@ -179,6 +178,10 @@ function UIGPSLocator:Update()
     self.m_date4:InitTextureEx(date4, "hud\\p3d")
     self.m_date5:InitTextureEx(date5, "hud\\p3d")
     self.m_date6:InitTextureEx(date6, "hud\\p3d")
+
+    -- Label
+    local distl = self:GetLabelTexture()
+    self.m_distl:InitTextureEx(distl, "hud\\p3d")
 
     -- Level name
     local lname = self:GetLevelTexture(level.name())
@@ -224,13 +227,11 @@ function UIGPSLocator:GetDateTextures()
 end
 
 function UIGPSLocator:GetDistTextures()
-    local dist, distl = nil, nil
+    local dist = nil
 
     if GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
-        distl = "gps_dist_safe"
         dist = self:FindDistSafeZone()
     else
-        distl = "gps_dist"
         dist = self:FindDistWorld() or self:FindDistPDA()
     end
 
@@ -240,7 +241,15 @@ function UIGPSLocator:GetDistTextures()
     -- Get dist number as a 4 char string (5 -> "0005")
     local s_dist = western_goods_utils.as_string(dist, 4)
 
-    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist), distl
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_dist)
+end
+
+function UIGPSLocator:GetLabelTexture()
+    if GetEvent("surge", "state") or GetEvent("psi_storm", "state") then
+        return "gps_dist_safe"
+    else
+        return "gps_dist"
+    end
 end
 
 function UIGPSLocator:FindDistSafeZone()
