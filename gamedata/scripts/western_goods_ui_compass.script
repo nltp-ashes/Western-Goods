@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 09/03/2024                                                                                             ---
+---    Date : 21/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the 3D UI for the compass device.                                                       ---
@@ -137,11 +137,11 @@ function UICompass:Update()
     self.m_time_s:InitTextureEx(time4, "hud\\p3d")
 
     -- Compass
-    local heading_rad = self:GetHeadingRadians()
+    local heading_rad = self:GetHeading()
     if western_goods_mcm.get_config("compass_north_lock") then
         self.m_heading_bg:InitTextureEx("wg_cp_heading_locked", "hud\\p3d")
         self.m_heading_bg:SetHeading(0)
-        self.m_heading_cursor:SetHeading(heading_rad)
+        self.m_heading_cursor:SetHeading(-heading_rad)
     else
         self.m_heading_bg:InitTextureEx("wg_cp_heading_unlocked", "hud\\p3d")
         self.m_heading_bg:SetHeading(heading_rad)
@@ -159,7 +159,7 @@ function UICompass:ShouldUpdate()
     end
 end
 
-function UICompass:GetHeadingRadians()
+function UICompass:GetHeading()
     local position = vector():set(0, 0, 0)
     local direction = vector():set(0, 0, 0):sub(device().cam_dir)
 
