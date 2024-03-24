@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 23/02/2024                                                                                             ---
+---    Date : 24/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -25,6 +25,29 @@ local dbg_printf                       = western_goods_utils.dbg_printf
 --- @return nil
 function bind(obj)
     obj:bind_object(lighter_binder(obj).binder)
+end
+
+--- Function used to display the fuel level of the lighter in the inventory.
+--- @param obj game_object
+--- @param sec string
+--- @param str string
+function build_desc_header(obj, sec, str)
+    str = str or western_goods_utils.get_translation(ini_sys:r_string_ex(sec, "description"))
+    if not str then
+        return ""
+    end
+
+    if not western_goods_utils.validate_is_lighter(obj) then
+        return western_goods_monkey_patches.ui_item_build_desc_header(obj, sec, str)
+    end
+
+    return western_goods_utils.get_translation("st_wg_lighter_header",
+            utils_xml.get_color("pda_blue"),
+            utils_xml.get_color("ui_gray_1"),
+            utils_xml.get_color("pda_blue"),
+            math.ceil(obj:condition() * 100),
+            utils_xml.get_color("ui_gray_1"),
+            western_goods_monkey_patches.ui_item_build_desc_header(obj, sec, str))
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +186,7 @@ function lighter_binder:check_is_primary()
     if det and det:id() == self.object:id() then
         return true
     end
-    if det and ini_sys:r_string_ex(det:section(), "script_binding") == "western_goods_bind_lighter.bind" then
+    if det and western_goods_utils.validate_is_lighter(det) then
         return false
     end
     return true
@@ -207,12 +230,11 @@ function lighter_binder:western_goods_on_campfire_use()
         return
     end
 
-    if self:check_is_drawn() then
-        self:play_animation()
-    end
-
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_campfire_use(self)
     if result then
+        if self:check_is_drawn() then
+            self:play_animation()
+        end
         self:update_fuel(self.m_fuel_consumption_use)
     end
 end
@@ -233,12 +255,11 @@ function lighter_binder:western_goods_on_hideout_furniture_light_use(obj_id)
         return
     end
 
-    if self:check_is_drawn() then
-        self:play_animation()
-    end
-
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_hideout_furniture_light_use(self, obj_id)
     if result then
+        if self:check_is_drawn() then
+            self:play_animation()
+        end
         self:update_fuel(self.m_fuel_consumption_use)
     end
 end
