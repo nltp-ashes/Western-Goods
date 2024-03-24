@@ -166,32 +166,8 @@ end
 -- Monkey-patches
 -- ---------------------------------------------------------------------------------------------------------------------
 
-make_monkey_patch(monkey_patches.ui_item_build_desc_header, function(obj, sec, str)
-    str = str or western_goods_utils.get_translation(ini_sys:r_string_ex(sec, "description"))
-    if not str then
-        return ""
-    end
-
-    if not western_goods_utils.validate_is_lighter(obj) then
-        return this.ui_item_build_desc_header(obj, sec, str)
-    end
-
-    return western_goods_utils.get_translation("st_wg_lighter_header",
-            utils_xml.get_color("pda_blue"),
-            utils_xml.get_color("ui_gray_1"),
-            utils_xml.get_color("pda_blue"),
-            math.ceil(obj:condition() * 100),
-            utils_xml.get_color("ui_gray_1"),
-            this.ui_item_build_desc_header(obj, sec, str))
-end)
-
 make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
-    local is_on_before = hf_obj_manager.get_data(obj_id).is_on
-    this.hideout_furniture_light(obj_id)
-    local is_on_after = hf_obj_manager.get_data(obj_id).is_on
-    if not is_on_before and not is_on_after then
-        SendScriptCallback("western_goods_on_hideout_furniture_light_use", obj_id)
-    end
+    western_goods_bind_fire_source.toggle_light(obj_id)
 end)
 
 make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
@@ -245,7 +221,9 @@ make_monkey_patch(monkey_patches.surge_manager_get_task_target, function()
 end)
 
 make_monkey_patch(monkey_patches.arszi_psy_get_psy_health_regeneration, function()
-    local base_psy_heal = this.arszi_psy_get_psy_health_regeneration() or 0
-    local bonus_psy_heal_magazine = western_goods_ui_readable.get_psy_health_regeneration_magazine() or 0
-    return base_psy_heal + bonus_psy_heal_magazine
+    return western_goods_ui_readable.get_psy_health_regeneration()
+end)
+
+make_monkey_patch(monkey_patches.ui_item_build_desc_header, function(obj, sec, str)
+    return western_goods_bind_lighter.build_desc_header(obj, sec, str)
 end)
