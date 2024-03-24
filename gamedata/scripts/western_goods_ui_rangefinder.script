@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/06/2023                                                                                             ---
+---    Date : 29/02/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the UI for the Rangefinder.                                                             ---
@@ -68,6 +68,7 @@ function UIRangefinder:__init() super()
     self.m_update_timer = 0
     self.m_update_freq = 222
     self.m_night_vision = false
+    self.m_digit_texture_prefix = "rf_num_"
     self.m_valid_sections = { "wg_rangefinder" }
 
     -- Callbacks
@@ -128,12 +129,7 @@ function UIRangefinder:GetLOSTextures()
         return "rf_dash", "rf_dash", "rf_dash"
     end
 
-    -- Line Of Sight format
-    local los1 = strformat("rf_num_%s", s_los:sub(1, 1))
-    local los2 = strformat("rf_num_%s", s_los:sub(2, 2))
-    local los3 = strformat("rf_num_%s", s_los:sub(3, 3))
-
-    return los1, los2, los3
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_los)
 end
 
 function UIRangefinder:GetHCDTextures()
@@ -149,12 +145,7 @@ function UIRangefinder:GetHCDTextures()
         return "rf_dash", "rf_dash", "rf_dash"
     end
 
-    -- Horizontal Compensation Distance format
-    local hcd1 = strformat("rf_num_%s", s_hcd:sub(1, 1))
-    local hcd2 = strformat("rf_num_%s", s_hcd:sub(2, 2))
-    local hcd3 = strformat("rf_num_%s", s_hcd:sub(3, 3))
-
-    return hcd1, hcd2, hcd3
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hcd)
 end
 
 function UIRangefinder:actor_on_weapon_zoom_in(wpn)
@@ -199,6 +190,6 @@ function UIRangefinder:on_key_press(dik)
         return
     end
 
-    GUI.m_night_vision = not GUI.m_night_vision
-    GUI.m_sfx_btn:play(db.actor, 0, sound_object.s2d)
+    self.m_night_vision = not self.m_night_vision
+    self.m_sfx_btn:play(db.actor, 0, sound_object.s2d)
 end

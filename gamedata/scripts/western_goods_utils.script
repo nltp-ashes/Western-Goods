@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 05/02/2024                                                                                             ---
+---    Date : 24/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -151,13 +151,32 @@ function as_boolean(var)
     return var
 end
 
---- Function used to clear the code a bit.
+--- Function used to round a number to the closest natural number.
 --- @param num number
 --- @return number
-function round_number(num)
+function number_round(num)
     if not validate_params({num,"round_number"}) then return end
 
     return tostring(math.floor(num+0.5))
+end
+
+--- Function used to wrap a number between a lower and a higher bound.
+--- When the number exceeds the upper bound, it is reset to the lower bound.
+--- E.g. : number_wrap(15, 0, 10) -> 5
+--- @param num number
+--- @param lower_bound number
+--- @param upper_bound number
+--- @return number
+function number_wrap(num, lower_bound, upper_bound)
+    if not validate_params({num,lower_bound,upper_bound,"number_wrap"}) then return end
+    local diff = upper_bound - lower_bound
+    while num < lower_bound do
+        num = num + diff
+    end
+    while num >= upper_bound do
+        num = num - diff
+    end
+    return num
 end
 
 --- Function used to know if there exists a translation for a given game string.
@@ -275,7 +294,7 @@ function get_distance(position_1, position_2)
     return position_1:distance_to(position_2) or 100000
 end
 
---- Function used to get the distance between two points in on the X and Z axis.
+--- Function used to get the distance squared between two points in on the X and Z axis.
 --- @param position_1 vector
 --- @param position_2 vector
 --- @return number
@@ -283,6 +302,32 @@ function get_distance_sqr(position_1, position_2)
     if not validate_params({position_1,position_2,"get_distance_sqr"}) then return end
 
     return position_1:distance_to_sqr(position_2) or 10000000000
+end
+
+--- Function used to get the distance between two points in on the X and Z axis, using global positions.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
+function get_distance_global(se_obj_1, se_obj_2)
+    if not validate_params({se_obj_1,se_obj_2,"get_distance_global"}) then return end
+
+    local pos_1 = global_position.from(se_obj_1)
+    local pos_2 = global_position.from(se_obj_2)
+
+    return pos_1:distance_to_xz(pos_2) or 100000
+end
+
+--- Function used to get the distance squared between two points in on the X and Z axis, using global positions.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
+function get_distance_global_sqr(se_obj_1, se_obj_2)
+    if not validate_params({se_obj_1,se_obj_2,"get_distance_global_sqr"}) then return end
+
+    local pos_1 = global_position.from(se_obj_1)
+    local pos_2 = global_position.from(se_obj_2)
+
+    return pos_1:distance_to_xz_sqr(pos_2) or 100000
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -799,6 +844,51 @@ function bone_hud_visibility(obj, hud_bone, bone, visibility)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- 3D UIs Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used transform digits (as strings) to matching texture descriptions.
+--- E.g. : get_digits_as_textures("hi_", "02", "5") -> "hi_0", "hi_2", "hi_5"
+--- @param prefix string
+--- @param ... strings
+--- @return strings (multiple return values)
+function get_digits_as_textures(prefix, ...)
+    local elems = {...}
+    local textures = {}
+    for _,str in pairs(elems) do
+        for i = 1, #str do
+            local texture = strformat(prefix.."%s", str:sub(i, i))
+            table.insert(textures, texture)
+        end
+    end
+    return unpack(textures)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Task Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the target of a task, if it exists.
+--- @param tsk CGeneralTask
+--- @return alife_object
+function task_get_target(tsk)
+    local target_id = tsk.current_target
+    return target_id and alife_object(target_id)
+end
+
+--- Function used to get the current active task of the player, if the player has any task at all.
+--- @return CGeneralTask
+function task_get_active()
+    local tm = task_manager.get_task_manager()
+    for id,tsk in pairs(tm.task_info) do
+        if db.actor:is_active_task(tsk.t) then
+            return tsk
+        end
+    end
+    return nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Validation Functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -833,6 +923,15 @@ function validate_is_pda(obj)
     }
 
     return pda_sections[obj:section()]
+end
+
+--- Function used to check if an object is a type of lighter device.
+--- @param obj game_object
+--- @return boolean
+function validate_is_lighter(obj)
+    if not validate_params({obj,"validate_is_lighter"}) then return end
+
+    return ini_sys:r_string_ex(obj:section(), "script_binding") == "western_goods_bind_lighter.bind"
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -920,7 +1019,8 @@ end
 --- Function used to check if there are NPCs currently in a fight with the player.
 --- @return boolean
 function is_player_fighting()
-    return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
+    local fighting_with = xr_combat_ignore.fighting_with_actor_npcs
+    return not is_empty(fighting_with)
 end
 
 --- Function used to get the real community of the NPC by checking spawn id.
@@ -985,4 +1085,11 @@ function get_section_price(section, count, default)
     local discount = factor * eco_factor
 
     return (cost * discount) * count
+end
+
+function vec_magnitude_xz(vec)
+    if not validate_params({vec,"vec_magnitude_xz"}) then return end
+
+    local vec_xz = vector():set(vec.x, 0, vec.z)
+    return vec_xz:magnitude()
 end

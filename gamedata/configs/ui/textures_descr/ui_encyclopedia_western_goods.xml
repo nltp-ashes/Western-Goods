@@ -2,7 +2,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 25/12/2023                                                                                            -->
+<!--    Date : 24/03/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Texture descriptions for encyclopedia entries added by Western Goods.                                        -->
@@ -19,6 +19,7 @@
         <texture id="encyclopedia_items_western_goods_gps_image"                x="512"    y="0"      width="512"    height="256"/>
         <texture id="encyclopedia_items_western_goods_bic_lighter_image"        x="512"    y="512"    width="512"    height="256"/>
         <texture id="encyclopedia_items_western_goods_rangefinder_image"        x="0"      y="768"    width="512"    height="256"/>
+        <texture id="encyclopedia_items_western_goods_compass_image"            x="512"    y="768"    width="512"    height="256"/>
 
         <!-- Functionalities -->
         <texture id="encyclopedia_features_western_goods_flea_image"            x="0"      y="256"    width="512"    height="256"/>
