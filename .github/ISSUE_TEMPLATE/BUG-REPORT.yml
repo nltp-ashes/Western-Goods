@@ -83,6 +83,6 @@ body:
         and I made sure I have all the necessary
         [pre-requisites](https://github.com/nltp-ashes/Western-Goods#requirements).
       options:
-        - label: Yes, I have.
+        - label: Yes, I have read the instructions and have all the pre-requisites installed.
           required: true
 
