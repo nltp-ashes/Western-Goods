@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 12/12/2023                                                                                            -->
+<!--    Date : 24/03/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tech items.                                                              -->
@@ -70,27 +70,6 @@
         </text>
     </string>
 
-    <string id="st_wg_gps">
-        <text>GPS locator</text>
-    </string>
-
-    <string id="st_wg_gps_s">
-        <text>GPS</text>
-    </string>
-
-    <string id="st_wg_gps_descr">
-        <text>
-            A really rare piece of equipment in the Zone. It seems to be a military grade GPS locator, usually used by NATO countries. It probably found its way into the Zone when the ISG was still around. It indicates the name and the distance to the nearest area. It also shows the name of the region of the Zone the user is located in. That being said, its database seems outdated. Some areas well known by stalkers are missing.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] technological item\n
-            %c[d_blue] • %c[ui_gray_2] military item\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_cyan] • %c[ui_gray_2] valuable\n
-            %c[d_orange] • %c[ui_gray_2] usable\n
-        </text>
-    </string>
-
     <string id="st_wg_military_decoder">
         <text>Military decoder</text>
     </string>
@@ -130,6 +109,27 @@
             %c[d_blue] • %c[ui_gray_2] imported\n
             %c[d_cyan] • %c[ui_gray_2] valuable\n
             %c[d_red] • %c[ui_gray_2] unusable\n
+        </text>
+    </string>
+
+    <string id="st_wg_gps">
+        <text>GPS locator</text>
+    </string>
+
+    <string id="st_wg_gps_s">
+        <text>GPS</text>
+    </string>
+
+    <string id="st_wg_gps_descr">
+        <text>
+            A really rare piece of equipment in the Zone. It seems to be a military grade GPS locator, usually used by NATO countries. It probably found its way into the Zone when the ISG was still around. It indicates the name and the distance to the nearest area. It also shows the name of the region of the Zone the user is located in. That being said, its database seems outdated. Some areas well known by stalkers are missing.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] • %c[ui_gray_2] technological item\n
+            %c[d_blue] • %c[ui_gray_2] military item\n
+            %c[d_blue] • %c[ui_gray_2] imported\n
+            %c[d_cyan] • %c[ui_gray_2] valuable\n
+            %c[d_orange] • %c[ui_gray_2] usable\n
         </text>
     </string>
 
