@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 20/02/2024                                                                                             ---
+---    Date : 24/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to monkey-patch some functions of base anomaly, or other addons.                                  ---
@@ -101,6 +101,12 @@ monkey_patches               = {
         patches = {
             { prio=1, script="arszi_psy", func="get_psy_health_regeneration", cond = function() return true end }
         }
+    },
+    ui_item_build_desc_header = {
+        name = "ui_item_build_desc_header",
+        patches = {
+            { prio=1, script="ui_item", func="build_desc_header", cond = function() return true end }
+        }
     }
 }
 
@@ -159,6 +165,25 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Monkey-patches
 -- ---------------------------------------------------------------------------------------------------------------------
+
+make_monkey_patch(monkey_patches.ui_item_build_desc_header, function(obj, sec, str)
+    str = str or western_goods_utils.get_translation(ini_sys:r_string_ex(sec, "description"))
+    if not str then
+        return ""
+    end
+
+    if not western_goods_utils.validate_is_lighter(obj) then
+        return this.ui_item_build_desc_header(obj, sec, str)
+    end
+
+    return western_goods_utils.get_translation("st_wg_lighter_header",
+            utils_xml.get_color("pda_blue"),
+            utils_xml.get_color("ui_gray_1"),
+            utils_xml.get_color("pda_blue"),
+            math.ceil(obj:condition() * 100),
+            utils_xml.get_color("ui_gray_1"),
+            this.ui_item_build_desc_header(obj, sec, str))
+end)
 
 make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
     local is_on_before = hf_obj_manager.get_data(obj_id).is_on

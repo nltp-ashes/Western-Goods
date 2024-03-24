@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 21/03/2024                                                                                             ---
+---    Date : 24/03/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -163,7 +163,7 @@ function lighter_binder:check_is_primary()
     if det and det:id() == self.object:id() then
         return true
     end
-    if det and ini_sys:r_string_ex(det:section(), "script_binding") == "western_goods_bind_lighter.bind" then
+    if det and western_goods_utils.validate_is_lighter(det) then
         return false
     end
     return true
