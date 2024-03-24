@@ -3,7 +3,7 @@
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.6.0/total?label=Downloads)]()
 
 **• Additions :**
-> • Added a new device : the Garmin eTrex 10 electronic compass (Thanks ;
+> • Added a new device : the Garmin eTrex 10 electronic compass (Thanks L4U6H1N6-LUN4T1C);
 > • Lighter now displays its fuel level in the item description.
 
 **• Changes :**
