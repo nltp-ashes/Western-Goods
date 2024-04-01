@@ -7,6 +7,8 @@
 > • Lighter now displays its fuel level in the item description.
 
 **• Changes :**
+> • Simplified code handling EUR/USD trade restrictions by monkey-patching vanilla functions;
+> • Removed dependency on `rax_icon_tint.script`;
 > • Refactored duplicated code in GPS, rangefinder and compass scripts using a new utility function.
 
 **• Bug fixes :**

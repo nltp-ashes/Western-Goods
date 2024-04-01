@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/02/2024                                                                                             ---
+---    Date : 01/04/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
@@ -54,7 +54,7 @@ local dbg_printf                = western_goods_utils.dbg_printf
 local level_object_by_id        = western_goods_utils.level_object_by_id
 
 -- Constants
-local bags_to_tint              = { actor_equ = true, actor_bag = true, actor_trade = true, actor_trade_bag = true }
+local trade_status_flags        = { cant_trade = 1, too_damaged = 2, hidden = 3, tradable = 4 }
 local eur_rouble_rate           = 68
 local usd_rouble_rate           = 70
 
@@ -107,49 +107,23 @@ function trade_manager_update(npc, force_refresh)
     end
 end
 
---- Function used to allow/disallow the player from moving items from one container to another when trading with a EUR/USD trader.
---- @param flags table
---- @param npc_id number
---- @param obj game_object
---- @param mode string
---- @param bag string
---- @return nil
-function check_move_item(flags, npc_id, obj, mode, bag)
-    if mode ~= "trade" then return flags.ret_value end
+--- Function used to check if an item is tradable.
+--- It is used to tint an item if it isn't tradable with a EUR/USD trader
+--- It also prevents the item from being moved to the cart.
+--- This function overrides a vanilla function. When not trading with a EUR/USD trader, the vanilla function takes over.
+--- @param obj game_object|nil
+--- @param profile table|nil
+--- @return number
+function get_item_trade_status(obj, profile)
+    local partner = ui_inventory.GUI and ui_inventory.GUI:GetPartner()
 
-    local npc = npc_id and level_object_by_id(npc_id)
+    if obj and partner
+    and western_goods_trade_eur_usd.is_eur_usd_trader(partner)
+    and not utils_item.in_npc_inv(partner, obj)
+    and not western_goods_trade_eur_usd.is_tradable(obj:section())
+    then return trade_status_flags.cant_trade end
 
-    -- Always allow items in NPC inventory to be moved
-    if utils_item.in_npc_inv(npc, obj) then return end
-
-    -- If you are talking to a EUR/USD trader and the item isn't tradable, prevent the item from moving
-    if this.is_eur_usd_trader(npc) and not this.is_tradable(obj:section()) then
-        flags.ret_value = false
-    end
-end
-
---- Function used to color the untradable items in the player inventory.
---- @param cell table
---- @return fcolor
-function tint_functor(cell)
-    local ui_instance = ui_inventory.GUI
-
-    if not ui_instance or not cell then return end
-
-    local partner = ui_instance:GetPartner()
-    local obj = cell.ID and level_object_by_id(cell.ID)
-
-    if (not ui_instance.mode == "trade")
-    or (not bags_to_tint[cell.container.ID])
-    or (not obj)
-    or (not partner)
-    or (utils_item.in_npc_inv(partner, obj))
-    or (this.is_tradable(obj:section()))
-    or (not this.is_eur_usd_trader(partner))
-    then return end
-
-    -- If you're in the trade mode with a EUR/USD trader, and the item isn't tradable, tint it in red
-    return GetARGB(240, 250, 0, 0)
+    return western_goods_monkey_patches.utils_ui_get_item_trade_status(obj, profile)
 end
 
 --- Monkey-patching ui_inventory.UIInventory.UpdateCharacter to display custom currencies in the character wallet.
@@ -385,8 +359,6 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    rax_icon_tint.register("wg_tint_functor", tint_functor)
-    RegisterScriptCallback("ActorMenu_on_item_before_move", check_move_item)
     RegisterScriptCallback("on_game_load", collect_traders_list)
 end
 
