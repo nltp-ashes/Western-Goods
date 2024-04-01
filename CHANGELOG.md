@@ -1,4 +1,4 @@
-## **v2.6.0 - 24/03/2024 - Minor Update**
+## **v2.6.0 - 01/04/2024 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v2.6.0/total?label=Downloads)]()
 
@@ -10,4 +10,5 @@
 > • Refactored duplicated code in GPS, rangefinder and compass scripts using a new utility function.
 
 **• Bug fixes :**
+> • Fixed inventory weight of Oreo being 60g instead of 154g.
 > • Fixed lighter playing animation even when it wasn't selected to light up the campfire/gas lamp.
