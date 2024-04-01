@@ -8,6 +8,8 @@
 > • Added trade restrictions to the addon's items. Now, traders will only buy the type of items that they would sell.
 
 **• Changes :**
+> • Changed suppliers' trade lists. Before : food, drinks. After : food, magazines ;
+> • Changed barman's trade lists. Before : magazines. After : food, drinks, magazines ;
 > • Simplified code handling EUR/USD trade restrictions by monkey-patching vanilla functions;
 > • Removed dependency on `rax_icon_tint.script`;
 > • Refactored duplicated code in GPS, rangefinder and compass scripts using a new utility function.
