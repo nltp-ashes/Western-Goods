@@ -15,8 +15,8 @@
 
 -- Constants
 local trade_lists = {
-    [trader_autoinject.SUPPLIER]    = { "food", "drink" },
-    [trader_autoinject.BARMAN]      = { "magazine" },
+    [trader_autoinject.SUPPLIER]    = { "food", "magazine" },
+    [trader_autoinject.BARMAN]      = { "food", "drink", "magazine" },
     [trader_autoinject.MECHANIC]    = { "tech" }
 }
 
