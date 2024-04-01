@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/01/2024                                                                                             ---
+---    Date : 01/04/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script handles the loot generation (in bodies and traders) for the addon.                                ---
@@ -41,6 +41,35 @@ function spawn_trader_loot(npc)
     dbg_printf("[WG] Core | NPC trading (%s) - type %s\n%s", community, trader_type, utils_data.print_table(trader_table, false, true))
 
     trader_autoinject.spawn_items(npc, trader_table, true)
+end
+
+--- Function used to check if an item is tradable.
+--- Items added through trader_autoinject do not have a proper way to define whether traders should buy them.
+--- @param obj game_object|nil
+--- @param profile table|nil
+--- @return number
+function get_item_trade_status(obj, profile)
+    local partner = ui_inventory.GUI and ui_inventory.GUI:GetPartner()
+
+    -- Only check if an object is tradable when... We have an object
+    if obj and partner then
+        -- Get trader type, list of what the trader sells/buys, and item data
+        local trader_type = trader_autoinject.get_trader_type(partner)
+        local trade_list = trade_lists[trader_type] or {}
+        local item_data = western_goods_core.western_goods_items[obj:section()]
+
+        -- Only WG items have item_data, ignore others
+        if item_data then
+            -- Return appropriate flag (tradable/cant_trade)
+            if western_goods_utils.table_contains(trade_list, item_data.type) then
+                return western_goods_utils.trade_status_flags.tradable
+            else
+                return western_goods_utils.trade_status_flags.cant_trade
+            end
+        end
+    end
+
+    return western_goods_monkey_patches.utils_ui_get_item_trade_status_loot(obj, profile)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

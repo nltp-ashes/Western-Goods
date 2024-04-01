@@ -54,7 +54,6 @@ local dbg_printf                = western_goods_utils.dbg_printf
 local level_object_by_id        = western_goods_utils.level_object_by_id
 
 -- Constants
-local trade_status_flags        = { cant_trade = 1, too_damaged = 2, hidden = 3, tradable = 4 }
 local eur_rouble_rate           = 68
 local usd_rouble_rate           = 70
 
@@ -115,15 +114,22 @@ end
 --- @param profile table|nil
 --- @return number
 function get_item_trade_status(obj, profile)
+    -- Get trading partner (if any)
     local partner = ui_inventory.GUI and ui_inventory.GUI:GetPartner()
 
-    if obj and partner
-    and western_goods_trade_eur_usd.is_eur_usd_trader(partner)
-    and not utils_item.in_npc_inv(partner, obj)
-    and not western_goods_trade_eur_usd.is_tradable(obj:section())
-    then return trade_status_flags.cant_trade end
-
-    return western_goods_monkey_patches.utils_ui_get_item_trade_status(obj, profile)
+    if obj and partner and this.is_eur_usd_trader(partner) then
+        -- If player is trading with EUR/USD trader
+        if utils_item.in_npc_inv(partner, obj) or this.is_tradable(obj:section()) then
+            -- Item is tradable if it is in trader inventory or is tradable
+            return western_goods_utils.trade_status_flags.tradable
+        else
+            -- Item is not tradable if it is in player inventory and is not tradable
+            return western_goods_utils.trade_status_flags.cant_trade
+        end
+    else
+        -- Vanilla function decides for other traders
+        return western_goods_monkey_patches.utils_ui_get_item_trade_status_eur_usd(obj, profile)
+    end
 end
 
 --- Monkey-patching ui_inventory.UIInventory.UpdateCharacter to display custom currencies in the character wallet.
