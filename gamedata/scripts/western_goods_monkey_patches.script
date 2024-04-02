@@ -108,8 +108,14 @@ monkey_patches               = {
             { prio=1, script="ui_item", func="build_desc_header", cond = function() return true end }
         }
     },
-    utils_ui_get_item_trade_status = {
-        name = "utils_ui_get_item_trade_status",
+    utils_ui_get_item_trade_status_eur_usd = {
+        name = "utils_ui_get_item_trade_status_eur_usd",
+        patches = {
+            { prio=1, script="utils_ui", func="get_item_trade_status", cond = function() return true end }
+        }
+    },
+    utils_ui_get_item_trade_status_loot = {
+        name = "utils_ui_get_item_trade_status_loot",
         patches = {
             { prio=1, script="utils_ui", func="get_item_trade_status", cond = function() return true end }
         }
@@ -234,6 +240,10 @@ make_monkey_patch(monkey_patches.ui_item_build_desc_header, function(obj, sec, s
     return western_goods_bind_lighter.build_desc_header(obj, sec, str)
 end)
 
-make_monkey_patch(monkey_patches.utils_ui_get_item_trade_status, function(obj, profile)
+make_monkey_patch(monkey_patches.utils_ui_get_item_trade_status_loot, function(obj, profile)
+    return western_goods_loot.get_item_trade_status(obj, profile)
+end)
+
+make_monkey_patch(monkey_patches.utils_ui_get_item_trade_status_eur_usd, function(obj, profile)
     return western_goods_trade_eur_usd.get_item_trade_status(obj, profile)
 end)

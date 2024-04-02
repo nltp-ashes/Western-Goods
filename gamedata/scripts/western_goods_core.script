@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 30/03/2024                                                                                             ---
+---    Date : 01/04/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -166,7 +166,7 @@ end
 --- Function called from game_tutorials.xml when the player interacts with a campfire.
 --- @return nil
 function use_campfire()
-    printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+    dbg_printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
