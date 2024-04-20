@@ -166,7 +166,7 @@ function lighter_binder:update_fuel(fuel_consumption_override)
     local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
 
     self.object:set_condition(fuel_level_new)
-    dbg_printf("[WG] Lighter Binder | Drain Fuel - Lighter new fuel level '%s'", self.object:condition())
+    dbg_printf("[WG] Lighter Binder | Update Fuel - Lighter new fuel level '%s'", self.object:condition())
 end
 
 function lighter_binder:check_state()
@@ -230,7 +230,7 @@ function lighter_binder:play_animation()
     local hud_sec = ini_sys:r_string_ex(self.object:section(), "hud")
     if ini_sys:line_exist(hud_sec, self.m_amn_motion) then
         game.play_hud_motion(1, hud_sec, self.m_amn_motion, true, 1.0)
-        dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, hud_sec)
+        dbg_printf("[WG] Lighter Binder | Play Animation - Played motion %s in section %s", self.m_amn_motion, hud_sec)
     end
 end
 
