@@ -78,9 +78,12 @@ function lighter_binder:__init(obj) super(obj)
     self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
 
     -- Build variables
-    self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "fuel_critical", 0.01)
-    self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "fuel_consumption", 0.0003)
-    self.m_fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "fuel_consumption_use", 0.05)
+    self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "wg_fuel_critical", 0.01)
+    self.m_fuel_consumption = ini_sys:r_float_ex(self.object:section(), "wg_fuel_consumption", 0.0003)
+    self.m_fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "wg_fuel_consumption_use", 0.05)
+    self.m_light_bone = ini_sys:r_string_ex(self.object:section(), "wg_light_bone", "wpn_body")
+    self.m_light_hud_bone = ini_sys:r_string_ex(self.object:section(), "wg_light_hud_bone", "wpn_body")
+    self.is_turned_on = false
     self.m_fuel_level_saved = nil
     self.m_first_update = false
     self.m_update_rate = 1000
@@ -198,13 +201,16 @@ function lighter_binder:check_is_drawn()
 end
 
 function lighter_binder:get_light_bone_position()
-    local pos = western_goods_utils.bone_hud_position(self.object, "lid", "bone01")
+    local pos = western_goods_utils.bone_hud_position(self.object, self.m_light_hud_bone, self.m_light_bone)
     return pos or db.actor:position()
 end
 
 function lighter_binder:set_light_status(status)
-    self.m_light.enabled = status
-    western_goods_utils.bone_hud_visibility(self.object, "lid", "bone01", status)
+    if status ~= self.is_turned_on then
+        self.is_turned_on = status
+        self.m_light.enabled = status
+        western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, status)
+    end
 end
 
 function lighter_binder:play_animation()
