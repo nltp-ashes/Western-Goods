@@ -63,6 +63,8 @@ snd_holster                                      = weapons\detector\detector_8_h
 [wg_gps_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
 
+attach_place_idx                                 = 1
+
 item_position                                    = -0.08, 0.05, -0.01
 item_orientation                                 = 130, 15, -10
 
@@ -76,27 +78,21 @@ aim_hud_offset_pos_16x9                          = 0.05, 0, 0.2
 aim_hud_offset_rot                               = 0, -0.5, 0
 aim_hud_offset_rot_16x9                          = 0, -0.5, 0
 
-attach_place_idx                                 = 1
-
 anm_show                                         = wg_gps_show, idle
 anm_show_fast                                    = wg_gps_show, idle
-
 anm_hide                                         = wg_gps_hide, idle, 2
 anm_hide_fast                                    = wg_gps_hide, idle, 2
-
 anm_idle                                         = wg_gps_idle, idle, 2
 anm_idle_variant1                                = wg_gps_idle_2, idle, 2
 anm_idle_moving                                  = wg_gps_walk, idle, 2
 anm_idle_moving_crouch                           = wg_gps_walk, idle, 2
 anm_idle_sprint                                  = wg_gps_sprint, idle, 2
 anm_idle_zoom                                    = wg_gps_zoom_idle, idle, 2
-
 anm_zoom_in                                      = wg_gps_zoom_in, idle, 2
 anm_zoom_out                                     = wg_gps_zoom_out, idle, 3
 anm_zoom_show                                    = wg_gps_zoom_show, idle, 2
 anm_zoom_hide                                    = wg_gps_zoom_hide, idle, 2
 anm_zoom_hide_fast                               = wg_gps_zoom_hide, idle, 2
-
 anm_throw_start                                  = wg_gps_throw_start, idle, 2
 anm_throw                                        = wg_gps_throw_idle, idle, 2
 anm_throw_variant1                               = wg_gps_throw_idle_2, idle, 2
@@ -149,7 +145,6 @@ wg_fuel_consumption_use                          = 0.05             ; using the 
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
 
 attach_place_idx                                 = 1
-freelook_z_offset_mul                            = 0.1
 
 item_position                                    = -0.065, 0.032, 0.0025
 item_orientation                                 = -110, -15, 80
@@ -164,11 +159,6 @@ aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
 aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
 aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
 
-fire_point                                       = 0,0,0.05
-fire_point2                                      = 0,0,0
-fire_bone                                        = lid
-fire_bone2                                       = lid
-
 anm_hide                                         = wg_lighter_bic_holster, holster, 1
 anm_hide_fast                                    = wg_lighter_bic_holster, holster, 1
 anm_idle                                         = wg_lighter_bic_idle, idle
@@ -176,6 +166,7 @@ anm_idle_moving                                  = wg_lighter_bic_moving, moving
 anm_idle_sprint                                  = wg_lighter_bic_sprint, sprint, 1.6
 anm_show                                         = wg_lighter_bic_draw, draw, 1
 anm_show_fast                                    = wg_lighter_bic_draw, draw, 1
+anm_campfire                                     = wg_lighter_campfire, idle
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -224,7 +215,6 @@ wg_fuel_consumption_use                          = 0.05             ; using the 
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_zippo_hud.ogf
 
 attach_place_idx                                 = 1
-freelook_z_offset_mul                            = 0.1
 
 item_position                                    = -0.056777, 0.042009, 0.011767
 item_orientation                                 = 310, -100, 177.393598
@@ -234,17 +224,10 @@ hands_position_16x9                              = 0.058123, -0.29765, 0.051894
 hands_orientation                                = 2, 38, 0
 hands_orientation_16x9                           = 2, 38, 0
 
-
-
 aim_hud_offset_pos                               = -0.175, 0.12, -0.05
 aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
 aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
 aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
-
-fire_point                                       = 0,0,0.05
-fire_point2                                      = 0,0,0
-fire_bone                                        = lid
-fire_bone2                                       = lid
 
 anm_hide                                         = wg_lighter_zippo_hide, holster
 anm_hide_16x9                                    = wg_lighter_zippo_hide, holster
@@ -313,6 +296,8 @@ snd_holster                                      = weapons\detector\detector_8_h
 [wg_compass_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_compass_hud.ogf
 
+attach_place_idx                                 = 1
+
 item_position                                    = -0.075, 0.04, -0.000746
 item_orientation                                 = 140, 20, -5
 
@@ -326,27 +311,21 @@ aim_hud_offset_pos_16x9                          = 0.15, -0.15, 0.3
 aim_hud_offset_rot                               = 0.0, -1.0, -0.25
 aim_hud_offset_rot_16x9                          = 0.0, -1.0, -0.25
 
-attach_place_idx                                 = 1
-
 anm_show                                         = wg_compass_show, idle
 anm_show_fast                                    = wg_compass_show, idle
-
 anm_hide                                         = wg_compass_hide, idle, 2
 anm_hide_fast                                    = wg_compass_hide, idle, 2
-
 anm_idle                                         = wg_compass_idle, idle, 2
 anm_idle_variant1                                = wg_compass_idle_2, idle, 2
 anm_idle_moving                                  = wg_compass_walk, idle, 2
 anm_idle_moving_crouch                           = wg_compass_walk, idle, 2
 anm_idle_sprint                                  = wg_compass_sprint, idle, 2
 anm_idle_zoom                                    = wg_compass_zoom_idle, idle, 2
-
 anm_zoom_in                                      = wg_compass_zoom_in, idle, 2
 anm_zoom_out                                     = wg_compass_zoom_out, idle, 3
 anm_zoom_show                                    = wg_compass_zoom_show, idle, 2
 anm_zoom_hide                                    = wg_compass_zoom_hide, idle, 2
 anm_zoom_hide_fast                               = wg_compass_zoom_hide, idle, 2
-
 anm_throw_start                                  = wg_compass_throw_start, idle, 2
 anm_throw                                        = wg_compass_throw_idle, idle, 2
 anm_throw_variant1                               = wg_compass_throw_idle_2, idle, 2

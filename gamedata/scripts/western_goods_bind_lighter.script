@@ -89,8 +89,8 @@ function lighter_binder:__init(obj) super(obj)
     self.m_update_rate = 1000
     self.m_update_timer = 1000
     self.m_detector_slot_id = 9
-    self.m_amn_motion_sec = "motion_campfire"
     self.m_amn_motion = "anm_campfire"
+    self.m_amn_cam_motion = "matches_script"
 
     dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
 end
@@ -218,7 +218,7 @@ function lighter_binder:play_animation()
     self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
 
     -- Play CFX
-    actor_effects.play_item_fx("matches_script")
+    actor_effects.play_item_fx(self.m_amn_cam_motion)
 
     -- Play animation if lighter is drawn
     local active_det = db.actor:active_detector()
@@ -227,8 +227,11 @@ function lighter_binder:play_animation()
     end
 
     -- Play HUD motion
-    game.play_hud_motion(1, self.m_amn_motion_sec, self.m_amn_motion, true, 1.0)
-    dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, self.m_amn_motion_sec)
+    local hud_sec = ini_sys:r_string_ex(self.object:section(), "hud")
+    if ini_sys:line_exist(hud_sec, self.m_amn_motion) then
+        game.play_hud_motion(1, hud_sec, self.m_amn_motion, true, 1.0)
+        dbg_printf("[WG] Lighter Binder | Campfire Turn On - Played motion %s in section %s", self.m_amn_motion, hud_sec)
+    end
 end
 
 function lighter_binder:western_goods_on_campfire_use()
