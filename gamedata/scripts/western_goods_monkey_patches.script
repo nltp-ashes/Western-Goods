@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 01/04/2024                                                                                             ---
+---    Date : 20/04/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to monkey-patch some functions of base anomaly, or other addons.                                  ---
@@ -145,7 +145,7 @@ function find_best_monkey_patch(monkey_patch_group)
     end
 
     if not monkey_patch then
-        dbg_printf("[WG] Fire Source Binder | No applicable monkey-patch for %s", monkey_patch_group.name)
+        dbg_printf("[WG] Monkey-Patches | No applicable monkey-patch for %s", monkey_patch_group.name)
         return
     end
 
@@ -164,11 +164,11 @@ function make_monkey_patch(monkey_patch_group, func)
     local function_name = monkey_patch.func
 
     if class_name then
-        dbg_printf("[WG] Fire Source Binder | Monkey-patching %s function from class %s in %s.script", function_name, class_name, script_name)
+        dbg_printf("[WG] Monkey-Patches | Monkey-patching %s function from class %s in %s.script", function_name, class_name, script_name)
         this[monkey_patch_group.name] = _G[script_name][class_name][function_name]
         _G[script_name][class_name][function_name] = func
     else
-        dbg_printf("[WG] Fire Source Binder | Monkey-patching %s function in %s.script", function_name, script_name)
+        dbg_printf("[WG] Monkey-Patches | Monkey-patching %s function in %s.script", function_name, script_name)
         this[monkey_patch_group.name] = _G[script_name][function_name]
         _G[script_name][function_name] = func
     end
