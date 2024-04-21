@@ -79,7 +79,7 @@ function lighter_binder:__init(obj) super(obj)
     light_outer.range = 10
     light_outer.shadow = false
     light_outer.lanim = "koster"
-    light_outer.lanim_brightness = 0.001
+    light_outer.lanim_brightness = 0.0005
 
     self.m_lights = { light_inner, light_outer }
 
