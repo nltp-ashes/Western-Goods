@@ -83,6 +83,14 @@ function lighter_binder:__init(obj) super(obj)
 
     self.m_lights = { light_inner, light_outer }
 
+    -- Particle effects
+    self.m_particles = {
+        -- TODO : remove these lines
+        --particles_object([[western_goods\nvg_dot]]),
+        --particles_object([[amik\hit_fx\metal\hit_sparks_01]]),
+        --particles_object([[damage_fx\effects\body_smoke_01]])
+    }
+
     -- Sound effects
     self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
 
@@ -132,18 +140,18 @@ function lighter_binder:update(delta)
 
     -- Turn off on wrong device state
     if not self:check_state() then
-        self:set_light_status(false)
+        self:set_flame_status(false)
         return
     end
 
     -- Turn off when out of fuel
     if not self:check_is_fueled() then
-        self:set_light_status(false)
+        self:set_flame_status(false)
         return
     end
 
     -- Fast update
-    self:update_light()
+    self:update_flame()
 
     -- Throttled update
     if not self:update_throttle(delta) then
@@ -163,10 +171,24 @@ function lighter_binder:update_throttle(delta)
     end
 end
 
-function lighter_binder:update_light()
-    self:set_light_status(true)
+function lighter_binder:update_flame()
+    -- Update bone visibility
+    self:set_flame_status(true)
+
+    local pos = self:get_flame_bone_position()
+
+    -- Update particles
+    for _, part in pairs(self.m_particles) do
+        if not part:playing() then
+            part:play_at_pos(pos, true)
+        else
+            part:move_to(pos, VEC_ZERO)
+        end
+    end
+
+    -- Update script lights
     for _, light in pairs(self.m_lights) do
-        light:set_position(self:get_light_bone_position())
+        light:set_position(pos)
         light:update()
     end
 end
@@ -211,16 +233,21 @@ function lighter_binder:check_is_drawn()
     return active_det and active_det:id() == self.object:id() or false
 end
 
-function lighter_binder:get_light_bone_position()
+function lighter_binder:get_flame_bone_position()
     local pos = western_goods_utils.bone_hud_position(self.object, self.m_light_hud_bone, self.m_light_bone)
     return pos or db.actor:position()
 end
 
-function lighter_binder:set_light_status(status)
+function lighter_binder:set_flame_status(status)
     if status ~= self.is_turned_on then
         self.is_turned_on = status
         for _, light in pairs(self.m_lights) do
             light.enabled = status
+        end
+        for _, part in pairs(self.m_particles) do
+            if not status then
+                part:stop()
+            end
         end
         western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, status)
     end
@@ -233,13 +260,13 @@ function lighter_binder:play_animation()
     -- Play CFX
     actor_effects.play_item_fx(self.m_amn_cam_motion)
 
-    -- Play animation if lighter is drawn
-    local active_det = db.actor:active_detector()
-    if not active_det or active_det:id() ~= self.object:id() then
-        return
-    end
-
     -- Play HUD motion
+    if self:check_is_drawn() then
+        self:play_hud_animation()
+    end
+end
+
+function lighter_binder:play_hud_animation()
     local hud_sec = ini_sys:r_string_ex(self.object:section(), "hud")
     if ini_sys:line_exist(hud_sec, self.m_amn_motion) then
         game.play_hud_motion(1, hud_sec, self.m_amn_motion, true, 1.0)
@@ -254,9 +281,7 @@ function lighter_binder:western_goods_on_campfire_use()
 
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_campfire_use(self)
     if result then
-        if self:check_is_drawn() then
-            self:play_animation()
-        end
+        self:play_animation()
         self:update_fuel(self.m_fuel_consumption_use)
     end
 end
@@ -279,9 +304,7 @@ function lighter_binder:western_goods_on_hideout_furniture_light_use(obj_id)
 
     local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_hideout_furniture_light_use(self, obj_id)
     if result then
-        if self:check_is_drawn() then
-            self:play_animation()
-        end
+        self:play_animation()
         self:update_fuel(self.m_fuel_consumption_use)
     end
 end
