@@ -81,18 +81,23 @@ function lighter_binder:__init(obj) super(obj)
     light_outer.lanim = "koster"
     light_outer.lanim_brightness = 0.0005
 
-    self.m_lights = { light_inner, light_outer }
+    self.m_lights = {
+        inner = light_inner,
+        outer = light_outer
+    }
 
     -- Particle effects
     self.m_particles = {
         -- TODO : remove these lines
-        --particles_object([[western_goods\nvg_dot]]),
-        --particles_object([[amik\hit_fx\metal\hit_sparks_01]]),
-        --particles_object([[damage_fx\effects\body_smoke_01]])
+        --dot = particles_object([[western_goods\nvg_dot]]),
+        --sparks = particles_object([[amik\hit_fx\metal\hit_sparks_01]]),
+        --smoke = particles_object([[damage_fx\effects\body_smoke_01]])
     }
 
     -- Sound effects
-    self.m_snd_use_cf = sound_object([[western_goods_tech\lighter_use_cf]])
+    self.m_sounds = {
+        campfire = sound_object([[western_goods_tech\lighter_use_cf]]),
+    }
 
     -- Build variables
     self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "wg_fuel_critical", 0.01)
@@ -251,7 +256,7 @@ end
 
 function lighter_binder:play_animation()
     -- Play SFX
-    self.m_snd_use_cf:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+    self.m_sounds.campfire:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
 
     -- Play CFX
     actor_effects.play_item_fx(self.m_amn_cam_motion)
