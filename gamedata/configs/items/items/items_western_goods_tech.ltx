@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 20/04/2024                                                                                               ;;
+;;    Date : 13/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -136,7 +136,7 @@ snd_holster                                      = western_goods_tech\lighter_ho
 
 ; custom properties
 wg_light_bone                                    = bone01           ; bone to attach the script_light on (in 3rd pers)
-wg_light_hud_bone                                = lid              ; bone to attach the script_light on (in 1st pers)
+wg_light_hud_bone                                = flame            ; bone to attach the script_light on (in 1st pers)
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0003           ; 0.03%/second (55 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
@@ -206,7 +206,7 @@ snd_holster                                      = western_goods_tech\zippo_hols
 
 ; custom properties
 wg_light_bone                                    = wpn_body         ; bone to attach the script_light on (in 3rd pers)
-wg_light_hud_bone                                = light_bone_1     ; bone to attach the script_light on (in 1st pers)
+wg_light_hud_bone                                = flame            ; bone to attach the script_light on (in 1st pers)
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0005           ; 0.05%/second (30 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
@@ -251,6 +251,7 @@ anm_throw_end                                    = wg_lighter_zippo_throw_end, i
 anm_throw_end_16x9                               = wg_lighter_zippo_throw_end, idle
 anm_throw_start                                  = wg_lighter_zippo_throw_start, idle
 anm_throw_start_16x9                             = wg_lighter_zippo_throw_start, idle
+anm_campfire                                     = wg_lighter_bic_campfire, campfire
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
