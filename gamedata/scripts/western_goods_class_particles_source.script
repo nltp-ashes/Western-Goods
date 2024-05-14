@@ -1,0 +1,59 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 14/05/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to handled a dynamically built collection of particle objects.                                    ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Object Binder Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "particles_source"
+
+function particles_source:__init(...)
+    dbg_printf("[WG] Particles Source Binder | Creating particles source")
+
+    self.m_particles = {
+        -- TODO : remove these lines
+        --dot = particles_object([[western_goods\nvg_dot]]),
+        --sparks = particles_object([[amik\hit_fx\metal\hit_sparks_01]]),
+        --smoke = particles_object([[damage_fx\effects\body_smoke_01]])
+    }
+
+    local particles = {...}
+    for _,v in pairs(particles) do
+        table.insert(self.m_particles, v)
+    end
+
+    dbg_printf("[WG] Particles Source Binder | Successfully bound particles source")
+end
+
+function particles_source:update_particles(pos)
+    for _, part in pairs(self.m_particles) do
+        if not part:playing() then
+            part:play_at_pos(pos, true)
+        else
+            part:move_to(pos, VEC_ZERO)
+        end
+    end
+end
+
+function particles_source:set_particles_status(status)
+    for _, part in pairs(self.m_particles) do
+        if not status then
+            part:stop()
+        end
+    end
+end

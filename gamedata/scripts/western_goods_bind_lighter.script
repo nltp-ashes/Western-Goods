@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 13/05/2024                                                                                             ---
+---    Date : 14/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -63,36 +63,10 @@ function lighter_binder:__init(obj) super(obj)
     self.object:set_fastcall(self.binder.update, self.binder)
 
     -- Script lights
-    local light_inner = script_light()
-    light_inner.hud_mode = false
-    light_inner.enabled = true
-    light_inner.type = 1
-    light_inner.range = 1.5
-    light_inner.shadow = false
-    light_inner.lanim = "koster"
-    light_inner.lanim_brightness = 0.002
-
-    local light_outer = script_light()
-    light_outer.hud_mode = false
-    light_outer.enabled = true
-    light_outer.type = 1
-    light_outer.range = 10
-    light_outer.shadow = false
-    light_outer.lanim = "koster"
-    light_outer.lanim_brightness = 0.0005
-
-    self.m_lights = {
-        inner = light_inner,
-        outer = light_outer
-    }
+    self.m_light_source = western_goods_class_light_source.light_source(0.002, 0.0005)
 
     -- Particle effects
-    self.m_particles = {
-        -- TODO : remove these lines
-        --dot = particles_object([[western_goods\nvg_dot]]),
-        --sparks = particles_object([[amik\hit_fx\metal\hit_sparks_01]]),
-        --smoke = particles_object([[damage_fx\effects\body_smoke_01]])
-    }
+    self.m_particles_source = western_goods_class_particles_source.particles_source()
 
     -- Sound effects
     self.m_sounds = {
@@ -176,25 +150,12 @@ function lighter_binder:update_throttle(delta)
 end
 
 function lighter_binder:update_flame()
-    -- Update bone visibility
     self:set_flame_status(true)
 
     local pos = self:get_flame_bone_position()
 
-    -- Update particles
-    for _, part in pairs(self.m_particles) do
-        if not part:playing() then
-            part:play_at_pos(pos, true)
-        else
-            part:move_to(pos, VEC_ZERO)
-        end
-    end
-
-    -- Update script lights
-    for _, light in pairs(self.m_lights) do
-        light:set_position(pos)
-        light:update()
-    end
+    self.m_particles_source:update_particles(pos)
+    self.m_light_source:update_light(pos)
 end
 
 function lighter_binder:update_fuel(fuel_consumption_override)
@@ -204,6 +165,30 @@ function lighter_binder:update_fuel(fuel_consumption_override)
 
     self.object:set_condition(fuel_level_new)
     dbg_printf("[WG] Lighter Binder | Update Fuel - Lighter new fuel level '%s'", self.object:condition())
+end
+
+function lighter_binder:get_flame_bone_position()
+    local pos = western_goods_utils.bone_hud_position(self.object, self.m_light_hud_bone, self.m_light_bone)
+    return pos or db.actor:position()
+end
+
+function lighter_binder:set_flame_status(status)
+    self.m_light_source:set_light_status(status)
+    self.m_particles_source:set_particles_status(status)
+    western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, status)
+end
+
+function lighter_binder:play_animation()
+    -- Play SFX
+    self.m_sounds.campfire:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
+
+    -- Play CFX
+    actor_effects.play_item_fx(self.m_amn_cam_motion)
+
+    -- Play HUD motion
+    if self:check_is_drawn() then
+        western_goods_utils.play_hud_animation(western_goods_utils.animation_hands_modes.left, self.object:section(), self.m_amn_motion)
+    end
 end
 
 function lighter_binder:check_state()
@@ -235,44 +220,6 @@ end
 function lighter_binder:check_is_drawn()
     local active_det = db.actor:active_detector()
     return active_det and active_det:id() == self.object:id() or false
-end
-
-function lighter_binder:get_flame_bone_position()
-    local pos = western_goods_utils.bone_hud_position(self.object, self.m_light_hud_bone, self.m_light_bone)
-    return pos or db.actor:position()
-end
-
-function lighter_binder:set_flame_status(status)
-    for _, light in pairs(self.m_lights) do
-        light.enabled = status
-    end
-    for _, part in pairs(self.m_particles) do
-        if not status then
-            part:stop()
-        end
-    end
-    western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, status)
-end
-
-function lighter_binder:play_animation()
-    -- Play SFX
-    self.m_sounds.campfire:play_at_pos(db.actor, VEC_ZERO, 0, sound_object.s2d)
-
-    -- Play CFX
-    actor_effects.play_item_fx(self.m_amn_cam_motion)
-
-    -- Play HUD motion
-    if self:check_is_drawn() then
-        self:play_hud_animation()
-    end
-end
-
-function lighter_binder:play_hud_animation()
-    local hud_sec = ini_sys:r_string_ex(self.object:section(), "hud")
-    if ini_sys:line_exist(hud_sec, self.m_amn_motion) then
-        game.play_hud_motion(1, hud_sec, self.m_amn_motion, true, 1.0)
-        dbg_printf("[WG] Lighter Binder | Play Animation - Played motion %s in section %s", self.m_amn_motion, hud_sec)
-    end
 end
 
 function lighter_binder:western_goods_on_campfire_use()
