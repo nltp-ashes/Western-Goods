@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 14/05/2024                                                                                             ---
+---    Date : 15/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle a collection of scripted lights.                                                        ---
@@ -23,7 +23,7 @@ local dbg_printf                       = western_goods_utils.dbg_printf
 class "light_source"
 
 function light_source:__init(inner_brightness, outer_brightness)
-    dbg_printf("[WG] Light Source Binder | Creating light source")
+    dbg_printf("[WG] Light Source | Creating light source")
 
     local light_inner = script_light()
     light_inner.hud_mode = false
@@ -48,7 +48,7 @@ function light_source:__init(inner_brightness, outer_brightness)
         outer = light_outer
     }
 
-    dbg_printf("[WG] Light Source Binder | Successfully bound light source")
+    dbg_printf("[WG] Light Source | Successfully created light source")
 end
 
 function light_source:update_light(pos)

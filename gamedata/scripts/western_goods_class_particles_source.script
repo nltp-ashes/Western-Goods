@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 14/05/2024                                                                                             ---
+---    Date : 15/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handled a dynamically built collection of particle objects.                                    ---
@@ -23,7 +23,7 @@ local dbg_printf                       = western_goods_utils.dbg_printf
 class "particles_source"
 
 function particles_source:__init(...)
-    dbg_printf("[WG] Particles Source Binder | Creating particles source")
+    dbg_printf("[WG] Particles Source | Creating particles source")
 
     self.m_particles = {
         -- TODO : remove these lines
@@ -37,7 +37,7 @@ function particles_source:__init(...)
         table.insert(self.m_particles, v)
     end
 
-    dbg_printf("[WG] Particles Source Binder | Successfully bound particles source")
+    dbg_printf("[WG] Particles Source | Successfully created particles source")
 end
 
 function particles_source:update_particles(pos)

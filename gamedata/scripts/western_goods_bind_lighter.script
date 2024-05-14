@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 14/05/2024                                                                                             ---
+---    Date : 15/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -54,13 +54,16 @@ end
 -- Object Binder Class
 -- ---------------------------------------------------------------------------------------------------------------------
 
-class "lighter_binder" (western_goods_bind_fire_source.fire_source_binder)
+class "lighter_binder" (western_goods_bind_object.object_binder_lua)
 
 function lighter_binder:__init(obj) super(obj)
     dbg_printf("[WG] Lighter Binder | Binding object '%s'", obj:name())
 
     -- Fast call required so that script_light doesn't lag behind the hands
     self.object:set_fastcall(self.binder.update, self.binder)
+
+    -- Fire source
+    self.m_fire_source = western_goods_class_fire_source.fire_source()
 
     -- Script lights
     self.m_light_source = western_goods_class_light_source.light_source(0.002, 0.0005)
@@ -72,6 +75,11 @@ function lighter_binder:__init(obj) super(obj)
     self.m_sounds = {
         campfire = sound_object([[western_goods_tech\lighter_use_cf]]),
     }
+
+    -- Callbacks
+    RegisterScriptCallback("western_goods_on_campfire_use", self)
+    RegisterScriptCallback("western_goods_on_item_before_use", self)
+    RegisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
 
     -- Build variables
     self.m_fuel_critical = ini_sys:r_float_ex(self.object:section(), "wg_fuel_critical", 0.01)
@@ -90,15 +98,23 @@ function lighter_binder:__init(obj) super(obj)
     dbg_printf("[WG] Lighter Binder | Successfully bound object '%s'", obj:name())
 end
 
+function lighter_binder:net_destroy()
+    UnregisterScriptCallback("western_goods_on_campfire_use", self)
+    UnregisterScriptCallback("western_goods_on_item_before_use", self)
+    UnregisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
+
+    western_goods_bind_object.object_binder_lua.net_destroy(self)
+end
+
 function lighter_binder:save()
-    western_goods_bind_fire_source.fire_source_binder.save(self)
+    western_goods_bind_object.object_binder_lua.save(self)
 
     se_save_var(self.object:id(), nil, "fuel_level", self.object:condition())
     dbg_printf("[WG] Lighter Binder | Save - Saved fuel level for '%s' : %s", self.object:name(), self.m_fuel_level_saved)
 end
 
 function lighter_binder:load()
-    western_goods_bind_fire_source.fire_source_binder.load(self)
+    western_goods_bind_object.object_binder_lua.load(self)
 
     self.m_fuel_level_saved = se_load_var(self.object:id(), nil, "fuel_level") or 1.0
     dbg_printf("[WG] Lighter Binder | Load - Loaded fuel level for '%s' : %s", self.object:name(), self.m_fuel_level_saved)
@@ -227,7 +243,7 @@ function lighter_binder:western_goods_on_campfire_use()
         return
     end
 
-    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_campfire_use(self)
+    local result = self.m_fire_source:light_campfire()
     if result then
         self:play_animation()
         self:update_fuel(self.m_fuel_consumption_use)
@@ -239,7 +255,7 @@ function lighter_binder:western_goods_on_item_before_use(obj, flags)
         return
     end
 
-    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_item_before_use(self, obj, flags)
+    local result = self.m_fire_source:light_cigarette(obj, flags)
     if result then
         self:update_fuel(self.m_fuel_consumption_use)
     end
@@ -250,7 +266,7 @@ function lighter_binder:western_goods_on_hideout_furniture_light_use(obj_id)
         return
     end
 
-    local result = western_goods_bind_fire_source.fire_source_binder.western_goods_on_hideout_furniture_light_use(self, obj_id)
+    local result = self.m_fire_source:light_gas_lamp(obj_id)
     if result then
         self:play_animation()
         self:update_fuel(self.m_fuel_consumption_use)
