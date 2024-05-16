@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : Tronex                                                                                   ---
 ---    Edited : NLTP_ASHES                                                                                           ---
----    Date : 24/03/2024                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon. ---
@@ -80,7 +80,7 @@ function collect_textures()
     local file_count, tex_count = 0, 0
 
     ini_sys:section_for_each(function(section)
-        local is_readable = ini_sys:r_bool_ex(section,"readable", false)
+        local is_readable = ini_sys:r_bool_ex(section, "wg_readable", false)
         local is_base = string.find(section, "_base")
 
         if is_readable and not is_base then

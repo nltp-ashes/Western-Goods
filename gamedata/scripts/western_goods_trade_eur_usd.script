@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 01/04/2024                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
@@ -428,11 +428,11 @@ function collect_traders_list()
 
     profiler:start()
 
-    local file_list = str_explode(ini_sys:r_string("profiles", "specific_characters_files"),",")
+    local file_list = parse_list(ini_sys, "profiles", "specific_characters_files")
 
     for _,file_name in pairs(file_list) do
         local xml = CScriptXmlInit()
-        xml:ParseDirFile([[gameplay]],file_name..".xml")
+        xml:ParseDirFile([[gameplay]], file_name..".xml")
 
         local char_count = xml:GetNodesNum("", 0, "specific_character")
         for i=0, char_count-1 do

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 16/05/2024                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -201,6 +201,12 @@ end
 --- @return boolean
 function is_mcm_installed()
     return ui_mcm ~= nil
+end
+
+--- Function used to check if the Pinup Collector addon is installed.
+--- @return boolean
+function is_pinup_collector_installed()
+    return item_pinup_collect ~= nil
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
