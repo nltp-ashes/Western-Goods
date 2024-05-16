@@ -25,17 +25,7 @@ class "particles_source"
 function particles_source:__init(...)
     dbg_printf("[WG] Particles Source | Creating particles source")
 
-    self.m_particles = {
-        -- TODO : remove these lines
-        --dot = particles_object([[western_goods\nvg_dot]]),
-        --sparks = particles_object([[amik\hit_fx\metal\hit_sparks_01]]),
-        --smoke = particles_object([[damage_fx\effects\body_smoke_01]])
-    }
-
-    local particles = {...}
-    for _,v in pairs(particles) do
-        table.insert(self.m_particles, v)
-    end
+    self.m_particles = {...}
 
     dbg_printf("[WG] Particles Source | Successfully created particles source")
 end
