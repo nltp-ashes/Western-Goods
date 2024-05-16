@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 01/04/2024                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -18,6 +18,8 @@ local ini_keys                  = ini_file_ex([[plugins\western_goods\misc\weste
 local ini_trade                 = ini_file([[items\trade\trade_generic.ltx]])
 
 trade_status_flags              = { cant_trade = 1, too_damaged = 2, hidden = 3, tradable = 4 }
+weapon_zoom_types               = { normal = 0, alt = 1, gl = 2 }
+animation_hands_modes           = { right = 0, left = 1, both = 2 }
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug Functions
@@ -225,9 +227,9 @@ end
 function get_key_translation(dik)
     if not validate_params({dik,"get_key_translation"}) then return end
 
-    local loc = ini_loc:r_value("string_table","language")
+    local loc = ini_loc:r_value("string_table", "language")
     loc = ini_keys:section_exist(loc) and loc or "eng"
-    return ini_keys:r_value(loc, dik,0,"<!!!>")
+    return ini_keys:r_value(loc, dik, 0, "<!!!>")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -435,7 +437,7 @@ function get_dialog_list(character_id)
 
     local dialog_list = {}
 
-    local file_list = str_explode(ini_sys:r_string("profiles", "specific_characters_files"),",")
+    local file_list = parse_list(ini_sys, "profiles", "specific_characters_files")
 
     for _,file_name in pairs(file_list) do
         local xml = CScriptXmlInit()
@@ -535,24 +537,6 @@ function collect_texture_descriptions(pattern)
     this.dbg_printf("[WG] Utils | Found %s matching texture descriptions for %s in %sms :\n%s", size_table(matches), pattern, profiler:time()/1000, utils_data.print_table(matches, false, true))
 
     return matches
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Objects Functions
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to get the current renderer used by the game.
---- @return "dx8"|"dx9"|"dx10"|"dx11"|
-function get_renderer()
-    local renderers = {
-        ["renderer_r4"]   = "dx11",
-        ["renderer_r3"]   = "dx10",
-        ["renderer_r2a"]  = "dx9",
-        ["renderer_r2.5"] = "dx9",
-        ["renderer_r1"]   = "dx8",
-    }
-
-    return renderers[get_console_cmd(0,"renderer")]
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1074,7 +1058,7 @@ function get_section_price(section, count, default)
     count = count or 1
     default = default or 0
 
-    local condlist = ini_trade and ini_trade:r_string_to_condlist("trader","discounts")
+    local condlist = ini_trade and ini_trade:r_string_to_condlist("trader", "discounts")
     local sect = condlist and xr_logic.pick_section_from_condlist(db.actor, nil, condlist)
 
     if sect == nil or sect == "" then
@@ -1082,16 +1066,48 @@ function get_section_price(section, count, default)
     end
 
     local cost = SYS_GetParam(2, section, "cost", 0)
-    local factor = ini_trade:r_float_ex(sect,"sell") or 1
+    local factor = ini_trade:r_float_ex(sect, "sell") or 1
     local eco_factor = game_difficulties.get_eco_factor("sell") or 1
     local discount = factor * eco_factor
 
     return (cost * discount) * count
 end
 
+--- Function used to get the magnitude of a vector on the XZ plane.
+--- @param vec vector
+--- @return number
 function vec_magnitude_xz(vec)
     if not validate_params({vec,"vec_magnitude_xz"}) then return end
 
     local vec_xz = vector():set(vec.x, 0, vec.z)
     return vec_xz:magnitude()
+end
+
+--- Function used to get the current renderer used by the game.
+--- @return "dx8"|"dx9"|"dx10"|"dx11"|
+function get_renderer()
+    local renderers = {
+        ["renderer_r4"]   = "dx11",
+        ["renderer_r3"]   = "dx10",
+        ["renderer_r2a"]  = "dx9",
+        ["renderer_r2.5"] = "dx9",
+        ["renderer_r1"]   = "dx8",
+    }
+
+    return renderers[get_console_cmd(0,"renderer")]
+end
+
+--- Function used to play an animation on a game object.
+--- @param hand_mode number
+--- @param section string
+--- @param motion_key string
+--- @param speed number
+function play_hud_animation(hand_mode, section, motion_key, speed)
+    if not validate_params({hand_mode,section,motion_key,"play_hud_animation"}) then return end
+
+    local hud_sec = ini_sys:r_string_ex(section, "hud")
+    if ini_sys:line_exist(hud_sec, motion_key) then
+        game.play_hud_motion(hand_mode, hud_sec, motion_key, true, speed or 1.0)
+        dbg_printf("[WG] Utils | Playing HUD animation '%s' from '%s'", motion_key, hud_sec)
+    end
 end

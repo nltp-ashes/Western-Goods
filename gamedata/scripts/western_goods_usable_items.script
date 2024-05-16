@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the various usable items from the Western Goods addon.                                  ---
@@ -19,7 +19,94 @@ local dbg_printf                = western_goods_utils.dbg_printf
 local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Inventory Labels
+-- Use functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called by callback when any object in the game is used.
+--- This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
+function use_item(obj,_,cf)
+    -- Toblerone
+    if obj:section() == "wg_toblerone" then
+        dbg_printf("[WG] Usable Items | Used %s", obj:section())
+        this.use_toblerone(obj)
+        return
+    end
+
+    -- Readable item (magazine, paper notes, etc.)
+    if ini_sys:r_bool_ex(obj:section(), "wg_readable", false) then
+        dbg_printf("[WG] Usable Items | Used %s", obj:section())
+        this.use_readable(obj)
+        return
+    end
+end
+
+--- Function called by callback when an object is drag and dropped over another one.
+--- This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
+function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
+    -- Danylo's pendrive on pda
+    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.validate_is_pda(dropped_on_item) then
+        this.use_danylo_pendrive(dragged_item, dropped_on_item, slot_from, slot_to)
+    end
+
+    -- Kerosene on lighter
+    if dragged_item:section() == "kerosene" and western_goods_utils.validate_is_lighter(dropped_on_item) then
+        this.use_kerosene(dragged_item, dropped_on_item, slot_from, slot_to)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Use actions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called when a readable item is used by the player.
+--- @param obj game_object
+--- @return nil
+function use_readable(obj)
+    western_goods_ui_readable.display(obj:section())
+end
+
+--- Function called when the Toblorone item is used by the player.
+--- @param obj game_object
+--- @return nil
+function use_toblerone(obj)
+    CreatePersistentTimeEvent("western_goods_delay", "toblerone_mask", 2, function()
+        level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
+        dbg_printf("[WG] Usable Items | Toblerone - Started ppe effect '%s'", 57742)
+        return true
+    end)
+    CreatePersistentTimeEvent("western_goods_delay", "force_sleep", 6, function()
+        level.remove_pp_effector(57742)
+        dbg_printf("[WG] Usable Items | Toblerone - Stopped ppe effect '%s'", 57742)
+        actor_status_thirst.force_sleep()
+        return true
+    end)
+end
+
+--- Function called when the player uses Danylo's pendrive.
+--- @param obj game_object
+--- @return nil
+function use_danylo_pendrive(dragged_item, dropped_on_item, slot_from, slot_to)
+    if slot_from == EDDListType.iActorBag and slot_to == EDDListType.iActorSlot then
+        ui_pda_encyclopedia_tab.unlock_note("encyclopedia__notes_western_goods_hand_drawn_map")
+    end
+end
+
+--- Function called when the player drags and drops kerosene on a lighter.
+--- This function will refuel the lighter completely and consume one use of the kerosene.
+--- @param fuel game_object
+--- @param lighter game_object
+function use_kerosene(dragged_item, dropped_on_item, slot_from, slot_to)
+    dropped_on_item:set_condition(1.0)
+    utils_item.discharge(dragged_item, 1)
+    dbg_printf("[WG] Usable Items | Kerosene - Refueled lighter %s", dropped_on_item:name())
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Inventory labels
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to return the text written when right clicking on a lighter.
@@ -54,91 +141,8 @@ end
 --- @param obj game_object
 --- @return string
 function menu_tear_page(obj)
-    if not item_pinup_collect then
-        return nil
-    end
-    return western_goods_utils.get_translation("st_wg_tear_page")
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Use Functions
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called by callback when any object in the game is used.
---- This redirects to the proper functions if the item used is one from Western Goods.
---- @param obj game_object
---- @return nil
-function use_item(obj,_,cf)
-    -- Toblerone
-    if (obj:section() == "wg_toblerone") then
-        dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        this.use_toblerone(obj)
-        return
-    end
-
-    -- Readable items (magazines, paper notes)
-    if ini_sys:r_bool_ex(obj:section(), "readable", false) then
-        dbg_printf("[WG] Usable Items | Used %s",obj:section())
-        western_goods_ui_readable.display(obj:section())
-        return
-    end
-end
-
---- Function called by callback when an object is drag and dropped over another one.
---- This redirects to the proper functions if the item used is one from Western Goods.
---- @param obj game_object
---- @return nil
-function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
-    -- Danylo's pendrive
-    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.validate_is_pda(dropped_on_item) then
-        if slot_from == EDDListType.iActorBag and slot_to == EDDListType.iActorSlot then
-            this.use_danylo_pendrive(dragged_item)
-        end
-    end
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Toblerone
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called when the Toblorone item is used by the player.
---- @param obj game_object
---- @return nil
-function use_toblerone(obj)
-    CreatePersistentTimeEvent("western_goods_delay","toblerone_mask",2,function()
-        level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
-        dbg_printf("[WG] Usable Items | Toblerone - Started ppe effect '%s'",57742)
-        return true
-    end)
-    CreatePersistentTimeEvent("western_goods_delay","force_sleep",6,function()
-        level.remove_pp_effector(57742)
-        dbg_printf("[WG] Usable Items | Toblerone - Stopped ppe effect '%s'",57742)
-        actor_status_thirst.force_sleep()
-        return true
-    end)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Danylo's pendrive
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called when the player uses Danylo's pendrive.
---- @param obj game_object
---- @return nil
-function use_danylo_pendrive(obj)
-    ui_pda_encyclopedia_tab.unlock_note("encyclopedia__notes_western_goods_hand_drawn_map")
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Pinup Collector addon
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function called by item use functors when a page is torn off a porn magazine.
---- @param obj game_object
---- @return nil
-function tear_page(obj)
-    if item_pinup_collect then
-        item_pinup_collect.func_pinup(obj)
+    if western_goods_core.is_pinup_collector_installed() then
+        return western_goods_utils.get_translation("st_wg_tear_page")
     end
     return nil
 end
@@ -152,4 +156,18 @@ end
 function on_game_start()
     RegisterScriptCallback("actor_on_item_use", use_item)
     RegisterScriptCallback("ActorMenu_on_item_drag_drop", use_item_drag_drop)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Pinup Collector addon
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called by item use functors when a page is torn off a porn magazine.
+--- @param obj game_object
+--- @return nil
+function tear_page(obj)
+    if western_goods_core.is_pinup_collector_installed() then
+        return item_pinup_collect.func_pinup(obj)
+    end
+    return nil
 end

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 20/04/2024                                                                                             ---
+---    Date : 15/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to monkey-patch some functions of base anomaly, or other addons.                                  ---
@@ -179,7 +179,12 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 
 make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
-    western_goods_bind_fire_source.toggle_light(obj_id)
+    local is_on_before = hf_obj_manager.get_data(obj_id).is_on
+    western_goods_monkey_patches.hideout_furniture_light(obj_id)
+    local is_on_after = hf_obj_manager.get_data(obj_id).is_on
+    if not is_on_before and not is_on_after then
+        SendScriptCallback("western_goods_on_hideout_furniture_light_use", obj_id)
+    end
 end)
 
 make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)

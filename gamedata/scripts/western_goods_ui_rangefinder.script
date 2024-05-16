@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 29/02/2024                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the UI for the Rangefinder.                                                             ---
@@ -154,7 +154,7 @@ function UIRangefinder:actor_on_weapon_zoom_in(wpn)
     end
 
     local old_hud_fov = ui_options.get("video/basic/hud_fov")
-    local new_hud_fov = ini_sys:r_float_ex(wpn:section(),"scope_hud_fov")
+    local new_hud_fov = ini_sys:r_float_ex(wpn:section(), "scope_hud_fov")
 
     exec_console_cmd("hud_fov ".. new_hud_fov)
     self.m_hud_fov = old_hud_fov
