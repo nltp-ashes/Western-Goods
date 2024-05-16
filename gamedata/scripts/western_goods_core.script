@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 01/04/2024                                                                                             ---
+---    Date : 16/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -1155,6 +1155,26 @@ western_goods_items = {
             ["renegade"]     = { qte=1, prob=0.03 },
             ["killer"]       = { qte=1, prob=0.05 },
             ["isg"]          = { qte=1, prob=0.10 },
+            ["monolith"]     = { qte=1, prob=0.05 }
+        },
+    },
+    ["wg_lighter_zippo"] =  {
+        type                 = "tech",
+        trader_params = {
+            ["isg"]          = { qte=1, sl=1, prob=1.0 },
+            ["killer"]       = { qte=2, sl=2, prob=0.9 },
+            ["stalker"]      = { qte=1, sl=2, prob=0.6 },
+            ["freedom"]      = { qte=1, sl=2, prob=0.8 },
+            ["bandit"]       = { qte=1, sl=2, prob=0.7 },
+            ["monolith"]     = { qte=1, sl=1, prob=0.7 }
+        },
+        corpse_params = {
+            ["stalker"]      = { qte=1, prob=0.04 },
+            ["bandit"]       = { qte=1, prob=0.07 },
+            ["freedom"]      = { qte=1, prob=0.03 },
+            ["renegade"]     = { qte=1, prob=0.03 },
+            ["killer"]       = { qte=1, prob=0.04 },
+            ["isg"]          = { qte=1, prob=0.05 },
             ["monolith"]     = { qte=1, prob=0.05 }
         },
     },
