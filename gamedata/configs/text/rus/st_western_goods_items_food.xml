@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                                 -->
 <!--    Edited : VodoXleb (Translation)                                                                                                 -->
-<!--    Date : 17/03/2023                                                                                             -->
+<!--    Date : 17/05/2024                                                                                             -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' food items.                                                                 -->
@@ -41,26 +41,6 @@
     <string id="st_wg_snickers_descr">
         <text>
             Snickers - шоколодный батончик, состо€щий из нуги, с добавкой карамели и арахиса, покрытой молочным шоколадом. Ѕольшинство сталкеров не могут их себе позволить, так как они импортированы из других стран. “е, кто могут его себе позволить, используют его, как быстрый источник пищи в загруженные дни.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] еда\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
-    <string id="st_wg_twix">
-        <text>Ўоколадна€ палочка Twix</text>
-    </string>
-
-    <string id="st_wg_twix_s">
-        <text>ѕалочка Twix</text>
-    </string>
-
-    <string id="st_wg_twix_descr">
-        <text>
-            Twix  - карамельный шоколадный батончик с печеньем, созданный Mars, Inc., состо€щий из печень€ с различными сладкими топпингами ( в основном карамель и молочный шоколад. Twix пакуетс€ по две "палочки" в упаковке.\n
             \n
             %c[ui_gray_1]—¬ќ…—“¬ј:\n
             %c[d_blue] Х %c[ui_gray_2] еда\n
@@ -121,46 +101,6 @@
     <string id="st_wg_bounty_descr">
         <text>
             Bounty - конфетно-шоколадный батончик с кокосовой начинкой, производимый Mars, Incorporated. Ѕатончик Bounty предлагает вам сильный кокосовой вкус, дающийс€ м€гкой и пушистой сердцевинкой конфеты. —наружи батончик покрыт сладким шоколадом, налитым сверху, что придают батончику свою форму.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] еда\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
-    <string id="st_wg_kinder_maxi">
-        <text>Ўоколадный батончик Kinder Maxi</text>
-    </string>
-
-    <string id="st_wg_kinder_maxi_s">
-        <text>Ўоколадка Kinder Maxi</text>
-    </string>
-
-    <string id="st_wg_kinder_maxi_descr">
-        <text>
-            Kinder Maxi - шоколадный батончик с какао-маслом, производимый брендом Kinder из группы Ferrero. Ѕатончик содержит в основном молочный шоколад, с м€гкой молочной начинкой.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] еда\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
-    <string id="st_wg_kinder_bueno">
-        <text>Ўоколадный батончик Kinder Bueno</text>
-    </string>
-
-    <string id="st_wg_kinder_bueno_s">
-        <text>Ѕатончик Kinder Bueno</text>
-    </string>
-
-    <string id="st_wg_kinder_bueno_descr">
-        <text>
-            Kinder Buenos - это хруст€щие, покрытые шоколадом пластинки-батончики с богатой начинкой из масла лесного ореха. ќни поставл€ютс€ в двух отдельно изолированных пластиковых упаковках, поэтому вы можете съесть один, а другой оставить на потом.\n
             \n
             %c[ui_gray_1]—¬ќ…—“¬ј:\n
             %c[d_blue] Х %c[ui_gray_2] еда\n
