@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 01/04/2024                                                                                               ;;
+;;    Date : 17/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new food and snacks to the game.                                                        ;;
@@ -53,7 +53,7 @@ use_sound                                        = western_goods_food\wg_french_
 tier                                             = 3
 
 ;;====================================================================================================================;;
-;;==================| Animated Items |================================================================================;;
+;;==================| Snacks |========================================================================================;;
 ;;====================================================================================================================;;
 
 [wg_mnms]:wg_food_base
@@ -87,8 +87,10 @@ tier                                             = 2
 
 [wg_mnms_hud]
 item_visual                                      = dynamics\western_goods_food\wg_mnms_hud.ogf
+
 hands_position                                   = -0.0055, 0.00, 0.12
 hands_position_16x9                              = -0.0055, 0.00, 0.12
+
 anm_ea_show                                      = wg_mnms_use, wg_mnms_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,66 +125,13 @@ tier                                             = 2
 
 [wg_mentos_hud]
 item_visual                                      = dynamics\western_goods_food\wg_mentos_hud.ogf
+
 hands_position                                   = -0.0055,-0.07, 0.32
 hands_position_16x9                              = -0.0055,-0.07, 0.32
+
 anm_ea_show                                      = wg_mentos_use, wg_mentos_item_use
 
-;;====================================================================================================================;;
-;;==================| Misc Items |====================================================================================;;
-;;====================================================================================================================;;
-
-[wg_hamborgir]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_hamborgir.ogf
-
-inv_name                                         = st_wg_hamborgir
-inv_name_short                                   = st_wg_hamborgir_s
-description                                      = st_wg_hamborgir_descr
-inv_weight                                       = 0.200
-cost                                             = 1665
-
-
-inv_grid_width                                   = 2
-inv_grid_height                                  = 1
-inv_grid_x                                       = 0
-inv_grid_y                                       = 2
-
-break_sound                                      = western_goods_food\wg_hamborgir_drop
-use_sound                                        = western_goods_food\wg_hamborgir_eat
-
-eat_satiety                                      = 0.265
-eat_sleepiness                                   = 0.00125
-eat_thirstiness                                  = 0.0425
-
-tier                                             = 2
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_sandwich]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_sandwich.ogf
-
-inv_name                                         = st_wg_sandwich
-inv_name_short                                   = st_wg_sandwich_s
-description                                      = st_wg_sandwich_descr
-inv_weight                                       = 0.350
-cost                                             = 1100
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 5
-inv_grid_y                                       = 3
-
-break_sound                                      = western_goods_food\wg_sandwich_drop
-use_sound                                        = western_goods_food\wg_sandwich_eat
-
-eat_satiety                                      = 0.265
-eat_sleepiness                                   = 0.00125
-eat_thirstiness                                  = 0.0425
-
-tier                                             = 2
-
-;;====================================================================================================================;;
-;;==================| Snacks |========================================================================================;;
-;;====================================================================================================================;;
 
 [wg_snickers]:wg_food_base
 visual                                           = dynamics\western_goods_food\wg_snickers.ogf
@@ -206,6 +155,14 @@ eat_sleepiness                                   = 0.0015
 eat_thirstiness                                  = 0.06
 
 tier                                             = 2
+
+[wg_snickers_hud]
+item_visual                                      = dynamics\western_goods_food\wg_snickers_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_snickers_use, wg_snickers_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -237,6 +194,14 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
+[wg_twix_hud]
+item_visual                                      = dynamics\western_goods_food\wg_twix_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_twix_use, wg_twix_item_use
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_mars]:wg_food_base
@@ -262,6 +227,14 @@ eat_thirstiness                                  = 0.075
 
 tier                                             = 2
 
+[wg_mars_hud]
+item_visual                                      = dynamics\western_goods_food\wg_mars_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_mars_use, wg_mars_item_use
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_milkyway]:wg_food_base
@@ -286,6 +259,14 @@ eat_sleepiness                                   = 0.001
 eat_thirstiness                                  = 0.04
 
 tier                                             = 2
+
+[wg_milkyway_hud]
+item_visual                                      = dynamics\western_goods_food\wg_milkyway_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_milkyway_use, wg_milkyway_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -316,6 +297,14 @@ remove_after_use                                 = true
 empty_weight                                     = 0.01
 
 tier                                             = 2
+
+[wg_bounty_hud]
+item_visual                                      = dynamics\western_goods_food\wg_bounty_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_bounty_use, wg_bounty_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -402,6 +391,14 @@ empty_weight                                     = 0.01
 
 tier                                             = 2
 
+[wg_kitkat_hud]
+item_visual                                      = dynamics\western_goods_food\wg_kitkat_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_kitkat_use, wg_kitkat_item_use
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_milka]:wg_food_base
@@ -426,6 +423,14 @@ eat_sleepiness                                   = 0.005
 eat_thirstiness                                  = 0.2
 
 tier                                             = 2
+
+[wg_milka_hud]
+item_visual                                      = dynamics\western_goods_food\wg_milka_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_milka_use, wg_milka_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -452,6 +457,14 @@ eat_thirstiness                                  = 0.2
 
 tier                                             = 2
 
+[wg_lays_hud]
+item_visual                                      = dynamics\western_goods_food\wg_lays_hud.ogf
+
+hands_position                                   = 0, 0, 0
+hands_orientation                                = 0, 0, 0
+
+anm_ea_show                                      = wg_lays_use, wg_lays_item_use
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_doritos]:wg_food_base
@@ -474,6 +487,67 @@ use_sound                                        = western_goods_food\wg_doritos
 eat_satiety                                      = 0.295
 eat_sleepiness                                   = 0.003
 eat_thirstiness                                  = 0.2
+
+tier                                             = 2
+
+[wg_doritos_hud]
+item_visual                                      = dynamics\western_goods_food\wg_doritos_hud.ogf
+
+hands_position                                   = 0, 0, 0
+hands_orientation                                = 0, 0, 0
+
+anm_ea_show                                      = wg_doritos_use, wg_doritos_item_use
+
+;;====================================================================================================================;;
+;;==================| Misc Items |====================================================================================;;
+;;====================================================================================================================;;
+
+[wg_hamborgir]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_hamborgir.ogf
+
+inv_name                                         = st_wg_hamborgir
+inv_name_short                                   = st_wg_hamborgir_s
+description                                      = st_wg_hamborgir_descr
+inv_weight                                       = 0.200
+cost                                             = 1665
+
+
+inv_grid_width                                   = 2
+inv_grid_height                                  = 1
+inv_grid_x                                       = 0
+inv_grid_y                                       = 2
+
+break_sound                                      = western_goods_food\wg_hamborgir_drop
+use_sound                                        = western_goods_food\wg_hamborgir_eat
+
+eat_satiety                                      = 0.265
+eat_sleepiness                                   = 0.00125
+eat_thirstiness                                  = 0.0425
+
+tier                                             = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_sandwich]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_sandwich.ogf
+
+inv_name                                         = st_wg_sandwich
+inv_name_short                                   = st_wg_sandwich_s
+description                                      = st_wg_sandwich_descr
+inv_weight                                       = 0.350
+cost                                             = 1100
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 5
+inv_grid_y                                       = 3
+
+break_sound                                      = western_goods_food\wg_sandwich_drop
+use_sound                                        = western_goods_food\wg_sandwich_eat
+
+eat_satiety                                      = 0.265
+eat_sleepiness                                   = 0.00125
+eat_thirstiness                                  = 0.0425
 
 tier                                             = 2
 
