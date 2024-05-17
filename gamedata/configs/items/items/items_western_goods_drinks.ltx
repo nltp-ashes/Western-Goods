@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 02/12/2023                                                                                               ;;
+;;    Date : 17/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new drinks to the game.                                                                 ;;
@@ -69,48 +69,6 @@ anm_ea_show                                      = wg_cola_bottle_use, wg_cola_b
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_gorbatschow_bottle]:wg_drink_base
-visual                                           = dynamics\western_goods_drinks\wg_gorbatschow_bottle.ogf
-
-inv_name                                         = st_wg_gorbatschow_bottle
-inv_name_short                                   = st_wg_gorbatschow_bottle_s
-description                                      = st_wg_gorbatschow_bottle_descr
-inv_weight                                       = 1.69 ; noice
-cost                                             = 2100
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 2
-inv_grid_x                                       = 0
-inv_grid_y                                       = 2
-
-break_particles                                  = destroy_fx\destroy_bottle
-break_sound                                      = western_goods_drinks\wg_gorbatschow_bottle_drop
-use_sound                                        = western_goods_drinks\wg_gorbatschow_bottle_drink
-snd_on_take                                      = bottle
-
-boost_time                                       = 45
-boost_radiation_restore                          = 0.0010
-eat_alcohol                                      = 0.2
-eat_satiety                                      = 0.022
-eat_sleepiness                                   = 0.039
-eat_thirstiness                                  = 0.25
-eat_health                                       = -0.015
-
-use_condition                                    = true
-max_uses                                         = 3
-remove_after_use                                 = true
-empty_weight                                     = 0.8
-
-tier                                             = 1
-
-[wg_gorbatschow_bottle_hud]
-item_visual                                      = dynamics\western_goods_drinks\wg_gorbatschow_bottle_hud.ogf
-hands_position                                   = -0.0055,-0.06, 0.34
-hands_position_16x9                              = -0.0055,-0.06, 0.34
-anm_ea_show                                      = wg_gorbatschow_bottle_use, wg_gorbatschow_bottle_item_use
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 [wg_wine_chateau_latour]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_wine_chateau_latour.ogf
 
@@ -149,39 +107,6 @@ item_visual                                      = dynamics\western_goods_drinks
 hands_position                                   = -0.0055,-0.09, 0.27
 hands_position_16x9                              = -0.0055,-0.09, 0.27
 anm_ea_show                                      = wg_wine_chateau_latour_use, wg_wine_chateau_latour_item_use
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_yoohoo_bottle]:wg_drink_base
-visual                                           = dynamics\western_goods_drinks\wg_yoohoo_bottle.ogf
-
-inv_name                                         = st_wg_yoohoo_bottle
-inv_name_short                                   = st_wg_yoohoo_bottle_s
-description                                      = st_wg_yoohoo_bottle_descr
-inv_weight                                       = 0.7
-cost                                             = 3100
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 3
-inv_grid_y                                       = 2
-
-break_particles                                  = destroy_fx\destroy_bottle
-break_sound                                      = western_goods_drinks\wg_yoohoo_bottle_drop
-use_sound                                        = western_goods_drinks\wg_yoohoo_bottle_drink
-snd_on_take                                      = bottle
-
-eat_satiety                                      = 0.220
-eat_sleepiness                                   = 0.042
-eat_thirstiness                                  = -2.26
-
-tier                                             = 1
-
-[wg_yoohoo_bottle_hud]
-item_visual                                      = dynamics\western_goods_drinks\wg_yoohoo_bottle_hud.ogf
-hands_position                                   = -0.0055,-0.06, 0.34
-hands_position_16x9                              = -0.0055,-0.06, 0.34
-anm_ea_show                                      = wg_yoohoo_bottle_use, wg_yoohoo_bottle_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -445,40 +370,6 @@ anm_ea_show                                      = wg_pepsi_can_use, wg_pepsi_ca
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-[wg_mountain_dew_can]:wg_drink_base
-visual                                           = dynamics\western_goods_drinks\wg_mountain_dew_can.ogf
-
-inv_name                                         = st_wg_mountain_dew_can
-inv_name_short                                   = st_wg_mountain_dew_can_s
-description                                      = st_wg_mountain_dew_can_descr
-inv_weight                                       = 0.35
-cost                                             = 2300
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 3
-inv_grid_y                                       = 1
-
-break_particles                                  = destroy_fx\destroy_bottle
-break_sound                                      = western_goods_drinks\wg_mountain_dew_can_drop
-use_sound                                        = western_goods_drinks\wg_mountain_dew_can_drink
-
-boost_time                                       = 30
-boost_radiation_restore                          = 0.0004
-eat_satiety                                      = 0.075
-eat_sleepiness                                   = -0.04
-eat_thirstiness                                  = -2.20
-
-tier                                             = 2
-
-[wg_mountain_dew_can_hud]
-item_visual                                      = dynamics\western_goods_drinks\wg_mountain_dew_can_hud.ogf
-hands_position                                   = -0.0055,-0.072, 0.31
-hands_position_16x9                              = -0.0055,-0.072, 0.31
-anm_ea_show                                      = wg_mountain_dew_can_use, wg_mountain_dew_can_item_use
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 [wg_perrier_can]:wg_drink_base
 visual                                           = dynamics\western_goods_drinks\wg_perrier_can.ogf
 
@@ -510,43 +401,6 @@ item_visual                                      = dynamics\western_goods_drinks
 hands_position                                   = -0.0055,-0.072, 0.31
 hands_position_16x9                              = -0.0055,-0.072, 0.31
 anm_ea_show                                      = wg_perrier_can_use, wg_perrier_can_item_use
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_rockstar_energy_can]:wg_drink_base
-visual                                           = dynamics\western_goods_drinks\wg_rockstar_energy_can.ogf
-
-inv_name                                         = st_wg_rockstar_energy_can
-inv_name_short                                   = st_wg_rockstar_energy_can_s
-description                                      = st_wg_rockstar_energy_can_descr
-inv_weight                                       = 0.35
-cost                                             = 1500
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 4
-inv_grid_y                                       = 1
-
-break_particles                                  = destroy_fx\destroy_bottle
-break_sound                                      = western_goods_drinks\wg_rockstar_energy_can_drop
-use_sound                                        = western_goods_drinks\wg_rockstar_energy_can_drink
-
-boost_time                                       = 250
-boost_max_weight                                 = 1.4
-boost_radiation_restore                          = 0.00004
-boost_power_restore                              = 0.003
-eat_alcohol                                      = -0.280
-eat_satiety                                      = 0.149
-eat_sleepiness                                   = -0.04
-eat_thirstiness                                  = -2.22
-
-tier                                             = 2
-
-[wg_rockstar_energy_can_hud]
-item_visual                                      = dynamics\western_goods_drinks\wg_rockstar_energy_can_hud.ogf
-hands_position                                   = -0.0055,-0.072, 0.31
-hands_position_16x9                              = -0.0055,-0.072, 0.31
-anm_ea_show                                      = wg_rockstar_energy_can_use, wg_rockstar_energy_can_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -654,73 +508,3 @@ item_visual                                      = dynamics\western_goods_drinks
 hands_position                                   = -0.0055,-0.072, 0.31
 hands_position_16x9                              = -0.0055,-0.072, 0.31
 anm_ea_show                                      = wg_sevenup_can_use, wg_sevenup_can_item_use
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_dr_bob_can]:wg_drink_base
-visual                                           = dynamics\western_goods_drinks\wg_dr_bob_can.ogf
-
-inv_name                                         = st_wg_dr_bob_can
-inv_name_short                                   = st_wg_dr_bob_can_s
-description                                      = st_wg_dr_bob_can_descr
-inv_weight                                       = 0.35
-cost                                             = 1500
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 7
-inv_grid_y                                       = 0
-
-break_particles                                  = destroy_fx\destroy_bottle
-break_sound                                      = western_goods_drinks\wg_dr_bob_can_drop
-use_sound                                        = western_goods_drinks\wg_dr_bob_can_drink
-
-boost_time                                       = 35
-boost_radiation_restore                          = 0.0004
-eat_satiety                                      = 0.01
-eat_sleepiness                                   = -0.06
-eat_thirstiness                                  = -3.20
-
-tier                                             = 2
-
-[wg_dr_bob_can_hud]
-item_visual                                      = dynamics\western_goods_drinks\wg_dr_bob_can_hud.ogf
-hands_position                                   = -0.0055,-0.072, 0.31
-hands_position_16x9                              = -0.0055,-0.072, 0.31
-anm_ea_show                                      = wg_dr_bob_can_use, wg_dr_bob_can_item_use
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_lipton_icetea_can]:wg_drink_base
-visual                                           = dynamics\western_goods_drinks\wg_lipton_icetea_can.ogf
-
-inv_name                                         = st_wg_lipton_icetea_can
-inv_name_short                                   = st_wg_lipton_icetea_can_s
-description                                      = st_wg_lipton_icetea_can_descr
-inv_weight                                       = 0.35
-cost                                             = 1500
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 6
-inv_grid_y                                       = 1
-
-break_particles                                  = destroy_fx\destroy_bottle
-break_sound                                      = western_goods_drinks\wg_lipton_icetea_can_drop
-use_sound                                        = western_goods_drinks\wg_lipton_icetea_can_drink
-
-boost_time                                       = 35
-boost_max_weight                                 = 0.22
-boost_radiation_restore                          = 0.0004
-boost_power_restore                              = 0.0004
-eat_satiety                                      = 0.01
-eat_sleepiness                                   = -0.06
-eat_thirstiness                                  = -3.20
-
-tier                                             = 2
-
-[wg_lipton_icetea_can_hud]
-item_visual                                      = dynamics\western_goods_drinks\wg_lipton_icetea_can_hud.ogf
-hands_position                                   = -0.0055,-0.072, 0.31
-hands_position_16x9                              = -0.0055,-0.072, 0.31
-anm_ea_show                                      = wg_lipton_icetea_can_use, wg_lipton_icetea_can_item_use

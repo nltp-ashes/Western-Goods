@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 17/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' drinks items.                                                            -->
@@ -32,28 +32,6 @@
         </text>
     </string>
 
-    <string id="st_wg_gorbatschow_bottle">
-        <text>Vodka Gorbatschow bottle</text>
-    </string>
-
-    <string id="st_wg_gorbatschow_bottle_s">
-        <text>Gorbatschow bottle</text>
-    </string>
-
-    <string id="st_wg_gorbatschow_bottle_descr">
-        <text>
-            Gorbatschow vodka is one of the most famous varieties of its category, produced and bottled in Germany. It is appreciated for its decent taste for a relatively low cost.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] drink\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_blue] • %c[ui_gray_2] stimulant\n
-            %c[d_green] • %c[ui_gray_2] high quality\n
-            %c[d_green] • %c[ui_gray_2] clean nutrition source\n
-            %c[d_red] • %c[ui_gray_2] strong alcohol\n
-        </text>
-    </string>
-
     <string id="st_wg_wine_chateau_latour">
         <text>Grand Vin de Chateau Latour</text>
     </string>
@@ -74,26 +52,6 @@
             %c[d_green] • %c[ui_gray_2] high quality\n
             %c[d_green] • %c[ui_gray_2] clean nutrition source\n
             %c[d_red] • %c[ui_gray_2] strong alcohol\n
-        </text>
-    </string>
-
-    <string id="st_wg_yoohoo_bottle">
-        <text>Yoo-hoo Chocolate Drink</text>
-    </string>
-
-    <string id="st_wg_yoohoo_bottle_s">
-        <text>Yoo-hoo Chocolate Drink</text>
-    </string>
-
-    <string id="st_wg_yoohoo_bottle_descr">
-        <text>
-            First introduced in the 1920s by Natalie Olivieri, Yoo-hoo is a chocolate flavored cold drink. It is a 99 percent fat-free, 100 percent caffeine-free, and rich in both calcium and vitamin D.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] drink\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_green] • %c[ui_gray_2] high quality\n
-            %c[d_green] • %c[ui_gray_2] clean nutrition source\n
         </text>
     </string>
 
@@ -239,26 +197,6 @@
         </text>
     </string>
 
-    <string id="st_wg_mountain_dew_can">
-        <text>Mountain Dew can</text>
-    </string>
-
-    <string id="st_wg_mountain_dew_can_s">
-        <text>Mountain Dew can</text>
-    </string>
-
-    <string id="st_wg_mountain_dew_can_descr">
-        <text>
-            Mountain Dew, often abbreviated as Mtn Dew, is a citrus-flavored, caffeinated soda marketed by the PepsiCo Group. It is a fruit-flavored soft drink initially marketed as an “energy” drink but has since evolved to be more soda.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] drink\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_green] • %c[ui_gray_2] high quality\n
-            %c[d_green] • %c[ui_gray_2] clean nutrition source\n
-        </text>
-    </string>
-
     <string id="st_wg_perrier_can">
         <text>Perrier can</text>
     </string>
@@ -274,27 +212,6 @@
             %c[ui_gray_1]PROPERTIES:\n
             %c[d_blue] • %c[ui_gray_2] drink\n
             %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_green] • %c[ui_gray_2] high quality\n
-            %c[d_green] • %c[ui_gray_2] clean nutrition source\n
-        </text>
-    </string>
-
-    <string id="st_wg_rockstar_energy_can">
-        <text>Rockstar Energy can</text>
-    </string>
-
-    <string id="st_wg_rockstar_energy_can_s">
-        <text>Rockstar Energy can</text>
-    </string>
-
-    <string id="st_wg_rockstar_energy_can_descr">
-        <text>
-            Rockstar Energy Drink Original contains 160 mg of caffeine per 16 ounce can. Besides caffeine and sugar, Rockstar Energy Drink contains a variety of herbs, including panax ginseng, ginkgo biloba, milk thistle extract, and guarana seed.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] drink\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_blue] • %c[ui_gray_2] stimulant\n
             %c[d_green] • %c[ui_gray_2] high quality\n
             %c[d_green] • %c[ui_gray_2] clean nutrition source\n
         </text>
@@ -354,46 +271,6 @@
     <string id="st_wg_sevenup_can_descr">
         <text>
             Seven-UP (also called 7UP) is a carbonated soft-drink with a taste of lemon-lime. It's the main competitor to Sprite, another soft-drink. Most enjoyable when drank cold.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] drink\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_green] • %c[ui_gray_2] high quality\n
-            %c[d_green] • %c[ui_gray_2] clean nutrition source\n
-        </text>
-    </string>
-
-    <string id="st_wg_dr_bob_can">
-        <text>Dr. Bob can</text>
-    </string>
-
-    <string id="st_wg_dr_bob_can_s">
-        <text>Dr. Bob can</text>
-    </string>
-
-    <string id="st_wg_dr_bob_can_descr">
-        <text>
-            Dr. Bob is a carbonated soft drink often described as a knock off of Dr. Pepper. While it tries to imitate it, it's taste is not quite like Dr. Pepper. The taste is more bitter and dry.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] drink\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_green] • %c[ui_gray_2] high quality\n
-            %c[d_green] • %c[ui_gray_2] clean nutrition source\n
-        </text>
-    </string>
-
-    <string id="st_wg_lipton_icetea_can">
-        <text>Lipton Ice Tea can</text>
-    </string>
-
-    <string id="st_wg_lipton_icetea_can_s">
-        <text>Lipton Ice Tea can</text>
-    </string>
-
-    <string id="st_wg_lipton_icetea_can_descr">
-        <text>
-            Lipton Ice Tea is a non-carbonated soft drink with tea extract and peach juice, mixed with sugar and sweetener. It is low in calories, and does not contain preservatives, making it a quite healthy drink.\n
             \n
             %c[ui_gray_1]PROPERTIES:\n
             %c[d_blue] • %c[ui_gray_2] drink\n
