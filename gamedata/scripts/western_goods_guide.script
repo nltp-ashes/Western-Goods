@@ -13,31 +13,160 @@
 -- Constants, global variables, imported functions and new callbacks
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- New callbacks
+AddScriptCallback("western_goods_guide_before_dialog")
+AddScriptCallback("western_goods_guide_on_change_level")
+
 -- Imported functions
 local dbg_printf                = western_goods_utils.dbg_printf
 
 -- Constants
 local ini_guides                = ini_file([[plugins\western_goods\guides\importer.ltx]])
+local items_per_page            = 7
 
 -- Global variables
 local guides_data               = {}
+local current_page              = 0
+local character_id              = nil
+local selected_route_idx        = nil
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Core functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to load the guides' data, namely the routes and their prices.
+--- @return nil
 function on_game_load()
-    ini_guides:section_for_each(function(character_id)
-        local config = utils_data.collect_section(ini_guides, character_id, true)
+    ini_guides:section_for_each(function(char_id)
+        local config = utils_data.collect_section(ini_guides, char_id, true)
         for location,price in pairs(config) do
-            if not guides_data[character_id] then
-                guides_data[character_id] = {}
+            if not guides_data[char_id] then
+                guides_data[char_id] = {}
             end
-            guides_data[character_id][location] = tonumber(price)
+            table.insert(guides_data[char_id], { location = location, price = tonumber(price) })
         end
     end)
 
-    dbg_printf("[WG] Guides | Loaded data :\n%s", utils_data.print_table(guides_data, false, true))
+    dbg_printf("[WG] Guides | Finished loading routes :\n%s", utils_data.print_table(guides_data, false, true))
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Dialog functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the NPC can guide the actor.
+--- @param actor game_object
+--- @param npc game_object
+--- @param dialog_id number
+--- @return boolean
+function can_guide(actor, npc, dialog_id)
+    local flags = { result = true }
+    SendScriptCallback("western_goods_guide_before_dialog", actor, npc, flags)
+    return flags.result
+end
+
+--- Function used to use the guide and relocate the actor to the destination.
+--- @param actor game_object
+--- @param npc game_object
+--- @return nil
+function use_guide(npc, actor)
+    local route_info = this.get_route_info(character_id, selected_route_idx)
+    local location = western_goods_utils.get_named_location(route_info.location)
+
+    dbg_printf("[WG] Guides | Relocating to pos:%s lvid:%s gvid:%s", location.position, location.lvid, location.gvid)
+
+    SendScriptCallback("western_goods_guide_on_change_level", npc, location.name)
+
+    ChangeLevel(location.position, location.lvid, location.gvid, location.orientation, true)
+end
+
+--- Function used to initialize the dialog.
+--- @param actor game_object
+--- @param npc game_object
+--- @return nil
+function initialize(actor, npc)
+    current_page = 0
+    selected_route_idx = nil
+    character_id = western_goods_utils.get_character_id(npc)
+    dbg_printf("[WG] Guides | Dialog initialized page:%s selection:%s char_id%s", current_page, selected_route_idx, character_id)
+end
+
+--- Function used to check if a route exists.
+--- @param actor game_object
+--- @param npc game_object
+--- @param dialog_id number
+--- @param phrase_id number
+--- @param next_id number
+--- @param p table
+--- @return boolean
+function has_route(actor, npc, dialog_id, phrase_id, next_id, p)
+    local route_info = this.get_route_info(character_id, p[1])
+    return route_info ~= nil
+end
+
+--- Function used to get the label of a route.
+--- @param actor game_object
+--- @param npc game_object
+--- @param dialog_id number
+--- @param phrase_id number
+--- @param next_id number
+--- @param p table
+--- @return string
+function get_route_label(actor, npc, dialog_id, phrase_id, next_id, p)
+    local route_info = this.get_route_info(character_id, p[1])
+
+    local route_name = this.get_route_name(route_info)
+    local route_price = this.get_route_price(route_info)
+
+    return western_goods_utils.get_translation("st_wg_guide_route", route_name, route_price)
+end
+
+--- Function used to check if the actor can pay for a route.
+--- @param actor game_object
+--- @param npc game_object
+--- @return boolean
+function can_pay(npc, actor)
+    local route_info = this.get_route_info(character_id, selected_route_idx)
+    return db.actor:money() >= route_info.price
+end
+
+--- Function used to pay for a route.
+--- @param actor game_object
+--- @param npc game_object
+--- @return nil
+function pay(npc, actor)
+    local route_info = this.get_route_info(character_id, selected_route_idx)
+    dialogs.relocate_money(npc, route_info.price, "out")
+    dbg_printf("[WG] Guides | Paid %s RUB for route %s", route_info.price, route_info.location)
+end
+
+--- Function used to select a route in the dialog.
+--- @param actor game_object
+--- @param npc game_object
+--- @param dialog_id number
+--- @param phrase_id number
+--- @param next_id number
+--- @param p table
+--- @return nil
+function select_route(actor, npc, dialog_id, phrase_id, next_id, p)
+    selected_route_idx = p[1]
+end
+
+--- Function used to check if there is a next page.
+--- @param actor game_object
+--- @param npc game_object
+--- @return boolean
+function has_next_page(actor, npc)
+    local next_page_idx = current_page * items_per_page + items_per_page
+    return next_page_idx < #guides_data[character_id]
+end
+
+--- Function used to go to the next page.
+--- @param actor game_object
+--- @param npc game_object
+--- @return nil
+function next_page(actor, npc)
+    current_page = current_page + 1
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -49,4 +178,37 @@ end
 function on_game_start()
     RegisterScriptCallback("on_game_load", on_game_load)
     RegisterScriptCallback("game_object_on_net_spawn", game_object_on_net_spawn)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Utility functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get a route.
+--- @param char_id string
+--- @param route_idx number
+--- @return table
+function get_route_info(char_id, route_idx)
+    if not guides_data[char_id] then
+        guides_data[char_id] = {}
+    end
+    return guides_data[char_id][current_page * items_per_page + route_idx]
+end
+
+--- Function used to get the name of a route.
+--- @param named_location table
+--- @return string
+function get_route_name(named_location)
+    return western_goods_utils.get_translation("st_"..named_location.location)
+end
+
+--- Function used to get the price of a route.
+--- @param named_location table
+--- @return string
+function get_route_price(named_location)
+    local price = named_location.price
+    if price == 0 then
+        return western_goods_utils.get_translation("st_wg_free")
+    end
+    return tostring(price) .. " RUB"
 end

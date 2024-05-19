@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 17/03/2022                                                                                            -->
+<!--    Date : 19/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    File containing game dialogs used in the addon.                                                              -->
@@ -65,69 +65,6 @@
             <phrase id="2"> <!-- npc -->
                 <precondition>dialogs_mlr.check_debt</precondition>
                 <script_text>dialogs_mlr.st_debt_no_trade</script_text>
-            </phrase>
-        </phrase_list>
-    </dialog>
-
-    <dialog id="western_goods_trader_guide">
-        <has_info>western_goods_trader_first_meet_over</has_info>
-        <has_info>western_goods_act_1_finished</has_info>
-        <phrase_list>
-            <phrase id="0"> <!-- actor -->
-                <text>western_goods_trader_guide_ask</text>
-                <next>1</next>
-            </phrase>
-            <phrase id="1"> <!-- npc -->
-                <text>western_goods_trader_guide_dest</text>
-                <next>3</next>
-                <next>4</next>
-                <next>5</next>
-                <next>6</next>
-                <next>7</next>
-                <next>8</next>
-                <next>9</next>
-                <next>10</next>
-                <next>11</next>
-                <next>2</next>
-            </phrase>
-            <phrase id="2"> <!-- actor -->
-                <text>western_goods_trader_guide_back</text>
-            </phrase>
-            <phrase id="3"> <!-- actor -->
-                <text>western_goods_trader_guide_cordon</text>
-                <action>western_goods_helicopter_transport.guide_to_cordon</action>
-            </phrase>
-            <phrase id="4"> <!-- actor -->
-                <text>western_goods_trader_guide_darkscape</text>
-                <action>western_goods_helicopter_transport.guide_to_darkscape</action>
-            </phrase>
-            <phrase id="5"> <!-- actor -->
-                <text>western_goods_trader_guide_deadcity</text>
-                <action>western_goods_helicopter_transport.guide_to_deadcity</action>
-            </phrase>
-            <phrase id="6"> <!-- actor -->
-                <text>western_goods_trader_guide_deserted_hospital</text>
-                <action>western_goods_helicopter_transport.guide_to_deserted_hospital</action>
-            </phrase>
-            <phrase id="7"> <!-- actor -->
-                <text>western_goods_trader_guide_swamps</text>
-                <action>western_goods_helicopter_transport.guide_to_swamps</action>
-            </phrase>
-            <phrase id="8"> <!-- actor -->
-                <text>western_goods_trader_guide_jupiter</text>
-                <action>western_goods_helicopter_transport.guide_to_jupiter</action>
-            </phrase>
-            <phrase id="9"> <!-- actor -->
-                <text>western_goods_trader_guide_limansk</text>
-                <action>western_goods_helicopter_transport.guide_to_limansk</action>
-            </phrase>
-            <phrase id="10"> <!-- actor -->
-                <text>western_goods_trader_guide_red_forest</text>
-                <action>western_goods_helicopter_transport.guide_to_red_forest</action>
-            </phrase>
-            <phrase id="11"> <!-- actor -->
-                <text>western_goods_trader_guide_zaton</text>
-                <action>western_goods_helicopter_transport.guide_to_zaton</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -1264,6 +1201,102 @@
             <phrase id="1"> <!-- npc -->
                 <rand_text>st_wg_trade_eur_usd_ask_reply_</rand_text>
                 <action>western_goods_trade_eur_usd.start_trade</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    Guide Dialog                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_guide">
+        <precondition>western_goods_guide.can_guide</precondition>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_guide_ask</text>
+                <action>western_goods_guide.initialize</action>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_guide_show_routes</text>
+                <next>2</next>
+                <next>3</next>
+                <next>4</next>
+                <next>5</next>
+                <next>6</next>
+                <next>7</next>
+                <next>8</next>
+                <next>9</next>
+                <next>12</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(1)</precondition>
+                <script_text>western_goods_guide.get_route_label(1)</script_text>
+                <action>western_goods_guide.select_route(1)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(2)</precondition>
+                <script_text>western_goods_guide.get_route_label(2)</script_text>
+                <action>western_goods_guide.select_route(2)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(3)</precondition>
+                <script_text>western_goods_guide.get_route_label(3)</script_text>
+                <action>western_goods_guide.select_route(3)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="5"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(4)</precondition>
+                <script_text>western_goods_guide.get_route_label(4)</script_text>
+                <action>western_goods_guide.select_route(4)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="6"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(5)</precondition>
+                <script_text>western_goods_guide.get_route_label(5)</script_text>
+                <action>western_goods_guide.select_route(5)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="7"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(6)</precondition>
+                <script_text>western_goods_guide.get_route_label(6)</script_text>
+                <action>western_goods_guide.select_route(6)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="8"> <!-- actor -->
+                <precondition>western_goods_guide.has_route(7)</precondition>
+                <script_text>western_goods_guide.get_route_label(7)</script_text>
+                <action>western_goods_guide.select_route(7)</action>
+                <next>10</next>
+                <next>11</next>
+            </phrase>
+            <phrase id="9"> <!-- actor -->
+                <precondition>western_goods_guide.has_next_page</precondition>
+                <text>st_wg_guide_next_routes</text>
+                <action>western_goods_guide.next_page</action>
+                <next>1</next>
+            </phrase>
+            <phrase id="10"> <!-- npc -->
+                <precondition>western_goods_guide.can_pay</precondition>
+                <text>st_wg_guide_accept</text>
+                <action>western_goods_guide.pay</action>
+                <action>western_goods_guide.use_guide</action>
+                <action>dialogs.break_dialog</action>
+            </phrase>
+            <phrase id="11"> <!-- npc -->
+                <precondition>!western_goods_guide.can_pay</precondition>
+                <text>st_wg_guide_too_poor</text>
+            </phrase>
+            <phrase id="12"> <!-- actor -->
+                <text>st_wg_guide_cancel</text>
             </phrase>
         </phrase_list>
     </dialog>

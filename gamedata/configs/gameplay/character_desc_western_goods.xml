@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 18/05/2023                                                                                            -->
+<!--    Date : 19/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Character description file used to describe NPCs used in the addon.                                          -->
@@ -41,7 +41,7 @@
         <actor_dialog>western_goods_trader_meet</actor_dialog>
         <actor_dialog>western_goods_trade_eur_usd</actor_dialog>
         <actor_dialog>western_goods_trader_barter</actor_dialog>
-        <actor_dialog>western_goods_trader_guide</actor_dialog>
+        <actor_dialog>western_goods_guide</actor_dialog>
         <actor_dialog>western_goods_act_1_task_1_start</actor_dialog>
         <actor_dialog>western_goods_act_1_task_1_end</actor_dialog>
         <actor_dialog>western_goods_act_1_task_2_start</actor_dialog>

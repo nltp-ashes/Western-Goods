@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/05/2023                                                                                             ---
+---    Date : 19/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).     ---
@@ -63,7 +63,7 @@ end
 --- @param enemy game_object
 --- @param flags table
 --- @return nil
-function eval_ignore_npcs(obj,enemy,flags)
+function eval_ignore_npcs(obj, enemy, flags)
     -- Skip mutants
     if IsMonster(obj) or IsMonster(enemy) then
         return
@@ -102,7 +102,7 @@ end
 --- @param actor game_object
 --- @param npc game_object
 --- @param flags table
-function oleksandr_can_show_flea(actor,npc,flags)
+function oleksandr_can_show_flea(actor, npc, flags)
     if npc:section() == "stalker_oleksandr_chernenko" then
         flags.result = western_goods_utils.has_info("western_goods_oleksandr_chernenko_meet_over")
     end
@@ -125,9 +125,21 @@ end
 --- @param actor game_object
 --- @param npc game_object
 --- @param flags table
-function ashes_can_show_trade(actor,npc,flags)
+--- @return nil
+function ashes_can_show_trade(actor, npc, flags)
     if npc:section() == "stalker_western_goods_trader" then
         flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over")
+    end
+end
+
+--- Function used to determine if Williams Heades can guide the player.
+--- @param actor game_object
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function ashes_can_guide(actor, npc, flags)
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over") and western_goods_utils.has_info("western_goods_act_1_finished")
     end
 end
 
@@ -155,4 +167,5 @@ function on_game_start()
     RegisterScriptCallback("actor_on_first_update", spawn_squads)
     RegisterScriptCallback("western_goods_flea_on_dialog", oleksandr_can_show_flea)
     RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", ashes_can_show_trade)
+    RegisterScriptCallback("western_goods_guide_before_dialog", ashes_can_guide)
 end
