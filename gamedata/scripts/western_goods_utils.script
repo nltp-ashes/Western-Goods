@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/05/2024                                                                                             ---
+---    Date : 19/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -16,13 +16,14 @@
 local ini_loc                   = ini_file_ex([[localization.ltx]])
 local ini_keys                  = ini_file_ex([[plugins\western_goods\misc\western_goods_key_localization.ltx]])
 local ini_trade                 = ini_file([[items\trade\trade_generic.ltx]])
+local ini_locations             = ini_file([[named_locations.ltx]])
 
 trade_status_flags              = { cant_trade = 1, too_damaged = 2, hidden = 3, tradable = 4 }
 weapon_zoom_types               = { normal = 0, alt = 1, gl = 2 }
 animation_hands_modes           = { right = 0, left = 1, both = 2 }
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Debug Functions
+-- Debug functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print information into the console/log file only when Western Goods' debug mode is enabled.
@@ -33,7 +34,7 @@ function dbg_printf(...)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table Functions
+-- Table functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to know if a certain value is contained in a table. This function is generic enough so that it'd work on any table.
@@ -82,7 +83,7 @@ function has_next(tab, pos)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Data Functions
+-- Data functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
@@ -233,7 +234,7 @@ function get_key_translation(dik)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Info Portions Functions
+-- Info portions functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to give an info portion to a game object.
@@ -285,7 +286,7 @@ function rem_info(info_name, who)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Distance Functions
+-- Distance functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the distance between two points in on the X and Z axis.
@@ -335,7 +336,7 @@ function get_distance_global_sqr(se_obj_1, se_obj_2)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Objects Getter Functions
+-- Objects getter functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to iterate through each existing server object.
@@ -395,7 +396,7 @@ function level_object_by_id(id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Objects Functions
+-- Objects functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the character ID of an NPC.
@@ -471,7 +472,7 @@ function get_dialog_list(character_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- File Functions
+-- File functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to list all the files in a given folder (excluding the sub-folders).
@@ -540,7 +541,7 @@ function collect_texture_descriptions(pattern)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Squads Functions
+-- Squads functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn a story squad.
@@ -755,7 +756,7 @@ function get_squad_of(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Bone Functions
+-- Bone functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the position of a bone by its name.
@@ -830,7 +831,7 @@ function bone_hud_visibility(obj, hud_bone, bone, visibility)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- 3D UIs Functions
+-- 3D UIs functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used transform digits (as strings) to matching texture descriptions.
@@ -851,13 +852,15 @@ function get_digits_as_textures(prefix, ...)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Task Functions
+-- Task functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the target of a task, if it exists.
 --- @param tsk CGeneralTask
 --- @return alife_object
 function task_get_target(tsk)
+    if not validate_params({tsk,"task_get_target"}) then return end
+
     local target_id = tsk.current_target
     return target_id and alife_object(target_id)
 end
@@ -875,7 +878,31 @@ function task_get_active()
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Validation Functions
+-- Named locations
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function get_named_location(location_name)
+    if not validate_params({location_name,"get_named_location"}) then return end
+
+    if not ini_locations:section_exist(location_name) then
+        printf("![WG] ERROR | Utils | Named location '%s' not found !", location_name)
+        return nil
+    end
+
+    local position = parse_list(ini_locations, location_name, "position")
+    local orientation = parse_list(ini_locations, location_name, "orientation")
+
+    return {
+        name = location_name,
+        lvid = is_not_empty(position) and tonumber(position[4]),
+        gvid = is_not_empty(position) and tonumber(position[5]),
+        position = is_not_empty(position) and vector():set(tonumber(position[1]), tonumber(position[2]), tonumber(position[3])),
+        orientation = is_not_empty(orientation) and vector():set(tonumber(orientation[1]), tonumber(orientation[2]), tonumber(orientation[3]))
+    }
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Validation functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to check if all necessary parameters were correctly passed to a function.
@@ -921,7 +948,7 @@ function validate_is_lighter(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Other Utils Functions
+-- Other utils functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to iterate through the inventory of a game object.

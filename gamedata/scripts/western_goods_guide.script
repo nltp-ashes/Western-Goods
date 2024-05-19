@@ -1,0 +1,52 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 19/05/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to handle the guide dialog.                                                                       ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables, imported functions and new callbacks
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                = western_goods_utils.dbg_printf
+
+-- Constants
+local ini_guides                = ini_file([[plugins\western_goods\guides\importer.ltx]])
+
+-- Global variables
+local guides_data               = {}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Core functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function on_game_load()
+    ini_guides:section_for_each(function(character_id)
+        local config = utils_data.collect_section(ini_guides, character_id, true)
+        for location,price in pairs(config) do
+            if not guides_data[character_id] then
+                guides_data[character_id] = {}
+            end
+            guides_data[character_id][location] = tonumber(price)
+        end
+    end)
+
+    dbg_printf("[WG] Guides | Loaded data :\n%s", utils_data.print_table(guides_data, false, true))
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_game_load", on_game_load)
+    RegisterScriptCallback("game_object_on_net_spawn", game_object_on_net_spawn)
+end
