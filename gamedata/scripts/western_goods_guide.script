@@ -196,7 +196,7 @@ end
 --- function when script_text is used on the first <phrase> node of a dialog.
 --- The nil check on top of that is yet another hack since this function is sometimes called AFTER exiting a dialog.
 --- @return string
-function st_guide_ask()
+function get_guide_ask_text()
     local npc = get_speaker()
     local flags = { result = "st_wg_guide_ask" }
     if npc then
@@ -209,7 +209,7 @@ end
 --- @param npc game_object
 --- @param dialog_id number
 --- @return string
-function st_guide_answer(npc, dialog_id)
+function get_guide_answer_text(npc, dialog_id)
     local flags = { result = "st_wg_guide_show_routes" }
     SendScriptCallback("western_goods_guide_on_answer", npc, flags)
     return flags.result

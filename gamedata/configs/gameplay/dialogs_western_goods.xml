@@ -1213,12 +1213,12 @@
         <precondition>western_goods_guide.can_guide</precondition>
         <phrase_list>
             <phrase id="0"> <!-- actor -->
-                <script_text>western_goods_guide.st_guide_ask</script_text>
+                <script_text>western_goods_guide.get_guide_ask_text</script_text>
                 <action>western_goods_guide.initialize</action>
                 <next>1</next>
             </phrase>
             <phrase id="1"> <!-- npc -->
-                <script_text>western_goods_guide.st_guide_answer</script_text>
+                <script_text>western_goods_guide.get_guide_answer_text</script_text>
                 <next>2</next>
                 <next>3</next>
                 <next>4</next>
