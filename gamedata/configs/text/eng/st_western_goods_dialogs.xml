@@ -855,7 +855,7 @@
     <!--=============================================================================================================-->
 
     <string id="st_wg_guide_ask">
-        <text>Could you guide somewhere?</text>
+        <text>Could you guide me somewhere?</text>
     </string>
 
     <string id="st_wg_guide_show_routes">
