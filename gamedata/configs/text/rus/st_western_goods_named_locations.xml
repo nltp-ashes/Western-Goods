@@ -12,19 +12,19 @@
 <string_table>
 
     <string id="st_western_goods_guide_dest_limansk">
-        <text>Лиманск, к югу от строительной площадки.</text>
+        <text>Лиманск, южнее строительной площадки.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_swamps">
-        <text>Болота, на наблюдательном пункте.</text>
+        <text>Великие Болота, на наблюдательной заставе.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_cordon">
-        <text>Кордон, к юго-востоку от железнодорожного моста.</text>
+        <text>Кордон, юго-восточнее железнодорожного моста.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_darkscape">
-        <text>Темная долина, на плато.</text>
+        <text>Темный пейзаж, на плато.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_deadcity">
@@ -32,35 +32,35 @@
     </string>
 
     <string id="st_western_goods_guide_dest_red_forest">
-        <text>Красный лес, рядом с хижиной Лесника.</text>
+        <text>Рыжий лес, рядом с хижиной лесника.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_jupiter_cooling">
-        <text>Юпитер, у охладительной башни.</text>
+        <text>Юпитер, у градирни.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_zaton">
-        <text>Затон, возле старого баржи.</text>
+        <text>Затон, возле старой баржи.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_deserted_hospital">
-        <text>Заброшенная больница, у обвалившегося входа.</text>
+        <text>Заброшенная больница, у обрушившегося входа.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_mil_base">
-        <text>Военные склады, на базе Свободы.</text>
+        <text>Военные склады на базе Свободы.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_yantar_lab">
-        <text>Янтарь, у мобильной лаборатории.</text>
+        <text>Янтарь, в передвижной лаборатории.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_agroprom_mil_base">
-        <text>Агропром, на базе армии в институте.</text>
+        <text>Агропром, на армейской базе в институте.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_jupiter_lab">
-        <text>Юпитер, у лаборатории.</text>
+        <text>Юпитер, в передвижной лаборатории.</text>
     </string>
 
 </string_table>

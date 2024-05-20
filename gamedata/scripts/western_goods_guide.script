@@ -67,7 +67,6 @@ function on_specific_character_dialog_list(char_id, dialog_list)
             return
         end
     end
-    dbg_printf("[WG] Guides | Not a guide", utils_data.print_table(guides_data, false, true))
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
