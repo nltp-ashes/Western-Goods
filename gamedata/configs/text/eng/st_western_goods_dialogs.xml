@@ -181,6 +181,10 @@
     </string>
 
     <!-- Guide dialogs -->
+    <string id="st_western_goods_trader_guide_ask">
+        <text>Could one of your helicopters drop me somewhere?</text>
+    </string>
+
     <string id="st_western_goods_trader_guide_answer">
         <text>Sure, that's the least I can do for you! I can request one of my helicopters to transport you. Where would you like to go?</text>
     </string>
@@ -708,6 +712,33 @@
     </string>
 
     <!--=============================================================================================================-->
+    <!--    Ashot                                                                                                    -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_ashot_guide_answer">
+        <text>I can tell one of our guys to guide you. Where do you need to go?</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Peregrine                                                                                                -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_peregrine_guide_answer">
+        <text>Well, you can wait for the next supply chopper to drop by. It's does rounds to resupply our different outposts. You can hop in it, but it's going to cost you.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Professor Ozersky                                                                                        -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_ozersky_guide_answer">
+        <text>Well, the army sends a helicopter once in a while to resupply us. I can ask the pilot to take you with them, but it will be expensive...</text>
+    </string>
+
+    <!--=============================================================================================================-->
     <!--    Flea Market Dialogs                                                                                      -->
     <!--=============================================================================================================-->
 
@@ -849,42 +880,6 @@
 
     <string id="st_wg_guide_too_poor">
         <text>You don't have enough money to go there.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_limansk">
-        <text>Limansk, south of the construction site.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_swamps">
-        <text>Great Swamps, at the observation outpost.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_cordon">
-        <text>Cordon, south-east of the railway bridge.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_darkscape">
-        <text>Darkscape, on the plateau.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_deadcity">
-        <text>Deadcity, at the mercenary base.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_red_forest">
-        <text>Red Forest, next to the Forester's cabin.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_jupiter">
-        <text>Jupiter, at the cooling tower.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_zaton">
-        <text>Zaton, near the old barge.</text>
-    </string>
-
-    <string id="st_western_goods_guide_dest_deserted_hospital">
-        <text>Deserted Hospital, by the collapsed entrance.</text>
     </string>
 
     <!--=============================================================================================================-->

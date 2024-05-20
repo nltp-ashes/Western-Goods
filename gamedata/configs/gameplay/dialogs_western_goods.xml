@@ -1213,7 +1213,7 @@
         <precondition>western_goods_guide.can_guide</precondition>
         <phrase_list>
             <phrase id="0"> <!-- actor -->
-                <text>st_wg_guide_ask</text>
+                <script_text>western_goods_guide.st_guide_ask</script_text>
                 <action>western_goods_guide.initialize</action>
                 <next>1</next>
             </phrase>

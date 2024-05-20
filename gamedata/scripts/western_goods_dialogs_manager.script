@@ -217,9 +217,35 @@ function st_interrogation_end()
     end
 end
 
+--- Function used to determine the player dialog when asking a guide for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_ask(npc, flags)
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = "st_western_goods_trader_guide_ask"
+    end
+end
+
+--- Function used to determine the guide's dialog when answering the player's request for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
 function st_guide_answer(npc, flags)
     if npc:section() == "stalker_western_goods_trader" then
-        flags.result = "st_western_goods_trader_guide_answer" -- western_goods_utils.get_translation("st_western_goods_trader_guide_answer")
+        flags.result = "st_western_goods_trader_guide_answer"
+    end
+
+    if npc:section() == "jup_a6_freedom_trader_ashot" then
+        flags.result = "st_western_goods_ashot_guide_answer"
+    end
+
+    if npc:section() == "mechanic_army_yan_mlr" then
+        flags.result = "st_western_goods_peregrine_guide_answer"
+    end
+
+    if npc:section() == "jup_b6_scientist_biochemist" then
+        flags.result = "st_western_goods_ozersky_guide_answer"
     end
 end
 
@@ -233,6 +259,7 @@ function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
     RegisterScriptCallback("actor_on_update", update_dialogs)
+    RegisterScriptCallback("western_goods_guide_on_ask", st_guide_ask)
     RegisterScriptCallback("western_goods_guide_on_answer", st_guide_answer)
 end
 

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/05/2024                                                                                             ---
+---    Date : 20/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script manages the helicopter transport system (similar to using a guide in the original games).         ---
@@ -15,18 +15,30 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- Imported functions
 local dbg_printf                = western_goods_utils.dbg_printf
 local level_object_by_id        = western_goods_utils.level_object_by_id
 local heli_spawn                = western_goods_helicopter.heli_spawn
 local heli_register             = western_goods_helicopter.heli_register
 local HELICOPTERS_MODES         = western_goods_helicopter.HELICOPTERS_MODES
 
+-- Constants
+local heli_transporters = {
+    ["stalker_western_goods_trader"] = true,
+    ["jup_b6_scientist_biochemist"] = true,
+    ["mechanic_army_yan_mlr"] = true
+}
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Helicopter transport order
 -- ---------------------------------------------------------------------------------------------------------------------
 
+--- Function used to check if the player has used a helicopter transport service.
+--- @param npc game_object
+--- @param destination string
+--- @return nil
 function western_goods_guide_on_change_level(npc, destination)
-    if npc:section() == "stalker_western_goods_trader" then
+    if heli_transporters[npc:section()] then
         western_goods_utils.give_info("western_goods_spawn_guide_helicopter")
     end
 end

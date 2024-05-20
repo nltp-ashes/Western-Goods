@@ -14,6 +14,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- New callbacks
+AddScriptCallback("western_goods_guide_on_ask")
 AddScriptCallback("western_goods_guide_on_answer")
 AddScriptCallback("western_goods_guide_before_dialog")
 AddScriptCallback("western_goods_guide_on_change_level")
@@ -23,6 +24,7 @@ local dbg_printf                = western_goods_utils.dbg_printf
 
 -- Constants
 local ini_guides                = ini_file([[plugins\western_goods\guides\importer.ltx]])
+local guide_dialog_id           = "western_goods_guide"
 local items_per_page            = 7
 
 -- Global variables
@@ -37,7 +39,7 @@ local selected_route_idx        = nil
 
 --- Function used to load the guides' data, namely the routes and their prices.
 --- @return nil
-function on_game_load()
+function load_guides_data()
     ini_guides:section_for_each(function(char_id)
         local config = utils_data.collect_section(ini_guides, char_id, true)
         for location,price in pairs(config) do
@@ -49,6 +51,23 @@ function on_game_load()
     end)
 
     dbg_printf("[WG] Guides | Finished loading routes :\n%s", utils_data.print_table(guides_data, false, true))
+end
+
+--- Function used to add the guide dialog to an NPC.
+--- @param char_id string
+--- @param dialog_list userdata
+--- @return nil
+function on_specific_character_dialog_list(char_id, dialog_list)
+    for id,data in pairs(guides_data) do
+        if id == char_id and not dialog_list:has(guide_dialog_id) then
+            local res = dialog_list:add(guide_dialog_id)
+            if res then
+                dbg_printf("[WG] Guides | Added dialog %s for %s, pos %s", guide_dialog_id, char_id, res)
+            end
+            return
+        end
+    end
+    dbg_printf("[WG] Guides | Not a guide", utils_data.print_table(guides_data, false, true))
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -114,7 +133,6 @@ end
 --- @param p table
 --- @return string
 function get_route_label(actor, npc, dialog_id, phrase_id, next_id, p)
-    printf("[WG] shit | npc %s", npc)
     local route_info = this.get_route_info(character_id, p[1])
 
     local route_name = this.get_route_name(route_info)
@@ -173,6 +191,20 @@ function next_page(actor, npc)
     dbg_printf("[WG] Guides | Page changed %s", current_page)
 end
 
+--- Function used to get the text to display in the dialog when the player asks to be guided.
+--- The call to get_speaker(true) is a hack because the engine does not properly sends the arguments to this
+--- function when script_text is used on the first <phrase> node of a dialog.
+--- The nil check on top of that is yet another hack since this function is sometimes called AFTER exiting a dialog.
+--- @return string
+function st_guide_ask()
+    local npc = get_speaker()
+    local flags = { result = "st_wg_guide_ask" }
+    if npc then
+        SendScriptCallback("western_goods_guide_on_ask", npc, flags)
+    end
+    return flags.result
+end
+
 --- Function used to get the answer of the NPC when the player asks for a guide.
 --- @param npc game_object
 --- @param dialog_id number
@@ -190,8 +222,8 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    RegisterScriptCallback("on_game_load", on_game_load)
-    RegisterScriptCallback("game_object_on_net_spawn", game_object_on_net_spawn)
+    this.load_guides_data()
+    RegisterScriptCallback("on_specific_character_dialog_list", on_specific_character_dialog_list)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
