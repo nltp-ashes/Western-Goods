@@ -173,6 +173,10 @@ function next_page(actor, npc)
     dbg_printf("[WG] Guides | Page changed %s", current_page)
 end
 
+--- Function used to get the answer of the NPC when the player asks for a guide.
+--- @param npc game_object
+--- @param dialog_id number
+--- @return string
 function st_guide_answer(npc, dialog_id)
     local flags = { result = "st_wg_guide_show_routes" }
     SendScriptCallback("western_goods_guide_on_answer", npc, flags)

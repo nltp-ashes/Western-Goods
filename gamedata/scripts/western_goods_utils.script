@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/05/2024                                                                                             ---
+---    Date : 20/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -890,14 +890,22 @@ function get_named_location(location_name)
     end
 
     local position = parse_list(ini_locations, location_name, "position")
+    if size_table(position) ~= 5 then
+        printf("![WG] ERROR | Utils | Named location '%s' has an invalid position !\n%s", location_name, utils_data.print_table(position, false, true))
+        return nil
+    end
     local orientation = parse_list(ini_locations, location_name, "orientation")
+    if is_not_empty(orientation) and size_table(orientation) ~= 3 then
+        printf("![WG] ERROR | Utils | Named location '%s' has an invalid orientation !\n%s", location_name, utils_data.print_table(orientation, false, true))
+        return nil
+    end
 
     return {
         name = location_name,
-        lvid = is_not_empty(position) and tonumber(position[4]),
-        gvid = is_not_empty(position) and tonumber(position[5]),
-        position = is_not_empty(position) and vector():set(tonumber(position[1]), tonumber(position[2]), tonumber(position[3])),
-        orientation = is_not_empty(orientation) and vector():set(tonumber(orientation[1]), tonumber(orientation[2]), tonumber(orientation[3]))
+        lvid = tonumber(position[4]),
+        gvid = tonumber(position[5]),
+        position = vector():set(tonumber(position[1]), tonumber(position[2]), tonumber(position[3])),
+        orientation = vector():set(tonumber(orientation[1] or 0), tonumber(orientation[2] or 0), tonumber(orientation[3] or 0))
     }
 end
 
