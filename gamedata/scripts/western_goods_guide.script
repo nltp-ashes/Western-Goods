@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 19/05/2024                                                                                             ---
+---    Date : 20/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle the guide dialog.                                                                       ---
@@ -14,6 +14,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- New callbacks
+AddScriptCallback("western_goods_guide_on_answer")
 AddScriptCallback("western_goods_guide_before_dialog")
 AddScriptCallback("western_goods_guide_on_change_level")
 
@@ -61,7 +62,7 @@ end
 --- @return boolean
 function can_guide(actor, npc, dialog_id)
     local flags = { result = true }
-    SendScriptCallback("western_goods_guide_before_dialog", actor, npc, flags)
+    SendScriptCallback("western_goods_guide_before_dialog", npc, flags)
     return flags.result
 end
 
@@ -113,6 +114,7 @@ end
 --- @param p table
 --- @return string
 function get_route_label(actor, npc, dialog_id, phrase_id, next_id, p)
+    printf("[WG] shit | npc %s", npc)
     local route_info = this.get_route_info(character_id, p[1])
 
     local route_name = this.get_route_name(route_info)
@@ -150,6 +152,7 @@ end
 --- @return nil
 function select_route(actor, npc, dialog_id, phrase_id, next_id, p)
     selected_route_idx = p[1]
+    dbg_printf("[WG] Guides | Route selected %s", selected_route_idx)
 end
 
 --- Function used to check if there is a next page.
@@ -167,6 +170,13 @@ end
 --- @return nil
 function next_page(actor, npc)
     current_page = current_page + 1
+    dbg_printf("[WG] Guides | Page changed %s", current_page)
+end
+
+function st_guide_answer(npc, dialog_id)
+    local flags = { result = "st_wg_guide_show_routes" }
+    SendScriptCallback("western_goods_guide_on_answer", npc, flags)
+    return flags.result
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -199,7 +209,8 @@ end
 --- @param named_location table
 --- @return string
 function get_route_name(named_location)
-    return western_goods_utils.get_translation("st_"..named_location.location)
+    local translation_key = "st_" .. named_location.location
+    return western_goods_utils.get_translation(translation_key)
 end
 
 --- Function used to get the price of a route.

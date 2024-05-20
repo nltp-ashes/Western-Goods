@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 19/05/2024                                                                                            -->
+<!--    Date : 20/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -178,6 +178,11 @@
 
     <string id="st_wg_barter_euros_rouble_100_to_6800_desc">
         <text>Exchange %c[d_orange]100 EUR%c[ui_gray_2] for %c[d_orange]6800 RU%c[ui_gray_2].</text>
+    </string>
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_trader_guide_answer">
+        <text>Sure, that's the least I can do for you! I can request one of my helicopters to transport you. Where would you like to go?</text>
     </string>
 
     <!--=============================================================================================================-->
@@ -813,7 +818,6 @@
     <string id="st_wg_trade_eur_usd_ask_reply_3">
         <text>Here's what I've got.</text>
     </string>
-
 
     <!--=============================================================================================================-->
     <!--    Guide Dialogs                                                                                            -->

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/05/2024                                                                                             ---
+---    Date : 20/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
@@ -13,7 +13,7 @@
 ---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
 ---                                                                                                                  ---
 ---    function on_game_start()                                                                                      ---
----       RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", function(actor,npc,flags)                  ---
+---       RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", function(npc, flags)                       ---
 ---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
 ---               -- The line of dialog will now be hidden                                                           ---
 ---               flags.result = false                                                                               ---
@@ -29,7 +29,7 @@
 ---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
 ---                                                                                                                  ---
 ---    function on_game_start()                                                                                      ---
----       RegisterScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject", function(npc,flags)             ---
+---       RegisterScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject", function(npc, flags)            ---
 ---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
 ---               -- The NPC will now receive items from trader_autoinject.script                                    ---
 ---               flags.result = true                                                                                ---
@@ -83,7 +83,7 @@ end
 --- @return table
 function cond_trade_dialog(actor, npc, dialog_id)
     local flags = { result = true }
-    SendScriptCallback("western_goods_trade_eur_usd_on_dialog",actor,npc,flags)
+    SendScriptCallback("western_goods_trade_eur_usd_on_dialog", npc, flags)
     return flags.result
 end
 

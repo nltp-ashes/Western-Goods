@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 19/05/2024                                                                                            -->
+<!--    Date : 20/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    File containing game dialogs used in the addon.                                                              -->
@@ -1218,7 +1218,7 @@
                 <next>1</next>
             </phrase>
             <phrase id="1"> <!-- npc -->
-                <text>st_wg_guide_show_routes</text>
+                <script_text>western_goods_guide.st_guide_answer</script_text>
                 <next>2</next>
                 <next>3</next>
                 <next>4</next>
