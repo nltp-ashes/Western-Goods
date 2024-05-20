@@ -232,20 +232,15 @@ end
 --- @param flags table
 --- @return nil
 function st_guide_answer(npc, flags)
-    if npc:section() == "stalker_western_goods_trader" then
-        flags.result = "st_western_goods_trader_guide_answer"
-    end
+    local guide_answers = {
+        ["stalker_western_goods_trader"] = "st_western_goods_trader_guide_answer",
+        ["jup_a6_freedom_trader_ashot"] = "st_western_goods_ashot_guide_answer",
+        ["mechanic_army_yan_mlr"] = "st_western_goods_peregrine_guide_answer",
+        ["jup_b6_scientist_biochemist"] = "st_western_goods_ozersky_guide_answer"
+    }
 
-    if npc:section() == "jup_a6_freedom_trader_ashot" then
-        flags.result = "st_western_goods_ashot_guide_answer"
-    end
-
-    if npc:section() == "mechanic_army_yan_mlr" then
-        flags.result = "st_western_goods_peregrine_guide_answer"
-    end
-
-    if npc:section() == "jup_b6_scientist_biochemist" then
-        flags.result = "st_western_goods_ozersky_guide_answer"
+    if guide_answers[npc:section()] then
+        flags.result = guide_answers[npc:section()]
     end
 end
 

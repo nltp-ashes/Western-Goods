@@ -22,13 +22,6 @@ local heli_spawn                = western_goods_helicopter.heli_spawn
 local heli_register             = western_goods_helicopter.heli_register
 local HELICOPTERS_MODES         = western_goods_helicopter.HELICOPTERS_MODES
 
--- Constants
-local heli_transporters = {
-    ["stalker_western_goods_trader"] = true,
-    ["jup_b6_scientist_biochemist"] = true,
-    ["mechanic_army_yan_mlr"] = true
-}
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Helicopter transport order
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -38,6 +31,12 @@ local heli_transporters = {
 --- @param destination string
 --- @return nil
 function western_goods_guide_on_change_level(npc, destination)
+    local heli_transporters = {
+        ["stalker_western_goods_trader"] = true,
+        ["jup_b6_scientist_biochemist"] = true,
+        ["mechanic_army_yan_mlr"] = true
+    }
+
     if heli_transporters[npc:section()] then
         western_goods_utils.give_info("western_goods_spawn_guide_helicopter")
     end
