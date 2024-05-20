@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 24/03/2024                                                                                            -->
+<!--    Date : 20/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -105,6 +105,11 @@
     <!-- Readable UI strings -->
     <string id="ui_wg_dx8_retard_notice">
         <text>It seems you're using DirectX 8 renderer, you may experience texture stretching. Use a more modern renderer to avoid issues.</text>
+    </string>
+
+    <!-- Misc strings -->
+    <string id="st_wg_free">
+        <text>Free</text>
     </string>
 
 </string_table>

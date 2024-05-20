@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 20/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -59,55 +59,6 @@
 
     <string id="western_goods_trader_meet_6">
         <text>Alright.</text>
-    </string>
-
-    <!-- Guide dialog -->
-    <string id="western_goods_trader_guide_ask">
-        <text>Could one of your helicopters drop me somewhere?</text>
-    </string>
-
-    <string id="western_goods_trader_guide_dest">
-        <text>Sure, that's the least I can do for you! Where would you like to go?</text>
-    </string>
-
-    <string id="western_goods_trader_guide_back">
-        <text>Actually, never-mind.</text>
-    </string>
-
-    <string id="western_goods_trader_guide_limansk">
-        <text>Limansk, south of the construction site. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_swamps">
-        <text>Great Swamps, at the observation outpost. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_cordon">
-        <text>Cordon, south-east of the railway bridge. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_darkscape">
-        <text>Darkscape, on the plateau. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_deadcity">
-        <text>Deadcity, at the mercenary base. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_red_forest">
-        <text>Red Forest, next to the Forester's cabin. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_jupiter">
-        <text>Jupiter, at the cooling tower. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_zaton">
-        <text>Zaton, near the old barge. %c[d_orange][Free]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_deserted_hospital">
-        <text>Deserted Hospital, by the collapsed entrance. %c[d_orange][Free]</text>
     </string>
 
     <!-- Western Goods Trader Trade strings -->
@@ -227,6 +178,15 @@
 
     <string id="st_wg_barter_euros_rouble_100_to_6800_desc">
         <text>Exchange %c[d_orange]100 EUR%c[ui_gray_2] for %c[d_orange]6800 RU%c[ui_gray_2].</text>
+    </string>
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_trader_guide_ask">
+        <text>Could one of your helicopters drop me somewhere?</text>
+    </string>
+
+    <string id="st_western_goods_trader_guide_answer">
+        <text>Sure, that's the least I can do for you! I can request one of my helicopters to transport you. Where would you like to go?</text>
     </string>
 
     <!--=============================================================================================================-->
@@ -752,6 +712,33 @@
     </string>
 
     <!--=============================================================================================================-->
+    <!--    Ashot                                                                                                    -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_ashot_guide_answer">
+        <text>I can tell one of our guys to guide you. Where do you need to go?</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Peregrine                                                                                                -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_peregrine_guide_answer">
+        <text>Well, you can wait for the next supply chopper to drop by. It's does rounds to resupply our different outposts. You can hop in it, but it's going to cost you.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Professor Ozersky                                                                                        -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_ozersky_guide_answer">
+        <text>Ну, армия время от времени присылает вертолёт, чтобы пополнить нас запасами. Я могу попросить пилота взять вас с собой, но это будет дорого...</text>
+    </string>
+
+    <!--=============================================================================================================-->
     <!--    Flea Market Dialogs                                                                                      -->
     <!--=============================================================================================================-->
 
@@ -861,6 +848,38 @@
 
     <string id="st_wg_trade_eur_usd_ask_reply_3">
         <text>Here's what I've got.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Guide Dialogs                                                                                            -->
+    <!--=============================================================================================================-->
+
+    <string id="st_wg_guide_ask">
+        <text>Could you guide me somewhere?</text>
+    </string>
+
+    <string id="st_wg_guide_show_routes">
+        <text>Where would you like to go?</text>
+    </string>
+
+    <string id="st_wg_guide_next_routes">
+        <text>Are there any other place you can guide me?</text>
+    </string>
+
+    <string id="st_wg_guide_cancel">
+        <text>Actually, never-mind.</text>
+    </string>
+
+    <string id="st_wg_guide_route">
+        <text>%s %c[d_orange][%s]</text>
+    </string>
+
+    <string id="st_wg_guide_accept">
+        <text>Alright, let's go then.</text>
+    </string>
+
+    <string id="st_wg_guide_too_poor">
+        <text>You don't have enough money to go there.</text>
     </string>
 
     <!--=============================================================================================================-->

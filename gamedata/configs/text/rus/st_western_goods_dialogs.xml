@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 20/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -59,55 +59,6 @@
 
     <string id="western_goods_trader_meet_6">
         <text>Понятно.</text>
-    </string>
-
-    <!-- Guide dialog -->
-    <string id="western_goods_trader_guide_ask">
-        <text>Может ли один из твоих вертолётов подбросить меня куда-нибудь?</text>
-    </string>
-
-    <string id="western_goods_trader_guide_dest">
-        <text>Конечно, это меньшее, что я могу для тебя сделать! Куда ты хочешь отправиться?</text>
-    </string>
-
-    <string id="western_goods_trader_guide_back">
-        <text>Знаешь, забудь.</text>
-    </string>
-
-    <string id="western_goods_trader_guide_limansk">
-        <text>Лиманск, южнее стройплощадки. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_swamps">
-        <text>Болота, на смотровую вышку. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_cordon">
-        <text>Кордон, юго-восточнее ж/д моста. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_darkscape">
-        <text>Тёмная Лощина, на плато. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_deadcity">
-        <text>Мёртвый город, на базу Наёмников. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_red_forest">
-        <text>Рыжий Лес, рядом с постом Лесника. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_jupiter">
-        <text>Юпитер, на градирню. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_zaton">
-        <text>Затон, рядом со старой баржей. %c[d_orange][Бесплатно]</text>
-    </string>
-
-    <string id="western_goods_trader_guide_deserted_hospital">
-        <text>Заброшенный госпиталь, у обрушенного входа. %c[d_orange][Бесплатно]</text>
     </string>
 
     <!-- Western Goods Trader Trade strings -->
@@ -227,6 +178,15 @@
 
     <string id="st_wg_barter_euros_rouble_100_to_6800_desc">
         <text>Разменяй %c[d_orange]100 EUR%c[ui_gray_2] на %c[d_orange]6800 RU%c[ui_gray_2].</text>
+    </string>
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_trader_guide_ask">
+        <text>Может ли один из твоих вертолётов подбросить меня куда-нибудь?</text>
+    </string>
+
+    <string id="st_western_goods_trader_guide_answer">
+        <text>Конечно, это меньшее, что я могу для тебя сделать! Куда ты хочешь отправиться?</text>
     </string>
 
     <!--=============================================================================================================-->
@@ -752,6 +712,33 @@
     </string>
 
     <!--=============================================================================================================-->
+    <!--    Ashot                                                                                                    -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_ashot_guide_answer">
+        <text>Я могу попросить одного из наших парней провести вас. Куда вам нужно пойти?</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Peregrine                                                                                                -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_peregrine_guide_answer">
+        <text>Что ж, вы можете подождать, пока прибудет следующий вертолет с припасами. Он совершает обходы, чтобы пополнить запасы наших различных аванпостов. Вы можете прыгнуть в него, но это будет стоить вам денег.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Professor Ozersky                                                                                        -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_ozersky_guide_answer">
+        <text>Well, the army sends a helicopter once in a while to resupply us. I can ask the pilot to take you with them, but it will be expensive...</text>
+    </string>
+
+    <!--=============================================================================================================-->
     <!--    Flea Market Dialogs                                                                                      -->
     <!--=============================================================================================================-->
 
@@ -861,6 +848,38 @@
 
     <string id="st_wg_trade_eur_usd_ask_reply_3">
         <text>Вот что у меня есть.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Guide Dialogs                                                                                            -->
+    <!--=============================================================================================================-->
+
+    <string id="st_wg_guide_ask">
+        <text>Не могли бы вы провести меня куда-нибудь?</text>
+    </string>
+
+    <string id="st_wg_guide_show_routes">
+        <text>Куда бы ты хотел пойти?</text>
+    </string>
+
+    <string id="st_wg_guide_next_routes">
+        <text>Есть ли еще какое-нибудь место, куда вы можете меня направить?</text>
+    </string>
+
+    <string id="st_wg_guide_cancel">
+        <text>На самом деле, неважно.</text>
+    </string>
+
+    <string id="st_wg_guide_route">
+        <text>%s %c[d_orange][%s]</text>
+    </string>
+
+    <string id="st_wg_guide_accept">
+        <text>Хорошо, тогда пойдем.</text>
+    </string>
+
+    <string id="st_wg_guide_too_poor">
+        <text>У тебя недостаточно денег, чтобы поехать туда.</text>
     </string>
 
     <!--=============================================================================================================-->
