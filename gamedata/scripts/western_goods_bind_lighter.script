@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 15/05/2024                                                                                             ---
+---    Date : 21/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -87,6 +87,7 @@ function lighter_binder:__init(obj) super(obj)
     self.m_fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "wg_fuel_consumption_use", 0.05)
     self.m_light_bone = ini_sys:r_string_ex(self.object:section(), "wg_light_bone", "wpn_body")
     self.m_light_hud_bone = ini_sys:r_string_ex(self.object:section(), "wg_light_hud_bone", "wpn_body")
+    self.m_light_bone_check_state = ini_sys:r_bool_ex(self.object:section(), "wg_light_bone_check_state", true)
     self.m_fuel_level_saved = nil
     self.m_first_update = false
     self.m_update_rate = 1000
@@ -191,7 +192,7 @@ end
 function lighter_binder:set_flame_status(status)
     self.m_light_source:set_light_status(status)
     self.m_particles_source:set_particles_status(status)
-    western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, status)
+    western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, self.m_light_bone_check_state and status or true)
 end
 
 function lighter_binder:play_animation()
@@ -203,7 +204,7 @@ function lighter_binder:play_animation()
 
     -- Play HUD motion
     if self:check_is_drawn() then
-        western_goods_utils.play_hud_animation(western_goods_utils.animation_hands_modes.left, self.object:section(), self.m_amn_motion)
+        western_goods_utils.play_object_hud_animation(self.object, self.m_amn_motion)
     end
 end
 

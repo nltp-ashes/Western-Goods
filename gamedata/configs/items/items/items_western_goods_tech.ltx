@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 16/05/2024                                                                                               ;;
+;;    Date : 21/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -140,6 +140,7 @@ wg_light_hud_bone                                = flame            ; bone to at
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0003           ; 0.03%/second (55 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
+wg_light_bone_check_state                        = true             ; flame is hidden in "invalid" states
 
 [wg_lighter_bic_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
@@ -210,37 +211,39 @@ wg_light_hud_bone                                = flame            ; bone to at
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0005           ; 0.05%/second (30 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
+wg_light_bone_check_state                        = false            ; flame is not hidden in "invalid" states
 
 [wg_lighter_zippo_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_zippo_hud.ogf
 
 attach_place_idx                                 = 1
+lh_lead_gun                                      = true
 
-item_position                                    = -0.065426, 0.033442, 0.002713
-item_orientation                                 = -30, 70, -10
+item_position                                    = 0, 0, 0
+item_orientation                                 = 0, 0, 0
 
-hands_position                                   = 0.058123, -0.29765, 0.051894
-hands_position_16x9                              = 0.058123, -0.29765, 0.051894
-hands_orientation                                = 2, 38, 0
-hands_orientation_16x9                           = 2, 38, 0
+hands_position                                   = 0, 0, 0.04
+hands_position_16x9                              = 0, 0, 0.04
+hands_orientation                                = 0, 0, 0
+hands_orientation_16x9                           = 0, 0, 0
 
-aim_hud_offset_pos                               = -0.175, 0.12, -0.05
-aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
-aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
-aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
+aim_hud_offset_pos                               = 0, 0, 0
+aim_hud_offset_pos_16x9                          = 0, 0, 0
+aim_hud_offset_rot                               = 0, 0, 0
+aim_hud_offset_rot_16x9                          = 0, 0, 0
 
-anm_hide                                         = wg_lighter_zippo_throw_start, holster
-anm_hide_fast                                    = wg_lighter_zippo_throw_start, holster
-anm_idle                                         = wg_lighter_zippo_idle, idle
-anm_idle_moving                                  = wg_lighter_zippo_walk, idle
-anm_idle_moving_crouch                           = wg_lighter_zippo_walk, idle
-anm_idle_sprint                                  = wg_lighter_zippo_sprint, idle
-anm_show                                         = wg_lighter_zippo_throw_end, draw
-anm_show_fast                                    = wg_lighter_zippo_throw_end, draw
-anm_throw                                        = wg_lighter_zippo_throw_idle, idle
-anm_throw_end                                    = wg_lighter_zippo_throw_end, idle
-anm_throw_start                                  = wg_lighter_zippo_throw_start, idle
-anm_campfire                                     = wg_lighter_bic_campfire, campfire
+anm_hide                                         = liz_zippo_hide_hands, liz_zippo_hide
+anm_hide_fast                                    = liz_zippo_hide_hands, liz_zippo_hide
+anm_idle                                         = liz_zippo_idle_hands, liz_zippo_idle
+anm_idle_moving                                  = liz_zippo_walk_hands, liz_zippo_walk
+anm_idle_moving_crouch                           = liz_zippo_walk_hands, liz_zippo_walk
+anm_idle_sprint                                  = liz_zippo_run_hands, liz_zippo_run
+anm_show                                         = liz_zippo_show_hands, liz_zippo_show
+anm_show_fast                                    = liz_zippo_show_hands, liz_zippo_show
+anm_throw                                        = liz_zippo_throw_idle_hands, liz_zippo_throw_idle
+anm_throw_end                                    = liz_zippo_throw_end_hands, liz_zippo_throw_end
+anm_throw_start                                  = liz_zippo_throw_start_hands, liz_zippo_throw_start
+anm_campfire                                     = liz_zippo_campfire_hands, liz_zippo_campfire
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
