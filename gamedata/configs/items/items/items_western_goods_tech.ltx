@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 21/05/2024                                                                                               ;;
+;;    Date : 22/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -140,7 +140,6 @@ wg_light_hud_bone                                = flame            ; bone to at
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0003           ; 0.03%/second (55 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
-wg_light_bone_check_state                        = true             ; flame is hidden in "invalid" states
 
 [wg_lighter_bic_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
@@ -211,7 +210,6 @@ wg_light_hud_bone                                = flame            ; bone to at
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0005           ; 0.05%/second (30 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
-wg_light_bone_check_state                        = false            ; flame is not hidden in "invalid" states
 
 [wg_lighter_zippo_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_zippo_hud.ogf

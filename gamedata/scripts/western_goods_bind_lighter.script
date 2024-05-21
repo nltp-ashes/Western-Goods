@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 21/05/2024                                                                                             ---
+---    Date : 22/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
@@ -68,15 +68,13 @@ function lighter_binder:__init(obj) super(obj)
     -- Script lights
     self.m_light_source = western_goods_class_light_source.light_source(0.002, 0.0005)
 
-    -- Particle effects
-    self.m_particles_source = western_goods_class_particles_source.particles_source()
-
     -- Sound effects
     self.m_sounds = {
         campfire = sound_object([[western_goods_tech\lighter_use_cf]]),
     }
 
     -- Callbacks
+    RegisterScriptCallback("actor_on_hud_animation_mark", self)
     RegisterScriptCallback("western_goods_on_campfire_use", self)
     RegisterScriptCallback("western_goods_on_item_before_use", self)
     RegisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
@@ -87,7 +85,7 @@ function lighter_binder:__init(obj) super(obj)
     self.m_fuel_consumption_use = ini_sys:r_float_ex(self.object:section(), "wg_fuel_consumption_use", 0.05)
     self.m_light_bone = ini_sys:r_string_ex(self.object:section(), "wg_light_bone", "wpn_body")
     self.m_light_hud_bone = ini_sys:r_string_ex(self.object:section(), "wg_light_hud_bone", "wpn_body")
-    self.m_light_bone_check_state = ini_sys:r_bool_ex(self.object:section(), "wg_light_bone_check_state", true)
+    self.m_is_flame_on = false
     self.m_fuel_level_saved = nil
     self.m_first_update = false
     self.m_update_rate = 1000
@@ -100,6 +98,7 @@ function lighter_binder:__init(obj) super(obj)
 end
 
 function lighter_binder:net_destroy()
+    UnregisterScriptCallback("actor_on_hud_animation_mark", self)
     UnregisterScriptCallback("western_goods_on_campfire_use", self)
     UnregisterScriptCallback("western_goods_on_item_before_use", self)
     UnregisterScriptCallback("western_goods_on_hideout_furniture_light_use", self)
@@ -133,8 +132,8 @@ function lighter_binder:update(delta)
         self:first_update(delta)
     end
 
-    -- Turn off on wrong device state
-    if not self:check_state() then
+    -- Ensure flame is off
+    if not self:get_flame_status() then
         self:set_flame_status(false)
         return
     end
@@ -168,11 +167,7 @@ end
 
 function lighter_binder:update_flame()
     self:set_flame_status(true)
-
-    local pos = self:get_flame_bone_position()
-
-    self.m_particles_source:update_particles(pos)
-    self.m_light_source:update_light(pos)
+    self.m_light_source:update_light(self:get_flame_bone_position())
 end
 
 function lighter_binder:update_fuel(fuel_consumption_override)
@@ -181,7 +176,7 @@ function lighter_binder:update_fuel(fuel_consumption_override)
     local fuel_level_new = clamp(self.object:condition() - fuel_consumed, 0.01, 1)
 
     self.object:set_condition(fuel_level_new)
-    dbg_printf("[WG] Lighter Binder | Update Fuel - Lighter new fuel level '%s'", self.object:condition())
+    dbg_printf("[WG] Lighter Binder | Update Fuel - Lighter %s new fuel level '%s'", self.object:name(), self.object:condition())
 end
 
 function lighter_binder:get_flame_bone_position()
@@ -189,10 +184,15 @@ function lighter_binder:get_flame_bone_position()
     return pos or db.actor:position()
 end
 
+function lighter_binder:get_flame_status()
+    local is_on = self.m_is_flame_on
+    return is_on
+end
+
 function lighter_binder:set_flame_status(status)
+    self.m_is_flame_on = status
     self.m_light_source:set_light_status(status)
-    self.m_particles_source:set_particles_status(status)
-    western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, self.m_light_bone_check_state and status or true)
+    western_goods_utils.bone_hud_visibility(self.object, self.m_light_hud_bone, self.m_light_bone, status)
 end
 
 function lighter_binder:play_animation()
@@ -237,6 +237,20 @@ end
 function lighter_binder:check_is_drawn()
     local active_det = db.actor:active_detector()
     return active_det and active_det:id() == self.object:id() or false
+end
+
+function lighter_binder:actor_on_hud_animation_mark(state, mark, obj, owner)
+    if self.object:id() ~= obj:id() then
+        return
+    end
+    if mark == "flame_on" then
+        self:set_flame_status(true)
+        return
+    end
+    if mark == "flame_off" then
+        self:set_flame_status(false)
+        return
+    end
 end
 
 function lighter_binder:western_goods_on_campfire_use()
