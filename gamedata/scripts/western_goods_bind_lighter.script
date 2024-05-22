@@ -140,8 +140,8 @@ function lighter_binder:update(delta)
         return
     end
 
-    -- Ensure lighter is drawn
-    if not self:check_is_drawn() then
+    -- Ensure lighter is equipped
+    if not self:check_is_primary() then
         self:set_flame_status(false)
         return
     end
@@ -214,11 +214,6 @@ function lighter_binder:play_animation()
     if self:check_is_drawn() then
         western_goods_utils.play_object_hud_animation(self.object, self.m_amn_motion)
     end
-end
-
-function lighter_binder:check_state()
-    local state = self.object:get_state()
-    return state == 0
 end
 
 function lighter_binder:check_is_fueled()
