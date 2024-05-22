@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 15/05/2024                                                                                             ---
+---    Date : 21/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to monkey-patch some functions of base anomaly, or other addons.                                  ---
@@ -14,7 +14,6 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- New callbacks
-AddScriptCallback("western_goods_on_campfire_use")
 AddScriptCallback("western_goods_on_item_before_use")
 AddScriptCallback("western_goods_on_hideout_furniture_light_use")
 
@@ -34,12 +33,6 @@ monkey_patches               = {
         patches = {
             { prio=1, script="itms_manager", func="actor_on_item_before_use", cond = function() return true end },
             { prio=2, script="enhanced_animations", func="originalAOIBU", cond = function() return western_goods_core.is_fdda_installed() end }
-        }
-    },
-    campfire_on_interact = {
-        name = "campfire_on_interact",
-        patches = {
-            { prio=1, script="western_goods_core",  func="use_campfire", cond = function() return true end }
         }
     },
     trader_autoinject_update = {
@@ -190,11 +183,6 @@ end)
 make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
     this.item_before_use(obj, flags)
     SendScriptCallback("western_goods_on_item_before_use", obj, flags)
-end)
-
-make_monkey_patch(monkey_patches.campfire_on_interact, function()
-    this.campfire_on_interact()
-    SendScriptCallback("western_goods_on_campfire_use")
 end)
 
 make_monkey_patch(monkey_patches.trader_autoinject_update, function(npc)

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 20/05/2024                                                                                             ---
+---    Date : 22/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -21,6 +21,8 @@ local ini_locations             = ini_file([[named_locations.ltx]])
 trade_status_flags              = { cant_trade = 1, too_damaged = 2, hidden = 3, tradable = 4 }
 weapon_zoom_types               = { normal = 0, alt = 1, gl = 2 }
 animation_hands_modes           = { right = 0, left = 1, both = 2 }
+hud_states                      = { idle = 0, showing = 1, hiding = 2, hidden = 3, bore = 4 }
+hud_states_devices              = { idle_zoom = 5, idle_zoom_in = 6, idle_zoom_out = 7, throw_start = 8, throw = 9, throw_end = 10 }
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug functions
@@ -910,6 +912,41 @@ function get_named_location(location_name)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Animations functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to play a HUD animation, without having a game_object to play the animation on.
+--- @param hand_mode number
+--- @param section string
+--- @param motion_key string
+--- @param speed number
+function play_hud_animation(hand_mode, section, motion_key, speed)
+    if not validate_params({hand_mode,section,motion_key,"play_hud_animation"}) then return end
+
+    local hud_sec = ini_sys:r_string_ex(section, "hud")
+    if ini_sys:line_exist(hud_sec, motion_key) then
+        game.play_hud_motion(hand_mode, hud_sec, motion_key, true, speed or 1.0)
+        dbg_printf("[WG] Utils | Playing HUD animation '%s' from '%s'", motion_key, hud_sec)
+    end
+end
+
+--- Function used to play a HUD animation on a game object.
+--- @param obj game_object
+--- @param hand_mode number
+--- @param section string
+--- @param motion_key string
+--- @param speed number
+function play_object_hud_animation(obj, motion_key, speed)
+    if not validate_params({obj,motion_key,"play_object_hud_animation"}) then return end
+
+    local hud_sec = ini_sys:r_string_ex(obj:section(), "hud")
+    if ini_sys:line_exist(hud_sec, motion_key) then
+        obj:play_hud_motion(motion_key, true, hud_states.idle, speed or 1.0, 0)
+        dbg_printf("[WG] Utils | Playing object HUD animation '%s' from '%s'", motion_key, hud_sec)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Validation functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -1132,17 +1169,3 @@ function get_renderer()
     return renderers[get_console_cmd(0,"renderer")]
 end
 
---- Function used to play an animation on a game object.
---- @param hand_mode number
---- @param section string
---- @param motion_key string
---- @param speed number
-function play_hud_animation(hand_mode, section, motion_key, speed)
-    if not validate_params({hand_mode,section,motion_key,"play_hud_animation"}) then return end
-
-    local hud_sec = ini_sys:r_string_ex(section, "hud")
-    if ini_sys:line_exist(hud_sec, motion_key) then
-        game.play_hud_motion(hand_mode, hud_sec, motion_key, true, speed or 1.0)
-        dbg_printf("[WG] Utils | Playing HUD animation '%s' from '%s'", motion_key, hud_sec)
-    end
-end

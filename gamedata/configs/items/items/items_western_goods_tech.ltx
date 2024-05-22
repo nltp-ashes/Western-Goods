@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 16/05/2024                                                                                               ;;
+;;    Date : 22/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -159,13 +159,13 @@ aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
 aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
 aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
 
+anm_show                                         = wg_lighter_bic_draw, draw
+anm_show_fast                                    = wg_lighter_bic_draw, draw
 anm_hide                                         = wg_lighter_bic_holster, holster
 anm_hide_fast                                    = wg_lighter_bic_holster, holster
 anm_idle                                         = wg_lighter_bic_idle, idle
 anm_idle_moving                                  = wg_lighter_bic_moving, moving, 2
 anm_idle_sprint                                  = wg_lighter_bic_sprint, sprint, 1.6
-anm_show                                         = wg_lighter_bic_draw, draw
-anm_show_fast                                    = wg_lighter_bic_draw, draw
 anm_campfire                                     = wg_lighter_bic_campfire, campfire
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -215,32 +215,33 @@ wg_fuel_consumption_use                          = 0.05             ; using the 
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_zippo_hud.ogf
 
 attach_place_idx                                 = 1
+lh_lead_gun                                      = true
 
-item_position                                    = -0.065426, 0.033442, 0.002713
-item_orientation                                 = -30, 70, -10
+item_position                                    = 0, 0, 0
+item_orientation                                 = 0, 0, 0
 
-hands_position                                   = 0.058123, -0.29765, 0.051894
-hands_position_16x9                              = 0.058123, -0.29765, 0.051894
-hands_orientation                                = 2, 38, 0
-hands_orientation_16x9                           = 2, 38, 0
+hands_position                                   = 0, -0.03, 0
+hands_position_16x9                              = 0, -0.03, 0
+hands_orientation                                = 0, 0, 0
+hands_orientation_16x9                           = 0, 0, 0
 
-aim_hud_offset_pos                               = -0.175, 0.12, -0.05
-aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
-aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
-aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
+aim_hud_offset_pos                               = 0, 0, 0
+aim_hud_offset_pos_16x9                          = 0, 0, 0
+aim_hud_offset_rot                               = 0, 0, 0
+aim_hud_offset_rot_16x9                          = 0, 0, 0
 
-anm_hide                                         = wg_lighter_zippo_throw_start, holster
-anm_hide_fast                                    = wg_lighter_zippo_throw_start, holster
+anm_show                                         = wg_lighter_zippo_show, show
+anm_show_fast                                    = wg_lighter_zippo_show, show
+anm_hide                                         = wg_lighter_zippo_hide, hide
+anm_hide_fast                                    = wg_lighter_zippo_hide, hide
 anm_idle                                         = wg_lighter_zippo_idle, idle
-anm_idle_moving                                  = wg_lighter_zippo_walk, idle
-anm_idle_moving_crouch                           = wg_lighter_zippo_walk, idle
-anm_idle_sprint                                  = wg_lighter_zippo_sprint, idle
-anm_show                                         = wg_lighter_zippo_throw_end, draw
-anm_show_fast                                    = wg_lighter_zippo_throw_end, draw
-anm_throw                                        = wg_lighter_zippo_throw_idle, idle
-anm_throw_end                                    = wg_lighter_zippo_throw_end, idle
-anm_throw_start                                  = wg_lighter_zippo_throw_start, idle
-anm_campfire                                     = wg_lighter_bic_campfire, campfire
+anm_idle_moving                                  = wg_lighter_zippo_walk, walk
+anm_idle_moving_crouch                           = wg_lighter_zippo_walk, walk
+anm_idle_sprint                                  = wg_lighter_zippo_run, run
+anm_throw_start                                  = wg_lighter_zippo_throw_start, throw_start
+anm_throw                                        = wg_lighter_zippo_throw_idle, throw_idle
+anm_throw_end                                    = wg_lighter_zippo_throw_end, throw_end
+anm_campfire                                     = wg_lighter_zippo_campfire, campfire
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

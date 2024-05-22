@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/05/2024                                                                                             ---
+---    Date : 21/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -25,6 +25,9 @@ local VERSION                       = "2.6.0"
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
+
+-- New callbacks
+AddScriptCallback("western_goods_on_campfire_use")
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Core functions
@@ -167,6 +170,7 @@ end
 --- @return nil
 function use_campfire()
     dbg_printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+    SendScriptCallback("western_goods_on_campfire_use")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
