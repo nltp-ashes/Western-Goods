@@ -140,6 +140,12 @@ function lighter_binder:update(delta)
         return
     end
 
+    -- Ensure lighter is drawn
+    if not self:check_is_drawn() then
+        self:set_flame_status(false)
+        return
+    end
+
     -- Turn off when out of fuel
     if not self:check_is_fueled() then
         self:set_flame_status(false)
