@@ -4,7 +4,7 @@
 
 **• Additions :**
 > • Added a new device : the `Garmin eTrex 10` electronic compass (Thanks L4U6H1N6-LUN4T1C, Crepis);
-> • Added a new device : a `Zippo lighter` (Thanks lexus, L4U6H1N6-LUN4T1C, Lucy, Lizzardman);
+> • Added a new device : a `Zippo lighter` (Thanks Lizzardman, L4U6H1N6-LUN4T1C, Lucy, lexus);
 > • Added use animations for `Lays`, `Doritos`, `Milka`, `KitKat`, `Snickers`, `Twix`, `Mars`, `Bounty` and `Milky-Way` (Thanks Lizzardman);
 > • Added lighter fuel level in the item description;
 > • Added function in core script to test installation of pinup collector.
@@ -26,6 +26,7 @@
 > • Changed new game loadouts : replaced the GPS device with the Bic lighter;
 > • Changed how the lighter illuminates. It now has a bright low range light, and a dim medium range light;
 > • Changed code handling EUR/USD trade restrictions : code was simplified by monkey-patching vanilla functions;
+> • Changed the way lighters handle the flame showing/hiding. Instead of a state check, it now uses motion marks;
 > • Refactored uses of `str_explode(...)` with `parse_list(...)` to simplify code;
 > • Refactored some code around to reduce code duplication;
 > • Refactored duplicated code in GPS, rangefinder and compass scripts using a new utility function.
@@ -34,4 +35,5 @@
 > • Fixed inventory weight of Oreo being 60g instead of 154g;
 > • Fixed lighter playing animation even when it wasn't selected to light up the campfire/gas lamp;
 > • Fixed monkey patches logs mentioning "fire source binder" instead of "monkey patches";
-> • Fixed one translation being in English instead of Russian.
+> • Fixed one translation being in English instead of Russian;
+> • Fixed lighter binder using game.play_hud_anim instead of obj:play_hud_anim.

@@ -38,6 +38,8 @@ Western Goods natively integrates with the following addons, but they **aren't r
 
 These patches should be used when native compatibility with other addons cannot be achieved :
 1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.0-patch-rbn) (fixes food and drink statistics).
+2. [Patch for vanilla Anomaly 1.5.2 devices](https://github.com/nltp-ashes/Western-Goods/releases/tag/fix-vanilla-shader) (fixes a broken shader from Anomaly 1.5.2).
+3. [Patch for Food Drugs and Drinks Animations v0.9](https://github.com/nltp-ashes/Western-Goods/releases/tag/patch-fdda) (fixes a broken animation from FDDA).
 
 These addons can be used to enhance the experience, but **aren't required** :
 1. [Cr3pis Icons](https://www.moddb.com/mods/stalker-anomaly/addons/cr3pis-icon-pack) (improves the quality of the inventory icons).
@@ -91,6 +93,7 @@ If you would like to help development for future updates, you can :
 
 - Hands mesh might collide with rangefinder when aiming in;
 - Stutters may occur when the game spawns in new NPCs;
+- When using FDDA, if the player picks up an item while a device is drawn, animations may not look correct.
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
