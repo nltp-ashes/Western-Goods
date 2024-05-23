@@ -19,6 +19,8 @@
 > • Removed dependency on `rax_icon_tint.script`;
 > • Completely rewrote the guide system to allow it to be used dynamically by multiple NPCs;
 > • Changed the helicopter transport system to use the new guide system;
+> • Changed animations of Bic lighter for new ones (Thanks Lizzardman);
+> • Changed sound effects of Bic lighter for new ones (Thanks Lizzardman);
 > • Changed `readable` config key for magazines to `wg_readable`;
 > • Changed some file names to avoid name conflicts;
 > • Changed suppliers' trade lists from `food`, `drinks` to `food`, `magazines`;
