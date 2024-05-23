@@ -12,11 +12,31 @@ The Zone is host to people from various horizons. Overtime, the demand for goods
 
 This addon was originally a minor addon that added a few drinks and snack from popular brands in western countries. Overtime, it evolved into a full-size game extension, adding new gameplay mechanics, consumables, readable magazines, trade items, devices, unique NPCs, and even a new set of storylines. Feel free to suggest new items or ideas in general, I'll do my best to add it if it fits the addon.
 
-|                                                                                                                                 |                                                           Illustrations                                                            |                                                                                                                                            |
-|:-------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
-|     ![Showcase Food](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png) _New food/snacks_      |       ![Showcase Drinks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png) _New drinks_        | ![Showcase Magazines](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png) _New (and readable) magazines_ |
-| ![Showcase GPS](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png) _New device: GPS Locator_ | ![Showcase Lighter](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_10.png) _New device: BIC lighter_ |   ![Showcase Rangefinder](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png) _New device: Rangefinder_    |
-|     ![Showcase Tasks](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png) _New storylines_      |          ![Showcase NPCs](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png) _New NPCs_           |     ![Showcase Mechanics](https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png) _New gameplay features_      |
+<table>
+  <tr>
+    <th colspan="3" align="center"><b>Illustrations</b></th>
+  </tr>
+  <tr>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_1.png" alt="Showcase Food"> <i>New food/snacks</i></td>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_2.1.png" alt="Showcase Drinks"> <i>New drinks</i></td>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_4.1.png" alt="Showcase Magazines"> <i>New (and readable) magazines</i></td>
+  </tr>
+  <tr>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_7.1.png" alt="Showcase GPS"> <i>New device: GPS Locator</i></td>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_8.png" alt="Showcase Rangefinder"> <i>New device: Rangefinder</i></td>
+    <td colspan="1" align="center"><img src="https://github.com/nltp-ashes/Western-Goods/assets/65969659/e655717d-a3fd-4675-8f1c-13e5292d621d" alt="Showcase Garmin eTrex 10"> <i>New device: Garmin eTrex 10</i></td>
+  </tr>
+  <tr>
+    <td colspan="1" align="center"><img src="https://github.com/nltp-ashes/Western-Goods/assets/65969659/15774249-957c-4e4d-ae8b-b0a31c8fe87c" alt="Showcase Bic Lighter"> <i>New device: BIC lighter</i></td>
+    <td colspan="1" align="center"><img src="https://github.com/nltp-ashes/Western-Goods/assets/65969659/f39a4828-430c-49eb-8aed-b6f1b1011e66" alt="Showcase Zippo lighter"> <i>New device: Zippo lighter</i></td>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_9.png" alt="Showcase Flea Market"> <i>New feature: Flea Market</i></td>
+</tr>
+  <tr>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_6.png" alt="Showcase Tasks"> <i>New storylines</i></td>
+    <td colspan="1" align="center"><img src="https://media.moddb.com/images/members/5/4575/4574850/profile/moddb_showcase_5.png" alt="Showcase NPCs"> <i>New NPCs</i></td>
+    <td colspan="1" align="center"><img src="https://github.com/nltp-ashes/Western-Goods/assets/65969659/ac112a28-ebdc-4e9e-aff5-90dc05f955d7" alt="Showcase Procedural Guides"> <i>New feature: Procedural guides</i></td>
+  </tr>
+</table>
 
 ---
 
@@ -27,17 +47,17 @@ These addons are **absolutely required** in order for Western Goods to work :
 2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes).
 
 Western Goods natively integrates with the following addons, but they **aren't required** :
+4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
 1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
 2. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest) (allows you to make EUR/USD/RUB currency exchanges);
 3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
-4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
 5. [Device Selector Key](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-required-device-selector-key) (makes it easier to switch between various devices);
 6. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
 7. [Interactive PDA](https://www.moddb.com/mods/stalker-anomaly/addons/interactive-pda-01) (adds more interactions with the world (and not only) via PDA);
-8. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.1-readables-ext) (adds more pages to magazines in the addon).
+8. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) (adds more pages to magazines in the addon).
 
 These patches should be used when native compatibility with other addons cannot be achieved :
-1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/v2.2.0-patch-rbn) (fixes food and drink statistics).
+1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/patch-real-body-needs) (fixes food and drink statistics).
 2. [Patch for vanilla Anomaly 1.5.2 devices](https://github.com/nltp-ashes/Western-Goods/releases/tag/fix-vanilla-shader) (fixes a broken shader from Anomaly 1.5.2).
 3. [Patch for Food Drugs and Drinks Animations v0.9](https://github.com/nltp-ashes/Western-Goods/releases/tag/patch-fdda) (fixes a broken animation from FDDA).
 
@@ -85,7 +105,7 @@ You can find a Trello board about the development of the addon by following this
 
 If you would like to help development for future updates, you can :
 1. Contribute to the addon, either by [getting in touch with me](https://github.com/nltp-ashes/Western-Goods#support--suggestions) or [creating a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the addon and [creating a pull-request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) on the addon's [GitHub repository](https://github.com/nltp-ashes/Western-Goods);
-2. Help by play-testing updates by [getting Release Candidates builds](https://github.com/nltp-ashes/Western-Goods/releases/tag/test) on the addon's GitHub repository.
+2. Help by play-testing updates by [getting Release Candidates builds](https://github.com/nltp-ashes/Western-Goods/releases/) on the addon's GitHub repository.
 
 ---
 
@@ -97,7 +117,7 @@ If you would like to help development for future updates, you can :
 
 **Note :** If you have issues, check the list of common issues (and their associated solutions) on [page 5 of the comments](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/page/5#8515571).
 
-If you truly believe your problem is new, please open an issue [on the addon's GitHub page](https://github.com/nltp-ashes/Western-Goods/issues).
+If you truly believe your problem is new, please open an issue [on the addon's GitHub page](https://github.com/nltp-ashes/Western-Goods/issues/new/choose).
 
 ---
 
