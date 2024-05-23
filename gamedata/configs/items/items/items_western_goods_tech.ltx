@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 22/05/2024                                                                                               ;;
+;;    Date : 23/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -135,8 +135,8 @@ snd_draw                                         = western_goods_tech\lighter_dr
 snd_holster                                      = western_goods_tech\lighter_holster.ogg
 
 ; custom properties
-wg_light_bone                                    = bone01           ; bone to attach the script_light on (in 3rd pers)
-wg_light_hud_bone                                = flame            ; bone to attach the script_light on (in 1st pers)
+wg_light_bone                                    = wpn_body         ; bone to attach the script_light on (in 3rd pers)
+wg_light_hud_bone                                = lid              ; bone to attach the script_light on (in 1st pers)
 wg_fuel_critical                                 = 0.01             ; lighter dies at 1%
 wg_fuel_consumption                              = 0.0003           ; 0.03%/second (55 real-life minutes)
 wg_fuel_consumption_use                          = 0.05             ; using the lighter (for cigs/campfire) consumes 5%
@@ -145,27 +145,31 @@ wg_fuel_consumption_use                          = 0.05             ; using the 
 item_visual                                      = dynamics\western_goods_tech\wg_lighter_bic_hud.ogf
 
 attach_place_idx                                 = 1
+lh_lead_gun                                      = true
 
-item_position                                    = -0.065, 0.032, 0.0025
-item_orientation                                 = -110, -15, 80
+item_position                                    = 0.0024, 0.007, 0.009
+item_orientation                                 = 127, 5, 21
 
-hands_position                                   = 0.023692, 0.011115, 0.028593
-hands_position_16x9                              = 0.023692, 0.011115, 0.028593
+hands_position                                   = 0, -0.03, 0
+hands_position_16x9                              = 0, -0.03, 0
 hands_orientation                                = 0, 0, 0
 hands_orientation_16x9                           = 0, 0, 0
 
-aim_hud_offset_pos                               = -0.175, 0.12, -0.05
-aim_hud_offset_pos_16x9                          = -0.175, 0.12, -0.05
-aim_hud_offset_rot                               = 0.0005, 0.09, -0.015
-aim_hud_offset_rot_16x9                          = 0.0005, 0.09, -0.015
+aim_hud_offset_pos                               = 0, 0, 0
+aim_hud_offset_pos_16x9                          = 0, 0, 0
+aim_hud_offset_rot                               = 0, 0, 0
+aim_hud_offset_rot_16x9                          = 0, 0, 0
 
-anm_show                                         = wg_lighter_bic_draw, draw
-anm_show_fast                                    = wg_lighter_bic_draw, draw
-anm_hide                                         = wg_lighter_bic_holster, holster
-anm_hide_fast                                    = wg_lighter_bic_holster, holster
+anm_show                                         = wg_lighter_bic_show, show
+anm_show_fast                                    = wg_lighter_bic_show, show
+anm_hide                                         = wg_lighter_bic_hide, hide
+anm_hide_fast                                    = wg_lighter_bic_hide, hide
 anm_idle                                         = wg_lighter_bic_idle, idle
-anm_idle_moving                                  = wg_lighter_bic_moving, moving, 2
-anm_idle_sprint                                  = wg_lighter_bic_sprint, sprint, 1.6
+anm_idle_moving                                  = wg_lighter_bic_walk, walk
+anm_idle_sprint                                  = wg_lighter_bic_run, run
+anm_throw_start                                  = wg_lighter_bic_throw_start, throw_start
+anm_throw                                        = wg_lighter_bic_throw_idle, throw_idle
+anm_throw_end                                    = wg_lighter_bic_throw_end, throw_end
 anm_campfire                                     = wg_lighter_bic_campfire, campfire
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
