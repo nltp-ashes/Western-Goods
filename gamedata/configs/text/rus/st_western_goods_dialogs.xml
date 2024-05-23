@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 20/05/2024                                                                                            -->
+<!--    Date : 23/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -735,7 +735,7 @@
 
     <!-- Guide dialogs -->
     <string id="st_western_goods_ozersky_guide_answer">
-        <text>Well, the army sends a helicopter once in a while to resupply us. I can ask the pilot to take you with them, but it will be expensive...</text>
+        <text>Ну, армия время от времени присылает вертолёт, чтобы пополнить нас запасами. Я могу попросить пилота взять вас с собой, но это будет дорого...</text>
     </string>
 
     <!--=============================================================================================================-->
