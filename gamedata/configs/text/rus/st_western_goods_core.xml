@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 20/05/2024                                                                                            -->
+<!--    Date : 24/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -94,7 +94,7 @@
     </string>
 
     <string id="st_wg_lighter_header">
-        <text>%s•%s Топливо : %s%s%\n \n%s%s</text>
+        <text>%s •%s Топливо : %s%s%\n \n%s%s</text>
     </string>
 
     <!-- Suitcase use strings -->
