@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 16/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tech items.                                                              -->
@@ -70,27 +70,6 @@
         </text>
     </string>
 
-    <string id="st_wg_gps">
-        <text>GPS локатор</text>
-    </string>
-
-    <string id="st_wg_gps_s">
-        <text>GPS</text>
-    </string>
-
-    <string id="st_wg_gps_descr">
-        <text>
-            Действительно редкое снаряжение в Зоне. Выглядит, как военный GPS локатор, использующийся, в основном, войсками NATO. Скорее всего, попал в Зону во время пребывания здесь ИИГ. Устройство показывает название и дистанцию до ближайшей территории. Также показывает и регион Зоны, в котором находится пользователь. Похоже, что база данных устарела. Некоторых, хорошо известных сталкерам территорий здесь нет.\n
-            \n
-            %c[ui_gray_1]СВОЙСТВА:\n
-            %c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
-            %c[d_blue] • %c[ui_gray_2] военная вещь\n
-            %c[d_blue] • %c[ui_gray_2] импортный\n
-            %c[d_cyan] • %c[ui_gray_2] ценная вещь\n
-            %c[d_orange] • %c[ui_gray_2] возможно использовать\n
-        </text>
-    </string>
-
     <string id="st_wg_military_decoder">
         <text>Военный декодер</text>
     </string>
@@ -133,6 +112,27 @@
         </text>
     </string>
 
+    <string id="st_wg_gps">
+        <text>GPS локатор</text>
+    </string>
+
+    <string id="st_wg_gps_s">
+        <text>GPS</text>
+    </string>
+
+    <string id="st_wg_gps_descr">
+        <text>
+            Действительно редкое снаряжение в Зоне. Выглядит, как военный GPS локатор, использующийся, в основном, войсками NATO. Скорее всего, попал в Зону во время пребывания здесь ИИГ. Устройство показывает название и дистанцию до ближайшей территории. Также показывает и регион Зоны, в котором находится пользователь. Похоже, что база данных устарела. Некоторых, хорошо известных сталкерам территорий здесь нет.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+            %c[d_blue] • %c[ui_gray_2] военная вещь\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+            %c[d_orange] • %c[ui_gray_2] возможно использовать\n
+        </text>
+    </string>
+
     <string id="st_wg_lighter_bic">
         <text>Зажигалка BIC</text>
     </string>
@@ -147,18 +147,38 @@
             \n
             %c[ui_gray_1]СВОЙСТВА:\n
             %c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
-            %c[d_blue] • %c[ui_gray_2] повсевместное применение\n
+            %c[d_blue] • %c[ui_gray_2] повсеместное применение\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_orange] • %c[ui_gray_2] можно использовать\n
+        </text>
+    </string>
+
+    <string id="st_wg_lighter_zippo">
+        <text>Зажигалка Zippo</text>
+    </string>
+
+    <string id="st_wg_lighter_zippo_s">
+        <text>Зажигалка Zippo</text>
+    </string>
+
+    <string id="st_wg_lighter_zippo_descr">
+        <text>
+            Классическая зажигалка Zippo. Эта зажигалка, известная своей долговечностью и ветрозащитным дизайном, пользуется популярностью среди многих. Он многоразового использования, а это означает, что при правильном уходе он может прослужить всю жизнь. Его пламя также регулируется, что делает его универсальным для различных целей. Эта конкретная модель, похоже, была импортирована из-за пределов Зоны.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+            %c[d_blue] • %c[ui_gray_2] повсеместное применение\n
             %c[d_blue] • %c[ui_gray_2] импортный\n
             %c[d_orange] • %c[ui_gray_2] можно использовать\n
         </text>
     </string>
 
     <string id="st_wg_rangefinder">
-        <text>Лазерный дальномер SigSauer KILO5K</text>
+        <text>SigSauer KILO5K</text>
     </string>
 
     <string id="st_wg_rangefinder_s">
-        <text>Дальномер KILO5K</text>
+        <text>SigSauer KILO5K</text>
     </string>
 
     <string id="st_wg_rangefinder_descr">
@@ -170,7 +190,27 @@
             %c[d_blue] • %c[ui_gray_2] военная вещь\n
             %c[d_blue] • %c[ui_gray_2] импортный\n
             %c[d_cyan] • %c[ui_gray_2] ценная вещь\n
-            %c[d_red] • %c[ui_gray_2] возможно использовать\n
+            %c[d_orange] • %c[ui_gray_2] можно использовать\n
+        </text>
+    </string>
+
+    <string id="st_wg_compass">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="st_wg_compass_s">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="st_wg_compass_descr">
+        <text>
+            Garmin eTrex 10 — портативное GPS-устройство. Серия eTrex известна своей прочной конструкцией, доступной ценой и длительным временем автономной работы. eTrex 10 оснащен 2,2-дюймовым дисплеем, который легко читается при любом освещении. В среднем он может работать в течение 25 часов от 2 батареек типа АА.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_cyan] • %c[ui_gray_2] ценная вещь\n
+            %c[d_orange] • %c[ui_gray_2] можно использовать\n
         </text>
     </string>
 

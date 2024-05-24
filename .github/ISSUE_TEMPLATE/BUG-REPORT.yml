@@ -19,6 +19,7 @@ body:
       label: Addon version
       description: Please select which version of the addon you are using.
       options:
+        - v2.6.0
         - v2.5.0
         - v2.4.0
         - v2.3.0
@@ -55,12 +56,15 @@ body:
       options:
         - 1.5.2
         - 1.5.1
+        - Other
     validations:
       required: true
   - type: textarea
     attributes:
-      label: Log output
-      description: Please copy and paste any relevant log output (found in Anomaly\appdata\logs\xray_user.log).
+      label: Game execution log
+      description: >-
+        Please drag and drop your game log (found in Anomaly\appdata\logs\xray_user.log).
+        If possible, try to replicate the issue with Western Goods' debug mode enabled (option in MCM) before attaching your log.
     validations:
       required: true
   - type: textarea
@@ -71,8 +75,8 @@ body:
   - type: input
     attributes:
       label: Contact
-      description: Please provide a way for us to contact you if needed.
-      placeholder: 'Example : "Discord: @nltp_ashes"'
+      description: Please provide a way for us to contact you if needed (separated by a ; if multiple).
+      placeholder: 'Example : "Discord: @nltp_ashes; Email: example@email.com"'
   - type: checkboxes
     attributes:
       label: Confirmation
@@ -82,6 +86,6 @@ body:
         and I made sure I have all the necessary
         [pre-requisites](https://github.com/nltp-ashes/Western-Goods#requirements).
       options:
-        - label: Yes, I have.
+        - label: Yes, I have read the instructions and have all the pre-requisites installed.
           required: true
 

@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 24/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -77,24 +77,7 @@
 
     <!-- Reading inventory string -->
     <string id="st_wg_view">
-        <text>View</text>
-    </string>
-
-    <!-- GPS Locator use strings -->
-    <string id="st_wg_gps_use_1">
-        <text>Местоположение :</text>
-    </string>
-
-    <string id="st_wg_gps_use_2">
-        <text>неизвестно</text>
-    </string>
-
-    <string id="st_wg_gps_use_3">
-        <text>вне радиуса действия спутника</text>
-    </string>
-
-    <string id="st_wg_gps_use_4">
-        <text>не найдено в базе данных</text>
+        <text>Вид</text>
     </string>
 
     <!-- Lighter use strings -->
@@ -110,6 +93,10 @@
         <text>Недостаточно топлива</text>
     </string>
 
+    <string id="st_wg_lighter_header">
+        <text>%s •%s Топливо : %s%s%\n \n%s%s</text>
+    </string>
+
     <!-- Suitcase use strings -->
     <string id="st_wg_open">
         <text>Открыть</text>
@@ -118,6 +105,11 @@
     <!-- Readable UI strings -->
     <string id="ui_wg_dx8_retard_notice">
         <text>Похожи, что вы используете рендерер DirectX 8, вы можете наблюдать растяжение текстур. Используйте более современный рендерер для избежания данных ошибок.</text>
+    </string>
+
+    <!-- Misc strings -->
+    <string id="st_wg_free">
+        <text>Бесплатно</text>
     </string>
 
 </string_table>

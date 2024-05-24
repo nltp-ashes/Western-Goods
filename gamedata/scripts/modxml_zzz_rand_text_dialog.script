@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 12/11/2023                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to add a new valid node to the dialog system.                                                     ---
@@ -57,7 +57,7 @@ function on_xml_read()
 end
 
 function trigger_dxml()
-    local file_list = str_explode(ini_sys:r_string("dialogs", "files"),",")
+    local file_list = parse_list(ini_sys, "dialogs", "files")
     local xml = CScriptXmlInit()
     for _,file_name in pairs(file_list) do
         xml:ParseDirFile([[gameplay]],file_name..".xml")

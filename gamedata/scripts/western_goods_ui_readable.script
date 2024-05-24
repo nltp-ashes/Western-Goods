@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : Tronex                                                                                   ---
 ---    Edited : NLTP_ASHES                                                                                           ---
----    Date : 20/02/2024                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off item_recipe and item_map_kit by Tronex, script used to manage magazines in the Western Goods addon. ---
@@ -64,12 +64,14 @@ end
 
 --- Function used to get the bonus for reading a magazine.
 --- @return number
-function get_psy_health_regeneration_magazine()
-    if not GUI or not GUI:IsShown() then
-        return 0.0
+function get_psy_health_regeneration()
+    local regeneration = western_goods_monkey_patches.arszi_psy_get_psy_health_regeneration()
+
+    if GUI and GUI:IsShown() then
+        regeneration = regeneration + (CONST_MAGAZINE_PSI_REGEN * western_goods_mcm.get_config("magazine_psi_regen"))
     end
 
-    return CONST_MAGAZINE_PSI_REGEN * western_goods_mcm.get_config("magazine_psi_regen")
+    return regeneration
 end
 
 --- Function used to collect the name of the texture descriptions for all the readables.
@@ -78,7 +80,7 @@ function collect_textures()
     local file_count, tex_count = 0, 0
 
     ini_sys:section_for_each(function(section)
-        local is_readable = ini_sys:r_bool_ex(section,"readable", false)
+        local is_readable = ini_sys:r_bool_ex(section, "wg_readable", false)
         local is_base = string.find(section, "_base")
 
         if is_readable and not is_base then

@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 22/02/2024                                                                                               ;;
+;;    Date : 17/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new food and snacks to the game.                                                        ;;
@@ -53,7 +53,7 @@ use_sound                                        = western_goods_food\wg_french_
 tier                                             = 3
 
 ;;====================================================================================================================;;
-;;==================| Animated Items |================================================================================;;
+;;==================| Snacks |========================================================================================;;
 ;;====================================================================================================================;;
 
 [wg_mnms]:wg_food_base
@@ -87,8 +87,10 @@ tier                                             = 2
 
 [wg_mnms_hud]
 item_visual                                      = dynamics\western_goods_food\wg_mnms_hud.ogf
+
 hands_position                                   = -0.0055, 0.00, 0.12
 hands_position_16x9                              = -0.0055, 0.00, 0.12
+
 anm_ea_show                                      = wg_mnms_use, wg_mnms_item_use
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,9 +125,275 @@ tier                                             = 2
 
 [wg_mentos_hud]
 item_visual                                      = dynamics\western_goods_food\wg_mentos_hud.ogf
+
 hands_position                                   = -0.0055,-0.07, 0.32
 hands_position_16x9                              = -0.0055,-0.07, 0.32
+
 anm_ea_show                                      = wg_mentos_use, wg_mentos_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_snickers]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_snickers.ogf
+
+inv_name                                         = st_wg_snickers
+inv_name_short                                   = st_wg_snickers_s
+description                                      = st_wg_snickers_descr
+inv_weight                                       = 0.05
+cost                                             = 2000
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 0
+inv_grid_y                                       = 0
+
+break_sound                                      = western_goods_food\wg_snickers_drop
+use_sound                                        = western_goods_food\wg_snickers_eat
+
+eat_satiety                                      = 0.242
+eat_sleepiness                                   = 0.0015
+eat_thirstiness                                  = 0.06
+
+tier                                             = 2
+
+[wg_snickers_hud]
+item_visual                                      = dynamics\western_goods_food\wg_snickers_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_snickers_use, wg_snickers_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_mars]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_mars.ogf
+
+inv_name                                         = st_wg_mars
+inv_name_short                                   = st_wg_mars_s
+description                                      = st_wg_mars_descr
+inv_weight                                       = 0.045
+cost                                             = 2000
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 0
+inv_grid_y                                       = 1
+
+break_sound                                      = western_goods_food\wg_mars_drop
+use_sound                                        = western_goods_food\wg_mars_eat
+
+eat_satiety                                      = 0.378
+eat_sleepiness                                   = 0.002
+eat_thirstiness                                  = 0.075
+
+tier                                             = 2
+
+[wg_mars_hud]
+item_visual                                      = dynamics\western_goods_food\wg_mars_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_mars_use, wg_mars_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_milkyway]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_milkyway.ogf
+
+inv_name                                         = st_wg_milkyway
+inv_name_short                                   = st_wg_milkyway_s
+description                                      = st_wg_milkyway_descr
+inv_weight                                       = 0.022
+cost                                             = 1665
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 1
+inv_grid_y                                       = 1
+
+break_sound                                      = western_goods_food\wg_milkyway_drop
+use_sound                                        = western_goods_food\wg_milkyway_eat
+
+eat_satiety                                      = 0.097
+eat_sleepiness                                   = 0.001
+eat_thirstiness                                  = 0.04
+
+tier                                             = 2
+
+[wg_milkyway_hud]
+item_visual                                      = dynamics\western_goods_food\wg_milkyway_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_milkyway_use, wg_milkyway_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_bounty]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_bounty.ogf
+
+inv_name                                         = st_wg_bounty
+inv_name_short                                   = st_wg_bounty_s
+description                                      = st_wg_bounty_descr
+inv_weight                                       = 0.057
+cost                                             = 1665
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 3
+inv_grid_y                                       = 0
+
+break_sound                                      = western_goods_food\wg_bounty_drop
+use_sound                                        = western_goods_food\wg_bounty_eat
+
+eat_satiety                                      = 0.278
+eat_sleepiness                                   = 0.0030
+eat_thirstiness                                  = 0.06
+
+tier                                             = 2
+
+[wg_bounty_hud]
+item_visual                                      = dynamics\western_goods_food\wg_bounty_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_bounty_use, wg_bounty_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_kitkat]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_kitkat.ogf
+
+inv_name                                         = st_wg_kitkat
+inv_name_short                                   = st_wg_kitkat_s
+description                                      = st_wg_kitkat_descr
+inv_weight                                       = 0.041
+cost                                             = 1665
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 3
+inv_grid_y                                       = 1
+
+break_sound                                      = western_goods_food\wg_kitkat_drop
+use_sound                                        = western_goods_food\wg_kitkat_eat
+
+eat_satiety                                      = 0.216
+eat_sleepiness                                   = 0.002
+eat_thirstiness                                  = 0.08
+
+tier                                             = 2
+
+[wg_kitkat_hud]
+item_visual                                      = dynamics\western_goods_food\wg_kitkat_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_kitkat_use, wg_kitkat_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_milka]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_milka.ogf
+
+inv_name                                         = st_wg_milka
+inv_name_short                                   = st_wg_milka_s
+description                                      = st_wg_milka_descr
+inv_weight                                       = 0.110
+cost                                             = 3200
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 4
+inv_grid_y                                       = 1
+
+break_sound                                      = western_goods_food\wg_milka_drop
+use_sound                                        = western_goods_food\wg_milka_eat
+
+eat_satiety                                      = 0.530
+eat_sleepiness                                   = 0.005
+eat_thirstiness                                  = 0.2
+
+tier                                             = 2
+
+[wg_milka_hud]
+item_visual                                      = dynamics\western_goods_food\wg_milka_hud.ogf
+
+hands_position_16x9                              = -0.0365, -0.03, 0.145
+hands_orientation_16x9                           = -15.0, 0.0, 0.0
+
+anm_ea_show                                      = wg_milka_use, wg_milka_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_lays]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_lays.ogf
+
+inv_name                                         = st_wg_lays
+inv_name_short                                   = st_wg_lays_s
+description                                      = st_wg_lays_descr
+inv_weight                                       = 0.160
+cost                                             = 2000
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 2
+inv_grid_x                                       = 1
+inv_grid_y                                       = 3
+
+break_sound                                      = western_goods_food\wg_lays_drop
+use_sound                                        = western_goods_food\wg_lays_eat
+
+eat_satiety                                      = 0.254
+eat_sleepiness                                   = 0.002
+eat_thirstiness                                  = 0.2
+
+tier                                             = 2
+
+[wg_lays_hud]
+item_visual                                      = dynamics\western_goods_food\wg_lays_hud.ogf
+
+hands_position                                   = 0, 0, 0
+hands_orientation                                = 0, 0, 0
+
+anm_ea_show                                      = wg_lays_use, wg_lays_item_use
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_doritos]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_doritos.ogf
+
+inv_name                                         = st_wg_doritos
+inv_name_short                                   = st_wg_doritos_s
+description                                      = st_wg_doritos_descr
+inv_weight                                       = 0.270
+cost                                             = 2000
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 2
+inv_grid_x                                       = 0
+inv_grid_y                                       = 3
+
+break_sound                                      = western_goods_food\wg_doritos_drop
+use_sound                                        = western_goods_food\wg_doritos_eat
+
+eat_satiety                                      = 0.295
+eat_sleepiness                                   = 0.003
+eat_thirstiness                                  = 0.2
+
+tier                                             = 2
+
+[wg_doritos_hud]
+item_visual                                      = dynamics\western_goods_food\wg_doritos_hud.ogf
+
+hands_position                                   = 0, 0, 0
+hands_orientation                                = 0, 0, 0
+
+anm_ea_show                                      = wg_doritos_use, wg_doritos_item_use
 
 ;;====================================================================================================================;;
 ;;==================| Misc Items |====================================================================================;;
@@ -180,303 +448,6 @@ eat_thirstiness                                  = 0.0425
 
 tier                                             = 2
 
-;;====================================================================================================================;;
-;;==================| Snacks |========================================================================================;;
-;;====================================================================================================================;;
-
-[wg_snickers]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_snickers.ogf
-
-inv_name                                         = st_wg_snickers
-inv_name_short                                   = st_wg_snickers_s
-description                                      = st_wg_snickers_descr
-inv_weight                                       = 0.05
-cost                                             = 2000
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 0
-inv_grid_y                                       = 0
-
-break_sound                                      = western_goods_food\wg_snickers_drop
-use_sound                                        = western_goods_food\wg_snickers_eat
-
-eat_satiety                                      = 0.242
-eat_sleepiness                                   = 0.0015
-eat_thirstiness                                  = 0.06
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_twix]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_twix.ogf
-
-inv_name                                         = st_wg_twix
-inv_name_short                                   = st_wg_twix_s
-description                                      = st_wg_twix_descr
-inv_weight                                       = 0.05
-cost                                             = 1985
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 1
-inv_grid_y                                       = 0
-
-break_sound                                      = western_goods_food\wg_twix_drop
-use_sound                                        = western_goods_food\wg_twix_eat
-
-eat_satiety                                      = 0.247
-eat_sleepiness                                   = 0.00125
-eat_thirstiness                                  = 0.0425
-
-use_condition                                    = true
-max_uses                                         = 2
-remove_after_use                                 = true
-empty_weight                                     = 0.01
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_mars]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_mars.ogf
-
-inv_name                                         = st_wg_mars
-inv_name_short                                   = st_wg_mars_s
-description                                      = st_wg_mars_descr
-inv_weight                                       = 0.045
-cost                                             = 2000
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 0
-inv_grid_y                                       = 1
-
-break_sound                                      = western_goods_food\wg_mars_drop
-use_sound                                        = western_goods_food\wg_mars_eat
-
-eat_satiety                                      = 0.378
-eat_sleepiness                                   = 0.002
-eat_thirstiness                                  = 0.075
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_milkyway]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_milkyway.ogf
-
-inv_name                                         = st_wg_milkyway
-inv_name_short                                   = st_wg_milkyway_s
-description                                      = st_wg_milkyway_descr
-inv_weight                                       = 0.022
-cost                                             = 1665
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 1
-inv_grid_y                                       = 1
-
-break_sound                                      = western_goods_food\wg_milkyway_drop
-use_sound                                        = western_goods_food\wg_milkyway_eat
-
-eat_satiety                                      = 0.097
-eat_sleepiness                                   = 0.001
-eat_thirstiness                                  = 0.04
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_bounty]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_bounty.ogf
-
-inv_name                                         = st_wg_bounty
-inv_name_short                                   = st_wg_bounty_s
-description                                      = st_wg_bounty_descr
-inv_weight                                       = 0.057
-cost                                             = 1665
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 3
-inv_grid_y                                       = 0
-
-break_sound                                      = western_goods_food\wg_bounty_drop
-use_sound                                        = western_goods_food\wg_bounty_eat
-
-eat_satiety                                      = 0.139
-eat_sleepiness                                   = 0.0015
-eat_thirstiness                                  = 0.03
-
-use_condition                                    = true
-max_uses                                         = 2
-remove_after_use                                 = true
-empty_weight                                     = 0.01
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_kinder_maxi]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_kinder_maxi.ogf
-
-inv_name                                         = st_wg_kinder_maxi
-inv_name_short                                   = st_wg_kinder_maxi_s
-description                                      = st_wg_kinder_maxi_descr
-inv_weight                                       = 0.057
-cost                                             = 1665
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 4
-inv_grid_y                                       = 0
-
-break_sound                                      = western_goods_food\wg_kinder_maxi_drop
-use_sound                                        = western_goods_food\wg_kinder_maxi_eat
-
-eat_satiety                                      = 0.119
-eat_sleepiness                                   = 0.0015
-eat_thirstiness                                  = 0.03
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_kinder_bueno]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_kinder_bueno.ogf
-
-inv_name                                         = st_wg_kinder_bueno
-inv_name_short                                   = st_wg_kinder_bueno_s
-description                                      = st_wg_kinder_bueno_descr
-inv_weight                                       = 0.057
-cost                                             = 1665
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 5
-inv_grid_y                                       = 1
-
-break_sound                                      = western_goods_food\wg_kinder_bueno_drop
-use_sound                                        = western_goods_food\wg_kinder_bueno_eat
-
-eat_satiety                                      = 0.120
-eat_sleepiness                                   = 0.0015
-eat_thirstiness                                  = 0.025
-
-use_condition                                    = true
-max_uses                                         = 2
-remove_after_use                                 = true
-empty_weight                                     = 0.01
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_kitkat]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_kitkat.ogf
-
-inv_name                                         = st_wg_kitkat
-inv_name_short                                   = st_wg_kitkat_s
-description                                      = st_wg_kitkat_descr
-inv_weight                                       = 0.041
-cost                                             = 1665
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 3
-inv_grid_y                                       = 1
-
-break_sound                                      = western_goods_food\wg_kitkat_drop
-use_sound                                        = western_goods_food\wg_kitkat_eat
-
-eat_satiety                                      = 0.054
-eat_sleepiness                                   = 0.0005
-eat_thirstiness                                  = 0.02
-
-use_condition                                    = true
-max_uses                                         = 4
-remove_after_use                                 = true
-empty_weight                                     = 0.01
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_milka]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_milka.ogf
-
-inv_name                                         = st_wg_milka
-inv_name_short                                   = st_wg_milka_s
-description                                      = st_wg_milka_descr
-inv_weight                                       = 0.110
-cost                                             = 3200
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 4
-inv_grid_y                                       = 1
-
-break_sound                                      = western_goods_food\wg_milka_drop
-use_sound                                        = western_goods_food\wg_milka_eat
-
-eat_satiety                                      = 0.530
-eat_sleepiness                                   = 0.005
-eat_thirstiness                                  = 0.2
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_lays]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_lays.ogf
-
-inv_name                                         = st_wg_lays
-inv_name_short                                   = st_wg_lays_s
-description                                      = st_wg_lays_descr
-inv_weight                                       = 0.160
-cost                                             = 2000
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 2
-inv_grid_x                                       = 1
-inv_grid_y                                       = 3
-
-break_sound                                      = western_goods_food\wg_lays_drop
-use_sound                                        = western_goods_food\wg_lays_eat
-
-eat_satiety                                      = 0.254
-eat_sleepiness                                   = 0.002
-eat_thirstiness                                  = 0.2
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_doritos]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_doritos.ogf
-
-inv_name                                         = st_wg_doritos
-inv_name_short                                   = st_wg_doritos_s
-description                                      = st_wg_doritos_descr
-inv_weight                                       = 0.270
-cost                                             = 2000
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 2
-inv_grid_x                                       = 0
-inv_grid_y                                       = 3
-
-break_sound                                      = western_goods_food\wg_doritos_drop
-use_sound                                        = western_goods_food\wg_doritos_eat
-
-eat_satiety                                      = 0.295
-eat_sleepiness                                   = 0.003
-eat_thirstiness                                  = 0.2
-
-tier                                             = 2
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wg_pringles]:wg_food_base
@@ -510,7 +481,7 @@ visual                                           = dynamics\western_goods_food\w
 inv_name                                         = st_wg_oreo
 inv_name_short                                   = st_wg_oreo_s
 description                                      = st_wg_oreo_descr
-inv_weight                                       = 0.06
+inv_weight                                       = 0.154
 cost                                             = 3350
 
 inv_grid_width                                   = 2

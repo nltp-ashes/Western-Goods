@@ -7,8 +7,19 @@
 ---                                                                                                                  ---
 ---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
 ---                                                                                                                  ---
----    This wrapper exists because it isn't possible to have inheritance of more than one level of depth with engine ---
----    classes. In other words, let -> mark an inheritance, lua -> lua -> c++ breaks for some weird reason.          ---
+---    This wrapper exists because it isn't possible to have inheritance of more than one level of depth with        ---
+---    engine classes.                                                                                               ---
+---                                                                                                                  ---
+---                This works                                             This does not work                         ---
+---                  ┌───┐                                                      ┌───┐                                ---
+---                  │c++│                                                      │c++│                                ---
+---                  └─▲─┘                                                      └─▲─┘                                ---
+---                  ┌─┴─┐                                                      ┌─┴─┐                                ---
+---                  │lua│                                                      │lua│                                ---
+---                  └───┘                                                      └─▲─┘                                ---
+---                                                                             ┌─┴─┐                                ---
+---                                                                             │lua│                                ---
+---                                                                             └───┘                                ---
 ---                                                                                                                  ---
 ---    This wrapper basically delegates the calls to an inner class (called wrapper). This inner class is a "pure"   ---
 ---    LUA class, meaning it does not directly, or indirectly inherit an engine class. This allows to have as many   ---

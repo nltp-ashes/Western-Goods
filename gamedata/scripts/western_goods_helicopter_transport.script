@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 20/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script manages the helicopter transport system (similar to using a guide in the original games).         ---
@@ -15,6 +15,7 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
+-- Imported functions
 local dbg_printf                = western_goods_utils.dbg_printf
 local level_object_by_id        = western_goods_utils.level_object_by_id
 local heli_spawn                = western_goods_helicopter.heli_spawn
@@ -25,19 +26,20 @@ local HELICOPTERS_MODES         = western_goods_helicopter.HELICOPTERS_MODES
 -- Helicopter transport order
 -- ---------------------------------------------------------------------------------------------------------------------
 
---- Function used to teleport the player from one level to another and make an helicopter spawn on top of the player on spawn.
---- @param level_name string
+--- Function used to check if the player has used a helicopter transport service.
+--- @param npc game_object
+--- @param destination string
 --- @return nil
-function go_to_level(level_name)
-    local dest_info = western_goods_trade_guide_table[level_name]
-    local spawn_pos = vector():set(dest_info.x, dest_info.y, dest_info.z)
-    local look_pos = vector():set(0.0, dest_info.look, 0.0)
+function western_goods_guide_on_change_level(npc, destination)
+    local heli_transporters = {
+        ["stalker_western_goods_trader"] = true,
+        ["jup_b6_scientist_biochemist"] = true,
+        ["mechanic_army_yan_mlr"] = true
+    }
 
-    dbg_printf("[WG] Helicopter Transport | Transporting to %s [lvid:%s | gvid:%s | pos:%s,%s,%s]", level_name, dest_info.lvid, dest_info.gvid, dest_info.x, dest_info.y, dest_info.z)
-
-    western_goods_utils.give_info("western_goods_spawn_guide_helicopter")
-
-    ChangeLevel(spawn_pos, dest_info.lvid, dest_info.gvid, look_pos, true)
+    if heli_transporters[npc:section()] then
+        western_goods_utils.give_info("western_goods_spawn_guide_helicopter")
+    end
 end
 
 --- Function used to spawn an helicopter above the player after using the helicopter transport service.
@@ -51,15 +53,16 @@ function spawn_guide_helicopter()
         local pos = vector():set(db.actor:position().x, db.actor:position().y + 20, db.actor:position().z)
         local lvid = db.actor:level_vertex_id()
         local gvid = db.actor:game_vertex_id()
-        local helicopter_se = heli_spawn(sec,pos,lvid,gvid)
+        local helicopter_se = heli_spawn(sec, pos, lvid, gvid)
 
-        dbg_printf("[WG] Helicopter Transport | Spawned transport helicopter in %s [lvid:%s | gvid:%s | pos:%s,%s,%s]",level.name(), lvid, gvid, pos.x, pos.y, pos.z)
+        dbg_printf("[WG] Helicopter Transport | Spawned transport helicopter in %s [lvid:%s | gvid:%s | pos:%s,%s,%s]", level.name(), lvid, gvid, pos.x, pos.y, pos.z)
 
-        CreateTimeEvent("delay_order_heli",helicopter_se.id,0,function()
+        CreateTimeEvent("delay_order_heli", helicopter_se.id, 0, function()
             if level_object_by_id(helicopter_se.id) then
-                heli_register(helicopter_se.id,HELICOPTERS_MODES.LEAVE_AT_POINT,level.get_bounding_volume().max)
+                heli_register(helicopter_se.id, HELICOPTERS_MODES.LEAVE_AT_POINT, level.get_bounding_volume().max)
                 return true
             end
+            return false
         end)
     end
 end
@@ -71,57 +74,6 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
+    RegisterScriptCallback("western_goods_guide_on_change_level", western_goods_guide_on_change_level)
     RegisterScriptCallback("actor_on_first_update", spawn_guide_helicopter)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Guide table
--- ---------------------------------------------------------------------------------------------------------------------
-
-western_goods_trade_guide_table = {
-    limansk                 = { x=-72.8004,     y=-6.9772,    z=57.4624,      look=-1.5,    lvid=67,         gvid=2455 },
-    swamps                  = { x=-270.8769,    y=0.4461,     z=1.2947,       look=0.0,     lvid=9620,       gvid=155  },
-    cordon                  = { x=238.3653,     y=15.1026,    z=128.2282,     look=2.5,     lvid=550490,     gvid=412  },
-    darkscape               = { x=142.2322,     y=27.6325,    z=-410.7854,    look=4.0,     lvid=540403,     gvid=1209 },
-    deadcity                = { x=-35.6632,     y=1.2510,     z=60.7808,      look=4.5,     lvid=111749,     gvid=2345 },
-    red_forest              = { x=42.8533,      y=-0.0004,    z=-13.7107,     look=1.5,     lvid=86866,      gvid=2768 },
-    jupiter                 = { x=-185.8170,    y=10.3172,    z=356.1926,     look=-1.0,    lvid=402796,     gvid=4574 },
-    zaton                   = { x=186.3917,     y=4.8224,     z=-184.4647,    look=0.0,     lvid=1283928,    gvid=4215 },
-    deserted_hospital       = { x=-78.4292,     y=32.6084,    z=847.4611,     look=3.5,     lvid=6384,       gvid=2887 },
-}
-
-function guide_to_limansk(actor,npc,p)
-    go_to_level("limansk")
-end
-
-function guide_to_swamps(actor,npc,p)
-    go_to_level("swamps")
-end
-
-function guide_to_cordon(actor,npc,p)
-    go_to_level("cordon")
-end
-
-function guide_to_darkscape(actor,npc,p)
-    go_to_level("darkscape")
-end
-
-function guide_to_deadcity(actor,npc,p)
-    go_to_level("deadcity")
-end
-
-function guide_to_red_forest(actor,npc,p)
-    go_to_level("red_forest")
-end
-
-function guide_to_jupiter(actor,npc,p)
-    go_to_level("jupiter")
-end
-
-function guide_to_zaton(actor,npc,p)
-    go_to_level("zaton")
-end
-
-function guide_to_deserted_hospital(actor,npc,p)
-    go_to_level("deserted_hospital")
 end

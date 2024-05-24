@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES, RavenAscendant                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 17/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script represents an API to make handling of helicopters easier.                                         ---
@@ -88,7 +88,7 @@ function heli_spawn(sec,pos,lvid,gvid)
 
     if not se_heli then return nil end
 
-    local visual = ini_sys:r_string_ex(sec,"visual")
+    local visual = ini_sys:r_string_ex(sec, "visual")
 
     -- Required to spawn by script
     local data = utils_stpk.get_heli_data(se_heli)

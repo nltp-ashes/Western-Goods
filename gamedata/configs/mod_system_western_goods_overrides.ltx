@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 08/01/2024                                                                                               ;;
+;;    Date : 16/05/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    DLTX config file used override existing sections from the base game.                                            ;;
@@ -10,6 +10,7 @@
 ;;    These overrides consist in :                                                                                    ;;
 ;;    - Injecting new gameplay files (character descriptions, profiles and dialogs);                                  ;;
 ;;    - Adding new items as supportive materials (used by repair kits).                                               ;;
+;;    - Allowing the lighters to light Hideout Furniture's lights and lamps that require a fire source.               ;;
 ;;                                                                                                                    ;;
 ;;====================================================================================================================;;
 
@@ -42,3 +43,11 @@
 
 ![toolkit_r7]
 >repair_parts_sections            = wg_cola_bottle, wg_cola_can
+
+;;====================================================================================================================;;
+;;==================| Hideout Furniture |=============================================================================;;
+;;====================================================================================================================;;
+
+; TODO : Re-enable this when necessary changes in Hideout Furniture have been merged.
+;![placeable_gas_lamp]
+;>require_tool                     = wg_lighter_bic, wg_lighter_zippo

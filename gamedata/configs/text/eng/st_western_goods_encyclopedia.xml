@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 25/12/2023                                                                                            -->
+<!--    Date : 24/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' entries in the PDA Guide.                                                -->
@@ -42,17 +42,31 @@
         </text>
     </string>
 
-    <!-- BIC Lighter encyclopedia entry -->
+    <!-- Bic lighter encyclopedia entry -->
     <string id="encyclopedia_items_western_goods_bic_lighter">
-        <text>BIC Lighter</text>
+        <text>Bic Lighter</text>
     </string>
 
     <string id="encyclopedia_items_western_goods_bic_lighter_text">
         <text>
-            The %c[pda_white]BIC lighter%c[ui_gray_1] is a small and disposable lighter that can be used to light up your surroundings, but also to ignite a number of things.\n
+            The %c[pda_white]Bic lighter%c[ui_gray_1] is a small and disposable lighter that can be used to light up your surroundings, but also to ignite a number of things.\n
             \n%c[pda_green]Information%c[ui_gray_1]\n
             \nLighters are considered by many Stalkers to be one of the essentials to survive in the Zone. Often used to light up cigarettes, but not only - it is strong enough to light up campfires (equip and pull the lighter out to do so).\n
             \nIt also provides a small light, which can be used to light up your immediate surroundings while remaining somewhat discrete, especially at night.
+        </text>
+    </string>
+
+    <!-- Zippo lighter encyclopedia entry -->
+    <string id="encyclopedia_items_western_goods_zippo_lighter">
+        <text>Zippo Lighter</text>
+    </string>
+
+    <string id="encyclopedia_items_western_goods_zippo_lighter_text">
+        <text>
+            The %c[pda_white]Zippo lighter%c[ui_gray_1] is a durable, windproof lighter that is a reliable source of fire in the Zone.\n
+            \n%c[pda_green]Information%c[ui_gray_1]\n
+            \nZippo lighters are renowned for their robustness and reliability. They are windproof and can be refilled, making them a long-lasting tool in the Zone. Stalkers often use them to light cigarettes, campfires, or even for illumination in the dark.\n
+            \nTheir sturdy metal construction and the ability to keep the flame lit without having to hold a button make them a favorite among many Stalkers. Despite their slightly heavier weight compared to disposable lighters, their durability and reliability make them a valuable asset in the harsh conditions of the Zone.
         </text>
     </string>
 
@@ -70,6 +84,26 @@
             \n• the Line of Sight (LOS) distance, that is, a direct line from the rangefinder to the target;
             \n• the Horizontal Component Distance (HCD), a two-dimensional distance (not taking in elevation) from the rangefinder to the target.\n
             \nTo ensure a consistent comfort of use, the rangefinder has two color modes, red (optimal during the day) and green (optimal at night under night vision goggles).
+        </text>
+    </string>
+
+    <!-- Garmin eTrex 10 encyclopedia entry -->
+    <string id="encyclopedia_items_western_goods_compass">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="encyclopedia_items_western_goods_compass_text">
+        <text>
+            The %c[pda_white]Garmin eTrex 10%c[ui_gray_1] is a device that can be used to obtain a variety of information about its user.\n
+            \n%c[pda_green]Information%c[ui_gray_1]\n
+            \nThis compact device packs a lot of functionalities. It is a very good tool to get around the Zone, given its high reliability against psi-emissions.\n
+            \nFunctionalities:
+            \n• %c[pda_white]Compass%c[ui_gray_1] : shows the heading of the user;
+            \n• %c[pda_white]Speed%c[ui_gray_1] : the current speed (in %c[pda_white]km/h%c[ui_gray_1]) of the user;
+            \n• %c[pda_white]Dist to Next%c[ui_gray_1] : the distance (in %c[pda_white]km%c[ui_gray_1]) to the waypoint;
+            \n• %c[pda_white]ETA at Dest%c[ui_gray_1] : the time (%c[pda_white]24h%c[ui_gray_1] format) at which the user will arrive at the waypoint;
+            \n• %c[pda_white]Time to Next%c[ui_gray_1] : the time needed (in %c[pda_white]HH:mm%c[ui_gray_1], or %c[pda_white]mm:ss%c[ui_gray_1] if less than an hour) to get to the waypoint.\n
+            \nBy default, the compass' cursor is fixed and its background indicates the heading. But can be changed to lock north and have the cursor rotate instead.
         </text>
     </string>
 

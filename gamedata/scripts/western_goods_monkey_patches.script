@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 20/02/2024                                                                                             ---
+---    Date : 21/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to monkey-patch some functions of base anomaly, or other addons.                                  ---
@@ -14,7 +14,6 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- New callbacks
-AddScriptCallback("western_goods_on_campfire_use")
 AddScriptCallback("western_goods_on_item_before_use")
 AddScriptCallback("western_goods_on_hideout_furniture_light_use")
 
@@ -34,12 +33,6 @@ monkey_patches               = {
         patches = {
             { prio=1, script="itms_manager", func="actor_on_item_before_use", cond = function() return true end },
             { prio=2, script="enhanced_animations", func="originalAOIBU", cond = function() return western_goods_core.is_fdda_installed() end }
-        }
-    },
-    campfire_on_interact = {
-        name = "campfire_on_interact",
-        patches = {
-            { prio=1, script="western_goods_core",  func="use_campfire", cond = function() return true end }
         }
     },
     trader_autoinject_update = {
@@ -101,6 +94,24 @@ monkey_patches               = {
         patches = {
             { prio=1, script="arszi_psy", func="get_psy_health_regeneration", cond = function() return true end }
         }
+    },
+    ui_item_build_desc_header = {
+        name = "ui_item_build_desc_header",
+        patches = {
+            { prio=1, script="ui_item", func="build_desc_header", cond = function() return true end }
+        }
+    },
+    utils_ui_get_item_trade_status_eur_usd = {
+        name = "utils_ui_get_item_trade_status_eur_usd",
+        patches = {
+            { prio=1, script="utils_ui", func="get_item_trade_status", cond = function() return true end }
+        }
+    },
+    utils_ui_get_item_trade_status_loot = {
+        name = "utils_ui_get_item_trade_status_loot",
+        patches = {
+            { prio=1, script="utils_ui", func="get_item_trade_status", cond = function() return true end }
+        }
     }
 }
 
@@ -127,7 +138,7 @@ function find_best_monkey_patch(monkey_patch_group)
     end
 
     if not monkey_patch then
-        dbg_printf("[WG] Fire Source Binder | No applicable monkey-patch for %s", monkey_patch_group.name)
+        dbg_printf("[WG] Monkey-Patches | No applicable monkey-patch for %s", monkey_patch_group.name)
         return
     end
 
@@ -146,11 +157,11 @@ function make_monkey_patch(monkey_patch_group, func)
     local function_name = monkey_patch.func
 
     if class_name then
-        dbg_printf("[WG] Fire Source Binder | Monkey-patching %s function from class %s in %s.script", function_name, class_name, script_name)
+        dbg_printf("[WG] Monkey-Patches | Monkey-patching %s function from class %s in %s.script", function_name, class_name, script_name)
         this[monkey_patch_group.name] = _G[script_name][class_name][function_name]
         _G[script_name][class_name][function_name] = func
     else
-        dbg_printf("[WG] Fire Source Binder | Monkey-patching %s function in %s.script", function_name, script_name)
+        dbg_printf("[WG] Monkey-Patches | Monkey-patching %s function in %s.script", function_name, script_name)
         this[monkey_patch_group.name] = _G[script_name][function_name]
         _G[script_name][function_name] = func
     end
@@ -162,7 +173,7 @@ end
 
 make_monkey_patch(monkey_patches.hideout_furniture_light, function(obj_id)
     local is_on_before = hf_obj_manager.get_data(obj_id).is_on
-    this.hideout_furniture_light(obj_id)
+    western_goods_monkey_patches.hideout_furniture_light(obj_id)
     local is_on_after = hf_obj_manager.get_data(obj_id).is_on
     if not is_on_before and not is_on_after then
         SendScriptCallback("western_goods_on_hideout_furniture_light_use", obj_id)
@@ -172,11 +183,6 @@ end)
 make_monkey_patch(monkey_patches.item_before_use, function(obj, flags)
     this.item_before_use(obj, flags)
     SendScriptCallback("western_goods_on_item_before_use", obj, flags)
-end)
-
-make_monkey_patch(monkey_patches.campfire_on_interact, function()
-    this.campfire_on_interact()
-    SendScriptCallback("western_goods_on_campfire_use")
 end)
 
 make_monkey_patch(monkey_patches.trader_autoinject_update, function(npc)
@@ -220,7 +226,17 @@ make_monkey_patch(monkey_patches.surge_manager_get_task_target, function()
 end)
 
 make_monkey_patch(monkey_patches.arszi_psy_get_psy_health_regeneration, function()
-    local base_psy_heal = this.arszi_psy_get_psy_health_regeneration() or 0
-    local bonus_psy_heal_magazine = western_goods_ui_readable.get_psy_health_regeneration_magazine() or 0
-    return base_psy_heal + bonus_psy_heal_magazine
+    return western_goods_ui_readable.get_psy_health_regeneration()
+end)
+
+make_monkey_patch(monkey_patches.ui_item_build_desc_header, function(obj, sec, str)
+    return western_goods_bind_lighter.build_desc_header(obj, sec, str)
+end)
+
+make_monkey_patch(monkey_patches.utils_ui_get_item_trade_status_loot, function(obj, profile)
+    return western_goods_loot.get_item_trade_status(obj, profile)
+end)
+
+make_monkey_patch(monkey_patches.utils_ui_get_item_trade_status_eur_usd, function(obj, profile)
+    return western_goods_trade_eur_usd.get_item_trade_status(obj, profile)
 end)

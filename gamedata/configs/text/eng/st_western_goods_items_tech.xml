@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 12/12/2023                                                                                            -->
+<!--    Date : 16/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tech items.                                                              -->
@@ -70,27 +70,6 @@
         </text>
     </string>
 
-    <string id="st_wg_gps">
-        <text>GPS locator</text>
-    </string>
-
-    <string id="st_wg_gps_s">
-        <text>GPS</text>
-    </string>
-
-    <string id="st_wg_gps_descr">
-        <text>
-            A really rare piece of equipment in the Zone. It seems to be a military grade GPS locator, usually used by NATO countries. It probably found its way into the Zone when the ISG was still around. It indicates the name and the distance to the nearest area. It also shows the name of the region of the Zone the user is located in. That being said, its database seems outdated. Some areas well known by stalkers are missing.\n
-            \n
-            %c[ui_gray_1]PROPERTIES:\n
-            %c[d_blue] • %c[ui_gray_2] technological item\n
-            %c[d_blue] • %c[ui_gray_2] military item\n
-            %c[d_blue] • %c[ui_gray_2] imported\n
-            %c[d_cyan] • %c[ui_gray_2] valuable\n
-            %c[d_orange] • %c[ui_gray_2] usable\n
-        </text>
-    </string>
-
     <string id="st_wg_military_decoder">
         <text>Military decoder</text>
     </string>
@@ -133,6 +112,27 @@
         </text>
     </string>
 
+    <string id="st_wg_gps">
+        <text>GPS locator</text>
+    </string>
+
+    <string id="st_wg_gps_s">
+        <text>GPS</text>
+    </string>
+
+    <string id="st_wg_gps_descr">
+        <text>
+            A really rare piece of equipment in the Zone. It seems to be a military grade GPS locator, usually used by NATO countries. It probably found its way into the Zone when the ISG was still around. It indicates the name and the distance to the nearest area. It also shows the name of the region of the Zone the user is located in. That being said, its database seems outdated. Some areas well known by stalkers are missing.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] • %c[ui_gray_2] technological item\n
+            %c[d_blue] • %c[ui_gray_2] military item\n
+            %c[d_blue] • %c[ui_gray_2] imported\n
+            %c[d_cyan] • %c[ui_gray_2] valuable\n
+            %c[d_orange] • %c[ui_gray_2] usable\n
+        </text>
+    </string>
+
     <string id="st_wg_lighter_bic">
         <text>BIC lighter</text>
     </string>
@@ -153,12 +153,32 @@
         </text>
     </string>
 
+    <string id="st_wg_lighter_zippo">
+        <text>Zippo lighter</text>
+    </string>
+
+    <string id="st_wg_lighter_zippo_s">
+        <text>Zippo lighter</text>
+    </string>
+
+    <string id="st_wg_lighter_zippo_descr">
+        <text>
+            A classic Zippo lighter. Known for its durability and windproof design, this lighter is a favorite among many. It's refillable, meaning it can last a lifetime with proper care. Its flame is also adjustable, making it versatile for various uses. This particular model seems to have been imported from outside the Zone.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] • %c[ui_gray_2] technological item\n
+            %c[d_blue] • %c[ui_gray_2] everyday item\n
+            %c[d_blue] • %c[ui_gray_2] imported\n
+            %c[d_orange] • %c[ui_gray_2] usable\n
+        </text>
+    </string>
+
     <string id="st_wg_rangefinder">
-        <text>SigSauer KILO5K laser rangefinder</text>
+        <text>SigSauer KILO5K</text>
     </string>
 
     <string id="st_wg_rangefinder_s">
-        <text>KILO5K rangefinder</text>
+        <text>SigSauer KILO5K</text>
     </string>
 
     <string id="st_wg_rangefinder_descr">
@@ -168,6 +188,26 @@
             %c[ui_gray_1]PROPERTIES:\n
             %c[d_blue] • %c[ui_gray_2] technological item\n
             %c[d_blue] • %c[ui_gray_2] military item\n
+            %c[d_blue] • %c[ui_gray_2] imported\n
+            %c[d_cyan] • %c[ui_gray_2] valuable\n
+            %c[d_orange] • %c[ui_gray_2] usable\n
+        </text>
+    </string>
+
+    <string id="st_wg_compass">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="st_wg_compass_s">
+        <text>Garmin eTrex 10</text>
+    </string>
+
+    <string id="st_wg_compass_descr">
+        <text>
+            The Garmin eTrex 10 is a handheld GPS device. The eTrex series is renowned for its rugged construction, affordability and long battery life. The eTrex 10 comes with a 2.2" display, that is easy to read in any light. On average, it can be on for 25 hours with 2 AA batteries.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] • %c[ui_gray_2] technological item\n
             %c[d_blue] • %c[ui_gray_2] imported\n
             %c[d_cyan] • %c[ui_gray_2] valuable\n
             %c[d_orange] • %c[ui_gray_2] usable\n

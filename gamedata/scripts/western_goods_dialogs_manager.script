@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/04/2023                                                                                             ---
+---    Date : 20/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script is used to manage the script-side of dialogs in the addon.                                        ---
@@ -217,6 +217,33 @@ function st_interrogation_end()
     end
 end
 
+--- Function used to determine the player dialog when asking a guide for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_ask(npc, flags)
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = "st_western_goods_trader_guide_ask"
+    end
+end
+
+--- Function used to determine the guide's dialog when answering the player's request for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_answer(npc, flags)
+    local guide_answers = {
+        ["stalker_western_goods_trader"] = "st_western_goods_trader_guide_answer",
+        ["jup_a6_freedom_trader_ashot"] = "st_western_goods_ashot_guide_answer",
+        ["mechanic_army_yan_mlr"] = "st_western_goods_peregrine_guide_answer",
+        ["jup_b6_scientist_biochemist"] = "st_western_goods_ozersky_guide_answer"
+    }
+
+    if guide_answers[npc:section()] then
+        flags.result = guide_answers[npc:section()]
+    end
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -227,6 +254,8 @@ function on_game_start()
     RegisterScriptCallback("save_state", save_state)
     RegisterScriptCallback("load_state", load_state)
     RegisterScriptCallback("actor_on_update", update_dialogs)
+    RegisterScriptCallback("western_goods_guide_on_ask", st_guide_ask)
+    RegisterScriptCallback("western_goods_guide_on_answer", st_guide_answer)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 11/11/2023                                                                                            -->
+<!--    Date : 17/05/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' drinks items.                                                            -->
@@ -32,28 +32,6 @@
         </text>
     </string>
 
-    <string id="st_wg_gorbatschow_bottle">
-        <text>Ѕутылка водки "√орбачЄв"</text>
-    </string>
-
-    <string id="st_wg_gorbatschow_bottle_s">
-        <text>¬одка "√орбачЄв"</text>
-    </string>
-
-    <string id="st_wg_gorbatschow_bottle_descr">
-        <text>
-            ¬одка "√орбачЄв" - один из самых известных брендов данной категории, производимый и разливаемый в √ермании. ÷енитс€ за хороший вкус при относительно низкой цене.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] напиток\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_blue] Х %c[ui_gray_2] стимул€тор\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-            %c[d_red] Х %c[ui_gray_2] крепкий алгоколь\n
-        </text>
-    </string>
-
     <string id="st_wg_wine_chateau_latour">
         <text>√ранд ¬ин де Ўато Ћатур</text>
     </string>
@@ -74,26 +52,6 @@
             %c[d_green] Х %c[ui_gray_2] высокое качество\n
             %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
             %c[d_red] Х %c[ui_gray_2] крепкий алгоколь\n
-        </text>
-    </string>
-
-    <string id="st_wg_yoohoo_bottle">
-        <text>Ўоколадный напиток Yoo-hoo</text>
-    </string>
-
-    <string id="st_wg_yoohoo_bottle_s">
-        <text>Ўоколадный напиток Yoo-hoo</text>
-    </string>
-
-    <string id="st_wg_yoohoo_bottle_descr">
-        <text>
-            »зобретЄнный в 1920-х Ќатали ќлайвери, Yoo-hoo - холодных напиток со вкусом шоколада. ќн на 99% без жиров и на 100% без кофеина, а также богат кальцием и витамином D.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] напиток\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
         </text>
     </string>
 
@@ -239,26 +197,6 @@
         </text>
     </string>
 
-    <string id="st_wg_mountain_dew_can">
-        <text>Ѕанка Mountain Dew</text>
-    </string>
-
-    <string id="st_wg_mountain_dew_can_s">
-        <text>Ѕанка Mountain Dew</text>
-    </string>
-
-    <string id="st_wg_mountain_dew_can_descr">
-        <text>
-            Mountain Dew,известный как ћаунтин ƒью - богата€ кофеином сильногазированна€ содова€ со вкусом цитрусовых, производима€ PepsiCo Group. Ёто безалкогольный напиток со вкусом цитрусовых, изначально называвшийс€ энергетическим, но со временем стал больше похож на содовую.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] напиток\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
     <string id="st_wg_perrier_can">
         <text>Ѕанка Perrier</text>
     </string>
@@ -274,27 +212,6 @@
             %c[ui_gray_1]—¬ќ…—“¬ј:\n
             %c[d_blue] Х %c[ui_gray_2] напиток\n
             %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
-    <string id="st_wg_rockstar_energy_can">
-        <text>Ѕанка Rockstar Energy</text>
-    </string>
-
-    <string id="st_wg_rockstar_energy_can_s">
-        <text>Ѕанка Rockstar Energy</text>
-    </string>
-
-    <string id="st_wg_rockstar_energy_can_descr">
-        <text>
-            Rockstar Energy Drink Original содержит 160 мг кафеина на 16 унций, €вл€ющихс€ размером одной банки.  роме кофеина и сахара, Rockstar Energy Drink содержит разные травы.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] напиток\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_blue] Х %c[ui_gray_2] стимул€тор\n
             %c[d_green] Х %c[ui_gray_2] высокое качество\n
             %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
         </text>
@@ -354,46 +271,6 @@
     <string id="st_wg_sevenup_can_descr">
         <text>
             Seven-UP (также известный, как 7UP) - газированный безалкогольный напиток со вкусом лемона-лайма. Ёто главный конкурент "—прайта". ¬куснее всего пить холодным.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] напиток\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
-    <string id="st_wg_dr_bob_can">
-        <text>Ѕанка Dr. Bob</text>
-    </string>
-
-    <string id="st_wg_dr_bob_can_s">
-        <text>Ѕанк Dr. Bob</text>
-    </string>
-
-    <string id="st_wg_dr_bob_can_descr">
-        <text>
-            Dr. Bob - газированный безалкогольный напиток, часто называемый копией Dr. Pepper. ’от€ напиток пытаетс€ изобразить тот вкус, он отличаетс€ от Dr. Pepper. ¬кус более острый и сухой.\n
-            \n
-            %c[ui_gray_1]—¬ќ…—“¬ј:\n
-            %c[d_blue] Х %c[ui_gray_2] напиток\n
-            %c[d_blue] Х %c[ui_gray_2] импортный\n
-            %c[d_green] Х %c[ui_gray_2] высокое качество\n
-            %c[d_green] Х %c[ui_gray_2] чистый источник питани€\n
-        </text>
-    </string>
-
-    <string id="st_wg_lipton_icetea_can">
-        <text>Ѕанка холодного ча€ Lipton</text>
-    </string>
-
-    <string id="st_wg_lipton_icetea_can_s">
-        <text>Ѕанка ча€ Lipton</text>
-    </string>
-
-    <string id="st_wg_lipton_icetea_can_descr">
-        <text>
-            Lipton - негазированный безалкогольный напиток, с экстрактом ча€ и персиковым соком, смешанным с сахаром и подсластител€ми. —одержит мало калорий и не содержит консервантов, что делает его довольно здоровым напитком.\n
             \n
             %c[ui_gray_1]—¬ќ…—“¬ј:\n
             %c[d_blue] Х %c[ui_gray_2] напиток\n

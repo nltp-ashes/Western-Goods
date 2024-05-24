@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 05/02/2024                                                                                             ---
+---    Date : 22/05/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -16,9 +16,16 @@
 local ini_loc                   = ini_file_ex([[localization.ltx]])
 local ini_keys                  = ini_file_ex([[plugins\western_goods\misc\western_goods_key_localization.ltx]])
 local ini_trade                 = ini_file([[items\trade\trade_generic.ltx]])
+local ini_locations             = ini_file([[named_locations.ltx]])
+
+trade_status_flags              = { cant_trade = 1, too_damaged = 2, hidden = 3, tradable = 4 }
+weapon_zoom_types               = { normal = 0, alt = 1, gl = 2 }
+animation_hands_modes           = { right = 0, left = 1, both = 2 }
+hud_states                      = { idle = 0, showing = 1, hiding = 2, hidden = 3, bore = 4 }
+hud_states_devices              = { idle_zoom = 5, idle_zoom_in = 6, idle_zoom_out = 7, throw_start = 8, throw = 9, throw_end = 10 }
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Debug Functions
+-- Debug functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to print information into the console/log file only when Western Goods' debug mode is enabled.
@@ -29,7 +36,7 @@ function dbg_printf(...)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table Functions
+-- Table functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to know if a certain value is contained in a table. This function is generic enough so that it'd work on any table.
@@ -78,7 +85,7 @@ function has_next(tab, pos)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Data Functions
+-- Data functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get a given variable as a number. Returns nil if the variable cannot be casted.
@@ -151,13 +158,32 @@ function as_boolean(var)
     return var
 end
 
---- Function used to clear the code a bit.
+--- Function used to round a number to the closest natural number.
 --- @param num number
 --- @return number
-function round_number(num)
+function number_round(num)
     if not validate_params({num,"round_number"}) then return end
 
     return tostring(math.floor(num+0.5))
+end
+
+--- Function used to wrap a number between a lower and a higher bound.
+--- When the number exceeds the upper bound, it is reset to the lower bound.
+--- E.g. : number_wrap(15, 0, 10) -> 5
+--- @param num number
+--- @param lower_bound number
+--- @param upper_bound number
+--- @return number
+function number_wrap(num, lower_bound, upper_bound)
+    if not validate_params({num,lower_bound,upper_bound,"number_wrap"}) then return end
+    local diff = upper_bound - lower_bound
+    while num < lower_bound do
+        num = num + diff
+    end
+    while num >= upper_bound do
+        num = num - diff
+    end
+    return num
 end
 
 --- Function used to know if there exists a translation for a given game string.
@@ -204,13 +230,13 @@ end
 function get_key_translation(dik)
     if not validate_params({dik,"get_key_translation"}) then return end
 
-    local loc = ini_loc:r_value("string_table","language")
+    local loc = ini_loc:r_value("string_table", "language")
     loc = ini_keys:section_exist(loc) and loc or "eng"
-    return ini_keys:r_value(loc, dik,0,"<!!!>")
+    return ini_keys:r_value(loc, dik, 0, "<!!!>")
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Info Portions Functions
+-- Info portions functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to give an info portion to a game object.
@@ -262,7 +288,7 @@ function rem_info(info_name, who)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Distance Functions
+-- Distance functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the distance between two points in on the X and Z axis.
@@ -275,7 +301,7 @@ function get_distance(position_1, position_2)
     return position_1:distance_to(position_2) or 100000
 end
 
---- Function used to get the distance between two points in on the X and Z axis.
+--- Function used to get the distance squared between two points in on the X and Z axis.
 --- @param position_1 vector
 --- @param position_2 vector
 --- @return number
@@ -285,8 +311,34 @@ function get_distance_sqr(position_1, position_2)
     return position_1:distance_to_sqr(position_2) or 10000000000
 end
 
+--- Function used to get the distance between two points in on the X and Z axis, using global positions.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
+function get_distance_global(se_obj_1, se_obj_2)
+    if not validate_params({se_obj_1,se_obj_2,"get_distance_global"}) then return end
+
+    local pos_1 = global_position.from(se_obj_1)
+    local pos_2 = global_position.from(se_obj_2)
+
+    return pos_1:distance_to_xz(pos_2) or 100000
+end
+
+--- Function used to get the distance squared between two points in on the X and Z axis, using global positions.
+--- @param position_1 vector
+--- @param position_2 vector
+--- @return number
+function get_distance_global_sqr(se_obj_1, se_obj_2)
+    if not validate_params({se_obj_1,se_obj_2,"get_distance_global_sqr"}) then return end
+
+    local pos_1 = global_position.from(se_obj_1)
+    local pos_2 = global_position.from(se_obj_2)
+
+    return pos_1:distance_to_xz_sqr(pos_2) or 100000
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
--- Objects Getter Functions
+-- Objects getter functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to iterate through each existing server object.
@@ -346,7 +398,7 @@ function level_object_by_id(id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Objects Functions
+-- Objects functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the character ID of an NPC.
@@ -388,7 +440,7 @@ function get_dialog_list(character_id)
 
     local dialog_list = {}
 
-    local file_list = str_explode(ini_sys:r_string("profiles", "specific_characters_files"),",")
+    local file_list = parse_list(ini_sys, "profiles", "specific_characters_files")
 
     for _,file_name in pairs(file_list) do
         local xml = CScriptXmlInit()
@@ -422,7 +474,7 @@ function get_dialog_list(character_id)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- File Functions
+-- File functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to list all the files in a given folder (excluding the sub-folders).
@@ -491,25 +543,7 @@ function collect_texture_descriptions(pattern)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Objects Functions
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to get the current renderer used by the game.
---- @return "dx8"|"dx9"|"dx10"|"dx11"|
-function get_renderer()
-    local renderers = {
-        ["renderer_r4"]   = "dx11",
-        ["renderer_r3"]   = "dx10",
-        ["renderer_r2a"]  = "dx9",
-        ["renderer_r2.5"] = "dx9",
-        ["renderer_r1"]   = "dx8",
-    }
-
-    return renderers[get_console_cmd(0,"renderer")]
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Squads Functions
+-- Squads functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to spawn a story squad.
@@ -724,7 +758,7 @@ function get_squad_of(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Bone Functions
+-- Bone functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to get the position of a bone by its name.
@@ -799,7 +833,121 @@ function bone_hud_visibility(obj, hud_bone, bone, visibility)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Validation Functions
+-- 3D UIs functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used transform digits (as strings) to matching texture descriptions.
+--- E.g. : get_digits_as_textures("hi_", "02", "5") -> "hi_0", "hi_2", "hi_5"
+--- @param prefix string
+--- @param ... strings
+--- @return strings (multiple return values)
+function get_digits_as_textures(prefix, ...)
+    local elems = {...}
+    local textures = {}
+    for _,str in pairs(elems) do
+        for i = 1, #str do
+            local texture = strformat(prefix.."%s", str:sub(i, i))
+            table.insert(textures, texture)
+        end
+    end
+    return unpack(textures)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Task functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the target of a task, if it exists.
+--- @param tsk CGeneralTask
+--- @return alife_object
+function task_get_target(tsk)
+    if not validate_params({tsk,"task_get_target"}) then return end
+
+    local target_id = tsk.current_target
+    return target_id and alife_object(target_id)
+end
+
+--- Function used to get the current active task of the player, if the player has any task at all.
+--- @return CGeneralTask
+function task_get_active()
+    local tm = task_manager.get_task_manager()
+    for id,tsk in pairs(tm.task_info) do
+        if db.actor:is_active_task(tsk.t) then
+            return tsk
+        end
+    end
+    return nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Named locations
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function get_named_location(location_name)
+    if not validate_params({location_name,"get_named_location"}) then return end
+
+    if not ini_locations:section_exist(location_name) then
+        printf("![WG] ERROR | Utils | Named location '%s' not found !", location_name)
+        return nil
+    end
+
+    local position = parse_list(ini_locations, location_name, "position")
+    if size_table(position) ~= 5 then
+        printf("![WG] ERROR | Utils | Named location '%s' has an invalid position !\n%s", location_name, utils_data.print_table(position, false, true))
+        return nil
+    end
+    local orientation = parse_list(ini_locations, location_name, "orientation")
+    if is_not_empty(orientation) and size_table(orientation) ~= 3 then
+        printf("![WG] ERROR | Utils | Named location '%s' has an invalid orientation !\n%s", location_name, utils_data.print_table(orientation, false, true))
+        return nil
+    end
+
+    return {
+        name = location_name,
+        lvid = tonumber(position[4]),
+        gvid = tonumber(position[5]),
+        position = vector():set(tonumber(position[1]), tonumber(position[2]), tonumber(position[3])),
+        orientation = vector():set(tonumber(orientation[1] or 0), tonumber(orientation[2] or 0), tonumber(orientation[3] or 0))
+    }
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Animations functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to play a HUD animation, without having a game_object to play the animation on.
+--- @param hand_mode number
+--- @param section string
+--- @param motion_key string
+--- @param speed number
+function play_hud_animation(hand_mode, section, motion_key, speed)
+    if not validate_params({hand_mode,section,motion_key,"play_hud_animation"}) then return end
+
+    local hud_sec = ini_sys:r_string_ex(section, "hud")
+    if ini_sys:line_exist(hud_sec, motion_key) then
+        game.play_hud_motion(hand_mode, hud_sec, motion_key, true, speed or 1.0)
+        dbg_printf("[WG] Utils | Playing HUD animation '%s' from '%s'", motion_key, hud_sec)
+    end
+end
+
+--- Function used to play a HUD animation on a game object.
+--- @param obj game_object
+--- @param hand_mode number
+--- @param section string
+--- @param motion_key string
+--- @param speed number
+function play_object_hud_animation(obj, motion_key, speed)
+    if not validate_params({obj,motion_key,"play_object_hud_animation"}) then return end
+
+    local hud_sec = ini_sys:r_string_ex(obj:section(), "hud")
+    if ini_sys:line_exist(hud_sec, motion_key) then
+        obj:play_hud_motion(motion_key, true, hud_states.idle, speed or 1.0, 0)
+        dbg_printf("[WG] Utils | Playing object HUD animation '%s' from '%s'", motion_key, hud_sec)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Validation functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to check if all necessary parameters were correctly passed to a function.
@@ -835,8 +983,17 @@ function validate_is_pda(obj)
     return pda_sections[obj:section()]
 end
 
+--- Function used to check if an object is a type of lighter device.
+--- @param obj game_object
+--- @return boolean
+function validate_is_lighter(obj)
+    if not validate_params({obj,"validate_is_lighter"}) then return end
+
+    return ini_sys:r_string_ex(obj:section(), "script_binding") == "western_goods_bind_lighter.bind"
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
--- Other Utils Functions
+-- Other utils functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to iterate through the inventory of a game object.
@@ -920,7 +1077,8 @@ end
 --- Function used to check if there are NPCs currently in a fight with the player.
 --- @return boolean
 function is_player_fighting()
-    return not is_empty(xr_combat_ignore.fighting_with_actor_npcs)
+    local fighting_with = xr_combat_ignore.fighting_with_actor_npcs
+    return not is_empty(fighting_with)
 end
 
 --- Function used to get the real community of the NPC by checking spawn id.
@@ -972,7 +1130,7 @@ function get_section_price(section, count, default)
     count = count or 1
     default = default or 0
 
-    local condlist = ini_trade and ini_trade:r_string_to_condlist("trader","discounts")
+    local condlist = ini_trade and ini_trade:r_string_to_condlist("trader", "discounts")
     local sect = condlist and xr_logic.pick_section_from_condlist(db.actor, nil, condlist)
 
     if sect == nil or sect == "" then
@@ -980,9 +1138,34 @@ function get_section_price(section, count, default)
     end
 
     local cost = SYS_GetParam(2, section, "cost", 0)
-    local factor = ini_trade:r_float_ex(sect,"sell") or 1
+    local factor = ini_trade:r_float_ex(sect, "sell") or 1
     local eco_factor = game_difficulties.get_eco_factor("sell") or 1
     local discount = factor * eco_factor
 
     return (cost * discount) * count
 end
+
+--- Function used to get the magnitude of a vector on the XZ plane.
+--- @param vec vector
+--- @return number
+function vec_magnitude_xz(vec)
+    if not validate_params({vec,"vec_magnitude_xz"}) then return end
+
+    local vec_xz = vector():set(vec.x, 0, vec.z)
+    return vec_xz:magnitude()
+end
+
+--- Function used to get the current renderer used by the game.
+--- @return "dx8"|"dx9"|"dx10"|"dx11"|
+function get_renderer()
+    local renderers = {
+        ["renderer_r4"]   = "dx11",
+        ["renderer_r3"]   = "dx10",
+        ["renderer_r2a"]  = "dx9",
+        ["renderer_r2.5"] = "dx9",
+        ["renderer_r1"]   = "dx8",
+    }
+
+    return renderers[get_console_cmd(0,"renderer")]
+end
+
