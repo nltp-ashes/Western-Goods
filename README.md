@@ -47,10 +47,10 @@ These addons are **absolutely required** in order for Western Goods to work :
 2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes).
 
 Western Goods natively integrates with the following addons, but they **aren't required** :
-4. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
-1. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
-2. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest) (allows you to make EUR/USD/RUB currency exchanges);
-3. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
+1. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
+2. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
+3. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest) (allows you to make EUR/USD/RUB currency exchanges);
+4. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
 5. [Device Selector Key](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-required-device-selector-key) (makes it easier to switch between various devices);
 6. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
 7. [Interactive PDA](https://www.moddb.com/mods/stalker-anomaly/addons/interactive-pda-01) (adds more interactions with the world (and not only) via PDA);
