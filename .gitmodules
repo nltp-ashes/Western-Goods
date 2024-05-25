@@ -1,0 +1,3 @@
+[submodule "Western-Goods-Core"]
+	path = module-core
+	url = https://github.com/nltp-ashes/Western-Goods-Core
