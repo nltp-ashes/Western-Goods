@@ -9,3 +9,6 @@
 [submodule "Western Goods Drinks"]
 	path = Western Goods Drinks
 	url = https://github.com/nltp-ashes/Western-Goods-Drinks
+[submodule "Western Goods Currencies"]
+	path = Western Goods Currencies
+	url = https://github.com/nltp-ashes/Western-Goods-Currencies
