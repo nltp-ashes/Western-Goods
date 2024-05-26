@@ -5,3 +5,7 @@
 [submodule "Western Goods Food"]
 	path = Western Goods Food
 	url = https://github.com/nltp-ashes/Western-Goods-Food
+
+[submodule "Western Goods Drinks"]
+	path = Western Goods Drinks
+	url = https://github.com/nltp-ashes/Western-Goods-Drinks
