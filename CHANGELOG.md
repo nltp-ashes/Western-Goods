@@ -7,3 +7,5 @@
 **• Changes :**
 
 **• Bug fixes :**
+> • Fixed not being able to purchase Western Goods' items from some NPCs;
+> • Fixed not being able to unlock the pendrive with a technician in the Chernenko Brothers Storyline.
