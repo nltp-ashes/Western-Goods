@@ -22,11 +22,11 @@ jobs:
         submodules: recursive
         ref: 'master'
 
-    - name: Checkout
-      id: checkout
-      run: |
-        git submodule foreach git checkout ${{ github.ref_name }}
-        git submodule foreach git pull origin ${{ github.ref_name }}
+#    - name: Checkout
+#      id: checkout
+#      run: |
+#        git submodule foreach git checkout ${{ github.ref_name }}
+#        git submodule foreach git pull origin ${{ github.ref_name }}
 
     - name: Archive
       id: archive
