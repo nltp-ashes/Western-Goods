@@ -62,7 +62,8 @@ These patches should be used when native compatibility with other addons cannot 
 3. [Patch for Food Drugs and Drinks Animations v0.9](https://github.com/nltp-ashes/Western-Goods/releases/tag/patch-fdda) (fixes a broken animation from FDDA).
 
 These addons can be used to enhance the experience, but **aren't required** :
-1. [Cr3pis Icons](https://www.moddb.com/mods/stalker-anomaly/addons/cr3pis-icon-pack) (improves the quality of the inventory icons).
+1. [Cr3pis Icons](https://www.moddb.com/mods/stalker-anomaly/addons/cr3pis-icon-pack) (improves the quality of the inventory icons);
+2. [Fair Fast Travel](https://www.moddb.com/mods/stalker-anomaly/addons/fair-fast-travel-duration-for-anomaly-151) (better calculations for the time and money using a guides takes).
 
 ---
 
