@@ -1,11 +1,11 @@
-## **v3.0.0 - 25/05/2024 - Major Update**
+## **v3.0.0 - 30/05/2024 - Major Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.0.0/total?label=Downloads)]()
 
-**• Additions :**
-
 **• Changes :**
+> • Separated all the different features of the addon into individual, and standalone modules.
 
 **• Bug fixes :**
-> • Fixed not being able to purchase Western Goods' items from some NPCs;
-> • Fixed not being able to unlock the pendrive with a technician in the Chernenko Brothers Storyline.
+> • Fixed addon removal not working properly (Thanks PaulieWalnuts);
+> • Fixed new trade restrictions applying to NPC inventory (Thanks Adlez_asleep);
+> • Fixed not being able to unlock the USD drive using a technician during the Chernenko Brothers storyline (Thanks QlqrCsa, 0rion03).
