@@ -152,7 +152,7 @@ For past updates, please refer to the description of each release, in the [relea
 
 ### FUTURE WORKS
 
-You can find a Trello board about the development of the addon by following this [link](https://trello.com/b/HBWc6R8g/development-board).
+You can find a GitHub board about the development of the addon by following this [link](https://github.com/users/nltp-ashes/projects/1/views/1).
 
 If you would like to help development for future updates, you can :
 1. Contribute to the addon, either by [getting in touch with me](https://github.com/nltp-ashes/Western-Goods#support--suggestions) or [creating a fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) of the addon and [creating a pull-request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) on the addon's [GitHub repository](https://github.com/nltp-ashes/Western-Goods);
