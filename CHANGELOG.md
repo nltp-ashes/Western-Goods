@@ -4,3 +4,6 @@
 
 **• Changes :**
 > • Separated all the different features of the addon into individual, and standalone modules.
+
+**• Bug fixes :**
+> • Fixed `! Fallback to default bump map` error in logs for the rangefinder.
