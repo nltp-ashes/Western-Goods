@@ -175,9 +175,9 @@ If you truly believe your problem is new, please open an issue [on the addon's G
 ### SUPPORT & SUGGESTIONS
 
 If you need help with anything, or if you have any suggestions, you can :
-- ✅ Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) ;
+- ✅ Message me on [ModDB](https://www.moddb.com/members/nltp-ashes) (recommended);
 - ✅ Message me on Discord : @nltp_ashes (formerly NLTP_ASHES#0117) (recommended);
-- ✅ Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended).
+- ✅ Message me on my [Discord](https://discord.gg/7Z8S2qg) server (recommended);
 - ⚠️ Leave a comment on [ModDB](https://www.moddb.com/mods/stalker-anomaly/addons/western-goods/) (not recommended);
 
 ---
