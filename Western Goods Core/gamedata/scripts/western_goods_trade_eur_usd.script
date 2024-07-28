@@ -362,8 +362,11 @@ end
 --- @param section string
 --- @return boolean
 function is_eur_usd_trader(obj)
+    if not IsStalker(obj) then
+        return false
+    end
     local dialogs = obj:character_dialogs()
-    for idx,dialog_id in pairs(dialogs) do
+    for _,dialog_id in pairs(dialogs) do
         if dialog_id == "western_goods_trade_eur_usd" then
             return true
         end
