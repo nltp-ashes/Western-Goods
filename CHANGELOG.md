@@ -1,9 +1,13 @@
-## **v3.0.0 - 30/05/2024 - Major Update**
+## **v3.0.0 - 28/07/2024 - Major Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.0.0/total?label=Downloads)]()
 
 **• Changes :**
-> • Separated all the different features of the addon into individual, and standalone modules.
+> • Separated all the different features of the addon into individual, and standalone modules;
+> • Added sound effect when refilling a lighter (Thanks demonized);
 
 **• Bug fixes :**
+> • Fixed Bic lighter being refillable. Now only the Zippo is refillable;
+> • Fixed lighters being refillable even when already full;
+> • Fixed lighter's flame staying on after changing to another device;
 > • Fixed `! Fallback to default bump map` error in logs for the rangefinder.
