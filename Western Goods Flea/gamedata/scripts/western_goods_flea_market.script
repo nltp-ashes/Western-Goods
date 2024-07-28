@@ -1,0 +1,41 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script holds the 'core' of the addon.                                                                    ---
+---    Stuff that ensure proper working of the addon, or that are general purpose.                                   ---
+---                                                                                                                  ---
+---    Notable mentions are :                                                                                        ---
+---     - This script is responsible for ensuring the player has the required game version and pre-requisites;       ---
+---     - This script is responsible for cleaning the save-game in case the player decides to remove the addon;      ---
+---     - This script is the source of truth for the list of items and objects added by the addon.                   ---
+---     - This script is the source of truth to check if other specific addons are installed.                        ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function on_specific_character_dialog_list(char_id, dialog_list)
+    if char_id == "stalker_oleksandr_chernenko" then
+        dialog_list:add("western_goods_flea_offers")
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_specific_character_dialog_list", on_specific_character_dialog_list)
+end

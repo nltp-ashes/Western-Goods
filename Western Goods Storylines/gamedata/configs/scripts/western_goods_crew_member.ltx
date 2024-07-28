@@ -1,0 +1,96 @@
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 28/07/2024                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    NPC logic config file used for Patrick Dunbar.                                                                  ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+;;====================================================================================================================;;
+;;==================| Logic Extension (GhenTuong's xr_logic_ex.script) |==============================================;;
+;;====================================================================================================================;;
+
+[section@squad]
+target@1                         = {-western_goods_crew_member_rescue_over} lim_smart_terrain_6
+target@2                         = {-western_goods_act_1_task_3_crew_member_extracted} red_smart_terrain_bridge
+target@3                         = pri_a18_smart_terrain
+
+[section@logic]
+logic@western_goods_crew_member
+
+;;====================================================================================================================;;
+;;==================| Logic |=========================================================================================;;
+;;====================================================================================================================;;
+
+[logic@western_goods_crew_member]
+suitable                         = {=check_npc_name(stalker_crew_member)} true
+prior                            = 140
+active                           = beh@general
+level_spot                       = quest_npc
+relationship                     = neutral
+
+;backwards compat
+[logic@stalker_crew_member]:logic@western_goods_crew_member
+
+;;====================================================================================================================;;
+;;==================| Scheme |========================================================================================;;
+;;====================================================================================================================;;
+
+[beh@general]
+behavior_state                   = beh_move
+
+target                           = waypoint
+walk_dist                        = 0
+jog_dist                         = 0
+
+walk_anim                        = walk
+jog_anim                         = rush
+run_anim                         = rush
+
+gather_items_enabled             = false
+help_wounded_enabled             = false
+corpse_detection_enabled         = false
+invulnerable                     = true
+relationship                     = neutral
+meet                             = meet@base
+before_hit                       = invulnerable
+
+enemy_ignore_cond                = {!is_enemy_actor !fighting_dist_le(40)} true
+
+on_info                          = {=has_task(western_goods_act_1_task_3) =check_task_stage(western_goods_act_1_task_3:0) -western_goods_crew_member_rescue_over} beh@prisoner
+on_info2                         = {=has_task(western_goods_act_1_task_3) =check_task_stage(western_goods_act_1_task_3:3)} beh@get_to_heli
+on_info3                         = {+western_goods_act_1_task_3_crew_member_extracted} beh@pripyat_stand
+
+[beh@prisoner]:beh@general
+enemy_ignore_cond                = true
+combat_ignore_cond               = true
+pt1                              = 88860000, prisoner | pos:35.3,1.1,42.9 look:34.4,1.1,43.2
+path_end                         = loop
+
+[beh@get_to_heli]:beh@general
+pt1                              = 88860000, guard | pos:-188.7,5.3,-195.8 look:-188.7,5.3,-195.8
+path_end                         = loop
+
+[beh@pripyat_stand]:beh@general
+pt1                              = 88860000, guard | pos:-184.3,0.8,-346.6 look:-183.5,0.8,-346
+path_end                         = loop
+
+;;====================================================================================================================;;
+;;==================| Meet |==========================================================================================;;
+;;====================================================================================================================;;
+
+[meet@base]
+close_snd_hello                  = meet_hello
+close_snd_bye                    = nil
+close_anim                       = nil
+close_victim                     = nil
+close_distance                   = 0
+far_anim                         = nil
+far_victim                       = nil
+far_distance                     = 0
+trade_enable                     = false
+meet_on_talking                  = false
+use                              = true

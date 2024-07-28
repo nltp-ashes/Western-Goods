@@ -1,0 +1,185 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script handles specific code for the food module.                                                        ---
+---                                                                                                                  ---
+---    It is responsible for :                                                                                       ---
+---    - Defining the trader and corpse params for the new items;                                                    ---
+---    - Handling migration process between the addon's updates;                                                     ---
+---    - Handling events when the player uses an item;                                                               ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+local dbg_printf                = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Use functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called by callback when an object is drag and dropped over another one.
+--- This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
+function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
+    -- Kerosene on lighter
+    if dragged_item:section() == "kerosene" and western_goods_utils.validate_is_lighter(dropped_on_item) then
+        this.use_kerosene(dragged_item, dropped_on_item, slot_from, slot_to)
+    end
+end
+
+--- Function called when the player drags and drops kerosene on a lighter.
+--- This function will refuel the lighter completely and consume one use of the kerosene.
+--- @param fuel game_object
+--- @param lighter game_object
+function use_kerosene(dragged_item, dropped_on_item, slot_from, slot_to)
+    dropped_on_item:set_condition(1.0)
+    utils_item.discharge(dragged_item, 1)
+    dbg_printf("[WG] Usable Items | Kerosene - Refueled lighter %s", dropped_on_item:name())
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Monkey-patches
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_monkey_patches.monkey_patches["surge_manager_get_task_target"] = {
+    name = "surge_manager_get_task_target",
+    patches = {
+        { prio=1, script="surge_manager", func="get_task_target", cond = function() return true end }
+    }
+}
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.surge_manager_get_task_target, function()
+    return western_goods_ui_gps_locator.surge_manager_get_task_target()
+end)
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("ActorMenu_on_item_drag_drop", use_item_drag_drop)
+    RegisterScriptCallback("actor_on_item_use", actor_on_item_use)
+    RegisterScriptCallback("game_object_on_net_spawn", game_object_on_net_spawn)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trader and corpse params
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_core.western_goods_items["wg_lighter_bic"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["killer"]       = { qte=2, sl=2, prob=0.9 },
+        ["stalker"]      = { qte=1, sl=2, prob=0.6 },
+        ["freedom"]      = { qte=1, sl=2, prob=0.8 },
+        ["bandit"]       = { qte=1, sl=2, prob=0.7 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.7 }
+    },
+    corpse_params = {
+        ["stalker"]      = { qte=1, prob=0.03 },
+        ["bandit"]       = { qte=1, prob=0.03 },
+        ["freedom"]      = { qte=1, prob=0.03 },
+        ["renegade"]     = { qte=1, prob=0.03 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["isg"]          = { qte=1, prob=0.10 },
+        ["monolith"]     = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_lighter_zippo"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["killer"]       = { qte=2, sl=2, prob=0.9 },
+        ["stalker"]      = { qte=1, sl=2, prob=0.6 },
+        ["freedom"]      = { qte=1, sl=2, prob=0.8 },
+        ["bandit"]       = { qte=1, sl=2, prob=0.7 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.7 }
+    },
+    corpse_params = {
+        ["stalker"]      = { qte=1, prob=0.04 },
+        ["bandit"]       = { qte=1, prob=0.07 },
+        ["freedom"]      = { qte=1, prob=0.03 },
+        ["renegade"]     = { qte=1, prob=0.03 },
+        ["killer"]       = { qte=1, prob=0.04 },
+        ["isg"]          = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_rangefinder"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["army"]         = { qte=1, sl=2, prob=0.5 },
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["killer"]       = { qte=1, sl=2, prob=1.0 },
+        ["monolith"]     = { qte=1, sl=2, prob=1.0 }
+    },
+    corpse_params = {
+        ["stalker"]      = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["army"]         = { qte=1, prob=0.03 },
+        ["killer"]       = { qte=1, prob=0.03 },
+        ["isg"]          = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_compass"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["army"]         = { qte=1, sl=2, prob=0.5 },
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["killer"]       = { qte=1, sl=2, prob=1.0 },
+        ["monolith"]     = { qte=1, sl=2, prob=1.0 },
+        ["stalker"]      = { qte=1, sl=1, prob=0.8 }
+    },
+    corpse_params = {
+        ["stalker"]      = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["army"]         = { qte=1, prob=0.03 },
+        ["killer"]       = { qte=1, prob=0.03 },
+        ["isg"]          = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_laptop"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=3, prob=0.2 },
+        ["isg"]          = { qte=1, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["killer"]       = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_military_radio"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=1, prob=0.3 },
+        ["isg"]          = { qte=1, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["killer"]       = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.02 }
+    },
+}
+western_goods_core.western_goods_items["wg_gps"] =  {
+    type                 = "tech",
+    trader_params = {
+        ["killer"]       = { qte=2, sl=1, prob=0.9 },
+        ["isg"]          = { qte=2, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["isg"]          = { qte=1, prob=0.10 }
+    },
+}

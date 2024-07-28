@@ -1,0 +1,30 @@
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 28/07/2024                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used add new squads to the game.                                                                    ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+;;====================================================================================================================;;
+;;==================| Important Squads |==============================================================================;;
+;;====================================================================================================================;;
+
+[stalker_western_goods_trader_squad]:online_offline_group
+story_id                = stalker_western_goods_trader_squad
+npc                     = stalker_western_goods_trader
+target_smart            = pri_a18_smart_terrain
+faction                 = killer
+relationship            = neutral
+logic                   = scripts\western_goods_trader.ltx
+
+[stalker_oleksandr_chernenko_squad]:online_offline_group
+story_id                = stalker_oleksandr_chernenko_squad
+npc                     = stalker_oleksandr_chernenko
+target_smart            = gar_smart_terrain_6_3
+faction                 = killer
+relationship            = neutral
+logic                   = scripts\western_goods_oleksandr_chernenko.ltx

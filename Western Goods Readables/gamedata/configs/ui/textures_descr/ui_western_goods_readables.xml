@@ -1,0 +1,73 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Texture descriptions for magazines and other readable items in Western Goods.                                -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Contract on texture description IDs ! Respect the following naming :                                         -->
+<!--                                                                                                                 -->
+<!--    <texture id="ui_<section>_page_<page_number>" ... />                                                         -->
+<!--                                                                                                                 -->
+<!--    Where :                                                                                                      -->
+<!--                                                                                                                 -->
+<!--    - <section> : The name of the readable item's section, as defined in system.ltx;                             -->
+<!--    - <page_number> : The page number associated with the current texture description.                           -->
+<!--                                                                                                                 -->
+<!--    Note : page numbers need to be contiguous, from 1 to n, where n is the total number of pages.                -->
+<!--                                                                                                                 -->
+<!--    For best results, texture description should be at a 2:1 ratio (e.g. width="4096" height="2048").            -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<w>
+
+    <!-- Ukrainian MAXIM -->
+    <file name="ui\readables\porn2\ui_porn2.dds">
+        <texture id="ui_porn2_page_1"                           x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- PLAYBOY magazine (Chloe Khan) -->
+    <file name="ui\readables\wg_porn_mag_1\page_1.dds">
+        <texture id="ui_wg_porn_mag_1_page_1"                   x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- PLAYBOY magazine (Nicole Whitehead) -->
+    <file name="ui\readables\wg_porn_mag_2\page_1.dds">
+        <texture id="ui_wg_porn_mag_2_page_1"                   x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- PLAYBOY magazine (Carrie Stevens) -->
+    <file name="ui\readables\wg_porn_mag_3\page_1.dds">
+        <texture id="ui_wg_porn_mag_3_page_1"                   x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- Xbox : The Official Magazine (March 2002) -->
+    <file name="ui\readables\wg_xbox_mag_1\page_1.dds">
+        <texture id="ui_wg_xbox_mag_1_page_1"                   x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- Xbox : The Official Magazine (December 2004) -->
+    <file name="ui\readables\wg_xbox_mag_2\page_1.dds">
+        <texture id="ui_wg_xbox_mag_2_page_1"                   x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- Gameland magazine (November 1999) -->
+    <file name="ui\readables\wg_strana_igr_mag_1\page_1.dds">
+        <texture id="ui_wg_strana_igr_mag_1_page_1"             x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- European Car magazine (August 2015) -->
+    <file name="ui\readables\wg_car_mag_1\page_1.dds">
+        <texture id="ui_wg_car_mag_1_page_1"                    x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+    <!-- EVO magazine (December 2015) -->
+    <file name="ui\readables\wg_car_mag_2\page_1.dds">
+        <texture id="ui_wg_car_mag_2_page_1"                    x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+</w>

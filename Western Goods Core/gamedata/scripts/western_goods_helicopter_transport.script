@@ -1,0 +1,79 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script manages the helicopter transport system (similar to using a guide in the original games).         ---
+---    Essentially, the function go_to_level(...) is called from a dialog, and triggers a level change.              ---
+---    When the player appears on the new map, and helicopter is spawned overhead and is set to leave to map.        ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                = western_goods_utils.dbg_printf
+local level_object_by_id        = western_goods_utils.level_object_by_id
+local heli_spawn                = western_goods_helicopter.heli_spawn
+local heli_register             = western_goods_helicopter.heli_register
+local HELICOPTERS_MODES         = western_goods_helicopter.HELICOPTERS_MODES
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Helicopter transport order
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the player has used a helicopter transport service.
+--- @param npc game_object
+--- @param destination string
+--- @return nil
+function western_goods_guide_on_change_level(npc, destination)
+    local heli_transporters = {
+        ["stalker_western_goods_trader"] = true,
+        ["jup_b6_scientist_biochemist"] = true,
+        ["mechanic_army_yan_mlr"] = true
+    }
+
+    if heli_transporters[npc:section()] then
+        western_goods_utils.give_info("western_goods_spawn_guide_helicopter")
+    end
+end
+
+--- Function used to spawn an helicopter above the player after using the helicopter transport service.
+--- @return nil
+function spawn_guide_helicopter()
+    if western_goods_utils.has_info("western_goods_spawn_guide_helicopter") then
+
+        western_goods_utils.rem_info("western_goods_spawn_guide_helicopter")
+
+        local sec = "western_goods_helicopter"
+        local pos = vector():set(db.actor:position().x, db.actor:position().y + 20, db.actor:position().z)
+        local lvid = db.actor:level_vertex_id()
+        local gvid = db.actor:game_vertex_id()
+        local helicopter_se = heli_spawn(sec, pos, lvid, gvid)
+
+        dbg_printf("[WG] Helicopter Transport | Spawned transport helicopter in %s [lvid:%s | gvid:%s | pos:%s,%s,%s]", level.name(), lvid, gvid, pos.x, pos.y, pos.z)
+
+        CreateTimeEvent("delay_order_heli", helicopter_se.id, 0, function()
+            if level_object_by_id(helicopter_se.id) then
+                heli_register(helicopter_se.id, HELICOPTERS_MODES.LEAVE_AT_POINT, level.get_bounding_volume().max)
+                return true
+            end
+            return false
+        end)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("western_goods_guide_on_change_level", western_goods_guide_on_change_level)
+    RegisterScriptCallback("actor_on_first_update", spawn_guide_helicopter)
+end

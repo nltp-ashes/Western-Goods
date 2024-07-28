@@ -1,0 +1,46 @@
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 28/07/2024                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    DLTX config file used to define new sections.                                                                   ;;
+;;                                                                                                                    ;;
+;;    These additions consist in :                                                                                    ;;
+;;    - Defining new dynamic objects;                                                                                 ;;
+;;    - Defining new NPC sections;                                                                                    ;;
+;;    - Defining new helicopter sections.                                                                             ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+;;====================================================================================================================;;
+;;==================| Gameplay Files |================================================================================;;
+;;====================================================================================================================;;
+
+![dialogs]
+>files                            = dialogs_western_goods_npcs
+
+![profiles]
+>files                            = npc_profile_western_goods_npcs
+>specific_characters_files        = character_desc_western_goods_npcs
+
+;;====================================================================================================================;;
+;;==================| Non-Playable-Characters |=======================================================================;;
+;;====================================================================================================================;;
+
+;;==================| Important NPCs |=================================================================================;;
+
+[stalker_western_goods_trader]:stalker_strong
+$spawn                            = "respawn\stalker_western_goods_trader"
+story_id                          = stalker_western_goods_trader
+character_profile                 = stalker_western_goods_trader
+spec_rank                         = veteran
+community                         = killer
+
+[stalker_oleksandr_chernenko]:stalker_strong
+$spawn                            = "respawn\stalker_oleksandr_chernenko"
+story_id                          = stalker_oleksandr_chernenko
+character_profile                 = stalker_oleksandr_chernenko
+spec_rank                         = veteran
+community                         = killer

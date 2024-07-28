@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : VodoXleb (Translation)                                                                              -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' quest items.                                                             -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <!-- Supply case -->
+    <string id="st_wg_act_1_task_1_quest_item">
+        <text>Кейс с припасами</text>
+    </string>
+
+    <string id="st_wg_act_1_task_1_quest_item_s">
+        <text>Припасы</text>
+    </string>
+
+    <string id="st_wg_act_1_task_1_quest_item_descr">
+        <text>
+            Закрытый кейс, найденный рядом с трупами экипажа вертолёта. Точное содержание кейса неизвестно, но если он должен был быть доставлен Уильямсу Хедесу, он скорее всего содержит западные товары.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_blue] • %c[ui_gray_2] импортный\n
+            %c[d_cyan] • %c[ui_gray_2] высокая ценность\n
+        </text>
+    </string>
+
+    <!-- Unidentified weapon -->
+    <string id="st_wg_act_1_task_2_quest_item_1">
+        <text>Неидентифицированное оружие</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_1_s">
+        <text>Неидентифицированное оружие</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_1_descr">
+        <text>
+            Неизвестное оружие, механизм стрельбы которого не установлен. В оружии, похоже, нет боеприпасов - нажатие на спусковой крючок ни к чему не приводит. Оно очень тяжелое и определенно высокотехнологичное. Следует отметить, что оружие не стреляет пулями, основанными на воспламенении. Скорее всего, они запускаются электро-магнитными силами. Можно только гадать о разрушительном потенциале этого оружия.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_red] • %c[ui_gray_2] неиспользуемо\n
+        </text>
+    </string>
+
+    <!-- Bandit's note -->
+    <string id="st_wg_act_1_task_2_quest_item_2">
+        <text>Записка бандита</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_2_s">
+        <text>Записка бандита</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_2_descr">
+        <text>
+            Бумажная записка, найденная на складе контейнеров. Судя по надписям, она определённо была написана кем-то из бандитов...
+        </text>
+    </string>
+
+    <!-- Research case -->
+    <string id="st_wg_act_2_task_2_quest_item">
+        <text>Кейс с документами</text>
+    </string>
+
+    <string id="st_wg_act_2_task_2_quest_item_s">
+        <text>Документы</text>
+    </string>
+
+    <string id="st_wg_act_2_task_2_quest_item_descr">
+        <text>
+            Закрытый кейс, скорее всего хранящий исследовательские документы. Его перевозил в неизвестное место конвой учёных. Клиент Душмана хочет заполучить кейс, но неизвестно, кто он и почему он в этом заинтересован.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_cyan] • %c[ui_gray_2] высокая ценность\n
+        </text>
+    </string>
+
+    <!-- Danylo Map -->
+    <string id="st_wg_stash_map_quest_item">
+        <text>Карта с тайником</text>
+    </string>
+
+    <string id="st_wg_stash_map_quest_item_s">
+        <text>Карта</text>
+    </string>
+
+    <string id="st_wg_stash_map_quest_item_descr">
+        <text>
+            Рукописная карта, данная Александром. С ней должно быть возможно найти старый тайник его и его брата в Подземельях Агропрома.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_green] • %c[ui_gray_2] информация\n
+            %c[d_blue] • %c[ui_gray_2] личная вещь\n
+        </text>
+    </string>
+
+    <!-- Danylo Pendrive -->
+    <string id="st_wg_danylo_pendrive_quest_item">
+        <text>Флешка Данилы</text>
+    </string>
+
+    <string id="st_wg_danylo_pendrive_quest_item_s">
+        <text>Флешка</text>
+    </string>
+
+    <string id="st_wg_danylo_pendrive_quest_item_descr">
+        <text>
+            Флешка, спрятанная ещё тогда, когда Данила служил в Армии. Возможно информация даст наводку на его настоящее местонахождение. К сожалению, люди ещё не умеют читать сквозь пластик и полупроводники, поэтому для чтения содержимого необходимо устройство или техник.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_green] • %c[ui_gray_2] информация\n
+            %c[d_blue] • %c[ui_gray_2] технологическое приспособление\n
+        </text>
+    </string>
+
+    <!-- SSU Deployment Notice -->
+    <string id="st_wg_deployment_notice_quest_item">
+        <text>Уведомление отряду ВСУ</text>
+    </string>
+
+    <string id="st_wg_deployment_notice_quest_item_s">
+        <text>Уведомление отряду</text>
+    </string>
+
+    <string id="st_wg_deployment_notice_quest_item_descr">
+        <text>
+            Военный документ, приказывающий отряду ВСУ найти и ликвидировать "Сержанта Данилу Черненко". Документ упоминает, что данный приказ отдан из-за дезертирования Сержанта, но остальные причины скрыты.\n
+            \n
+            %c[ui_gray_1]СВОЙСТВА:\n
+            %c[d_green] • %c[ui_gray_2] информация\n
+        </text>
+    </string>
+
+</string_table>

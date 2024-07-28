@@ -1,0 +1,65 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to handle a collection of scripted lights.                                                        ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Object Binder Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "light_source"
+
+function light_source:__init(inner_brightness, outer_brightness)
+    dbg_printf("[WG] Light Source | Creating light source")
+
+    local light_inner = script_light()
+    light_inner.hud_mode = false
+    light_inner.enabled = true
+    light_inner.type = 1
+    light_inner.range = 1.5
+    light_inner.shadow = false
+    light_inner.lanim = "koster"
+    light_inner.lanim_brightness = inner_brightness
+
+    local light_outer = script_light()
+    light_outer.hud_mode = false
+    light_outer.enabled = true
+    light_outer.type = 1
+    light_outer.range = 10
+    light_outer.shadow = false
+    light_outer.lanim = "koster"
+    light_outer.lanim_brightness = outer_brightness
+
+    self.m_lights = {
+        inner = light_inner,
+        outer = light_outer
+    }
+
+    dbg_printf("[WG] Light Source | Successfully created light source")
+end
+
+function light_source:update_light(pos)
+    for _, light in pairs(self.m_lights) do
+        light:set_position(pos)
+        light:update()
+    end
+end
+
+function light_source:set_light_status(status)
+    for _, light in pairs(self.m_lights) do
+        light.enabled = status
+    end
+end

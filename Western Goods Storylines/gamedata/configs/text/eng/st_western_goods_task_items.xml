@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' quest items.                                                             -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <!-- Supply case -->
+    <string id="st_wg_act_1_task_1_quest_item">
+        <text>Supply case</text>
+    </string>
+
+    <string id="st_wg_act_1_task_1_quest_item_s">
+        <text>Supplies</text>
+    </string>
+
+    <string id="st_wg_act_1_task_1_quest_item_descr">
+        <text>
+            A sealed case found near the corpses of the helicopter crew. The exact contents of the case are unknown, but since it was to be delivered to Williams Heades, it must contain western goods.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_blue] • %c[ui_gray_2] imported\n
+            %c[d_cyan] • %c[ui_gray_2] highly valuable\n
+        </text>
+    </string>
+
+    <!-- Unidentified weapon -->
+    <string id="st_wg_act_1_task_2_quest_item_1">
+        <text>Unidentified weapon</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_1_s">
+        <text>Unidentified weapon</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_1_descr">
+        <text>
+            An unknown weapon, the firing mechanism of which has not been established. The weapon appears to be out of ammunition - squeezing the trigger doesn't do anything. It's very heavy and definitely high-tech. Of note is that it appears not to fire bullets based on ignition. Most probably, the rounds are propelled by electro-magnetic forces. One can only suspect what kind of destructive potential it possesses.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_red] • %c[ui_gray_2] unusable\n
+        </text>
+    </string>
+
+    <!-- Bandit's note -->
+    <string id="st_wg_act_1_task_2_quest_item_2">
+        <text>Bandit's note</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_2_s">
+        <text>Bandit's note</text>
+    </string>
+
+    <string id="st_wg_act_1_task_2_quest_item_2_descr">
+        <text>
+            A paper note found at the container warehouse. Judging by the writing, it was definitely written by one of the bandits...
+        </text>
+    </string>
+
+    <!-- Research case -->
+    <string id="st_wg_act_2_task_2_quest_item">
+        <text>Documents case</text>
+    </string>
+
+    <string id="st_wg_act_2_task_2_quest_item_s">
+        <text>Documents</text>
+    </string>
+
+    <string id="st_wg_act_2_task_2_quest_item_descr">
+        <text>
+            A sealed case supposedly containing research documents. It was being carried by a convoy of scientists to an unknown location. Dushman's client wants this, but it's unknown who they are and why they are interested in this.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_cyan] • %c[ui_gray_2] highly valuable\n
+        </text>
+    </string>
+
+    <!-- Danylo Map -->
+    <string id="st_wg_stash_map_quest_item">
+        <text>Map to stash</text>
+    </string>
+
+    <string id="st_wg_stash_map_quest_item_s">
+        <text>Map</text>
+    </string>
+
+    <string id="st_wg_stash_map_quest_item_descr">
+        <text>
+            A hand drawn map, given by Oleksandr. With it, it should be possible to locate he and his brother's old stash in the Agroprom Underground.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_green] • %c[ui_gray_2] informative\n
+            %c[d_blue] • %c[ui_gray_2] personal belongings\n
+        </text>
+    </string>
+
+    <!-- Danylo Pendrive -->
+    <string id="st_wg_danylo_pendrive_quest_item">
+        <text>Danylo's pendrive</text>
+    </string>
+
+    <string id="st_wg_danylo_pendrive_quest_item_s">
+        <text>Pendrive</text>
+    </string>
+
+    <string id="st_wg_danylo_pendrive_quest_item_descr">
+        <text>
+            A pendrive that was stashed when Danylo was still part of the Army. Perhaps the information it contains can give a hit as to his current whereabouts. Unfortunately, humans don't yet read through plastic and semiconductors, so a device or a technician is needed to read its content.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_green] • %c[ui_gray_2] informative\n
+            %c[d_blue] • %c[ui_gray_2] technological item\n
+        </text>
+    </string>
+
+    <!-- SSU Deployment Notice -->
+    <string id="st_wg_deployment_notice_quest_item">
+        <text>SSU deployment notice</text>
+    </string>
+
+    <string id="st_wg_deployment_notice_quest_item_s">
+        <text>Deployment notice</text>
+    </string>
+
+    <string id="st_wg_deployment_notice_quest_item_descr">
+        <text>
+            A military document, ordering an SSU squad to locate and eliminate "Sergeant Danylo Chernenko". The document mentions that the order follows the Sergeant's desertion, but the rest of the motive is redacted.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_green] • %c[ui_gray_2] informative\n
+        </text>
+    </string>
+
+</string_table>

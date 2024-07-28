@@ -1,0 +1,220 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script handles specific code for the food module.                                                        ---
+---                                                                                                                  ---
+---    It is responsible for :                                                                                       ---
+---    - Defining the trader and corpse params for the new items;                                                    ---
+---    - Handling migration process between the addon's updates;                                                     ---
+---    - Handling events when the player uses an item;                                                               ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+local act_3_task_1_usb_unlock_dialog_id     = "western_goods_act_3_task_1_usb_unlock"
+local act_3_task_1_start_dialog_id          = "western_goods_act_3_task_1_start"
+local act_3_task_4_end_dialog_id            = "western_goods_act_3_task_4_end"
+
+local act_1_task_1_start_dialog_id          = "western_goods_act_1_task_1_start"
+local act_1_task_1_end_dialog_id            = "western_goods_act_1_task_1_end"
+local act_1_task_2_start_dialog_id          = "western_goods_act_1_task_2_start"
+local act_1_task_2_end_dialog_id            = "western_goods_act_1_task_2_end"
+local act_1_task_3_start_dialog_id          = "western_goods_act_1_task_3_start"
+local act_1_task_3_end_dialog_id            = "western_goods_act_1_task_3_end"
+
+local act_2_task_1_start_dialog_id          = "western_goods_act_2_task_1_start"
+local act_2_task_1_end_dialog_id            = "western_goods_act_2_task_1_end"
+local act_2_task_2_opt_in_dialog_id         = "western_goods_act_2_task_2_differed_opt_in"
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to add dialogs to specific NPCs.
+--- @param char_id string
+--- @param dialog_list table
+--- @return nil
+function on_specific_character_dialog_list(char_id, dialog_list)
+    if dialog_list:has("dm_init_mechanic") then
+        dialog_list:add(act_3_task_1_usb_unlock_dialog_id)
+    end
+
+    if char_id == "cit_killers_merc_trader_stalker" then
+        dialog_list:add(act_2_task_1_start_dialog_id)
+        dialog_list:add(act_2_task_1_end_dialog_id)
+        dialog_list:add(act_2_task_2_opt_in_dialog_id)
+    end
+
+    if char_id == "stalker_oleksandr_chernenko" then
+        dialog_list:add(act_3_task_1_start_dialog_id)
+        dialog_list:add(act_3_task_4_end_dialog_id)
+    end
+
+    if char_id == "stalker_western_goods_trader" then
+        dialog_list:add(act_1_task_1_start_dialog_id)
+        dialog_list:add(act_1_task_1_end_dialog_id)
+        dialog_list:add(act_1_task_2_start_dialog_id)
+        dialog_list:add(act_1_task_2_end_dialog_id)
+        dialog_list:add(act_1_task_3_start_dialog_id)
+        dialog_list:add(act_1_task_3_end_dialog_id)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Use functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called by callback when an object is drag and dropped over another one.
+--- This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
+function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
+    -- Danylo's pendrive on pda
+    if dragged_item:section() == "wg_danylo_pendrive_quest_item" and western_goods_utils.validate_is_pda(dropped_on_item) then
+        this.use_danylo_pendrive()
+    end
+end
+
+--- Function called when the player uses Danylo's pendrive.
+--- @param obj game_object
+--- @return nil
+function use_danylo_pendrive()
+    local note_name = "encyclopedia__notes_western_goods_hand_drawn_map"
+    ui_pda_encyclopedia_tab.unlock_note(note_name)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("ActorMenu_on_item_drag_drop", use_item_drag_drop)
+    RegisterScriptCallback("on_specific_character_dialog_list", on_specific_character_dialog_list)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trader and corpse params
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_core.western_goods_special_items["wg_act_1_task_1_quest_item"] = true
+western_goods_core.western_goods_special_items["wg_act_1_task_2_quest_item_1"] = true
+western_goods_core.western_goods_special_items["wg_act_1_task_2_quest_item_2"] = true
+western_goods_core.western_goods_special_items["wg_act_2_task_2_quest_item"] = true
+western_goods_core.western_goods_special_items["wg_danylo_pendrive_quest_item"] = true
+western_goods_core.western_goods_special_items["wg_deployment_notice_quest_item"] = true
+western_goods_core.western_goods_special_items["wg_stash_map_quest_item"] = true
+western_goods_core.western_goods_special_items["western_goods_helicopter_landed"] = true
+
+western_goods_core.western_goods_squads["stalker_crew_member_squad"] = true
+western_goods_core.western_goods_squads["stalker_danylo_chernenko_squad"] = true
+western_goods_core.western_goods_squads["stalker_dunn_lynn_squad"] = true
+western_goods_core.western_goods_squads["stalker_jupiter_informant_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_1_heli_crew_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_1_zombie_1_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_1_zombie_2_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_1_zombie_3_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_1_zombie_4_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_2_bandit_1_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_2_bandit_2_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_2_bandit_3_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_2_bandit_4_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_2_bandit_5_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_2_bandit_6_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_3_mono_bridge_1_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_3_mono_bridge_2_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_3_mono_bridge_3_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_3_mono_guards_1_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_1_task_3_mono_guards_2_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_army_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_bandit_1_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_bandit_2_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_controller_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_ecolog_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_lynn_guards_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_mono_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_snork_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_zombie_1_squad"] = true
+western_goods_core.western_goods_squads["western_goods_act_2_task_2_zombie_2_squad"] = true
+western_goods_core.western_goods_squads["western_goods_ssu_bounty_squad"] = true
+western_goods_core.western_goods_squads["western_goods_ssu_prisoner_squad"] = true
+western_goods_core.western_goods_squads["western_goods_ssu_supervisor_squad"] = true
+
+western_goods_core.western_goods_npcs["stalker_crew_member"] = true
+western_goods_core.western_goods_npcs["stalker_danylo_chernenko"] = true
+western_goods_core.western_goods_npcs["stalker_dunn_lynn"] = true
+western_goods_core.western_goods_npcs["stalker_ecolog_convoy_orange"] = true
+western_goods_core.western_goods_npcs["stalker_ecolog_convoy_yellow"] = true
+western_goods_core.western_goods_npcs["stalker_jupiter_informant"] = true
+western_goods_core.western_goods_npcs["stalker_ssu_prisoner"] = true
+western_goods_core.western_goods_npcs["stalker_ssu_supervisor"] = true
+
+western_goods_core.western_goods_task["western_goods_act_1_task_1"] = true
+western_goods_core.western_goods_task["western_goods_act_1_task_2"] = true
+western_goods_core.western_goods_task["western_goods_act_1_task_3"] = true
+western_goods_core.western_goods_task["western_goods_act_2_task_1"] = true
+western_goods_core.western_goods_task["western_goods_act_2_task_2"] = true
+western_goods_core.western_goods_task["western_goods_act_3_task_1"] = true
+western_goods_core.western_goods_task["western_goods_act_3_task_2"] = true
+western_goods_core.western_goods_task["western_goods_act_3_task_3"] = true
+western_goods_core.western_goods_task["western_goods_act_3_task_4"] = true
+
+western_goods_core.western_goods_info["western_goods_act_1_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_1_active"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_1_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_1_init"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_1_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_2_active"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_2_available"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_2_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_2_init"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_2_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_3_active"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_3_available"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_3_crew_member_extracted"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_3_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_3_init"] = true
+western_goods_core.western_goods_info["western_goods_act_1_task_3_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_2_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_1_active"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_1_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_1_init"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_1_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_active"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_controller_killed"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_controller_killed"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_controller_spawned"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_ecolog_calm"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_ecolog_calm"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_ecolog_flee"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_init"] = true
+western_goods_core.western_goods_info["western_goods_act_2_task_2_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_1_active"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_1_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_1_init"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_1_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_2_active"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_2_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_2_init"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_2_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_3_active"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_3_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_3_init"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_3_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_4_active"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_4_finished"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_4_init"] = true
+western_goods_core.western_goods_info["western_goods_act_3_task_4_ready_finished"] = true
+western_goods_core.western_goods_info["western_goods_danylo_army_warehouses"] = true
+western_goods_core.western_goods_info["western_goods_danylo_army_warehouses"] = true
+western_goods_core.western_goods_info["western_goods_danylo_red_forest"] = true

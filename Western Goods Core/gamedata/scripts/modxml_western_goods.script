@@ -1,0 +1,103 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    DXML script used to modify some XML files according to some criteria.                                         ---
+---    Modifying these files allows Western Goods to power some features.                                            ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- DXML for game_tutorials.xml
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function dxml_game_tutorials(xml_file_name, xml_obj)
+    -- Only execute on gamedata\configs\ui\game_tutorials.xml
+    if xml_file_name ~= [[ui\game_tutorials.xml]] then
+        return
+    end
+
+    -- Query the file to get the node(s) to modify
+    local query = "tutorial_campfire_ignite > item"
+    local query_res = xml_obj:query(query)
+
+    -- Expect one, and only one match
+    if size_table(query_res) ~= 1 then
+        printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+        return
+    end
+
+    -- Get the resulting element
+    local xml_elem = query_res[1]
+
+    -- XML Code to inject
+    local xml_inject = [[<action id="use" finalize="1">western_goods_core.use_campfire</action>]]
+
+    -- Inject XML Code
+    xml_obj:insertFromXMLString(xml_inject, xml_elem, #xml_elem.kids)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- DXML for ui_barter.xml
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function dxml_barter_ui_background_size(xml_file_name, xml_obj)
+    -- Only execute on gamedata\configs\ui\ui_barter.xml
+    if xml_file_name ~= [[ui\ui_barter.xml]] then
+        return
+    end
+
+    -- Query the file to get the node(s) to modify
+    local query = "barter > background"
+    local query_res = xml_obj:query(query)
+
+    -- Expect one, and only one match
+    if size_table(query_res) ~= 1 then
+        printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+        return
+    end
+
+    -- Get the resulting element
+    local xml_elem = query_res[1]
+
+    -- Change node attributes
+    xml_obj:setElementAttr(xml_elem, {x=-228, y=-47, width=1024, height=768})
+end
+
+function dxml_barter_ui_background_texture(xml_file_name, xml_obj)
+    -- Only execute on gamedata\configs\ui\ui_barter.xml
+    if xml_file_name ~= [[ui\ui_barter.xml]] then
+        return
+    end
+
+    -- Query the file to get the node(s) to modify
+    local query = "background > texture"
+    local query_res = xml_obj:query(query)
+
+    -- Expect one, and only one match
+    if size_table(query_res) ~= 1 then
+        printf("~[WG] WARNING | DXML | Aborting. Invalid number of results for '%s', got '%s', expected '%s'.", query, size_table(query_res), 1)
+        return
+    end
+
+    -- Get the resulting element
+    local xml_elem = query_res[1]
+
+    -- Change node text content
+    xml_obj:setText(xml_elem, "ui\\barter\\ui_barter_background.dds")
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_xml_read()
+    RegisterScriptCallback("on_xml_read", dxml_game_tutorials)
+    RegisterScriptCallback("on_xml_read", dxml_barter_ui_background_size)
+    RegisterScriptCallback("on_xml_read", dxml_barter_ui_background_texture)
+end

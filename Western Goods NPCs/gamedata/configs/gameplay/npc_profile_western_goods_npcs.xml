@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    NPC profiles listing valid characters descriptions for a given class.                                        -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<xml>
+
+    <!--=============================================================================================================-->
+    <!--    Williams Heades                                                                                          -->
+    <!--=============================================================================================================-->
+
+    <character id="stalker_western_goods_trader">
+        <class>stalker_western_goods_trader</class>
+        <specific_character>stalker_western_goods_trader</specific_character>
+    </character>
+
+    <!--=============================================================================================================-->
+    <!--    Oleksandr Chernenko                                                                                      -->
+    <!--=============================================================================================================-->
+
+    <character id="stalker_oleksandr_chernenko">
+        <class>stalker_oleksandr_chernenko</class>
+        <specific_character>stalker_oleksandr_chernenko</specific_character>
+    </character>
+
+</xml>

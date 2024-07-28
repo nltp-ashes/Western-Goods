@@ -1,0 +1,402 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
+---                                                                                                                  ---
+---    By default, if the npc has the "western_goods_trade_eur_usd" dialog, it will be available to the player.      ---
+---    If you want more control over this dialog, you can use the "western_goods_trade_eur_usd_on_dialog" callback.  ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function on_game_start()                                                                                      ---
+---       RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", function(npc, flags)                       ---
+---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
+---               -- The line of dialog will now be hidden                                                           ---
+---               flags.result = false                                                                               ---
+---           end                                                                                                    ---
+---       end)                                                                                                       ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---    By default, NPCs using the EUR/USD trade system are shielded (aka unaffected) from trader_autoinject.script.  ---
+---    If you want change that, you can use the "western_goods_trade_eur_usd_on_trader_autoinject" callback.         ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function on_game_start()                                                                                      ---
+---       RegisterScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject", function(npc, flags)            ---
+---           if npc:section() == "my_npc_section" and some_condition() then                                         ---
+---               -- The NPC will now receive items from trader_autoinject.script                                    ---
+---               flags.result = true                                                                                ---
+---           end                                                                                                    ---
+---       end)                                                                                                       ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables, imported functions and new callbacks
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- New callbacks
+AddScriptCallback("western_goods_trade_eur_usd_on_dialog")
+AddScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject")
+
+-- Imported functions
+local dbg_printf                = western_goods_utils.dbg_printf
+local level_object_by_id        = western_goods_utils.level_object_by_id
+
+-- Constants
+local eur_rouble_rate           = 68
+local usd_rouble_rate           = 70
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Dialog Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called when the player uses the trade line of dialog.
+--- @param npc game_object
+--- @param actor game_object
+--- @return nil
+function start_trade(npc, actor)
+    if not this.is_eur_usd_trader(npc) then return end
+    if hide_hud_inventory() then
+        npc:start_trade(actor)
+    end
+end
+
+--- Function called to determine if the trade line of dialog should be shown.
+--- @param npc game_object
+--- @param actor game_object
+--- @param dialog_id string
+--- @return table
+function cond_trade_dialog(actor, npc, dialog_id)
+    local flags = { result = true }
+    SendScriptCallback("western_goods_trade_eur_usd_on_dialog", npc, flags)
+    return flags.result
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trading actions/restrictions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Monkey-patching the monkey-patches so I can prevent the monkey-patches to be executed on the western goods trader.
+--- Got it? Me neither. In the end, it works.
+--- @param npc game_object
+--- @param force_refresh boolean
+--- @return nil
+function trade_manager_update(npc, force_refresh)
+    local flags = { result = false }
+    SendScriptCallback("western_goods_trade_eur_usd_on_trader_autoinject",npc,flags)
+    if this.is_eur_usd_trader(npc) and not flags.result then
+        trader_autoinject.TraderUpdate(npc, force_refresh)
+    else
+        western_goods_monkey_patches.trade_manager_update(npc, force_refresh)
+    end
+end
+
+--- Function used to check if an item is tradable.
+--- It is used to tint an item if it isn't tradable with a EUR/USD trader
+--- It also prevents the item from being moved to the cart.
+--- This function overrides a vanilla function. When not trading with a EUR/USD trader, the vanilla function takes over.
+--- @param obj game_object|nil
+--- @param profile table|nil
+--- @return number
+function get_item_trade_status(obj, profile)
+    -- Get trading partner (if any)
+    local partner = ui_inventory.GUI and ui_inventory.GUI:GetPartner()
+
+    if obj and partner and this.is_eur_usd_trader(partner) then
+        -- If player is trading with EUR/USD trader
+        if utils_item.in_npc_inv(partner, obj) or this.is_tradable(obj:section()) then
+            -- Item is tradable if it is in trader inventory or is tradable
+            return western_goods_utils.trade_status_flags.tradable
+        else
+            -- Item is not tradable if it is in player inventory and is not tradable
+            return western_goods_utils.trade_status_flags.cant_trade
+        end
+    else
+        -- Vanilla function decides for other traders
+        return western_goods_monkey_patches.utils_ui_get_item_trade_status_eur_usd(obj, profile)
+    end
+end
+
+--- Monkey-patching ui_inventory.UIInventory.UpdateCharacter to display custom currencies in the character wallet.
+--- @param self UIInventory
+--- @return nil
+function ui_inventory_UIInventory_UpdateCharacter(self)
+    local partner = self:GetPartner()
+
+    if (not self.mode == "trade")
+    or (not partner)
+    or (not this.is_eur_usd_trader(partner))
+    then return end
+
+    local eur_money = 0
+    local usd_money = 0
+
+    western_goods_utils.inventory_iter(db.actor,function(owner, obj)
+        if this.is_tradable(obj:section()) then
+            local currency,value = this.get_money_value(obj:section())
+            if currency == "usd" then
+                usd_money = usd_money + value
+            end
+            if currency == "eur" then
+                eur_money = eur_money + value
+            end
+        end
+    end)
+
+    self.player_money:SetText(tostring(eur_money) .. " EUR | " .. tostring(usd_money) .. " USD")
+
+    -- NPC
+    self.npc_money:SetText("... EUR | ... USD")
+end
+
+--- Monkey-patching ui_inventory.UIInventory.UpdatePrice to display custom value for items in cart.
+--- @param self UIInventory
+--- @param ele_txt ?
+--- @param ele_btn ?
+--- @param bag string
+--- @return nil
+function ui_inventory_UIInventory_TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
+    local partner = self:GetPartner()
+
+    if (not self.mode == "trade")
+    or (not partner)
+    or (not this.is_eur_usd_trader(partner))
+    then return end
+
+    local cc = self.CC[bag]
+    if (not cc) then
+        return
+    end
+
+    local tot_cost = 0
+
+    for obj_id,idx in pairs(cc.indx_id) do
+        local obj = level_object_by_id(obj_id)
+        local currency,value = this.get_money_value(obj:section())
+        if currency == "eur" then
+            tot_cost = tot_cost + value * eur_rouble_rate
+        end
+        if currency == "usd" then
+            tot_cost = tot_cost + value * usd_rouble_rate
+        end
+        if currency == "unknown" then
+            tot_cost = tot_cost + cc:GetCellCost(cc.cell[idx])
+        end
+    end
+
+    ele_txt:SetText(math.ceil(tot_cost/eur_rouble_rate) .. " EUR or " .. math.ceil(tot_cost/usd_rouble_rate) .. " USD")
+    ele_btn:Enable(math.ceil(tot_cost) > 0)
+end
+
+--- Monkey-patching ui_inventory.UIInventory.TMode_Sell to change the trade logic to a sort of barter system with the trader.
+--- @param self UIInventory
+--- @return nil
+function ui_inventory_UIInventory_TMode_Sell(self)
+    -- If we aren't talking to a EUR/USD trader, process normally
+    local npc = self:GetPartner()
+    if not npc or not this.is_eur_usd_trader(npc) then
+        western_goods_monkey_patches.ui_inventory_t_mode_sell(self)
+        return
+    end
+
+    make_exchange(self, npc)
+end
+
+--- Monkey-patching ui_inventory.UIInventory.TMode_Buy to change the trade logic to a sort of barter system with the trader.
+--- @param self UIInventory
+--- @return nil
+function ui_inventory_UIInventory_TMode_Buy(self)
+    -- If we aren't talking to a EUR/USD trader, process normally
+    local npc = self:GetPartner()
+    if not npc or not this.is_eur_usd_trader(npc) then
+        western_goods_monkey_patches.ui_inventory_t_mode_buy(self)
+        return
+    end
+
+    make_exchange(self, npc)
+end
+
+--- Function called when the player clicks Sell/Buy in the trade UI.
+--- This function makes a few checks, and then proceeds to exchange the money for the items selected.
+--- @param self UIInventory
+--- @param npc game_object
+--- @return nil
+function make_exchange(self, npc)
+    -- Get sell cells
+    local cc_sell = self.CC["actor_trade"]
+    if (not cc_sell) then
+        return
+    end
+    if size_table(cc_sell.indx_id) <= 0 then
+        self.message_box:InitMessageBox("message_box_ok")
+        self.message_box:SetText(western_goods_utils.get_translation("st_wg_trade_eur_usd_empty_sell"))
+        self.message_box:ShowDialog(true)
+        return
+    end
+
+    -- Get buy sells
+    local cc_buy = self.CC["npc_trade"]
+    if (not cc_buy) then
+        return
+    end
+    if size_table(cc_buy.indx_id) <= 0 then
+        self.message_box:InitMessageBox("message_box_ok")
+        self.message_box:SetText(western_goods_utils.get_translation("st_wg_trade_eur_usd_empty_buy"))
+        self.message_box:ShowDialog(true)
+        return
+    end
+
+    -- Calculate full sell price
+    local tot_sell_cost = 0
+    for obj_id,idx in pairs(cc_sell.indx_id) do
+        local obj = level_object_by_id(obj_id)
+        local currency,value = this.get_money_value(obj:section())
+        if currency == "eur" then
+            tot_sell_cost = tot_sell_cost + value * eur_rouble_rate
+        end
+        if currency == "usd" then
+            tot_sell_cost = tot_sell_cost + value * usd_rouble_rate
+        end
+        if currency == "unknown" then
+            tot_sell_cost = tot_sell_cost + cc_sell:GetCellCost(cc_sell.cell[idx])
+        end
+    end
+
+    -- Calculate full buy price
+    local tot_buy_cost = 0
+    for obj_id,idx in pairs(cc_buy.indx_id) do
+        local obj = level_object_by_id(obj_id)
+        local currency,value = this.get_money_value(obj:section())
+        if currency == "eur" then
+            tot_buy_cost = tot_buy_cost + value * eur_rouble_rate
+        end
+        if currency == "usd" then
+            tot_buy_cost = tot_buy_cost + value * usd_rouble_rate
+        end
+        if currency == "unknown" then
+            tot_buy_cost = tot_buy_cost + cc_buy:GetCellCost(cc_buy.cell[idx])
+        end
+    end
+
+    -- Round values up
+    tot_sell_cost = math.ceil(tot_sell_cost)
+    tot_buy_cost = math.ceil(tot_buy_cost)
+
+    -- Don't processed the sell price < buy price
+    if tot_sell_cost < tot_buy_cost then
+        self.message_box:InitMessageBox("message_box_ok")
+        self.message_box:SetText(western_goods_utils.get_translation("st_wg_trader_uneven_value"))
+        self.message_box:ShowDialog(true)
+        return
+    end
+
+    -- Make the trade
+    dbg_printf("[WG] Western Goods Trader | Traded :")
+    for id,_ in pairs(cc_sell.indx_id) do
+        local obj = level_object_by_id(id)
+        dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+        self:On_Item_Exchange(db.actor, npc, obj)
+    end
+    dbg_printf("[WG] Western Goods Trader | In exchange for :")
+    for id,_ in pairs(cc_buy.indx_id) do
+        local obj = level_object_by_id(id)
+        dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+        self:On_Item_Exchange(npc, db.actor, obj)
+    end
+
+    -- Update UI
+    self:UpdateInfo(true)
+
+    -- Clean trader inventory
+    CreateTimeEvent("delete_traded_items",npc:id(),0.01,function()
+        dbg_printf("[WG] Western Goods Trader | Cleaning traded items :")
+        western_goods_utils.inventory_iter(npc,function(owner, obj)
+            if this.is_tradable(obj:section()) then
+                dbg_printf("[WG] - [%s] %s", obj:id(), obj:section())
+                alife_release_id(obj:id())
+            end
+        end)
+        return true
+    end)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Barter actions/restrictions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is a EUR/USD trader.
+--- @param name string
+--- @param path string
+--- @return nil
+function barter_ui_gui_on_show(name, path)
+    local ui_instance = ui_inventory.GUI
+    if name ~= "UIInventory" or (not ui_instance) then
+        return
+    end
+
+    local partner = ui_instance:GetPartner()
+
+    if partner and this.is_eur_usd_trader(partner) then
+        return
+    end
+
+    western_goods_monkey_patches.barter_ui_gui_on_show(name, path)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Service Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to know if an NPC is a EUR/USD trader or not.
+--- @param section string
+--- @return boolean
+function is_eur_usd_trader(obj)
+    local dialogs = obj:character_dialogs()
+    for idx,dialog_id in pairs(dialogs) do
+        if dialog_id == "western_goods_trade_eur_usd" then
+            return true
+        end
+    end
+    return false
+end
+
+--- Function used to know if an object is tradable with the western goods trader.
+--- @param obj game_object
+--- @return boolean
+function is_tradable(sec)
+    for section,data in pairs(western_goods_core.western_goods_items) do
+        -- Is tradable if item is in actor inventory, and is of type money
+        if sec == section and data.type == "money" then
+            return true
+        end
+    end
+
+    -- All other items are forbidden for trade
+    return false
+end
+
+--- Function used to get the monetary value of a section, if this section is a WG money bill.
+--- @param sec string
+--- @return string,number
+function get_money_value(sec)
+    if string.find(sec, "wg_euros_") then
+        local value = string.sub(sec,10,#sec) or "0"
+        return "eur", tonumber(value)
+    end
+    if string.find(sec, "wg_dollars_") then
+        local value = string.sub(sec,12,#sec) or "0"
+        return "usd", tonumber(value)
+    end
+    return "unknown", 0
+end
