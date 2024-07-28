@@ -30,8 +30,8 @@ local dbg_printf                = western_goods_utils.dbg_printf
 --- @return nil
 function use_item_drag_drop(dragged_item, dropped_on_item, slot_from, slot_to)
     -- Kerosene on lighter
-    if dragged_item:section() == "kerosene" and western_goods_utils.validate_is_lighter(dropped_on_item) then
-        this.use_kerosene(dragged_item, dropped_on_item, slot_from, slot_to)
+    if dragged_item:section() == "kerosene" and dropped_on_item:section() == "wg_lighter_zippo" and dropped_on_item:condition() <= 0.75 then
+        this.use_kerosene(dragged_item, dropped_on_item)
     end
 end
 
@@ -39,10 +39,11 @@ end
 --- This function will refuel the lighter completely and consume one use of the kerosene.
 --- @param fuel game_object
 --- @param lighter game_object
-function use_kerosene(dragged_item, dropped_on_item, slot_from, slot_to)
-    dropped_on_item:set_condition(1.0)
-    utils_item.discharge(dragged_item, 1)
-    dbg_printf("[WG] Usable Items | Kerosene - Refueled lighter %s", dropped_on_item:name())
+function use_kerosene(fuel, lighter)
+    lighter:set_condition(1.0)
+    utils_item.discharge(fuel, 1)
+    utils_obj.play_sound([[western_goods_tech\refill_kerosene]])
+    dbg_printf("[WG] Usable Items | Kerosene - Refueled lighter %s", lighter:name())
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
