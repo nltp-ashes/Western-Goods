@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 31/07/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the tasks of the first act of the addon's storyline.                                    ---
@@ -1202,7 +1202,6 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
             -- If the crew member hasn't extracted, and isn't alive, respawn him
             if not crew_member_squad_se and not western_goods_utils.has_info("western_goods_act_1_task_3_crew_member_extracted") then
                 crew_member_squad_se = spawn_story_squad("stalker_crew_member_squad", vector():set(35.3,1,42.9), SIMBOARD.smarts_by_names["lim_smart_terrain_6"])
-
                 return
             end
 
@@ -1224,6 +1223,11 @@ function task_status_functor.act_1_task_3_status_f(tsk,task_id)
             -- Get the distance between the helicopter and the landing zone, and wait for it to be smaller than 5m
             local dist_to_landing = helicopter_obj and western_goods_utils.get_distance_sqr(helicopter_obj:position(), heli_landing_pos)
             if (not dist_to_landing) or dist_to_landing and dist_to_landing > CONST_TASK_3_HELI_DIST then return end
+
+            -- TODO : Find a better way to make sure companion is online
+            if not crew_member_obj then
+                return
+            end
 
             -- Set the rescued companion to head towards the helicopter
             if not TASK_3_CACHE.stage_3_evac_order_given then
