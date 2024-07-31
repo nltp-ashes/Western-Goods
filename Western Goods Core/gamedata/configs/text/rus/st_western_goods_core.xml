@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 31/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -21,15 +21,32 @@
     </string>
 
     <string id="st_err_outdated_game_what">
-        <text>Версия вашей игры не поддерживается модификацией. Пожалуйста, установите версию игры S.T.A.L.K.E.R. Anomaly 1.5.2.</text>
+        <text>Версия вашей игры не поддерживается модификацией. Пожалуйста, установите версию игры S.T.A.L.K.E.R. Anomaly %s.</text>
     </string>
 
     <string id="st_err_outdated_game_why">
-        <text>Western Goods требует функций игры, добавленных только в 1.5.2, и/или использует для работы модификации требующие версии игры 1.5.2.</text>
+        <text>Western Goods требует функций игры, добавленных только в 1.5.2, и/или использует для работы модификации требующие версии игры %s.</text>
     </string>
 
     <string id="st_err_outdated_game_where">
-        <text>Вы можете скачать S.T.A.L.K.E.R. Anomaly 1.5.2 с ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+        <text>Вы можете скачать S.T.A.L.K.E.R. Anomaly %s с ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+    </string>
+
+    <!-- Out-of-date modded exes -->
+    <string id="st_err_outdated_modded_exes_title">
+        <text>Версия моддвижка недействительна или устарела.</text>
+    </string>
+
+    <string id="st_err_outdated_modded_exes_what">
+        <text>Ваш моддвижок отсутствует, поврежден или устарел. Установите модифицированные исполняемые файлы версии %s или более новой.</text>
+    </string>
+
+    <string id="st_err_outdated_modded_exes_why">
+        <text>В движок постоянно добавляются улучшения, и Western Goods извлекает выгоду из этих новых функций.</text>
+    </string>
+
+    <string id="st_err_outdated_modded_exes_where">
+        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
     </string>
 
     <!-- Missing DXML -->
@@ -46,7 +63,7 @@
     </string>
 
     <string id="st_err_missing_dxml_where">
-        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
     </string>
 
     <!-- Missing LUA unlocalizer -->
@@ -63,7 +80,7 @@
     </string>
 
     <string id="st_err_missing_unlocalizer_where">
-        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes</text>
+        <text>Вы можете установить последнюю версию Modded Exes с Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
     </string>
 
     <!--=============================================================================================================-->

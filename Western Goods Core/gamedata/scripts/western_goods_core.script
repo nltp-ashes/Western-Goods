@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 31/07/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -24,6 +24,8 @@
 
 -- Constants
 local VERSION                       = "3.0.0"
+local REQUIRED_GAME_VERSION         = "1.5.2"
+local REQUIRED_MODDED_EXES_VERSION  = 20240612
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
@@ -264,14 +266,20 @@ end
 --- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
 --- @return nil
 function check_prerequisites()
-    UnregisterScriptCallback("on_game_load", check_prerequisites)
-
     -- Out-of-date game
     assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
         western_goods_utils.get_translation("st_err_outdated_game_title"),
-        western_goods_utils.get_translation("st_err_outdated_game_what"),
-        western_goods_utils.get_translation("st_err_outdated_game_why"),
-        western_goods_utils.get_translation("st_err_outdated_game_where")
+        western_goods_utils.get_translation("st_err_outdated_game_what", REQUIRED_GAME_VERSION),
+        western_goods_utils.get_translation("st_err_outdated_game_why", REQUIRED_GAME_VERSION),
+        western_goods_utils.get_translation("st_err_outdated_game_where", REQUIRED_GAME_VERSION)
+    ))
+
+    -- Out-of-date modded exes
+    assert(is_modded_exes_updated(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_title"),
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_what", tostring(REQUIRED_MODDED_EXES_VERSION):insert(".", 4):insert(".", 7)),
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_why"),
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_where")
     ))
 
     -- Missing DXML
@@ -294,7 +302,16 @@ end
 --- Function used to check if game version number is 1.5.2.
 --- @return boolean
 function is_version_1_5_2()
-    return string.find(GAME_VERSION,"1.5.2")
+    return string.find(GAME_VERSION, REQUIRED_GAME_VERSION)
+end
+
+--- Function used to check if the modded exes are up to date.
+--- @return boolean
+function is_modded_exes_updated()
+    if not MODDED_EXES_VERSION then
+        return false
+    end
+    return MODDED_EXES_VERSION >= REQUIRED_MODDED_EXES_VERSION
 end
 
 --- Function used to check if DXML is installed.

@@ -2,6 +2,9 @@
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.0.0/total?label=Downloads)]()
 
+**• Additions :**
+> • Added a CTD when using an outdated version of the modded executables.
+
 **• Changes :**
 > • Separated all the different features of the addon into individual, and standalone modules;
 > • Added sound effect when refilling a lighter (Thanks demonized);
