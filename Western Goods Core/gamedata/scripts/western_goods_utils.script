@@ -703,14 +703,7 @@ function get_squad_of(obj)
         return
     end
 
-    local squad = get_object_squad(obj)
-
-    if not squad then
-        printf("~[WG] WARNING | Utils | Object '%s' has no squad, this will probably crash the game eventually since stalkers/mutants MUST be in squads !", obj and obj:name())
-        return
-    end
-
-    return squad
+    return get_object_squad(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
