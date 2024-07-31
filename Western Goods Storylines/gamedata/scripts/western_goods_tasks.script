@@ -5,11 +5,11 @@
 ---    Date : 28/07/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
----    This script handles specific code for the food module.                                                        ---
+---    This script handles specific code for the storylines module.                                                  ---
 ---                                                                                                                  ---
 ---    It is responsible for :                                                                                       ---
+---    - Adding dialogs to NPCs;                                                                                     ---
 ---    - Defining the trader and corpse params for the new items;                                                    ---
----    - Handling migration process between the addon's updates;                                                     ---
 ---    - Handling events when the player uses an item;                                                               ---
 ---                                                                                                                  ---
 ---==================================================================================================================---

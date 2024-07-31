@@ -5,9 +5,8 @@
 ---    Date : 28/07/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
----    This script manages the helicopter transport system (similar to using a guide in the original games).         ---
----    Essentially, the function go_to_level(...) is called from a dialog, and triggers a level change.              ---
----    When the player appears on the new map, and helicopter is spawned overhead and is set to leave to map.        ---
+---    This script handles the helicopter transport. It is basically a wrapper around the procedural guides.         ---
+---    When using guides with certain NPCs, and helicopter will spawn above the player at the destination.           ---
 ---                                                                                                                  ---
 ---==================================================================================================================---
 

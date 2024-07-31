@@ -5,14 +5,7 @@
 ---    Date : 28/07/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
----    This script holds the 'core' of the addon.                                                                    ---
----    Stuff that ensure proper working of the addon, or that are general purpose.                                   ---
----                                                                                                                  ---
----    Notable mentions are :                                                                                        ---
----     - This script is responsible for ensuring the player has the required game version and pre-requisites;       ---
----     - This script is responsible for cleaning the save-game in case the player decides to remove the addon;      ---
----     - This script is the source of truth for the list of items and objects added by the addon.                   ---
----     - This script is the source of truth to check if other specific addons are installed.                        ---
+---    This script defines the trader and corpse params for the new items.                                           ---
 ---                                                                                                                  ---
 ---==================================================================================================================---
 

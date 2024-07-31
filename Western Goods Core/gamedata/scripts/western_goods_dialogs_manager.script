@@ -7,9 +7,10 @@
 ---                                                                                                                  ---
 ---    This script is used to manage the script-side of dialogs in the addon.                                        ---
 ---                                                                                                                  ---
----    It essentially is composed of two things :                                                                    ---
+---    It essentially is composed of three things :                                                                  ---
 ---     - The addon's own dialog system (also referred as auto-rolling dialogs - using the game's news manager);     ---
----     - The functions used to generate start dialogs for NPCs.                                                     ---
+---     - The functions used to generate start (aka greetings) dialogs for NPCs.                                     ---
+---     - The functions used to generate scripted dialogs for NPCs.                                                  ---
 ---                                                                                                                  ---
 ---==================================================================================================================---
 
