@@ -11,6 +11,7 @@
 > • Removed console warning when the addon detects a squad-less NPC;
 
 **• Bug fixes :**
+> • Fixed incorrect paths to bump map textures for food and drinks;
 > • Fixed Williams Heades always offering free travels, even before finishing the "Helicopter Delivery" storyline;
 > • Fixed Bic lighter being refillable. Now only the Zippo is refillable;
 > • Fixed lighters being refillable even when already full;
