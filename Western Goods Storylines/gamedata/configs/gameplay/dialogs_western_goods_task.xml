@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    This file defines the game dialogs for the storylines of Western Goods.                                      -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<game_dialogs>
+
+    <!--=============================================================================================================-->
+    <!--    Jupiter Informant Dialogs                                                                                -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_jupiter_informant_meet">
+        <has_info>western_goods_act_1_task_2_active</has_info>
+        <dont_has_info>western_goods_jupiter_informant_first_meet_over</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- npc -->
+                <text>western_goods_jupiter_informant_meet_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- actor -->
+                <text>western_goods_jupiter_informant_meet_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- npc -->
+                <text>western_goods_jupiter_informant_meet_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>western_goods_jupiter_informant_meet_3</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- npc -->
+                <text>western_goods_jupiter_informant_meet_4</text>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- actor -->
+                <text>western_goods_jupiter_informant_meet_5</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="6"> <!-- npc -->
+                <text>western_goods_jupiter_informant_meet_6</text>
+                <give_info>western_goods_jupiter_informant_first_meet_over</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    Helicopter Crew Member Dialogs                                                                           -->
+    <!--=============================================================================================================-->
+
+    <dialog id="stalker_crew_member_start">
+        <phrase_list>
+            <phrase id="0">
+                <script_text>western_goods_dialogs_manager.st_crew_member_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="stalker_crew_member_rescue">
+        <has_info>western_goods_act_1_task_3_active</has_info>
+        <dont_has_info>western_goods_crew_member_rescue_over</dont_has_info>
+        <phrase_list>
+            <phrase id="0">
+                <text>stalker_crew_member_rescue_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1">
+                <text>stalker_crew_member_rescue_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2">
+                <text>stalker_crew_member_rescue_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3">
+                <text>stalker_crew_member_rescue_3</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="4">
+                <text>stalker_crew_member_rescue_4</text>
+                <give_info>western_goods_crew_member_rescue_over</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="stalker_crew_member_reward">
+        <has_info>western_goods_act_1_task_3_finished</has_info>
+        <dont_has_info>western_goods_crew_member_reward_over</dont_has_info>
+        <phrase_list>
+            <phrase id="0">
+                <text>stalker_crew_member_reward_0</text>
+                <give_info>western_goods_crew_member_reward_over</give_info>
+                <next>1</next>
+            </phrase>
+            <phrase id="1">
+                <text>stalker_crew_member_reward_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2">
+                <text>stalker_crew_member_reward_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3">
+                <text>stalker_crew_member_reward_3</text>
+                <action>western_goods_tasks_act_1.give_final_reward</action>
+                <next>4</next>
+            </phrase>
+            <phrase id="4">
+                <text>stalker_crew_member_reward_4</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="stalker_crew_member_barter">
+        <has_info>western_goods_act_1_task_3_finished</has_info>
+        <precondition>western_goods_core.is_barter_ui_installed</precondition>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_stalker_crew_member_barter</text>
+                <next>1</next>
+                <next>2</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <precondition>dialogs_mlr.check_no_debt</precondition>
+                <script_text>dialogs.st_trader_dialog_reply</script_text>
+                <action>western_goods_npcs.crew_member_barter</action>
+            </phrase>
+            <phrase id="2"> <!-- npc -->
+                <precondition>dialogs_mlr.check_debt</precondition>
+                <script_text>dialogs_mlr.st_debt_no_trade</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="stalker_crew_member_lore">
+        <has_info>western_goods_act_1_task_3_finished</has_info>
+        <precondition>western_goods_core.is_barter_ui_installed</precondition>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_stalker_crew_member_lore_init</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_stalker_crew_member_lore_ask</text>
+                <next>2</next>
+                <next>4</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_stalker_crew_member_lore_question_1</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_stalker_crew_member_lore_answer_1</text>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_stalker_crew_member_lore_question_2</text>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- npc -->
+                <text>st_stalker_crew_member_lore_answer_2</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    Dunn Lynn Dialogs                                                                                        -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_dunn_lynn_start">
+        <phrase_list>
+            <phrase id="0">
+                <script_text>western_goods_dialogs_manager.st_dunn_lynn_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    Golubev Nikolaj                                                                                          -->
+    <!--=============================================================================================================-->
+
+    <dialog id="stalker_ecolog_convoy_yellow_start">
+        <phrase_list>
+            <phrase id="0">
+                <script_text>western_goods_dialogs_manager.st_yellow_ecolog_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="stalker_ecolog_convoy_yellow_meet">
+        <has_info>western_goods_act_2_task_2_active</has_info>
+        <has_info>western_goods_act_2_task_2_ecolog_calm</has_info>
+        <dont_has_info>western_goods_ecolog_convoy_yellow_meet_over</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>stalker_ecolog_convoy_yellow_meet_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>stalker_ecolog_convoy_yellow_meet_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>stalker_ecolog_convoy_yellow_meet_2</text>
+                <give_info>western_goods_ecolog_convoy_yellow_meet_over</give_info>
+                <action>dialogs.break_dialog</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="stalker_ecolog_convoy_yellow_second_meet">
+        <has_info>western_goods_act_2_task_2_active</has_info>
+        <has_info>western_goods_ecolog_convoy_yellow_meet_over</has_info>
+        <has_info>western_goods_act_2_task_2_controller_killed</has_info>
+        <dont_has_info>western_goods_ecolog_convoy_yellow_second_meet_over</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>stalker_ecolog_convoy_yellow_second_meet_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>stalker_ecolog_convoy_yellow_second_meet_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>stalker_ecolog_convoy_yellow_second_meet_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>stalker_ecolog_convoy_yellow_second_meet_3</text>
+                <action>western_goods_tasks_act_2.task_2_give_quest_item</action>
+                <give_info>western_goods_ecolog_convoy_yellow_second_meet_over</give_info>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>stalker_ecolog_convoy_yellow_second_meet_4</text>
+                <action>dialogs.break_dialog</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    Danylo Chernenko Dialogs                                                                                 -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_danylo_chernenko_start">
+        <phrase_list>
+            <phrase id="0">
+                <script_text>western_goods_dialogs_manager.st_danylo_chernenko_start_dialog</script_text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    SSU Prisoner Dialogs                                                                                     -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_ssu_prisoner_start">
+        <phrase_list>
+            <phrase id="0">
+                <text>western_goods_ssu_prisoner_start</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    SSU Supervisor Dialogs                                                                                   -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_ssu_supervisor_bribe">
+        <has_info>western_goods_act_3_task_3_active</has_info>
+        <dont_has_info>western_goods_act_3_task_3_finished</dont_has_info>
+        <dont_has_info>western_goods_ssu_supervisor_bribed</dont_has_info>
+        <precondition>western_goods_tasks_act_3.task_3_bribe_dialog_cond</precondition>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>western_goods_ssu_supervisor_bribe_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>western_goods_ssu_supervisor_bribe_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <script_text>western_goods_tasks_act_3.task_3_st_bribe_dialog</script_text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>western_goods_ssu_supervisor_bribe_3</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>western_goods_ssu_supervisor_bribe_4</text>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- npc -->
+                <text>western_goods_ssu_supervisor_bribe_5</text>
+                <action>western_goods_tasks_act_3.task_3_bribe</action>
+                <give_info>western_goods_ssu_supervisor_bribed</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <!--=============================================================================================================-->
+    <!--    Task start & end dialogs                                                                                 -->
+    <!--=============================================================================================================-->
+
+    <dialog id="western_goods_act_1_task_1_start">
+        <has_info>western_goods_trader_first_meet_over</has_info>
+        <dont_has_info>western_goods_act_1_task_1_active</dont_has_info>
+        <dont_has_info>western_goods_act_1_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_1_task_1_ask_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_1_task_1_job_descr</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_1_task_1_accept_work</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_1_task_1_refuse_work</text>
+            </phrase>
+            <phrase id="4"> <!-- npc -->
+                <text>st_wg_act_2_task_1_answer_0</text>
+                <action>western_goods_tasks_act_1.act_1_task_1_start</action>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- actor -->
+                <text>st_wg_act_2_task_1_answer_1</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="6"> <!-- npc -->
+                <text>st_wg_act_2_task_1_answer_2</text>
+                <action>western_goods_tasks_act_1.task_1_give_item</action>
+                <next>7</next>
+            </phrase>
+            <phrase id="7"> <!-- actor -->
+                <text>st_wg_act_2_task_1_answer_3</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_1_task_1_end">
+        <has_info>western_goods_trader_first_meet_over</has_info>
+        <has_info>western_goods_act_1_task_1_active</has_info>
+        <has_info>western_goods_act_1_task_1_ready_finished</has_info>
+        <dont_has_info>western_goods_act_1_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_1_task_1_finish_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_1_task_1_task_complete_descr</text>
+                <action>western_goods_tasks_act_1.act_1_task_1_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_1_task_2_start">
+        <has_info>western_goods_trader_first_meet_over</has_info>
+        <has_info>western_goods_act_1_task_1_finished</has_info>
+        <has_info>western_goods_act_1_task_2_available</has_info>
+        <dont_has_info>western_goods_act_1_task_2_active</dont_has_info>
+        <dont_has_info>western_goods_act_1_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_1_task_2_ask_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- actor -->
+                <text>st_wg_act_1_task_2_ask_work_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_1_task_2_ask_work_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_1_task_2_job_descr</text>
+                <next>4</next>
+                <next>5</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_1_task_2_accept_work</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="5"> <!-- actor -->
+                <text>st_wg_act_1_task_2_refuse_work</text>
+            </phrase>
+            <phrase id="6"> <!-- npc -->
+                <text>st_wg_act_2_task_2_answer</text>
+                <action>western_goods_tasks_act_1.act_1_task_2_start</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_1_task_2_end">
+        <has_info>western_goods_trader_first_meet_over</has_info>
+        <has_info>western_goods_act_1_task_2_active</has_info>
+        <has_info>western_goods_act_1_task_2_ready_finished</has_info>
+        <dont_has_info>western_goods_act_1_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_1_task_2_finish_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- actor -->
+                <text>st_wg_act_1_task_2_finish_work_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_1_task_2_finish_work_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_1_task_2_task_complete_descr</text>
+                <action>western_goods_tasks_act_1.act_1_task_2_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_1_task_3_start">
+        <has_info>western_goods_trader_first_meet_over</has_info>
+        <has_info>western_goods_act_1_task_2_finished</has_info>
+        <has_info>western_goods_act_1_task_3_available</has_info>
+        <dont_has_info>western_goods_act_1_task_3_active</dont_has_info>
+        <dont_has_info>western_goods_act_1_task_3_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_1_task_3_ask_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_1_task_3_job_descr</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_1_task_3_accept_work</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_1_task_3_refuse_work</text>
+            </phrase>
+            <phrase id="4"> <!-- npc -->
+                <text>st_wg_act_2_task_3_answer</text>
+                <action>western_goods_tasks_act_1.act_1_task_3_start</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_1_task_3_end">
+        <has_info>western_goods_trader_first_meet_over</has_info>
+        <has_info>western_goods_act_1_task_3_active</has_info>
+        <has_info>western_goods_act_1_task_3_ready_finished</has_info>
+        <dont_has_info>western_goods_act_1_task_3_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_1_task_3_finish_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_1_task_3_task_complete_descr</text>
+                <action>western_goods_tasks_act_1.act_1_task_3_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_2_task_1_start">
+        <has_info>western_goods_act_1_finished</has_info>
+        <dont_has_info>western_goods_act_2_task_1_active</dont_has_info>
+        <dont_has_info>western_goods_act_2_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_2_task_1_ask_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_2_task_1_job_descr</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_2_task_1_accept_work</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_2_task_1_refuse_work</text>
+            </phrase>
+            <phrase id="4"> <!-- npc -->
+                <text>st_wg_act_2_task_1_answer</text>
+                <action>western_goods_tasks_act_2.act_2_task_1_start</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_2_task_1_end">
+        <has_info>western_goods_act_2_task_1_active</has_info>
+        <has_info>western_goods_act_2_task_1_ready_finished</has_info>
+        <dont_has_info>western_goods_act_2_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_2_task_1_finish_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_2_task_1_task_complete_descr</text>
+                <action>western_goods_tasks_act_2.act_2_task_1_end</action>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_2_task_2_opt_in</text>
+                <give_info>western_goods_act_2_task_2_opted_in</give_info>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_2_task_2_opt_out</text>
+                <give_info>western_goods_act_2_task_2_opted_out</give_info>
+                <next>5</next>
+            </phrase>
+            <phrase id="4"> <!-- npc -->
+                <text>st_wg_act_2_task_2_opted_in</text>
+            </phrase>
+            <phrase id="5"> <!-- npc -->
+                <text>st_wg_act_2_task_2_opted_out</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_2_task_2_differed_opt_in">
+        <has_info>western_goods_act_2_task_2_opted_out</has_info>
+        <dont_has_info>western_goods_act_2_task_2_opted_in</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_2_task_2_differed_opt_in</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_2_task_2_differed_opted_in</text>
+                <give_info>western_goods_act_2_task_2_opted_in</give_info>
+                <disable_info>western_goods_act_2_task_2_opted_out</disable_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_2_task_2_end">
+        <has_info>western_goods_act_2_task_2_active</has_info>
+        <has_info>western_goods_act_2_task_2_ready_finished</has_info>
+        <dont_has_info>western_goods_act_2_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_2_task_2_finish_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_2_task_2_finish_work_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_2_task_2_finish_work_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_2_task_2_finish_work_3</text>
+                <action>western_goods_tasks_act_2.act_2_task_2_end</action>
+                <next>4</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_2_task_2_finish_work_4</text>
+                <next>5</next>
+            </phrase>
+            <phrase id="5"> <!-- npc -->
+                <text>st_wg_act_2_task_2_finish_work_5</text>
+                <next>6</next>
+            </phrase>
+            <phrase id="6">
+                <text>st_wg_act_2_task_2_finish_work_6</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_1_start">
+        <has_info>western_goods_oleksandr_chernenko_meet_over</has_info>
+        <dont_has_info>western_goods_act_3_task_1_active</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_1_ask_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_1_ask_work_1</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_1_accept_work</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_3_task_1_refuse_work</text>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_1_work_details</text>
+                <action>western_goods_tasks_act_3.act_3_task_1_start</action>
+                <action>western_goods_tasks_act_3.task_1_give_item</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_1_usb_unlock">
+        <has_info>western_goods_act_3_task_1_active</has_info>
+        <precondition>western_goods_tasks_act_3.task_1_usb_unlock_dialog_cond</precondition>
+        <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_1_usb_unlock_ask</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_1_usb_unlock_quote</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <precondition>western_goods_tasks_act_3.task_1_usb_unlock_money_cond</precondition>
+                <text>st_wg_act_3_task_1_usb_unlock_accept</text>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_3_task_1_usb_unlock_refuse</text>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_1_usb_unlock_unlocked</text>
+                <action>western_goods_tasks_act_3.task_1_usb_unlock</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_1_end">
+        <has_info>western_goods_act_3_task_1_active</has_info>
+        <has_info>western_goods_act_3_task_1_ready_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_1_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_1_end_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_1_end_work_1</text>
+                <next>2</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_1_end_work_2</text>
+                <next>3</next>
+            </phrase>
+            <phrase id="3"> <!-- npc -->
+                <text>st_wg_act_3_task_1_end_work_3</text>
+                <action>western_goods_tasks_act_3.act_3_task_1_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_2_start">
+        <has_info>western_goods_act_3_task_1_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_2_active</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_2_start_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_2_start_work_details</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_2_start_work_accept</text>
+                <action>western_goods_tasks_act_3.act_3_task_2_start</action>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_3_task_2_start_work_refuse</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_2_interrogation">
+        <has_info>western_goods_act_3_task_2_active</has_info>
+        <dont_has_info>western_goods_ssu_prisoner_interrogated</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_start</text>
+                <action>western_goods_tasks_act_3.task_2_init_interrogation</action>
+                <next>1</next>
+            </phrase>
+
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_start_answer</text>
+                <next>2</next>
+                <next>3</next>
+                <next>4</next>
+            </phrase>
+
+            <!-- intro (0) -->
+
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_0_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>5</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_0_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>6</next>
+            </phrase>
+            <phrase id="4"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_0_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>7</next>
+            </phrase>
+
+            <phrase id="5"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_0_nice_answer</text>
+                <next>8</next>
+                <next>9</next>
+                <next>10</next>
+            </phrase>
+            <phrase id="6"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_0_normal_answer</text>
+                <next>11</next>
+                <next>12</next>
+                <next>13</next>
+            </phrase>
+            <phrase id="7"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_0_mean_answer</text>
+                <next>14</next>
+                <next>15</next>
+                <next>16</next>
+            </phrase>
+
+            <!-- who (1) -->
+
+            <phrase id="8"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>17</next>
+            </phrase>
+            <phrase id="9"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>18</next>
+            </phrase>
+            <phrase id="10"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>19</next>
+            </phrase>
+            <phrase id="11"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>17</next>
+            </phrase>
+            <phrase id="12"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>18</next>
+            </phrase>
+            <phrase id="13"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>19</next>
+            </phrase>
+            <phrase id="14"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>17</next>
+            </phrase>
+            <phrase id="15"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>18</next>
+            </phrase>
+            <phrase id="16"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>19</next>
+            </phrase>
+
+            <phrase id="17"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_1_nice_answer</text>
+                <next>20</next>
+                <next>21</next>
+                <next>22</next>
+            </phrase>
+            <phrase id="18"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_1_normal_answer</text>
+                <next>23</next>
+                <next>24</next>
+                <next>25</next>
+            </phrase>
+            <phrase id="19"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_1_mean_answer</text>
+                <next>26</next>
+                <next>27</next>
+                <next>28</next>
+            </phrase>
+
+            <!-- why (2) -->
+
+            <phrase id="20"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>29</next>
+            </phrase>
+            <phrase id="21"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>30</next>
+            </phrase>
+            <phrase id="22"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>31</next>
+            </phrase>
+            <phrase id="23"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>29</next>
+            </phrase>
+            <phrase id="24"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>30</next>
+            </phrase>
+            <phrase id="25"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>31</next>
+            </phrase>
+            <phrase id="26"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>29</next>
+            </phrase>
+            <phrase id="27"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>30</next>
+            </phrase>
+            <phrase id="28"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>31</next>
+            </phrase>
+
+            <phrase id="29"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_2_nice_answer</text>
+                <next>32</next>
+                <next>33</next>
+                <next>34</next>
+            </phrase>
+            <phrase id="30"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_2_normal_answer</text>
+                <next>35</next>
+                <next>36</next>
+                <next>37</next>
+            </phrase>
+            <phrase id="31"> <!-- npc -->
+                <text>st_wg_act_3_task_2_interrogation_2_mean_answer</text>
+                <next>38</next>
+                <next>39</next>
+                <next>40</next>
+            </phrase>
+
+            <!-- where (3) -->
+
+            <phrase id="32"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_nice_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="33"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_nice_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="34"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_nice_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="35"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_normal_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="36"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_normal_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="37"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_normal_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="38"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_mean_nice</text>
+                <action>western_goods_tasks_act_3.task_2_incr_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="39"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_mean_normal</text>
+                <action>western_goods_tasks_act_3.task_2_normal_interrogation</action>
+                <next>41</next>
+            </phrase>
+            <phrase id="40"> <!-- actor -->
+                <text>st_wg_act_3_task_2_interrogation_3_mean_mean</text>
+                <action>western_goods_tasks_act_3.task_2_decr_interrogation</action>
+                <next>41</next>
+            </phrase>
+
+            <phrase id="41"> <!-- npc -->
+                <script_text>western_goods_dialogs_manager.st_interrogation_end</script_text>
+                <action>western_goods_tasks_act_3.task_2_interrogation_over</action>
+                <give_info>western_goods_ssu_prisoner_interrogated</give_info>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_2_end">
+        <has_info>western_goods_act_3_task_2_active</has_info>
+        <has_info>western_goods_act_3_task_2_ready_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_2_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_2_end_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_2_end_work_1</text>
+                <action>western_goods_tasks_act_3.act_3_task_2_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_3_start">
+        <has_info>western_goods_act_3_task_2_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_3_active</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_3_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_3_start_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_3_start_work_details</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_3_start_work_accept</text>
+                <action>western_goods_tasks_act_3.act_3_task_3_start</action>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_3_task_3_start_work_refuse</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_3_end">
+        <has_info>western_goods_act_3_task_3_active</has_info>
+        <has_info>western_goods_act_3_task_3_ready_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_3_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_3_end_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_3_end_work_1</text>
+                <action>western_goods_tasks_act_3.act_3_task_3_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_4_start">
+        <has_info>western_goods_act_3_task_3_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_4_active</dont_has_info>
+        <dont_has_info>western_goods_act_3_task_4_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_4_start_work</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_4_start_work_details</text>
+                <next>2</next>
+                <next>3</next>
+            </phrase>
+            <phrase id="2"> <!-- actor -->
+                <text>st_wg_act_3_task_4_start_work_accept_0</text>
+                <action>western_goods_tasks_act_3.act_3_task_4_start</action>
+                <next>4</next>
+            </phrase>
+            <phrase id="3"> <!-- actor -->
+                <text>st_wg_act_3_task_4_start_work_refuse</text>
+            </phrase>
+            <phrase id="4"> <!-- npc -->
+                <text>st_wg_act_3_task_4_start_work_accept_1</text>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+    <dialog id="western_goods_act_3_task_4_end">
+        <has_info>western_goods_act_3_task_4_active</has_info>
+        <has_info>western_goods_act_3_task_4_ready_finished</has_info>
+        <dont_has_info>western_goods_act_3_task_4_finished</dont_has_info>
+        <phrase_list>
+            <phrase id="0"> <!-- actor -->
+                <text>st_wg_act_3_task_4_end_work_0</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1"> <!-- npc -->
+                <text>st_wg_act_3_task_4_end_work_1</text>
+                <action>western_goods_tasks_act_3.act_3_task_4_end</action>
+            </phrase>
+        </phrase_list>
+    </dialog>
+
+</game_dialogs>

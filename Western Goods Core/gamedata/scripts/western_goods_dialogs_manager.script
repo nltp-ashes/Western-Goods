@@ -1,0 +1,303 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script is used to manage the script-side of dialogs in the addon.                                        ---
+---                                                                                                                  ---
+---    It essentially is composed of three things :                                                                  ---
+---     - The addon's own dialog system (also referred as auto-rolling dialogs - using the game's news manager);     ---
+---     - The functions used to generate start (aka greetings) dialogs for NPCs.                                     ---
+---     - The functions used to generate scripted dialogs for NPCs.                                                  ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Dialog constants
+local CONST_DISPLAY_TIME        = 15
+local CONST_DELAY_MSG           = 7000
+local CONST_DELAY_QUICK_MSG     = 1000
+local CONST_DELAY_LOAD          = 15000
+local CONST_MSG_HEADER          = western_goods_utils.get_translation("st_wg_dm_message_header")
+local CONST_DEFAULT_NAME        = western_goods_utils.get_translation("st_wg_dm_default_name")
+local CONST_DEFAULT_ICON        = "ui_inGame2_no_data"
+
+-- Dialog variables
+DIALOGS_TABLE                   = {}
+local sound                     = true
+local last_sender               = nil
+
+-- Imported functions
+local dbg_printf                = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Dialog Manager
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called every frame to update the Dialog Manager and check if some messages should be fired.
+--- When dialogs are waiting to be played, the Dialog Manager will disable dynamic random news.
+--- @return nil
+function update_dialogs()
+    -- Turn off dynamic news
+    if size_table(DIALOGS_TABLE) > 0 and dynamic_news_manager.enable_news then
+        dynamic_news_manager.enable_news = false
+        dbg_printf("[WG] Dialogs Manager | Disabled dynamic news (now:%s)", dynamic_news_manager.enable_news)
+    end
+
+    -- Process dialogs
+    for index,dialog in pairs(DIALOGS_TABLE) do
+        if dialog.timer < time_global() then
+            -- Send the line of dialog
+            dynamic_news_helper.send_tip(dialog.message, CONST_MSG_HEADER .. " " .. dialog.sender, nil, CONST_DISPLAY_TIME, dialog.icon, dialog.sound, "npc")
+            DIALOGS_TABLE[index] = nil
+            dbg_printf("[WG] Dialogs Manager | Pushed dialog (from:%s) (left:%s)", dialog.sender, size_table(DIALOGS_TABLE))
+        end
+    end
+
+    -- Re-enable dynamic news if we're done sending dialogs
+    if size_table(DIALOGS_TABLE) < 1 and not dynamic_news_manager.enable_news then
+        dynamic_news_manager.enable_news = true
+        dbg_printf("[WG] Dialogs Manager | Re-enabled dynamic news (now:%s)", dynamic_news_manager.enable_news)
+    end
+end
+
+--- Function used to register multiple dialog lines to the Dialog Manager.
+--- For each line of dialog, default values exist 'sender' and 'icon'; 'message' is required.
+--- @param dialog_table table
+--- @param quick_delay boolean
+--- @return nil
+function send_dialog(dialog_table, quick_delay)
+    dbg_printf("[WG] Dialogs Manager | Preparing dialog (length:%s)", size_table(dialog_table))
+
+    for index,dialog in pairs(dialog_table) do
+        -- Default values
+        dialog.sender = dialog.sender or CONST_DEFAULT_NAME
+        dialog.icon = dialog.icon or CONST_DEFAULT_ICON
+        dialog.timer = (quick_delay and CONST_DELAY_QUICK_MSG or CONST_DELAY_MSG) * (size_table(DIALOGS_TABLE) + 1) + time_global()
+        dialog.sound = sound and "beep_1" or "beep_2"
+
+        -- Invert sound effect if from different sender
+        if not last_sender or (last_sender ~= dialog.sender) then
+            sound = not sound
+            last_sender = dialog.sender
+        end
+
+        this.send_message(dialog.message, dialog.sender, dialog.icon, dialog.timer, dialog.sound)
+    end
+
+    dbg_printf("[WG] Dialogs Manager | Dialog ready (waiting queue: %s(+%s))", size_table(DIALOGS_TABLE), size_table(dialog_table))
+end
+
+--- Function used to register a single dialog line to the Dialog Manager.
+--- Default values exist 'sender', 'icon', 'timer' and 'sound'; 'message' is required.
+--- @param message string
+--- @param sender string
+--- @param icon string
+--- @param timer number
+--- @param sound string
+--- @return nil
+function send_message(message, sender, icon, timer, sfx)
+    -- Default values
+    sender = sender or CONST_DEFAULT_NAME
+    icon = icon or CONST_DEFAULT_ICON
+    timer = timer or (CONST_DELAY_QUICK_MSG + time_global())
+    sfx = sfx or "beep_1"
+
+    table.insert(DIALOGS_TABLE, { message=message, sender=sender, icon=icon, timer=timer, sound=sfx })
+
+    dbg_printf("[WG] Dialogs Manager | Registered dialog (from:%s)", sender)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Scripted Text Dialogs
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called to determine the start dialog's text of the crew member.
+--- @return string
+function st_crew_member_start_dialog()
+    if not (western_goods_utils.has_info("western_goods_act_1_task_3_active") or western_goods_utils.has_info("western_goods_act_1_task_3_finished")) then
+        return western_goods_utils.get_translation("st_stalker_crew_member_start_0")
+
+    elseif not western_goods_utils.has_info("western_goods_crew_member_rescue_over") then
+        return western_goods_utils.get_translation("st_stalker_crew_member_start_1")
+
+    elseif not western_goods_tasks_act_1.TASK_3_CACHE.stage_1_dialog_1_sent then
+        return western_goods_utils.get_translation("st_stalker_crew_member_start_2")
+
+    elseif not western_goods_tasks_act_1.TASK_3_CACHE.stage_1_dialog_2_sent then
+        return western_goods_utils.get_translation("st_stalker_crew_member_start_3")
+
+    elseif not western_goods_utils.has_info("western_goods_act_1_task_3_crew_member_extracted") then
+        return western_goods_utils.get_translation("st_stalker_crew_member_start_4")
+
+    elseif not western_goods_utils.has_info("western_goods_act_1_task_3_finished") then
+        return western_goods_utils.get_translation("st_stalker_crew_member_start_5")
+
+    else return western_goods_utils.get_translation("st_stalker_crew_member_start_6") end
+end
+
+--- Function called to determine the start dialog's text of yellow crewmate.
+--- @return string
+function st_yellow_ecolog_start_dialog()
+    if western_goods_utils.has_info("western_goods_act_2_task_2_controller_spawned") and not western_goods_utils.has_info("western_goods_act_2_task_2_controller_killed") then
+        return western_goods_utils.get_translation("st_wg_yellow_ecolog_start_0")
+
+    else return western_goods_utils.get_translation("st_wg_yellow_ecolog_start_1") end
+end
+
+--- Function called to determine the start dialog's text of Dunn Lynn.
+--- @return string
+function st_dunn_lynn_start_dialog()
+    if western_goods_utils.has_info("western_goods_act_2_task_2_active") and not western_goods_utils.has_info("western_goods_act_2_task_2_finished") then
+        return western_goods_utils.get_translation("st_wg_dunn_lynn_first_start")
+
+    elseif math.random() < 0.0001 then
+        return western_goods_utils.get_translation("st_wg_dunn_lynn_start_x")
+
+    else return western_goods_utils.get_translation("st_wg_dunn_lynn_start_" .. math.random(0,5)) end
+end
+
+--- Function called to determine the second phrase of Oleksandr Chernenko start dialog.
+--- @return string
+function st_oleksandr_chernenko_meet_1()
+    if get_actor_true_community() == "army" then
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_1_army")
+    else
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_1")
+    end
+end
+
+--- Function called to determine the third phrase of Oleksandr Chernenko start dialog.
+--- @return string
+function st_oleksandr_chernenko_meet_2()
+    if get_actor_true_community() == "army" then
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_2_army")
+    else
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_2")
+    end
+end
+
+--- Function called to determine the fourth phrase of Oleksandr Chernenko start dialog.
+--- @return string
+function st_oleksandr_chernenko_meet_3()
+    if get_actor_true_community() == "army" then
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_3_army")
+    else
+        return western_goods_utils.get_translation("western_goods_oleksandr_chernenko_meet_3")
+    end
+end
+
+--- Function called to determine the start dialog's text of Danylo Chernenko.
+--- @return string
+function st_danylo_chernenko_start_dialog()
+    if not western_goods_utils.has_info("western_goods_act_3_task_1_finished") then
+        return western_goods_utils.get_translation("st_wg_danylo_chernenko_first_start")
+    else
+        return western_goods_utils.get_translation("st_wg_danylo_chernenko_start_" .. math.random(0,5))
+    end
+end
+
+--- Function called to determine the final line of dialog for the interrogation with the SSU prisoner.
+--- @return string
+function st_interrogation_end()
+    local score = western_goods_tasks_act_3.TASK_2_CACHE.interrogation_points
+
+    dbg_printf("[WG] Tasks Act 3 | Task 2 - Interrogation finished with score %s", score)
+
+    if score >= 35 then
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_interrogation_end_nice")
+    elseif score >= 0 then
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_interrogation_end_normal")
+    else
+        return western_goods_utils.get_translation("st_wg_act_3_task_2_interrogation_end_mean")
+    end
+end
+
+--- Function used to determine the player dialog when asking a guide for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_ask(npc, flags)
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = "st_western_goods_trader_guide_ask"
+    end
+end
+
+--- Function used to determine the guide's dialog when answering the player's request for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_answer(npc, flags)
+    local guide_answers = {
+        ["stalker_western_goods_trader"] = "st_western_goods_trader_guide_answer",
+        ["jup_a6_freedom_trader_ashot"] = "st_western_goods_ashot_guide_answer",
+        ["mechanic_army_yan_mlr"] = "st_western_goods_peregrine_guide_answer",
+        ["jup_b6_scientist_biochemist"] = "st_western_goods_ozersky_guide_answer"
+    }
+
+    if guide_answers[npc:section()] then
+        flags.result = guide_answers[npc:section()]
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("save_state", save_state)
+    RegisterScriptCallback("load_state", load_state)
+    RegisterScriptCallback("actor_on_update", update_dialogs)
+    RegisterScriptCallback("western_goods_guide_on_ask", st_guide_ask)
+    RegisterScriptCallback("western_goods_guide_on_answer", st_guide_answer)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Data persistence
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to store information in the save file.
+--- @param m_data table
+--- @return nil
+function save_state(m_data)
+    -- Prepare save table
+    local DIALOGS_SAVE = {}
+
+    -- Make copies of dialog table
+    copy_table(DIALOGS_SAVE, DIALOGS_TABLE)
+
+    -- Pre-process timers
+    for _,dialog in pairs(DIALOGS_SAVE) do
+        dialog.timer = dialog.timer - time_global()
+    end
+
+    -- Save dialog table
+    m_data.wg_dialogs_table = DIALOGS_SAVE
+
+    -- Debug print
+    dbg_printf("[WG] Dialogs Manager | Saved dialog table...\n%s",utils_data.print_table(DIALOGS_SAVE, false, true))
+end
+
+--- Function used to load information stored in the save file.
+--- @param m_data table
+--- @return nil
+function load_state(m_data)
+    local DIALOGS_SAVE = m_data.wg_dialogs_table or {}
+
+    -- Post-process timers
+    for _,dialog in pairs(DIALOGS_SAVE) do
+        dialog.timer = dialog.timer + time_global() + CONST_DELAY_LOAD
+    end
+
+    copy_table(DIALOGS_TABLE, DIALOGS_SAVE)
+
+    -- Debug print
+    dbg_printf("[WG] Dialogs Manager | Loaded dialog table...\n%s",utils_data.print_table(DIALOGS_TABLE, false, true))
+end

@@ -1,0 +1,93 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    UI Template for the Compass of Western Goods.                                                                -->
+<!--                                                                                                                 -->
+<!--    Note : Since this UI is displayed in the game world, and not on a 2D display, coordinates aren't in pixels.  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+
+<w>
+    <compass>
+        <!-- Speed display -->
+        <speed>
+            <background x="0.0" y="0.0" width="0.0170" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_background</texture>
+            </background>
+            <label x="0.0025" y="0.0" width="0.012" height="0.005" stretch="1">
+                <texture shader="hud\p3d">wg_cp_label_speed</texture>
+            </label>
+            <unit x="0.01025" y="0.0025" width="0.0035" height="0.007" stretch="1">
+                <texture shader="hud\p3d">wg_cp_unit_kmh</texture>
+            </unit>
+            <m x="0.00325" y="0.0025" width="0.0035" height="0.007" stretch="1" />
+            <dm x="0.00675" y="0.0025" width="0.0035" height="0.007" stretch="1" />
+        </speed>
+
+        <!-- Distance to waypoint display -->
+        <dist>
+            <background x="0.0175" y="0.0" width="0.0170" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_background</texture>
+            </background>
+            <label x="0.02" y="0.0" width="0.012" height="0.005" stretch="1">
+                <texture shader="hud\p3d">wg_cp_label_dist</texture>
+            </label>
+            <dot x="0.02075" y="0.0025" width="0.0035" height="0.007" stretch="1">
+                <texture shader="hud\p3d">wg_cp_char_dot</texture>
+            </dot>
+            <unit x="0.0295" y="0.0025" width="0.0035" height="0.007" stretch="1">
+                <texture shader="hud\p3d">wg_cp_unit_km</texture>
+            </unit>
+            <km x="0.019" y="0.0025" width="0.0035" height="0.007" stretch="1" />
+            <hm x="0.0225" y="0.0025" width="0.0035" height="0.007" stretch="1" />
+            <dam x="0.026" y="0.0025" width="0.0035" height="0.007" stretch="1" />
+        </dist>
+
+        <!-- Estimated Time of Arrival (ETA) to waypoint display -->
+        <eta>
+            <background x="0.0" y="0.01" width="0.0170" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_background</texture>
+            </background>
+            <label x="0.0025" y="0.01" width="0.012" height="0.005" stretch="1">
+                <texture shader="hud\p3d">wg_cp_label_eta</texture>
+            </label>
+            <dots x="0.00675" y="0.0125" width="0.0035" height="0.007" stretch="1">
+                <texture shader="hud\p3d">wg_cp_char_dots</texture>
+            </dots>
+            <hh x="0.001" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+            <h x="0.0045" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+            <mm x="0.009" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+            <m x="0.0125" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+        </eta>
+
+        <!-- Time to waypoint display -->
+        <time>
+            <background x="0.0175" y="0.01" width="0.0170" height="0.009" stretch="1">
+                <texture shader="hud\p3d">wg_cp_background</texture>
+            </background>
+            <label x="0.02" y="0.01" width="0.012" height="0.005" stretch="1">
+                <texture shader="hud\p3d">wg_cp_label_time</texture>
+            </label>
+            <dots x="0.02425" y="0.0125" width="0.0035" height="0.007" stretch="1">
+                <texture shader="hud\p3d">wg_cp_char_dots</texture>
+            </dots>
+            <mm x="0.018" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+            <m x="0.022" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+            <ss x="0.0265" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+            <s x="0.0305" y="0.0125" width="0.0035" height="0.007" stretch="1" />
+        </time>
+
+        <!-- Compass display -->
+        <heading>
+            <cursor x="0.005" y="0.02" width="0.025" height="0.025" stretch="1" align="c" heading="1" heading_angle="0">
+                <texture shader="hud\p3d">wg_cp_cursor</texture>
+            </cursor>
+
+            <background x="0.005" y="0.02" width="0.025" height="0.025" stretch="1" align="c" heading="1" heading_angle="0" />
+        </heading>
+    </compass>
+</w>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : VodoXleb (Translation)                                                                              -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' entries in the PDA Guide.                                                -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <!-- Flea Market encyclopedia entry -->
+    <string id="encyclopedia_features_western_goods_flea">
+        <text>Барахолка</text>
+    </string>
+
+    <string id="encyclopedia_features_western_goods_flea_text">
+        <text>
+            %c[pda_white]Барахолка%c[ui_gray_1] посволяет игроку покупать временные предложения, где вещи продаются в нескольких экземплярах, но со скидкой.\n
+            \n%c[pda_green]Информация%c[ui_gray_1]\n
+            \nИгрок имеет возможность приобретать специальные предложения путём общения с торговцем на Барахолке. Эти предложения ограничены во времени и постепенно истекут, но будут заменены другими.\n
+            \nПредложение описывается так:\n
+            \n• %c[pda_white]Предмет%c[ui_gray_1]. Предлагаемая вещь;
+            \n• %c[pda_white]Кол-во%c[ui_gray_1]. Количество предметов в предложении. Колеблется между 2 и 10 предметами;
+            \n• %c[pda_white]Скидка%c[ui_gray_1]. Скидка по сравнению с базовой ценой. Колеблется между  5% и 50%;
+            \n• %c[pda_white]Цена%c[ui_gray_1]. Необходимое для покупки количество денег.
+        </text>
+    </string>
+
+</string_table>

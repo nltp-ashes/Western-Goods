@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 31/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' general purpose strings.                                                 -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <!--=============================================================================================================-->
+    <!--    Fatal Errors                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <!-- Out-of-date game -->
+    <string id="st_err_outdated_game_title">
+        <text>Game version invalid or out-of-date.</text>
+    </string>
+
+    <string id="st_err_outdated_game_what">
+        <text>Your game has an invalid version or is out-of-date. Please install version S.T.A.L.K.E.R. Anomaly %s.</text>
+    </string>
+
+    <string id="st_err_outdated_game_why">
+        <text>Western Goods requires some functionalities added only in 1.5.2, and/or uses prerequisites that themselves require version %s.</text>
+    </string>
+
+    <string id="st_err_outdated_game_where">
+        <text>You can download S.T.A.L.K.E.R. Anomaly %s from ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+    </string>
+
+    <!-- Out-of-date modded exes -->
+    <string id="st_err_outdated_modded_exes_title">
+        <text>Modded executables version invalid or out-of-date.</text>
+    </string>
+
+    <string id="st_err_outdated_modded_exes_what">
+        <text>Your modded executables are missing, corrupted or out-of-date. Please install the modded executables version %s or newer.</text>
+    </string>
+
+    <string id="st_err_outdated_modded_exes_why">
+        <text>Improvements are constantly being added to the engine, and Western Goods benefits from these new features.</text>
+    </string>
+
+    <string id="st_err_outdated_modded_exes_where">
+        <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+    </string>
+
+    <!-- Missing DXML -->
+    <string id="st_err_missing_dxml_title">
+        <text>Prerequisite missing - DXML.</text>
+    </string>
+
+    <string id="st_err_missing_dxml_what">
+        <text>DXML is missing. Please install or update your modded exes before using Western Goods.</text>
+    </string>
+
+    <string id="st_err_missing_dxml_why">
+        <text>Western Goods requires DXML to increase compatibility with other addons and to avoid overwriting vanilla files.</text>
+    </string>
+
+    <string id="st_err_missing_dxml_where">
+        <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+    </string>
+
+    <!-- Missing LUA unlocalizer -->
+    <string id="st_err_missing_unlocalizer_title">
+        <text>Prerequisite missing - LUA unlocalizer.</text>
+    </string>
+
+    <string id="st_err_missing_unlocalizer_what">
+        <text>LUA unlocalizer is missing. Please install or update your modded exes before using Western Goods.</text>
+    </string>
+
+    <string id="st_err_missing_unlocalizer_why">
+        <text>Western Goods requires LUA unlocalizer to increase compatibility with other addons and to avoid overwriting vanilla files.</text>
+    </string>
+
+    <string id="st_err_missing_unlocalizer_where">
+        <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Core Strings                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <!-- Unpacking inventory string -->
+    <string id="st_wg_unpack">
+        <text>Unpack</text>
+    </string>
+
+    <!-- Reading inventory string -->
+    <string id="st_wg_view">
+        <text>View</text>
+    </string>
+
+    <!-- Lighter use strings -->
+    <string id="st_wg_use">
+        <text>Use</text>
+    </string>
+
+    <string id="st_wg_missing_requirements_ext">
+        <text>A tool is required!</text>
+    </string>
+
+    <string id="st_wg_not_enough_fuel">
+        <text>Not enough fuel</text>
+    </string>
+
+    <string id="st_wg_lighter_header">
+        <text>%s •%s Fuel : %s%s%\n \n%s%s</text>
+    </string>
+
+    <!-- Suitcase use strings -->
+    <string id="st_wg_open">
+        <text>Open</text>
+    </string>
+
+    <!-- Readable UI strings -->
+    <string id="ui_wg_dx8_retard_notice">
+        <text>It seems you're using DirectX 8 renderer, you may experience texture stretching. Use a more modern renderer to avoid issues.</text>
+    </string>
+
+    <!-- Misc strings -->
+    <string id="st_wg_free">
+        <text>Free</text>
+    </string>
+
+</string_table>

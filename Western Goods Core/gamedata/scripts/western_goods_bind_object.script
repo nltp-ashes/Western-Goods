@@ -1,0 +1,173 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES, Aoldri                                                                       ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to bind a game_object to a luabind class, to enable specific scripted behaviors.                  ---
+---                                                                                                                  ---
+---    This wrapper exists because it isn't possible to have inheritance of more than one level of depth with        ---
+---    engine classes.                                                                                               ---
+---                                                                                                                  ---
+---                This works                                             This does not work                         ---
+---                  ┌───┐                                                      ┌───┐                                ---
+---                  │c++│                                                      │c++│                                ---
+---                  └─▲─┘                                                      └─▲─┘                                ---
+---                  ┌─┴─┐                                                      ┌─┴─┐                                ---
+---                  │lua│                                                      │lua│                                ---
+---                  └───┘                                                      └─▲─┘                                ---
+---                                                                             ┌─┴─┐                                ---
+---                                                                             │lua│                                ---
+---                                                                             └───┘                                ---
+---                                                                                                                  ---
+---    This wrapper basically delegates the calls to an inner class (called wrapper). This inner class is a "pure"   ---
+---    LUA class, meaning it does not directly, or indirectly inherit an engine class. This allows to have as many   ---
+---    levels of depth as we want, thus resolving the issue.                                                         ---
+---                                                                                                                  ---
+---    This wrapper class thing was heavily inspired by Aoldri's implementation in Hideout Furniture addon.          ---
+---                                                                                                                  ---
+---    Bellow is an minimal example of how to use this custom wrapped binder.                                        ---
+---                                                                                                                  ---
+---=== gamedata/scripts/my_addon_s_script.script ====================================================================---
+---                                                                                                                  ---
+---    function bind(obj)                                                                                            ---
+---        obj:bind_object(child_binder(obj).binder) -- main difference is here. you must add .binder                ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---    class "child_binder" (western_goods_bind_object.object_binder_lua)                                            ---
+---                                                                                                                  ---
+---    function child_binder:__init(obj) super(obj)                                                                  ---
+---        printf("child_binder's __init runs properly")                                                             ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---    function child_binder:update(delta)                                                                           ---
+---        bind_object_wrapper.lua_object_binder.update(self, delta)                                                 ---
+---        printf("child_binder's update runs properly")                                                             ---
+---    end                                                                                                           ---
+---                                                                                                                  ---
+---==================================================================================================================---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Pure LUA Object Binder Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "object_binder_lua"
+
+function object_binder_lua:__init(obj)
+    self.binder = this.object_binder_wrapper(obj)
+    self.binder.wrapper = self
+    self.object = obj
+end
+
+function object_binder_lua:__finalize()
+end
+
+function object_binder_lua:reinit()
+end
+
+function object_binder_lua:reload(section)
+end
+
+function object_binder_lua:net_spawn(se_abstract)
+    return true
+end
+
+function object_binder_lua:net_destroy()
+    self.binder.wrapper = nil
+    self.binder = nil
+    self.object = nil
+end
+
+function object_binder_lua:net_import(net_packet)
+end
+
+function object_binder_lua:net_export(net_packet)
+end
+
+function object_binder_lua:update(delta)
+end
+
+function object_binder_lua:save(output_packet)
+end
+
+function object_binder_lua:load(input_packet)
+end
+
+function object_binder_lua:net_save_relevant()
+end
+
+function object_binder_lua:net_Relcase(obj)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Object Binder Wrapper Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "object_binder_wrapper" (object_binder)
+
+function object_binder_wrapper:__init(obj) super(obj)
+    self.wrapper = nil
+end
+
+function object_binder_wrapper:__finalize()
+end
+
+function object_binder_wrapper:reinit()
+    object_binder.reinit(self)
+    self.wrapper:reinit()
+end
+
+function object_binder_wrapper:reload(section)
+    object_binder.reload(self, section)
+    self.wrapper:reload(section)
+end
+
+function object_binder_wrapper:net_spawn(se_abstract)
+    if not object_binder.net_spawn(self, se_abstract) then
+        return false
+    end
+    return self.wrapper:net_spawn(se_abstract)
+end
+
+function object_binder_wrapper:net_destroy()
+    self.wrapper:net_destroy()
+    object_binder.net_destroy(self)
+end
+
+function object_binder_wrapper:net_import(net_packet)
+    object_binder.net_import(self, net_packet)
+    self.wrapper:net_import(net_packet)
+end
+
+function object_binder_wrapper:net_export(net_packet)
+    object_binder.net_export(self, net_packet)
+    self.wrapper:net_export(net_packet)
+end
+
+function object_binder_wrapper:update(delta)
+    object_binder.update(self, delta)
+    self.wrapper:update(delta)
+end
+
+function object_binder_wrapper:save(output_packet)
+    object_binder.save(self, output_packet)
+    self.wrapper:save(output_packet)
+end
+
+function object_binder_wrapper:load(input_packet)
+    object_binder.load(self, input_packet)
+    self.wrapper:load(input_packet)
+end
+
+function object_binder_wrapper:net_save_relevant()
+    object_binder.net_save_relevant(self)
+    self.wrapper:net_save_relevant()
+end
+
+function object_binder_wrapper:net_Relcase(obj)
+    object_binder.net_Relcase(self, obj)
+    self.wrapper:net_Relcase(obj)
+end

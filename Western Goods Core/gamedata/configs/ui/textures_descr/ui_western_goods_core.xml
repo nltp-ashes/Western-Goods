@@ -1,0 +1,33 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Texture descriptions for magazines and other readable items in Western Goods.                                -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Contract on texture description IDs ! Respect the following naming :                                         -->
+<!--                                                                                                                 -->
+<!--    <texture id="ui_<section>_page_<page_number>" ... />                                                         -->
+<!--                                                                                                                 -->
+<!--    Where :                                                                                                      -->
+<!--                                                                                                                 -->
+<!--    - <section> : The name of the readable item's section, as defined in system.ltx;                             -->
+<!--    - <page_number> : The page number associated with the current texture description.                           -->
+<!--                                                                                                                 -->
+<!--    Note : page numbers need to be contiguous, from 1 to n, where n is the total number of pages.                -->
+<!--                                                                                                                 -->
+<!--    For best results, texture description should be at a 2:1 ratio (e.g. width="4096" height="2048").            -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<w>
+
+    <!-- Missing texture -->
+    <file name="ui\readables\ui_readable_missing_texture.dds">
+        <texture id="ui_readable_missing_texture"               x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
+</w>
