@@ -20,38 +20,6 @@ Western Goods is fully modular, meaning you can pick and choose what you want fr
 > 
 > This module contains all the core logic, and support for all functionalities of the addon. On its own, it does not add anything (think modded exes). It can even be used by other addons if they want features from Western Goods, but not the content of it. All the other modules of the addon require this one to work.
 
-> #### FOOD MODULE
-> 
-> The food module adds a variety of western branded consumables to the game. All of them come with custom icons, models, and textures. If you use the [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) addon, you'll also get animations for some of them.
-
-> #### DRINKS MODULE
-> 
-> Similar to the food module, this module adds various european and american drinks to the game. Again, they all come with custom icons, models and textures and [FDDA](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) animations if you use it.
-
-> #### READABLES MODULE
-> 
-> The readables module uses one of the functionalities offered by the core module : the ability to read items, whether they would be magazines, or notes, and so on. The module adds different kinds of magazines. To limit the size of the archive, only the first page of each magazine is available by default. Download the [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) addon to get extra pages.
-
-> #### DEVICES MODULE
->
-> This module adds brand-new devices to the game. From a GPS locator to help you find the nearest camp, a laser range finder to adjust your shot on your target, an electronic compass to help you navigate the harsh landscapes of The Zone, to a lighter to illuminate your surroundings in the cold nights, this module has you covered.
-
-> #### CURRENCIES MODULE
->
-> This module adds new currencies to the game, namely Euros and Dollars. You can exchange these currencies, and even make purchases with them if you have the NPCs module installed.
-
-> #### NPCs MODULE
->
-> This module adds new unique NPCs to game. On this own, this module won't have much to offer you, as NPCs will have nothing but a meet dialog. This module is meant to be used in conjunction with other modules, like the Flea Market, Procedural Guides, Currencies and Storylines modules.
-
-> #### FLEA MARKET MODULE *[REQUIRES NPCs MODULE]*
->
-> The flea market module adds a new feature to the game. At the Flea Market, at the Garbage, meet a new NPC that will offer you packages of randomized items at a discount. Be quick, offers aren't permanent and expire after some time!
-
-> #### PROCEDURAL GUIDES MODULE *[REQUIRES NPCs MODULE]*
->
-> This module will make Ashot (Jupiter), Professor Ozersky (Jupiter) and Peregrine (Yantar) be able to guide the player, using a brand-new system to dynamically make NPCs guides.
-
 > #### STORYLINES MODULE *[REQUIRES NPCs MODULE]*
 >
 > This module adds 3 new storylines.
@@ -67,6 +35,38 @@ Western Goods is fully modular, meaning you can pick and choose what you want fr
 > **The Chernenko Brothers**
 > - 4 missions - started at the Flea Market, Garbage
 > - Help a former soldier turned Mercenary trader to find his missing brother.
+
+> #### DEVICES MODULE
+>
+> This module adds brand-new devices to the game. From a GPS locator to help you find the nearest camp, a laser range finder to adjust your shot on your target, an electronic compass to help you navigate the harsh landscapes of The Zone, to a lighter to illuminate your surroundings in the cold nights, this module has you covered.
+
+> #### NPCs MODULE
+>
+> This module adds new unique NPCs to game. On this own, this module won't have much to offer you, as NPCs will have nothing but a meet dialog. This module is meant to be used in conjunction with other modules, like the Flea Market, Procedural Guides, Currencies and Storylines modules.
+
+> #### FLEA MARKET MODULE *[REQUIRES NPCs MODULE]*
+>
+> The flea market module adds a new feature to the game. At the Flea Market, at the Garbage, meet a new NPC that will offer you packages of randomized items at a discount. Be quick, offers aren't permanent and expire after some time!
+
+> #### PROCEDURAL GUIDES MODULE *[REQUIRES NPCs MODULE]*
+>
+> This module will make Ashot (Jupiter), Professor Ozersky (Jupiter) and Peregrine (Yantar) be able to guide the player, using a brand-new system to dynamically make NPCs guides.
+
+> #### READABLES MODULE
+>
+> The readables module uses one of the functionalities offered by the core module : the ability to read items, whether they would be magazines, or notes, and so on. The module adds different kinds of magazines. To limit the size of the archive, only the first page of each magazine is available by default. Download the [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) addon to get extra pages.
+
+> #### CURRENCIES MODULE
+>
+> This module adds new currencies to the game, namely Euros and Dollars. You can exchange these currencies, and even make purchases with them if you have the NPCs module installed.
+
+> #### FOOD MODULE
+> 
+> The food module adds a variety of western branded consumables to the game. All of them come with custom icons, models, and textures. If you use the [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) addon, you'll also get animations for some of them.
+
+> #### DRINKS MODULE
+> 
+> Similar to the food module, this module adds various european and american drinks to the game. Again, they all come with custom icons, models and textures and [FDDA](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) animations if you use it.
 
 <table>
   <tr>
@@ -134,7 +134,8 @@ To **install** the addon :
 To **update** the addon :
 1. In MO2, disable and delete the previous version of the addon;
 2. Make sure to update the requirements;
-3. Follow the installation instructions.
+3. Make sure to check the changelog for extra steps;
+4. Follow the installation instructions.
 
 To **uninstall** the addon :
 1. Start your game and open the MCM settings;
