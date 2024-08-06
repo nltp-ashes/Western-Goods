@@ -23,7 +23,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local VERSION                       = "3.0.0"
+local VERSION                       = "3.1.0"
 local REQUIRED_GAME_VERSION         = "1.5.2"
 local REQUIRED_MODDED_EXES_VERSION  = 20240612
 
