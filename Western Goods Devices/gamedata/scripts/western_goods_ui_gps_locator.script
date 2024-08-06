@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 06/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off ui_dosimeter.script, script used to handle the UI for the 3D GPS Locator.                           ---
@@ -157,36 +157,35 @@ function UIGPSLocator:Update()
     self.m_conn:InitTextureEx(conn, "hud\\p3d")
 
     -- Dist to smart terrain
-    local dist1, dist2, dist3, dist4 = self:GetDistTextures()
-    self.m_dist1:InitTextureEx(dist1, "hud\\p3d")
-    self.m_dist2:InitTextureEx(dist2, "hud\\p3d")
-    self.m_dist3:InitTextureEx(dist3, "hud\\p3d")
-    self.m_dist4:InitTextureEx(dist4, "hud\\p3d")
+    local dist_km, dist_hm, dist_dm, dist_m = self:GetDistTextures()
+    self.m_dist1:InitTextureEx(dist_km, "hud\\p3d")
+    self.m_dist2:InitTextureEx(dist_hm, "hud\\p3d")
+    self.m_dist3:InitTextureEx(dist_dm, "hud\\p3d")
+    self.m_dist4:InitTextureEx(dist_m, "hud\\p3d")
 
     -- Time of day
-    local time1, time2, time3, time4 = self:GetTimeOfDayTextures()
-    self.m_time1:InitTextureEx(time1, "hud\\p3d")
-    self.m_time2:InitTextureEx(time2, "hud\\p3d")
-    self.m_time3:InitTextureEx(time3, "hud\\p3d")
-    self.m_time4:InitTextureEx(time4, "hud\\p3d")
+    local hours_1, hours_2, mins_1, mins_2 = self:GetTimeOfDayTextures()
+    self.m_time1:InitTextureEx(hours_1, "hud\\p3d")
+    self.m_time2:InitTextureEx(hours_2, "hud\\p3d")
+    self.m_time3:InitTextureEx(mins_1, "hud\\p3d")
+    self.m_time4:InitTextureEx(mins_2, "hud\\p3d")
 
-    -- Date
-    local date1, date2, date3, date4, date5, date6 = self:GetDateTextures()
-    self.m_date1:InitTextureEx(date1, "hud\\p3d")
-    self.m_date2:InitTextureEx(date2, "hud\\p3d")
-    self.m_date3:InitTextureEx(date3, "hud\\p3d")
-    self.m_date4:InitTextureEx(date4, "hud\\p3d")
-    self.m_date5:InitTextureEx(date5, "hud\\p3d")
-    self.m_date6:InitTextureEx(date6, "hud\\p3d")
+    -- Date (ignoring first 2 digits of year)
+    local day_1, day_2, month_1, month_2, _, _, year_3, year_4 = self:GetDateTextures()
+    self.m_date1:InitTextureEx(day_1, "hud\\p3d")
+    self.m_date2:InitTextureEx(day_2, "hud\\p3d")
+    self.m_date3:InitTextureEx(month_1, "hud\\p3d")
+    self.m_date4:InitTextureEx(month_2, "hud\\p3d")
+    self.m_date5:InitTextureEx(year_3, "hud\\p3d")
+    self.m_date6:InitTextureEx(year_4, "hud\\p3d")
 
     -- Label
-    local distl = self:GetLabelTexture()
-    self.m_distl:InitTextureEx(distl, "hud\\p3d")
+    local dist_label = self:GetLabelTexture()
+    self.m_distl:InitTextureEx(dist_label, "hud\\p3d")
 
     -- Level name
-    local lname = self:GetLevelTexture(level.name())
-    self.m_lname:InitTextureEx(lname, "hud\\p3d")
-
+    local level_name = self:GetLevelTexture(level.name())
+    self.m_lname:InitTextureEx(level_name, "hud\\p3d")
 end
 
 function UIGPSLocator:ShouldUpdate()
