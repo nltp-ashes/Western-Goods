@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 28/07/2024                                                                                               ;;
+;;    Date : 07/08/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used add new squads to the game.                                                                    ;;
@@ -25,7 +25,7 @@ story_id                = stalker_crew_member_squad
 npc                     = stalker_crew_member
 target_smart            = lim_smart_terrain_6
 faction                 = killer
-relationship            = friend
+relationship            = {+western_goods_crew_member_rescue_over} friend, neutral
 logic                   = scripts\western_goods_crew_member.ltx
 
 [stalker_dunn_lynn_squad]:online_offline_group
@@ -41,7 +41,7 @@ story_id                = stalker_danylo_chernenko_squad
 npc                     = stalker_danylo_chernenko
 target_smart            = gar_smart_terrain_6_3
 faction                 = killer
-relationship            = neutral
+relationship            = {+western_goods_act_3_finished} friend, neutral
 logic                   = scripts\western_goods_danylo_chernenko.ltx
 
 ;;====================================================================================================================;;
@@ -93,7 +93,6 @@ npc_random              = sim_default_bandit_0, sim_default_bandit_0, sim_defaul
 npc_in_squad            = 1, 3
 target_smart            = jup_a12
 faction                 = bandit
-always_arrived          = true
 
 [western_goods_act_1_task_2_bandit_2_squad]:online_offline_group
 story_id                = western_goods_act_1_task_2_bandit_2_squad
@@ -101,7 +100,6 @@ npc_random              = sim_default_bandit_1, sim_default_bandit_1, sim_defaul
 npc_in_squad            = 1, 3
 target_smart            = jup_a12
 faction                 = bandit
-always_arrived          = true
 
 [western_goods_act_1_task_2_bandit_3_squad]:online_offline_group
 story_id                = western_goods_act_1_task_2_bandit_3_squad
@@ -109,7 +107,6 @@ npc_random              = sim_default_bandit_2, sim_default_bandit_2, sim_defaul
 npc_in_squad            = 1, 3
 target_smart            = jup_a12
 faction                 = bandit
-always_arrived          = true
 
 [western_goods_act_1_task_2_bandit_4_squad]:online_offline_group
 story_id                = western_goods_act_1_task_2_bandit_4_squad
@@ -117,7 +114,6 @@ npc_random              = sim_default_bandit_0, sim_default_bandit_0, sim_defaul
 npc_in_squad            = 1, 3
 target_smart            = jup_a12
 faction                 = bandit
-always_arrived          = true
 
 [western_goods_act_1_task_2_bandit_5_squad]:online_offline_group
 story_id                = western_goods_act_1_task_2_bandit_5_squad
@@ -125,7 +121,6 @@ npc_random              = sim_default_bandit_1, sim_default_bandit_1, sim_defaul
 npc_in_squad            = 1, 3
 target_smart            = jup_a12
 faction                 = bandit
-always_arrived          = true
 
 [western_goods_act_1_task_2_bandit_6_squad]:online_offline_group
 story_id                = western_goods_act_1_task_2_bandit_6_squad
@@ -133,7 +128,6 @@ npc_random              = sim_default_bandit_2, sim_default_bandit_2, sim_defaul
 npc_in_squad            = 1, 3
 target_smart            = jup_a12
 faction                 = bandit
-always_arrived          = true
 
 ;;==================| Act 1, Task 3 |=================================================================================;;
 
@@ -143,7 +137,6 @@ npc_random              = sim_default_monolith_3, sim_default_monolith_4
 npc_in_squad            = 3, 4
 target_smart            = lim_smart_terrain_6
 faction                 = monolith
-always_arrived          = true
 
 [western_goods_act_1_task_3_mono_guards_2_squad]:online_offline_group
 story_id                = western_goods_act_1_task_3_mono_guards_2_squad
@@ -151,7 +144,6 @@ npc_random              = sim_default_monolith_3, sim_default_monolith_4
 npc_in_squad            = 3, 4
 target_smart            = lim_smart_terrain_6
 faction                 = monolith
-always_arrived          = true
 
 [western_goods_act_1_task_3_mono_bridge_1_squad]:online_offline_group
 story_id                = western_goods_act_1_task_3_mono_bridge_1_squad
@@ -159,7 +151,6 @@ npc_random              = sim_default_monolith_2, sim_default_monolith_2, sim_de
 npc_in_squad            = 2, 4
 target_smart            = red_smart_terrain_bridge
 faction                 = monolith
-always_arrived          = true
 
 [western_goods_act_1_task_3_mono_bridge_2_squad]:online_offline_group
 story_id                = western_goods_act_1_task_3_mono_bridge_2_squad
@@ -167,7 +158,6 @@ npc_random              = sim_default_monolith_2, sim_default_monolith_2, sim_de
 npc_in_squad            = 2, 4
 target_smart            = red_smart_terrain_bridge
 faction                 = monolith
-always_arrived          = true
 
 [western_goods_act_1_task_3_mono_bridge_3_squad]:online_offline_group
 story_id                = western_goods_act_1_task_3_mono_bridge_3_squad
@@ -175,7 +165,6 @@ npc_random              = sim_default_monolith_2, sim_default_monolith_2, sim_de
 npc_in_squad            = 2, 4
 target_smart            = red_smart_terrain_bridge
 faction                 = monolith
-always_arrived          = true
 
 ;;==================| Act 2, Task 2 |=================================================================================;;
 
@@ -227,7 +216,7 @@ story_id                = western_goods_act_2_task_2_ecolog_squad
 npc                     = stalker_ecolog_convoy_yellow, stalker_ecolog_convoy_orange, sim_default_ecolog_2, sim_default_ecolog_2, sim_default_ecolog_2, sim_default_ecolog_2
 target_smart            = pri_a28_school
 faction                 = ecolog
-relationship            = enemy
+relationship            = {=actor_true_community(ecolog)} neutral, enemy
 logic                   = scripts\western_goods_a2_t2_s6_ecolog.ltx
 
 [western_goods_act_2_task_2_bandit_2_squad]:online_offline_group
