@@ -1,19 +1,12 @@
-## **v3.0.0 - 04/08/2024 - Major Update**
+## **v3.1.0 - 07/08/2024 - Major Update**
 
-[![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.0.0/total?label=Downloads)]()
-
-**• Additions :**
-> • Added a CTD when using an outdated version of the modded executables.
+[![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
 **• Changes :**
-> • Separated all the different features of the addon into individual, and standalone modules;
-> • Added sound effect when refilling a lighter (Thanks demonized);
-> • Removed console warning when the addon detects a squad-less NPC;
+> • Neutral NPCs are actually neutral now, instead of being enemies and ignoring the player;
+> • Some NPCs will become friends after finishing storylines;
+> • Some NPCs will be enemy with the player, even if they are the same faction, for story reasons;
 
 **• Bug fixes :**
-> • Fixed incorrect paths to bump map textures for food and drinks;
-> • Fixed Williams Heades always offering free travels, even before finishing the "Helicopter Delivery" storyline;
-> • Fixed Bic lighter being refillable. Now only the Zippo is refillable;
-> • Fixed lighters being refillable even when already full;
-> • Fixed lighter's flame staying on after changing to another device;
-> • Fixed `! Fallback to default bump map` error in logs for the rangefinder.
+> • Fixed `trying to set callback ... to nil function!` errors in log (Thanks Stalker_Boss);
+> • Fixed GPS locator displaying first two digits of the year, instead of the last two (Thanks Rambito).

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 07/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).     ---
@@ -31,14 +31,6 @@ local squads_to_spawn = {
     ["stalker_oleksandr_chernenko_squad"] = { sid="stalker_oleksandr_chernenko_squad", smart="gar_smart_terrain_6_3" },
 }
 
-local squads_relations = {
-    ["stalker_western_goods_trader_squad"] = "neutral",
-    ["stalker_oleksandr_chernenko_squad"] = "neutral",
-    ["stalker_danylo_chernenko_squad"] = "neutral",
-    ["western_goods_act_2_task_2_bandit_1_squad"] = "enemy",
-    ["western_goods_act_2_task_2_bandit_2_squad"] = "enemy",
-}
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -57,41 +49,31 @@ function spawn_squads()
     end
 end
 
---- Function used to force some NPCs to be neutral to and with everyone.
---- This function is fired by 'on_enemy_eval' callback.
+--- Function used to force some NPCs to have a specific relation with the player.
 --- @param obj game_object
---- @param enemy game_object
---- @param flags table
 --- @return nil
-function eval_ignore_npcs(obj, enemy, flags)
-    -- Skip mutants
-    if IsMonster(obj) or IsMonster(enemy) then
+function set_relation(obj)
+    -- Ignore if the object is not a stalker
+    if not IsStalker(obj) then
         return
     end
 
-    -- Get squad
-    local squad_obj = western_goods_utils.get_squad_of(obj)
-    local squad_enemy = western_goods_utils.get_squad_of(enemy)
-
-    -- Get squad relation (if any)
-    local relation_obj = squad_obj and squads_relations[squad_obj:section_name()]
-    local relation_enemy = squad_enemy and squads_relations[squad_enemy:section_name()]
-
-    -- Skip unaffected squads
-    if (not relation_obj) and (not relation_enemy) then
+    -- Get the object squad if any (nil if actor or not in a squad)
+    local squad = western_goods_utils.get_squad_of(obj)
+    if not squad then
         return
     end
 
-    -- Override eval
-    if relation_obj == "neutral" or relation_enemy == "neutral" then
-        flags.override = true
-        flags.result = false
+    -- Ignore squads that are not from the addon
+    if not western_goods_core.western_goods_squads[squad:section_name()] then
         return
-    -- TODO : Check if this even works https://discord.com/channels/961738167139049472/961738167537512527/1245538197627207781
-    elseif relation_obj == "enemy" or relation_enemy == "enemy" then
-        flags.override = true
-        flags.result = true
-        return
+    end
+
+    -- Set the relation of the squad
+    local relation_cond = ini_sys:r_string_to_condlist(squad:section_name(), "relationship")
+    local relation = relation_cond and xr_logic.pick_section_from_condlist(db.actor, squad, relation_cond)
+    if relation then
+        western_goods_utils.set_squad_relation(squad, relation)
     end
 end
 
@@ -164,7 +146,7 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    RegisterScriptCallback("on_enemy_eval", eval_ignore_npcs)
+    RegisterScriptCallback("game_object_on_net_spawn", set_relation)
     RegisterScriptCallback("actor_on_first_update", spawn_squads)
     RegisterScriptCallback("western_goods_flea_on_dialog", oleksandr_can_show_flea)
     RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", ashes_can_show_trade)

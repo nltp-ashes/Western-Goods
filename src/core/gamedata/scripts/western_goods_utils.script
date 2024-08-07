@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 07/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -23,6 +23,7 @@ weapon_zoom_types               = { normal = 0, alt = 1, gl = 2 }
 animation_hands_modes           = { right = 0, left = 1, both = 2 }
 hud_states                      = { idle = 0, showing = 1, hiding = 2, hidden = 3, bore = 4 }
 hud_states_devices              = { idle_zoom = 5, idle_zoom_in = 6, idle_zoom_out = 7, throw_start = 8, throw = 9, throw_end = 10 }
+squad_relations                 = { friend = "friend", neutral = "neutral", enemy = "enemy" }
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Debug functions
@@ -521,7 +522,7 @@ function spawn_story_squad(sec, pos, smart)
     pos = pos or smart.position
 
     -- Spawn squad on the appropriate smart terrain
-    se_squad = spawn_squad(sec,pos,smart.m_level_vertex_id,smart.m_game_vertex_id, smart)
+    se_squad = spawn_squad(sec, pos, smart.m_level_vertex_id, smart.m_game_vertex_id, smart)
     if se_squad then
         -- Force the squad to stay there
         se_squad.scripted_target = smart:name()
@@ -688,7 +689,7 @@ end
 --- @param obj game_object
 --- @return cse_alife_online_offline_group
 function get_squad_of(obj)
-    if (not validate_params({obj,"get_squad_of"})) then
+    if not validate_params({obj,"get_squad_of"}) then
         return
     end
 
@@ -704,6 +705,20 @@ function get_squad_of(obj)
     end
 
     return get_object_squad(obj)
+end
+
+--- Function used to change the stance of a squad towards the player.
+--- @param squad alife_object
+--- @param relation "friend"|"neutral"|"enemy"
+--- @return nil
+function set_squad_relation(squad, relation)
+    if not validate_params({squad,relation,"set_squad_relation"}) then
+        return
+    end
+
+    dbg_printf("[WG] Utils | Squad %s is now %s to the player", squad.id, relation)
+
+    squad:set_squad_relation(relation)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
