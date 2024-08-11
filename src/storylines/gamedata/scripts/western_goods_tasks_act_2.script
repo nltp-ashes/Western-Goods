@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 11/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the tasks of the second act of the addon's storyline.                                   ---
@@ -1250,13 +1250,13 @@ end
 --- @return nil
 function task_2_mark_current_enemies(marked_enemies)
     for _,id in pairs(marked_enemies) do
-        level.map_remove_object_spot(id, "anomaly_thermal")
+        western_goods_utils.map_rem_spot(id, "anomaly_thermal")
     end
     empty_table(marked_enemies)
     for id,_ in pairs(xr_combat_ignore.fighting_with_actor_npcs) do
         if not western_goods_utils.table_contains(marked_enemies, id) then
             table.insert(marked_enemies, id)
-            level.map_add_object_spot_ser(id, "anomaly_thermal", "Enemy")
+            western_goods_utils.map_add_spot(id, "anomaly_thermal", "Enemy", true)
         end
     end
 end

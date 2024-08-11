@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 06/08/2024                                                                                             ---
+---    Date : 11/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Based off ui_dosimeter.script, script used to handle the UI for the 3D GPS Locator.                           ---
@@ -15,6 +15,9 @@
 
 -- Imported functions
 local dbg_printf                = western_goods_utils.dbg_printf
+
+-- Constants
+local map_spot_gps              = "treasure_player"
 
 -- Singleton
 GUI                             = nil -- instance, don't touch
@@ -40,6 +43,49 @@ function surge_manager_get_task_target()
         return western_goods_monkey_patches.surge_manager_get_task_target()
     end
     return nil
+end
+
+--- Function used to place a map spot on a stash if the player puts a GPS in it.
+--- @param box inventory_owner|inventory_box
+--- @param obj game_object
+function mark_stash(box, obj)
+    -- Check if the object is a GPS
+    if obj:section() ~= "wg_gps" then
+        return
+    end
+    -- Only mark stashes once
+    if western_goods_utils.map_has_spot(box:id(), map_spot_gps) then
+        return
+    end
+    dbg_printf("[WG] UI GPS Locator | Marking stash %s", box:name())
+    western_goods_utils.map_add_spot(box:id(), map_spot_gps, "Stash marked by GPS", true)
+end
+
+--- Function used to remove a map spot from a stash if no longer has GPS inside.
+--- @param box inventory_owner|inventory_box
+--- @param obj game_object
+function unmark_stash(box, obj)
+    -- Check if the object is a GPS
+    if obj:section() ~= "wg_gps" then
+        return
+    end
+    -- Keep marker if stash has another GPS
+    if box:object("wg_gps") then
+        return
+    end
+    dbg_printf("[WG] UI GPS Locator | Unmarking stash %s", box:name())
+    western_goods_utils.map_rem_spot(box:id(), map_spot_gps)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("actor_on_item_put_in_box", mark_stash)
+    RegisterScriptCallback("actor_on_item_take_from_box", unmark_stash)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
