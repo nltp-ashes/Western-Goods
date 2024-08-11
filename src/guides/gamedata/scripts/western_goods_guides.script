@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 11/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script is responsible for all the scripted needs of the guides module.                                   ---
@@ -16,4 +16,52 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-dummy_variable = true -- the engine throws a "invalid parameter" fatal error if the script is empty
+-- Constants
+local guide_asks = {
+    ["stalker_western_goods_trader"] = "st_western_goods_trader_guide_ask",
+}
+
+local guide_answers = {
+    ["stalker_western_goods_trader"] = "st_western_goods_trader_guide_answer",
+    ["jup_a6_freedom_trader_ashot"] = "st_western_goods_ashot_guide_answer",
+    ["mechanic_army_yan_mlr"] = "st_western_goods_peregrine_guide_answer",
+    ["jup_b6_scientist_biochemist"] = "st_western_goods_ozersky_guide_answer",
+    ["jup_cont_trader_bandit"] = "st_western_goods_klenov_guide_answer",
+}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to determine the player dialog when asking a guide for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_ask(npc, flags)
+    local ask = guide_asks[npc:section()]
+    if ask then
+        flags.result = ask
+    end
+end
+
+--- Function used to determine the guide's dialog when answering the player's request for transport.
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function st_guide_answer(npc, flags)
+    local answer = guide_answers[npc:section()]
+    if answer then
+        flags.result = answer
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("western_goods_guide_on_ask", st_guide_ask)
+    RegisterScriptCallback("western_goods_guide_on_answer", st_guide_answer)
+end

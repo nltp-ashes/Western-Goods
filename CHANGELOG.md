@@ -2,6 +2,9 @@
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
+**• Additions :**
+> • Added route from container warehouse in Jupiter to Bandit base in Dark Valley (Thanks Rambito);
+
 **• Changes :**
 > • Neutral NPCs are actually neutral now, instead of being enemies and ignoring the player;
 > • Some NPCs will become friends after finishing storylines;
