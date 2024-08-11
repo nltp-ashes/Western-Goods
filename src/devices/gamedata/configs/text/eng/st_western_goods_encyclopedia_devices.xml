@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 11/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' entries in the PDA Guide.                                                -->
@@ -18,11 +18,12 @@
 
     <string id="encyclopedia_items_western_goods_gps_text">
         <text>
-        The %c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
-        \n%c[pda_green]Information%c[ui_gray_1]\n
-        \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
-        \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
-        \n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
+            The %c[pda_white]GPS locator%c[ui_gray_1] is a device used to identify the distance and name to the closest area.\n
+            \n%c[pda_green]Information%c[ui_gray_1]\n
+            \nA military grade GPS device used to identify, and find the distance to the closest area near the user. It also displays the global region the user is located in.\n
+            \nThe device is capable of displaying its location on the user's PDA. Useful to mark stashes, for example.\n
+            \nA special technology is used for the screen of the device, allowing it to display information with very minimal power use. The downside of that is that the screen cannot display colors.\n
+            \n• %c[pda_white]Extremely low power consumption%c[ui_gray_1]. Needs recharging about once a year depending on use.
         </text>
     </string>
 

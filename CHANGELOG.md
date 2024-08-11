@@ -9,6 +9,7 @@
 > • Changed guide price from Yanov to Army Warehouses from 4k RUB to 6k RUB (Thanks Rambito);
 > • Changed guide price from Yanov to Yantar from 8k RUB to 12k RUB (Thanks Rambito);
 > • Changed guide price from Yantar to Yanov from 8k RUB to 12k RUB (Thanks Rambito);
+> • Stashes will now show a marker on the PDA when they contain a GPS Locator (Thanks lexus);
 
 **• Bug fixes :**
 > • Fixed `trying to set callback ... to nil function!` errors in log (Thanks Stalker_Boss);

@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 07/08/2024                                                                                             ---
+---    Date : 11/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -957,6 +957,57 @@ function validate_is_lighter(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Map spot functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if a map spot exists for a given object ID.
+--- This function is a wrapper to fix the return value of the original function.
+--- @param id number
+--- @param spot_name string
+--- @return boolean
+function map_has_spot(id, spot_name)
+    if not validate_params({id,spot_name,"map_has_spot"}) then
+        return
+    end
+    return level.map_has_object_spot(id, spot_name) ~= 0
+end
+
+--- Function used to add a map spot for a given object ID.
+--- This function is a wrapper to handle the persistence of the spot via argument, and not via the function's name.
+--- @param id number
+--- @param spot_name string
+--- @param descr string
+--- @param persist boolean
+--- @return nil
+function map_add_spot(id, spot_name, descr, persist)
+    if not validate_params({id,spot_name,"map_add_spot"}) then
+        return
+    end
+
+    -- Default values
+    descr = descr or ""
+    persist = persist or false
+
+    if persist then
+        level.map_add_object_spot_ser(id, spot_name, descr)
+    else
+        level.map_add_object_spot(id, spot_name, descr)
+    end
+end
+
+--- Function used to remove a map spot for a given object ID.
+--- This function does not really do anything, but might as well have a wrapper for it if the other ones have one.
+--- @param id number
+--- @param spot_name string
+--- @return nil
+function map_rem_spot(id, spot_name)
+    if not validate_params({id,spot_name,"map_rem_spot"}) then
+        return
+    end
+    level.map_remove_object_spot(id, spot_name)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Other utils functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -969,14 +1020,16 @@ end
 --- @param ... table
 --- @return nil
 function inventory_iter(who ,func, ...)
-    if not validate_params({who,func,"inventory_iter"}) then return end
+    if not validate_params({who,func,"inventory_iter"}) then
+        return
+    end
 
-    dbg_printf("[WG] Utils | Iterating inventory of '%s'",who:section())
+    dbg_printf("[WG] Utils | Iterating inventory of '%s'", who:section())
 
     local args = {...}
     who:iterate_inventory(function(owner, obj)
         return func(owner, obj, unpack(args))
-    end,who)
+    end, who)
 end
 
 --- Function used to find an NPC by its section name in the player squad.

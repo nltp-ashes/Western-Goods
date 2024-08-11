@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES, RavenAscendant                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 11/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script represents an API to make handling of helicopters easier.                                         ---
@@ -158,8 +158,8 @@ function heli_unregister(heli_id)
     HELICOPTERS_TABLE[heli_id] = nil
 
     -- Remove the helicopter's marker on the PDA
-    if level.map_has_object_spot(heli_id, CONST_HELICOPTER_SPOT) then
-        level.map_remove_object_spot(heli_id, CONST_HELICOPTER_SPOT)
+    if western_goods_utils.map_has_spot(heli_id, CONST_HELICOPTER_SPOT) then
+        western_goods_utils.map_rem_spot(heli_id, CONST_HELICOPTER_SPOT)
     end
 
     -- Delete the helicopter from the world if it exists
@@ -181,8 +181,8 @@ function refresh_helicopters()
         if (not heli_se) or heli_se:section_name() ~= "western_goods_helicopter" then
             HELICOPTERS_TABLE[id] = nil
 
-            if level.map_has_object_spot(id, CONST_HELICOPTER_SPOT) ~= 0 then
-                level.map_remove_object_spot(id, CONST_HELICOPTER_SPOT)
+            if western_goods_utils.map_has_spot(id, CONST_HELICOPTER_SPOT) then
+                western_goods_utils.map_rem_spot(id, CONST_HELICOPTER_SPOT)
             end
             break
         end
@@ -335,8 +335,8 @@ function heli_update(heli_obj,mode,last_mode,target_pos)
         HELICOPTERS_TABLE[heli_obj:id()].update_timer = time_global() + CONST_HELICOPTER_UPDATE_FREQ
 
         -- Refresh the helicopter's marker on the PDA
-        if level.map_has_object_spot(heli_obj:id(), CONST_HELICOPTER_SPOT) == 0 then
-            level.map_add_object_spot(heli_obj:id(), CONST_HELICOPTER_SPOT, "Helicopter")
+        if not western_goods_utils.map_has_spot(heli_obj:id(), CONST_HELICOPTER_SPOT) then
+            western_goods_utils.map_add_spot(heli_obj:id(), CONST_HELICOPTER_SPOT, "Helicopter", true)
         end
     elseif not updated then
         dbg_printf("![WG] ERROR | Helicopter | Failed to update helicopter %s", heli_obj:id())
