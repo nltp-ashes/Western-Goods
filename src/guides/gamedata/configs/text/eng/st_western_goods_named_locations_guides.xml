@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 11/08/2024                                                                                            -->
+<!--    Date : 12/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' named locations.                                                         -->
@@ -65,6 +65,10 @@
 
     <string id="st_western_goods_guide_dest_dark_valley_base">
         <text>Dark Valley, at the Bandit base.</text>
+    </string>
+
+    <string id="st_western_goods_guide_dest_swamps_renegade_base">
+        <text>Great Swamps, at the Renegades base.</text>
     </string>
 
 </string_table>
