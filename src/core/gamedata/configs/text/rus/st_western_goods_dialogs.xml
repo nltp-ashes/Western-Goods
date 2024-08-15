@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 11/08/2024                                                                                            -->
+<!--    Date : 15/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -633,6 +633,19 @@
     <!-- Guide dialogs -->
     <string id="st_western_goods_klenov_guide_answer">
         <text>Думаешь я люблю со сталкерами на прогулки ходить? Если есть деньги - то пара людей может и найтись чтобы провести тебя куда хочешь.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Pug                                                                                                   -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_pug_guide_ask">
+        <text>Куда еще вы можете меня отвезти?</text>
+    </string>
+
+    <string id="st_western_goods_pug_guide_answer">
+        <text>Ну, я не часто там бываю, но я могу показать вам эти места...</text>
     </string>
 
     <!--=============================================================================================================-->

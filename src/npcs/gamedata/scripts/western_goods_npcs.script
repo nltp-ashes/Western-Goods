@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 07/08/2024                                                                                             ---
+---    Date : 15/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).     ---
@@ -78,68 +78,6 @@ function set_relation(obj)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Oleksandr Chernenko functions
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to determine if Oleksandr Chernenko can show the Flea Market dialog.
---- @param actor game_object
---- @param npc game_object
---- @param flags table
-function oleksandr_can_show_flea(npc, flags)
-    if npc:section() == "stalker_oleksandr_chernenko" then
-        flags.result = western_goods_utils.has_info("western_goods_oleksandr_chernenko_meet_over")
-    end
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Williams Heades functions
--- ---------------------------------------------------------------------------------------------------------------------
-
-if western_goods_core.is_barter_ui_installed() then
-    --- Function used to initiate the Barter UI.
-    --- @return nil
-    function ashes_barter()
-        utils_obj.play_sound("interface\\inv_open")
-        barter_ui.start()
-    end
-end
-
---- Function used to determine if Williams Heades can show the EUR/USD trade dialog.
---- @param actor game_object
---- @param npc game_object
---- @param flags table
---- @return nil
-function ashes_can_show_trade(npc, flags)
-    if npc:section() == "stalker_western_goods_trader" then
-        flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over")
-    end
-end
-
---- Function used to determine if Williams Heades can guide the player.
---- @param actor game_object
---- @param npc game_object
---- @param flags table
---- @return nil
-function ashes_can_guide(npc, flags)
-    if npc:section() == "stalker_western_goods_trader" then
-        flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over") and western_goods_utils.has_info("western_goods_act_1_finished")
-    end
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Crew Member functions
--- ---------------------------------------------------------------------------------------------------------------------
-
-if western_goods_core.is_barter_ui_installed() then
-    --- Function used to initiate the Barter UI.
-    --- @return nil
-    function crew_member_barter()
-        utils_obj.play_sound("interface\\inv_open")
-        barter_ui.start()
-    end
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
 
@@ -148,9 +86,6 @@ end
 function on_game_start()
     RegisterScriptCallback("game_object_on_net_spawn", set_relation)
     RegisterScriptCallback("actor_on_first_update", spawn_squads)
-    RegisterScriptCallback("western_goods_flea_on_dialog", oleksandr_can_show_flea)
-    RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", ashes_can_show_trade)
-    RegisterScriptCallback("western_goods_guide_before_dialog", ashes_can_guide)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

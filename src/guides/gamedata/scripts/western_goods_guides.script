@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 11/08/2024                                                                                             ---
+---    Date : 15/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script is responsible for all the scripted needs of the guides module.                                   ---
@@ -19,6 +19,7 @@
 -- Constants
 local guide_asks = {
     ["stalker_western_goods_trader"] = "st_western_goods_trader_guide_ask",
+    ["guid_dv_mal_mlr"] = "st_western_goods_pug_guide_ask",
 }
 
 local guide_answers = {
@@ -26,6 +27,7 @@ local guide_answers = {
     ["jup_a6_freedom_trader_ashot"] = "st_western_goods_ashot_guide_answer",
     ["mechanic_army_yan_mlr"] = "st_western_goods_peregrine_guide_answer",
     ["jup_b6_scientist_biochemist"] = "st_western_goods_ozersky_guide_answer",
+    ["guid_dv_mal_mlr"] = "st_western_goods_pug_guide_answer",
     ["jup_cont_trader_bandit"] = "st_western_goods_klenov_guide_answer",
 }
 
@@ -55,6 +57,26 @@ function st_guide_answer(npc, flags)
     end
 end
 
+
+--- Function used to determine if Pug can guide the player.
+--- @param actor game_object
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function check_can_guide(npc, flags)
+    -- Bandit guide, Dark Valley
+    if npc:section() == "guid_dv_mal_mlr" then
+        flags.result = western_goods_utils.has_info("meet_guid_dv_bandit_over")
+        return
+    end
+
+    -- Merc trader, Pripyat Outskirts
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over") and western_goods_utils.has_info("western_goods_act_1_finished")
+        return
+    end
+end
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -64,4 +86,5 @@ end
 function on_game_start()
     RegisterScriptCallback("western_goods_guide_on_ask", st_guide_ask)
     RegisterScriptCallback("western_goods_guide_on_answer", st_guide_answer)
+    RegisterScriptCallback("western_goods_guide_before_dialog", check_can_guide)
 end
