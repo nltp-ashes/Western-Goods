@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 15/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    File containing game dialogs used in the currencies module of Western Goods.                                 -->
@@ -27,7 +27,7 @@
             <phrase id="1"> <!-- npc -->
                 <precondition>dialogs_mlr.check_no_debt</precondition>
                 <script_text>dialogs.st_trader_dialog_reply</script_text>
-                <action>western_goods_npcs.ashes_barter</action>
+                <action>western_goods_currencies.ashes_barter</action>
             </phrase>
             <phrase id="2"> <!-- npc -->
                 <precondition>dialogs_mlr.check_debt</precondition>

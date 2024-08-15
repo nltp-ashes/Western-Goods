@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 15/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -624,6 +624,28 @@
     <!-- Guide dialogs -->
     <string id="st_western_goods_ozersky_guide_answer">
         <text>Well, the army sends a helicopter once in a while to resupply us. I can ask the pilot to take you with them, but it will be expensive...</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Klenov                                                                                                   -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_klenov_guide_answer">
+        <text>Do I look like I take stalkers for a walk? If you got the money though, there are probably one or two guys that could get you where you want.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    Pug                                                                                                   -->
+    <!--=============================================================================================================-->
+
+    <!-- Guide dialogs -->
+    <string id="st_western_goods_pug_guide_ask">
+        <text>Any other place you can take me to?</text>
+    </string>
+
+    <string id="st_western_goods_pug_guide_answer">
+        <text>Well, I don't go there often, but I can also guide you to these locations...</text>
     </string>
 
     <!--=============================================================================================================-->

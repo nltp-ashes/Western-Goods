@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 12/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' named locations.                                                         -->
@@ -12,55 +12,63 @@
 <string_table>
 
     <string id="st_western_goods_guide_dest_limansk">
-        <text>Лиманск, южнее строительной площадки.</text>
+        <text>Limansk, south of the construction site.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_swamps">
-        <text>Великие Болота, на наблюдательной заставе.</text>
+        <text>Great Swamps, at the observation outpost.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_cordon">
-        <text>Кордон, юго-восточнее железнодорожного моста.</text>
+        <text>Cordon, south-east of the railway bridge.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_darkscape">
-        <text>Темный пейзаж, на плато.</text>
+        <text>Darkscape, on the plateau.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_deadcity">
-        <text>Мертвый город, на базе наемников.</text>
+        <text>Deadcity, at the mercenary base.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_red_forest">
-        <text>Рыжий лес, рядом с хижиной лесника.</text>
+        <text>Red Forest, next to the Forester's cabin.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_jupiter_cooling">
-        <text>Юпитер, у градирни.</text>
+        <text>Jupiter, at the cooling tower.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_zaton">
-        <text>Затон, возле старой баржи.</text>
+        <text>Zaton, near the old barge.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_deserted_hospital">
-        <text>Заброшенная больница, у обрушившегося входа.</text>
+        <text>Deserted Hospital, by the collapsed entrance.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_mil_base">
-        <text>Военные склады на базе Свободы.</text>
+        <text>Military warehouses, at Freedom's base.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_yantar_lab">
-        <text>Янтарь, в передвижной лаборатории.</text>
+        <text>Yantar, at the mobile lab.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_agroprom_mil_base">
-        <text>Агропром, на армейской базе в институте.</text>
+        <text>Agroprom, at the Army's base in the institute.</text>
     </string>
 
     <string id="st_western_goods_guide_dest_jupiter_lab">
-        <text>Юпитер, в передвижной лаборатории.</text>
+        <text>Jupiter, at the mobile lab.</text>
+    </string>
+
+    <string id="st_western_goods_guide_dest_dark_valley_base">
+        <text>Dark Valley, at the Bandit base.</text>
+    </string>
+
+    <string id="st_western_goods_guide_dest_swamps_renegade_base">
+        <text>Great Swamps, at the Renegades base.</text>
     </string>
 
 </string_table>

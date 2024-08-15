@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 15/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script containing necessary code for the currencies module.                                                   ---
@@ -25,6 +25,17 @@ local dbg_printf                       = western_goods_utils.dbg_printf
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to determine if Williams Heades can show the EUR/USD trade dialog.
+--- @param actor game_object
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function can_show_eur_usd_trade(npc, flags)
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over")
+    end
+end
 
 --- Function used to add dialogs to specific NPCs.
 --- @param character_id string
@@ -64,12 +75,26 @@ function money_suitcase_loot(npc_rank, npc_comm, loot_to_spawn)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Barter UI functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+if western_goods_core.is_barter_ui_installed() then
+    --- Function used to initiate the Barter UI.
+    --- @return nil
+    function ashes_barter()
+        utils_obj.play_sound("interface\\inv_open")
+        barter_ui.start()
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Callbacks registration
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
+    RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", can_show_eur_usd_trade)
     RegisterScriptCallback("on_specific_character_dialog_list", on_specific_character_dialog_list)
 end
 
