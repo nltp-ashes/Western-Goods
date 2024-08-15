@@ -7,6 +7,7 @@
 > • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
 
 **• Changes :**
+> • Dropped support for the "Device Selector Key" addon, given its lack of use by the community;
 > • Neutral NPCs are actually neutral now, instead of being enemies and ignoring the player;
 > • Some NPCs will become friends after finishing storylines;
 > • Some NPCs will be enemy with the player, even if they are the same faction, for story reasons;

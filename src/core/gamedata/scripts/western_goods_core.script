@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 31/07/2024                                                                                             ---
+---    Date : 15/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -239,12 +239,6 @@ end
 --- @return boolean
 function is_fdda_installed()
     return enhanced_animations ~= nil
-end
-
---- Function used to check if the Device Selector Key addon is installed.
---- @return boolean
-function is_device_selector_installed()
-    return detector_selector_mcm ~= nil
 end
 
 --- Function used to check if the Mod Configuration Menu (MCM) is installed.
