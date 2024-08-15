@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 15/08/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
@@ -176,18 +176,6 @@
 
     <string id="ui_mcm_western_goods_addon_removal_desc">
         <text>Разрешает безопасное удаление аддона. Включите эту функцию, затем сохранить игру. После этого можете удалять модификацию и играть дальше без Western Goods.</text>
-    </string>
-
-    <!--=============================================================================================================-->
-    <!--     DEVICE SELECTOR KEY INTEGRATION                                                                         -->
-    <!--=============================================================================================================-->
-
-    <string id="ui_mcm_detector_selector_keybind_wg_gps">
-        <text>Клавиша выбора GPS-локатора</text>
-    </string>
-
-    <string id="ui_mcm_detector_selector_keybind_wg_minedetect">
-        <text>Клавиша выбора миноискателя</text>
     </string>
 
 </string_table>

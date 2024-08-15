@@ -1,8 +1,9 @@
-## **v3.1.0 - 11/08/2024 - Major Update**
+## **v3.1.0 - 15/08/2024 - Major Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
 **• Changes :**
+> • Dropped support for the "Device Selector Key" addon, given its lack of use by the community;
 > • Neutral NPCs are actually neutral now, instead of being enemies and ignoring the player;
 > • Some NPCs will become friends after finishing storylines;
 > • Some NPCs will be enemy with the player, even if they are the same faction, for story reasons;
