@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : RavenAscendant                                                                           ---
 ---    Edited : NLTP_ASHES                                                                                           ---
----    Date : 30/07/2024                                                                                             ---
+---    Date : 15/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define the options in MCM.                                                                     ---
@@ -79,19 +79,4 @@ function on_mcm_load()
     } }
 
     return op
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Device Selector Key Integration
--- ---------------------------------------------------------------------------------------------------------------------
-
-if western_goods_core.is_device_selector_installed() then
-
-    detector_selector_mcm.categories.wg_gps = {
-        devices = {
-            ["wg_gps"] = 1
-        },
-        defaults = { keybind = DIK_keys.DIK_B, modifier = 2, second_key = 1 }
-    }
-
 end
