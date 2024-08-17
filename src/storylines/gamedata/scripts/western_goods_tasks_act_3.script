@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 18/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the tasks of the third act of the addon's storyline.                                    ---
@@ -928,7 +928,7 @@ end
 --- @param npc game_object
 --- @return nil
 function task_1_usb_unlock(npc, actor)
-    western_goods_tasks.use_danylo_pendrive()
+    western_goods_module_tasks.use_danylo_pendrive()
     dialogs.relocate_money(npc, CONST_TASK_1_USB_UNLOCK_COST, "out")
 end
 
