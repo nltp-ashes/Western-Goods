@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 15/08/2024                                                                                             ---
+---    Date : 18/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -184,39 +184,39 @@ end
 -- ---------------------------------------------------------------------------------------------------------------------
 
 function is_currencies_module_installed()
-    return western_goods_currencies ~= nil
+    return western_goods_module_currencies ~= nil
 end
 
 function is_devices_module_installed()
-    return western_goods_tech ~= nil
+    return western_goods_module_devices ~= nil
 end
 
 function is_drinks_module_installed()
-    return western_goods_drinks ~= nil
+    return western_goods_module_drinks ~= nil
 end
 
 function is_flea_module_installed()
-    return western_goods_flea_market ~= nil
+    return western_goods_module_flea ~= nil
 end
 
 function is_food_module_installed()
-    return western_goods_food ~= nil
+    return western_goods_module_food ~= nil
 end
 
 function is_guides_module_installed()
-    return western_goods_guides ~= nil
+    return western_goods_module_guides ~= nil
 end
 
 function is_npcs_module_installed()
-    return western_goods_npcs ~= nil
+    return western_goods_module_npcs ~= nil
 end
 
 function is_readables_module_installed()
-    return western_goods_readables ~= nil
+    return western_goods_module_readables ~= nil
 end
 
 function is_storylines_module_installed()
-    return western_goods_tasks ~= nil
+    return western_goods_module_tasks ~= nil
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------

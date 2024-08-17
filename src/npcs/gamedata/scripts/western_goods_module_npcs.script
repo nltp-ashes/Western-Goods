@@ -9,7 +9,7 @@
 ---                                                                                                                  ---
 ---    To add a new NPC to the system, add a new line in the squads_to_spawn table, as follows :                     ---
 ---                                                                                                                  ---
----    { sec="<squad_section>", sid="<story_id>", smart="<spawn_smart_name>" },                                      ---
+---    ["<squad_section>"] = { sid="<story_id>", smart="<spawn_smart_name>" },                                       ---
 ---                                                                                                                  ---
 ---    Where :                                                                                                       ---
 ---     - <squad_section> : section of the squad that needs to be spawned in;                                        ---
