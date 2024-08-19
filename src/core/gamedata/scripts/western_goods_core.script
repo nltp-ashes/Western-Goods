@@ -25,7 +25,7 @@
 -- Constants
 local VERSION                       = "3.1.0"
 local REQUIRED_GAME_VERSION         = "1.5.2"
-local REQUIRED_MODDED_EXES_VERSION  = 20240612
+local REQUIRED_MODDED_EXES_VERSION  = 20240818
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
