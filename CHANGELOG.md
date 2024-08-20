@@ -1,4 +1,4 @@
-## **v3.1.0 - 15/08/2024 - Major Update**
+## **v3.1.0 - 20/08/2024 - Major Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
@@ -7,6 +7,7 @@
 > • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
 
 **• Changes :**
+> • Williams Heades (trader in Pripyat Outskirts) will now increase supply level based on storylines completion instead of goodwill;
 > • Dropped support for the "Device Selector Key" addon, given its lack of use by the community;
 > • Neutral NPCs are actually neutral now, instead of being enemies and ignoring the player;
 > • Some NPCs will become friends after finishing storylines;
