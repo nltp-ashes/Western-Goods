@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 28/07/2024                                                                                               ;;
+;;    Date : 20/08/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to define the trade profile of Williams Heades.                                                ;;
@@ -20,7 +20,7 @@
 discounts                                        = discount_supplier
 
 buy_condition                                    = trade_generic_buy
-buy_supplies                                     = {=heavy_pockets_functor()} supplies_3, {=actor_goodwill_ge(killer:1000)} supplies_3, {=actor_goodwill_ge(killer:500)} supplies_2,  supplies_1
+buy_supplies                                     = {+western_goods_act_2_finished} supplies_3, {+western_goods_act_1_finished} supplies_2,  supplies_1
 buy_item_condition_factor                        = 1.0
 buy_item_exponent                                = 3.00
 
