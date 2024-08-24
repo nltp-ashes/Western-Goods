@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 18/08/2024                                                                                             ---
+---    Date : 24/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script containing necessary code for the currencies module.                                                   ---
@@ -44,7 +44,6 @@ end
 function on_specific_character_dialog_list(char_id, dialog_list)
     if char_id == "stalker_western_goods_trader" then
         dialog_list:add("western_goods_trade_eur_usd")
-        dialog_list:add("western_goods_trader_barter")
     end
 end
 
@@ -74,16 +73,17 @@ function money_suitcase_loot(npc_rank, npc_comm, loot_to_spawn)
     return loot_to_spawn
 end
 
--- ---------------------------------------------------------------------------------------------------------------------
--- Barter UI functions
--- ---------------------------------------------------------------------------------------------------------------------
-
 if western_goods_core.is_barter_ui_installed() then
-    --- Function used to initiate the Barter UI.
-    --- @return nil
-    function ashes_barter()
-        utils_obj.play_sound("interface\\inv_open")
-        barter_ui.start()
+    function barter_ui_on_before_dialog(npc, flags)
+        if npc:section() == "stalker_western_goods_trader" then
+            flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over")
+        end
+    end
+
+    function barter_ui_on_barter_ask(npc, flags)
+        if npc:section() == "stalker_western_goods_trader" then
+            flags.result = "western_goods_trader_dialog_init"
+        end
     end
 end
 
@@ -96,18 +96,16 @@ end
 function on_game_start()
     RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", can_show_eur_usd_trade)
     RegisterScriptCallback("on_specific_character_dialog_list", on_specific_character_dialog_list)
+    if western_goods_core.is_barter_ui_installed() then
+        RegisterScriptCallback("barter_ui_on_before_dialog", barter_ui_on_before_dialog)
+        RegisterScriptCallback("barter_ui_on_barter_ask", barter_ui_on_barter_ask)
+    end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Monkey-patches
 -- ---------------------------------------------------------------------------------------------------------------------
 
-western_goods_monkey_patches.monkey_patches["barter_ui_gui_on_show"] = {
-    name = "barter_ui_gui_on_show",
-    patches = {
-        { prio=1, script="barter_ui", func="GUI_on_show", cond = function() return western_goods_core.is_barter_ui_installed() end }
-    }
-}
 western_goods_monkey_patches.monkey_patches["trade_manager_update"] = {
     name = "trade_manager_update",
     patches = {
@@ -150,10 +148,6 @@ western_goods_monkey_patches.monkey_patches["western_goods_loot_table_corpse_rea
         { prio=1, script="western_goods_loot", func="table_corpse_ready", cond = function() return true end }
     }
 }
-
-western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.barter_ui_gui_on_show, function(name, path)
-    western_goods_trade_eur_usd.barter_ui_gui_on_show(name, path)
-end)
 
 western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.trade_manager_update, function(npc, force_refresh)
     western_goods_trade_eur_usd.trade_manager_update(npc, force_refresh)

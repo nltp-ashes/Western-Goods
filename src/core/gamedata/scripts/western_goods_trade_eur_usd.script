@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 24/08/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the trade system, but with Euros/Dollars instead of Roubles.                            ---
@@ -58,7 +58,7 @@ local eur_rouble_rate           = 68
 local usd_rouble_rate           = 70
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- General Dialog Functions
+-- Dialog functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function called when the player uses the trade line of dialog.
@@ -332,30 +332,7 @@ function make_exchange(self, npc)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Barter actions/restrictions
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Monkey-patching barter_ui.GUI_on_show to prevent the Barter button from showing if the NPC is a EUR/USD trader.
---- @param name string
---- @param path string
---- @return nil
-function barter_ui_gui_on_show(name, path)
-    local ui_instance = ui_inventory.GUI
-    if name ~= "UIInventory" or (not ui_instance) then
-        return
-    end
-
-    local partner = ui_instance:GetPartner()
-
-    if partner and this.is_eur_usd_trader(partner) then
-        return
-    end
-
-    western_goods_monkey_patches.barter_ui_gui_on_show(name, path)
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Service Functions
+-- Service functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
 --- Function used to know if an NPC is a EUR/USD trader or not.
