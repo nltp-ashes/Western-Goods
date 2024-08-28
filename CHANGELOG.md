@@ -1,4 +1,4 @@
-## **v3.1.0 - 20/08/2024 - Major Update**
+## **v3.1.0 - 08/08/2024 - Major Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
@@ -7,6 +7,7 @@
 > • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
 
 **• Changes :**
+> • Removed code used to overwrite the Barter UI, as it is no longer needed;
 > • Williams Heades (trader in Pripyat Outskirts) will now increase supply level based on storylines completion instead of goodwill;
 > • Dropped support for the "Device Selector Key" addon, given its lack of use by the community;
 > • Neutral NPCs are actually neutral now, instead of being enemies and ignoring the player;
@@ -18,6 +19,8 @@
 > • Stashes will now show a marker on the PDA when they contain a GPS Locator (Thanks lexus);
 
 **• Bug fixes :**
+> • Fixed duplicate dialog for bartering (Thanks Rambito);
+> • Fixed magazines not having parts, preventing the player from disassembling them (Thanks Minolta50);
 > • Fixed some script functions not being defined in the correct module;
 > • Fixed `trying to set callback ... to nil function!` errors in log (Thanks Stalker_Boss);
 > • Fixed GPS locator displaying first two digits of the year, instead of the last two (Thanks Rambito).
