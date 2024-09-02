@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="st_wg_act_1_task_1_quest_item">
+		<text>Caisse d'approvisionnement</text>
+	</string>
+	<string id="st_wg_act_1_task_1_quest_item_s">
+		<text>Fournitures</text>
+	</string>
+	<string id="st_wg_act_1_task_1_quest_item_descr">
+		<text>            Une caisse scellée trouvée près des corps de l'équipage de l'hélicoptère. Le contenu exact de la caisse est inconnu, mais comme elle devait être livrée à Williams Heades, elle doit contenir des marchandises occidentales.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] grande valeur\n
+        </text>
+	</string>
+	<string id="st_wg_act_1_task_2_quest_item_1">
+		<text>Arme non identifiée</text>
+	</string>
+	<string id="st_wg_act_1_task_2_quest_item_1_s">
+		<text>Arme non identifiée</text>
+	</string>
+	<string id="st_wg_act_1_task_2_quest_item_1_descr">
+		<text>            Une arme inconnue, dont le mécanisme de tir n'a pas été établi. L'arme semble être à court de munitions - appuyer sur la gâchette ne fait rien. Elle est très lourde et certainement de haute technologie. Il est à noter qu'elle ne semble pas tirer de balles basées sur l'allumage. Très probablement, les projectiles sont propulsés par des forces électromagnétiques. On ne peut que supposer quel genre de potentiel destructeur elle possède.\n
+            \n
+            %c[ui_gray_1]PROPERTIES:\n
+            %c[d_red] • %c[ui_gray_2] unusable\n
+        </text>
+	</string>
+	<string id="st_wg_act_1_task_2_quest_item_2">
+		<text>Note de bandit</text>
+	</string>
+	<string id="st_wg_act_1_task_2_quest_item_2_s">
+		<text>Note de bandit</text>
+	</string>
+	<string id="st_wg_act_1_task_2_quest_item_2_descr">
+		<text>            Un papier trouvé dans l'entrepôt de conteneurs. À en juger par l'écriture, il a certainement été rédigé par l'un des bandits...       </text>
+	</string>
+	<string id="st_wg_act_2_task_2_quest_item">
+		<text>Mallette de documents</text>
+	</string>
+	<string id="st_wg_act_2_task_2_quest_item_s">
+		<text>Documents</text>
+	</string>
+	<string id="st_wg_act_2_task_2_quest_item_descr">
+		<text>            Une caisse scellée contenant supposément des documents de recherche. Elle était transportée par un convoi de scientifiques vers un emplacement inconnu. Le client de Dushman en veut, mais on ne sait pas qui ils sont ni pourquoi ils s'intéressent à cela.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_cyan] • %c[ui_gray_2] grande valeur\n
+        </text>
+	</string>
+	<string id="st_wg_stash_map_quest_item">
+		<text>Carte vers le planque</text>
+	</string>
+	<string id="st_wg_stash_map_quest_item_s">
+		<text>Carte</text>
+	</string>
+	<string id="st_wg_stash_map_quest_item_descr">
+		<text>            Une carte dessinée à la main, donnée par Oleksandr. Avec elle, il devrait être possible de localiser l'ancienne planque de lui et de son frère dans le sous-sol d'Agroprom.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_green] • %c[ui_gray_2] informatif\n
+            %c[d_blue] • %c[ui_gray_2] effets personnels\n
+        </text>
+	</string>
+	<string id="st_wg_danylo_pendrive_quest_item">
+		<text>Clé USB de Danylo</text>
+	</string>
+	<string id="st_wg_danylo_pendrive_quest_item_s">
+		<text>Clé USB</text>
+	</string>
+	<string id="st_wg_danylo_pendrive_quest_item_descr">
+		<text>            Une clé USB qui a été cachée lorsque Danylo faisait encore partie de l'armée. Peut-être que les informations qu'elle contient peuvent donner un indice sur ses coordonnées actuelles. Malheureusement, les humains ne peuvent pas encore lire à travers le plastique et les semi-conducteurs, donc un appareil ou un technicien est nécessaire pour lire son contenu.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_green] • %c[ui_gray_2] informatif\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+        </text>
+	</string>
+	<string id="st_wg_deployment_notice_quest_item">
+		<text>Avis de déploiement du SSU</text>
+	</string>
+	<string id="st_wg_deployment_notice_quest_item_s">
+		<text>Avis de déploiement</text>
+	</string>
+	<string id="st_wg_deployment_notice_quest_item_descr">
+		<text>            Un document militaire, ordonnant à un escadron du SSU de localiser et d'éliminer "le sergent Danylo Chernenko". Le document mentionne que l'ordre fait suite à la désertion du sergent, mais le reste du motif est censuré.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_green] • %c[ui_gray_2] informatif\n
+        </text>
+	</string>
+</string_table>
