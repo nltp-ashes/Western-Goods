@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="ui_mcm_western_goods_title">
+		<text>Western Goods</text>
+	</string>
+	<string id="ui_mcm_menu_western_goods">
+		<text>Western Goods</text>
+	</string>
+	<string id="ui_mcm_western_goods_general_settings_title">
+		<text>PARAMÈTRES GÉNÉRAUX</text>
+	</string>
+	<string id="ui_mcm_western_goods_devices_settings_title">
+		<text>PARAMÈTRES DES DISPOSITIFS</text>
+	</string>
+	<string id="ui_mcm_western_goods_guided_surge">
+		<text>Localisateur GPS - Émissions guidées/tempêtes psi</text>
+	</string>
+	<string id="ui_mcm_western_goods_guided_tasks">
+		<text>Tâches guidées</text>
+	</string>
+	<string id="ui_mcm_western_goods_guided_tasks_desc">
+		<text>Certaines tâches sont intentionnellement non guidées, pour encourager l'exploration et la réflexion. Vous pouvez modifier ce paramètre en temps réel pour avoir un marqueur sur votre PDA pour votre objectif.</text>
+	</string>
+	<string id="ui_mcm_western_goods_magazine_psi_regen">
+		<text>Facteur de régénération de la santé psi pour la lecture de magazines</text>
+	</string>
+	<string id="ui_mcm_western_goods_magazine_psi_regen_desc">
+		<text>Définit le facteur par lequel multiplier la régénération de votre santé psi (santé mentale) lorsque vous lisez un magazine.</text>
+	</string>
+	<string id="ui_mcm_western_goods_guided_surge_desc">
+		<text>Si activé, lorsqu'une émission/tempête psi se produit, vous obtiendrez une tâche dans votre PDA, et cette tâche indiquera le plus proche abri. Si désactivé, vous aurez toujours la tâche, mais elle n'indiquera pas le plus proche abri. Le localisateur GPS peut être utilisé pour localiser le plus proche abri.</text>
+	</string>
+	<string id="ui_mcm_western_goods_compass_north_lock">
+		<text>Compas - Verrouillage nord</text>
+	</string>
+	<string id="ui_mcm_western_goods_compass_north_lock_desc">
+		<text>Si activé, l'arrière-plan du compas affichera toujours le nord en haut, et le curseur pointera dans la direction où le joueur fait face. Si désactivé, le curseur pointera toujours vers le haut, et l'arrière-plan tournera dans la direction où le joueur fait face.</text>
+	</string>
+	<string id="ui_mcm_western_goods_keybindings_title">
+		<text>PARAMÈTRES DES RACCOURCIS CLAVIERS</text>
+	</string>
+	<string id="ui_mcm_western_goods_heli_attack">
+		<text>Ordonne à l'hélicoptère d'attaquer</text>
+	</string>
+	<string id="ui_mcm_western_goods_heli_attack_desc">
+		<text>Raccourci utilisé pour envoyer un ordre d'attaque à un hélicoptère. Visez une cible et utilisez le raccourci pour envoyer l'ordre.</text>
+	</string>
+	<string id="ui_mcm_western_goods_rangefinder_nv">
+		<text>Basculer la couleur du réticule du télémètre</text>
+	</string>
+	<string id="ui_mcm_western_goods_rangefinder_nv_desc">
+		<text>Raccourci utilisé pour basculer la couleur (rouge/vert) du réticule du télémètre SigSauer KILO5K.</text>
+	</string>
+	<string id="ui_mcm_western_goods_loot_settings_title">
+		<text>PARAMÈTRES DU BUTIN</text>
+	</string>
+	<string id="ui_mcm_western_goods_trader_loot_factor">
+		<text>Facteur de butin des commerçants</text>
+	</string>
+	<string id="ui_mcm_western_goods_trader_loot_factor_desc">
+		<text>Définit le facteur par lequel affecter la chance d'apparition du butin chez les commerçants. Cela n'affecte que la probabilité d'apparition, pas la quantité.</text>
+	</string>
+	<string id="ui_mcm_western_goods_corpse_loot_factor">
+		<text>Facteur de butin des cadavres</text>
+	</string>
+	<string id="ui_mcm_western_goods_corpse_loot_factor_desc">
+		<text>Définit le facteur par lequel affecter la chance d'apparition du butin sur les cadavres. Cela n'affecte que la probabilité d'apparition, pas la quantité.</text>
+	</string>
+	<string id="ui_mcm_western_goods_max_item_per_corpse">
+		<text>Nombre maximum d'objets par cadavre</text>
+	</string>
+	<string id="ui_mcm_western_goods_max_item_per_corpse_desc">
+		<text>Définit le nombre maximum d'objets X pouvant apparaître dans un seul cadavre. Le jeu sélectionnera X objets à faire apparaître, puis appliquera les taux de chute pour chacun des objets sélectionnés. En d'autres termes, vous pouvez obtenir entre 0 et X objets.</text>
+	</string>
+	<string id="ui_mcm_western_goods_compatibility_title">
+		<text>PARAMÈTRES DE COMPATIBILITÉ</text>
+	</string>
+	<string id="ui_mcm_western_goods_technical_settings_title">
+		<text>PARAMÈTRES TECHNIQUES</text>
+	</string>
+	<string id="ui_mcm_western_goods_debug_mode">
+		<text>Debug mode</text>
+	</string>
+	<string id="ui_mcm_western_goods_debug_mode_desc">
+		<text>Fait en sorte que l'addon imprime certaines informations dans la console/logs, pour référence ultérieure lors de l'identification des problèmes.</text>
+	</string>
+	<string id="ui_mcm_western_goods_addon_removal">
+		<text>Suppression de l'addon</text>
+	</string>
+	<string id="ui_mcm_western_goods_addon_removal_desc">
+		<text>Permet une suppression sûre de l'addon. Activez ce paramètre, puis sauvegardez votre jeu. Après cela, vous pouvez supprimer l'addon et recharger cette sauvegarde, et continuer à jouer sans Western Goods.</text>
+	</string>
+	<string id="ui_mcm_detector_selector_keybind_wg_gps">
+		<text>Touche de sélection du localisateur GPS</text>
+	</string>
+	<string id="ui_mcm_detector_selector_keybind_wg_minedetect">
+		<text>Touche de sélection du détecteur de mines</text>
+	</string>
+</string_table>
