@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 31/07/2024                                                                                            -->
+<!--    Date : 04/09/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -122,6 +122,19 @@
     <!-- Readable UI strings -->
     <string id="ui_wg_dx8_retard_notice">
         <text>Похожи, что вы используете рендерер DirectX 8, вы можете наблюдать растяжение текстур. Используйте более современный рендерер для избежания данных ошибок.</text>
+    </string>
+
+    <!-- Map spots strings -->
+    <string id="st_wg_map_spot_helicopter">
+        <text>Вертолет</text>
+    </string>
+
+    <string id="st_wg_map_spot_enemy">
+        <text>Враг</text>
+    </string>
+
+    <string id="st_wg_map_spot_gps_stash">
+        <text>Тайник отмечен GPS</text>
     </string>
 
     <!-- Misc strings -->
