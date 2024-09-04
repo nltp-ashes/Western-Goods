@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 31/07/2024                                                                                            -->
+<!--    Date : 04/09/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -122,6 +122,19 @@
     <!-- Readable UI strings -->
     <string id="ui_wg_dx8_retard_notice">
         <text>It seems you're using DirectX 8 renderer, you may experience texture stretching. Use a more modern renderer to avoid issues.</text>
+    </string>
+
+    <!-- Map spots strings -->
+    <string id="st_wg_map_spot_helicopter">
+        <text>Helicopter</text>
+    </string>
+
+    <string id="st_wg_map_spot_enemy">
+        <text>Enemy</text>
+    </string>
+
+    <string id="st_wg_map_spot_gps_stash">
+        <text>Stash marked by GPS</text>
     </string>
 
     <!-- Misc strings -->

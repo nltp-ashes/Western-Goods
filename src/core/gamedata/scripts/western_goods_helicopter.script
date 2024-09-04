@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES, RavenAscendant                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 11/08/2024                                                                                             ---
+---    Date : 04/09/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script represents an API to make handling of helicopters easier.                                         ---
@@ -336,7 +336,7 @@ function heli_update(heli_obj,mode,last_mode,target_pos)
 
         -- Refresh the helicopter's marker on the PDA
         if not western_goods_utils.map_has_spot(heli_obj:id(), CONST_HELICOPTER_SPOT) then
-            western_goods_utils.map_add_spot(heli_obj:id(), CONST_HELICOPTER_SPOT, "Helicopter", true)
+            western_goods_utils.map_add_spot(heli_obj:id(), CONST_HELICOPTER_SPOT, western_goods_utils.get_translation("st_wg_map_spot_helicopter"), true)
         end
     elseif not updated then
         dbg_printf("![WG] ERROR | Helicopter | Failed to update helicopter %s", heli_obj:id())
