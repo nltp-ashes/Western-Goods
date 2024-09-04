@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 18/08/2024                                                                                             ---
+---    Date : 04/09/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -264,7 +264,7 @@ function check_prerequisites()
     assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
         western_goods_utils.get_translation("st_err_outdated_game_title"),
         western_goods_utils.get_translation("st_err_outdated_game_what", REQUIRED_GAME_VERSION),
-        western_goods_utils.get_translation("st_err_outdated_game_why", REQUIRED_GAME_VERSION),
+        western_goods_utils.get_translation("st_err_outdated_game_why", REQUIRED_GAME_VERSION, REQUIRED_GAME_VERSION),
         western_goods_utils.get_translation("st_err_outdated_game_where", REQUIRED_GAME_VERSION)
     ))
 

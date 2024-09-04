@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 15/08/2024                                                                                            -->
+<!--    Date : 04/09/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' dialogs.                                                                 -->
@@ -221,7 +221,7 @@
 
     <!-- Start dialog strings -->
     <string id="st_wg_dunn_lynn_first_start">
-        <text>At least we meet.</text>
+        <text>At last, we meet.</text>
     </string>
 
     <string id="st_wg_dunn_lynn_start_x">

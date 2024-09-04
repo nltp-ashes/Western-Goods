@@ -25,7 +25,7 @@
     </string>
 
     <string id="st_err_outdated_game_why">
-        <text>Western Goods требует функций игры, добавленных только в 1.5.2, и/или использует для работы модификации требующие версии игры %s.</text>
+        <text>Western Goods требует функций игры, добавленных только в %s, и/или использует для работы модификации требующие версии игры %s.</text>
     </string>
 
     <string id="st_err_outdated_game_where">

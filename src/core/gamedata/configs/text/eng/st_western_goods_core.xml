@@ -25,7 +25,7 @@
     </string>
 
     <string id="st_err_outdated_game_why">
-        <text>Western Goods requires some functionalities added only in 1.5.2, and/or uses prerequisites that themselves require version %s.</text>
+        <text>Western Goods requires some functionalities added only in %s, and/or uses prerequisites that themselves require version %s.</text>
     </string>
 
     <string id="st_err_outdated_game_where">
