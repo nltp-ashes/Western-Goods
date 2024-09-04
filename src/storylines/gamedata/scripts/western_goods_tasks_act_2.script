@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 11/08/2024                                                                                             ---
+---    Date : 04/09/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the tasks of the second act of the addon's storyline.                                   ---
@@ -42,6 +42,7 @@ local CONST_TASK_2_CLEAR_SMART_DIST       = 2500                     -- meters s
 local CONST_TASK_2_ZOMBIE_1_DIST          = 15625                    -- meters squared
 local CONST_TASK_2_SCHOOL_CLOSE           = 400                      -- meters squared
 local CONST_TASK_2_SCHOOL_FAR             = 4900                     -- meters squared
+local CONST_TASK_2_ENEMY_SPOT             = "anomaly_thermal"
 
 -- Task variables
 TASK_1_CACHE                              = {}
@@ -1256,7 +1257,7 @@ function task_2_mark_current_enemies(marked_enemies)
     for id,_ in pairs(xr_combat_ignore.fighting_with_actor_npcs) do
         if not western_goods_utils.table_contains(marked_enemies, id) then
             table.insert(marked_enemies, id)
-            western_goods_utils.map_add_spot(id, "anomaly_thermal", "Enemy", true)
+            western_goods_utils.map_add_spot(id, CONST_TASK_2_ENEMY_SPOT, western_goods_utils.get_translation("st_wg_map_spot_enemy"), true)
         end
     end
 end
