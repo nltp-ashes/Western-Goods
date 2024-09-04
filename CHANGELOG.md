@@ -1,12 +1,14 @@
-## **v3.1.0 - 08/08/2024 - Major Update**
+## **v3.1.0 - 04/09/2024 - Major Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
 **• Additions :**
+> • Added translations to map spots placed by the addon;
 > • Added route from container warehouse in Jupiter to Bandit base in Dark Valley for 8k RUB (Thanks Rambito);
 > • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
 
 **• Changes :**
+> • Improved texture quality of Mi-24 Hind used during the storylines;
 > • Removed code used to overwrite the Barter UI, as it is no longer needed;
 > • Williams Heades (trader in Pripyat Outskirts) will now increase supply level based on storylines completion instead of goodwill;
 > • Dropped support for the "Device Selector Key" addon, given its lack of use by the community;
