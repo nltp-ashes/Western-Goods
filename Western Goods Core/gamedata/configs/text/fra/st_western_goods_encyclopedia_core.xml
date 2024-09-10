@@ -25,7 +25,7 @@ En parlant à un marchand au Marché aux puces, le joueur a la possibilité d'ac
 Les offres se composent des éléments suivants:\n
             \n
 • %c[pda_white]Objet%c[ui_gray_1]. L'article contenu dans l'offre;            \n
-• %c[pda_white]Quantité%c[ui_gray_1]. La quantité de l'article contenu dans l'offre, variant de manière aléatoire entre 2 et 10 articles;            \n
+• %c[pda_white]Quantité%c[ui_gray_1]. La quantité d'articles contenus dans l'offre, variant de manière aléatoire entre 2 et 10 articles;            \n
 • %c[pda_white]Réduction%c[ui_gray_1]. La réduction appliquée par rapport au prix régulier, variant de manière aléatoire entre 5% et 50%\n
 • %c[pda_white]Prix%c[ui_gray_1]. L'argent nécessaire pour accepter l'offre.        </text>
 	</string>
