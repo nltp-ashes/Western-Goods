@@ -43,7 +43,7 @@
 		<text>Si activé, lorsqu'une émission/tempête psi se produit, vous obtiendrez une tâche dans votre PDA, et cette tâche indiquera le plus proche abri. Si désactivé, vous aurez toujours la tâche, mais elle n'indiquera pas le plus proche abri. Le localisateur GPS peut être utilisé pour localiser le plus proche abri.</text>
 	</string>
 	<string id="ui_mcm_western_goods_compass_north_lock">
-		<text>Compas - Verrouillage nord</text>
+		<text>Boussole - Verrouillage nord</text>
 	</string>
 	<string id="ui_mcm_western_goods_compass_north_lock_desc">
 		<text>Si activé, l'arrière-plan du compas affichera toujours le nord en haut, et le curseur pointera dans la direction où le joueur fait face. Si désactivé, le curseur pointera toujours vers le haut, et l'arrière-plan tournera dans la direction où le joueur fait face.</text>
