@@ -34,9 +34,9 @@ Une technologie spéciale est utilisée pour l'écran de l'appareil, permettant 
         \n
 %c[pda_green]Informations%c[ui_gray_1]\n
         \n
-Les briquets sont considérés par de nombreux Stalkers comme l'un des essentiels pour survivre dans la Zone. Souvent utilisés pour allumer des cigarettes, mais pas seulement - ils sont suffisamment puissants pour allumer des feux de camp (équipez-vous et sortez le briquet pour le faire).\n
+Les briquets sont considérés par de nombreux Stalkers comme l'un des essentiels pour survivre dans la Zone. Souvent utilisés pour allumer des cigarettes, mais pas seulement - ils sont suffisamment puissants pour allumer des feux de camp (équipez-le et sortez le briquet dans vos mains pour le faire).\n
         \n
-Il fournit également une petite lumière, qui peut être utilisée pour éclairer vos environs immédiats tout en restant relativement discret, surtout la nuit.</text>
+Il fournit également une petite lumière, qui peut être utilisée pour éclairer vos environs tout en restant relativement discret, surtout la nuit.</text>
 	</string>
 	<string id="encyclopedia_items_western_goods_zippo_lighter">
 		<text>Briquet Zippo</text>
@@ -76,11 +76,11 @@ Pour assurer un confort d'utilisation constant, le télémètre dispose de deux 
         \n
 Cet appareil compact regorge de fonctionnalités. C'est un très bon outil pour se déplacer dans la Zone, compte tenu de sa haute fiabilité face aux émissions de psi.
 Fonctionnalités :
-• %c[pda_white]Compas%c[ui_gray_1] : indique la direction de l'utilisateur ;
-• %c[pda_white]Vitesse%c[ui_gray_1] : la vitesse actuelle (en %c[pda_white]km/h%c[ui_gray_1]) de l'utilisateur ;
-• %c[pda_white]Distance au Prochain%c[ui_gray_1] : la distance (en %c[pda_white]km%c[ui_gray_1]) jusqu'au point de passage ;
-• %c[pda_white]ETA à Destination%c[ui_gray_1] : l'heure (%c[pda_white]format 24h%c[ui_gray_1]) à laquelle l'utilisateur arrivera au point de passage ;
-• %c[pda_white]Temps jusqu'au Prochain%c[ui_gray_1] : le temps nécessaire (en %c[pda_white]HH:mm%c[ui_gray_1], ou %c[pda_white]mm:ss%c[ui_gray_1] si moins d'une heure) pour atteindre le point de passage.\n
+• %c[pda_white]Compas%c[ui_gray_1]: indique la direction de l'utilisateur ;
+• %c[pda_white]Vitesse%c[ui_gray_1]: la vitesse actuelle (en %c[pda_white]km/h%c[ui_gray_1]) de l'utilisateur ;
+• %c[pda_white]Distance au Prochain%c[ui_gray_1]: la distance (en %c[pda_white]km%c[ui_gray_1]) jusqu'au point de passage ;
+• %c[pda_white]ETA à Destination%c[ui_gray_1]: l'heure (%c[pda_white]format 24h%c[ui_gray_1]) à laquelle l'utilisateur arrivera au point de passage ;
+• %c[pda_white]Temps jusqu'au Prochain%c[ui_gray_1]: le temps nécessaire (en %c[pda_white]HH:mm%c[ui_gray_1], ou %c[pda_white]mm:ss%c[ui_gray_1] si moins d'une heure) pour atteindre le point de passage.\n
         \n
 Par défaut, le curseur du compas est fixe et son arrière-plan indique la direction. Mais il peut être changé pour verrouiller le nord et faire pivoter le curseur à la place.</text>
 	</string>
