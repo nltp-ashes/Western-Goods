@@ -19,10 +19,10 @@
 		<text>Votre jeu a une version invalide ou obsolète. Veuillez installer la version S.T.A.L.K.E.R. Anomaly %s.</text>
 	</string>
 	<string id="st_err_outdated_game_why">
-		<text>Western Goods nécessite certaines fonctionnalités ajoutées uniquement dans la version 1.5.2 et/ou utilise des prérequis qui eux-mêmes nécessitent la version %s.</text>
+		<text>Western Goods nécessite certaines fonctionnalités ajoutées uniquement dans la version %s et/ou utilise des prérequis qui eux-mêmes nécessitent la version %s.</text>	
 	</string>
 	<string id="st_err_outdated_game_where">
-		<text>Vous pouvez télécharger S.T.A.L.K.E.R. Anomaly %s depuis ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+		<text>Vous pouvez télécharger S.T.A.L.K.E.R. Anomaly %s depuis ModDB: https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
 	</string>
 	<string id="st_err_outdated_modded_exes_title">
 		<text>Version des exécutables modifiés invalide ou obsolète.</text>
@@ -34,7 +34,7 @@
 		<text>Des améliorations sont constamment ajoutées au moteur, et Western Goods profite de ces nouvelles fonctionnalités.</text>
 	</string>
 	<string id="st_err_outdated_modded_exes_where">
-		<text>Vous pouvez télécharger la dernière version depuis GitHub : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+		<text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
 	</string>
 	<string id="st_err_missing_dxml_title">
 		<text>Prérequis manquant - DXML</text>
@@ -58,7 +58,7 @@
 		<text>Western Goods nécessite LUA Unlocalizer pour améliorer la compatibilité avec d'autres addons et éviter l'écrasement des fichiers d'origine.</text>
 	</string>
 	<string id="st_err_missing_unlocalizer_where">
-		<text>Vous pouvez télécharger la dernière version depuis GitHub : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+		<text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
 	</string>
 	<string id="st_wg_unpack">
 		<text>Décompresser</text>
@@ -76,7 +76,7 @@
 		<text>Pas assez de carburant</text>
 	</string>
 	<string id="st_wg_lighter_header">
-		<text>%s •%s Carburant : %s%s%\n
+		<text>%s •%s Carburant: %s%s%\n
  \n
 %s%s</text>
 	</string>
@@ -87,6 +87,6 @@
 		<text>Libre</text>
 	</string>
 	<string id="st_err_missing_dxml_where">
-		<text>Vous pouvez télécharger la dernière version depuis GitHub : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+		<text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
 	</string>
 </string_table>
