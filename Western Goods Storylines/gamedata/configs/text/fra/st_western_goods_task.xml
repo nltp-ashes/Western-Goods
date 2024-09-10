@@ -13,7 +13,7 @@
 <!--=================================================================================================================-->
 <string_table>
 	<string id="st_wg_act_1_task_1_title">
-		<text>Livraison par hélicoptère : bosses sur la route</text>
+		<text>Livraison héliportée: bosses sur la route</text>
 	</string>
 	<string id="st_wg_act_1_task_1_stage_0_descr">
 		<text>Williams Heades attendait une réapprovisionnement par hélicoptère, mais l'équipage a cessé de répondre. Suivez leur signal GPS et vérifiez si tout va bien.</text>
@@ -44,7 +44,7 @@ C'est déjà assez difficile d'obtenir ces fournitures dans la Zone, je n'ai pas
 Quoi qu'il en soit, merci pour votre aide, Stalker. C'est bon de savoir que je peux compter sur vous.</text>
 	</string>
 	<string id="st_wg_act_1_task_2_title">
-		<text>Livraison par hélicoptère : Conspiration</text>
+		<text>Livraison par hélicoptère: Conspiration</text>
 	</string>
 	<string id="st_wg_act_1_task_2_stage_0_descr">
 		<text>Les Mercenaires à la Station de Traitement des Déchets ont sécurisé l'hélicoptère. Certains de ses équipements électroniques étaient grillés. Des Stalkers à la station de Yanov parlent de lumières étranges. Poursuivez l'enquête à partir d'ici.</text>
@@ -74,7 +74,7 @@ Pourriez-vous vous y rendre et clarifier ce qui se passe?</text>
 Quoi qu'il en soit - désolé, je me suis emporté - Merci de m'avoir aidé à éclaircir toute cette affaire. Au moins, ce n'était pas une attaque ciblée, donc les affaires ne devraient pas être trop impactées.</text>
 	</string>
 	<string id="st_wg_act_1_task_3_title">
-		<text>Livraison par hélicoptère : Le Sauvetage</text>
+		<text>Livraison par hélicoptère: Le Sauvetage</text>
 	</string>
 	<string id="st_wg_act_1_task_3_stage_0_descr">
 		<text>Une équipe de mercenaires en mission de reconnaissance a repéré ce qui semble être l'un des leurs, capturé par les forces de Monolith. Sauvez-le.</text>
@@ -108,7 +108,7 @@ Quoi qu'il en soit, je lui ai donné des médicaments pour essayer de calmer sa 
 Oh, avant que j'oublie, il a dit qu'il voulait vous voir.</text>
 	</string>
 	<string id="st_wg_act_2_task_1_title">
-		<text>Travail sous contrat : Kolobok</text>
+		<text>Travail sous contrat: Kolobok</text>
 	</string>
 	<string id="st_wg_act_2_task_1_stage_0_descr">
 		<text>Dushman a un client important qui demande un Kolobok. Trouvez-en un et livrez-le à la Ville Morte.</text>
@@ -127,10 +127,10 @@ Si vous réussissez cela, je leur ferai un mot pour leur dire que vous cherchez 
 Vous avez tenu votre part du marché, et je tiendrai la mienne. Voulez-vous toujours que je dise à mon client que vous cherchez plus de travail?</text>
 	</string>
 	<string id="st_wg_act_2_task_2_title">
-		<text>Travail sous contrat : Mission de récupération</text>
+		<text>Travail sous contrat: Mission de récupération</text>
 	</string>
 	<string id="st_wg_act_2_task_2_stage_0_descr">
-		<text>Récupérez des documents escortés par un convoi de scientifiques. Lieu : La Banlieue.</text>
+		<text>Récupérez des documents escortés par un convoi de scientifiques. Lieu: La Banlieue.</text>
 	</string>
 	<string id="st_wg_act_2_task_2_stage_1_descr">
 		<text>Des zombies se trouvent sur votre chemin, éliminez-les avant d'avancer.</text>
@@ -175,7 +175,7 @@ Vous avez tenu votre part du marché, et je tiendrai la mienne. Voulez-vous touj
 		<text>Vous avez trouvé le colis. Récupérez-le pour votre contact.</text>
 	</string>
 	<string id="st_wg_act_3_task_1_title">
-		<text>Frères Chernenko : Ancien Stock</text>
+		<text>Frères Chernenko: Ancien Stock</text>
 	</string>
 	<string id="st_wg_act_3_task_1_stage_0_descr">
 		<text>Le frère de l'un des commerçants du Marché aux puces est porté disparu. Quand ils étaient dans l'armée, ils gardaient un stock dans le sous-sol d'Agroprom. Localisez et enquêtez sur le stock.</text>
@@ -190,7 +190,7 @@ Vous avez tenu votre part du marché, et je tiendrai la mienne. Voulez-vous touj
 		<text>La clé USB contenait, entre autres, une carte avec des dessins manuscrits. Trouvez l'emplacement indiqué sur cette carte.</text>
 	</string>
 	<string id="st_wg_act_3_task_2_title">
-		<text>Frères Chernenko : Poursuivants</text>
+		<text>Frères Chernenko: Poursuivants</text>
 	</string>
 	<string id="st_wg_act_3_task_2_stage_0_descr">
 		<text>Vous avez trouvé le frère d'Oleksandr. Il semble que certaines personnes le recherchent. Interrogez le soldat du SSU qu'il a capturé et essayez d'obtenir des informations.</text>
@@ -208,7 +208,7 @@ Vous avez tenu votre part du marché, et je tiendrai la mienne. Voulez-vous touj
 		<text>Retournez l'ordre de déploiement que vous avez trouvé à Danylo.</text>
 	</string>
 	<string id="st_wg_act_3_task_3_title">
-		<text>Frères Chernenko : Responsable des opérations</text>
+		<text>Frères Chernenko: Responsable des opérations</text>
 	</string>
 	<string id="st_wg_act_3_task_3_stage_0_descr">
 		<text>Trouvez et éliminez le superviseur corrompu du SSU. Ses dernières coordonnées connues se trouvent dans le parc des machines, dans les Grands Marais.</text>
@@ -217,7 +217,7 @@ Vous avez tenu votre part du marché, et je tiendrai la mienne. Voulez-vous touj
 		<text>Le superviseur du SSU est éliminé. Retournez auprès de Danylo.</text>
 	</string>
 	<string id="st_wg_act_3_task_4_title">
-		<text>Frères Chernenko : Réunion</text>
+		<text>Frères Chernenko: Réunion</text>
 	</string>
 	<string id="st_wg_act_3_task_4_stage_0_descr">
 		<text>Avec l'armée prise en charge, Danylo veut retrouver son frère. Rencontrez Danylo.</text>
