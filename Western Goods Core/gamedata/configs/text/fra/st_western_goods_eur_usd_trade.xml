@@ -13,7 +13,7 @@
 <!--=================================================================================================================-->
 <string_table>
 	<string id="western_goods_trader_dialog_init">
-		<text>Je voudrais échanger de la monnaie. %c[d_orange][Exchange]</text>
+		<text>Je voudrais échanger des devises. %c[d_orange][Echanger]</text>
 	</string>
 	<string id="st_wg_barter_blackbox_to_eur_desc">
 		<text>Échange une %c[d_orange]boîte noire%c[ui_gray_2] contre  %c[d_orange]300 EUR%c[ui_gray_2].</text>
