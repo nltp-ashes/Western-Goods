@@ -85,7 +85,7 @@
 		<text>Briquet Zippo</text>
 	</string>
 	<string id="st_wg_lighter_zippo_descr">
-		<text>            Un briquet Zippo classique. Connu pour sa durabilité et son design coupe-vent, ce briquet est un favori parmi beaucoup de gens. Il est rechargeable, ce qui signifie qu'il peut durer toute une vie avec un entretien approprié. Sa flamme est également réglable, ce qui le rend polyvalent pour diverses utilisations. Ce modèle particulier semble avoir été importé de l'extérieur de la Zone.\n
+		<text>            Un briquet Zippo classique. Connu pour sa durabilité et son design resistant au vent, ce briquet est un favori parmi beaucoup de gens. Il est rechargeable, ce qui signifie qu'il peut durer toute une vie avec un entretien approprié. Sa flamme est également réglable, ce qui le rend polyvalent pour diverses utilisations. Ce modèle particulier semble avoir été importé de l'extérieur de la Zone.\n
             \n
             %c[ui_gray_1]PROPRIÉTÉS:\n
             %c[d_blue] • %c[ui_gray_2] objet technologique\n
@@ -101,7 +101,7 @@
 		<text>SigSauer KILO5K</text>
 	</string>
 	<string id="st_wg_rangefinder_descr">
-		<text>            Le KILO5K 7x25 mm de Sig Sauer est un télémètre laser qui offre des capacités de mesure précises dans un format compact. Ce télémètre dispose d'un oculaire de style jumelle et d'un réglage de dioptrie. La portée maximale sur une cible réfléchissante est de 5 000 yards, et la portée maximale sur un cerf est de 2 000 yards.\n
+<text>            Le KILO5K 7x25 mm de Sig Sauer est un télémètre laser qui offre des capacités de mesure précises dans un format compact. Ce télémètre dispose d'un oculaire de style jumelle et d'un réglage de dioptrie. La portée maximale sur une cible réfléchissante est de 4 500 metres, et la portée maximale sur un cerf est de 1 800 yards.\n
             \n
             %c[ui_gray_1]PROPRIÉTÉS:\n
             %c[d_blue] • %c[ui_gray_2] objet technologique\n
