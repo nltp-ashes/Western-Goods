@@ -19,14 +19,14 @@
 		<text>Bouteille de Coca</text>
 	</string>
 	<string id="st_wg_cola_bottle_descr">
-		<text>            Coca-Cola, connu de manière informelle sous le nom de Coke, est une boisson gazeuse. À l'origine commercialisée comme une boisson de tempérance et destinée à être un médicament breveté. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprécient comme boisson, elle peut également être utilisée pour enlever la rouille des vieilles armes.\n
+		<text>            Coca-Cola, connu de manière informelle sous le nom de Coca, est une boisson gazeuse. À l'origine commercialisée comme une boisson de tempérance et destinée à être un médicament breveté. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprécient comme boisson, elle peut également être utilisée pour enlever la rouille des vieilles armes.\n
             \n
             %c[ui_gray_1]PROPRIÉTÉS:\n
             %c[d_blue] • %c[ui_gray_2] boisson\n
             %c[d_blue] • %c[ui_gray_2] importé\n
             %c[d_green] • %c[ui_gray_2] grande qualité\n
             %c[d_green] • %c[ui_gray_2] source nutritive saine\n
-            %c[d_cyan] • %c[ui_gray_2] Précieux\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
         </text>
 	</string>
 	<string id="st_wg_wine_chateau_latour">
@@ -84,10 +84,10 @@
 		<text>Canette de Coca-Cola</text>
 	</string>
 	<string id="st_wg_cola_can_s">
-		<text>Canette de Coke</text>
+		<text>Canette de Coca</text>
 	</string>
 	<string id="st_wg_cola_can_descr">
-		<text>            Coca-Cola, connu de manière informelle sous le nom de Coke, est une boisson gazeuse. À l'origine commercialisée comme une boisson de tempérance et destinée à être un médicament breveté. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprécient comme boisson, elle peut également être utilisée pour enlever la rouille des vieilles armes.\n
+		<text>            Coca-Cola, connu de manière informelle sous le nom de Coca, est une boisson gazeuse. À l'origine commercialisée comme une boisson de tempérance et destinée à être un médicament breveté. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprécient comme boisson, elle peut également être utilisée pour enlever la rouille des vieilles armes.\n
             \n
             %c[ui_gray_1]PROPRIÉTÉS::\n
             %c[d_blue] • %c[ui_gray_2] boisson\n
