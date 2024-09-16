@@ -49,7 +49,7 @@
 		<text>Échanger une %c[d_orange]boîte noire%c[ui_gray_2] contre trois %c[d_orange]ogives OG-7V%c[ui_gray_2].</text>
 	</string>
 	<string id="st_wg_barter_blackbox_to_og7v_desc_done">
-		<text>Le marchand est à court de têtes chercheuses pour l'instant, revenez plus tard.</text>
+		<text>Le marchand est à court d'ogives pour l'instant, revenez plus tard.</text>
 	</string>
 	<string id="st_western_goods_trader_guide_ask">
 		<text>L'un de vos hélicoptères pourrait-il me déposer quelque part?</text>
@@ -121,10 +121,10 @@
 		<text>Oui. Je voulais te remercier personnellement pour m'avoir sauvé. Tu sais, de nos jours, c'est difficile de trouver des gens qui ne saisissent pas l'occasion de plumer les autres quand ils le peuvent.</text>
 	</string>
 	<string id="stalker_crew_member_reward_2">
-		<text>Je ne suis pas ce genre de gars. Je suis content d'être arrivé à temps avant que le Monolithe ne te lave le cerveau.</text>
+		<text>Je ne suis pas ce genre de personne. Je suis content d'être arrivé à temps avant que le Monolithe ne te lave le cerveau.</text>
 	</string>
 	<string id="stalker_crew_member_reward_3">
-		<text>Ouais, raconte-moi ! De toute façon, je voulais te donner un petit quelque chose, pour te remercier avec autre chose que des mots.\n
+<text>Ouais, à qui le dis-tu! De toute façon, je voulais te donner un petit quelque chose, pour te remercier avec autre chose que des mots.\n
  \n
 Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de notre dernière chasse. Je n'arrive pas à croire qu'ils sont tous morts... Un artefact n'est pas exactement la même chose que de sauver une vie, mais j'ai entendu dire qu'il est assez précieux.</text>
 	</string>
@@ -150,7 +150,7 @@ Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de n
 		<text>Ils voulaient probablement me transformer en un des leurs pour piloter leurs hélicoptères. J'ai de la chance que tu m'aies sorti de là...</text>
 	</string>
 	<string id="st_wg_dunn_lynn_first_start">
-		<text>Au moins, on se rencontre.</text>
+		<text>Enfin, on se rencontre.</text>
 	</string>
 	<string id="st_wg_dunn_lynn_start_x">
 		<text>Salut, jeune Padawan.</text>
@@ -159,7 +159,7 @@ Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de n
 		<text>Bonjour.</text>
 	</string>
 	<string id="st_wg_dunn_lynn_start_1">
-		<text>Yo.</text>
+		<text>Salut.</text>
 	</string>
 	<string id="st_wg_dunn_lynn_start_2">
 		<text>Que veux-tu, stalker?</text>
@@ -471,7 +471,7 @@ Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de n
 		<text>Ok, j'achète!</text>
 	</string>
 	<string id="st_wg_flea_offer_buy_end_3">
-		<text>Ici.</text>
+		<text>Tiens.</text>
 	</string>
 	<string id="st_wg_flea_offer_buy_end_4">
 		<text>Vendu.</text>
@@ -537,7 +537,7 @@ Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de n
 		<text>Je suis de retour, et j'ai les fournitures.</text>
 	</string>
 	<string id="st_wg_act_1_task_2_ask_work_0">
-		<text> Comment ça se passe?</text>
+		<text>Comment ça se passe?</text>
 	</string>
 	<string id="st_wg_act_1_task_2_ask_work_1">
 		<text>Ça pourrait aller mieux...</text>
@@ -603,7 +603,7 @@ Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de n
 		<text>Bien, ils te contacteront bientôt.</text>
 	</string>
 	<string id="st_wg_act_2_task_2_opted_out">
-		<text>Pourquoi n'as-tu pas échangé l'artefact contre de l'argent alors? Je pensais que tu voulais te prouver...</text>
+		<text>Pourquoi tu n'as pas vendu l'artefact alors? Je pensais que tu voulais prouver ta valeur...</text>
 	</string>
 	<string id="st_wg_act_2_task_2_differed_opt_in">
 		<text>J'ai changé d'avis, peux-tu dire à ton client que je suis à la recherche de plus de travail?</text>
@@ -612,7 +612,7 @@ Tiens, prends ça. C'est un artefact que mes amis et moi avons trouvé lors de n
 		<text>T'es quoi... bipolaire? Je vais être cool cette fois et transmettre ton message. Mais la prochaine fois, tâche d'être plus clair!</text>
 	</string>
 	<string id="st_wg_act_2_task_2_finish_work_0">
-		<text>Donc, tu es le contact « anonyme » avec qui j'ai été en contact?</text>
+		<text>Donc, tu es le contact « anonyme » avec qui j'ai échangé pendant tout ce temps?</text>
 	</string>
 	<string id="st_wg_act_2_task_2_finish_work_1">
 		<text>Oui. Nous essayons de rester discrets. Nous ne voulons pas laisser transparaître notre présence.</text>
@@ -741,7 +741,7 @@ Je suppose que notre désertion lui a offert l'opportunité parfaite pour que l'
 		<text>Je suis de retour, et je ne suis pas venu seul.</text>
 	</string>
 	<string id="st_wg_act_3_task_4_end_work_1">
-		<text>Merci beaucoup, Stalker. J'étais de plus en plus inquiet. C'est bon de savoir que tu es quelqu'un de fiable. Hé, prends ça, pour te remercier de ta peine et pour avoir ramené mon frère en un seul morceau.</text>
+		<text>Merci beaucoup, Stalker. J'étais de plus en plus inquiet. C'est bon de savoir que tu es quelqu'un de fiable. Hé, prends ça, pour te remercier de ton aide et pour avoir ramené mon frère en un seul morceau.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_1">
 		<text>Tu as réussi à atteindre l'hélicoptère?</text>
@@ -753,25 +753,25 @@ Je suppose que notre désertion lui a offert l'opportunité parfaite pour que l'
 		<text>Où est l'équipage?</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_4">
-		<text>Je ne sais pas. As-tu un moyen de les localiser ou de trouver les fournitures?</text>
+		<text>Je ne sais pas. As-tu un moyen de les localiser ou de trouver la cargaison?</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_5">
-		<text>Certaines des fournitures ont un traceur GPS, laisse-moi vérifier.</text>
+		<text>Certaines des marchandises ont un traceur GPS, laisse-moi vérifier.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_0_message_6">
 		<text>J'ai un signal actif à la scierie, pas loin d'ici. Fonces-y! Rapidos!</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_1">
-		<text>J'ai localisé l'équipage... Ils sont tous morts. Il semble qu'ils ont essayé de se réfugier dans une maison... Et qu'ils ont été submergés par des zombies.</text>
+		<text>J'ai localisé l'équipage... Ils sont tous morts. Il semble qu'ils aient essayé de se réfugier dans une maison... Et qu'ils ont été submergés par des zombies.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_2">
-		<text>Ils sont tous morts? Fais chier... Tu vois des fournitures?</text>
+		<text>Ils sont tous morts? Fais chier... Tu vois la cargaison quelque part?</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_3">
-		<text>Je pense voir un coffre de transport.</text>
+		<text>Je crois que je vois une malette de transport.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_1_stage_1_message_4">
-		<text>Un seul? Il devrait y en avoir beaucoup plus! Peu importe. Prends ce que tu peux et barre-toi d'ici avant que les zombies ne t'attrapent aussi!</text>
+		<text>Une seul? Il devrait y en avoir beaucoup plus! Peu importe. Prends ce que tu peux et barre-toi d'ici avant que les zombies ne t'attrapent aussi!</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_stage_0_message_1">
 		<text>J'ai trouvé quelqu'un à la station de Yanov. Il a dit avoir vu des lumières étranges venant de l'entrepôt des conteneurs.</text>
@@ -789,22 +789,22 @@ Je suppose que notre désertion lui a offert l'opportunité parfaite pour que l'
 		<text>Nous sommes en route vers votre emplacement. Heades a dit que vous pourriez avoir besoin d'un feu de couverture. Désignez simplement les cibles (appuyez sur: %c[d_orange]%s%c[ui_white]), et nous nous occuperons du reste.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_2">
-		<text>nous n'avons plus assez de carburant. Nous retournerons à la station de traitement des déchets. Bonne chance là-bas.</text>
+		<text>Nous n'avons plus assez de carburant. On retourne à la station de traitement des déchets. Bonne chance là-bas.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_3">
 		<text>Que fais-tu, en train de voler nos affaires? Espèce d'idiot!</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_stage_1_message_4">
-		<text>Voler nos affaires? Je vais dire aux gars qui tu es vraiment.</text>
+		<text>Tu voles notre butin? Je vais dire aux gars qui tu es vraiment.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_stage_2_message_1">
 		<text>Soyez averti, plusieurs escouades de bandits se dirigent vers votre position.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_stage_2_message_2">
-		<text>Nous sommes à court de carburant. Nous retournerons à la station de traitement des déchets. Bonne chance là-bas.</text>
+		<text>Nous n'avons plus assez de carburant. On retourne à la station de traitement des déchets. Bonne chance là-bas.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_heli_attack_1">
-		<text>Cible repérée</text>
+		<text>Cible repérée.</text>
 	</string>
 	<string id="st_wg_trader_act_1_task_2_heli_attack_2">
 		<text>Bien reçu.</text>
@@ -870,52 +870,52 @@ Je suppose que notre désertion lui a offert l'opportunité parfaite pour que l'
 		<text>Reçu, nous sommes en route. Accroche-toi!</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_message_school_pursuers_far">
-		<text>Sois prudent, tu t'approches de l'école. Si les gens te voient arriver, on devra annuler la mission.</text>
+		<text>Soyez prudent, vous vous approchez de l'école. Si vous êtes repéré, on allons devoir annuler la mission.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_message_school_pursuers_close">
-		<text>Quelqu'un t'a vu entrer dans l'école. Mission annulée.</text>
+		<text>Quelqu'un vous a vu entrer dans l'école. Mission annulée.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_message_left_position">
-		<text>Tu as quitté ta position? Nous ne pouvons pas prendre de risques, mission annulée.</text>
+		<text>Vous avez quitté votre position? Nous ne pouvons pas prendre de risques, mission annulée.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_2_message_1">
-		<text>Tu es arrivé à la Banlieue? Bien. Avance vers l'école, des instructions suivront.</text>
+		<text>Vous êtes arrivé à la banlieue de Pripyat? Bien. Avancez vers l'école, les instructions suivront.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_5_message_1">
 		<text>Je suis arrivé à l'école, et maintenant?</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_5_message_2">
-		<text>Trouve le hall d'entrée, il y aura des escaliers menant au sous-sol. Cache-toi là-bas, pendant que le convoi arrive.</text>
+		<text>Trouvez le hall d'entrée, il y aura des escaliers menant au sous-sol. Cachez-vous là-bas, en attendant que le convoi arrive.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_1">
-		<text>Le convoi arrivera bientôt. Quand il arrivera, rends-toi au troisième étage de l'école.</text>
+		<text>Le convoi arrivera bientôt. Quand il sera là, rends-toi au troisième étage de l'école.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_2">
-		<text>Que veux-tu que je fasse quand je les verrai?</text>
+		<text>Que voulez-vous que je fasse quand je les verrai?</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_3">
-		<text>Élimine leur escorte, mais pas avant que nous te donnions le signal. Nous te dirons quand ouvrir le feu.</text>
+		<text>Éliminez leur escorte, mais pas avant que nous vous donnions le signal. Nous vous dirons quand ouvrir le feu.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_6_message_4">
 		<text>Bien compris.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_9_message">
-		<text>Attention, un groupe de bandits s'approche. N'interviens pas encore, nous ne savons pas si le convoi a les documents.</text>
+		<text>Attention, un groupe de bandits s'approche. N'intervenez pas encore, nous ne savons pas si le convoi a les documents.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_10_message_1">
-		<text>... tu... reçois ? Nous essayons d'amplifier notre signal. Le convoi a fui. Nous avons un signal GPS actif au vieux centre de service.</text>
+		<text>... vous... recevez? Nous essayons d'amplifier notre signal. Le convoi a fui. Nous avons un signal GPS actif au vieux centre de service.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_10_message_2">
-		<text>Si tu reçois ceci, je suis en route.</text>
+		<text>Si vous recevez ceci: je suis en route.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_10_message_3">
-		<text>10-4. Nous avons la confirmation que le convoi transporte les documents. Tu as le feu vert pour engager.</text>
+		<text>Reçu 5 sur 5. Nous avons la confirmation que le convoi transporte les documents. Vous avez le feu vert pour engager.</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_11_message_1">
 		<text>J'ai les documents!</text>
 	</string>
 	<string id="st_wg_trader_act_2_task_2_stage_11_message_2">
-		<text>Bien. Retrouve-nous dans le Darkscape. Nous t'attendrons au camp, sous la falaise.</text>
+		<text>Bien. Rendez-vous dans le Darkscape. Nous vous attendrons au camp, sous la falaise.</text>
 	</string>
 	<string id="st_wg_act_3_task_2_stage_2_message_1">
 		<text>%s, je dois bouger. Ma position actuelle n'est plus sûre. Retrouve-moi dans la Forêt Rouge, à la vieille mine.</text>
@@ -927,12 +927,12 @@ Je suppose que notre désertion lui a offert l'opportunité parfaite pour que l'
 		<text>Le superviseur ne te causera plus de problèmes. La Zone a eu raison de lui.</text>
 	</string>
 	<string id="st_wg_act_3_task_3_stage_0_message_2">
-		<text>Dieu merci. C'est enfin fini. Écoute, peux-tu m'aider avec une dernière chose ? Je t'attendrai dans les Entrepôts de l'Armée.</text>
+		<text>Dieu merci. C'est enfin fini. Écoute, peux-tu m'aider avec une dernière chose? Je t'attendrai dans les Entrepôts Militaires.</text>
 	</string>
 	<string id="st_wg_act_3_task_3_stage_0_message_3">
 		<text>Le superviseur ne devrait plus te causer de problèmes. J'ai glissé de l'argent dans ses poches.</text>
 	</string>
 	<string id="st_wg_act_3_task_3_stage_0_message_4">
-		<text>Ce n'est pas ce que je voulais, mais j'espère que cela fera l'affaire. Écoute, peux-tu m'aider avec une dernière chose? Je t'attendrai dans les Entrepôts de l'Armée.</text>
+		<text>Ce n'est pas ce que je voulais, mais j'espère que cela fera l'affaire. Écoute, peux-tu m'aider avec une dernière chose? Je t'attendrai dans les Entrepôts Militaires.</text>
 	</string>
 </string_table>
