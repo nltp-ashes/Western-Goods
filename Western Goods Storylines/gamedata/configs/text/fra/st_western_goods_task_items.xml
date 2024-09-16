@@ -43,7 +43,7 @@
 		<text>Note d'un bandit</text>
 	</string>
 	<string id="st_wg_act_1_task_2_quest_item_2_s">
-		<text>Note de bandit</text>
+		<text>Note d'un bandit</text>
 	</string>
 	<string id="st_wg_act_1_task_2_quest_item_2_descr">
 		<text>            Un papier trouvé dans l'entrepôt de conteneurs. À en juger par l'écriture, il a certainement été rédigé par l'un des bandits...       </text>
@@ -55,7 +55,7 @@
 		<text>Documents</text>
 	</string>
 	<string id="st_wg_act_2_task_2_quest_item_descr">
-		<text>            Une caisse scellée contenant supposément des documents de recherche. Elle était transportée par un convoi de scientifiques vers un emplacement inconnu. Le client de Dushman en veut, mais on ne sait pas qui ils sont ni pourquoi ils s'intéressent à cela.\n
+		<text>            Une caisse scellée contenant supposément des documents de recherche. Elle était transportée par un convoi de scientifiques vers un emplacement inconnu. Le client de Dushman semble vraiment vouloir mettre ses mains dessus, mais on ne sait ni qui ils sont, ni pourquoi ils s'y intéressent.\n
             \n
             %c[ui_gray_1]PROPRIÉTÉS:\n
             %c[d_cyan] • %c[ui_gray_2] grande valeur\n
