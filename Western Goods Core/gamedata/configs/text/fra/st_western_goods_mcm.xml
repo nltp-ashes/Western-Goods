@@ -46,7 +46,7 @@
 		<text>Boussole - Verrouillage nord</text>
 	</string>
 	<string id="ui_mcm_western_goods_compass_north_lock_desc">
-		<text>Si activé, l'arrière-plan du compas affichera toujours le nord en haut, et le curseur pointera dans la direction où le joueur fait face. Si désactivé, le curseur pointera toujours vers le haut, et l'arrière-plan tournera dans la direction où le joueur fait face.</text>
+		<text>Si activé, l'arrière-plan de la boussole affichera toujours le nord en haut, et le curseur pointera dans la direction où le joueur fait face. Si désactivé, le curseur pointera toujours vers le haut, et l'arrière-plan tournera dans la direction où le joueur fait face.</text>
 	</string>
 	<string id="ui_mcm_western_goods_keybindings_title">
 		<text>PARAMÈTRES DES RACCOURCIS CLAVIERS</text>
@@ -82,7 +82,7 @@
 		<text>Nombre maximum d'objets par cadavre</text>
 	</string>
 	<string id="ui_mcm_western_goods_max_item_per_corpse_desc">
-		<text>Définit le nombre maximum d'objets X pouvant apparaître dans un seul cadavre. Le jeu sélectionnera X objets à faire apparaître, puis appliquera les taux de chute pour chacun des objets sélectionnés. En d'autres termes, vous pouvez obtenir entre 0 et X objets.</text>
+		<text>Définit le nombre maximum d'objets X pouvant apparaître dans un seul cadavre. Le jeu sélectionnera X objets à faire apparaître, puis appliquera les taux d'apparition pour chacun des objets sélectionnés. En d'autres termes, vous pouvez obtenir entre 0 et X objets.</text>
 	</string>
 	<string id="ui_mcm_western_goods_compatibility_title">
 		<text>PARAMÈTRES DE COMPATIBILITÉ</text>
@@ -91,7 +91,7 @@
 		<text>PARAMÈTRES TECHNIQUES</text>
 	</string>
 	<string id="ui_mcm_western_goods_debug_mode">
-		<text>Debug mode</text>
+		<text>Mode de débogage</text>
 	</string>
 	<string id="ui_mcm_western_goods_debug_mode_desc">
 		<text>Fait en sorte que l'addon imprime certaines informations dans la console/logs, pour référence ultérieure lors de l'identification des problèmes.</text>
