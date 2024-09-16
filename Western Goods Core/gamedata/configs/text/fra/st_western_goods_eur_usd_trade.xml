@@ -22,7 +22,7 @@
 		<text>Le marchand n'est pas intéressé par l'achat de cet objet pour l'instant. Reviens plus tard.</text>
 	</string>
 	<string id="st_wg_barter_money_desc_done">
-		<text>Le marchand veut garder un peu de monnaie pour d'autres clients, reviens plus tard.</text>
+		<text>Le marchand veut garder des devises pour d'autres clients, reviens plus tard.</text>
 	</string>
 	<string id="st_wg_barter_dollars_10_to_50_desc">
 		<text>Échange cinq billets de %c[d_orange]10 USD%c[ui_gray_2] contre un billet de %c[d_orange]50 USD%c[ui_gray_2].</text>
@@ -79,10 +79,10 @@
 		<text>Échange %c[d_orange]100 EUR%c[ui_gray_2] contre %c[d_orange]6800 RU%c[ui_gray_2].</text>
 	</string>
 	<string id="st_stalker_crew_member_barter">
-		<text>Je voudrais échanger quelques objets.%c[d_orange][Exchange]</text>
+		<text>Je voudrais échanger quelques objets.%c[d_orange][Echanger]</text>
 	</string>
 	<string id="st_wg_trade_eur_usd_ask">
-		<text>Je veux acheter quelques choses.%c[d_orange][Trade]</text>
+		<text>Je veux acheter quelques choses.%c[d_orange][Marchander]</text>
 	</string>
 	<string id="st_wg_trade_eur_usd_ask_reply_1">
 		<text>Bien sûr.</text>
