@@ -61,7 +61,7 @@
 		<text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
 	</string>
 	<string id="st_wg_unpack">
-		<text>Décompresser</text>
+		<text>Déballer</text>
 	</string>
 	<string id="st_wg_view">
 		<text>Afficher</text>
@@ -84,7 +84,7 @@
 		<text>Il semble que vous utilisez le rendu DirectX 8, ce qui peut entraîner des étirements de textures. Utilisez un rendu plus moderne pour éviter ces problèmes.</text>
 	</string>
 	<string id="st_wg_free">
-		<text>Libre</text>
+		<text>Gratuit</text>
 	</string>
 	<string id="st_err_missing_dxml_where">
 		<text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
