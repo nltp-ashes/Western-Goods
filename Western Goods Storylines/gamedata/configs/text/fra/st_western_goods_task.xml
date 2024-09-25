@@ -130,7 +130,7 @@ Vous avez tenu votre part du marché, et je tiendrai la mienne. Voulez-vous touj
 		<text>Sous-traitant: Mission de récupération</text>
 	</string>
 	<string id="st_wg_act_2_task_2_stage_0_descr">
-		<text><text>Récupérez des documents escortés par un convoi de scientifiques. Lieu: La Banlieue de Pripyat.</text></text>
+		<text>Récupérez des documents escortés par un convoi de scientifiques. Lieu: La Banlieue de Pripyat.</text>
 	</string>
 	<string id="st_wg_act_2_task_2_stage_1_descr">
 		<text>Des zombies se trouvent sur votre chemin, éliminez-les avant d'avancer.</text>
