@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 04/09/2024                                                                                             ---
+---    Date : 23/10/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -130,7 +130,7 @@ function check_missing_translations()
     local profiler = profile_timer()
     profiler:start()
 
-    local folders = { "eng", "rus" }
+    local folders = { "eng", "rus", "fra" }
     local strings = {}
 
     for _, folder in pairs(folders) do
