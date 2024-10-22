@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- ALSEWARE -->
-<!-- File made by Oyissan using ALSÃ‰WARE Tool -->
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
-<!--    Edited : N/A                                                                                                 -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
 <!--    Date : 28/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
-<!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
-	<string id="western_goods_trader_name">
-		<text>Williams "Ashes" Heades</text>
-	</string>
-	<string id="western_goods_trader_bio">
-		<text>Williams "Ashes" Heades est un membre des Mercenaires. Ancien soldat des Nations Unies, il a Ã©tÃ© envoyÃ© dans plusieurs thÃ©Ã¢tres de guerre dans le cadre des forces d'intervention de l'ONU. Il a combattu lors de la guerre civile de la rÃ©bellion de 2010 Ã  Altis, en GrÃ¨ce. Par la suite, il a Ã©tÃ© envoyÃ© dans la zone d'exclusion de Tchernobyl dans le cadre d'un dÃ©ploiement spÃ©cial de l'UNISG. Peu d'informations sont connues sur ses missions, tout ce que l'on sait, c'est qu'il a dÃ©cidÃ© de rester et n'est pas parti avec le reste du dÃ©ploiement.</text>
-	</string>
-	<string id="western_goods_oleksandr_chernenko_name">
-		<text>Captain Oleksandr Chernenko</text>
-	</string>
-	<string id="western_goods_oleksandr_chernenko_bio">
-		<text>Soldat de l'armÃ©e ukrainienne devenu mercenaire. GÃ¨re les intÃ©rÃªts de Dushman au MarchÃ© aux Puces, Ã  la DÃ©charge.</text>
-	</string>
+    <string id="western_goods_trader_name">
+        <text>Williams "Ashes" Heades</text>
+    </string>
+    <string id="western_goods_trader_bio">
+        <text>Williams "Ashes" Heades est un membre des Mercenaires. Ancien soldat des Nations Unies, il a été envoyé dans plusieurs théâtres de guerre dans le cadre des forces d'intervention de l'ONU. Il a combattu lors de la guerre civile de la rébellion de 2010 à Altis, en Grèce. Par la suite, il a été envoyé dans la zone d'exclusion de Tchernobyl dans le cadre d'un déploiement spécial de l'UNISG. Peu d'informations sont connues sur ses missions, tout ce que l'on sait, c'est qu'il a décidé de rester et n'est pas parti avec le reste du déploiement.</text>
+    </string>
+    <string id="western_goods_oleksandr_chernenko_name">
+        <text>Captain Oleksandr Chernenko</text>
+    </string>
+    <string id="western_goods_oleksandr_chernenko_bio">
+        <text>Soldat de l'armée ukrainienne devenu mercenaire. Gère les intérêts de Dushman au Marché aux Puces, à la Décharge.</text>
+    </string>
 </string_table>

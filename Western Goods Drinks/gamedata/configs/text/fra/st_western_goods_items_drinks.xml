@@ -1,232 +1,228 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- ALSEWARE -->
-<!-- File made by Oyissan using ALSÃ‰WARE Tool -->
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
-<!--    Edited : N/A                                                                                                 -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
 <!--    Date : 28/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
-<!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
-	<string id="st_wg_cola_bottle">
-		<text>Bouteille de Coca-Cola</text>
-	</string>
-	<string id="st_wg_cola_bottle_s">
-		<text>Bouteille de Coca</text>
-	</string>
-	<string id="st_wg_cola_bottle_descr">
-		<text>            Coca-Cola, connu de maniÃ¨re informelle sous le nom de Coca, est une boisson gazeuse. Ã€ l'origine commercialisÃ©e comme une boisson de tempÃ©rance et destinÃ©e Ã  Ãªtre un mÃ©dicament brevetÃ©. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprÃ©cient comme boisson, elle peut Ã©galement Ãªtre utilisÃ©e pour enlever la rouille des vieilles armes.\n
+    <string id="st_wg_cola_bottle">
+        <text>Bouteille de Coca-Cola</text>
+    </string>
+    <string id="st_wg_cola_bottle_s">
+        <text>Bouteille de Coca</text>
+    </string>
+    <string id="st_wg_cola_bottle_descr">
+        <text>Coca-Cola, connu de manière informelle sous le nom de Coca, est une boisson gazeuse. À l'origine commercialisée comme une boisson de tempérance et destinée à être un médicament breveté. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprécient comme boisson, elle peut également être utilisée pour enlever la rouille des vieilles armes.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
-            %c[d_cyan] â€¢ %c[ui_gray_2] prÃ©cieux\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
         </text>
-	</string>
-	<string id="st_wg_wine_chateau_latour">
-		<text>Grand Vin de ChÃ¢teau Latour</text>
-	</string>
-	<string id="st_wg_wine_chateau_latour_s">
-		<text>Vin ChÃ¢teau Latour</text>
-	</string>
-	<string id="st_wg_wine_chateau_latour_descr">
-		<text>            Le ChÃ¢teau Latour est l'un des plus anciens domaines viticoles de Bordeaux en production continue. Il est renommÃ© pour Ãªtre un 'Premier Grand Cru ClassÃ©'. La composition des cÃ©pages est de 80 % de Cabernet Sauvignon, 18 % de Merlot, et 2 % de Cabernet Franc et Petit Verdot. Les bouteilles de ce vin sont assez chÃ¨res, c'est une vÃ©ritable raretÃ© d'en trouver une dans la Zone.\n
+    </string>
+    <string id="st_wg_wine_chateau_latour">
+        <text>Grand Vin de Château Latour</text>
+    </string>
+    <string id="st_wg_wine_chateau_latour_s">
+        <text>Vin Château Latour</text>
+    </string>
+    <string id="st_wg_wine_chateau_latour_descr">
+        <text>Le Château Latour est l'un des plus anciens domaines viticoles de Bordeaux en production continue. Il est renommé pour être un 'Premier Grand Cru Classé'. La composition des cépages est de 80 % de Cabernet Sauvignon, 18 % de Merlot, et 2 % de Cabernet Franc et Petit Verdot. Les bouteilles de ce vin sont assez chères, c'est une véritable rareté d'en trouver une dans la Zone.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_blue] â€¢ %c[ui_gray_2] stimulant\n
-            %c[d_cyan] â€¢ %c[ui_gray_2] prÃ©cieux\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
-            %c[d_red] â€¢ %c[ui_gray_2] alcool fort\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_blue] • %c[ui_gray_2] stimulant\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+            %c[d_red] • %c[ui_gray_2] alcool fort\n
         </text>
-	</string>
-	<string id="st_wg_mountain_dew_bottle">
-		<text>Bouteille de Mountain Dew</text>
-	</string>
-	<string id="st_wg_mountain_dew_bottle_s">
-		<text>Bouteille de Mountain Dew</text>
-	</string>
-	<string id="st_wg_mountain_dew_bottle_descr">
-		<text>            Mountain Dew, souvent abrÃ©gÃ© en Mtn Dew, est un soda au goÃ»t d'agrumes et cafÃ©inÃ© commercialisÃ© par le groupe PepsiCo. Il s'agit d'une boisson gazeuse aromatisÃ©e aux fruits, initialement commercialisÃ©e comme une boisson 'Ã©nergÃ©tique', mais qui a depuis Ã©voluÃ© pour devenir davantage un soda.\n
+    </string>
+    <string id="st_wg_mountain_dew_bottle">
+        <text>Bouteille de Mountain Dew</text>
+    </string>
+    <string id="st_wg_mountain_dew_bottle_s">
+        <text>Bouteille de Mountain Dew</text>
+    </string>
+    <string id="st_wg_mountain_dew_bottle_descr">
+        <text>Mountain Dew, souvent abrégé en Mtn Dew, est un soda au goût d'agrumes et caféiné commercialisé par le groupe PepsiCo. Il s'agit d'une boisson gazeuse aromatisée aux fruits, initialement commercialisée comme une boisson 'énergétique', mais qui a depuis évolué pour devenir davantage un soda.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_nestea_icetea_bottle">
-		<text>Bouteille de Nestea Ice Tea</text>
-	</string>
-	<string id="st_wg_nestea_icetea_bottle_s">
-		<text>Bouteille de Nestea Ice Tea</text>
-	</string>
-	<string id="st_wg_nestea_icetea_bottle_descr">
-		<text>            Nestea est une boisson rafraÃ®chissante de thÃ© glacÃ© au citron, non gazeuse. Elle est prÃ©fÃ©rable trÃ¨s froide, mÃªme si cela est difficile Ã  rÃ©aliser dans la Zone. Elle est idÃ©ale pour les mois chauds de l'Ã©tÃ©.\n
+    </string>
+    <string id="st_wg_nestea_icetea_bottle">
+        <text>Bouteille de Nestea Ice Tea</text>
+    </string>
+    <string id="st_wg_nestea_icetea_bottle_s">
+        <text>Bouteille de Nestea Ice Tea</text>
+    </string>
+    <string id="st_wg_nestea_icetea_bottle_descr">
+        <text>Nestea est une boisson rafraîchissante de thé glacé au citron, non gazeuse. Elle est préférable très froide, même si cela est difficile à réaliser dans la Zone. Elle est idéale pour les mois chauds de l'été.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_cola_can">
-		<text>Canette de Coca-Cola</text>
-	</string>
-	<string id="st_wg_cola_can_s">
-		<text>Canette de Coca</text>
-	</string>
-	<string id="st_wg_cola_can_descr">
-		<text>            Coca-Cola, connu de maniÃ¨re informelle sous le nom de Coca, est une boisson gazeuse. Ã€ l'origine commercialisÃ©e comme une boisson de tempÃ©rance et destinÃ©e Ã  Ãªtre un mÃ©dicament brevetÃ©. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprÃ©cient comme boisson, elle peut Ã©galement Ãªtre utilisÃ©e pour enlever la rouille des vieilles armes.\n
+    </string>
+    <string id="st_wg_cola_can">
+        <text>Canette de Coca-Cola</text>
+    </string>
+    <string id="st_wg_cola_can_s">
+        <text>Canette de Coca</text>
+    </string>
+    <string id="st_wg_cola_can_descr">
+        <text>Coca-Cola, connu de manière informelle sous le nom de Coca, est une boisson gazeuse. À l'origine commercialisée comme une boisson de tempérance et destinée à être un médicament breveté. Certains marchands autour de la Zone importent occasionnellement quelques bouteilles. Bien que la plupart des stalkers l'apprécient comme boisson, elle peut également être utilisée pour enlever la rouille des vieilles armes.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S::\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
-            %c[d_cyan] â€¢ %c[ui_gray_2] prÃ©cieux\n
+            %c[ui_gray_1]PROPRIÉTÉS::\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
         </text>
-	</string>
-	<string id="st_wg_sprite_can">
-		<text>Canette de Sprite</text>
-	</string>
-	<string id="st_wg_sprite_can_s">
-		<text>Canette de Sprite</text>
-	</string>
-	<string id="st_wg_sprite_can_descr">
-		<text>            Sprite est une boisson gazeuse faite Ã  partir d'extraits de citron et de lime. Son goÃ»t est similaire Ã  celui de la limonade.\n
+    </string>
+    <string id="st_wg_sprite_can">
+        <text>Canette de Sprite</text>
+    </string>
+    <string id="st_wg_sprite_can_s">
+        <text>Canette de Sprite</text>
+    </string>
+    <string id="st_wg_sprite_can_descr">
+        <text>Sprite est une boisson gazeuse faite à partir d'extraits de citron et de lime. Son goût est similaire à celui de la limonade.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_redbull_can">
-		<text>Canette de Red Bull</text>
-	</string>
-	<string id="st_wg_redbull_can_s">
-		<text>Canette de Red Bull</text>
-	</string>
-	<string id="st_wg_redbull_can_descr">
-		<text>            Red Bull est une boisson Ã©nergisante Ã  prendre contre la fatigue mentale ou physique. Red Bull combine deux substances naturelles et des transmetteurs mÃ©taboliques importants - l'acide aminÃ© taurine et la glucuronolactone - avec de la cafÃ©ine stimulante, des vitamines et l'Ã©nergie fournie par des glucides.\n
+    </string>
+    <string id="st_wg_redbull_can">
+        <text>Canette de Red Bull</text>
+    </string>
+    <string id="st_wg_redbull_can_s">
+        <text>Canette de Red Bull</text>
+    </string>
+    <string id="st_wg_redbull_can_descr">
+        <text>Red Bull est une boisson énergisante à prendre contre la fatigue mentale ou physique. Red Bull combine deux substances naturelles et des transmetteurs métaboliques importants - l'acide aminé taurine et la glucuronolactone - avec de la caféine stimulante, des vitamines et l'énergie fournie par des glucides.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S::\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_blue] â€¢ %c[ui_gray_2] stimulant\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS::\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_blue] • %c[ui_gray_2] stimulant\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_fanta_can">
-		<text>Canette de Fanta</text>
-	</string>
-	<string id="st_wg_fanta_can_s">
-		<text>Canette de Fanta</text>
-	</string>
-	<string id="st_wg_fanta_can_descr">
-		<text>            Vive, pÃ©tillante et populaire, Fanta est une boisson gazeuse introduite pour la premiÃ¨re fois en 1940. Fanta est la deuxiÃ¨me marque la plus ancienne de The Coca-Cola Company.\n
+    </string>
+    <string id="st_wg_fanta_can">
+        <text>Canette de Fanta</text>
+    </string>
+    <string id="st_wg_fanta_can_s">
+        <text>Canette de Fanta</text>
+    </string>
+    <string id="st_wg_fanta_can_descr">
+        <text>Vive, pétillante et populaire, Fanta est une boisson gazeuse introduite pour la première fois en 1940. Fanta est la deuxième marque la plus ancienne de The Coca-Cola Company.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_pepsi_can">
-		<text>Canette de Pepsi</text>
-	</string>
-	<string id="st_wg_pepsi_can_s">
-		<text>Canette de Pepsi</text>
-	</string>
-	<string id="st_wg_pepsi_can_descr">
-		<text>            Pepsi est une boisson gazeuse fabriquÃ©e par PepsiCo. C'est le principal concurrent de Coca-Cola. Elle est souvent dÃ©crite comme Ã©tant douce et lisse, avec une saveur de cola modÃ©rÃ©e et des bulles modÃ©rÃ©es.\n
+    </string>
+    <string id="st_wg_pepsi_can">
+        <text>Canette de Pepsi</text>
+    </string>
+    <string id="st_wg_pepsi_can_s">
+        <text>Canette de Pepsi</text>
+    </string>
+    <string id="st_wg_pepsi_can_descr">
+        <text>Pepsi est une boisson gazeuse fabriquée par PepsiCo. C'est le principal concurrent de Coca-Cola. Elle est souvent décrite comme étant douce et lisse, avec une saveur de cola modérée et des bulles modérées.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_perrier_can">
-		<text>Canette de Perrier</text>
-	</string>
-	<string id="st_wg_perrier_can_s">
-		<text>Canette de Perrier</text>
-	</string>
-	<string id="st_wg_perrier_can_descr">
-		<text>            Perrier est une eau minÃ©rale gazeuse et aromatique, sans sucre et sans calories. La source d'oÃ¹ provient l'eau Perrier est naturellement carbonatÃ©e, mais l'eau et le gaz carbonique naturel sont obtenus indÃ©pendamment. L'eau est ensuite purifiÃ©e, et pendant la mise en bouteille, le gaz carbonique est rÃ©injectÃ© afin que le niveau de carbonatation dans les bouteilles de Perrier soit identique Ã  celui de la source de VergÃ¨ze.\n
+    </string>
+    <string id="st_wg_perrier_can">
+        <text>Canette de Perrier</text>
+    </string>
+    <string id="st_wg_perrier_can_s">
+        <text>Canette de Perrier</text>
+    </string>
+    <string id="st_wg_perrier_can_descr">
+        <text>Perrier est une eau minérale gazeuse et aromatique, sans sucre et sans calories. La source d'où provient l'eau Perrier est naturellement carbonatée, mais l'eau et le gaz carbonique naturel sont obtenus indépendamment. L'eau est ensuite purifiée, et pendant la mise en bouteille, le gaz carbonique est réinjecté afin que le niveau de carbonatation dans les bouteilles de Perrier soit identique à celui de la source de Vergèze.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_monster_energy_can">
-		<text>Canette de Monster Energy</text>
-	</string>
-	<string id="st_wg_monster_energy_can_s">
-		<text>Canette de Monster Energy</text>
-	</string>
-	<string id="st_wg_monster_energy_can_descr">
-		<text>            Boisson Ã©nergisante gazÃ©ifiÃ©e avec taurine, ginseng, L-carnitine, cafÃ©ine et vitamines B avec sucres et Ã©dulcorant. C'est l'une des boissons Ã©nergisantes les plus populaires dans le monde. Cependant, certaines personnes n'aiment pas son goÃ»t chimique.\n
+    </string>
+    <string id="st_wg_monster_energy_can">
+        <text>Canette de Monster Energy</text>
+    </string>
+    <string id="st_wg_monster_energy_can_s">
+        <text>Canette de Monster Energy</text>
+    </string>
+    <string id="st_wg_monster_energy_can_descr">
+        <text>Boisson énergisante gazéifiée avec taurine, ginseng, L-carnitine, caféine et vitamines B avec sucres et édulcorant. C'est l'une des boissons énergisantes les plus populaires dans le monde. Cependant, certaines personnes n'aiment pas son goût chimique.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_blue] â€¢ %c[ui_gray_2] stimulant\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_blue] • %c[ui_gray_2] stimulant\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
-	<string id="st_wg_beer_86_can">
-		<text>Canette de biÃ¨re blonde "Bavaria 86"</text>
-	</string>
-	<string id="st_wg_beer_86_can_s">
-		<text>Canette de Bavaria 86</text>
-	</string>
-	<string id="st_wg_beer_86_can_descr">
-		<text>            Bavaria 8.6 est une biÃ¨re blonde spÃ©ciale avec un caractÃ¨re distinctif. C'est une biÃ¨re puissante et forte avec une teinte dorÃ©e, agrÃ©ablement sucrÃ©e et visqueuse en arriÃ¨re-goÃ»t.\n
+    </string>
+    <string id="st_wg_beer_86_can">
+        <text>Canette de bière blonde "Bavaria 86"</text>
+    </string>
+    <string id="st_wg_beer_86_can_s">
+        <text>Canette de Bavaria 86</text>
+    </string>
+    <string id="st_wg_beer_86_can_descr">
+        <text>Bavaria 8.6 est une bière blonde spéciale avec un caractère distinctif. C'est une bière puissante et forte avec une teinte dorée, agréablement sucrée et visqueuse en arrière-goût.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_blue] â€¢ %c[ui_gray_2] stimulant\n
-            %c[d_green] â€¢ %c[ui_gray_2] grande qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
-            %c[d_orange] â€¢ %c[ui_gray_2] peu alcoolisÃ©\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_blue] • %c[ui_gray_2] stimulant\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+            %c[d_orange] • %c[ui_gray_2] peu alcoolisé\n
         </text>
-	</string>
-	<string id="st_wg_sevenup_can">
-		<text>Canette de 7 UP</text>
-	</string>
-	<string id="st_wg_sevenup_can_s">
-		<text>Canette de 7 UP</text>
-	</string>
-	<string id="st_wg_sevenup_can_descr">
-		<text>            Seven-UP (Ã©galement appelÃ© 7 UP) est une boisson gazeuse au goÃ»t de citron-lime. C'est le principal concurrent de Sprite, une autre boisson gazeuse. Elle est plus agrÃ©able lorsqu'elle est consommÃ©e froide.\n
+    </string>
+    <string id="st_wg_sevenup_can">
+        <text>Canette de 7 UP</text>
+    </string>
+    <string id="st_wg_sevenup_can_s">
+        <text>Canette de 7 UP</text>
+    </string>
+    <string id="st_wg_sevenup_can_descr">
+        <text>Seven-UP (également appelé 7 UP) est une boisson gazeuse au goût de citron-lime. C'est le principal concurrent de Sprite, une autre boisson gazeuse. Elle est plus agréable lorsqu'elle est consommée froide.\n
             \n
-            %c[ui_gray_1]PROPRIÃ‰TÃ‰S:\n
-            %c[d_blue] â€¢ %c[ui_gray_2] boisson\n
-            %c[d_blue] â€¢ %c[ui_gray_2] importÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] haute qualitÃ©\n
-            %c[d_green] â€¢ %c[ui_gray_2] source nutritive saine\n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] boisson\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] haute qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
         </text>
-	</string>
+    </string>
 </string_table>

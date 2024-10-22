@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- ALSEWARE -->
-<!-- File made by Oyissan using ALSÃ‰WARE Tool -->
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
-<!--    Edited : N/A                                                                                                 -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
 <!--    Date : 28/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
-<!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
-	<string id="western_goods_jupiter_informant_name">
-		<text>Sergei Karlovskiy</text>
-	</string>
-	<string id="western_goods_jupiter_informant_bio">
-		<text>Aucune information.</text>
-	</string>
-	<string id="western_goods_crew_member_name">
-		<text>Patrick "Odysseus" Dunbar</text>
-	</string>
-	<string id="western_goods_crew_member_bio">
-		<text>Un des membres de l'Ã©quipage de l'hÃ©licoptÃ¨re.</text>
-	</string>
-	<string id="western_goods_dunn_lynn_name">
-		<text>Lt. Dunn "Jodye" Lynn</text>
-	</string>
-	<string id="western_goods_dunn_lynn_bio">
-		<text>Agent de l'UNISG. Les informations dÃ©taillÃ©es manquent.</text>
-	</string>
-	<string id="western_goods_ecolog_convoy_yellow_name">
-		<text>Golubev Nikolaj</text>
-	</string>
-	<string id="western_goods_ecolog_convoy_yellow_bio">
-		<text>Membre du camp scientifique mobile. Les informations dÃ©taillÃ©es manquent.</text>
-	</string>
-	<string id="stalker_ecolog_convoy_orange_bio">
-		<text>Membre du camp scientifique mobile. Les informations dÃ©taillÃ©es manquent.</text>
-	</string>
-	<string id="western_goods_danylo_chernenko_name">
-		<text>Sergeant Danylo Chernenko</text>
-	</string>
-	<string id="western_goods_danylo_chernenko_bio">
-		<text>Le frÃ¨re cadet d'Oleksandr Chernenko. Les informations dÃ©taillÃ©es manquent.</text>
-	</string>
-	<string id="western_goods_ssu_prisoner_bio">
-		<text>Soldat affiliÃ© au Service de sÃ©curitÃ© d'Ukraine. Les informations dÃ©taillÃ©es manquent.</text>
-	</string>
+    <string id="western_goods_jupiter_informant_name">
+        <text>Sergei Karlovskiy</text>
+    </string>
+    <string id="western_goods_jupiter_informant_bio">
+        <text>Aucune information.</text>
+    </string>
+    <string id="western_goods_crew_member_name">
+        <text>Patrick "Odysseus" Dunbar</text>
+    </string>
+    <string id="western_goods_crew_member_bio">
+        <text>Un des membres de l'équipage de l'hélicoptère.</text>
+    </string>
+    <string id="western_goods_dunn_lynn_name">
+        <text>Lt. Dunn "Jodye" Lynn</text>
+    </string>
+    <string id="western_goods_dunn_lynn_bio">
+        <text>Agent de l'UNISG. Les informations détaillées manquent.</text>
+    </string>
+    <string id="western_goods_ecolog_convoy_yellow_name">
+        <text>Golubev Nikolaj</text>
+    </string>
+    <string id="western_goods_ecolog_convoy_yellow_bio">
+        <text>Membre du camp scientifique mobile. Les informations détaillées manquent.</text>
+    </string>
+    <string id="stalker_ecolog_convoy_orange_bio">
+        <text>Membre du camp scientifique mobile. Les informations détaillées manquent.</text>
+    </string>
+    <string id="western_goods_danylo_chernenko_name">
+        <text>Sergeant Danylo Chernenko</text>
+    </string>
+    <string id="western_goods_danylo_chernenko_bio">
+        <text>Le frère cadet d'Oleksandr Chernenko. Les informations détaillées manquent.</text>
+    </string>
+    <string id="western_goods_ssu_prisoner_bio">
+        <text>Soldat affilié au Service de sécurité d'Ukraine. Les informations détaillées manquent.</text>
+    </string>
 </string_table>

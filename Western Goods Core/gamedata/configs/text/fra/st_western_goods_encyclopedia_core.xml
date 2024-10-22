@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- ALSEWARE -->
-<!-- File made by Oyissan using ALSÃ‰WARE Tool -->
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
-<!--    Edited : N/A                                                                                                 -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
 <!--    Date : 28/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
-<!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
-	<string id="encyclopedia_features_western_goods_flea">
-		<text>MarchÃ© aux puces</text>
-	</string>
-	<string id="encyclopedia_features_western_goods_flea_text">
-		<text>            Le %c[pda_white]MarchÃ© aux puces%c[ui_gray_1] Le MarchÃ© aux puces permet au joueur d'acheter des offres temporaires, oÃ¹ les articles sont proposÃ©s en plusieurs unitÃ©s, mais Ã  prix rÃ©duit..\n
+    <string id="encyclopedia_features_western_goods_flea">
+        <text>Marché aux puces</text>
+    </string>
+    <string id="encyclopedia_features_western_goods_flea_text">
+        <text>Le %c[pda_white]Marché aux puces%c[ui_gray_1] Le Marché aux puces permet au joueur d'acheter des offres temporaires, où les articles sont proposés en plusieurs unités, mais à prix réduit..\n
             \n
-%c[pda_green]Information%c[ui_gray_1]\n
+            %c[pda_green]Information%c[ui_gray_1]\n
             \n
-En parlant Ã  un marchand au MarchÃ© aux puces, le joueur a la possibilitÃ© d'acheter des offres spÃ©ciales. Ces offres sont limitÃ©es dans le temps et finiront par expirer pour Ãªtre remplacÃ©es par de nouvelles offres..\n
+            En parlant à un marchand au Marché aux puces, le joueur a la possibilité d'acheter des offres spéciales. Ces offres sont limitées dans le temps et finiront par expirer pour être remplacées par de nouvelles offres..\n
             \n
-Les offres se composent des Ã©lÃ©ments suivants:\n
+            Les offres se composent des éléments suivants:\n
             \n
-â€¢ %c[pda_white]Objet%c[ui_gray_1]. L'article contenu dans l'offre;            \n
-â€¢ %c[pda_white]QuantitÃ©%c[ui_gray_1]. La quantitÃ© d'articles contenus dans l'offre, variant de maniÃ¨re alÃ©atoire entre 2 et 10 articles;            \n
-â€¢ %c[pda_white]RÃ©duction%c[ui_gray_1]. La rÃ©duction appliquÃ©e par rapport au prix rÃ©gulier, variant de maniÃ¨re alÃ©atoire entre 5% et 50%\n
-â€¢ %c[pda_white]Prix%c[ui_gray_1]. L'argent nÃ©cessaire pour accepter l'offre.        </text>
-	</string>
+            • %c[pda_white]Objet%c[ui_gray_1]. L'article contenu dans l'offre;            \n
+            • %c[pda_white]Quantité%c[ui_gray_1]. La quantité d'articles contenus dans l'offre, variant de manière aléatoire entre 2 et 10 articles;            \n
+            • %c[pda_white]Réduction%c[ui_gray_1]. La réduction appliquée par rapport au prix régulier, variant de manière aléatoire entre 5% et 50%\n
+            • %c[pda_white]Prix%c[ui_gray_1]. L'argent nécessaire pour accepter l'offre.        </text>
+    </string>
 </string_table>

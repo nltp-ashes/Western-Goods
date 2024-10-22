@@ -1,87 +1,83 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- ALSEWARE -->
-<!-- File made by Oyissan using ALSÃ‰WARE Tool -->
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
-<!--    Edited : N/A                                                                                                 -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
 <!--    Date : 28/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
-<!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
-	<string id="encyclopedia_items_western_goods_gps">
-		<text>Localisateur GPS</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_gps_text">
-		<text>Le %c[pda_white]localisateur GPS%c[ui_gray_1] est un appareil utilisÃ© pour identifier la distance et le nom de la zone la plus proche.\n
-        \n
-%c[pda_green]Informations%c[ui_gray_1]\n
-        \n
-Un appareil GPS de grade militaire utilisÃ© pour identifier et trouver la distance Ã  la zone la plus proche de l'utilisateur. Il affiche Ã©galement la rÃ©gion globale dans laquelle se trouve l'utilisateur.\n
-        \n
-Une technologie spÃ©ciale est utilisÃ©e pour l'Ã©cran de l'appareil, permettant d'afficher des informations avec une consommation d'Ã©nergie trÃ¨s minimale. L'inconvÃ©nient est que l'Ã©cran ne peut pas afficher de couleurs.\n
-        \n
-â€¢ %c[pda_white]Consommation d'Ã©nergie extrÃªmement faible%c[ui_gray_1]. NÃ©cessite une recharge environ une fois par an selon l'utilisation.</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_bic_lighter">
-		<text>Briquet Bic</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_bic_lighter_text">
-		<text>Le %c[pda_white]briquet Bic%c[ui_gray_1] est un petit briquet jetable qui peut Ãªtre utilisÃ© pour Ã©clairer votre environnement, mais aussi pour allumer un certain nombre de choses.\n
-        \n
-%c[pda_green]Informations%c[ui_gray_1]\n
-        \n
-Les briquets sont considÃ©rÃ©s par de nombreux Stalkers comme l'un des essentiels pour survivre dans la Zone. Souvent utilisÃ©s pour allumer des cigarettes, mais pas seulement - ils sont suffisamment puissants pour allumer des feux de camp (Ã©quipez-le et sortez le briquet dans vos mains pour le faire).\n
-        \n
-Il fournit Ã©galement une petite lumiÃ¨re, qui peut Ãªtre utilisÃ©e pour Ã©clairer vos environs tout en restant relativement discret, surtout la nuit.</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_zippo_lighter">
-		<text>Briquet Zippo</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_zippo_lighter_text">
-		<text>Le %c[pda_white]briquet Zippo%c[ui_gray_1] est un briquet durable et insensible au vent qui constitue une source fiable de feu dans la Zone.\n
-        \n
-%c[pda_green]Informations%c[ui_gray_1]\n
-        \n
-Les briquets Zippo sont rÃ©putÃ©s pour leur robustesse et leur fiabilitÃ©. Ils sont insensible au vent et rechargeables, ce qui en fait un outil durable dans la Zone. Les Stalkers les utilisent souvent pour allumer des cigarettes, des feux de camp, ou mÃªme pour s'Ã©clairer dans l'obscuritÃ©.\n
-        \n
-Leur construction en mÃ©tal robuste et la capacitÃ© de maintenir la flamme allumÃ©e sans avoir Ã  maintenir un bouton en font un favori parmi de nombreux Stalkers. MalgrÃ© leur poids lÃ©gÃ¨rement supÃ©rieur par rapport aux briquets jetables, leur durabilitÃ© et leur fiabilitÃ© en font un atout prÃ©cieux dans les conditions difficiles de la Zone.</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_rangefinder">
-		<text>SigSauer KILO5K</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_rangefinder_text">
-		<text>Le %c[pda_white]SigSauer KILO5K%c[ui_gray_1] est un tÃ©lÃ©mÃ¨tre laser qui peut Ãªtre utilisÃ© pour lire les distances jusqu'Ã  une cible.\n
-        \n
-%c[pda_green]Informations%c[ui_gray_1]\n
-        \n
-Ce tÃ©lÃ©mÃ¨tre compact et robuste est un outil puissant pour mesurer les distances jusqu'Ã  diffÃ©rentes cibles.\n
-        \n
-Il mesure :
-â€¢ la distance de ligne de mire (LOS), c'est-Ã -dire une ligne directe du tÃ©lÃ©mÃ¨tre Ã  la cible ;
-â€¢ la distance du composant horizontal (HCD), une distance bidimensionnelle (sans tenir compte de l'Ã©lÃ©vation) du tÃ©lÃ©mÃ¨tre Ã  la cible.\n
-        \n
-Pour assurer un confort d'utilisation constant, le tÃ©lÃ©mÃ¨tre dispose de deux modes de couleur, rouge (optimal pendant la journÃ©e) et vert (optimal la nuit sous lunettes de vision nocturne).</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_compass">
-		<text>Garmin eTrex 10</text>
-	</string>
-	<string id="encyclopedia_items_western_goods_compass_text">
-		<text>Le %c[pda_white]Garmin eTrex 10%c[ui_gray_1] est un appareil qui peut Ãªtre utilisÃ© pour obtenir une variÃ©tÃ© d'informations sur son utilisateur.\n
-        \n
-%c[pda_green]Informations%c[ui_gray_1]\n
-        \n
-Cet appareil compact regorge de fonctionnalitÃ©s. C'est un trÃ¨s bon outil pour se dÃ©placer dans la Zone, compte tenu de sa haute fiabilitÃ© face aux Ã©missions de psi.
-FonctionnalitÃ©s :
-â€¢ %c[pda_white]Boussole%c[ui_gray_1] : indique la direction de l'utilisateur ;
-â€¢ %c[pda_white]Vitesse%c[ui_gray_1] : la vitesse actuelle (en %c[pda_white]km/h%c[ui_gray_1]) de l'utilisateur ;
-â€¢ %c[pda_white]Distance au Prochain%c[ui_gray_1] : la distance (en %c[pda_white]km%c[ui_gray_1]) jusqu'au point de passage ;
-â€¢ %c[pda_white]ETA Ã  Destination%c[ui_gray_1] : l'heure (%c[pda_white]format 24h%c[ui_gray_1]) Ã  laquelle l'utilisateur arrivera au point de passage ;
-â€¢ %c[pda_white]Temps jusqu'au Prochain%c[ui_gray_1] : le temps nÃ©cessaire (en %c[pda_white]HH:mm%c[ui_gray_1], ou %c[pda_white]mm:ss%c[ui_gray_1] si moins d'une heure) pour atteindre le point de passage.\n
-        \n
-Par dÃ©faut, le curseur du compas est fixe et son arriÃ¨re-plan indique la direction. Mais il peut Ãªtre changÃ© pour verrouiller le nord et faire pivoter le curseur Ã  la place.</text>
-	</string>
+    <string id="encyclopedia_items_western_goods_gps">
+        <text>Localisateur GPS</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_gps_text">
+        <text>Le %c[pda_white]localisateur GPS%c[ui_gray_1] est un appareil utilisé pour identifier la distance et le nom de la zone la plus proche.\n
+            \n
+            %c[pda_green]Informations%c[ui_gray_1]\n
+            \n
+            Un appareil GPS de grade militaire utilisé pour identifier et trouver la distance à la zone la plus proche de l'utilisateur. Il affiche également la région globale dans laquelle se trouve l'utilisateur.\n
+            \n
+            Une technologie spéciale est utilisée pour l'écran de l'appareil, permettant d'afficher des informations avec une consommation d'énergie très minimale. L'inconvénient est que l'écran ne peut pas afficher de couleurs.\n
+            \n
+            • %c[pda_white]Consommation d'énergie extrêmement faible%c[ui_gray_1]. Nécessite une recharge environ une fois par an selon l'utilisation.</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_bic_lighter">
+        <text>Briquet Bic</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_bic_lighter_text">
+        <text>Le %c[pda_white]briquet Bic%c[ui_gray_1] est un petit briquet jetable qui peut être utilisé pour éclairer votre environnement, mais aussi pour allumer un certain nombre de choses.\n
+            \n
+            %c[pda_green]Informations%c[ui_gray_1]\n
+            \n
+            Les briquets sont considérés par de nombreux Stalkers comme l'un des essentiels pour survivre dans la Zone. Souvent utilisés pour allumer des cigarettes, mais pas seulement - ils sont suffisamment puissants pour allumer des feux de camp (équipez-le et sortez le briquet dans vos mains pour le faire).\n
+            \n
+            Il fournit également une petite lumière, qui peut être utilisée pour éclairer vos environs tout en restant relativement discret, surtout la nuit.</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_zippo_lighter">
+        <text>Briquet Zippo</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_zippo_lighter_text">
+        <text>Le %c[pda_white]briquet Zippo%c[ui_gray_1] est un briquet durable et insensible au vent qui constitue une source fiable de feu dans la Zone.\n
+            \n
+            %c[pda_green]Informations%c[ui_gray_1]\n
+            \n
+            Les briquets Zippo sont réputés pour leur robustesse et leur fiabilité. Ils sont insensible au vent et rechargeables, ce qui en fait un outil durable dans la Zone. Les Stalkers les utilisent souvent pour allumer des cigarettes, des feux de camp, ou même pour s'éclairer dans l'obscurité.\n
+            \n
+            Leur construction en métal robuste et la capacité de maintenir la flamme allumée sans avoir à maintenir un bouton en font un favori parmi de nombreux Stalkers. Malgré leur poids légèrement supérieur par rapport aux briquets jetables, leur durabilité et leur fiabilité en font un atout précieux dans les conditions difficiles de la Zone.</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_rangefinder">
+        <text>SigSauer KILO5K</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_rangefinder_text">
+        <text>Le %c[pda_white]SigSauer KILO5K%c[ui_gray_1] est un télémètre laser qui peut être utilisé pour lire les distances jusqu'à une cible.\n
+            \n
+            %c[pda_green]Informations%c[ui_gray_1]\n
+            \n
+            Ce télémètre compact et robuste est un outil puissant pour mesurer les distances jusqu'à différentes cibles.\n
+            \n
+            Il mesure :
+            • la distance de ligne de mire (LOS), c'est-à-dire une ligne directe du télémètre à la cible ;
+            • la distance du composant horizontal (HCD), une distance bidimensionnelle (sans tenir compte de l'élévation) du télémètre à la cible.\n
+            \n
+            Pour assurer un confort d'utilisation constant, le télémètre dispose de deux modes de couleur, rouge (optimal pendant la journée) et vert (optimal la nuit sous lunettes de vision nocturne).</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_compass">
+        <text>Garmin eTrex 10</text>
+    </string>
+    <string id="encyclopedia_items_western_goods_compass_text">
+        <text>Le %c[pda_white]Garmin eTrex 10%c[ui_gray_1] est un appareil qui peut être utilisé pour obtenir une variété d'informations sur son utilisateur.\n
+            \n
+            %c[pda_green]Informations%c[ui_gray_1]\n
+            \n
+            Cet appareil compact regorge de fonctionnalités. C'est un très bon outil pour se déplacer dans la Zone, compte tenu de sa haute fiabilité face aux émissions de psi.
+            Fonctionnalités :
+            • %c[pda_white]Boussole%c[ui_gray_1] : indique la direction de l'utilisateur ;
+            • %c[pda_white]Vitesse%c[ui_gray_1] : la vitesse actuelle (en %c[pda_white]km/h%c[ui_gray_1]) de l'utilisateur ;
+            • %c[pda_white]Distance au Prochain%c[ui_gray_1] : la distance (en %c[pda_white]km%c[ui_gray_1]) jusqu'au point de passage ;
+            • %c[pda_white]ETA à Destination%c[ui_gray_1] : l'heure (%c[pda_white]format 24h%c[ui_gray_1]) à laquelle l'utilisateur arrivera au point de passage ;
+            • %c[pda_white]Temps jusqu'au Prochain%c[ui_gray_1] : le temps nécessaire (en %c[pda_white]HH:mm%c[ui_gray_1], ou %c[pda_white]mm:ss%c[ui_gray_1] si moins d'une heure) pour atteindre le point de passage.\n
+            \n
+            Par défaut, le curseur du compas est fixe et son arrière-plan indique la direction. Mais il peut être changé pour verrouiller le nord et faire pivoter le curseur à la place.</text>
+    </string>
 </string_table>

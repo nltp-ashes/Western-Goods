@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- ALSEWARE -->
-<!-- File made by Oyissan using ALSÃ‰WARE Tool -->
 <!--=================================================================================================================-->
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
-<!--    Edited : N/A                                                                                                 -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
 <!--    Date : 28/07/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
-<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
-<!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
-	<string id="encyclopedia__notes_western_goods_hand_drawn_map">
-		<text>Carte dessinÃ©e Ã  la main</text>
-	</string>
-	<string id="encyclopedia__notes_western_goods_hand_drawn_map_text">
-		<text>\n
-</text>
-	</string>
+    <string id="encyclopedia__notes_western_goods_hand_drawn_map">
+        <text>Carte dessinée à la main</text>
+    </string>
+    <string id="encyclopedia__notes_western_goods_hand_drawn_map_text">
+        <text>\n</text>
+    </string>
 </string_table>
