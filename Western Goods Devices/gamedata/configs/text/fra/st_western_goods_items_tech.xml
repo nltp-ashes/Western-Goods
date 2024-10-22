@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="st_wg_laptop">
+		<text>Laptop ASUS</text>
+	</string>
+	<string id="st_wg_laptop_s">
+		<text>Laptop</text>
+	</string>
+	<string id="st_wg_laptop_descr">
+		<text>            Le ZenBook 13 est un ordinateur portable de la famille des ultra-portables. Produit par ASUS, il a sûrement été amené dans la Zone par des mercenaires. Il semble avoir été légèrement endommagé, le rendant inutilisable. Ses composants sont de haute valeur, un commerçant pourrait en proposer un bon prix.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_red] • %c[ui_gray_2] inutilisable\n
+        </text>
+	</string>
+	<string id="st_wg_military_radio">
+		<text>Radio militaire</text>
+	</string>
+	<string id="st_wg_military_radio_s">
+		<text>Radio militaire</text>
+	</string>
+	<string id="st_wg_military_radio_descr">
+		<text>            Une radio militaire avec une antenne longue portée. Il est très visible qu'elle ne provient pas de la Zone. Elle semble être en bon état. Avec le bon équipement, quelqu'un pourrait la faire fonctionner. Les commerçants recherchent souvent ces radios longue portée pour communiquer entre eux.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] objet militaire\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_red] • %c[ui_gray_2] inutilisable\n
+        </text>
+	</string>
+	<string id="st_wg_gps">
+		<text>Localisateur GPS</text>
+	</string>
+	<string id="st_wg_gps_s">
+		<text>GPS</text>
+	</string>
+	<string id="st_wg_gps_descr">
+		<text>            Un équipement vraiment rare dans la Zone. Il semble s'agir d'un localisateur GPS de grade militaire, généralement utilisé par les pays de l'OTAN. Il a probablement trouvé son chemin dans la Zone lorsque l'ISG était encore présent. Il indique le nom et la distance de la zone la plus proche. Il montre également le nom de la région de la Zone dans laquelle l'utilisateur se trouve. Cela dit, sa base de données semble obsolète. Certaines zones bien connues des stalkers manquent.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] objet militaire\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_orange] • %c[ui_gray_2] utilisable\n
+        </text>
+	</string>
+	<string id="st_wg_lighter_bic">
+		<text>Briquet BIC</text>
+	</string>
+	<string id="st_wg_lighter_bic_s">
+		<text>Briquet BIC</text>
+	</string>
+	<string id="st_wg_lighter_bic_descr">
+		<text>            Un briquet BIC standard. Rarement trouvé dans la Zone, ce briquet est facilement disponible dans les pays d'Europe de l'Ouest. Un briquet plein peut généralement allumer 20 cigarettes.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_orange] • %c[ui_gray_2] utilisable\n
+        </text>
+	</string>
+	<string id="st_wg_lighter_zippo">
+		<text>Briquet Zippo</text>
+	</string>
+	<string id="st_wg_lighter_zippo_s">
+		<text>Briquet Zippo</text>
+	</string>
+	<string id="st_wg_lighter_zippo_descr">
+		<text>            Un briquet Zippo classique. Connu pour sa durabilité et son design resistant au vent, ce briquet est un favori parmi beaucoup de gens. Il est rechargeable, ce qui signifie qu'il peut durer toute une vie avec un entretien approprié. Sa flamme est également réglable, ce qui le rend polyvalent pour diverses utilisations. Ce modèle particulier semble avoir été importé de l'extérieur de la Zone.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_orange] • %c[ui_gray_2] utilisable\n
+        </text>
+	</string>
+	<string id="st_wg_rangefinder">
+		<text>SigSauer KILO5K</text>
+	</string>
+	<string id="st_wg_rangefinder_s">
+		<text>SigSauer KILO5K</text>
+	</string>
+	<string id="st_wg_rangefinder_descr">
+<text>            Le KILO5K 7x25 mm de Sig Sauer est un télémètre laser qui offre des capacités de mesure précises dans un format compact. Ce télémètre dispose d'un oculaire de style jumelle et d'un réglage de dioptrie. La portée maximale sur une cible réfléchissante est de 4 500 metres, et la portée maximale sur un cerf est de 1 800 yards.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] objet militaire\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_orange] • %c[ui_gray_2] utilisable\n
+        </text>
+	</string>
+	<string id="st_wg_compass">
+		<text>Garmin eTrex 10</text>
+	</string>
+	<string id="st_wg_compass_s">
+		<text>Garmin eTrex 10</text>
+	</string>
+	<string id="st_wg_compass_descr">
+		<text>            Le Garmin eTrex 10 est un GPS de poche. La série eTrex est réputée pour sa construction robuste, son abordabilité et sa longue autonomie. L'eTrex 10 est équipé d'un écran de 2,2 pouces, facile à lire quelle que soit la luminosité. En moyenne, il peut fonctionner pendant 25 heures avec 2 piles AA.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet technologique\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_orange] • %c[ui_gray_2] utilisable\n
+        </text>
+	</string>
+</string_table>

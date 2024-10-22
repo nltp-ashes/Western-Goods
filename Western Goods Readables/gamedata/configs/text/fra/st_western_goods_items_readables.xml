@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="st_wg_porn_mag_1">
+		<text>PLAYBOY magazine (Chloe Khan)</text>
+	</string>
+	<string id="st_wg_porn_mag_1_s">
+		<text>PLAYBOY (Chloe Khan)</text>
+	</string>
+	<string id="st_wg_porn_mag_1_descr">
+		<text>            Un des derniers numéros de ce magazine à avoir été imprimé avant leur passage à une version numérique. Contrairement aux magazines soviétiques du même genre qu'on trouve souvent dans la Zone, il ne semble pas avoir traversé l'enfer et en être revenu. Mis à part quelques pages manquantes, il est presque complet. Il a probablement atterri dans la Zone via des mercenaires, on sait qu'ils ont l'habitude d'importer des produits occidentaux ces derniers temps.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_porn_mag_2">
+		<text>PLAYBOY magazine (Nicole Whitehead)</text>
+	</string>
+	<string id="st_wg_porn_mag_2_s">
+		<text>PLAYBOY (Nicole Whitehead)</text>
+	</string>
+	<string id="st_wg_porn_mag_2_descr">
+		<text>            Un des derniers numéros de ce magazine à avoir été imprimé avant leur passage à une version numérique. Contrairement aux magazines soviétiques du même genre qu'on trouve souvent dans la Zone, il ne semble pas avoir traversé l'enfer et en être revenu. Mis à part quelques pages manquantes, il est presque complet. Il a probablement atterri dans la Zone via des mercenaires, on sait qu'ils ont l'habitude d'importer des produits occidentaux ces derniers temps.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_porn_mag_3">
+		<text>PLAYBOY magazine (Carrie Stevens)</text>
+	</string>
+	<string id="st_wg_porn_mag_3_s">
+		<text>PLAYBOY (Carrie Stevens)</text>
+	</string>
+	<string id="st_wg_porn_mag_3_descr">
+		<text>            Un des derniers numéros de ce magazine à avoir été imprimé avant leur passage à une version numérique. Contrairement aux magazines soviétiques du même genre qu'on trouve souvent dans la Zone, il ne semble pas avoir traversé l'enfer et en être revenu. Mis à part quelques pages manquantes, il est presque complet. Il a probablement atterri dans la Zone via des mercenaires, on sait qu'ils ont l'habitude d'importer des produits occidentaux ces derniers temps.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_xbox_mag_1">
+		<text>Xbox: The Official Magazine (March 2002)</text>
+	</string>
+	<string id="st_wg_xbox_mag_1_s">
+		<text>Xbox magazine</text>
+	</string>
+	<string id="st_wg_xbox_mag_1_descr">
+		<text>            Un vieux magazine Xbox, remontant à 2002. C'est le premier numéro sorti au Royaume-Uni. Certaines sections du magazine sont manquantes, mais au moins une critique est restée complète.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_xbox_mag_2">
+		<text>Xbox: The Official Magazine (December 2004)</text>
+	</string>
+	<string id="st_wg_xbox_mag_2_s">
+		<text>Xbox magazine</text>
+	</string>
+	<string id="st_wg_xbox_mag_2_descr">
+		<text>            Un vieux magazine Xbox, datant de 2004. C'est le 36e numéro publié au Royaume-Uni. Certaines sections du magazine sont manquantes, mais au moins une critique est restée complète.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_strana_igr_mag_1">
+		<text>Gameland magazine (November 1999)</text>
+	</string>
+	<string id="st_wg_strana_igr_mag_1_s">
+		<text>Gameland magazine</text>
+	</string>
+	<string id="st_wg_strana_igr_mag_1_descr">
+		<text>            "Strana Igr" (russe: ?????? ???, Gameland) était un magazine russe axé sur les jeux vidéo. Il a été publié par Gameland entre janvier 1996 et novembre 2013, date à laquelle le magazine a été suspendu en raison de problèmes financiers. Il est un peu étrange qu'un tel magazine ait trouvé son chemin dans la Zone. Peut-être qu'après que les produits occidentaux soient devenus de plus en plus présents dans la Zone, les locuteurs russes ont développé un intérêt pour la culture occidentale.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_car_mag_1">
+		<text>European Car magazine (August 2015)</text>
+	</string>
+	<string id="st_wg_car_mag_1_s">
+		<text>European Car magazine</text>
+	</string>
+	<string id="st_wg_car_mag_1_descr">
+		<text>           European Car était un magazine américain dédié aux passionnés d'automobile publié par le Motor Trend Group. Le magazine a été en circulation entre 1978 et 2018. De nombreux mercenaires sont entrés dans la Zone avec ces magazines, pour se distraire lors des journées difficiles.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+	<string id="st_wg_car_mag_2">
+		<text>EVO magazine (December 2015)</text>
+	</string>
+	<string id="st_wg_car_mag_2_s">
+		<text>EVO magazine</text>
+	</string>
+	<string id="st_wg_car_mag_2_descr">
+		<text>            Evo est un magazine automobile britannique dédié aux voitures de performance. Ces magazines se trouvent de plus en plus souvent dans la Zone, probablement parce qu'ils donnent un aperçu du monde extérieur à ceux qui y sont coincés.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+        </text>
+	</string>
+</string_table>

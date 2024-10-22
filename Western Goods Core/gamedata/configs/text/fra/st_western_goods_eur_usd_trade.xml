@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="western_goods_trader_dialog_init">
+		<text>Je voudrais échanger des devises. %c[d_orange][Echanger]</text>
+	</string>
+	<string id="st_wg_barter_blackbox_to_eur_desc">
+		<text>Échange une %c[d_orange]boîte noire%c[ui_gray_2] contre  %c[d_orange]300 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_blackbox_to_eur_desc_done">
+		<text>Le marchand n'est pas intéressé par l'achat de cet objet pour l'instant. Reviens plus tard.</text>
+	</string>
+	<string id="st_wg_barter_money_desc_done">
+		<text>Le marchand veut garder des devises pour d'autres clients, reviens plus tard.</text>
+	</string>
+	<string id="st_wg_barter_dollars_10_to_50_desc">
+		<text>Échange cinq billets de %c[d_orange]10 USD%c[ui_gray_2] contre un billet de %c[d_orange]50 USD%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_50_to_10_desc">
+		<text>Échange un billet de %c[d_orange]50 USD%c[ui_gray_2] contre cinq billets de %c[d_orange]10 USD%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_50_to_100_desc">
+		<text>Échange deux billets de %c[d_orange]50 USD%c[ui_gray_2] contre un billet de %c[d_orange]100 USD%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_100_to_50_desc">
+		<text>Échange un billet de %c[d_orange]100 USD%c[ui_gray_2] contre deux billets de%c[d_orange]50 USD%c[ui_gray_2]</text>
+	</string>
+	<string id="st_wg_barter_dollars_100_to_10_desc">
+		<text>Échange un billet de %c[d_orange]100 USD%c[ui_gray_2] contre dix billets de %c[d_orange]10 USD%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_10_to_100_desc">
+		<text>Échange dix billets de %c[d_orange]10 USD%c[ui_gray_2] contre un billet de %c[d_orange]100 USD%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_10_to_50_desc">
+		<text>Échange cinq billets de %c[d_orange]10 EUR%c[ui_gray_2] contre un billet de %c[d_orange]50 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_50_to_10_desc">
+		<text>Échange un billet de %c[d_orange]50 EUR%c[ui_gray_2] contre cinq billets de %c[d_orange]10 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_50_to_100_desc">
+		<text>Échange deux billets de %c[d_orange]50 EUR%c[ui_gray_2] contre un billet de %c[d_orange]100 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_100_to_50_desc">
+		<text>Échange un billet de %c[d_orange]100 EUR%c[ui_gray_2] contre deux billets de %c[d_orange]50 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_100_to_10_desc">
+		<text>Échange un billet de %c[d_orange]100 EUR%c[ui_gray_2] contre dix billets de %c[d_orange]10 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_10_to_100_desc">
+		<text>Échange dix billets de %c[d_orange]10 EUR%c[ui_gray_2] contre un billet de %c[d_orange]100 EUR%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_rouble_10_to_700_desc">
+		<text>Échange %c[d_orange]10 USD%c[ui_gray_2] contre %c[d_orange]700 RU%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_rouble_50_to_3500_desc">
+		<text>Échange %c[d_orange]50 USD%c[ui_gray_2] contre %c[d_orange]3500 RU%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_dollars_rouble_100_to_7000_desc">
+		<text>Échange %c[d_orange]100 USD%c[ui_gray_2] contre %c[d_orange]7000 RU%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_rouble_10_to_680_desc">
+		<text>Échange %c[d_orange]10 EUR%c[ui_gray_2] contre %c[d_orange]680 RU%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_rouble_50_to_3400_desc">
+		<text>Échange %c[d_orange]50 EUR%c[ui_gray_2] contre %c[d_orange]3400 RU%c[ui_gray_2].</text>
+	</string>
+	<string id="st_wg_barter_euros_rouble_100_to_6800_desc">
+		<text>Échange %c[d_orange]100 EUR%c[ui_gray_2] contre %c[d_orange]6800 RU%c[ui_gray_2].</text>
+	</string>
+	<string id="st_stalker_crew_member_barter">
+		<text>Je voudrais échanger quelques objets.%c[d_orange][Echanger]</text>
+	</string>
+	<string id="st_wg_trade_eur_usd_ask">
+		<text>Je veux acheter quelques choses.%c[d_orange][Marchander]</text>
+	</string>
+	<string id="st_wg_trade_eur_usd_ask_reply_1">
+		<text>Bien sûr.</text>
+	</string>
+	<string id="st_wg_trade_eur_usd_ask_reply_2">
+		<text>Jette un œil.</text>
+	</string>
+	<string id="st_wg_trade_eur_usd_ask_reply_3">
+		<text>Voici ce que j'ai.</text>
+	</string>
+	<string id="st_wg_trade_eur_usd_empty_sell">
+		<text>Tu dois payer pour les articles sélectionnés (en Euros ou en Dollars).</text>
+	</string>
+	<string id="st_wg_trade_eur_usd_empty_buy">
+		<text>Tu n'as rien sélectionné à acheter.</text>
+	</string>
+	<string id="st_wg_trader_uneven_value">
+		<text>Tu dois fournir, en espèces, une somme égale ou supérieure à la valeur de ce que tu achètes.</text>
+	</string>
+</string_table>

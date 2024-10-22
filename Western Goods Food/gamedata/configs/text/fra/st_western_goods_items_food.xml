@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="st_wg_hamborgir">
+		<text>Hamburger Charal (au fromage)</text>
+	</string>
+	<string id="st_wg_hamborgir_s">
+		<text>Hamburger Charal</text>
+	</string>
+	<string id="st_wg_hamborgir_descr">
+		<text>            Charal est une marque populaire en France, spécialisée dans les préparations surgelées de viande hachée de boeuf. Certains commerçants autour de la Zone parviennent à importer certains de leurs produits de temps en temps. Cette boîte doit être préparée pendant 1 minute et 50 secondes au micro-ondes, bien qu'il semble que celle-ci ait été récemment préparée, donc même si elle est froide, elle est prête à être consommée.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_snickers">
+		<text>Barre chocolatée Snickers</text>
+	</string>
+	<string id="st_wg_snickers_s">
+		<text>Barre chocolatée Snickers</text>
+	</string>
+	<string id="st_wg_snickers_descr">
+		<text>            Snickers est une barre chocolatée composée de nougat surmonté de caramel et de cacahuètes, le tout enrobé de chocolat au lait. La plupart des stalkers dans la Zone ne peuvent pas se les permettre, car elles sont importées de pays étrangers. Cela dit, ceux qui peuvent se le permettre l'utilisent souvent comme un moyen rapide de se nourrir lors de journées chargées.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_mars">
+		<text>Barre chocolatée Mars</text>
+	</string>
+	<string id="st_wg_mars_s">
+		<text>Barre chocolatée Mars</text>
+	</string>
+	<string id="st_wg_mars_descr">
+		<text>            La barre chocolaté Mars est le nom de deux variétés de barres chocolatées produites par Mars, Incorporated. La barre se compose de caramel et de nougat enrobés de chocolat au lait.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_milkyway">
+		<text>Barre chocolatée Milky Way</text>
+	</string>
+	<string id="st_wg_milkyway_s">
+		<text>Barre chocolatée Milky Way</text>
+	</string>
+	<string id="st_wg_milkyway_descr">
+		<text>            Milky Way est une marque de barres confiseries enrobées de chocolat fabriquées et commercialisées par Mars, Incorporated. Cette barre est l'un des deux types vendus par la marque. Disponible en dehors des États-Unis, cette barre a d'une manière ou d'une autre réussi à entrer dans la Zone.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_bounty">
+		<text>Barre chocolatée Bounty</text>
+	</string>
+	<string id="st_wg_bounty_s">
+		<text>Barre chocolatée Bounty</text>
+	</string>
+	<string id="st_wg_bounty_descr">
+		<text>            Bounty est une barre de confiserie fourrée à la noix de coco et enrobée de chocolat, fabriquée par Mars, Incorporated. La barre Bounty vous offre une saveur forte de noix de coco, apportée par la garniture centrale moelleuse et légère de la barre de confiserie. Il y a une couche de chocolat sucré qui est étalée sur le dessus et qui donne sa forme à la barre.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_kitkat">
+		<text>Barre chocolatée Kit-Kat</text>
+	</string>
+	<string id="st_wg_kitkat_s">
+		<text>Barre chocolatée Kit-Kat</text>
+	</string>
+	<string id="st_wg_kitkat_descr">
+		<text>            Les Kit Kats sont un type de chocolat composé de trois couches de gaufrettes. Les gaufrettes sont recouvertes d'une couche de chocolat à l'intérieur et à l'extérieur. Chaque pièce entière est considérée comme un 'doigt'. Chaque paquet de Kit Kats contient généralement quatre doigts reliés ensemble.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_milka">
+		<text>Barre chocolatée Milka Alpine Milk</text>
+	</string>
+	<string id="st_wg_milka_s">
+		<text>Chocolat Milka</text>
+	</string>
+	<string id="st_wg_milka_descr">
+		<text>            Barre chocolatée fabriquée par Milka. Elle est répandue en Europe de l'Ouest, où les gens l'apprécient pour son chocolat au goût doux. Elle contient 30 % de cacao.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_mnms">
+		<text>Bonbons au chocolat M&M's</text>
+	</string>
+	<string id="st_wg_mnms_s">
+		<text>M&M's</text>
+	</string>
+	<string id="st_wg_mnms_descr">
+		<text>            Les M&M's sont des chocolats en forme de boutons multicolores, composés d'une coque en bonbon entourant une garniture qui varie selon la variété des M&M's.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] grande qualité\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_mentos">
+		<text>Bonbons fruités Mentos</text>
+	</string>
+	<string id="st_wg_mentos_s">
+		<text>Mentos Fruit</text>
+	</string>
+	<string id="st_wg_mentos_descr">
+		<text>            Les Mentos Fruit sont de petites confiseries à mâcher de différentes saveurs. Mentos Fruit a un mélange de fraise, d'orange et de citron. C'est un incontournable pour un goûter l'après-midi ou une collation à tout moment de la journée.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_lays">
+		<text>Chips Lay's (Nature)</text>
+	</string>
+	<string id="st_wg_lays_s">
+		<text>Chips Lay's</text>
+	</string>
+	<string id="st_wg_lays_descr">
+		<text>            Les Lays sont des chips de pomme de terre frites. Elles contiennent beaucoup de sel et de conservateurs, ce qui a tendance à rendre les gens assoiffés.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_doritos">
+		<text>Chips Doritos (Nachos au fromage)</text>
+	</string>
+	<string id="st_wg_doritos_s">
+		<text>Chips Doritos</text>
+	</string>
+	<string id="st_wg_doritos_descr">
+		<text>            Les Doritos sont des chips de maïs frites. Elles contiennent beaucoup de sel et de conservateurs, ce qui a tendance à rendre les gens assoiffés.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_pringles">
+		<text>Mini boîte de Pringles (Nature)</text>
+	</string>
+	<string id="st_wg_pringles_s">
+		<text>Mini boîte de Pringles</text>
+	</string>
+	<string id="st_wg_pringles_descr">
+		<text>            Les Pringles sont des chips frites. Contrairement à la croyance populaire, elles ne sont pas fabriquées à partir de pommes de terre, mais plutôt d'un mélange de maïs, de farine de riz, de blé, de maïs et de copeaux de pommes de terre. Ce mélange est ensuite broyé et étalé en une feuille, courbé, puis frit pendant quelques secondes. Les chips frites sont ensuite saupoudrées de poudre de sel aromatisée. Elles contiennent beaucoup de sel et de conservateurs, ce qui a tendance à rendre les gens assoiffés.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_oreo">
+		<text>Oreo Original</text>
+	</string>
+	<string id="st_wg_oreo_s">
+		<text>Oreo</text>
+	</string>
+	<string id="st_wg_oreo_descr">
+		<text>            Oreo est une marque de biscuit sandwich composée de deux biscuits ou morceaux de gâteau avec une garniture crémeuse sucrée. Les enfants ont généralement un point à respecter pour manger correctement: séparer les deux biscuits, manger la garniture en la léchant, remettre les deux biscuits ensemble, les tremper dans du lait et les manger.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_ferrero_rocher">
+		<text>Boîte de Ferrero Rocher</text>
+	</string>
+	<string id="st_wg_ferrero_rocher_s">
+		<text>Ferrero Rocher</text>
+	</string>
+	<string id="st_wg_ferrero_rocher_descr">
+		<text>            Ferrero Rocher est un chocolat composé d'une noisette entière croquante au cœur, d'une délicieuse garniture crémeuse à la noisette, d'une coque de gaufrette croustillante recouverte de chocolat et de morceaux légèrement grillés. Ils sont présentés dans un prestigieux emballage doré. Ils sont assez populaires en Europe de l'Ouest, où ils sont généralement vendus pendant les fêtes.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_mon_cheri">
+		<text>Boîte de Mon Chéri</text>
+	</string>
+	<string id="st_wg_mon_cheri_s">
+		<text>Mon Chéri</text>
+	</string>
+	<string id="st_wg_mon_cheri_descr">
+		<text>            Le Mon Chéri est un chocolat individuel enveloppé composé d'un 'cœur' de cerise et de liqueur, contenu dans un enrobage de chocolat noir. La liqueur est assez concentrée, donc il est recommandé de ne pas en manger trop d'un coup. Ils sont vendus en boîtes de 30 pièces.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_toblerone">
+		<text>Toblerone</text>
+	</string>
+	<string id="st_wg_toblerone_s">
+		<text>Toblerone</text>
+	</string>
+	<string id="st_wg_toblerone_descr">
+		<text>            Toblerone est une barre de chocolat suisse fabriquée avec du nougat au miel et aux amandes. Toblerone est facilement reconnaissable grâce à son emballage au design unique. Les gens dans la Zone plaisantent souvent en disant que 'si tu le manges, la Zone te forcera à le finir d'un seul coup !'. Mais ce ne sont que des blagues, un stalker avisé ne devrait pas le manger d'un seul coup, pour éviter une attaque au foie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_french_mre">
+		<text>Ration de Combat Individuelle Réchauffable</text>
+	</string>
+	<string id="st_wg_french_mre_s">
+		<text>RCIR MRE</text>
+	</string>
+	<string id="st_wg_french_mre_descr">
+		<text>            La Ration de Combat Individuelle Réchauffable est la ration de type MRE utilisée dans l'armée française. Au fil des ans, plusieurs itérations ont été développées: une en 1995, une autre en 1999, et elle a été révisée une dernière fois en 2004. Heureusement, cette version est la plus récente, donc son contenu n'est pas plus vieux que 14 ans...\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] objet militaire\n
+            %c[d_blue] • %c[ui_gray_2] importé\n
+            %c[d_cyan] • %c[ui_gray_2] précieux\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+	<string id="st_wg_sandwich">
+		<text>Sandwich</text>
+	</string>
+	<string id="st_wg_sandwich_s">
+		<text>Sandwich</text>
+	</string>
+	<string id="st_wg_sandwich_descr">
+		<text>            Un sandwich fait à la main. Plutôt simple: pain, beurre, fromage et tranches de viande. Tenir un compteur Geiger contre lui ne semble pas détecter de radiation, donc les ingrédients ont probablement été importés. Cela ne tiendra pas longtemps, mais c'est toujours mieux que de la viande mutante.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] nourriture\n
+            %c[d_blue] • %c[ui_gray_2] fait à la main\n
+            %c[d_green] • %c[ui_gray_2] source nutritive saine\n
+        </text>
+	</string>
+</string_table>

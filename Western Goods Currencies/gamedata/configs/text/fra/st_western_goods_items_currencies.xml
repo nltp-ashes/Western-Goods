@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!-- ALSEWARE -->
+<!-- File made by Oyissan using ALSÉWARE Tool -->
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Traduction par Thundard - Date : 01/09/2024                                                                  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+	<string id="st_wg_dollars_10">
+		<text>10 dollars</text>
+	</string>
+	<string id="st_wg_dollars_10_s">
+		<text>10 USD</text>
+	</string>
+	<string id="st_wg_dollars_10_descr">
+		<text>            Le commerce dans la Zone se fait principalement par transactions électroniques pour des raisons de sécurité et de gestion des risques. Mais de nombreux stalkers gardent au moins quelques billets sur eux au cas où ils voudraient acheter des petites choses comme des cigarettes. Cela simplifie la vie et conserve la batterie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] Objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] Espèce\n
+            %c[d_cyan] • %c[ui_gray_2] Valeur\n
+        </text>
+	</string>
+	<string id="st_wg_dollars_50">
+		<text>50 dollars</text>
+	</string>
+	<string id="st_wg_dollars_50_s">
+		<text>50 USD</text>
+	</string>
+	<string id="st_wg_dollars_50_descr">
+		<text>            Le commerce dans la Zone se fait principalement par transactions électroniques pour des raisons de sécurité et de gestion des risques. Mais de nombreux stalkers gardent au moins quelques billets sur eux au cas où ils voudraient acheter des petites choses comme des cigarettes. Cela simplifie la vie et conserve la batterie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] Objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] Espèce\n
+            %c[d_cyan] • %c[ui_gray_2] Valeur\n
+</text>
+	</string>
+	<string id="st_wg_dollars_100">
+		<text>100 dollars</text>
+	</string>
+	<string id="st_wg_dollars_100_s">
+		<text>100 USD</text>
+	</string>
+	<string id="st_wg_dollars_100_descr">
+		<text>            Le commerce dans la Zone se fait principalement par transactions électroniques pour des raisons de sécurité et de gestion des risques. Mais de nombreux stalkers gardent au moins quelques billets sur eux au cas où ils voudraient acheter des petites choses comme des cigarettes. Cela simplifie la vie et conserve la batterie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] Objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] Espèce\n
+            %c[d_cyan] • %c[ui_gray_2] Valeur\n</text>
+	</string>
+	<string id="st_wg_euros_10">
+		<text>10 euros</text>
+	</string>
+	<string id="st_wg_euros_10_s">
+		<text>10 EUR</text>
+	</string>
+	<string id="st_wg_euros_10_descr">
+		<text>            Le commerce dans la Zone se fait principalement par transactions électroniques pour des raisons de sécurité et de gestion des risques. Mais de nombreux stalkers gardent au moins quelques billets sur eux au cas où ils voudraient acheter des petites choses comme des cigarettes. Cela simplifie la vie et conserve la batterie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] Objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] Espèce\n
+            %c[d_cyan] • %c[ui_gray_2] Valeur\n
+</text>
+	</string>
+	<string id="st_wg_euros_50">
+		<text>50 euros</text>
+	</string>
+	<string id="st_wg_euros_50_s">
+		<text>50 EUR</text>
+	</string>
+	<string id="st_wg_euros_50_descr">
+		<text>            Le commerce dans la Zone se fait principalement par transactions électroniques pour des raisons de sécurité et de gestion des risques. Mais de nombreux stalkers gardent au moins quelques billets sur eux au cas où ils voudraient acheter des petites choses comme des cigarettes. Cela simplifie la vie et conserve la batterie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] Objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] Espèce\n
+            %c[d_cyan] • %c[ui_gray_2] Valeur\n
+</text>
+	</string>
+	<string id="st_wg_euros_100">
+		<text>100 euros</text>
+	</string>
+	<string id="st_wg_euros_100_s">
+		<text>100 EUR</text>
+	</string>
+	<string id="st_wg_euros_100_descr">
+		<text>            Le commerce dans la Zone se fait principalement par transactions électroniques pour des raisons de sécurité et de gestion des risques. Mais de nombreux stalkers gardent au moins quelques billets sur eux au cas où ils voudraient acheter des petites choses comme des cigarettes. Cela simplifie la vie et conserve la batterie.\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_blue] • %c[ui_gray_2] Objet du quotidien\n
+            %c[d_blue] • %c[ui_gray_2] Espèce\n
+            %c[d_cyan] • %c[ui_gray_2] Valeur\n
+</text>
+	</string>
+	<string id="st_wg_money_suitcase">
+		<text>Valise</text>
+	</string>
+	<string id="st_wg_money_suitcase_s">
+		<text>Valise</text>
+	</string>
+	<string id="st_wg_money_suitcase_descr">
+		<text>            Une vieille valise. Son contenu est inconnu, mais en la secouant, on peut clairement entendre qu'elle contient quelque chose...\n
+            \n
+            %c[ui_gray_1]PROPRIÉTÉS:\n
+            %c[d_cyan] • %c[ui_gray_2] Grande valeur\n
+        </text>
+	</string>
+</string_table>
