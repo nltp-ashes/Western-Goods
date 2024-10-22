@@ -1,8 +1,11 @@
-## **v3.1.0 - 04/09/2024 - Major Update**
+## **v3.1.0 - 23/10/2024 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
 **• Additions :**
+> • Added a complete French translation (Thanks Thundard);
+> • Added a readable cover for the vanilla Playboy magazine (Thanks zeonzeoff);
+> • Added options to increase lighter range and brightness in MCM (Thanks Rambito);
 > • Added translations to map spots placed by the addon;
 > • Added route from container warehouse in Jupiter to Bandit base in Dark Valley for 8k RUB (Thanks Rambito);
 > • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
