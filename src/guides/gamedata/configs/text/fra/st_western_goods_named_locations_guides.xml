@@ -3,48 +3,72 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 23/10/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' named locations.                                                         -->
 <!--                                                                                                                 -->
 <!--=================================================================================================================-->
 <string_table>
+
     <string id="st_western_goods_guide_dest_limansk">
         <text>Limansk, au sud du chantier.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_swamps">
         <text>Grands Marais, au poste d'observation</text>
     </string>
+
     <string id="st_western_goods_guide_dest_cordon">
         <text>Cordon, au sud-est du pont ferroviaire.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_darkscape">
         <text>Darkscape, sur le plateau.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_deadcity">
         <text>La Ville Morte, à la base des mercenaires.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_red_forest">
         <text>Forêt Rouge, à côté de la cabane du forestier.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_jupiter_cooling">
         <text>Jupiter, à la tour de refroidissement.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_zaton">
         <text>Zaton, près de l'ancien chaland.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_deserted_hospital">
         <text>Hôpital déserté, près de l'entrée effondrée.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_mil_base">
         <text>Entrepôts militaires, à la base de la Liberté.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_yantar_lab">
         <text>Yantar, au laboratoire mobile.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_agroprom_mil_base">
         <text>Agroprom, à la base de l'Armée dans l'institut.</text>
     </string>
+
     <string id="st_western_goods_guide_dest_jupiter_lab">
         <text>Jupiter, au laboratoire mobile.</text>
     </string>
+
+    <string id="st_western_goods_guide_dest_dark_valley_base">
+        <text>Vallée Obscure, à la base des Bandits.</text>
+    </string>
+
+    <string id="st_western_goods_guide_dest_swamps_renegade_base">
+        <text>Grands Marrais, à la base des Renégats.</text>
+    </string>
+
 </string_table>

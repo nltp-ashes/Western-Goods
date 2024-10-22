@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : RavenAscendant                                                                           ---
 ---    Edited : NLTP_ASHES                                                                                           ---
----    Date : 15/08/2024                                                                                             ---
+---    Date : 23/10/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define the options in MCM.                                                                     ---
@@ -19,6 +19,8 @@ local defaults = {
     ["guided_tasks"] = false,
     ["heli_attack"] = DIK_keys.DIK_K,
     ["rangefinder_nv"] = DIK_keys.DIK_J,
+    ["light_brightness_factor"] = 1.0,
+    ["light_range_factor"] = 1.0,
     ["magazine_psi_regen"] = 1.0,
     ["corpse_loot_factor"] = 1.0,
     ["trader_loot_factor"] = 1.0,
@@ -67,6 +69,8 @@ function on_mcm_load()
          {                               type="title",       text="ui_mcm_western_goods_keybindings_title"                                                            },
          { id="heli_attack",             type="key_bind",    val=2,    def=DIK_keys.DIK_K                                                                             },
          { id="rangefinder_nv",          type="key_bind",    val=2,    def=DIK_keys.DIK_J                                                                             },
+         { id="light_brightness_factor", type="track",       val=2,    def=1.0,              min=0.25,    max=2.0,    step=0.25                                       },
+         { id="light_range_factor",      type="track",       val=2,    def=1.0,              min=0.25,    max=2.0,    step=0.25                                       },
          { id="divider",                 type="line"                                                                                                                  },
          {                               type="title",       text="ui_mcm_western_goods_loot_settings_title"                                                          },
          { id="trader_loot_factor",      type="track",       val=2,    def=1.0,              min=0.0,     max=2.0,    step=0.25                                       },

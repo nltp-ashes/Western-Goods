@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 28/07/2024                                                                                             ---
+---    Date : 23/10/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to handle a collection of scripted lights.                                                        ---
@@ -29,19 +29,19 @@ function light_source:__init(inner_brightness, outer_brightness)
     light_inner.hud_mode = false
     light_inner.enabled = true
     light_inner.type = 1
-    light_inner.range = 1.5
+    light_inner.range = 1.5 * western_goods_mcm.get_config("light_range_factor")
     light_inner.shadow = false
     light_inner.lanim = "koster"
-    light_inner.lanim_brightness = inner_brightness
+    light_inner.lanim_brightness = inner_brightness * western_goods_mcm.get_config("light_brightness_factor")
 
     local light_outer = script_light()
     light_outer.hud_mode = false
     light_outer.enabled = true
     light_outer.type = 1
-    light_outer.range = 10
+    light_outer.range = 10 * western_goods_mcm.get_config("light_range_factor")
     light_outer.shadow = false
     light_outer.lanim = "koster"
-    light_outer.lanim_brightness = outer_brightness
+    light_outer.lanim_brightness = outer_brightness * western_goods_mcm.get_config("light_brightness_factor")
 
     self.m_lights = {
         inner = light_inner,

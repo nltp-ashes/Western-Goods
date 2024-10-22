@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : VodoXleb (Translation)                                                                              -->
-<!--    Date : 15/08/2024                                                                                            -->
+<!--    Date : 23/10/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
@@ -77,6 +77,24 @@
 
     <string id="ui_mcm_western_goods_compass_north_lock_desc">
         <text>Если эта опция включена, на фоне компаса всегда будет север вверху, а курсор будет указывать в направлении, в котором смотрит игрок. Если отключено, курсор всегда будет направлен вверх, а фон будет вращаться в направлении взгляда игрока.</text>
+    </string>
+
+    <!-- Lighters - Brightness -->
+    <string id="ui_mcm_western_goods_light_brightness_factor">
+        <text>Зажигалки - Яркость</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_brightness_factor_desc">
+        <text>Управляет яркостью света, излучаемого осветителями аддона. Эта настройка является фактором, то есть если вы установите ее на 2.0, осветители будут в два раза ярче обычного. Требуется перезагрузка сохранения.</text>
+    </string>
+
+    <!-- Lighters - Range -->
+    <string id="ui_mcm_western_goods_light_range_factor">
+        <text>Зажигалки - Ассортимент</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_range_factor_desc">
+        <text>Управляет дальностью света, излучаемого осветителями аддона. Эта настройка является фактором, то есть если вы установите ее на 2.0, осветители будут иметь в два раза большую дальность, чем обычно. Требуется перезагрузка сохранения.</text>
     </string>
 
     <!--=============================================================================================================-->

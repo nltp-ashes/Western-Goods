@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 15/08/2024                                                                                            -->
+<!--    Date : 23/10/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
@@ -77,6 +77,24 @@
 
     <string id="ui_mcm_western_goods_compass_north_lock_desc">
         <text>If enabled, the compass' background will always show North up, and the cursor will point towards the direction the player is facing. If disabled, the cursor will always point up, and the background will rotate towards the direction the player is facing.</text>
+    </string>
+
+    <!-- Lighters - Brightness -->
+    <string id="ui_mcm_western_goods_light_brightness_factor">
+        <text>Lighters - Brightness</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_brightness_factor_desc">
+        <text>Controls the brightness of the light emitted by lighters of the addon. This setting is a factor, meaning if you set it to 2.0, the lighters will be twice as bright as normal. Requires a save reload.</text>
+    </string>
+
+    <!-- Lighters - Range -->
+    <string id="ui_mcm_western_goods_light_range_factor">
+        <text>Lighters - Range</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_range_factor_desc">
+        <text>Controls the range of the light emitted by lighters of the addon. This setting is a factor, meaning if you set it to 2.0, the lighters will have twice as much range as normal. Requires a save reload.</text>
     </string>
 
     <!--=============================================================================================================-->
