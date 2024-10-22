@@ -11,6 +11,7 @@
 > • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
 
 **• Changes :**
+> • Updated the addon for S.T.A.L.K.E.R. Anomaly 1.5.3;
 > • Improved texture quality of Mi-24 Hind used during the storylines;
 > • Removed code used to overwrite the Barter UI, as it is no longer needed;
 > • Williams Heades (trader in Pripyat Outskirts) will now increase supply level based on storylines completion instead of goodwill;

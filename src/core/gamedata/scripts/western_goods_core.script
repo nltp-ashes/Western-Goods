@@ -24,8 +24,10 @@
 
 -- Constants
 local VERSION                       = "3.1.0"
-local REQUIRED_GAME_VERSION         = "1.5.2"
-local REQUIRED_MODDED_EXES_VERSION  = 20240818
+local REQUIRED_GAME_VERSION         = "1.5.3"
+local REQUIRED_MODDED_EXES_VERSION  = 20240929
+local GAME_DOWNLOAD_LINK            = [[https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153]]
+local MODDED_EXES_DOWNLOAD_LINK     = [[https://github.com/themrdemonized/xray-monolith/releases]]
 
 -- Imported functions
 local dbg_printf                   = western_goods_utils.dbg_printf
@@ -265,7 +267,7 @@ function check_prerequisites()
         western_goods_utils.get_translation("st_err_outdated_game_title"),
         western_goods_utils.get_translation("st_err_outdated_game_what", REQUIRED_GAME_VERSION),
         western_goods_utils.get_translation("st_err_outdated_game_why", REQUIRED_GAME_VERSION, REQUIRED_GAME_VERSION),
-        western_goods_utils.get_translation("st_err_outdated_game_where", REQUIRED_GAME_VERSION)
+        western_goods_utils.get_translation("st_err_outdated_game_where", REQUIRED_GAME_VERSION, GAME_DOWNLOAD_LINK)
     ))
 
     -- Out-of-date modded exes
@@ -273,7 +275,7 @@ function check_prerequisites()
         western_goods_utils.get_translation("st_err_outdated_modded_exes_title"),
         western_goods_utils.get_translation("st_err_outdated_modded_exes_what", tostring(REQUIRED_MODDED_EXES_VERSION):insert(".", 4):insert(".", 7)),
         western_goods_utils.get_translation("st_err_outdated_modded_exes_why"),
-        western_goods_utils.get_translation("st_err_outdated_modded_exes_where")
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_where", MODDED_EXES_DOWNLOAD_LINK)
     ))
 
     -- Missing DXML
@@ -281,7 +283,7 @@ function check_prerequisites()
         western_goods_utils.get_translation("st_err_missing_dxml_title"),
         western_goods_utils.get_translation("st_err_missing_dxml_what"),
         western_goods_utils.get_translation("st_err_missing_dxml_why"),
-        western_goods_utils.get_translation("st_err_missing_dxml_where")
+        western_goods_utils.get_translation("st_err_missing_dxml_where", MODDED_EXES_DOWNLOAD_LINK)
     ))
 
     -- Missing LUA unlocalizer
@@ -289,7 +291,7 @@ function check_prerequisites()
         western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
         western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
         western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
-        western_goods_utils.get_translation("st_err_missing_unlocalizer_where")
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_where", MODDED_EXES_DOWNLOAD_LINK)
     ))
 end
 

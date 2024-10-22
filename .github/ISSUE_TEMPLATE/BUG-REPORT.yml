@@ -57,6 +57,7 @@ body:
       label: Game version
       description: Please select the version of S.T.A.L.K.E.R. Anomaly you are running.
       options:
+        - 1.5.3
         - 1.5.2
         - 1.5.1
         - Other

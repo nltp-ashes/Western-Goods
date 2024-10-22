@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 04/09/2024                                                                                            -->
+<!--    Date : 23/10/2024                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Translation file for Western Goods' general purpose strings.                                                 -->
@@ -21,7 +21,7 @@
     </string>
 
     <string id="st_err_outdated_game_what">
-        <text>Your game has an invalid version or is out-of-date. Please install version S.T.A.L.K.E.R. Anomaly %s.</text>
+        <text>Your game has an invalid version, is out-of-date or is too recent. Please install version S.T.A.L.K.E.R. Anomaly %s.</text>
     </string>
 
     <string id="st_err_outdated_game_why">
@@ -29,7 +29,7 @@
     </string>
 
     <string id="st_err_outdated_game_where">
-        <text>You can download S.T.A.L.K.E.R. Anomaly %s from ModDB : https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+        <text>You can download S.T.A.L.K.E.R. Anomaly %s from ModDB : %s</text>
     </string>
 
     <!-- Out-of-date modded exes -->
@@ -46,7 +46,7 @@
     </string>
 
     <string id="st_err_outdated_modded_exes_where">
-        <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+        <text>You can download the latest version from Github : %s</text>
     </string>
 
     <!-- Missing DXML -->
@@ -63,7 +63,7 @@
     </string>
 
     <string id="st_err_missing_dxml_where">
-        <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+        <text>You can download the latest version from Github : %s</text>
     </string>
 
     <!-- Missing LUA unlocalizer -->
@@ -80,7 +80,7 @@
     </string>
 
     <string id="st_err_missing_unlocalizer_where">
-        <text>You can download the latest version from Github : https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+        <text>You can download the latest version from Github : %s</text>
     </string>
 
     <!--=============================================================================================================-->

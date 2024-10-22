@@ -21,7 +21,7 @@
     </string>
 
     <string id="st_err_outdated_game_what">
-        <text>Votre jeu a une version invalide ou obsolète. Veuillez installer la version S.T.A.L.K.E.R. Anomaly %s.</text>
+        <text>Votre jeu a une version invalide, obsolète ou trop récente. Veuillez installer la version S.T.A.L.K.E.R. Anomaly %s.</text>
     </string>
 
     <string id="st_err_outdated_game_why">
@@ -29,7 +29,7 @@
     </string>
 
     <string id="st_err_outdated_game_where">
-        <text>Vous pouvez télécharger S.T.A.L.K.E.R. Anomaly %s depuis ModDB: https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152</text>
+        <text>Vous pouvez télécharger S.T.A.L.K.E.R. Anomaly %s depuis ModDB: %s</text>
     </string>
 
     <!-- Out-of-date modded exes -->
@@ -46,7 +46,7 @@
     </string>
 
     <string id="st_err_outdated_modded_exes_where">
-        <text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+        <text>Vous pouvez télécharger la dernière version depuis GitHub: %s</text>
     </string>
 
     <!-- Missing DXML -->
@@ -63,7 +63,7 @@
     </string>
 
     <string id="st_err_missing_dxml_where">
-        <text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+        <text>Vous pouvez télécharger la dernière version depuis GitHub: %s</text>
     </string>
 
     <!-- Missing LUA unlocalizer -->
@@ -80,7 +80,7 @@
     </string>
 
     <string id="st_err_missing_unlocalizer_where">
-        <text>Vous pouvez télécharger la dernière version depuis GitHub: https://github.com/themrdemonized/STALKER-Anomaly-modded-exes/releases/latest</text>
+        <text>Vous pouvez télécharger la dernière version depuis GitHub: %s</text>
     </string>
 
     <!--=============================================================================================================-->
