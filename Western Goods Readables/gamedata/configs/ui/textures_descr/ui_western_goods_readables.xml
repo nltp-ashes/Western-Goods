@@ -25,6 +25,11 @@
 <!--=================================================================================================================-->
 <w>
 
+    <!-- Russian PLAYBOY (Playboy Hungary Aug 2012) -->
+    <file name="ui\readables\porn\ui_porn.dds">
+        <texture id="ui_porn_page_1"                           x="0"    y="0"    width="4096"    height="2048" />
+    </file>
+
     <!-- Ukrainian MAXIM -->
     <file name="ui\readables\porn2\ui_porn2.dds">
         <texture id="ui_porn2_page_1"                           x="0"    y="0"    width="4096"    height="2048" />
