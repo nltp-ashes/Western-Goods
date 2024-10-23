@@ -1,0 +1,262 @@
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : artifax (update for breaking changes)                                                                  ;;
+;;    Date : 28/07/2024                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used to define new currency barters for the Barter UI.                                              ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+;;====================================================================================================================;;
+;;==================| Black Boxes |===================================================================================;;
+;;====================================================================================================================;;
+
+[wg_barter_blackbox_to_eur]
+trader          = stalker_crew_member
+give            = wg_euros_100:3
+take            = blackbox_mlr:1
+type            = allOf
+has_info        = western_goods_act_1_finished
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 1
+desc            = st_wg_barter_blackbox_to_eur_desc
+desc_done       = st_wg_barter_blackbox_to_eur_desc_done
+
+;;====================================================================================================================;;
+;;==================| Money Transfers - Dollars to Dollars |==========================================================;;
+;;====================================================================================================================;;
+
+[wg_barter_dollars_50_to_10]
+trader          = stalker_western_goods_trader 
+give            = wg_dollars_10:5
+take            = wg_dollars_50:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_50_to_10_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_100_to_10]
+trader          = stalker_western_goods_trader 
+give            = wg_dollars_10:10
+take            = wg_dollars_100:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_100_to_10_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_10_to_50]
+trader          = stalker_western_goods_trader 
+give            = wg_dollars_50:1
+take            = wg_dollars_10:5
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_10_to_50_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_100_to_50]
+trader          = stalker_western_goods_trader 
+give            = wg_dollars_50:2
+take            = wg_dollars_100:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_100_to_50_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_10_to_100]
+trader          = stalker_western_goods_trader 
+give            = wg_dollars_100:1
+take            = wg_dollars_10:10
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_10_to_100_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_50_to_100]
+trader          = stalker_western_goods_trader 
+give            = wg_dollars_100:1
+take            = wg_dollars_50:2
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_50_to_100_desc
+desc_done       = st_wg_barter_money_desc_done
+
+
+;;====================================================================================================================;;
+;;==================| Money Transfers - Euros to Euros |==============================================================;;
+;;====================================================================================================================;;
+
+[wg_barter_euros_50_to_10]
+trader          = stalker_western_goods_trader 
+give            = wg_euros_10:5
+take            = wg_euros_50:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_50_to_10_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_euros_100_to_10]
+trader          = stalker_western_goods_trader 
+give            = wg_euros_10:10
+take            = wg_euros_100:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_100_to_10_desc
+desc_done       = st_wg_barter_money_desc_done
+
+
+[wg_barter_euros_10_to_50]
+trader          = stalker_western_goods_trader 
+give            = wg_euros_50:1
+take            = wg_euros_10:5
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_10_to_50_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_euros_100_to_50]
+trader          = stalker_western_goods_trader 
+give            = wg_euros_50:2
+take            = wg_euros_100:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_100_to_50_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_euros_10_to_100]
+trader          = stalker_western_goods_trader 
+give            = wg_euros_100:1
+take            = wg_euros_10:10
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_10_to_100_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_euros_50_to_100]
+trader          = stalker_western_goods_trader 
+give            = wg_euros_100:1
+take            = wg_euros_50:2
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_50_to_100_desc
+desc_done       = st_wg_barter_money_desc_done
+
+
+;;====================================================================================================================;;
+;;==================| Money Transfers - Dollars to Roubles |==========================================================;;
+;;====================================================================================================================;;
+
+[wg_barter_dollars_rouble_10_to_700]
+trader          = stalker_western_goods_trader 
+give            = money_100:7
+take            = wg_dollars_10:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_rouble_10_to_700_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_rouble_50_to_3500]
+trader          = stalker_western_goods_trader 
+give            = money_100:35
+take            = wg_dollars_50:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_rouble_50_to_3500_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_dollars_rouble_100_to_7000]
+trader          = stalker_western_goods_trader 
+give            = money_1000:7
+take            = wg_dollars_100:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_dollars_rouble_100_to_7000_desc
+desc_done       = st_wg_barter_money_desc_done
+
+;;====================================================================================================================;;
+;;==================| Money Transfers - Euros to Roubles |============================================================;;
+;;====================================================================================================================;;
+
+[wg_barter_euros_rouble_10_to_680]
+trader          = stalker_western_goods_trader 
+give            = money_10:68
+take            = wg_euros_10:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_rouble_10_to_680_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_euros_rouble_50_to_3400]
+trader          = stalker_western_goods_trader 
+give            = money_100:34
+take            = wg_euros_50:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_rouble_50_to_3400_desc
+desc_done       = st_wg_barter_money_desc_done
+
+[wg_barter_euros_rouble_100_to_6800]
+trader          = stalker_western_goods_trader 
+give            = money_100:68
+take            = wg_euros_100:1
+type            = allOf
+precondition    = barter_core.check_limit,barter_core.check_goodwill
+postcondition   = barter_core.increment_limit
+repeat          = restock
+limit           = 10
+desc            = st_wg_barter_euros_rouble_100_to_6800_desc
+desc_done       = st_wg_barter_money_desc_done

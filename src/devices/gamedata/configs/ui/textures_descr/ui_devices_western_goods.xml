@@ -1,0 +1,149 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Texture descriptions for UI elements of the GPS Locator, Rangefinder and Compass of Western Goods.           -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<w>
+    <!-- GPS Locator -->
+    <file name="ui\items\ui_gps_locator.dds">
+        <!-- Numbers -->
+        <texture id="gps_num_1"                 x="750"    y="150"    width="40"       height="120" />
+        <texture id="gps_num_2"                 x="790"    y="150"    width="40"       height="120" />
+        <texture id="gps_num_3"                 x="750"    y="270"    width="40"       height="120" />
+        <texture id="gps_num_4"                 x="790"    y="270"    width="40"       height="120" />
+        <texture id="gps_num_5"                 x="750"    y="390"    width="40"       height="120" />
+        <texture id="gps_num_6"                 x="790"    y="390"    width="40"       height="120" />
+        <texture id="gps_num_7"                 x="750"    y="510"    width="40"       height="120" />
+        <texture id="gps_num_8"                 x="790"    y="510"    width="40"       height="120" />
+        <texture id="gps_num_9"                 x="750"    y="630"    width="40"       height="120" />
+        <texture id="gps_num_0"                 x="790"    y="630"    width="40"       height="120" />
+
+        <!-- Labels -->
+        <texture id="gps_meters"                x="830"    y="150"    width="40"       height="120" />
+        <texture id="gps_slash"                 x="830"    y="270"    width="40"       height="120" />
+        <texture id="gps_dots"                  x="830"    y="390"    width="40"       height="120" />
+        <texture id="gps_dist"                  x="750"    y="900"    width="250"      height="50" />
+        <texture id="gps_dist_safe"             x="750"    y="950"    width="250"      height="50" />
+
+        <!-- Connectivity icons -->
+        <texture id="gps_conn_5"                x="750"    y="0"      width="100"      height="50" />
+        <texture id="gps_conn_4"                x="850"    y="0"      width="100"      height="50" />
+        <texture id="gps_conn_3"                x="750"    y="50"     width="100"      height="50" />
+        <texture id="gps_conn_2"                x="850"    y="50"     width="100"      height="50" />
+        <texture id="gps_conn_1"                x="750"    y="100"    width="100"      height="50" />
+        <texture id="gps_conn_0"                x="850"    y="100"    width="100"      height="50" />
+
+        <!-- Level names -->
+        <texture id="gps_no_sig"                x="0"      y="0"      width="250"      height="100" />
+        <texture id="gps_mar"                   x="0"      y="100"    width="250"      height="100" />
+        <texture id="gps_darkscape"             x="0"      y="200"    width="250"      height="100" />
+        <texture id="gps_wild"                  x="0"      y="300"    width="250"      height="100" />
+        <texture id="gps_pole"                  x="0"      y="400"    width="250"      height="100" />
+        <texture id="gps_yantar"                x="0"      y="500"    width="250"      height="100" />
+        <texture id="gps_dead"                  x="0"      y="600"    width="250"      height="100" />
+        <texture id="gps_rad"                   x="0"      y="700"    width="250"      height="100" />
+        <texture id="gps_lim"                   x="0"      y="800"    width="250"      height="100" />
+        <texture id="gps_zat"                   x="0"      y="900"    width="250"      height="100" />
+        <texture id="gps_esc"                   x="250"    y="0"      width="250"      height="100" />
+        <texture id="gps_gar"                   x="250"    y="100"    width="250"      height="100" />
+        <texture id="gps_darkvalley"            x="250"    y="200"    width="250"      height="100" />
+        <texture id="gps_bar"                   x="250"    y="300"    width="250"      height="100" />
+        <texture id="gps_agroprom"              x="250"    y="400"    width="250"      height="100" />
+        <texture id="gps_truck"                 x="250"    y="500"    width="250"      height="100" />
+        <texture id="gps_mil"                   x="250"    y="600"    width="250"      height="100" />
+        <texture id="gps_red"                   x="250"    y="700"    width="250"      height="100" />
+        <texture id="gps_jup"                   x="250"    y="800"    width="250"      height="100" />
+        <texture id="gps_cnpp"                  x="250"    y="900"    width="250"      height="100" />
+        <texture id="gps_pri_soc"               x="500"    y="0"      width="250"      height="100" />
+        <texture id="gps_pri"                   x="500"    y="100"    width="250"      height="100" />
+        <texture id="gps_gen"                   x="500"    y="200"    width="250"      height="100" />
+        <texture id="gps_hospital"              x="500"    y="300"    width="250"      height="100" />
+        <texture id="gps_unknown"               x="500"    y="400"    width="250"      height="100" />
+        <texture id="gps_bunker"                x="500"    y="500"    width="250"      height="100" />
+        <texture id="gps_collaider"             x="500"    y="600"    width="250"      height="100" />
+        <texture id="gps_grimwood"              x="500"    y="700"    width="250"      height="100" />
+        <texture id="gps_yuzhniy"               x="500"    y="800"    width="250"      height="100" />
+        <texture id="gps_promzone"              x="500"    y="900"    width="250"      height="100" />
+
+        <!-- Misc -->
+        <texture id="gps_strelok"               x="750"    y="800"    width="250"      height="100" />
+    </file>
+
+    <!-- Rangefinder -->
+    <file name="ui\items\ui_rangefinder.dds">
+        <!-- Reticule -->
+        <texture id="rf_reticule_r"             x="0"       y="0"      width="570"     height="200" />
+        <texture id="rf_reticule_g"             x="0"       y="200"    width="570"     height="200" />
+
+        <!-- Dash -->
+        <texture id="rf_dash_r"                 x="650"     y="240"    width="40"      height="120" />
+        <texture id="rf_dash_g"                 x="810"     y="240"    width="40"      height="120" />
+
+        <!-- Red Numbers -->
+        <texture id="rf_num_1_r"                x="570"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_2_r"                x="610"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_3_r"                x="650"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_4_r"                x="690"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_5_r"                x="570"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_6_r"                x="610"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_7_r"                x="650"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_8_r"                x="690"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_9_r"                x="570"     y="240"    width="40"      height="120" />
+        <texture id="rf_num_0_r"                x="610"     y="240"    width="40"      height="120" />
+
+        <!-- Green Numbers -->
+        <texture id="rf_num_1_g"                x="730"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_2_g"                x="770"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_3_g"                x="810"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_4_g"                x="850"     y="0"      width="40"      height="120" />
+        <texture id="rf_num_5_g"                x="730"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_6_g"                x="770"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_7_g"                x="810"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_8_g"                x="850"     y="120"    width="40"      height="120" />
+        <texture id="rf_num_9_g"                x="730"     y="240"    width="40"      height="120" />
+        <texture id="rf_num_0_g"                x="770"     y="240"    width="40"      height="120" />
+    </file>
+
+    <!-- Compass -->
+    <file name="ui\items\ui_compass.dds">
+        <!-- Digits -->
+        <texture id="wg_cp_digit_0"             x="0"       y="0"      width="120"     height="210" />
+        <texture id="wg_cp_digit_1"             x="120"     y="0"      width="120"     height="210" />
+        <texture id="wg_cp_digit_2"             x="240"     y="0"      width="120"     height="210" />
+        <texture id="wg_cp_digit_3"             x="360"     y="0"      width="120"     height="210" />
+        <texture id="wg_cp_digit_4"             x="480"     y="0"      width="120"     height="210" />
+        <texture id="wg_cp_digit_5"             x="0"       y="210"    width="120"     height="210" />
+        <texture id="wg_cp_digit_6"             x="120"     y="210"    width="120"     height="210" />
+        <texture id="wg_cp_digit_7"             x="240"     y="210"    width="120"     height="210" />
+        <texture id="wg_cp_digit_8"             x="360"     y="210"    width="120"     height="210" />
+        <texture id="wg_cp_digit_9"             x="480"     y="210"    width="120"     height="210" />
+
+        <!-- Characters -->
+        <texture id="wg_cp_char_dash"           x="600"     y="0"      width="120"     height="210" />
+        <texture id="wg_cp_char_dot"            x="720"     y="0"      width="120"     height="210" />
+        <texture id="wg_cp_char_dots"           x="840"     y="0"      width="120"     height="210" />
+
+        <!-- Units -->
+        <texture id="wg_cp_unit_kmh"            x="720"     y="420"    width="120"     height="210" />
+        <texture id="wg_cp_unit_km"             x="840"     y="420"    width="120"     height="210" />
+
+        <!-- Labels -->
+        <texture id="wg_cp_label_speed"         x="0"       y="420"    width="360"     height="105" />
+        <texture id="wg_cp_label_dist"          x="360"     y="420"    width="360"     height="105" />
+        <texture id="wg_cp_label_eta"           x="0"       y="525"    width="360"     height="105" />
+        <texture id="wg_cp_label_time"          x="360"     y="525"    width="360"     height="105" />
+
+        <!-- Compass -->
+        <texture id="wg_cp_heading_locked"      x="1024"    y="0"      width="512"    height="512" />
+        <texture id="wg_cp_heading_unlocked"    x="1024"    y="512"    width="512"    height="512" />
+        <texture id="wg_cp_cursor"              x="1536"    y="0"      width="512"    height="512" />
+
+        <!-- Background -->
+        <texture id="wg_cp_background"          x="1548"    y="782"    width="500"     height="242" />
+    </file>
+</w>

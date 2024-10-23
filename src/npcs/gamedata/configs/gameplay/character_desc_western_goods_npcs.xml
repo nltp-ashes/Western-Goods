@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Character description file used to describe NPCs used in the addon.                                          -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<xml>
+
+    <!--=============================================================================================================-->
+    <!--    Williams Heades                                                                                          -->
+    <!--=============================================================================================================-->
+
+    <specific_character id="stalker_western_goods_trader" team_default="1">
+        <name>western_goods_trader_name</name>
+        <bio>western_goods_trader_bio</bio>
+        <icon>ui_npc_small_williams_heades</icon>
+        <visual>actors\stalker_merc\stalker_mercenary3</visual>
+        <snd_config>characters_voice\human\killer_3\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_western_goods_trader</class>
+        <community>killer</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>15000</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>2200</reputation>
+
+        <supplies>
+            [spawn] \n
+            wpn_scar_acog \n
+            ammo_5.56x45_ap = 1 \n
+            wpn_usp = 1 \n
+            ammo_11.43x23_fmj = 1 \n
+        </supplies>
+
+        <actor_dialog>western_goods_trader_meet</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+    <!--=============================================================================================================-->
+    <!--    Oleksandr Chernenko                                                                                      -->
+    <!--=============================================================================================================-->
+
+    <specific_character id="stalker_oleksandr_chernenko" team_default="1">
+        <name>western_goods_oleksandr_chernenko_name</name>
+        <bio>western_goods_oleksandr_chernenko_bio</bio>
+        <icon>ui_npc_small_oleksandr_chernenko</icon>
+        <visual>actors\stalker_soldier\light_voen</visual>
+        <snd_config>characters_voice\human\military_1\</snd_config>
+
+        <map_icon x="1" y="0"></map_icon>
+        <class>stalker_oleksandr_chernenko</class>
+        <community>killer</community>
+        <terrain_sect>stalker_terrain</terrain_sect>
+
+        <rank>27800</rank>
+        <money min="0" max="0" infinitive="0"/>
+        <reputation>1200</reputation>
+
+        <supplies>
+            [spawn] \n
+            wpn_pkp = 1 \n
+            wpn_mp412 = 1 \n
+            wpn_knife4 = 1 \n
+            army_patch = 1 \n
+        </supplies>
+
+        <actor_dialog>western_goods_oleksandr_chernenko_meet</actor_dialog>
+        <actor_dialog>actor_break_dialog</actor_dialog>
+    </specific_character>
+
+</xml>

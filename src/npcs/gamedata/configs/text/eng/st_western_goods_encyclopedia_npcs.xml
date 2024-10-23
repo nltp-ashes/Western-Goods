@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' entries in the PDA Guide.                                                -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <!-- Western goods trader encyclopedia entry -->
+    <string id="encyclopedia_characters_western_goods_ashes">
+        <text>Williams "Ashes" Heades</text>
+    </string>
+
+    <string id="encyclopedia_characters_western_goods_ashes_text">
+        <text>
+        %c[pda_white]Williams "Ashes" Heades%c[ui_gray_1] is a trader. He hangs around at the Book Store (Pripyat Outskirts).\n
+        \n%c[pda_green]Information%c[ui_gray_1]\n
+        \nWilliams "Ashes" Heades is a member of the Mercenaries. Former UN soldier, he was sent to multiple theaters of war as part of UN task forces. He fought the civil war in the 2010 rebellion in Altis, Greece.\n
+        \nHe was later sent to the Chornobyl exclusion zone as part of a special UNISG deployment. Not a lot is known about what he was tasked with, all that people know is he decided to stay and did not leave with the rest of the deployment.\n
+        \n%c[pda_yellow]Trivia%c[ui_gray_1]\n
+        \n• This trader is the main importer for western goods in the Zone.
+        </text>
+    </string>
+
+    <!-- Oleksandr Chernenko encyclopedia entry -->
+    <string id="encyclopedia_characters_western_goods_oleksandr">
+        <text>Captain Oleksandr Chernenko</text>
+    </string>
+
+    <string id="encyclopedia_characters_western_goods_oleksandr_text">
+        <text>
+            %c[pda_white]Captain Oleksandr Chernenko%c[ui_gray_1] is a trader. He can be found at the Flea Market (Garbage).\n
+            \n%c[pda_green]Information%c[ui_gray_1]\n
+            \nCaptain Oleksandr Chernenko is a former Army soldier, turned Mercenary. He said he deserted when the army tasked him with a suicide mission, although little details are know about what this mission was, as he seems to not enjoy talking about it.\n
+            \nThese days, he can be found in the basement of the Flea Market, at the Garbage. He offers packages of items, at a discount. The sale of these packages is usually limited in time.\n
+            \n%c[pda_yellow]Trivia%c[ui_gray_1]\n
+            \n• This trader manages the Mercenary's flea market offerings;
+            \n• This trader can sometimes sell packages containing western goods.
+        </text>
+    </string>
+
+</string_table>

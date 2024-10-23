@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
+<!--    Date : 23/10/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <!--=============================================================================================================-->
+    <!--    MAIN STRINGS                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <!-- Page Title -->
+    <string id="ui_mcm_western_goods_title">
+        <text>Western Goods</text>
+    </string>
+
+    <!-- Menu Title -->
+    <string id="ui_mcm_menu_western_goods">
+        <text>Western Goods</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    GENERAL SETTINGS                                                                                         -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_general_settings_title">
+        <text>PARAMÈTRES GÉNÉRAUX</text>
+    </string>
+
+    <!-- Guided Tasks -->
+    <string id="ui_mcm_western_goods_guided_tasks">
+        <text>Tâches guidées</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_guided_tasks_desc">
+        <text>Certaines tâches sont intentionnellement non guidées, pour encourager l'exploration et la réflexion. Vous pouvez modifier ce paramètre en temps réel pour avoir un marqueur sur votre PDA pour votre objectif.</text>
+    </string>
+
+    <!-- Magazines Psy-Regen -->
+    <string id="ui_mcm_western_goods_magazine_psi_regen">
+        <text>Facteur de régénération de la santé psi pour la lecture de magazines</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_magazine_psi_regen_desc">
+        <text>Définit le facteur par lequel multiplier la régénération de votre santé psi (santé mentale) lorsque vous lisez un magazine.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    DEVICES SETTINGS                                                                                         -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_devices_settings_title">
+        <text>PARAMÈTRES DES DISPOSITIFS</text>
+    </string>
+
+    <!-- GPS Locator - Guided Surges -->
+    <string id="ui_mcm_western_goods_guided_surge">
+        <text>Localisateur GPS - Émissions guidées/tempêtes psi</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_guided_surge_desc">
+        <text>Si activé, lorsqu'une émission/tempête psi se produit, vous obtiendrez une tâche dans votre PDA, et cette tâche indiquera le plus proche abri. Si désactivé, vous aurez toujours la tâche, mais elle n'indiquera pas le plus proche abri. Le localisateur GPS peut être utilisé pour localiser le plus proche abri.</text>
+    </string>
+
+    <!-- Compass - North lock -->
+    <string id="ui_mcm_western_goods_compass_north_lock">
+        <text>Boussole - Verrouillage nord</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_compass_north_lock_desc">
+        <text>Si activé, l'arrière-plan de la boussole affichera toujours le nord en haut, et le curseur pointera dans la direction où le joueur fait face. Si désactivé, le curseur pointera toujours vers le haut, et l'arrière-plan tournera dans la direction où le joueur fait face.</text>
+    </string>
+
+    <!-- Lighters - Brightness -->
+    <string id="ui_mcm_western_goods_light_brightness_factor">
+        <text>Briquets - Luminosité</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_brightness_factor_desc">
+        <text>Contrôle la luminosité de la lumière émise par les briquets dans l'addon. Ce paramètre est un facteur, c'est-à-dire si vous prenez la valeur 2.0, les briquets seront deux fois plus lumineux que par défaut. Nécessite un rechargement de la sauvegarde.</text>
+    </string>
+
+    <!-- Lighters - Range -->
+    <string id="ui_mcm_western_goods_light_range_factor">
+        <text>Briquets - Portée</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_range_factor_desc">
+        <text>Contrôle la portée de la lumière émise par les briquets dans l'addon. Ce paramètre est un facteur, c'est-à-dire si vous prenez la valeur 2.0, les briquets éclaireront deux fois plus loin que par défaut. Nécessite un rechargement de la sauvegarde.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    KEY-BINDINGS                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_keybindings_title">
+        <text>PARAMÈTRES DES RACCOURCIS CLAVIERS</text>
+    </string>
+
+    <!-- Helicopter Attack Order -->
+    <string id="ui_mcm_western_goods_heli_attack">
+        <text>Ordonne à l'hélicoptère d'attaquer</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_heli_attack_desc">
+        <text>Raccourci utilisé pour envoyer un ordre d'attaque à un hélicoptère. Visez une cible et utilisez le raccourci pour envoyer l'ordre.</text>
+    </string>
+
+    <!-- Rangefinder Night Vision -->
+    <string id="ui_mcm_western_goods_rangefinder_nv">
+        <text>Basculer la couleur du réticule du télémètre</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_rangefinder_nv_desc">
+        <text>Raccourci utilisé pour basculer la couleur (rouge/vert) du réticule du télémètre SigSauer KILO5K.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    LOOT SETTINGS                                                                                            -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_loot_settings_title">
+        <text>PARAMÈTRES DU BUTIN</text>
+    </string>
+
+    <!-- Trader Loot Chance -->
+    <string id="ui_mcm_western_goods_trader_loot_factor">
+        <text>Facteur de butin des commerçants</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_trader_loot_factor_desc">
+        <text>Définit le facteur par lequel affecter la chance d'apparition du butin chez les commerçants. Cela n'affecte que la probabilité d'apparition, pas la quantité.</text>
+    </string>
+
+    <!-- Corpse Loot Chance -->
+    <string id="ui_mcm_western_goods_corpse_loot_factor">
+        <text>Facteur de butin des cadavres</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_corpse_loot_factor_desc">
+        <text>Définit le facteur par lequel affecter la chance d'apparition du butin sur les cadavres. Cela n'affecte que la probabilité d'apparition, pas la quantité.</text>
+    </string>
+
+    <!-- Items Per Corpse -->
+    <string id="ui_mcm_western_goods_max_item_per_corpse">
+        <text>Nombre maximum d'objets par cadavre</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_max_item_per_corpse_desc">
+        <text>Définit le nombre maximum d'objets X pouvant apparaître dans un seul cadavre. Le jeu sélectionnera X objets à faire apparaître, puis appliquera les taux d'apparition pour chacun des objets sélectionnés. En d'autres termes, vous pouvez obtenir entre 0 et X objets.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    COMPATIBILITY SETTINGS                                                                                   -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_compatibility_title">
+        <text>PARAMÈTRES DE COMPATIBILITÉ</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--     TECHNICAL SETTINGS                                                                                      -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_technical_settings_title">
+        <text>PARAMÈTRES TECHNIQUES</text>
+    </string>
+
+    <!-- Debug mode -->
+    <string id="ui_mcm_western_goods_debug_mode">
+        <text>Mode de débogage</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_debug_mode_desc">
+        <text>Fait en sorte que l'addon imprime certaines informations dans la console/logs, pour référence ultérieure lors de l'identification des problèmes.</text>
+    </string>
+
+    <!-- Addon removal -->
+    <string id="ui_mcm_western_goods_addon_removal">
+        <text>Suppression de l'addon</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_addon_removal_desc">
+        <text>Permet une suppression sûre de l'addon. Activez ce paramètre, puis sauvegardez votre jeu. Après cela, vous pouvez supprimer l'addon et recharger cette sauvegarde, et continuer à jouer sans Western Goods.</text>
+    </string>
+
+</string_table>

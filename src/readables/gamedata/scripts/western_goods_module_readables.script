@@ -1,0 +1,124 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 18/08/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script handles specific code for the readables module.                                                   ---
+---                                                                                                                  ---
+---    It is responsible for defining the trader and corpse params for the new items.                                ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trader and corpse params
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_core.western_goods_items["wg_porn_mag_1"] = {
+    type                 = "magazine",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.01 },
+        ["freedom"]      = { qte=1, prob=0.01 },
+        ["killer"]       = { qte=1, prob=0.02 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_porn_mag_2"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=3, prob=0.4 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.02 }
+    },
+}
+western_goods_core.western_goods_items["wg_porn_mag_3"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=2, prob=0.4 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.02 }
+    },
+}
+western_goods_core.western_goods_items["wg_xbox_mag_1"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=1, prob=0.6 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.02 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.02 }
+    },
+}
+western_goods_core.western_goods_items["wg_xbox_mag_2"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=2, prob=0.6 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.02 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.02 }
+    },
+}
+western_goods_core.western_goods_items["wg_car_mag_1"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["killer"]       = { qte=1, sl=3, prob=0.6 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.04 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_car_mag_2"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["isg"]          = { qte=1, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.04 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_strana_igr_mag_1"] = {
+    type                 = "magazine",
+    trader_params = {
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["stalker"]      = { qte=1, sl=3, prob=0.4 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}

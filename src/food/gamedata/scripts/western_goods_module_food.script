@@ -1,0 +1,354 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 18/08/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script handles specific code for the food module.                                                        ---
+---                                                                                                                  ---
+---    It is responsible for :                                                                                       ---
+---    - Defining the trader and corpse params for the new items;                                                    ---
+---    - Handling migration process between the addon's updates;                                                     ---
+---    - Handling events when the player uses an item;                                                               ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+local dbg_printf                = western_goods_utils.dbg_printf
+local CreatePersistentTimeEvent = western_goods_persistent_timed_events.CreatePersistentTimeEvent
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Use functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called by callback when any object in the game is used.
+--- This redirects to the proper functions if the item used is one from Western Goods.
+--- @param obj game_object
+--- @return nil
+function actor_on_item_use(obj,_,cf)
+    -- Toblerone
+    if obj:section() == "wg_toblerone" then
+        dbg_printf("[WG] Food | Used %s", obj:section())
+        this.use_toblerone(obj)
+        return
+    end
+end
+
+--- Function called when the Toblorone item is used by the player.
+--- @param obj game_object
+--- @return nil
+function use_toblerone(obj)
+    CreatePersistentTimeEvent("western_goods_delay", "toblerone_mask", 2, function()
+        level.add_pp_effector("yantar_underground_psi.ppe", 57742, false)
+        dbg_printf("[WG] Food | Toblerone - Started ppe effect '%s'", 57742)
+        return true
+    end)
+    CreatePersistentTimeEvent("western_goods_delay", "force_sleep", 6, function()
+        level.remove_pp_effector(57742)
+        dbg_printf("[WG] Food | Toblerone - Stopped ppe effect '%s'", 57742)
+        actor_status_thirst.force_sleep()
+        return true
+    end)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Migration functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to set the remaining uses of some items.
+--- These items previously had more than one use, but now they only have one.
+--- @param obj game_object
+--- @return nil
+function game_object_on_net_spawn(obj)
+    if obj:section() == "wg_bounty" or obj:section() == "wg_kitkat" then
+        obj:set_remaining_uses(1)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("actor_on_item_use", actor_on_item_use)
+    RegisterScriptCallback("game_object_on_net_spawn", game_object_on_net_spawn)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trader and corpse params
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_core.western_goods_items["wg_mars"] = {
+    type                 = "food",
+    trader_params = {
+        ["freedom"]      = { qte=1, sl=1, prob=0.1 },
+        ["killer"]       = { qte=2, sl=1, prob=0.5 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.1 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.10 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_milkyway"] =  {
+    type                 = "food",
+    trader_params = {
+        ["freedom"]      = { qte=1, sl=1, prob=0.2 },
+        ["killer"]       = { qte=2, sl=1, prob=0.5 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.4 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.10 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_snickers"] =  {
+    type                 = "food",
+    trader_params = {
+        ["bandit"]       = { qte=1, sl=1, prob=0.8 },
+        ["freedom"]      = { qte=1, sl=1, prob=0.3 },
+        ["killer"]       = { qte=2, sl=1, prob=0.8 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.3 },
+        ["renegade"]     = { qte=1, sl=2, prob=0.7 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.10 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_mnms"] =  {
+    type                 = "food",
+    trader_params = {
+        ["killer"]       = { qte=2, sl=1, prob=0.3 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.2 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=5, prob=0.02 },
+        ["freedom"]      = { qte=5, prob=0.05 },
+        ["killer"]       = { qte=5, prob=0.10 },
+        ["monolith"]     = { qte=5, prob=0.05 },
+        ["renegade"]     = { qte=5, prob=0.02 },
+        ["isg"]          = { qte=5, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_mentos"] =  {
+    type                 = "food",
+    trader_params = {
+        ["monolith"]     = { qte=1, sl=1, prob=0.2 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=3, prob=0.02 },
+        ["freedom"]      = { qte=3, prob=0.05 },
+        ["killer"]       = { qte=3, prob=0.10 },
+        ["monolith"]     = { qte=3, prob=0.05 },
+        ["renegade"]     = { qte=3, prob=0.02 },
+        ["isg"]          = { qte=3, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_bounty"] =  {
+    type                 = "food",
+    trader_params = {
+        ["freedom"]      = { qte=1, sl=1, prob=0.3 },
+        ["killer"]       = { qte=2, sl=1, prob=0.6 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.4 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.10 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.02 },
+        ["isg"]          = { qte=1, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_kitkat"] =  {
+    type                 = "food",
+    trader_params = {
+        ["monolith"]     = { qte=1, sl=1, prob=0.2 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=4, prob=0.01 },
+        ["freedom"]      = { qte=4, prob=0.02 },
+        ["killer"]       = { qte=4, prob=0.05 },
+        ["monolith"]     = { qte=4, prob=0.05 },
+        ["renegade"]     = { qte=4, prob=0.01 },
+        ["isg"]          = { qte=4, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_milka"] =  {
+    type                 = "food",
+    trader_params = {
+        ["monolith"]     = { qte=1, sl=1, prob=0.2 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.01 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 },
+        ["isg"]          = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_lays"] =  {
+    type                 = "food",
+    trader_params = {
+        ["freedom"]      = { qte=1, sl=1, prob=0.4 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.3 },
+        ["renegade"]     = { qte=1, sl=2, prob=0.6 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.01 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 },
+        ["isg"]          = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_doritos"] =  {
+    type                 = "food",
+    trader_params = {
+        ["bandit"]       = { qte=1, sl=2, prob=0.7 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.2 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.01 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 },
+        ["isg"]          = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_pringles"] =  {
+    type                 = "food",
+    trader_params = {
+        ["freedom"]      = { qte=1, sl=1, prob=0.3 },
+        ["killer"]       = { qte=2, sl=2, prob=0.4 },
+        ["monolith"]     = { qte=1, sl=1, prob=0.2 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.01 },
+        ["freedom"]      = { qte=1, prob=0.02 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.05 },
+        ["renegade"]     = { qte=1, prob=0.01 },
+        ["isg"]          = { qte=1, prob=0.05 }
+    },
+}
+western_goods_core.western_goods_items["wg_hamborgir"] =  {
+    type                 = "food",
+    trader_params = {
+        ["monolith"]     = { qte=1, sl=1, prob=0.5 },
+        ["isg"]          = { qte=3, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.01 },
+        ["freedom"]      = { qte=1, prob=0.03 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.02 },
+        ["renegade"]     = { qte=1, prob=0.01 },
+        ["isg"]          = { qte=1, prob=0.10 }
+    },
+}
+western_goods_core.western_goods_items["wg_french_mre"] =  {
+    type                 = "food",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=3, prob=0.25 },
+        ["isg"]          = { qte=2, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["killer"]       = { qte=1, prob=0.01 },
+        ["isg"]          = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_sandwich"] =  {
+    type                 = "food",
+    trader_params = {
+    },
+    corpse_params = {
+    },
+}
+western_goods_core.western_goods_items["wg_oreo"] =  {
+    type                 = "food",
+    trader_params = {
+        ["killer"]       = { qte=2, sl=2, prob=1.0 },
+        ["isg"]          = { qte=2, sl=1, prob=1.0 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_ferrero_rocher"] =  {
+    type                 = "food",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=1, prob=0.5 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_mon_cheri"] =  {
+    type                 = "food",
+    trader_params = {
+        ["killer"]       = { qte=1, sl=2, prob=0.6 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_toblerone"] =  {
+    type                 = "food",
+    trader_params = {
+        ["isg"]          = { qte=1, sl=1, prob=1.0 },
+        ["stalker"]      = { qte=1, sl=3, prob=0.5 }
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.02 },
+        ["freedom"]      = { qte=1, prob=0.05 },
+        ["killer"]       = { qte=1, prob=0.05 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}

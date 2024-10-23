@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : Traduction en Français avec ALSÉWARE Tool par Oyissan (Thundard - 01/09/2024)                       -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+    <string id="encyclopedia_characters_western_goods_ashes">
+        <text>Williams "Ashes" Heades</text>
+    </string>
+    <string id="encyclopedia_characters_western_goods_ashes_text">
+        <text>%c[pda_white]Williams "Ashes" Heades%c[ui_gray_1] est un marchand. Il traîne au Book Store (environs de Pripyat).\n
+            \n
+            %c[pda_green]Information%c[ui_gray_1]\n
+            \n
+            Williams "Ashes" Heades est un membre des Mercenaires. Ancien soldat des Nations Unies, il a été déployé dans plusieurs théâtres de guerre en tant que membre des forces d'intervention de l'ONU. Il a combattu lors de la guerre civile durant la rébellion de 2010 à Altis, en Grèce..\n
+            \n
+            Il a ensuite été envoyé dans la zone d'exclusion de Tchernobyl dans le cadre d'un déploiement spécial de l'UNISG. Peu de choses sont connues sur sa mission, tout ce que les gens savent, c'est qu'il a décidé de rester et n'est pas parti avec le reste du déploiement..\n
+            \n
+            %c[pda_yellow]Trivia%c[ui_gray_1]\n
+            \n
+            • Ce marchand est le principal importateur de biens occidentaux dans la Zone.</text>
+    </string>
+    <string id="encyclopedia_characters_western_goods_oleksandr">
+        <text>Captain Oleksandr Chernenko</text>
+    </string>
+    <string id="encyclopedia_characters_western_goods_oleksandr_text">
+        <text>%c[pda_white]Capitaine Oleksandr Chernenko%c[ui_gray_1]: On peut le trouver au Marché aux Puces (Décharge).\n
+            \n
+            %c[pda_green]Information%c[ui_gray_1]\n
+            \n
+            Oleksandr Chernenko est un ancien soldat de l'armée, devenu mercenaire. Il a dit avoir déserté quand l'armée lui a confié une mission suicide, bien que peu de détails soient connus sur cette mission, car il semble ne pas aimer en parler.\n
+            \n
+            De nos jours, on peut le trouver dans le sous-sol du Marché aux Puces, à la Décharge. Il propose des paquets d'articles, avec une remise. La vente de ces paquets est généralement limitée dans le temps.\n
+            \n
+            %c[pda_yellow]Trivia%c[ui_gray_1]\n
+            \n
+            • Ce marchand gère les offres du Marché aux puces des mercenaires.;            \n
+            • Ce marchand peut parfois vendre des paquets contenant des biens occidentaux.        </text>
+    </string>
+</string_table>

@@ -1,0 +1,416 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 23/10/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script holds the 'core' of the addon.                                                                    ---
+---    Stuff that ensure proper working of the addon, or that are general purpose.                                   ---
+---                                                                                                                  ---
+---    Notable mentions are :                                                                                        ---
+---     - adding new callbacks;                                                                                      ---
+---     - ensuring the player has the required game version and pre-requisites;                                      ---
+---     - cleaning the save-game in case the player decides to remove the addon;                                     ---
+---     - source of truth for the list of items and objects added by the addon;                                      ---
+---     - source of truth to check if other specific addons are installed;                                           ---
+---     - source of truth to check if other modules are installed.                                                   ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Constants
+local VERSION                       = "3.1.0"
+local REQUIRED_GAME_VERSION         = "1.5.3"
+local REQUIRED_MODDED_EXES_VERSION  = 20240929
+local GAME_DOWNLOAD_LINK            = [[https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153]]
+local MODDED_EXES_DOWNLOAD_LINK     = [[https://github.com/themrdemonized/xray-monolith/releases]]
+
+-- Imported functions
+local dbg_printf                   = western_goods_utils.dbg_printf
+
+-- New callbacks
+AddScriptCallback("western_goods_on_campfire_use")
+AddScriptCallback("western_goods_on_item_before_use")
+AddScriptCallback("western_goods_on_hideout_furniture_light_use")
+AddScriptCallback("western_goods_guide_on_ask")
+AddScriptCallback("western_goods_guide_on_answer")
+AddScriptCallback("western_goods_guide_before_dialog")
+AddScriptCallback("western_goods_guide_on_change_level")
+AddScriptCallback("western_goods_flea_on_dialog")
+AddScriptCallback("western_goods_flea_on_collect_sections")
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Core functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to print the version of the addon in the console/log.
+--- @return nil
+function print_addon_version()
+    printf("[WG] Western Goods version %s", VERSION)
+end
+
+--- Function used to delete every item added by the addon from the save file.
+--- @author Leviathan
+--- @return nil
+function check_addon_removal(status)
+    if not status or not western_goods_mcm.get_config("addon_removal") then return end
+
+    dbg_printf("[WG] Core | Addon removal started...")
+
+    local released_objects = 0
+
+    dbg_printf("[WG] Core | Addon removal checking server objects...")
+
+    -- Release Western Goods items
+    western_goods_utils.server_objects_iter(function(se_obj)
+        dbg_printf("[WG] Core | Addon removal checking '%s' for deletion...", se_obj:section_name())
+
+        -- Check if is Western Goods item
+        if western_goods_items[se_obj:section_name()] then
+            released_objects = released_objects + 1
+            dbg_printf("[WG] Core | Addon removal releasing item '%s'", se_obj:section_name())
+            alife_release(se_obj)
+            return
+        end
+
+        -- Check if is Western Goods special item
+        if western_goods_special_items[se_obj:section_name()] then
+            released_objects = released_objects + 1
+            dbg_printf("[WG] Core | Addon removal releasing special item '%s'", se_obj:section_name())
+            alife_release(se_obj)
+            return
+        end
+
+        -- Check if is Western Goods squad
+        if western_goods_squads[se_obj:section_name()] then
+            released_objects = released_objects + 1 + se_obj:npc_count()
+            dbg_printf("[WG] Core | Addon removal releasing squad '%s'", se_obj:section_name())
+            SIMBOARD:remove_squad(se_obj)
+            return
+        end
+
+        -- Check if is Western Goods NPC
+        if western_goods_npcs[se_obj:section_name()] then
+            released_objects = released_objects + 1
+            dbg_printf("[WG] Core | Addon removal releasing NPC '%s'", se_obj:section_name())
+            alife():release(se_obj)
+            return
+        end
+    end)
+
+    dbg_printf("[WG] Core | Addon removal checking info portions...")
+
+    for _,info_name in pairs(western_goods_info) do
+        western_goods_utils.rem_info(info_name)
+    end
+
+    dbg_printf("[WG] Core | Addon removal checking tasks...")
+
+    -- Cancel Western Goods tasks
+    for task_id,_ in pairs(western_goods_task) do
+        task_manager.get_task_manager():set_task_cancelled(task_id)
+    end
+
+    news_manager.send_tip(db.actor, "Successfully removed all %c[yellow]" .. released_objects .. "%c[default] items added by Western Goods from the save-game.", nil, nil, 10000)
+
+    dbg_printf("[WG] Core | Addon removal finished : %s", released_objects)
+
+    western_goods_mcm.set_config("addon_removal", false)
+end
+
+--- Function used to detect missing translations.
+--- This function will iterate all files in gamedata/configs/text/[eng|rus]/*.xml.
+--- Then, it will compare the strings found, and warn if any language has missing translation.
+--- @return nil
+function check_missing_translations()
+    dbg_printf("[WG] Core | Starting check for missing translations...")
+
+    local profiler = profile_timer()
+    profiler:start()
+
+    local folders = { "eng", "rus", "fra" }
+    local strings = {}
+
+    for _, folder in pairs(folders) do
+        local file_list = western_goods_utils.list_files("text\\" .. folder .. "\\")
+
+        dbg_printf("[WG] Core | Gathering strings for '%s' language", folder)
+        strings[folder] = {}
+
+        for _,file_name in pairs(file_list) do
+            if string.find(file_name, "western_goods") then
+                dbg_printf("[WG] Core | Parsing file '%s'", file_name)
+
+                local xml = CScriptXmlInit()
+                xml:ParseDirFile("text\\" .. folder, file_name)
+                xml:NavigateToNode("string_table", 0)
+
+                for i=0, xml:GetNodesNum("", 0, "string") - 1 do
+                    strings[folder][#strings[folder]+1] = xml:ReadAttribute("string", i, "id")
+                end
+            end
+        end
+    end
+
+    for lang_curr, strings_curr in pairs(strings) do
+        for _, str_curr in pairs(strings_curr) do
+            for lang_other, strings_other in pairs(strings) do
+                if lang_curr ~= lang_other and not western_goods_utils.table_contains(strings_other, str_curr) then
+                    printf("![WG] ERROR | Core | String '" .. str_curr .. "' found in '" .. lang_curr .. "' but not in '" .. lang_other .. "' !")
+                end
+            end
+        end
+    end
+
+    profiler:stop()
+    dbg_printf("[WG] Core | Check for missing translations ended in %sms", profiler:time()/1000)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Other functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function called from game_tutorials.xml when the player interacts with a campfire.
+--- @return nil
+function use_campfire()
+    dbg_printf("[WG] Core | Use Campfire - Called from game_tutorials.xml")
+    SendScriptCallback("western_goods_on_campfire_use")
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Modules detection functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function is_currencies_module_installed()
+    return western_goods_module_currencies ~= nil
+end
+
+function is_devices_module_installed()
+    return western_goods_module_devices ~= nil
+end
+
+function is_drinks_module_installed()
+    return western_goods_module_drinks ~= nil
+end
+
+function is_flea_module_installed()
+    return western_goods_module_flea ~= nil
+end
+
+function is_food_module_installed()
+    return western_goods_module_food ~= nil
+end
+
+function is_guides_module_installed()
+    return western_goods_module_guides ~= nil
+end
+
+function is_npcs_module_installed()
+    return western_goods_module_npcs ~= nil
+end
+
+function is_readables_module_installed()
+    return western_goods_module_readables ~= nil
+end
+
+function is_storylines_module_installed()
+    return western_goods_module_tasks ~= nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Addons detection functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the Barter UI is installed.
+--- @return boolean
+function is_barter_ui_installed()
+    return barter_core ~= nil
+end
+
+--- Function used to check if Hideout Furniture is installed.
+--- @return boolean
+function is_hideout_furniture_installed()
+    return ui_furniture_light ~= nil and hf_obj_manager ~= nil
+end
+
+--- Function used to check if Food, Drugs and Drinks Animations (FDDA) is installed.
+--- @return boolean
+function is_fdda_installed()
+    return enhanced_animations ~= nil
+end
+
+--- Function used to check if the Mod Configuration Menu (MCM) is installed.
+--- @return boolean
+function is_mcm_installed()
+    return ui_mcm ~= nil
+end
+
+--- Function used to check if the Pinup Collector addon is installed.
+--- @return boolean
+function is_pinup_collector_installed()
+    return item_pinup_collect ~= nil
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Prerequisites functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to check if the necessary pre-requisites are installed, and forcefully crash the game if they aren't.
+--- @return nil
+function check_prerequisites()
+    -- Out-of-date game
+    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_game_title"),
+        western_goods_utils.get_translation("st_err_outdated_game_what", REQUIRED_GAME_VERSION),
+        western_goods_utils.get_translation("st_err_outdated_game_why", REQUIRED_GAME_VERSION, REQUIRED_GAME_VERSION),
+        western_goods_utils.get_translation("st_err_outdated_game_where", REQUIRED_GAME_VERSION, GAME_DOWNLOAD_LINK)
+    ))
+
+    -- Out-of-date modded exes
+    assert(is_modded_exes_updated(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_title"),
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_what", tostring(REQUIRED_MODDED_EXES_VERSION):insert(".", 4):insert(".", 7)),
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_why"),
+        western_goods_utils.get_translation("st_err_outdated_modded_exes_where", MODDED_EXES_DOWNLOAD_LINK)
+    ))
+
+    -- Missing DXML
+    assert(is_dxml_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_dxml_title"),
+        western_goods_utils.get_translation("st_err_missing_dxml_what"),
+        western_goods_utils.get_translation("st_err_missing_dxml_why"),
+        western_goods_utils.get_translation("st_err_missing_dxml_where", MODDED_EXES_DOWNLOAD_LINK)
+    ))
+
+    -- Missing LUA unlocalizer
+    assert(is_lua_unlocalizer_installed(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_title"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_what"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_why"),
+        western_goods_utils.get_translation("st_err_missing_unlocalizer_where", MODDED_EXES_DOWNLOAD_LINK)
+    ))
+end
+
+--- Function used to check if game version number is 1.5.2.
+--- @return boolean
+function is_version_1_5_2()
+    return string.find(GAME_VERSION, REQUIRED_GAME_VERSION)
+end
+
+--- Function used to check if the modded exes are up to date.
+--- @return boolean
+function is_modded_exes_updated()
+    if not MODDED_EXES_VERSION then
+        return false
+    end
+    return MODDED_EXES_VERSION >= REQUIRED_MODDED_EXES_VERSION
+end
+
+--- Function used to check if DXML is installed.
+--- @return boolean
+function is_dxml_installed()
+    return dxml_core ~= nil
+end
+
+--- Function used to check if LUA Unlocalizer is installed.
+--- @return boolean
+function is_lua_unlocalizer_installed()
+    return western_goods_core.VERSION == VERSION
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks Registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_game_load", print_addon_version)
+    RegisterScriptCallback("on_game_load", check_prerequisites)
+    RegisterScriptCallback("on_game_load", check_missing_translations)
+    RegisterScriptCallback("on_option_change", check_addon_removal)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- ITEMS POOL
+-- ---------------------------------------------------------------------------------------------------------------------
+--
+-- Example :
+--
+-- ["<section>"] = {
+--     type = "<type>",
+--     trader_params = {
+--         ["<faction>"] = { qte=<quantity>, sl=<supply_level>, prob=<probability> },
+--         ["<faction>"] = { qte=<quantity>, sl=<supply_level>, prob=<probability> }
+--     },
+--     corpse_params = {
+--         ["<faction>"] = { qte=<quantity>, prob=<probability> },
+--         ["<faction>"] = { qte=<quantity>, prob=<probability> }
+--     },
+-- },
+--
+--
+-- Legend :
+--
+-- - <section> :      Name of the section to spawn in traders/corpses.
+--
+-- - <type> :         Type of the item. If you add a new one, don't forget to modify function spawn_western_goods_in_trader() to spawn the new type of item.
+--                    Range: "food", "drink", "magazine", "tech", "money".
+--
+-- - <faction> :      Faction allowed to spawn the item in trader/corpse.
+--                    Range: "stalker", "bandit", "csky", "dolg", "freedom", "killer", "army", "ecolog", "monolith", "renegade", "greh", "isg" or "trader".
+--
+-- - <quantity> :     Quantity of the item to spawn in traders.
+--                    Range: any positive integer value.
+--
+-- - <supply_level> : Required supply level to access the item in traders.
+--                    Range: an integer value between 1 and 5.
+--
+-- - <probability> :  Spawn rate in traders/corpses.
+--                    Range: a value from 0.0 to 1.0.
+--
+--
+-- Note :
+--
+-- If you want an item to spawn for a given faction trader, you must define all three values : qte, sl and prob.
+-- If one is missing, it most likely won't work or it'll crash to desktop.
+--
+-- You can make changes to this table from another script.
+-- This way, you can do "Western Goods rebalance" addons or something, without needing to redistribute this script.
+-- For this, create a script and inset something like this :
+--
+-- == my_western_goods_edit_<some_unique_name>.script ==================================================================
+-- function on_game_start()
+--    RegisterScriptCallback("on_game_load", function()
+--       western_goods_core.western_goods_items["wg_snickers"].trader_params["stalker"] = { qte=1, sl=1, prob=0.2 }
+--    end)
+-- end
+-- =====================================================================================================================
+--
+-- With this line, stalker barmen will now have a 20% chance of selling 1 Snickers at Supply Level 1.
+-- Note that callbacks are fired in a random order, so if multiple edits are made to the same object and the same
+-- property, it's unknown what the result will be.
+--
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_items = {}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- OTHER ITEMS
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_special_items = {
+    ["western_goods_helicopter"] = true,
+}
+
+western_goods_squads = {}
+
+western_goods_npcs = {}
+
+western_goods_task = {}
+
+western_goods_info = {}

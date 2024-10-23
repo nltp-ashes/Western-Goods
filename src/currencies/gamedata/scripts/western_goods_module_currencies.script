@@ -1,0 +1,260 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 24/08/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script containing necessary code for the currencies module.                                                   ---
+---                                                                                                                  ---
+---    It contains :                                                                                                 ---
+---    - Callbacks to add dialogs to NPCs;                                                                           ---
+---    - Code to spawn the money suitcase in corpses;                                                                ---
+---    - Monkey-patches;                                                                                             ---
+---    - Trader/corpse params for the items added by this module.                                                    ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                       = western_goods_utils.dbg_printf
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to determine if Williams Heades can show the EUR/USD trade dialog.
+--- @param actor game_object
+--- @param npc game_object
+--- @param flags table
+--- @return nil
+function can_show_eur_usd_trade(npc, flags)
+    if npc:section() == "stalker_western_goods_trader" then
+        flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over")
+    end
+end
+
+--- Function used to add dialogs to specific NPCs.
+--- @param character_id string
+--- @param dialog_list table
+--- @return nil
+function on_specific_character_dialog_list(char_id, dialog_list)
+    if char_id == "stalker_western_goods_trader" then
+        dialog_list:add("western_goods_trade_eur_usd")
+    end
+end
+
+--- Function used to add an extra lootable item, with a custom behavior.
+--- @param npc_rank string
+--- @param npc_comm string
+--- @param loot_to_spawn table
+--- @return table
+function money_suitcase_loot(npc_rank, npc_comm, loot_to_spawn)
+    -- Get general params
+    local max_items = western_goods_mcm.get_config("max_item_per_corpse") or 0
+
+    -- Special
+    if max_items > 1 and npc_comm == "killer" and npc_rank == "legend" then
+
+        local dice = math.random()
+        local luck = 0.001
+
+        if dice < luck then
+            dbg_printf("[WG] Core | NPC loot (special) diced 'wg_money_suitcase' [%s<%s]", dice, luck)
+            loot_to_spawn["wg_money_suitcase"] = 1
+        else
+            dbg_printf("[WG] Core | NPC loot (special) missed 'wg_money_suitcase' [%s>=%s]", dice, luck)
+        end
+    end
+
+    return loot_to_spawn
+end
+
+if western_goods_core.is_barter_ui_installed() then
+    function barter_ui_on_before_dialog(npc, flags)
+        if npc:section() == "stalker_western_goods_trader" then
+            flags.result = western_goods_utils.has_info("western_goods_trader_first_meet_over")
+        end
+    end
+
+    function barter_ui_on_barter_ask(npc, flags)
+        if npc:section() == "stalker_western_goods_trader" then
+            flags.result = "western_goods_trader_dialog_init"
+        end
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("western_goods_trade_eur_usd_on_dialog", can_show_eur_usd_trade)
+    RegisterScriptCallback("on_specific_character_dialog_list", on_specific_character_dialog_list)
+    if western_goods_core.is_barter_ui_installed() then
+        RegisterScriptCallback("barter_ui_on_before_dialog", barter_ui_on_before_dialog)
+        RegisterScriptCallback("barter_ui_on_barter_ask", barter_ui_on_barter_ask)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Monkey-patches
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_monkey_patches.monkey_patches["trade_manager_update"] = {
+    name = "trade_manager_update",
+    patches = {
+        { prio=1, script="trade_manager", func="update", cond = function() return true end }
+    }
+}
+western_goods_monkey_patches.monkey_patches["ui_inventory_update_character"] = {
+    name = "ui_inventory_update_character",
+    patches = {
+        { prio=1, script="ui_inventory", class="UIInventory", func="UpdateCharacter", cond = function() return true end }
+    }
+}
+western_goods_monkey_patches.monkey_patches["ui_inventory_t_mode_update_price"] = {
+    name = "ui_inventory_t_mode_update_price",
+    patches = {
+        { prio=1, script="ui_inventory", class="UIInventory", func="TMode_UpdatePrice", cond = function() return true end }
+    }
+}
+western_goods_monkey_patches.monkey_patches["ui_inventory_t_mode_sell"] = {
+    name = "ui_inventory_t_mode_sell",
+    patches = {
+        { prio=1, script="ui_inventory", class="UIInventory", func="TMode_Sell", cond = function() return true end }
+    }
+}
+western_goods_monkey_patches.monkey_patches["ui_inventory_t_mode_buy"] = {
+    name = "ui_inventory_t_mode_buy",
+    patches = {
+        { prio=1, script="ui_inventory", class="UIInventory", func="TMode_Buy", cond = function() return true end }
+    }
+}
+western_goods_monkey_patches.monkey_patches["utils_ui_get_item_trade_status_eur_usd"] = {
+    name = "utils_ui_get_item_trade_status_eur_usd",
+    patches = {
+        { prio=1, script="utils_ui", func="get_item_trade_status", cond = function() return true end }
+    }
+}
+western_goods_monkey_patches.monkey_patches["western_goods_loot_table_corpse_ready"] = {
+    name = "western_goods_loot_table_corpse_ready",
+    patches = {
+        { prio=1, script="western_goods_loot", func="table_corpse_ready", cond = function() return true end }
+    }
+}
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.trade_manager_update, function(npc, force_refresh)
+    western_goods_trade_eur_usd.trade_manager_update(npc, force_refresh)
+end)
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.ui_inventory_update_character, function(self)
+    western_goods_monkey_patches.ui_inventory_update_character(self)
+    western_goods_trade_eur_usd.ui_inventory_UIInventory_UpdateCharacter(self)
+end)
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.ui_inventory_t_mode_update_price, function(self, ele_txt, ele_btn, bag)
+    western_goods_monkey_patches.ui_inventory_t_mode_update_price(self, ele_txt, ele_btn, bag)
+    western_goods_trade_eur_usd.ui_inventory_UIInventory_TMode_UpdatePrice(self, ele_txt, ele_btn, bag)
+end)
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.ui_inventory_t_mode_sell, function(self)
+    western_goods_trade_eur_usd.ui_inventory_UIInventory_TMode_Sell(self)
+end)
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.ui_inventory_t_mode_buy, function(self)
+    western_goods_trade_eur_usd.ui_inventory_UIInventory_TMode_Buy(self)
+end)
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.utils_ui_get_item_trade_status_eur_usd, function(obj, profile)
+    return western_goods_trade_eur_usd.get_item_trade_status(obj, profile)
+end)
+
+western_goods_monkey_patches.make_monkey_patch(western_goods_monkey_patches.monkey_patches.western_goods_loot_table_corpse_ready, function(npc_rank, npc_comm)
+    local loot_to_spawn = western_goods_monkey_patches.western_goods_loot_table_corpse_ready(npc_rank, npc_comm)
+    return this.money_suitcase_loot(npc_rank, npc_comm, loot_to_spawn)
+end)
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trader and corpse params
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_core.western_goods_items["wg_dollars_10"] = {
+    type                 = "money",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.10 },
+        ["freedom"]      = { qte=1, prob=0.60 },
+        ["killer"]       = { qte=1, prob=0.80 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_dollars_50"] = {
+    type                 = "money",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.07 },
+        ["freedom"]      = { qte=1, prob=0.50 },
+        ["killer"]       = { qte=1, prob=0.70 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_dollars_100"] = {
+    type                 = "money",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.04 },
+        ["freedom"]      = { qte=1, prob=0.40 },
+        ["killer"]       = { qte=1, prob=0.60 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_euros_10"] = {
+    type                 = "money",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.10 },
+        ["freedom"]      = { qte=1, prob=0.60 },
+        ["killer"]       = { qte=1, prob=0.80 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_euros_50"] = {
+    type                 = "money",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.07 },
+        ["freedom"]      = { qte=1, prob=0.50 },
+        ["killer"]       = { qte=1, prob=0.70 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+western_goods_core.western_goods_items["wg_euros_100"] = {
+    type                 = "money",
+    trader_params = {
+    },
+    corpse_params = {
+        ["bandit"]       = { qte=1, prob=0.04 },
+        ["freedom"]      = { qte=1, prob=0.40 },
+        ["killer"]       = { qte=1, prob=0.60 },
+        ["monolith"]     = { qte=1, prob=0.01 },
+        ["renegade"]     = { qte=1, prob=0.01 }
+    },
+}
+
+western_goods_core.western_goods_special_items["wg_money_suitcase"] = true

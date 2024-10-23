@@ -107,10 +107,9 @@ Western Goods natively integrates with the following addons, but they **aren't r
 2. [Food, drug and drinks animations](https://www.moddb.com/mods/stalker-anomaly/addons/food-drug-and-drinks-animations-reuploaded) (enables use animations for some consumables);
 3. [Anomaly Barter UI Framework](https://github.com/ahuyn/anomaly-barter/releases/tag/latest) (allows you to make EUR/USD/RUB currency exchanges);
 4. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
-5. [Device Selector Key](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-required-device-selector-key) (makes it easier to switch between various devices);
-6. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
-7. [Interactive PDA](https://www.moddb.com/mods/stalker-anomaly/addons/interactive-pda-01) (adds more interactions with the world (and not only) via PDA);
-8. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) (adds more pages to magazines in the addon).
+5. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
+6. [Interactive PDA](https://www.moddb.com/mods/stalker-anomaly/addons/interactive-pda-01) (adds more interactions with the world (and not only) via PDA);
+7. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) (adds more pages to magazines in the addon).
 
 These patches should be used when native compatibility with other addons cannot be achieved :
 1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/patch-real-body-needs) (fixes food and drink statistics).
