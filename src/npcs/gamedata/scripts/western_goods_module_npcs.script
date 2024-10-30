@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 18/08/2024                                                                                             ---
+---    Date : 30/10/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).     ---
@@ -49,10 +49,66 @@ function spawn_squads()
     end
 end
 
+--- Function used to force some NPCs to be neutral to and with everyone.
+--- This function is fired by 'on_enemy_eval' callback.
+--- @param obj game_object
+--- @param enemy game_object
+--- @param flags table
+--- @return nil
+function eval_ignore_npcs(obj, enemy, flags)
+    -- Get squad relation (if any)
+    local relation_obj = this.get_object_relation(obj)
+    local relation_enemy = this.get_object_relation(enemy)
+
+    -- Skip unaffected squads
+    if (not relation_obj) and (not relation_enemy) then
+        return
+    end
+
+    -- Override eval
+    if relation_obj == "friend" or relation_enemy == "friend" then
+        flags.override = true
+        flags.result = false
+        return
+    elseif relation_obj == "neutral" or relation_enemy == "neutral" then
+        flags.override = true
+        flags.result = false
+        return
+    end
+end
+
 --- Function used to force some NPCs to have a specific relation with the player.
 --- @param obj game_object
 --- @return nil
 function set_relation(obj)
+    local relation = this.get_object_relation(obj)
+    if relation then
+        local squad = western_goods_utils.get_squad_of(obj)
+        western_goods_utils.set_squad_relation(squad, relation)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_enemy_eval", eval_ignore_npcs)
+    RegisterScriptCallback("game_object_on_net_spawn", set_relation)
+    RegisterScriptCallback("actor_on_first_update", spawn_squads)
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Utility functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the relation of a human object.
+--- @param obj game_object
+--- @return string|nil
+function get_object_relation(obj)
     -- Ignore if the object is not a stalker
     if not IsStalker(obj) then
         return
@@ -71,21 +127,7 @@ function set_relation(obj)
 
     -- Set the relation of the squad
     local relation_cond = ini_sys:r_string_to_condlist(squad:section_name(), "relationship")
-    local relation = relation_cond and xr_logic.pick_section_from_condlist(db.actor, squad, relation_cond)
-    if relation then
-        western_goods_utils.set_squad_relation(squad, relation)
-    end
-end
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Callbacks registration
--- ---------------------------------------------------------------------------------------------------------------------
-
---- Function used to register callbacks.
---- @return nil
-function on_game_start()
-    RegisterScriptCallback("game_object_on_net_spawn", set_relation)
-    RegisterScriptCallback("actor_on_first_update", spawn_squads)
+    return relation_cond and xr_logic.pick_section_from_condlist(db.actor, squad, relation_cond)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
