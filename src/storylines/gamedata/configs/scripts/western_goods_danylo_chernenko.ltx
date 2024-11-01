@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 30/07/2024                                                                                               ;;
+;;    Date : 01/11/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    NPC logic config file used for Danylo Chernenko.                                                                ;;
@@ -55,6 +55,10 @@ invulnerable                     = true
 relationship                     = neutral
 meet                             = meet@base
 before_hit                       = invulnerable
+
+help_wounded_enabled             = false
+corpse_detection_enabled         = false
+gather_items_enabled             = false
 
 enemy_ignore_cond                = {!fighting_dist_le(40)} true, false
 combat_ignore_cond               = {=check_enemy_name(actor)} true, false

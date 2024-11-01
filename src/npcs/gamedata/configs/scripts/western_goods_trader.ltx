@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 31/07/2024                                                                                               ;;
+;;    Date : 01/11/2024                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    NPC logic config file used for Williams Heades.                                                                 ;;
@@ -48,13 +48,14 @@ walk_anim                        = walk
 jog_anim                         = rush
 run_anim                         = rush
 
-gather_items_enabled             = false
-help_wounded_enabled             = false
-corpse_detection_enabled         = false
 invulnerable                     = true
 relationship                     = neutral
 meet                             = meet@base
 before_hit                       = invulnerable
+
+help_wounded_enabled             = false
+corpse_detection_enabled         = false
+gather_items_enabled             = false
 
 enemy_ignore_cond                = {!is_enemy_actor !fighting_dist_le(40)} true
 combat_ignore_cond               = {=is_warfare} false, {=actor_true_enemy =check_enemy_name(actor)} false, true
