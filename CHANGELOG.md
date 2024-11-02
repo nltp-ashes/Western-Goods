@@ -1,4 +1,4 @@
-## **v3.1.0 - 23/10/2024 - Minor Update**
+## **v3.1.0 - 02/11/2024 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.1.0/total?label=Downloads)]()
 
@@ -8,7 +8,7 @@
 > • Added options to increase lighter range and brightness in MCM (Thanks Rambito);
 > • Added translations to map spots placed by the addon;
 > • Added route from container warehouse in Jupiter to Bandit base in Dark Valley for 8k RUB (Thanks Rambito);
-> • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB;
+> • Added route from Bandit base in Dark Valley to Renegade base in Great Swamps for 3k RUB.
 
 **• Changes :**
 > • Updated the addon for S.T.A.L.K.E.R. Anomaly 1.5.3;
@@ -22,9 +22,10 @@
 > • Changed guide price from Yanov to Army Warehouses from 4k RUB to 6k RUB (Thanks Rambito);
 > • Changed guide price from Yanov to Yantar from 8k RUB to 12k RUB (Thanks Rambito);
 > • Changed guide price from Yantar to Yanov from 8k RUB to 12k RUB (Thanks Rambito);
-> • Stashes will now show a marker on the PDA when they contain a GPS Locator (Thanks lexus);
+> • Stashes will now show a marker on the PDA when they contain a GPS Locator (Thanks lexus).
 
 **• Bug fixes :**
+> • Fixed bad smart job setting allowing important characters to loot dead bodies (Thanks s4ndwh1ch);
 > • Fixed duplicate dialog for bartering (Thanks Rambito);
 > • Fixed magazines not having parts, preventing the player from disassembling them (Thanks Minolta50);
 > • Fixed some script functions not being defined in the correct module;
