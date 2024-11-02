@@ -1,0 +1,269 @@
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 07/08/2024                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used add new squads to the game.                                                                    ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+;;====================================================================================================================;;
+;;==================| Important Squads |==============================================================================;;
+;;====================================================================================================================;;
+
+[stalker_jupiter_informant_squad]:online_offline_group
+story_id                = stalker_jupiter_informant_squad
+npc                     = stalker_jupiter_informant
+target_smart            = jup_a6
+faction                 = stalker
+relationship            = neutral
+
+[stalker_crew_member_squad]:online_offline_group
+story_id                = stalker_crew_member_squad
+npc                     = stalker_crew_member
+target_smart            = lim_smart_terrain_6
+faction                 = killer
+relationship            = {+western_goods_crew_member_rescue_over} friend, neutral
+logic                   = scripts\western_goods_crew_member.ltx
+
+[stalker_dunn_lynn_squad]:online_offline_group
+story_id                = stalker_dunn_lynn_squad
+npc                     = stalker_dunn_lynn
+target_smart            = ds2_lager_st
+faction                 = isg
+relationship            = neutral
+logic                   = scripts\western_goods_dunn_lynn.ltx
+
+[stalker_danylo_chernenko_squad]:online_offline_group
+story_id                = stalker_danylo_chernenko_squad
+npc                     = stalker_danylo_chernenko
+target_smart            = gar_smart_terrain_6_3
+faction                 = killer
+relationship            = {+western_goods_act_3_finished} friend, neutral
+logic                   = scripts\western_goods_danylo_chernenko.ltx
+
+;;====================================================================================================================;;
+;;==================| Story Squads |==================================================================================;;
+;;====================================================================================================================;;
+
+;;==================| Act 1, Task 1 |=================================================================================;;
+
+[western_goods_act_1_task_1_heli_crew_squad]:online_offline_group
+story_id                = western_goods_act_1_task_1_heli_crew_squad
+npc                     = sim_default_killer_4, sim_default_killer_3, sim_default_killer_3
+target_smart            = zat_b104_zombied
+faction                 = killer
+logic                   = scripts\western_goods_a1_t1_s1_merc.ltx
+
+[western_goods_act_1_task_1_zombie_1_squad]:online_offline_group
+story_id                = western_goods_act_1_task_1_zombie_1_squad
+npc                     = sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
+target_smart            = zat_b104_zombied
+faction                 = zombied
+logic                   = scripts\western_goods_a1_t1_s1_zombie_1.ltx
+
+[western_goods_act_1_task_1_zombie_2_squad]:online_offline_group
+story_id                = western_goods_act_1_task_1_zombie_2_squad
+npc                     = sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
+target_smart            = zat_b104_zombied
+faction                 = zombied
+logic                   = scripts\western_goods_a1_t1_s1_zombie_2.ltx
+
+[western_goods_act_1_task_1_zombie_3_squad]:online_offline_group
+story_id                = western_goods_act_1_task_1_zombie_3_squad
+npc                     = sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
+target_smart            = zat_b104_zombied
+faction                 = zombied
+logic                   = scripts\western_goods_a1_t1_s1_zombie_3.ltx
+
+[western_goods_act_1_task_1_zombie_4_squad]:online_offline_group
+story_id                = western_goods_act_1_task_1_zombie_4_squad
+npc                     = sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
+target_smart            = zat_b104_zombied
+faction                 = zombied
+logic                   = scripts\western_goods_a1_t1_s1_zombie_4.ltx
+
+;;==================| Act 1, Task 2 |=================================================================================;;
+
+[western_goods_act_1_task_2_bandit_1_squad]:online_offline_group
+story_id                = western_goods_act_1_task_2_bandit_1_squad
+npc_random              = sim_default_bandit_0, sim_default_bandit_0, sim_default_bandit_0, sim_default_bandit_0, sim_default_bandit_1, sim_default_bandit_2
+npc_in_squad            = 1, 3
+target_smart            = jup_a12
+faction                 = bandit
+
+[western_goods_act_1_task_2_bandit_2_squad]:online_offline_group
+story_id                = western_goods_act_1_task_2_bandit_2_squad
+npc_random              = sim_default_bandit_1, sim_default_bandit_1, sim_default_bandit_2, sim_default_bandit_2, sim_default_bandit_2, sim_default_bandit_3
+npc_in_squad            = 1, 3
+target_smart            = jup_a12
+faction                 = bandit
+
+[western_goods_act_1_task_2_bandit_3_squad]:online_offline_group
+story_id                = western_goods_act_1_task_2_bandit_3_squad
+npc_random              = sim_default_bandit_2, sim_default_bandit_2, sim_default_bandit_3, sim_default_bandit_3, sim_default_bandit_3, sim_default_bandit_4
+npc_in_squad            = 1, 3
+target_smart            = jup_a12
+faction                 = bandit
+
+[western_goods_act_1_task_2_bandit_4_squad]:online_offline_group
+story_id                = western_goods_act_1_task_2_bandit_4_squad
+npc_random              = sim_default_bandit_0, sim_default_bandit_0, sim_default_bandit_0, sim_default_bandit_0, sim_default_bandit_1, sim_default_bandit_2
+npc_in_squad            = 1, 3
+target_smart            = jup_a12
+faction                 = bandit
+
+[western_goods_act_1_task_2_bandit_5_squad]:online_offline_group
+story_id                = western_goods_act_1_task_2_bandit_5_squad
+npc_random              = sim_default_bandit_1, sim_default_bandit_1, sim_default_bandit_2, sim_default_bandit_2, sim_default_bandit_2, sim_default_bandit_3
+npc_in_squad            = 1, 3
+target_smart            = jup_a12
+faction                 = bandit
+
+[western_goods_act_1_task_2_bandit_6_squad]:online_offline_group
+story_id                = western_goods_act_1_task_2_bandit_6_squad
+npc_random              = sim_default_bandit_2, sim_default_bandit_2, sim_default_bandit_3, sim_default_bandit_3, sim_default_bandit_3, sim_default_bandit_4
+npc_in_squad            = 1, 3
+target_smart            = jup_a12
+faction                 = bandit
+
+;;==================| Act 1, Task 3 |=================================================================================;;
+
+[western_goods_act_1_task_3_mono_guards_1_squad]:online_offline_group
+story_id                = western_goods_act_1_task_3_mono_guards_1_squad
+npc_random              = sim_default_monolith_3, sim_default_monolith_4
+npc_in_squad            = 3, 4
+target_smart            = lim_smart_terrain_6
+faction                 = monolith
+
+[western_goods_act_1_task_3_mono_guards_2_squad]:online_offline_group
+story_id                = western_goods_act_1_task_3_mono_guards_2_squad
+npc_random              = sim_default_monolith_3, sim_default_monolith_4
+npc_in_squad            = 3, 4
+target_smart            = lim_smart_terrain_6
+faction                 = monolith
+
+[western_goods_act_1_task_3_mono_bridge_1_squad]:online_offline_group
+story_id                = western_goods_act_1_task_3_mono_bridge_1_squad
+npc_random              = sim_default_monolith_2, sim_default_monolith_2, sim_default_monolith_3
+npc_in_squad            = 2, 4
+target_smart            = red_smart_terrain_bridge
+faction                 = monolith
+
+[western_goods_act_1_task_3_mono_bridge_2_squad]:online_offline_group
+story_id                = western_goods_act_1_task_3_mono_bridge_2_squad
+npc_random              = sim_default_monolith_2, sim_default_monolith_2, sim_default_monolith_3
+npc_in_squad            = 2, 4
+target_smart            = red_smart_terrain_bridge
+faction                 = monolith
+
+[western_goods_act_1_task_3_mono_bridge_3_squad]:online_offline_group
+story_id                = western_goods_act_1_task_3_mono_bridge_3_squad
+npc_random              = sim_default_monolith_2, sim_default_monolith_2, sim_default_monolith_3
+npc_in_squad            = 2, 4
+target_smart            = red_smart_terrain_bridge
+faction                 = monolith
+
+;;==================| Act 2, Task 2 |=================================================================================;;
+
+[western_goods_act_2_task_2_zombie_1_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_zombie_1_squad
+npc                     = sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
+target_smart            = pri_sim_3
+faction                 = zombied
+logic                   = scripts\western_goods_a2_t2_s0_zombie.ltx
+
+[western_goods_act_2_task_2_zombie_2_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_zombie_2_squad
+npc                     = sim_default_zombied_1, sim_default_zombied_1, sim_default_zombied_2, sim_default_zombied_2, sim_default_zombied_3, sim_default_zombied_4
+target_smart            = pri_sim_3
+faction                 = zombied
+logic                   = scripts\western_goods_a2_t2_s2_zombie.ltx
+
+[western_goods_act_2_task_2_army_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_army_squad
+npc                     = sim_default_military_3, sim_default_military_3, sim_default_military_3, sim_default_military_4
+target_smart            = pri_sim_3
+faction                 = army
+logic                   = scripts\western_goods_a2_t2_s2_army.ltx
+
+[western_goods_act_2_task_2_mono_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_army_squad
+npc                     = sim_default_monolith_3, sim_default_monolith_4, sim_default_monolith_3, sim_default_monolith_4, sim_default_monolith_3, sim_default_monolith_4, sim_default_monolith_3, sim_default_monolith_4
+target_smart            = pri_sim_3
+faction                 = monolith
+logic                   = scripts\western_goods_a2_t2_s2_mono.ltx
+
+[western_goods_act_2_task_2_snork_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_snork_squad
+npc                     = snork_weak, snork_strong, snork_strong, snork_strong
+target_smart            = pri_b301
+faction                 = monster
+logic                   = scripts\western_goods_a2_t2_s3_snork.ltx
+
+[western_goods_act_2_task_2_bandit_1_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_bandit_1_squad
+npc                     = sim_default_bandit_0, sim_default_bandit_1, sim_default_bandit_1
+target_smart            = pri_b301
+faction                 = bandit
+relationship            = enemy
+logic                   = scripts\western_goods_a2_t2_s4_bandit.ltx
+
+[western_goods_act_2_task_2_ecolog_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_ecolog_squad
+npc                     = stalker_ecolog_convoy_yellow, stalker_ecolog_convoy_orange, sim_default_ecolog_2, sim_default_ecolog_2, sim_default_ecolog_2, sim_default_ecolog_2
+target_smart            = pri_a28_school
+faction                 = ecolog
+relationship            = {=actor_true_community(ecolog)} neutral, enemy
+logic                   = scripts\western_goods_a2_t2_s6_ecolog.ltx
+
+[western_goods_act_2_task_2_bandit_2_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_bandit_2_squad
+npc                     = sim_default_bandit_0, sim_default_bandit_1, sim_default_bandit_1
+target_smart            = pri_a28_school
+faction                 = bandit
+relationship            = enemy
+logic                   = scripts\western_goods_a2_t2_s7_bandit.ltx
+
+[western_goods_act_2_task_2_controller_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_controller_squad
+npc                     = m_controller_normal
+target_smart            = pri_b303
+faction                 = monster
+
+[western_goods_act_2_task_2_lynn_guards_squad]:online_offline_group
+story_id                = western_goods_act_2_task_2_lynn_guards_squad
+npc                     = sim_default_isg_2, sim_default_isg_2, sim_default_isg_2
+target_smart            = ds2_lager_st
+faction                 = isg
+relationship            = neutral
+logic                   = scripts\western_goods_a2_t2_s13_isg.ltx
+
+;;==================| Act 3, Task 2 |=================================================================================;;
+
+[western_goods_ssu_prisoner_squad]:online_offline_group
+story_id                = western_goods_ssu_prisoner_squad
+npc                     = stalker_ssu_prisoner
+target_smart            = jup_a6
+faction                 = army_npc
+relationship            = enemy
+logic                   = scripts\western_goods_a3_t1_s0_ssu_prisoner.ltx
+
+[western_goods_ssu_bounty_squad]:online_offline_group
+story_id                = western_goods_ssu_bounty_squad
+npc_random              = sim_default_anpc_1, sim_default_anpc_2
+npc_in_squad            = 3, 4
+target_smart            = zat_b14_smart_terrain
+faction                 = army_npc
+relationship            = enemy
+
+;;==================| Act 3, Task 3 |=================================================================================;;
+
+[western_goods_ssu_supervisor_squad]:online_offline_group
+story_id                = western_goods_ssu_supervisor_squad
+npc                     = stalker_ssu_supervisor
+target_smart            = mar_smart_terrain_10_5
+faction                 = army_npc
+relationship            = enemy

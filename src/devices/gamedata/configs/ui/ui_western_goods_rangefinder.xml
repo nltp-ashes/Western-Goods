@@ -1,0 +1,28 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    UI Template for the Rangefinder of Western Goods.                                                            -->
+<!--                                                                                                                 -->
+<!--    Note : Since this UI is displayed in the game world, and not on a 2D display, coordinates aren't in pixels.  -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<w>
+    <rangefinder>
+        <!-- Reticule -->
+        <reticule    x="-0.0050"    y="-0.0003"    width="0.0100"    height="0.0035"    stretch="1" />
+
+        <!-- Line Of Sight (LOS) -->
+        <los1        x="-0.0031"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1" />
+        <los2        x="-0.0024"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1" />
+        <los3        x="-0.0017"    y="0.0007"     width="0.0007"    height="0.0021"    stretch="1" />
+
+        <!-- Horizontal Compensation Distance (HCD) -->
+        <hcd1        x="0.0010"     y="0.0007"     width="0.0007"    height="0.0021"    stretch="1" />
+        <hcd2        x="0.0017"     y="0.0007"     width="0.0007"    height="0.0021"    stretch="1" />
+        <hcd3        x="0.0024"     y="0.0007"     width="0.0007"    height="0.0021"    stretch="1" />
+    </rangefinder>
+</w>

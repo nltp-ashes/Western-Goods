@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
+<!--================================================================================================================ -->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : VodoXleb (Translation)                                                                              -->
+<!--    Date : 23/10/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' tab in the Mod Configuration Menu.                                       -->
+<!--                                                                                                                 -->
+<!--================================================================================================================ -->
+<string_table>
+
+    <!--=============================================================================================================-->
+    <!--    MAIN STRINGS                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <!-- Page Title -->
+    <string id="ui_mcm_western_goods_title">
+        <text>Western Goods</text>
+    </string>
+
+    <!-- Menu Title -->
+    <string id="ui_mcm_menu_western_goods">
+        <text>Western Goods</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    GENERAL SETTINGS                                                                                         -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_general_settings_title">
+        <text>ОБЩИЕ НАСТРОЙКИ</text>
+    </string>
+
+    <!-- Guided Tasks -->
+    <string id="ui_mcm_western_goods_guided_tasks">
+        <text>Метки заданий</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_guided_tasks_desc">
+        <text>Часть заданий специально не имеют метки, для поощрения исследования и мышления. Вы можете изменить это в любое время, чтобы метки заданий отображались на КПК.</text>
+    </string>
+
+    <!-- Magazines Psy-Regen -->
+    <string id="ui_mcm_western_goods_magazine_psi_regen">
+        <text>Восстановление пси-здоровья при чтении журналов</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_magazine_psi_regen_desc">
+        <text>Определяет фактор восстановления пси-здоровья при чтении журнала.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    DEVICES SETTINGS                                                                                         -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_devices_settings_title">
+        <text>НАСТРОЙКИ УСТРОЙСТВ</text>
+    </string>
+
+    <!-- GPS Locator - Guided Surges -->
+    <string id="ui_mcm_western_goods_guided_surge">
+        <text>GPS-локатор - Метка укрытия от выброса/пси-шторма</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_guided_surge_desc">
+        <text>Если включено, когда выброс/пси-шторм происходит, вы получить задание в КПК, и задание будет показывать на ближайшее укрытие от выброса. Если выключено, у вас всё равно будет задание, но ближайшее укрытие не будет отображаться. GPS Локатор можно использовать для поиска ближайшего укрытия.</text>
+    </string>
+
+    <!-- Compass - North lock -->
+    <string id="ui_mcm_western_goods_compass_north_lock">
+        <text>Компас - Северный шлюз</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_compass_north_lock_desc">
+        <text>Если эта опция включена, на фоне компаса всегда будет север вверху, а курсор будет указывать в направлении, в котором смотрит игрок. Если отключено, курсор всегда будет направлен вверх, а фон будет вращаться в направлении взгляда игрока.</text>
+    </string>
+
+    <!-- Lighters - Brightness -->
+    <string id="ui_mcm_western_goods_light_brightness_factor">
+        <text>Зажигалки - Яркость</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_brightness_factor_desc">
+        <text>Управляет яркостью света, излучаемого осветителями аддона. Эта настройка является фактором, то есть если вы установите ее на 2.0, осветители будут в два раза ярче обычного. Требуется перезагрузка сохранения.</text>
+    </string>
+
+    <!-- Lighters - Range -->
+    <string id="ui_mcm_western_goods_light_range_factor">
+        <text>Зажигалки - Ассортимент</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_light_range_factor_desc">
+        <text>Управляет дальностью света, излучаемого осветителями аддона. Эта настройка является фактором, то есть если вы установите ее на 2.0, осветители будут иметь в два раза большую дальность, чем обычно. Требуется перезагрузка сохранения.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    KEY-BINDINGS                                                                                             -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_keybindings_title">
+        <text>НАСТРОЙКИ ПРИВЯЗКИ КЛАВИШ</text>
+    </string>
+
+    <!-- Helicopter Attack Order -->
+    <string id="ui_mcm_western_goods_heli_attack">
+        <text>Приказ вертолёту атаковать</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_heli_attack_desc">
+        <text>Клавиша для приказа атаковать вертолёту. Наведите прицел на противника, затем нажмите клавишу.</text>
+    </string>
+
+    <!-- Rangefinder Night Vision -->
+    <string id="ui_mcm_western_goods_rangefinder_nv">
+        <text>Переключить цвет сетки дальномера</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_rangefinder_nv_desc">
+        <text>Привязка клавиш используется для переключения цвета (красный/зеленый) прицельной сетки дальномера Sig Sauer KILO5K.</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    LOOT SETTINGS                                                                                            -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_loot_settings_title">
+        <text>НАСТРОЙКИ ЛУТА</text>
+    </string>
+
+    <!-- Trader Loot Chance -->
+    <string id="ui_mcm_western_goods_trader_loot_factor">
+        <text>Шанс продажи у торговцев</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_trader_loot_factor_desc">
+        <text>Определяет шанс появления вещей в ассортименте торговцев. Влияет только на шанс появления, не на количество.</text>
+    </string>
+
+    <!-- Corpse Loot Chance -->
+    <string id="ui_mcm_western_goods_corpse_loot_factor">
+        <text>Шанс дропа с трупов</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_corpse_loot_factor_desc">
+        <text>Определяет шанс появления вещей в инвентарях трупов. Влияет только на шанс появления, не на количество.</text>
+    </string>
+
+    <!-- Items Per Corpse -->
+    <string id="ui_mcm_western_goods_max_item_per_corpse">
+        <text>Максимальное количество вещей в трупах</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_max_item_per_corpse_desc">
+        <text>Определяет максимальное количество вещей в трупах. Игра выберет данное количество вещей для спавна, затем проверит шансы их спавна. То есть, игра заспавнит от 0 до X вещей в трупах (где X - макс кол-во вещей)</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--    COMPATIBILITY SETTINGS                                                                                   -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_compatibility_title">
+        <text>НАСТРОЙКИ СОВМЕСТИМОСТИ</text>
+    </string>
+
+    <!--=============================================================================================================-->
+    <!--     TECHNICAL SETTINGS                                                                                      -->
+    <!--=============================================================================================================-->
+
+    <!-- Section Title -->
+    <string id="ui_mcm_western_goods_technical_settings_title">
+        <text>ТЕХНИЧЕСКИЕ НАСТРОЙКИ</text>
+    </string>
+
+    <!-- Debug mode -->
+    <string id="ui_mcm_western_goods_debug_mode">
+        <text>Дебаг режим</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_debug_mode_desc">
+        <text>Заставляет аддон писать в консоль/лог. Используется для обнаружения и исправления ошибок.</text>
+    </string>
+
+    <!-- Addon removal -->
+    <string id="ui_mcm_western_goods_addon_removal">
+        <text>Удаление аддона</text>
+    </string>
+
+    <string id="ui_mcm_western_goods_addon_removal_desc">
+        <text>Разрешает безопасное удаление аддона. Включите эту функцию, затем сохранить игру. После этого можете удалять модификацию и играть дальше без Western Goods.</text>
+    </string>
+
+</string_table>

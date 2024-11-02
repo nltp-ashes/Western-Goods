@@ -1,0 +1,16 @@
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 28/07/2024                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Texture descriptions for unique NPCs icons, added by Western Goods.                                          -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<w>
+    <!-- Western Goods images for NPC icons -->
+    <file name="ui\misc\ui_western_goods_npc_unique_task.dds">
+        <texture id="ui_npc_small_danylo_chernenko"       x="330"    y="0"    width="165"    height="108" />
+    </file>
+</w>

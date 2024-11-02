@@ -1,0 +1,141 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 30/10/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).     ---
+---                                                                                                                  ---
+---    To add a new NPC to the system, add a new line in the squads_to_spawn table, as follows :                     ---
+---                                                                                                                  ---
+---    ["<squad_section>"] = { sid="<story_id>", smart="<spawn_smart_name>" },                                       ---
+---                                                                                                                  ---
+---    Where :                                                                                                       ---
+---     - <squad_section> : section of the squad that needs to be spawned in;                                        ---
+---     - <story_id> : story id of the squad that needs to be spawned in;                                            ---
+---     - <spawn_smart_name> : name of the smart where the squad should be spawned at;                               ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                = western_goods_utils.dbg_printf
+
+-- Constants
+local squads_to_spawn = {
+    ["stalker_western_goods_trader_squad"] = { sid="stalker_western_goods_trader_squad", smart="pri_a18_smart_terrain" },
+    ["stalker_oleksandr_chernenko_squad"] = { sid="stalker_oleksandr_chernenko_squad", smart="gar_smart_terrain_6_3" },
+}
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to spawn the permanent NPCs on the map.
+--- @return nil
+function spawn_squads()
+    for section,data in pairs(squads_to_spawn) do
+        local squad_se = western_goods_utils.server_object_by_sid(data.sid)
+        if not squad_se then
+            squad_se = western_goods_utils.spawn_story_squad(section, nil, SIMBOARD.smarts_by_names[data.smart])
+            dbg_printf("[WG] Permanent NPCs | Created %s(%s) at %s", section, squad_se.id, data.smart)
+        else
+            dbg_printf("[WG] Permanent NPCs | Squad %s(%s) already exists", squad_se:section_name(), squad_se.id)
+        end
+    end
+end
+
+--- Function used to force some NPCs to be neutral to and with everyone.
+--- This function is fired by 'on_enemy_eval' callback.
+--- @param obj game_object
+--- @param enemy game_object
+--- @param flags table
+--- @return nil
+function eval_ignore_npcs(obj, enemy, flags)
+    -- Get squad relation (if any)
+    local relation_obj = this.get_object_relation(obj)
+    local relation_enemy = this.get_object_relation(enemy)
+
+    -- Skip unaffected squads
+    if (not relation_obj) and (not relation_enemy) then
+        return
+    end
+
+    -- Override eval
+    if relation_obj == "friend" or relation_enemy == "friend" then
+        flags.override = true
+        flags.result = false
+        return
+    elseif relation_obj == "neutral" or relation_enemy == "neutral" then
+        flags.override = true
+        flags.result = false
+        return
+    end
+end
+
+--- Function used to force some NPCs to have a specific relation with the player.
+--- @param obj game_object
+--- @return nil
+function set_relation(obj)
+    local relation = this.get_object_relation(obj)
+    if relation then
+        local squad = western_goods_utils.get_squad_of(obj)
+        western_goods_utils.set_squad_relation(squad, relation)
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_enemy_eval", eval_ignore_npcs)
+    RegisterScriptCallback("game_object_on_net_spawn", set_relation)
+    RegisterScriptCallback("actor_on_first_update", spawn_squads)
+end
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Utility functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the relation of a human object.
+--- @param obj game_object
+--- @return string|nil
+function get_object_relation(obj)
+    -- Ignore if the object is not a stalker
+    if not IsStalker(obj) then
+        return
+    end
+
+    -- Get the object squad if any (nil if actor or not in a squad)
+    local squad = western_goods_utils.get_squad_of(obj)
+    if not squad then
+        return
+    end
+
+    -- Ignore squads that are not from the addon
+    if not western_goods_core.western_goods_squads[squad:section_name()] then
+        return
+    end
+
+    -- Set the relation of the squad
+    local relation_cond = ini_sys:r_string_to_condlist(squad:section_name(), "relationship")
+    return relation_cond and xr_logic.pick_section_from_condlist(db.actor, squad, relation_cond)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Trader and corpse params
+-- ---------------------------------------------------------------------------------------------------------------------
+
+western_goods_core.western_goods_squads["stalker_oleksandr_chernenko_squad"] = true
+western_goods_core.western_goods_squads["stalker_western_goods_trader_squad"] = true
+
+western_goods_core.western_goods_npcs["stalker_oleksandr_chernenko"] = true
+western_goods_core.western_goods_npcs["stalker_western_goods_trader"] = true

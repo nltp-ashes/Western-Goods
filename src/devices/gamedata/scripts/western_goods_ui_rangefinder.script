@@ -1,0 +1,219 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 28/07/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    Script used to handle the UI for the Rangefinder.                                                             ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+-- Imported functions
+local dbg_printf                = western_goods_utils.dbg_printf
+
+-- Singleton
+GUI                             = nil -- instance, don't touch
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General Functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to get the UI singleton for the UIRangefinder class.
+--- @return UIRangefinder
+function get_ui()
+    if (not GUI) then
+        GUI = UIRangefinder()
+    end
+
+    return GUI
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- UI Class
+-- ---------------------------------------------------------------------------------------------------------------------
+
+class "UIRangefinder" (CUIScriptWnd)
+
+function UIRangefinder:__init() super()
+    dbg_printf("[WG] UI Rangefinder | Constructing GUI...")
+
+    self:Show(true)
+    self:Enable(true)
+
+    -- Build UI
+    self.m_xml = CScriptXmlInit()
+    self.m_xml:ParseFile("ui_western_goods_rangefinder.xml")
+    self.m_xml:InitWindow("rangefinder", 0, self)
+
+    self.m_los1 = self.m_xml:InitStatic("rangefinder:los1", self)
+    self.m_los2 = self.m_xml:InitStatic("rangefinder:los2", self)
+    self.m_los3 = self.m_xml:InitStatic("rangefinder:los3", self)
+
+    self.m_hcd1 = self.m_xml:InitStatic("rangefinder:hcd1", self)
+    self.m_hcd2 = self.m_xml:InitStatic("rangefinder:hcd2", self)
+    self.m_hcd3 = self.m_xml:InitStatic("rangefinder:hcd3", self)
+
+    self.m_reticule = self.m_xml:InitStatic("rangefinder:reticule", self)
+
+    -- Sound effects
+    self.m_sfx_btn = sound_object([[western_goods_tech\rangefinder_btn]])
+
+    -- Build variables
+    self.m_hud_fov = nil
+    self.m_update_timer = 0
+    self.m_update_freq = 222
+    self.m_night_vision = false
+    self.m_digit_texture_prefix = "rf_num_"
+    self.m_valid_sections = { "wg_rangefinder" }
+
+    -- Callbacks
+    -- TODO : Investigate if these callbacks can cause memory leaks
+    RegisterScriptCallback("actor_on_weapon_zoom_in", self)
+    RegisterScriptCallback("actor_on_weapon_zoom_out", self)
+end
+
+function UIRangefinder:__finalize()
+    GUI = nil
+end
+
+function UIRangefinder:Update()
+
+    CUIScriptWnd.Update(self)
+
+    local tg = time_global()
+    if (tg < self.m_update_timer) then
+        return
+    else
+        self.m_update_timer = tg + self.m_update_freq
+    end
+
+    -- Line Of Sight Distance
+    local los1, los2, los3 = self:GetLOSTextures()
+
+    -- Horizontal Compensation Distance Distance
+    local hcd1, hcd2, hcd3 = self:GetHCDTextures()
+
+    -- Reticule
+    local ret = "rf_reticule"
+
+    -- Night Vision
+    local nv = self:GetNightVisionSuffix()
+
+    self.m_los1:InitTextureEx(los1..nv, [[hud\p3d]])
+    self.m_los2:InitTextureEx(los2..nv, [[hud\p3d]])
+    self.m_los3:InitTextureEx(los3..nv, [[hud\p3d]])
+
+    self.m_hcd1:InitTextureEx(hcd1..nv, [[hud\p3d]])
+    self.m_hcd2:InitTextureEx(hcd2..nv, [[hud\p3d]])
+    self.m_hcd3:InitTextureEx(hcd3..nv, [[hud\p3d]])
+
+    self.m_reticule:InitTextureEx(ret..nv, [[hud\p3d]])
+end
+
+function UIRangefinder:GetNightVisionSuffix()
+    return self.m_night_vision and "_g" or "_r"
+end
+
+function UIRangefinder:GetLOSTextures()
+    local los = math.floor(level.get_target_dist())
+
+    -- Get LOS number as a 3 char string (5 -> "005")
+    local s_los = western_goods_utils.as_string(los, 3)
+
+    -- Max range at 999m
+    if los > 999 then
+        return "rf_dash", "rf_dash", "rf_dash"
+    end
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_los)
+end
+
+function UIRangefinder:GetHCDTextures()
+    local los_pos = vector():mad(device().cam_pos, device().cam_dir, level.get_target_dist())
+    local hcd_pos = vector():set(los_pos.x, db.actor:position().y , los_pos.z)
+    local hcd = math.floor(western_goods_utils.get_distance(device().cam_pos, hcd_pos))
+
+    -- Get HCD number as a 3 char string (5 -> "005")
+    local s_hcd = western_goods_utils.as_string(hcd, 3)
+
+    -- Max range at 999m
+    if hcd > 999 then
+        return "rf_dash", "rf_dash", "rf_dash"
+    end
+
+    return western_goods_utils.get_digits_as_textures(self.m_digit_texture_prefix, s_hcd)
+end
+
+function UIRangefinder:actor_on_update()
+    local obj = db.actor:active_item()
+    if not obj then
+        return
+    end
+
+    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then
+        return
+    end
+
+    local cobj = obj:cast_Weapon()
+    if not cobj then
+        return
+    end
+
+    local zoom_factor = ini_sys:r_float_ex(obj:section(), "scope_zoom_factor", 0)
+    if cobj:IsZoomed() then
+        cobj:SetZoomFactor(zoom_factor)
+    end
+end
+
+function UIRangefinder:actor_on_weapon_zoom_in(obj)
+    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then
+        return
+    end
+
+    local old_hud_fov = ui_options.get("video/basic/hud_fov")
+    local new_hud_fov = ini_sys:r_float_ex(obj:section(), "scope_hud_fov")
+
+    exec_console_cmd("hud_fov ".. new_hud_fov)
+    self.m_hud_fov = old_hud_fov
+
+    RegisterScriptCallback("on_key_press", self)
+    RegisterScriptCallback("actor_on_update", self)
+
+    dbg_printf("[WG] UI Rangefinder | Changed 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
+end
+
+function UIRangefinder:actor_on_weapon_zoom_out(obj)
+    if not western_goods_utils.table_contains(self.m_valid_sections, obj:section()) then
+        return
+    end
+
+    local old_hud_fov = ui_options.get("video/basic/hud_fov")
+    local new_hud_fov = self.m_hud_fov
+
+    exec_console_cmd("hud_fov " .. new_hud_fov)
+    self.m_hud_fov = nil
+
+    UnregisterScriptCallback("on_key_press", self)
+    UnregisterScriptCallback("actor_on_update", self)
+
+    dbg_printf("[WG] UI Rangefinder | Restored 'hud_fov' from '%s' to '%s'", old_hud_fov, new_hud_fov)
+end
+
+function UIRangefinder:on_key_press(dik)
+    if dik ~= western_goods_mcm.get_config("rangefinder_nv") then
+        return
+    end
+
+    local active_item = db.actor:active_item()
+    if not active_item or not western_goods_utils.table_contains(self.m_valid_sections, active_item:section()) then
+        return
+    end
+
+    self.m_night_vision = not self.m_night_vision
+    self.m_sfx_btn:play(db.actor, 0, sound_object.s2d)
+end
