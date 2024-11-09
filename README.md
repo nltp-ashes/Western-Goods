@@ -99,8 +99,8 @@ Western Goods is fully modular, meaning you can pick and choose what you want fr
 ### REQUIREMENTS
 
 These addons are **absolutely required** in order for Western Goods to work :
-1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152);
-2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes).
+1. [S.T.A.L.K.E.R. Anomaly 1.5.3](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153);
+2. [DLTX and DXML](https://github.com/themrdemonized/xray-monolith).
 
 Western Goods natively integrates with the following addons, but they **aren't required** :
 1. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
