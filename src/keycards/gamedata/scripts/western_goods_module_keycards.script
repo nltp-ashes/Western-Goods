@@ -1,0 +1,146 @@
+---==================================================================================================================---
+---                                                                                                                  ---
+---    Original Author(s) : NLTP_ASHES                                                                               ---
+---    Edited : N/A                                                                                                  ---
+---    Date : 18/08/2024                                                                                             ---
+---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
+---                                                                                                                  ---
+---    This script is responsible for all the scripted needs of the keycards module.                                 ---
+---                                                                                                                  ---
+---    western_goods_module_keycards.spawn_door("door_metal_145_230_01")                                             ---
+---    western_goods_module_keycards.spawn_door("door_old_wood_120x240_01")                                          ---
+---    western_goods_module_keycards.spawn_door("door_metal_150x240_01")                                             ---
+---                                                                                                                  ---
+---==================================================================================================================---
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Constants, global variables and imported functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+spawned_door_id = nil
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function spawn_door(section)
+    local gvid = db.actor:game_vertex_id()
+    local pos = vector():set(db.actor:position())
+    pos:add(device().cam_dir:mul(level.get_target_dist()))
+    pos = vector():set(pos.x, db.actor:position().y + 0.01, pos.z)
+    local lvid = level.vertex_id(pos)
+
+    local se_obj = alife_create(section, pos, lvid, gvid)
+    spawned_door_id = se_obj.id
+end
+
+function move_door_up()
+    printf("Attempting to move door up")
+    local se_obj = alife_object(spawned_door_id)
+    local pos = vector():set(se_obj.position.x, se_obj.position.y + 0.01, se_obj.position.z)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
+    printf("Moved door up")
+end
+
+function move_door_down()
+    printf("Attempting to move door down")
+    local se_obj = alife_object(spawned_door_id)
+    local pos = vector():set(se_obj.position.x, se_obj.position.y - 0.01, se_obj.position.z)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
+    printf("Moved door down")
+end
+
+function move_door_forward()
+    printf("Attempting to move door forward")
+    local se_obj = alife_object(spawned_door_id)
+    local pos = vector():set(se_obj.position.x, se_obj.position.y, se_obj.position.z + 0.01)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
+    printf("Moved door forward")
+end
+
+function move_door_backward()
+    printf("Attempting to move door backward")
+    local se_obj = alife_object(spawned_door_id)
+    local pos = vector():set(se_obj.position.x, se_obj.position.y, se_obj.position.z - 0.01)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
+    printf("Moved door backward")
+end
+
+function move_door_left()
+    printf("Attempting to move door left")
+    local se_obj = alife_object(spawned_door_id)
+    local pos = vector():set(se_obj.position.x - 0.01, se_obj.position.y, se_obj.position.z)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
+    printf("Moved door left")
+end
+
+function move_door_right()
+    printf("Attempting to move door right")
+    local se_obj = alife_object(spawned_door_id)
+    local pos = vector():set(se_obj.position.x + 0.01, se_obj.position.y, se_obj.position.z)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
+    printf("Moved door right")
+end
+
+function rotate_door_clockwise()
+    printf("Attempting to rotate door clockwise")
+    local se_obj = alife_object(spawned_door_id)
+    se_obj.angle = vector():set(se_obj.angle.x, se_obj.angle.y + 0.0873, se_obj.angle.z)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, se_obj.position)
+    printf("Rotated door clockwise")
+end
+
+function rotate_door_counterclockwise()
+    printf("Attempting to rotate door counterclockwise")
+    local se_obj = alife_object(spawned_door_id)
+    se_obj.angle = vector():set(se_obj.angle.x, se_obj.angle.y - 0.0873, se_obj.angle.z)
+    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, se_obj.position)
+    printf("Rotated door counterclockwise")
+end
+
+function dump_door_info()
+    local se_obj = alife_object(spawned_door_id)
+    printf("Door : %s", se_obj:section_name())
+    printf("Door position: x:%s y:%s z:%s", se_obj.position.x, se_obj.position.y, se_obj.position.z)
+    printf("Door game vertex ID: %s", se_obj.m_game_vertex_id)
+    printf("Door level vertex ID: %s", se_obj.m_level_vertex_id)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- General functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function on_key_press(dik)
+    if not spawned_door_id then
+        return
+    end
+    if dik == DIK_keys.DIK_PRIOR then
+        move_door_up()
+    elseif dik == DIK_keys.DIK_NEXT then
+        move_door_down()
+    elseif dik == DIK_keys.DIK_UP then
+        move_door_forward()
+    elseif dik == DIK_keys.DIK_DOWN then
+        move_door_backward()
+    elseif dik == DIK_keys.DIK_LEFT then
+        move_door_left()
+    elseif dik == DIK_keys.DIK_RIGHT then
+        move_door_right()
+    elseif dik == DIK_keys.DIK_ADD then
+        rotate_door_clockwise()
+    elseif dik == DIK_keys.DIK_SUBTRACT then
+        rotate_door_counterclockwise()
+    elseif dik == DIK_keys.DIK_I then
+        dump_door_info()
+    end
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Callbacks registration
+-- ---------------------------------------------------------------------------------------------------------------------
+
+--- Function used to register callbacks.
+--- @return nil
+function on_game_start()
+    RegisterScriptCallback("on_key_press", on_key_press)
+end
