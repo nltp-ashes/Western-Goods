@@ -11,6 +11,7 @@
 ---    western_goods_module_keycards.spawn_door("door_old_wood_120x240_01")                                          ---
 ---    western_goods_module_keycards.spawn_door("door_metal_150x240_01")                                             ---
 ---    western_goods_module_keycards.spawn_door("door_metal_155x235_01")                                             ---
+---    western_goods_module_keycards.spawn_door("door_wood_130x245_01")                                              ---
 ---                                                                                                                  ---
 ---==================================================================================================================---
 
