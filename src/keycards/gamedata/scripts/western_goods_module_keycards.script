@@ -19,122 +19,30 @@
 -- Constants, global variables and imported functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-spawned_door_id = nil
+-- Imported functions
+local dbg_printf             = western_goods_utils.dbg_printf
+
+-- Constants
+local ini_doors              = ini_file([[plugins\western_goods\keycards\doors.ltx]])
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-function spawn_door(section)
-    local gvid = db.actor:game_vertex_id()
-    local pos = vector():set(db.actor:position())
-    pos:add(device().cam_dir:mul(level.get_target_dist()))
-    pos = vector():set(pos.x, db.actor:position().y + 0.01, pos.z)
-    local lvid = level.vertex_id(pos)
-
-    local se_obj = alife_create(section, pos, lvid, gvid)
-    spawned_door_id = se_obj.id
-end
-
-function move_door_up()
-    printf("Attempting to move door up")
-    local se_obj = alife_object(spawned_door_id)
-    local pos = vector():set(se_obj.position.x, se_obj.position.y + 0.01, se_obj.position.z)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
-    printf("Moved door up")
-end
-
-function move_door_down()
-    printf("Attempting to move door down")
-    local se_obj = alife_object(spawned_door_id)
-    local pos = vector():set(se_obj.position.x, se_obj.position.y - 0.01, se_obj.position.z)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
-    printf("Moved door down")
-end
-
-function move_door_forward()
-    printf("Attempting to move door forward")
-    local se_obj = alife_object(spawned_door_id)
-    local pos = vector():set(se_obj.position.x, se_obj.position.y, se_obj.position.z + 0.01)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
-    printf("Moved door forward")
-end
-
-function move_door_backward()
-    printf("Attempting to move door backward")
-    local se_obj = alife_object(spawned_door_id)
-    local pos = vector():set(se_obj.position.x, se_obj.position.y, se_obj.position.z - 0.01)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
-    printf("Moved door backward")
-end
-
-function move_door_left()
-    printf("Attempting to move door left")
-    local se_obj = alife_object(spawned_door_id)
-    local pos = vector():set(se_obj.position.x - 0.01, se_obj.position.y, se_obj.position.z)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
-    printf("Moved door left")
-end
-
-function move_door_right()
-    printf("Attempting to move door right")
-    local se_obj = alife_object(spawned_door_id)
-    local pos = vector():set(se_obj.position.x + 0.01, se_obj.position.y, se_obj.position.z)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, pos)
-    printf("Moved door right")
-end
-
-function rotate_door_clockwise()
-    printf("Attempting to rotate door clockwise")
-    local se_obj = alife_object(spawned_door_id)
-    se_obj.angle = vector():set(se_obj.angle.x, se_obj.angle.y + 0.0873, se_obj.angle.z)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, se_obj.position)
-    printf("Rotated door clockwise")
-end
-
-function rotate_door_counterclockwise()
-    printf("Attempting to rotate door counterclockwise")
-    local se_obj = alife_object(spawned_door_id)
-    se_obj.angle = vector():set(se_obj.angle.x, se_obj.angle.y - 0.0873, se_obj.angle.z)
-    alife():teleport_object(spawned_door_id, se_obj.m_game_vertex_id, se_obj.m_level_vertex_id, se_obj.position)
-    printf("Rotated door counterclockwise")
-end
-
-function dump_door_info()
-    local se_obj = alife_object(spawned_door_id)
-    printf("Door : %s", se_obj:section_name())
-    printf("Door position: x:%s y:%s z:%s", se_obj.position.x, se_obj.position.y, se_obj.position.z)
-    printf("Door game vertex ID: %s", se_obj.m_game_vertex_id)
-    printf("Door level vertex ID: %s", se_obj.m_level_vertex_id)
-end
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
 
-function on_key_press(dik)
-    if not spawned_door_id then
-        return
-    end
-    if dik == DIK_keys.DIK_PRIOR then
-        move_door_up()
-    elseif dik == DIK_keys.DIK_NEXT then
-        move_door_down()
-    elseif dik == DIK_keys.DIK_UP then
-        move_door_forward()
-    elseif dik == DIK_keys.DIK_DOWN then
-        move_door_backward()
-    elseif dik == DIK_keys.DIK_LEFT then
-        move_door_left()
-    elseif dik == DIK_keys.DIK_RIGHT then
-        move_door_right()
-    elseif dik == DIK_keys.DIK_ADD then
-        rotate_door_clockwise()
-    elseif dik == DIK_keys.DIK_SUBTRACT then
-        rotate_door_counterclockwise()
-    elseif dik == DIK_keys.DIK_I then
-        dump_door_info()
-    end
+function actor_on_first_update()
+    ini_doors:section_for_each(function(door_name)
+        local section = ini_doors:r_string_ex(door_name, "section")
+        local info_portion = ini_doors:r_string_ex(door_name, "spawned_info")
+        local named_location = ini_doors:r_string_ex(door_name, "named_location")
+
+        if not western_goods_utils.has_info(info_portion) then
+            spawn_door(door_name, section, named_location, info_portion)
+        end
+    end)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -144,5 +52,21 @@ end
 --- Function used to register callbacks.
 --- @return nil
 function on_game_start()
-    RegisterScriptCallback("on_key_press", on_key_press)
+    RegisterScriptCallback("actor_on_first_update", actor_on_first_update)
+end
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Utility functions
+-- ---------------------------------------------------------------------------------------------------------------------
+
+function spawn_door(door_name, section, named_location, info_portion)
+    local location = western_goods_utils.get_named_location(named_location)
+    local se_obj = alife_create(section, location.position, location.lvid, location.gvid)
+    if se_obj then
+        se_obj.angle = location.orientation
+        western_goods_utils.give_info(info_portion)
+        dbg_printf("[WG] Keycards | Spawned door %s at %s", door_name, named_location)
+    else
+        printf("[WG] ERROR | Keycards | Failed to spawn door %s at %s", door_name, named_location)
+    end
 end
