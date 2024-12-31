@@ -25,7 +25,7 @@ local dbg_printf             = western_goods_utils.dbg_printf
 -- Constants
 local ini_doors              = ini_file([[plugins\western_goods\keycards\doors.ltx]])
 
-has_keycard                  = false
+has_keycard                  = true
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
