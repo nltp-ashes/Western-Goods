@@ -1,0 +1,45 @@
+;;====================================================================================================================;;
+;;                                                                                                                    ;;
+;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
+;;    Edited : N/A                                                                                                    ;;
+;;    Date : 31/12/2024                                                                                               ;;
+;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
+;;                                                                                                                    ;;
+;;    Config file used to define the logic for Western Goods' door.                                                   ;;
+;;                                                                                                                    ;;
+;;====================================================================================================================;;
+
+[logic]
+active                  = ph_door@locked
+
+[ph_door@locked]
+locked                  = true
+closed                  = true
+snd_open_start          = wood_small_open ; TODO : Change this sound effect
+snd_close_start         = wood_small_close_start ; TODO : Change this sound effect
+snd_close_stop          = wood_small_close_stop ; TODO : Change this sound effect
+on_use                  = {=western_goods_unlock_door()} ph_door@close, ph_door@locked
+tip_open                = jup_b1_door_is_closed ; TODO : Make a translation in-house
+
+[ph_door@close]
+locked                  = false
+closed                  = true
+snd_open_start          = wood_small_open ; TODO : Change this sound effect
+snd_close_start         = wood_small_close_start ; TODO : Change this sound effect
+snd_close_stop          = wood_small_close_stop ; TODO : Change this sound effect
+on_use                  = ph_door@open
+tip_open                = tip_door_open ; TODO : Make a translation in-house
+
+[ph_door@open]
+locked                  = false
+closed                  = false
+snd_open_start          = wood_small_open ; TODO : Change this sound effect
+snd_close_start         = wood_small_close_start ; TODO : Change this sound effect
+snd_close_stop          = wood_small_close_stop ; TODO : Change this sound effect
+on_use                  = ph_door@close
+tip_close               = tip_door_close ; TODO : Make a translation in-house
+
+[collide]
+ignore_static
+ignore_small_objects
+not_collide_parts       = 1

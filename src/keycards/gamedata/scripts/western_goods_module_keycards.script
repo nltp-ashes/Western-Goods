@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 18/08/2024                                                                                             ---
+---    Date : 31/12/2024                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script is responsible for all the scripted needs of the keycards module.                                 ---
@@ -25,9 +25,20 @@ local dbg_printf             = western_goods_utils.dbg_printf
 -- Constants
 local ini_doors              = ini_file([[plugins\western_goods\keycards\doors.ltx]])
 
+has_keycard                  = false
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
 -- ---------------------------------------------------------------------------------------------------------------------
+
+function xr_conditions.western_goods_unlock_door(actor, npc, p)
+    if has_keycard then
+        has_keycard = false
+        return true
+    else
+        return false
+    end
+end
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
