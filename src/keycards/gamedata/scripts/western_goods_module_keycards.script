@@ -23,7 +23,8 @@
 local dbg_printf             = western_goods_utils.dbg_printf
 
 -- Constants
-local ini_doors              = ini_file([[plugins\western_goods\keycards\doors.ltx]])
+local ini_doors_existing     = ini_file([[plugins\western_goods\keycards\doors_existing.ltx]])
+local ini_doors_new          = ini_file([[plugins\western_goods\keycards\doors_new.ltx]])
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- General functions
@@ -34,15 +35,25 @@ local ini_doors              = ini_file([[plugins\western_goods\keycards\doors.l
 -- ---------------------------------------------------------------------------------------------------------------------
 
 function actor_on_first_update()
-    ini_doors:section_for_each(function(door_name)
-        local section = ini_doors:r_string_ex(door_name, "section")
-        local info_portion = ini_doors:r_string_ex(door_name, "spawned_info")
-        local named_location = ini_doors:r_string_ex(door_name, "named_location")
+    ini_doors_new:section_for_each(function(door_name)
+        local section = ini_doors_new:r_string_ex(door_name, "section")
+        local info_portion = ini_doors_new:r_string_ex(door_name, "spawned_info")
+        local named_location = ini_doors_new:r_string_ex(door_name, "named_location")
 
         if not western_goods_utils.has_info(info_portion) then
             spawn_door(door_name, section, named_location, info_portion)
         end
     end)
+end
+
+xr_logic_get_customdata_or_ini_file = xr_logic.get_customdata_or_ini_file
+function xr_logic.get_customdata_or_ini_file(npc, filename)
+    local override_logic = get_customdata_override(npc, level.name())
+    if override_logic ~= nil then
+        dbg_printf("[WG] Keycards | Overrode existing door %s logic with %s at %s", npc:name(), override_logic)
+        return ini_file(override_logic), override_logic
+    end
+    return xr_logic_get_customdata_or_ini_file(npc, filename)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -69,4 +80,18 @@ function spawn_door(door_name, section, named_location, info_portion)
     else
         printf("[WG] ERROR | Keycards | Failed to spawn door %s at %s", door_name, named_location)
     end
+end
+
+function get_customdata_override(npc, npc_level)
+    local override_logic = nil
+    ini_doors_existing:section_for_each(function(door_name)
+        local name = ini_doors_existing:r_string_ex(door_name, "name")
+        local level_name = ini_doors_existing:r_string_ex(door_name, "level")
+        local logic = ini_doors_existing:r_string_ex(door_name, "logic")
+
+        if npc:name() == name and npc_level == level_name then
+            override_logic = logic
+        end
+    end)
+    return override_logic
 end
