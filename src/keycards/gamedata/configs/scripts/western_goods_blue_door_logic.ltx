@@ -19,7 +19,8 @@ snd_open_start          = western_goods_no_sound
 snd_close_start         = western_goods_no_sound
 snd_close_stop          = western_goods_no_sound
 on_info                 = {=actor_has_item(wg_keycard_blue)} ph_door@unlockable
-tip_open                = tip_no_access_card ; TODO : Make a translation in-house
+tip_open                = st_wg_access_keycard_required
+tip_close               = st_wg_close_door
 
 [ph_door@unlockable]
 locked                  = true
@@ -29,7 +30,8 @@ snd_close_start         = western_goods_no_sound
 snd_close_stop          = western_goods_no_sound
 on_info                 = {!actor_has_item(wg_keycard_blue)} ph_door@locked
 on_use                  = ph_door@close
-tip_open                = tip_need_access_card ; TODO : Make a translation in-house
+tip_open                = st_wg_access_use_access_keycard
+tip_close               = st_wg_close_door
 
 [ph_door@close]
 locked                  = false
@@ -38,6 +40,8 @@ snd_open_start          = western_goods_door_metal_window_open
 snd_close_start         = western_goods_door_metal_window_close_start
 snd_close_stop          = western_goods_door_metal_window_close_stop
 on_use                  = ph_door@open
+tip_open                = st_wg_open_door
+tip_close               = st_wg_close_door
 
 [ph_door@open]
 locked                  = false
@@ -46,6 +50,8 @@ snd_open_start          = western_goods_door_metal_window_open
 snd_close_start         = western_goods_door_metal_window_close_start
 snd_close_stop          = western_goods_door_metal_window_close_stop
 on_use                  = ph_door@close
+tip_open                = st_wg_open_door
+tip_close               = st_wg_close_door
 
 [collide]
 ignore_static

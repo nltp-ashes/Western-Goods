@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--=================================================================================================================-->
+<!--                                                                                                                 -->
+<!--    Original Author(s) : NLTP_ASHES                                                                              -->
+<!--    Edited : N/A                                                                                                 -->
+<!--    Date : 01/01/2025                                                                                            -->
+<!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
+<!--                                                                                                                 -->
+<!--    Translation file for Western Goods' keycards module.                                                         -->
+<!--                                                                                                                 -->
+<!--=================================================================================================================-->
+<string_table>
+
+    <string id="st_wg_open_door">
+        <text>Ouvrir la porte ($$ACTION_USE$$)</text>
+    </string>
+
+    <string id="st_wg_close_door">
+        <text>Fermer la porte ($$ACTION_USE$$)</text>
+    </string>
+
+    <string id="st_wg_access_keycard_required">
+        <text>Carte magnétique requise</text>
+    </string>
+
+    <string id="st_wg_access_use_access_keycard">
+        <text>Utiliser la carte magnétique ($$ACTION_USE$$)</text>
+    </string>
+
+</string_table>
