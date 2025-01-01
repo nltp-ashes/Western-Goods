@@ -27,9 +27,9 @@ on_info                 = {!actor_has_item(wg_keycard_red)} ph_button@locked
 [ph_button@close]
 anim                    = idle
 tooltip                 = st_wg_open_door
-on_press                = ph_button@open %+lx8_door_open =anim_obj_forward(lx8_physic_door)%
+on_press                = ph_button@open %+lx8_door_open =anim_obj_forward(lx8_physic_door) =play_sound(western_goods_airtight_gate_open)%
 
 [ph_button@open]
 anim                    = idle
 tooltip                 = st_wg_close_door
-on_press                = ph_button@close %-lx8_door_open =anim_obj_backward(lx8_physic_door)%
+on_press                = ph_button@close %-lx8_door_open =anim_obj_backward(lx8_physic_door) =play_sound(western_goods_airtight_gate_close)%
