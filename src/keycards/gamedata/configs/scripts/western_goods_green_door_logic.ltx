@@ -18,7 +18,7 @@ closed                  = true
 snd_open_start          = western_goods_keycard_denied
 snd_close_start         = western_goods_no_sound
 snd_close_stop          = western_goods_no_sound
-on_info                 = {=actor_has_item(wg_keycard_red)} ph_door@unlockable
+on_info                 = {=actor_has_item(wg_keycard_green)} ph_door@unlockable
 tip_open                = st_wg_access_keycard_required
 tip_close               = st_wg_close_door
 
@@ -28,7 +28,7 @@ closed                  = true
 snd_open_start          = western_goods_keycard_granted
 snd_close_start         = western_goods_no_sound
 snd_close_stop          = western_goods_no_sound
-on_info                 = {!actor_has_item(wg_keycard_red)} ph_door@locked
+on_info                 = {!actor_has_item(wg_keycard_green)} ph_door@locked
 on_use                  = ph_door@close
 tip_open                = st_wg_access_use_access_keycard
 tip_close               = st_wg_close_door
