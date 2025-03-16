@@ -48,7 +48,7 @@ end
 
 xr_logic_get_customdata_or_ini_file = xr_logic.get_customdata_or_ini_file
 function xr_logic.get_customdata_or_ini_file(npc, filename)
-    local override_logic = get_customdata_override(npc, level.name())
+    local override_logic = this.get_customdata_override(npc, level.name())
     if override_logic ~= nil then
         dbg_printf("[WG] Keycards | Overrode existing door %s logic with %s at %s", npc:name(), override_logic)
         return ini_file(override_logic), override_logic
