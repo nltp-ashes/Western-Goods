@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 23/10/2024                                                                                             ---
+---    Date : 17/03/2025                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -23,7 +23,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local VERSION                       = "3.2.0"
+local VERSION                       = "3.1.1"
 local REQUIRED_GAME_VERSION         = "1.5.3"
 local REQUIRED_MODDED_EXES_VERSION  = 20240929
 local GAME_DOWNLOAD_LINK            = [[https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153]]
@@ -304,10 +304,10 @@ end
 --- Function used to check if the modded exes are up to date.
 --- @return boolean
 function is_modded_exes_updated()
-    if not MODDED_EXES_VERSION then
+    if not get_modded_exes_version then
         return false
     end
-    return MODDED_EXES_VERSION >= REQUIRED_MODDED_EXES_VERSION
+    return get_modded_exes_version() >= REQUIRED_MODDED_EXES_VERSION
 end
 
 --- Function used to check if DXML is installed.
