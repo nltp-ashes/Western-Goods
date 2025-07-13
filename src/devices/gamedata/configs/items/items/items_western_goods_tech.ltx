@@ -1,8 +1,8 @@
 ;;====================================================================================================================;;
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
-;;    Edited : N/A                                                                                                    ;;
-;;    Date : 28/07/2024                                                                                               ;;
+;;    Edited : Native integration with Fatal Errors addon (Ncenka - 13/07/2025)                                       ;;
+;;    Date : 13/07/2025                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new technological items to the game.                                                    ;;
@@ -59,6 +59,9 @@ animation_slot                                   = 7
 
 snd_draw                                         = weapons\detector\detector_8_draw
 snd_holster                                      = weapons\detector\detector_8_holster
+
+; custom property for Fatal Errors addon
+battery                                          = batteries_dead
 
 [wg_gps_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_gps_hud.ogf
@@ -287,6 +290,9 @@ default_to_ruck                                  = true
 
 snd_draw                                         = weapons\detector\detector_8_draw
 snd_holster                                      = weapons\detector\detector_8_holster
+
+; custom property for Fatal Errors addon
+battery                                          = batteries_dead
 
 [wg_compass_hud]:detector_base_hud
 item_visual                                      = dynamics\western_goods_tech\wg_compass_hud.ogf

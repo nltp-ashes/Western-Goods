@@ -99,8 +99,8 @@ Western Goods is fully modular, meaning you can pick and choose what you want fr
 ### REQUIREMENTS
 
 These addons are **absolutely required** in order for Western Goods to work :
-1. [S.T.A.L.K.E.R. Anomaly 1.5.2](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-151-to-152);
-2. [DLTX and DXML](https://github.com/themrdemonized/STALKER-Anomaly-modded-exes).
+1. [S.T.A.L.K.E.R. Anomaly 1.5.3](https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153);
+2. [DLTX and DXML](https://github.com/themrdemonized/xray-monolith).
 
 Western Goods natively integrates with the following addons, but they **aren't required** :
 1. [Mod Configuration Menu](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu) (allows you to customize some options about the addon);
@@ -109,7 +109,8 @@ Western Goods natively integrates with the following addons, but they **aren't r
 4. [Pinup Collector](https://www.moddb.com/mods/stalker-anomaly/addons/pinup-collector) (allows you to collect some magazine pages to your wallet);
 5. [New Levels](https://www.moddb.com/mods/stalker-anomaly/addons/promzone-level) (adds new levels to the game);
 6. [Interactive PDA](https://www.moddb.com/mods/stalker-anomaly/addons/interactive-pda-01) (adds more interactions with the world (and not only) via PDA);
-7. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) (adds more pages to magazines in the addon).
+7. [Fatal Error](https://www.moddb.com/mods/stalker-anomaly/addons/fatal-error-by-ncenka) (add new PDA tiers, various fatal errors for PDA, device breaking, battery system, BIOS and other gameplay features);
+8. [Western Goods Readables Extended](https://github.com/nltp-ashes/Western-Goods/releases/tag/readables-ext) (adds more pages to magazines in the addon).
 
 These patches should be used when native compatibility with other addons cannot be achieved :
 1. [Patch for Realistic Bodily Needs v3.8](https://github.com/nltp-ashes/Western-Goods/releases/tag/patch-real-body-needs) (fixes food and drink statistics).

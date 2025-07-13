@@ -19,6 +19,7 @@ body:
       label: Addon version
       description: Please select which version of the addon you are using.
       options:
+        - v3.1.1
         - v3.1.0
         - v3.0.0
         - v2.6.1

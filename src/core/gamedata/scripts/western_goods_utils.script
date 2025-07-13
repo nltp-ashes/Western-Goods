@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 11/08/2024                                                                                             ---
+---    Date : 17/03/2025                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -460,14 +460,16 @@ end
 --- This function takes on average 300ms, prioritize using it in on_game_load to avoid stutters.
 --- @param pattern string
 --- @return table
-function collect_texture_descriptions(pattern)
-    this.dbg_printf("[WG] Utils | Getting matching texture descriptions for '%s'...", pattern)
+function collect_texture_descriptions(patterns)
+    this.dbg_printf("[WG] Utils | Getting matching texture descriptions for '%s' patterns...", size_table(patterns))
 
     local profiler = profile_timer()
     profiler:start()
 
     local file_list = this.list_files("ui\\textures_descr\\")
+
     local matches = {}
+    local matches_count = 0
 
     for _,file_name in pairs(file_list) do
         local xml = CScriptXmlInit()
@@ -483,9 +485,14 @@ function collect_texture_descriptions(pattern)
             for y=0, texture_count-1 do
 
                 local texture_descr_id = xml:ReadAttribute("texture", y, "id")
-                if string.find(texture_descr_id, pattern) then
-
-                    table.insert(matches, texture_descr_id)
+                for key, pattern in pairs(patterns) do
+                    if not matches[key] then
+                        matches[key] = {}
+                    end
+                    if string.find(texture_descr_id, pattern) then
+                        table.insert(matches[key], texture_descr_id)
+                        matches_count = matches_count + 1
+                    end
                 end
             end
             xml:NavigateToRoot()
@@ -494,7 +501,7 @@ function collect_texture_descriptions(pattern)
     end
 
     profiler:stop()
-    this.dbg_printf("[WG] Utils | Found %s matching texture descriptions for %s in %sms :\n%s", size_table(matches), pattern, profiler:time()/1000, utils_data.print_table(matches, false, true))
+    this.dbg_printf("[WG] Utils | Found %s matching texture descriptions for %s patterns in %sms :\n%s", matches_count, size_table(patterns), profiler:time()/1000, utils_data.print_table(matches, false, true))
 
     return matches
 end

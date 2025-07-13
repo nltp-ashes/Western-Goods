@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 23/10/2024                                                                                             ---
+---    Date : 17/03/2025                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -23,7 +23,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local VERSION                       = "3.1.0"
+local VERSION                       = "3.1.1"
 local REQUIRED_GAME_VERSION         = "1.5.3"
 local REQUIRED_MODDED_EXES_VERSION  = 20240929
 local GAME_DOWNLOAD_LINK            = [[https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153]]
@@ -263,7 +263,7 @@ end
 --- @return nil
 function check_prerequisites()
     -- Out-of-date game
-    assert(is_version_1_5_2(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
+    assert(is_game_updated(), string.format("\n\n%s\n\n%s\n\n%s\n\n%s",
         western_goods_utils.get_translation("st_err_outdated_game_title"),
         western_goods_utils.get_translation("st_err_outdated_game_what", REQUIRED_GAME_VERSION),
         western_goods_utils.get_translation("st_err_outdated_game_why", REQUIRED_GAME_VERSION, REQUIRED_GAME_VERSION),
@@ -295,19 +295,19 @@ function check_prerequisites()
     ))
 end
 
---- Function used to check if game version number is 1.5.2.
+--- Function used to check if game version number is 1.5.3.
 --- @return boolean
-function is_version_1_5_2()
+function is_game_updated()
     return string.find(GAME_VERSION, REQUIRED_GAME_VERSION)
 end
 
 --- Function used to check if the modded exes are up to date.
 --- @return boolean
 function is_modded_exes_updated()
-    if not MODDED_EXES_VERSION then
+    if not get_modded_exes_version then
         return false
     end
-    return MODDED_EXES_VERSION >= REQUIRED_MODDED_EXES_VERSION
+    return get_modded_exes_version() >= REQUIRED_MODDED_EXES_VERSION
 end
 
 --- Function used to check if DXML is installed.
