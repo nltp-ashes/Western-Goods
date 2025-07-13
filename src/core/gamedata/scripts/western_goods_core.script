@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/03/2025                                                                                             ---
+---    Date : 13/07/2025                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    This script holds the 'core' of the addon.                                                                    ---
@@ -23,7 +23,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 
 -- Constants
-local VERSION                       = "3.1.1"
+local VERSION                       = "3.2.0"
 local REQUIRED_GAME_VERSION         = "1.5.3"
 local REQUIRED_MODDED_EXES_VERSION  = 20240929
 local GAME_DOWNLOAD_LINK            = [[https://www.moddb.com/mods/stalker-anomaly/downloads/stalker-anomaly-153]]
