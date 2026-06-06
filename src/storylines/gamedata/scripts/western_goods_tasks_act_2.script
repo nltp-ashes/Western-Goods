@@ -1210,9 +1210,8 @@ function task_2_setup()
     -- If the task should be set up
     if task_opted_in and timeout_ready then
         local delay = math.random(CONST_TASK_2_SOFT_DELAY_MIN, CONST_TASK_2_SOFT_DELAY_MAX)
+        dbg_printf("[WG] Tasks Act 2 | Task 2 - Setting up task, time before start : %s", delay)
         CreateTimeEvent("western_goods_setup_task", "act_2_task_2", delay, function ()
-            dbg_printf("[WG] Tasks Act 2 | Task 2 - Task set up, time before start : %s",delay)
-
             -- Give the task some time after loading the save
             act_2_task_2_start(western_goods_utils.server_object_by_sid("cit_killers_merc_trader_stalker"))
 
