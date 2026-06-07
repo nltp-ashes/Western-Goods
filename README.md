@@ -191,6 +191,7 @@ Credit goes to these people for their work contained in this addon :
 
 |                                   Name                                    |                                    Motive                                     |                                License                                |
 |:-------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|:---------------------------------------------------------------------:|
+|                              **pipicolombo**                              |            Created a HUD model and use animations for the Pringles            |                              Proprietary                              |
 |        **[Lizzardman](https://www.moddb.com/members/lizzardman)**         |          Created a set of animations for the Zippo and Bic lighters           |                              Proprietary                              |
 | **[Lizzardman](https://www.moddb.com/members/lizzardman)**, **MFS team**  | Ported food animations (MRE, chocolate bar & chocolate plate) from their mods |                              Proprietary                              |
 |          **[Dead Air mod](https://www.moddb.com/mods/dead-air)**          |          Ported a Zippo model, texture and animations from their mod          |                              Proprietary                              |
