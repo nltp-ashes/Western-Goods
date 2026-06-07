@@ -2,7 +2,7 @@
 ;;                                                                                                                    ;;
 ;;    Original Author(s) : NLTP_ASHES                                                                                 ;;
 ;;    Edited : N/A                                                                                                    ;;
-;;    Date : 28/07/2024                                                                                               ;;
+;;    Date : 08/06/2026                                                                                               ;;
 ;;    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)             ;;
 ;;                                                                                                                    ;;
 ;;    Config file used to add new food and snacks to the game.                                                        ;;
@@ -395,6 +395,41 @@ hands_orientation                                = 0, 0, 0
 
 anm_ea_show                                      = wg_doritos_use, wg_doritos_item_use
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[wg_pringles]:wg_food_base
+visual                                           = dynamics\western_goods_food\wg_pringles.ogf
+
+
+inv_name                                         = st_wg_pringles
+inv_name_short                                   = st_wg_pringles_s
+description                                      = st_wg_pringles_descr
+inv_weight                                       = 0.06
+cost                                             = 2000
+
+inv_grid_width                                   = 1
+inv_grid_height                                  = 1
+inv_grid_x                                       = 2
+inv_grid_y                                       = 3
+
+break_sound                                      = western_goods_food\wg_pringles_drop
+use_sound                                        = western_goods_food\wg_pringles_eat
+
+eat_satiety                                      = 0.198
+eat_sleepiness                                   = 0.003
+eat_thirstiness                                  = 0.2
+
+tier                                             = 2
+
+[wg_pringles_hud]
+item_visual                                           = dynamics\western_goods_food\wg_pringles_hud.ogf
+
+hands_position                                   = 0, 0, 0.09
+hands_position_16x9								 = 0, 0, 0.09
+hands_orientation                                = 0, 0, 0
+
+anm_ea_show                                      = wg_pringles_use, wg_pringles_item_use
+
 ;;====================================================================================================================;;
 ;;==================| Misc Items |====================================================================================;;
 ;;====================================================================================================================;;
@@ -445,31 +480,6 @@ use_sound                                        = western_goods_food\wg_sandwic
 eat_satiety                                      = 0.265
 eat_sleepiness                                   = 0.00125
 eat_thirstiness                                  = 0.0425
-
-tier                                             = 2
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[wg_pringles]:wg_food_base
-visual                                           = dynamics\western_goods_food\wg_pringles.ogf
-
-inv_name                                         = st_wg_pringles
-inv_name_short                                   = st_wg_pringles_s
-description                                      = st_wg_pringles_descr
-inv_weight                                       = 0.06
-cost                                             = 2000
-
-inv_grid_width                                   = 1
-inv_grid_height                                  = 1
-inv_grid_x                                       = 2
-inv_grid_y                                       = 3
-
-break_sound                                      = western_goods_food\wg_pringles_drop
-use_sound                                        = western_goods_food\wg_pringles_eat
-
-eat_satiety                                      = 0.198
-eat_sleepiness                                   = 0.003
-eat_thirstiness                                  = 0.2
 
 tier                                             = 2
 
