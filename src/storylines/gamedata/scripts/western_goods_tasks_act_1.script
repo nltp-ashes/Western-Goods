@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 31/07/2024                                                                                             ---
+---    Date : 10/10/2026                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the tasks of the first act of the addon's storyline.                                    ---
@@ -36,8 +36,6 @@ local heli_register                   = western_goods_helicopter.heli_register
 local HELICOPTERS_MODES               = western_goods_helicopter.HELICOPTERS_MODES
 
 -- Constants
-local CONST_TASK_2_HARD_DELAY         = 1800000               -- milliseconds
-local CONST_TASK_3_HARD_DELAY         = 1800000               -- milliseconds
 local CONST_TASK_1_HELI_DIST          = 625                   -- meters squared
 local CONST_TASK_1_SUPPLIES_DIST      = 25                    -- meters squared
 local CONST_TASK_1_PROGRESS_DELAY     = 43000                 -- milliseconds
@@ -104,7 +102,7 @@ function xr_effects.act_1_task_1_complete(actor,npc)
     xr_effects.remove_item(actor, npc, {"wg_act_1_task_1_quest_item"})
 
     -- Set up task 2
-    TASK_2_CACHE.available_time = time_global() + CONST_TASK_2_HARD_DELAY
+    task_2_setup()
 
     -- Process reward
     xr_effects.reward_random_money(actor,npc,{"5000","10000"})
@@ -390,7 +388,7 @@ function xr_effects.act_1_task_2_complete(actor,npc)
     xr_effects.remove_item(actor, npc, {"wg_act_1_task_2_quest_item_2"})
 
     -- Set up task 3
-    TASK_3_CACHE.available_time = time_global() + CONST_TASK_3_HARD_DELAY
+    task_3_setup()
 
     -- Process reward
     xr_effects.reward_random_money(actor,npc,{"10000","20000"})
@@ -1328,8 +1326,6 @@ function save_state(m_data)
 
     -- Pre-process tables
     TASK_1_SAVE.progress_timer = (TASK_1_SAVE.progress_timer or 0) - time_global()
-    TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) - time_global()
-    TASK_3_SAVE.available_time = (TASK_3_SAVE.available_time or 0) - time_global()
     TASK_3_SAVE.progress_timer = (TASK_3_SAVE.progress_timer or 0) - time_global()
     TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) - time_global()
     TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) - time_global()
@@ -1357,8 +1353,6 @@ function load_state(m_data)
 
     -- Post-process tables
     TASK_1_SAVE.progress_timer = (TASK_1_SAVE.progress_timer or 0) + time_global()
-    TASK_2_SAVE.available_time = (TASK_2_SAVE.available_time or 0) + time_global()
-    TASK_3_SAVE.available_time = (TASK_3_SAVE.available_time or 0) + time_global()
     TASK_3_SAVE.progress_timer = (TASK_3_SAVE.progress_timer or 0) + time_global()
     TASK_2_SAVE.stage_1_heli_ready_timer = (TASK_2_SAVE.stage_1_heli_ready_timer or 0) + time_global()
     TASK_2_SAVE.stage_2_show_targets_timer = (TASK_2_SAVE.stage_2_show_targets_timer or 0) + time_global()
@@ -1386,18 +1380,13 @@ function task_2_setup()
     local task_1_done = western_goods_utils.has_info("western_goods_act_1_task_1_finished")
     local task_2_started = western_goods_utils.has_info("western_goods_act_1_task_2_active")
     local task_2_done = western_goods_utils.has_info("western_goods_act_1_task_2_finished")
-    local timeout_ready = time_global() > (TASK_2_CACHE.available_time or 0)
 
     -- If the task is available
     if not task_1_done or task_2_started or task_2_done then return end
 
-    -- If the task should be set up
-    if timeout_ready then
-        dbg_printf("[WG] Tasks Act 1 | Task 2 - Task set up...")
-        western_goods_utils.give_info("western_goods_act_1_task_2_available")
-    else
-        dbg_printf("[WG] Tasks Act 1 | Task 2 - What's missing? timeout_ready:%s (%s/%s)", timeout_ready, time_global(), TASK_2_CACHE.available_time)
-    end
+    -- Set up the task
+    dbg_printf("[WG] Tasks Act 1 | Task 2 - Task set up...")
+    western_goods_utils.give_info("western_goods_act_1_task_2_available")
 end
 
 function task_3_setup()
@@ -1405,18 +1394,13 @@ function task_3_setup()
     local task_2_done = western_goods_utils.has_info("western_goods_act_1_task_2_finished")
     local task_3_started = western_goods_utils.has_info("western_goods_act_1_task_3_active")
     local task_3_done = western_goods_utils.has_info("western_goods_act_1_task_3_finished")
-    local timeout_ready = time_global() > (TASK_3_CACHE.available_time or 0)
 
     -- If the task is available
     if not task_2_done or task_3_started or task_3_done then return end
 
-    -- If the task should be set up
-    if timeout_ready then
-        dbg_printf("[WG] Tasks Act 1 | Task 3 - Task set up...")
-        western_goods_utils.give_info("western_goods_act_1_task_3_available")
-    else
-        dbg_printf("[WG] Tasks Act 1 | Task 3 - What's missing? timeout_ready:%s (%s/%s)", timeout_ready, time_global(), TASK_3_CACHE.available_time)
-    end
+    -- Set up the task
+    dbg_printf("[WG] Tasks Act 1 | Task 3 - Task set up...")
+    western_goods_utils.give_info("western_goods_act_1_task_3_available")
 end
 
 --- Function used to give the player an item at the start of Act 1, Task 1.

@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 18/08/2024                                                                                            -->
+<!--    Date : 10/10/2026                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    This file defines the game dialogs for the storylines of Western Goods.                                      -->
@@ -523,7 +523,7 @@
             </phrase>
             <phrase id="2"> <!-- actor -->
                 <text>st_wg_act_2_task_2_opt_in</text>
-                <give_info>western_goods_act_2_task_2_opted_in</give_info>
+                <action>western_goods_tasks_act_2.act_2_task_2_opt_in</action>
                 <next>4</next>
             </phrase>
             <phrase id="3"> <!-- actor -->
@@ -550,7 +550,7 @@
             </phrase>
             <phrase id="1"> <!-- npc -->
                 <text>st_wg_act_2_task_2_differed_opted_in</text>
-                <give_info>western_goods_act_2_task_2_opted_in</give_info>
+                <action>western_goods_tasks_act_2.act_2_task_2_opt_in</action>
                 <disable_info>western_goods_act_2_task_2_opted_out</disable_info>
             </phrase>
         </phrase_list>

@@ -6,6 +6,7 @@
 > - Added use animation for `Pringles` (Thanks pipicolombo);
 
 **• Changes :**
+> - Removed the forced delays between tasks, all tasks can now be played one after the other;
 
 **• Bug fixes :**
 > - Fixed `Milka` and `Kit-Kat` having inverted camera animations;
