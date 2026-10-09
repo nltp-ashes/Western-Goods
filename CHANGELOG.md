@@ -13,3 +13,4 @@
 > - Fixed `Milka` and `Kit-Kat` having inverted camera animations;
 > - Fixed zippo lighter's smoothing;
 > - Fixed flea market offers being noticeably too expensive;
+> - Fixed the SSU supervisor (Act 3, Task 3) ignoring disguises and always being hostile to the player (Thanks Rambito);
