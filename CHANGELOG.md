@@ -8,5 +8,6 @@
 **• Changes :**
 
 **• Bug fixes :**
+> - Fixed `Milka` and `Kit-Kat` having inverted camera animations;
 > - Fixed zippo lighter's smoothing;
 > - Fixed flea market offers being noticeably too expensive;
