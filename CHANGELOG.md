@@ -1,4 +1,4 @@
-## **v3.2.0 - 13/09/2026 - Hotfix**
+## **v3.2.0 - 10/10/2026 - Hotfix**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.2.0/total?label=Downloads)]()
 
@@ -8,3 +8,4 @@
 
 **• Changes :**
 > - Fixed zippo lighter's smoothing;
+> - Fixed flea market offers being noticeably too expensive;

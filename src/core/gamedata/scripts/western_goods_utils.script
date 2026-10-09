@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 17/03/2025                                                                                             ---
+---    Date : 10/10/2026                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to define various common functions defined in the scripts of the Western Goods addon.             ---
@@ -1140,7 +1140,7 @@ function get_real_community(npc, default)
 end
 
 --- Function used to get the price of a item (or multiple) according to progression difficulty.
---- The price is the estimated price when the player buys an item from a trader.
+--- The price is the base cost of a pristine item, scaled by the trasher "sell" discount and the progression difficulty "sell" factor.
 --- Original author is RavenAscendant. Function was edited by NLTP_ASHES.
 --- @author RavenAscendant
 --- @param section string
@@ -1154,19 +1154,11 @@ function get_section_price(section, count, default)
     count = count or 1
     default = default or 0
 
-    local condlist = ini_trade and ini_trade:r_string_to_condlist("trader", "discounts")
-    local sect = condlist and xr_logic.pick_section_from_condlist(db.actor, nil, condlist)
-
-    if sect == nil or sect == "" then
-        return default
-    end
-
-    local cost = SYS_GetParam(2, section, "cost", 0)
-    local factor = ini_trade:r_float_ex(sect, "sell") or 1
+    local cost = SYS_GetParam(2, section, "cost", default)
+    local factor = ini_trade:r_float_ex("discount_trasher", "sell") or 1
     local eco_factor = game_difficulties.get_eco_factor("sell") or 1
-    local discount = factor * eco_factor
 
-    return (cost * discount) * count
+    return (cost * factor * eco_factor) * count
 end
 
 --- Function used to get the magnitude of a vector on the XZ plane.
