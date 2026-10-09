@@ -3,7 +3,7 @@
 <!--                                                                                                                 -->
 <!--    Original Author(s) : NLTP_ASHES                                                                              -->
 <!--    Edited : N/A                                                                                                 -->
-<!--    Date : 28/07/2024                                                                                            -->
+<!--    Date : 10/10/2026                                                                                            -->
 <!--    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)          -->
 <!--                                                                                                                 -->
 <!--    Character description file used to describe NPCs used in the addon.                                          -->
@@ -216,7 +216,7 @@
 
         <map_icon x="1" y="0"></map_icon>
         <class>stalker_ssu_prisoner</class>
-        <community>army_npc</community>
+        <community>army</community>
         <terrain_sect>stalker_terrain</terrain_sect>
 
         <rank>11500</rank>
@@ -246,7 +246,7 @@
 
         <map_icon x="1" y="0"></map_icon>
         <class>stalker_ssu_supervisor</class>
-        <community>army_npc</community>
+        <community>army</community>
         <terrain_sect>stalker_terrain</terrain_sect>
 
         <rank>24500</rank>

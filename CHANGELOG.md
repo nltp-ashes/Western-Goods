@@ -6,6 +6,7 @@
 > - Added use animation for `Pringles` (Thanks pipicolombo);
 
 **• Changes :**
+> - Army NPCs will now use the regular Army faction instead of the SSU during storylines;
 > - Removed the forced delays between tasks, all tasks can now be played one after the other;
 
 **• Bug fixes :**
