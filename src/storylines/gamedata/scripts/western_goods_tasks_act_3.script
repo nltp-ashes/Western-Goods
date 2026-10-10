@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 22/08/2024                                                                                             ---
+---    Date : 10/10/2026                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to manage the tasks of the third act of the addon's storyline.                                    ---
@@ -431,6 +431,14 @@ function task_status_functor.act_3_task_2_status_f(tsk,task_id)
                 return
             end
 
+            -- Respawn Danylo if he disappeared (wait for next update before using him)
+            if not western_goods_utils.server_object_by_sid("stalker_danylo_chernenko_squad") then
+                local smart_name = western_goods_utils.has_info("western_goods_danylo_red_forest") and "red_smart_terrain_monsters_2" or "jup_a6"
+                western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", smart_name)
+                dbg_printf("[WG] Tasks Act 3 | Task 2 - Stage 2 - Respawned Danylo squad at %s...", smart_name)
+                return
+            end
+
             if document_se and document_se.parent_id == AC_ID then
                 local prisoner_squad_se = western_goods_utils.server_object_by_sid("western_goods_ssu_prisoner_squad")
 
@@ -608,6 +616,14 @@ end
 --- @return string
 function task_status_functor.act_3_task_3_status_f(tsk,task_id)
     if western_goods_utils.has_info("western_goods_act_3_task_3_init") then
+        -- Respawn Danylo if he disappeared (wait for next update before using him)
+        if not western_goods_utils.server_object_by_sid("stalker_danylo_chernenko_squad") then
+            local smart_name = western_goods_utils.has_info("western_goods_danylo_army_warehouses") and "mil_smart_terrain_2_4" or "red_smart_terrain_monsters_2"
+            western_goods_utils.spawn_squad_smart("stalker_danylo_chernenko_squad", smart_name)
+            dbg_printf("[WG] Tasks Act 3 | Task 3 - Respawned Danylo squad at %s...", smart_name)
+            return
+        end
+
         -- First stage : Find and kill/bribe supervisor
         if tsk.stage == 0 then
             local squad_se = western_goods_utils.server_object_by_sid("western_goods_ssu_supervisor_squad")

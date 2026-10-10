@@ -10,6 +10,7 @@
 > - Removed the forced delays between tasks, all tasks can now be played one after the other;
 
 **• Bug fixes :**
+> - Fixed potential CTD when story NPCs get removed by other scripts (Thanks ethanswayn12);
 > - Fixed `Milka` and `Kit-Kat` having inverted camera animations;
 > - Fixed zippo lighter's smoothing;
 > - Fixed flea market offers being noticeably too expensive;
