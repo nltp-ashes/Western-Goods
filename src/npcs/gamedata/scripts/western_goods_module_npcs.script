@@ -2,7 +2,7 @@
 ---                                                                                                                  ---
 ---    Original Author(s) : NLTP_ASHES                                                                               ---
 ---    Edited : N/A                                                                                                  ---
----    Date : 30/10/2024                                                                                             ---
+---    Date : 21/11/2026                                                                                             ---
 ---    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)           ---
 ---                                                                                                                  ---
 ---    Script used to spawn NPCs that should permanently exist in the world (mostly if not exclusively traders).     ---
@@ -41,8 +41,17 @@ function spawn_squads()
     for section,data in pairs(squads_to_spawn) do
         local squad_se = western_goods_utils.server_object_by_sid(data.sid)
         if not squad_se then
-            squad_se = western_goods_utils.spawn_story_squad(section, nil, SIMBOARD.smarts_by_names[data.smart])
-            dbg_printf("[WG] Permanent NPCs | Created %s(%s) at %s", section, squad_se.id, data.smart)
+            local smart = SIMBOARD.smarts_by_names[data.smart]
+            if not smart then
+                printf("![WG] ERROR | Permanent NPCs | Smart terrain %s not found, can't spawn %s", data.smart, section)
+            else
+                squad_se = western_goods_utils.spawn_story_squad(section, nil, smart)
+                if squad_se then
+                    dbg_printf("[WG] Permanent NPCs | Created %s(%s) at %s", section, squad_se.id, data.smart)
+                else
+                    printf("![WG] ERROR | Permanent NPCs | Failed to spawn %s at %s", section, data.smart)
+                end
+            end
         else
             dbg_printf("[WG] Permanent NPCs | Squad %s(%s) already exists", squad_se:section_name(), squad_se.id)
         end

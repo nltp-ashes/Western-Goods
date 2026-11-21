@@ -1,4 +1,4 @@
-## **v3.2.0 - 10/10/2026 - Minor Update**
+## **v3.2.0 - 21/11/2026 - Minor Update**
 
 [![Downloads](https://img.shields.io/github/downloads/nltp-ashes/Western-Goods/v3.2.0/total?label=Downloads)]()
 
@@ -10,6 +10,7 @@
 > - Removed the forced delays between tasks, all tasks can now be played one after the other;
 
 **• Bug fixes :**
+> - Fixed CTD on load when the permanent traders' smart terrains are missing (e.g. removed by other mods);
 > - Fixed potential CTD when story NPCs get removed by other scripts (Thanks ethanswayn12);
 > - Fixed `Milka` and `Kit-Kat` having inverted camera animations;
 > - Fixed zippo lighter's smoothing;
