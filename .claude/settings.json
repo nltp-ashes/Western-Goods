@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/check_edit.js\"",
+            "timeout": 30,
+            "statusMessage": "Checking line endings, header date and Lua syntax"
+          }
+        ]
+      }
+    ]
+  }
+}
